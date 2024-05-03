@@ -1,11 +1,9 @@
 package View;
 
-public class ProfileMenuView extends AppMenu {
-    private final String name = "Profile Menu";
-
+public class PregameMenu extends AppMenu{
     @Override
     public String getName() {
-        return name;
+        return null;
     }
 
     @Override

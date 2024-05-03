@@ -1,17 +1,33 @@
 package Controller;
 
-import Model.Result;
-
+import java.util.Scanner;
 import java.util.regex.Matcher;
 
-public class ProfileMenuController {
-    public Result menuEnter(Matcher matcher) {
-        return null;
+public class ProfileMenuController extends AppController {
+    @Override
+    public void run(Scanner scanner) {
+
     }
-    public Result menuExit() {
-        return null;
+    public void changeUsername(String newUsername) {
+
     }
-    public Result showCurrentMenu() {
-        return null;
+    public void changeNickname(String newNickname) {
+
+    }
+    public void changeEmail(String newEmail) {
+
+    }
+    public void changePassword(String oldPassword, String newPassword) {
+
+    }
+    public void showUserInfo() {
+
+    }
+    public void showGameHistory(int number) {
+
+    }
+    public void menuExit() {
+    }
+    public void showCurrentMenu() {
     }
 }
