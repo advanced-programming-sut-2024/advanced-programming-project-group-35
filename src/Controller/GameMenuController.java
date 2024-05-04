@@ -1,17 +1,20 @@
 package Controller;
 
-import Model.Result;
-
+import java.util.Scanner;
 import java.util.regex.Matcher;
 
-public class GameMenuController {
-    public Result menuEnter(Matcher matcher) {
-        return null;
+public class GameMenuController extends AppController {
+    @Override
+    public void run(Scanner scanner) {
+
     }
-    public Result menuExit() {
-        return null;
+
+    public void menuEnter(Matcher matcher) {
     }
-    public Result showCurrentMenu() {
-        return null;
+
+    public void menuExit() {
+    }
+
+    public void showCurrentMenu() {
     }
 }

@@ -1,12 +1,20 @@
 package View;
 
-import java.util.Scanner;
-
 public class MainMenuView extends AppMenu {
     private final String name = "Main Menu";
 
     @Override
-    public void getInput(Scanner scanner) {
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void output(Error error) {
+
+    }
+
+    @Override
+    public void output(String message) {
 
     }
 }

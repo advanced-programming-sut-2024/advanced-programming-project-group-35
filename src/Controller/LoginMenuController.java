@@ -1,25 +1,33 @@
 package Controller;
 
-import Model.Result;
-import java.util.regex.Matcher;
+import Model.App;
+import Model.User.User;
+import View.AppMenu;
+import java.util.Scanner;
 
-public class LoginMenuController {
-    public Result menuEnter(Matcher matcher) {
+public class LoginMenuController extends AppController {
+    @Override
+    public void run(Scanner scanner) {
+
+    }
+
+    public void menuEnter(AppMenu menu) {
+    }
+
+    public void menuExit() {
+    }
+
+    public void showCurrentMenu() {
+    }
+
+    public void registerNewUser(String username, String password, String nickname, String email, int securityQuestionNumber, String securityQuestionAnswer) {
+    }
+
+    private String generateRandomPassword() {
         return null;
     }
-    public Result menuExit() {
-        return null;
-    }
-    public Result showCurrentMenu() {
-        return null;
-    }
-    public Result registerNewUser(Matcher matcher) {
-        return null;
-    }
-    public String generateRandomPassword() { // shayad private shod
-        return null;
-    }
-    public Result loginUser(Matcher matcher) {
-        return null;
+
+    public void loginUser(User user) {
+        App.setLoggedInUser(user);
     }
 }

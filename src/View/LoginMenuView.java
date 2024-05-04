@@ -1,14 +1,20 @@
 package View;
 
-import Controller.LoginMenuController;
-
-import java.util.Scanner;
-
 public class LoginMenuView extends AppMenu {
     private final String name = "Login Menu";
-    private LoginMenuController controller = new LoginMenuController();
+
     @Override
-    public void getInput(Scanner scanner) {
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void output(Error error) {
+
+    }
+
+    @Override
+    public void output(String message) {
 
     }
 }

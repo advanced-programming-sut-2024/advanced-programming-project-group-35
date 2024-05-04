@@ -1,14 +1,20 @@
 package View;
 
-import Controller.GameMenuController;
-
-import java.util.Scanner;
-
 public class GameMenuView extends AppMenu {
     private final String name = "Game Menu";
-    private GameMenuController controller = new GameMenuController();
+
     @Override
-    public void getInput(Scanner scanner) {
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void output(Error error) {
+
+    }
+
+    @Override
+    public void output(String message) {
 
     }
 }

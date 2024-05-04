@@ -1,3 +1,5 @@
+import Controller.Controller;
+import Controller.LoginMenuController;
 import Model.App;
 import java.util.Scanner;
 
@@ -6,8 +8,6 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        do {
-            App.getCurrentMenu().getInput(scanner);
-        } while (App.getCurrentMenu() != null);
+        Controller.LOGIN_MENU_CONTROLLER.run(scanner);
     }
 }
