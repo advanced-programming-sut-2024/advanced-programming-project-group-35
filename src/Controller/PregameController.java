@@ -69,4 +69,8 @@ public class PregameController extends AppController {
     public void startGame() {
         
     }
+
+    public void addRandomCardsToHand() {
+
+    }
 }
