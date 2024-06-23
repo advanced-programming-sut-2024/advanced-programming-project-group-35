@@ -1,0 +1,24 @@
+.image-view:hover {
+    -fx-effect: dropshadow(gaussian, #f0f0f0, 10, 0.5, 0.0, 0.0);
+}
+
+.vbox-label-container {
+    -fx-background-color: #000000;
+    -fx-padding: 10px;
+    -fx-background-radius: 0 0 10px 10px;
+    -fx-border-radius: 0 0 10px 10px;
+}
+
+.vbox-button-container {
+    -fx-background-color: #3C3F41;
+    -fx-padding: 10px;
+    -fx-pref-height: 10px;
+    -fx-max-height: 10px;
+    -fx-overflow: hidden;
+    -fx-background-radius: 10px 10px 0 0;
+    -fx-border-radius: 10px 10px 0 0;
+}
+.label {
+    -fx-font-size: 14pt;
+    -fx-fill: #f0f0f0;
+}

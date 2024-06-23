@@ -2,9 +2,12 @@ package com.example.view;
 
 import com.example.Main;
 import com.example.controller.Controller;
+import com.example.model.Alert;
 import com.example.model.App;
 import com.example.model.Terminal;
 import com.example.view.menuControllers.ViewController;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -22,8 +25,9 @@ public class AppView extends Application {
     private Stage primaryStage;
     private Pane pane;
     private ViewController viewController = null;
-    private static Terminal terminal;
-    private boolean terminalVisible = false;
+    private Terminal terminal;
+    private boolean isAlert = false;
+    private Alert alert;
     public void showMenu(Menu menu) throws Exception {
         terminal = new Terminal();
 
@@ -52,7 +56,6 @@ public class AppView extends Application {
         transition.setFromY(900);
         transition.setToY(630);
         transition.play();
-        terminalVisible = true;
     }
     public void removeTerminal() {
         TranslateTransition transition = new TranslateTransition(Duration.millis(700), terminal);
@@ -65,7 +68,25 @@ public class AppView extends Application {
             } catch (NullPointerException e1) {}
         });
         transition.play();
-        terminalVisible = false;
+    }
+    public void showAlert(String message) {
+        if (!isAlert) {
+            alert = new Alert(message);
+            alert.setLayoutX(1400);
+            alert.setLayoutY(50);
+            pane.getChildren().add(alert);
+            isAlert = true;
+            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5)));
+            timeline.play();
+            timeline.setOnFinished(actionEvent ->  {
+                isAlert = false;
+                removeAlert();
+            });
+        }
+    }
+    public void removeAlert() {
+        pane.getChildren().remove(alert);
+        isAlert = false;
     }
     private BackgroundImage createBackgroundImage() {
         Image image = new Image(Main.class.getResource(App.getCurrentMenu().getBackGroundImagePath()).toExternalForm(), 1707, 900, false, false);
