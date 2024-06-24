@@ -9,4 +9,5 @@ module gwent {
     exports com.example.controller;
     exports com.example.view;
     exports com.example.view.menuControllers;
+    exports com.example.model.alerts;
 }

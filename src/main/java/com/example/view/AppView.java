@@ -2,9 +2,10 @@ package com.example.view;
 
 import com.example.Main;
 import com.example.controller.Controller;
-import com.example.model.Alert;
+import com.example.model.alerts.Alert;
 import com.example.model.App;
 import com.example.model.Terminal;
+import com.example.model.alerts.AlertType;
 import com.example.view.menuControllers.ViewController;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -14,8 +15,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -70,11 +69,12 @@ public class AppView extends Application {
             } catch (NullPointerException e1) {
             }
         });
+        showAlert("zaneto Gaiidam", AlertType.INFO.getType());
         transition.play();
     }
-    public void showAlert(String message) {
+    public void showAlert(String message, String alertType) {
         if (!isAlert) {
-            alert = new Alert(message);
+            alert = new Alert(message, alertType);
             alert.setLayoutX(1400);
             alert.setLayoutY(50);
             pane.getChildren().add(alert);
@@ -93,7 +93,7 @@ public class AppView extends Application {
     }
 
     private BackgroundImage createBackgroundImage() {
-        Image image = new Image(Main.class.getResource(App.getCurrentMenu().getBackGroundImagePath()).toExternalForm(), 1707, 900, false, false);
+        Image image = new Image(Main.class.getResource(App.getCurrentMenu().getBackGroundImagePath()).toExternalForm());
         BackgroundImage backgroundImage = new BackgroundImage(image,
                 BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT,
@@ -105,7 +105,7 @@ public class AppView extends Application {
     @Override
     public void start(Stage stage) {
         primaryStage = stage;
-        primaryStage.setMaximized(true);
+        //primaryStage.setMaximized(true);
         Image icon = new Image(Main.class.getResource("/images/game_icon.png").toExternalForm());
         primaryStage.getIcons().add(icon);
         Controller.LOGIN_MENU_CONTROLLER.run();
