@@ -115,12 +115,6 @@ public class AppView extends Application {
         primaryStage.getIcons().add(icon);
         Controller.LOGIN_MENU_CONTROLLER.run();
     }
-    public void hideTerminal() {
-        removeTerminal();
-        try {
-            viewController.showTerminalButton();
-        } catch (NullPointerException e) {}
-    }
 
     public Pane getPane() {
         return pane;

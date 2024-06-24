@@ -31,11 +31,8 @@ public class LoginMenuControllerView extends ViewController {
         terminalButton.setEffect(null);
     }
 
-    public void showCommandLine(MouseEvent mouseEvent) {
-        showCommandLine();
-    }
 
-    public void showCommandLine() {
+    public void showTerminal() {
         terminalButton.setVisible(false);
         App.getAppView().showTerminal();
     }
@@ -68,4 +65,5 @@ public class LoginMenuControllerView extends ViewController {
            // App.getAppView().getTerminal().scrollDown();
         }
     }
+
 }
