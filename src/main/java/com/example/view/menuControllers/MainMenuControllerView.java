@@ -5,4 +5,9 @@ public class MainMenuControllerView extends ViewController {
     public void showTerminalButton() {
 
     }
+
+    @Override
+    public void hideTerminalButton() {
+
+    }
 }

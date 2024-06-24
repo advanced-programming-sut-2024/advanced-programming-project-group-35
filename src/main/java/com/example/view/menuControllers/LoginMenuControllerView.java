@@ -31,13 +31,12 @@ public class LoginMenuControllerView extends ViewController {
         terminalButton.setEffect(null);
     }
 
-    public void showCommandLine(MouseEvent mouseEvent) {
-        showCommandLine();
-    }
-
-    public void showCommandLine() {
-        terminalButton.setVisible(false);
+    public void showTerminal() {
         App.getAppView().showTerminal();
+    }
+    @Override
+    public void hideTerminalButton() {
+        terminalButton.setVisible(false);
     }
 
     @Override

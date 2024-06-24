@@ -66,6 +66,9 @@ public class AppView extends Application {
         transition.setFromY(800);
         transition.setToY(530);
         transition.play();
+        try {
+            viewController.hideTerminalButton();
+        } catch (NullPointerException e1) {}
     }
     public void removeTerminal() {
         TranslateTransition transition = new TranslateTransition(Duration.millis(700), terminal);
@@ -114,12 +117,6 @@ public class AppView extends Application {
         Image icon = new Image(Main.class.getResource("/images/game_icon.png").toExternalForm());
         primaryStage.getIcons().add(icon);
         Controller.LOGIN_MENU_CONTROLLER.run();
-    }
-    public void hideTerminal() {
-        removeTerminal();
-        try {
-            viewController.showTerminalButton();
-        } catch (NullPointerException e) {}
     }
 
     public Pane getPane() {
