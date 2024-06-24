@@ -9,6 +9,14 @@ import com.example.view.Menu;
 import java.util.ArrayList;
 
 public class App {
+    private static ArrayList<String> securityQuestions = new ArrayList<String>();
+    static {
+        securityQuestions.add("What is your favorite color?");
+        securityQuestions.add("What is your favorite food?");
+        securityQuestions.add("What is your favorite movie?");
+        securityQuestions.add("What is your favorite book?");
+        securityQuestions.add("What is your favorite song?");
+    }
     private static ArrayList<User> allUsers = new ArrayList<User>();
     private static ArrayList<Card> allCards = new ArrayList<Card>();
     private static Controller currentController;
@@ -57,5 +65,13 @@ public class App {
 
     public static void addNewUser(User newUser) {
         App.allUsers.add(newUser);
+    }
+
+    public static void addSecurityQuestion(String question) {
+        App.securityQuestions.add(question);
+    }
+
+    public static ArrayList<String> getSecurityQuestions() {
+        return App.securityQuestions;
     }
 }

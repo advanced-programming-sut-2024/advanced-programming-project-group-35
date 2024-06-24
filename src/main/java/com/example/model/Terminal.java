@@ -10,6 +10,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 public class Terminal extends StackPane {
+    private final double WIDTH = 900;
+    private final double HEIGHT = 180;
     private TextArea textArea;
     private int editableStartIndex;
     private String title;
@@ -17,9 +19,9 @@ public class Terminal extends StackPane {
     public Terminal() {
         this.getStylesheets().add(Terminal.class.getResource("/CSS/terminalStyle.css").toExternalForm());
         textArea = new TextArea();
-        textArea.setPrefHeight(180);
+        textArea.setPrefHeight(HEIGHT);
         textArea.setWrapText(true);
-        textArea.setPrefWidth(900);
+        textArea.setPrefWidth(WIDTH);
 
         if (App.getLoggedInUser() != null) {
             title = "Gwent\\" + App.getLoggedInUser().getUsername() + " :\n";
@@ -58,6 +60,7 @@ public class Terminal extends StackPane {
         });
 
         ImageView imageView = new ImageView(new Image(Terminal.class.getResource("/images/terminal-exit-button.png").toExternalForm()));
+        imageView.getStyleClass().add("image-view");
         imageView.setOnMouseClicked(e -> App.getAppView().removeTerminal());
 
         VBox buttonContainer = new VBox(imageView);
@@ -86,9 +89,13 @@ public class Terminal extends StackPane {
         editableStartIndex = textArea.getCaretPosition() + 2;
     }
 
-    private String getCurrentCommand() {
+    public String getCurrentCommand() {
         String text = textArea.getText();
         int lastPromptIndex = text.lastIndexOf("\n");
         return text.substring(lastPromptIndex + 1).trim();
+    }
+
+    public void close() {
+        App.getAppView().removeTerminal();
     }
 }

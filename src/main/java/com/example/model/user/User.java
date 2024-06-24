@@ -1,5 +1,6 @@
 package com.example.model.user;
 
+import com.example.model.App;
 import com.example.model.card.Card;
 import com.example.model.card.enums.FactionsType;
 import com.example.model.game.GameData;
@@ -37,6 +38,8 @@ public class User {
     private ArrayList<GameData> gameData; // mitoonim az queue estefade konim (vali ta hala kar nakardam bahash)
     private Deck deck;
 
+
+
     public User(String username, String password, String nickname, String email, int securityQuestionNumber, String securityQuestionAnswer) {
         this.username = username;
         this.password = password;
@@ -49,6 +52,19 @@ public class User {
         this.gameData = new ArrayList<>();
         this.deck = new Deck();
     }
+
+    public User(String username, String password, String nickname, String email) {
+        this.username = username;
+        this.password = password;
+        this.nickname = nickname;
+        this.email = email;
+        this.currentFactionType = generateRandomFactionType();
+        this.storageCards = new ArrayList<Card>();
+        this.gameData = new ArrayList<>();
+        this.deck = new Deck();
+        App.addNewUser(this);
+    }
+
     private FactionsType generateRandomFactionType() {
         return null;
     }
@@ -73,8 +89,8 @@ public class User {
         this.password = password;
     }
 
-    public int getSecurityQuestion() {
-        return securityQuestion;
+    public String getSecurityQuestion() {
+        return securityQuestion + ". " + App.getSecurityQuestions().get(securityQuestion);
     }
 
     public String getSecurityQuestionAnswer() {
@@ -82,5 +98,13 @@ public class User {
     }
     public int calculateRank() {
         return 0;
+    }
+
+    public void setSecurityQuestion(String securityQuestion) {
+        this.securityQuestionAnswer = securityQuestion;
+    }
+
+    public void setSecurityQuestionAnswer(String securityQuestionAnswer) {
+        this.securityQuestionAnswer = securityQuestionAnswer;
     }
 }

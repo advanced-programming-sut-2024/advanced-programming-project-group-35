@@ -4,6 +4,7 @@ package com.example;
 import com.example.model.App;
 import com.example.view.AppView;
 import javafx.application.Application;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class Main extends Application {

@@ -8,6 +8,9 @@ import com.example.model.Terminal;
 import com.example.view.menuControllers.ViewController;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import com.example.model.App;
+import com.example.model.Terminal;
+import com.example.view.menuControllers.ViewController;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -28,6 +31,12 @@ public class AppView extends Application {
     private Terminal terminal;
     private boolean isAlert = false;
     private Alert alert;
+    private boolean terminalVisible = false;
+
+    public Terminal getTerminal() {
+        return terminal;
+    }
+
     public void showMenu(Menu menu) throws Exception {
         terminal = new Terminal();
 
@@ -48,6 +57,7 @@ public class AppView extends Application {
         scene.setCursor(cursor);
 
         primaryStage.setTitle(menu.getTitle());
+        viewController.showTerminalButton();
         primaryStage.show();
     }
     public void showTerminal() {
@@ -59,8 +69,8 @@ public class AppView extends Application {
     }
     public void removeTerminal() {
         TranslateTransition transition = new TranslateTransition(Duration.millis(700), terminal);
-        transition.setFromY(530);
-        transition.setToY(800);
+        transition.setFromY(630);
+        transition.setToY(900);
         transition.setOnFinished(e -> {
             pane.getChildren().remove(terminal);
             try {
@@ -72,7 +82,7 @@ public class AppView extends Application {
     public void showAlert(String message) {
         if (!isAlert) {
             alert = new Alert(message);
-            alert.setLayoutX(1400);
+            alert.setLayoutX(1100);
             alert.setLayoutY(50);
             pane.getChildren().add(alert);
             isAlert = true;
@@ -101,8 +111,19 @@ public class AppView extends Application {
     @Override
     public void start(Stage stage){
         primaryStage = stage;
+        primaryStage.setMaximized(true);
         Image icon = new Image(Main.class.getResource("/images/game_icon.png").toExternalForm());
         primaryStage.getIcons().add(icon);
         Controller.LOGIN_MENU_CONTROLLER.run();
+    }
+    public void hideTerminal() {
+        pane.getChildren().remove(terminal);
+        try {
+            viewController.showTerminalButton();
+        } catch (NullPointerException e) {}
+    }
+
+    public Pane getPane() {
+        return pane;
     }
 }
