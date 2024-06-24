@@ -59,7 +59,7 @@ public class LoginMenuControllerView extends ViewController {
             showCommandLine();
         }
         else if (event.getCode().toString().equals("ESCAPE")) {
-            App.getAppView().hideTerminal();
+            App.getAppView().removeTerminal();
         }
         else if (event.getCode().toString().equals("PAGE_UP")) {
             //App.getAppView().getTerminal().scrollUp();
