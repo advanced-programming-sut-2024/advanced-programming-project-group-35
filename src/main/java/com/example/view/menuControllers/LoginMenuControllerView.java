@@ -1,5 +1,6 @@
 package com.example.view.menuControllers;
 
+import com.example.controller.Controller;
 import com.example.controller.LoginMenuController;
 import com.example.model.App;
 import javafx.animation.KeyFrame;
@@ -35,7 +36,6 @@ public class LoginMenuControllerView extends ViewController {
     }
 
     public void showCommandLine() {
-        LoginMenuController.weAreInTerminal = true;
         terminalButton.setVisible(false);
         App.getAppView().showTerminal();
     }
@@ -56,7 +56,7 @@ public class LoginMenuControllerView extends ViewController {
 
     public void keyPressed(KeyEvent event) {
         if (event.getCode().toString().equals("TAB")) {
-            showCommandLine();
+            App.getAppView().showTerminal();
         }
         else if (event.getCode().toString().equals("ESCAPE")) {
             App.getAppView().removeTerminal();
