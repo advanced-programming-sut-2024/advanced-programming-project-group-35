@@ -2,7 +2,7 @@ package com.example.view;
 
 public enum Menu {
     LOGIN_MENU("Gwent", "/FXML/LoginMenu.fxml", "/images/login-menu-background.png"),
-    MAIN_MENU("Main Menu", "", ""),
+    MAIN_MENU("Main Menu", "/FXML/MainMenu.fxml", ""),
     PROFILE_MENU("Profile Menu", "", ""),
     PREGAME_MENU("Pre Game Menu", "", ""),
     GAME_MENU("Game Menu", "", "");

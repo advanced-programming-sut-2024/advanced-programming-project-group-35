@@ -53,14 +53,14 @@ public class AppView extends Application {
     public void showTerminal() {
         pane.getChildren().add(terminal);
         TranslateTransition transition = new TranslateTransition(Duration.millis(700), terminal);
-        transition.setFromY(900);
-        transition.setToY(630);
+        transition.setFromY(800);
+        transition.setToY(530);
         transition.play();
     }
     public void removeTerminal() {
         TranslateTransition transition = new TranslateTransition(Duration.millis(700), terminal);
-        transition.setFromY(630);
-        transition.setToY(900);
+        transition.setFromY(530);
+        transition.setToY(800);
         transition.setOnFinished(e -> {
             pane.getChildren().remove(terminal);
             try {
@@ -89,7 +89,7 @@ public class AppView extends Application {
         isAlert = false;
     }
     private BackgroundImage createBackgroundImage() {
-        Image image = new Image(Main.class.getResource(App.getCurrentMenu().getBackGroundImagePath()).toExternalForm(), 1707, 900, false, false);
+        Image image = new Image(Main.class.getResource(App.getCurrentMenu().getBackGroundImagePath()).toExternalForm(), 1400, 800, false, false);
         BackgroundImage backgroundImage = new BackgroundImage(image,
                 BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT,
@@ -101,7 +101,6 @@ public class AppView extends Application {
     @Override
     public void start(Stage stage){
         primaryStage = stage;
-        primaryStage.setMaximized(true);
         Image icon = new Image(Main.class.getResource("/images/game_icon.png").toExternalForm());
         primaryStage.getIcons().add(icon);
         Controller.LOGIN_MENU_CONTROLLER.run();
