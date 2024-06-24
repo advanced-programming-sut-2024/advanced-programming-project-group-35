@@ -1,0 +1,55 @@
+.vbox-textArea-container {
+    -fx-background-color: #000000;
+    -fx-padding: 10px;
+    -fx-background-radius: 0 0 10px 10px;
+    -fx-border-radius: 0 0 10px 10px;
+}
+
+.vbox-button-container {
+    -fx-background-color: #3C3F41;
+    -fx-padding: 10px;
+    -fx-pref-height: 10px;
+    -fx-max-height: 10px;
+    -fx-overflow: hidden;
+    -fx-background-radius: 10px 10px 0 0;
+    -fx-border-radius: 10px 10px 0 0;
+}
+
+.image-view:hover {
+    -fx-effect: dropshadow(gaussian, #f0f0f0, 10, 0.5, 0.0, 0.0);
+}
+
+.text-area {
+    -fx-text-fill: #FFC56A;
+    -fx-font-family: 'Arial', monospace;
+    -fx-font-size: 12pt;
+}
+
+.text-area .content {
+    -fx-background-color: #1e1e1e;
+}
+
+.text-area .scroll-bar:vertical {
+    -fx-background-color: #1e1e1e;
+    -fx-padding: 5px;
+    -fx-background-radius: 0;
+}
+
+.text-area .scroll-bar .thumb {
+    -fx-background-color: #888888;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+}
+
+.text-area .scroll-bar .track {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+}
+
+
+.text-area .scroll-bar .increment-button,
+.text-area .scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
