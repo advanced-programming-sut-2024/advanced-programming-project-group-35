@@ -1,5 +1,6 @@
-package com.example.model;
+package com.example.model.alerts;
 
+import com.example.model.App;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -7,11 +8,13 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 public class Alert extends StackPane {
+    private String alertType;
     private String message;
     private final double width = 250;
     private final double height = 80;
 
-    public Alert(String message) {
+    public Alert(String message, String alertType) {
+        this.alertType = alertType;
         this.message = message;
         init();
     }

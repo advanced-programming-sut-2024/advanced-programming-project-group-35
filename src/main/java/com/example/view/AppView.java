@@ -2,23 +2,19 @@ package com.example.view;
 
 import com.example.Main;
 import com.example.controller.Controller;
-import com.example.model.Alert;
+import com.example.model.alerts.Alert;
 import com.example.model.App;
 import com.example.model.Terminal;
+import com.example.model.alerts.AlertType;
 import com.example.view.menuControllers.ViewController;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import com.example.model.App;
-import com.example.model.Terminal;
-import com.example.view.menuControllers.ViewController;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -32,10 +28,10 @@ public class AppView extends Application {
     private boolean isAlert = false;
     private Alert alert;
     private boolean terminalVisible = false;
-
     public Terminal getTerminal() {
         return terminal;
     }
+
 
     public void showMenu(Menu menu) throws Exception {
         terminal = new Terminal();
@@ -51,7 +47,7 @@ public class AppView extends Application {
         Scene scene = new Scene(pane);
         primaryStage.setScene(scene);
 
-        Image image = new Image(Main.class.getResource("/images/cursor.png").toExternalForm());
+        Image image = new Image(Main.class.getResource("/images/cursor.png").toExternalForm(), 32, 32, true, true);
         ImageCursor cursor = new ImageCursor(image);
 
         scene.setCursor(cursor);
@@ -60,6 +56,7 @@ public class AppView extends Application {
         viewController.showTerminalButton();
         primaryStage.show();
     }
+
     public void showTerminal() {
         pane.getChildren().add(terminal);
         TranslateTransition transition = new TranslateTransition(Duration.millis(700), terminal);
@@ -70,6 +67,7 @@ public class AppView extends Application {
             viewController.hideTerminalButton();
         } catch (NullPointerException e1) {}
     }
+
     public void removeTerminal() {
         TranslateTransition transition = new TranslateTransition(Duration.millis(700), terminal);
         transition.setFromY(530);
@@ -78,13 +76,15 @@ public class AppView extends Application {
             pane.getChildren().remove(terminal);
             try {
                 viewController.showTerminalButton();
-            } catch (NullPointerException e1) {}
+            } catch (NullPointerException e1) {
+            }
         });
+        showAlert("zaneto Gaiidam", AlertType.INFO.getType());
         transition.play();
     }
-    public void showAlert(String message) {
+    public void showAlert(String message, String alertType) {
         if (!isAlert) {
-            alert = new Alert(message);
+            alert = new Alert(message, alertType);
             alert.setLayoutX(1100);
             alert.setLayoutY(50);
             pane.getChildren().add(alert);
@@ -112,7 +112,7 @@ public class AppView extends Application {
     }
 
     @Override
-    public void start(Stage stage){
+    public void start(Stage stage) {
         primaryStage = stage;
         Image icon = new Image(Main.class.getResource("/images/game_icon.png").toExternalForm());
         primaryStage.getIcons().add(icon);

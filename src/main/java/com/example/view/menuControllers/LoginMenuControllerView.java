@@ -67,4 +67,5 @@ public class LoginMenuControllerView extends ViewController {
            // App.getAppView().getTerminal().scrollDown();
         }
     }
+
 }

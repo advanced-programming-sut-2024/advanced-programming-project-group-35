@@ -60,7 +60,6 @@ public class Terminal extends StackPane {
         });
 
         ImageView imageView = new ImageView(new Image(Terminal.class.getResource("/images/terminal-exit-button.png").toExternalForm()));
-        imageView.getStyleClass().add("image-view");
         imageView.setOnMouseClicked(e -> App.getAppView().removeTerminal());
 
         VBox buttonContainer = new VBox(imageView);
