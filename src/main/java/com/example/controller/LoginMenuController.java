@@ -9,15 +9,14 @@ import com.example.view.LoginMenuView;
 import com.example.view.Menu;
 
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class LoginMenuController extends AppController {
-    public static boolean weAreInTerminal = true;
-    static LoginMenuStep currentStep = LoginMenuStep.NOTHING;
-    static User registeringUser;
-    static User forgotenPasswordUser;
+    private LoginMenuStep currentStep = LoginMenuStep.NOTHING;
+    private User registeringUser;
+    private User forgotenPasswordUser;
+
     @Override
-    public void run(){
+    public void run() {
         try {
             App.getAppView().showMenu(Menu.LOGIN_MENU);
             App.setCurrentController(Controller.LOGIN_MENU_CONTROLLER);
@@ -25,23 +24,21 @@ public class LoginMenuController extends AppController {
             throw new RuntimeException();
         }
     }
+
     @Override
     public void runCommand(String input) {
         try {
             LoginMenuErrors error = null;
-            if (currentStep == LoginMenuStep.NOTHING){
+            if (currentStep == LoginMenuStep.NOTHING) {
                 error = runCommandNothingStep(input);
-            }
-            else if (currentStep == LoginMenuStep.REGISTER_FIRST_STEP){
+            } else if (currentStep == LoginMenuStep.REGISTER_FIRST_STEP) {
                 error = runCommandRegisterFirstStep(input);
-            }
-            else if (currentStep == LoginMenuStep.FORGOT_PASSWORD){
+            } else if (currentStep == LoginMenuStep.FORGOT_PASSWORD) {
                 error = runCommandForgotPassword(input);
-            }
-            else if (currentStep == LoginMenuStep.SET_PASSWORD){
+            } else if (currentStep == LoginMenuStep.SET_PASSWORD) {
                 error = runCommandSetPassword(input);
             }
-            if (error != null){
+            if (error != null) {
                 App.getAppView().getTerminal().printError(LoginMenuView.toString(error));
             }
         } catch (NullPointerException e) {
@@ -174,7 +171,7 @@ public class LoginMenuController extends AppController {
         return registerUser(username, password, confirmPassword, nickname, email);
     }
 
-    private LoginMenuErrors registerUser(String username, String password,String confirmPassword, String nickname, String email) {
+    private LoginMenuErrors registerUser(String username, String password, String confirmPassword, String nickname, String email) {
         if (!isValidUsername(username)) {
             return LoginMenuErrors.INVALID_USERNAME;
         }
@@ -196,14 +193,11 @@ public class LoginMenuController extends AppController {
     }
 
     private void showSecurityQuestions() {
-        if (weAreInTerminal) {
-            App.getAppView().getTerminal().printMessage("Choose a security question:");
-            for (int i = 1; i <= App.getSecurityQuestions().size(); i++) {
-                App.getAppView().getTerminal().printMessage(i + ". " + App.getSecurityQuestions().get(i - 1));
-            }
-        } else {
-            //App.getAppView().getGraphic().showSecurityQuestions();
+        App.getAppView().getTerminal().printMessage("Choose a security question:");
+        for (int i = 1; i <= App.getSecurityQuestions().size(); i++) {
+            App.getAppView().getTerminal().printMessage(i + ". " + App.getSecurityQuestions().get(i - 1));
         }
+        //TODO
     }
 
     private boolean isValidEmail(String email) {

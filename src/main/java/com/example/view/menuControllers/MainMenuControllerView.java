@@ -1,6 +1,6 @@
 package com.example.view.menuControllers;
 
-public class MainMenuController extends ViewController {
+public class MainMenuControllerView extends ViewController {
     @Override
     public void showTerminalButton() {
 
