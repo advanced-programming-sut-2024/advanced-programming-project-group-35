@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
 
-<AnchorPane prefHeight="800" prefWidth="1400" onKeyPressed="#keyPressed" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.view.menuControllers.LoginMenuControllerView">
-   <children>
-      <ImageView fx:id="terminalButton" fitHeight="70.0" fitWidth="84.0" layoutX="90.0" layoutY="640.0" onMouseClicked="#showTerminal" onMouseEntered="#blurringImage" onMouseExited="#UnBlurringImage" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/command_line_button.png" />
-         </image>
-      </ImageView>
-   </children>
+<AnchorPane prefHeight="800" prefWidth="1400" onKeyPressed="#keyPressed"
+            xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.view.menuControllers.LoginMenuControllerView"
+            stylesheets="@../CSS/allMenu.css, @../CSS/allFiles.css"
+            styleClass="login-menu-background">
+    <VBox alignment="CENTER" prefHeight="800" prefWidth="1400" spacing="30.0">
+        <Button onMouseClicked="#openLoginStage" minWidth="150" fx:id="loginButton" styleClass="custom-button" text="Login"/>
+        <Button onMouseClicked="#openRegisterStage" minWidth="150" fx:id="registerButton" styleClass="ice-blue-button" text="Register"/>
+    </VBox>
+    <Button styleClass="custom-button" fx:id="terminalButton" onMouseClicked="#showTerminal"
+            onMouseEntered="#blurringImage" onMouseExited="#UnBlurringImage" layoutX="90.0" layoutY="640.0">
+        <graphic>
+            <ImageView fitHeight="50.0" preserveRatio="true">
+                <Image url="@../images/command_line_button.png"/>
+            </ImageView>
+        </graphic>
+    </Button>
 </AnchorPane>

@@ -7,17 +7,26 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import java.io.IOException;
+import java.util.Objects;
 
 public class LoginMenuControllerView extends ViewController {
 
     @FXML
-    private ImageView terminalButton;
+    private Button terminalButton;
 
     public void blurringImage(MouseEvent mouseEvent) {
         BoxBlur blur = new BoxBlur();
@@ -34,6 +43,7 @@ public class LoginMenuControllerView extends ViewController {
     public void showTerminal() {
         App.getAppView().showTerminal();
     }
+
     @Override
     public void hideTerminalButton() {
         terminalButton.setVisible(false);
@@ -56,16 +66,40 @@ public class LoginMenuControllerView extends ViewController {
     public void keyPressed(KeyEvent event) {
         if (event.getCode().toString().equals("TAB")) {
             App.getAppView().showTerminal();
-        }
-        else if (event.getCode().toString().equals("ESCAPE")) {
+        } else if (event.getCode().toString().equals("ESCAPE")) {
             App.getAppView().removeTerminal();
-        }
-        else if (event.getCode().toString().equals("PAGE_UP")) {
+        } else if (event.getCode().toString().equals("PAGE_UP")) {
             //App.getAppView().getTerminal().scrollUp();
-        }
-        else if (event.getCode().toString().equals("PAGE_DOWN")) {
-           // App.getAppView().getTerminal().scrollDown();
+        } else if (event.getCode().toString().equals("PAGE_DOWN")) {
+            // App.getAppView().getTerminal().scrollDown();
         }
     }
 
+    public void openLoginStage(MouseEvent mouseEvent) throws IOException {
+        stageCreator("Login", "login.fxml");
+    }
+
+    public void openRegisterStage(MouseEvent mouseEvent) throws IOException {
+        stageCreator("Register", "register.fxml");
+    }
+
+    public void openResetPasswordStage(MouseEvent mouseEvent) throws IOException {
+        stageCreator("Reset Password", "register.fxml");
+    }
+
+    public void generateRandomPassword(MouseEvent mouseEvent) {
+    }
+
+    private static void stageCreator(String stageTitle, String fxmlFileName) throws IOException {
+        Stage stage = new Stage();
+        stage.setTitle(stageTitle);
+        String fxmlFilePath = "/FXML/";
+        fxmlFilePath += fxmlFileName;
+        Pane pane = FXMLLoader.load(Objects.requireNonNull(LoginMenuControllerView.class.getResource(fxmlFilePath)));
+        stage.setScene(new Scene(pane));
+        stage.setResizable(false);
+        stage.centerOnScreen();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.showAndWait();
+    }
 }

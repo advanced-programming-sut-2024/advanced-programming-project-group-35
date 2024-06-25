@@ -42,8 +42,6 @@ public class AppView extends Application {
         pane = fxmlLoader.load();
         viewController = fxmlLoader.getController();
 
-        pane.setBackground(new Background(createBackgroundImage()));
-
         Scene scene = new Scene(pane);
         primaryStage.setScene(scene);
 
@@ -101,15 +99,15 @@ public class AppView extends Application {
         pane.getChildren().remove(alert);
         isAlert = false;
     }
-    private BackgroundImage createBackgroundImage() {
-        Image image = new Image(Main.class.getResource(App.getCurrentMenu().getBackGroundImagePath()).toExternalForm(), 1400, 800, false, false);
-        BackgroundImage backgroundImage = new BackgroundImage(image,
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundPosition.DEFAULT,
-                BackgroundSize.DEFAULT);
-        return backgroundImage;
-    }
+//    private BackgroundImage createBackgroundImage() {
+//        Image image = new Image(Main.class.getResource(App.getCurrentMenu().getBackGroundImagePath()).toExternalForm(), 1400, 800, false, false);
+//        BackgroundImage backgroundImage = new BackgroundImage(image,
+//                BackgroundRepeat.NO_REPEAT,
+//                BackgroundRepeat.NO_REPEAT,
+//                BackgroundPosition.DEFAULT,
+//                BackgroundSize.DEFAULT);
+//        return backgroundImage;
+//    }
 
     @Override
     public void start(Stage stage) {

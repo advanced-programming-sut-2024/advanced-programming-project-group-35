@@ -1,0 +1,18 @@
+.login-menu-background {
+    -fx-background-image: url("/Images/login-menu-background.jpg");
+}
+
+.register-background {
+    -fx-background-image: url("/Images/register-background.jpg");
+}
+
+.login-background {
+    -fx-background-image: url("/Images/login-background.jpg");
+}
+
+.custom-checkbox {
+    -fx-background-color: #575d81;
+    -fx-text-fill: #f8ffed;
+    -fx-border-width: 2;
+    -fx-border-color: #707ab5;
+}
