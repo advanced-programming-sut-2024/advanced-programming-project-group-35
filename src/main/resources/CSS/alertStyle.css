@@ -2,23 +2,87 @@
     -fx-effect: dropshadow(gaussian, #f0f0f0, 10, 0.5, 0.0, 0.0);
 }
 
-.vbox-label-container {
-    -fx-background-color: #000000;
+.info-vbox-label-container {
+    -fx-background-color: #d7eef6;
     -fx-padding: 10px;
-    -fx-background-radius: 0 0 10px 10px;
-    -fx-border-radius: 0 0 10px 10px;
+    -fx-background-radius: 0px 0px 10px 10px;
+    -fx-border-radius: 0px 0px 10px 10px;
 }
 
-.vbox-button-container {
-    -fx-background-color: #3C3F41;
+.info-vbox-button-container {
+    -fx-background-color: #396b84;
     -fx-padding: 10px;
     -fx-pref-height: 10px;
     -fx-max-height: 10px;
     -fx-overflow: hidden;
-    -fx-background-radius: 10px 10px 0 0;
-    -fx-border-radius: 10px 10px 0 0;
+    -fx-background-radius: 10px 10px 0px 0px;
+    -fx-border-radius: 10px 10px 0px 0px;
 }
-.label {
+.warning-vbox-label-container {
+    -fx-background-color: #fdf8e4;
+    -fx-padding: 10px;
+    -fx-background-radius: 0px 0px 10px 10px;
+    -fx-border-radius: 0px 0px 10px 10px;
+}
+
+.warning-vbox-button-container {
+    -fx-background-color: #826d36;
+    -fx-padding: 10px;
+    -fx-pref-height: 10px;
+    -fx-max-height: 10px;
+    -fx-overflow: hidden;
+    -fx-background-radius: 10px 10px 0px 0px;
+    -fx-border-radius: 10px 10px 0px 0px;
+}
+.error-vbox-label-container {
+    -fx-background-color: #f2dedf;
+    -fx-padding: 10px;
+    -fx-background-radius: 0px 0px 10px 10px;
+    -fx-border-radius: 0px 0px 10px 10px;
+}
+
+.error-vbox-button-container {
+    -fx-background-color: #a93d3a;
+    -fx-padding: 10px;
+    -fx-pref-height: 10px;
+    -fx-max-height: 10px;
+    -fx-overflow: hidden;
+    -fx-background-radius: 10px 10px 0px 0px;
+    -fx-border-radius: 10px 10px 0px 0px;
+}
+.success-vbox-label-container {
+    -fx-background-color: #def0d8;
+    -fx-padding: 10px;
+    -fx-background-radius: 0px 0px 10px 10px;
+    -fx-border-radius: 0px 0px 10px 10px;
+}
+
+.success-vbox-button-container {
+    -fx-background-color: #3c7d52;
+    -fx-padding: 10px;
+    -fx-pref-height: 10px;
+    -fx-max-height: 10px;
+    -fx-overflow: hidden;
+    -fx-background-radius: 10px 10px 0px 0px;
+    -fx-border-radius: 10px 10px 0px 0px;
+}
+/*.label {*/
+/*    -fx-font-size: 14pt;*/
+/*    -fx-fill: #f0f0f0;*/
+/*}*/
+.info-label-message {
     -fx-font-size: 14pt;
-    -fx-fill: #f0f0f0;
+    -fx-fill: #396b84;
+}
+.warning-label-message {
+    -fx-font-size: 14pt;
+    -fx-fill: #826d36;
+}
+.error-label-message {
+    -fx-font-size: 14pt;
+    -fx-fill: #a93d3a;
+}
+.success-label-message {
+    -fx-font-size: 14pt;
+    -fx-fill: #3c7d52;
 }

@@ -14,18 +14,18 @@
       stylesheets="@../CSS/allFiles.css, @../CSS/allMenu.css" xmlns="http://javafx.com/javafx/21"
       xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.view.menuControllers.LoginMenuControllerView">
     <VBox alignment="CENTER" prefHeight="520.0" prefWidth="780.0" spacing="15.0">
-        <TextField fx:id="usernameField" maxWidth="250" promptText="Username" styleClass="custom-text-field"/>
-        <PasswordField fx:id="passwordField" maxWidth="250" promptText="Password" styleClass="custom-text-field"/>
+        <TextField fx:id="usernameFieldLogin" maxWidth="250" promptText="Username" styleClass="custom-text-field"/>
+        <PasswordField fx:id="passwordFieldLogin" maxWidth="250" promptText="Password" styleClass="custom-text-field"/>
         <HBox alignment="CENTER" prefWidth="100" spacing="15.0">
-            <Text styleClass="register-text" text="Forgot your password?"/>
+            <Text text="Forgot your password?"/>
             <Button fx:id="forgotPasswordButton" maxHeight="20" minWidth="50" onMouseClicked="#openResetPasswordStage"
-                    style="-fx-font-size: 12;" styleClass="ice-blue-button" text="Reset"/>
+                    style="-fx-font-size: 12;" styleClass="brown-button" text="Reset"/>
         </HBox>
         <HBox alignment="CENTER" prefWidth="100" spacing="15.0">
-            <Text styleClass="register-text" text="Stay logged in?"/>
+            <Text text="Stay logged in?"/>
             <CheckBox fx:id="stayLoggedInCheckBox" styleClass="custom-checkbox"/>
         </HBox>
-        <Button fx:id="loginButton" minWidth="150" onMouseClicked="#openLoginStage" styleClass="ice-blue-button"
+        <Button fx:id="loginButton" minWidth="150" onMouseClicked="#loginUser" styleClass="brown-button"
                 text="Login"/>
     </VBox>
 

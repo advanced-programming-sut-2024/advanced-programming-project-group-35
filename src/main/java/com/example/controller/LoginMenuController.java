@@ -40,6 +40,7 @@ public class LoginMenuController extends AppController {
             }
             if (error != null) {
                 App.getAppView().getTerminal().printError(LoginMenuView.toString(error));
+                //App.getAppView().showAlert(LoginMenuView.toString(error), AlertType.ERROR.getType());
             }
         } catch (NullPointerException e) {
             throw new RuntimeException(e);
@@ -83,6 +84,10 @@ public class LoginMenuController extends AppController {
         int securityQuestionNumber = Integer.parseInt(matcher.group("questionNumber"));
         String securityQuestionAnswer = matcher.group("answer");
         String securityQuestionAnswerConfirmation = matcher.group("confirmAnswer");
+        return setSecurityQuestion(securityQuestionAnswer, securityQuestionAnswerConfirmation, securityQuestionNumber);
+    }
+
+    private LoginMenuErrors setSecurityQuestion(String securityQuestionAnswer, String securityQuestionAnswerConfirmation, int securityQuestionNumber) {
         if (!securityQuestionAnswer.equals(securityQuestionAnswerConfirmation)) {
             return LoginMenuErrors.WRONG_ANSWER_CONFIRMATION;
         }
@@ -168,10 +173,10 @@ public class LoginMenuController extends AppController {
         String email = matcher.group("email");
 
 
-        return registerUser(username, password, confirmPassword, nickname, email);
+        return registerUser(username, password, confirmPassword, nickname, email, false);
     }
 
-    private LoginMenuErrors registerUser(String username, String password, String confirmPassword, String nickname, String email) {
+    private LoginMenuErrors registerUser(String username, String password, String confirmPassword, String nickname, String email, Boolean isFromGraphic) {
         if (!isValidUsername(username)) {
             return LoginMenuErrors.INVALID_USERNAME;
         }
@@ -186,10 +191,21 @@ public class LoginMenuController extends AppController {
             return LoginMenuErrors.INVALID_EMAIL;
         }
 
-        showSecurityQuestions();
-        registeringUser = new User(username, password, nickname, email);
-        currentStep = LoginMenuStep.REGISTER_FIRST_STEP;
-        return LoginMenuErrors.REGISTER_FIRST_STEP_SUCCESSFUL;
+        if (!isFromGraphic) {
+            showSecurityQuestions();
+            registeringUser = new User(username, password, nickname, email);
+            currentStep = LoginMenuStep.REGISTER_FIRST_STEP;
+            return LoginMenuErrors.REGISTER_FIRST_STEP_SUCCESSFUL;
+        } else {
+            showGraphicalSecurityQuestions();
+            registeringUser = new User(username, password, nickname, email);
+            currentStep = LoginMenuStep.REGISTER_FIRST_STEP;
+            return LoginMenuErrors.REGISTER_FIRST_STEP_SUCCESSFUL;
+        }
+    }
+
+    private void showGraphicalSecurityQuestions() {
+
     }
 
     private void showSecurityQuestions() {

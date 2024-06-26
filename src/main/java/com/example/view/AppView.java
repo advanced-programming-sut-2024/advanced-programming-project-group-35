@@ -77,37 +77,28 @@ public class AppView extends Application {
             } catch (NullPointerException e1) {
             }
         });
-        showAlert("zaneto Gaiidam", AlertType.INFO.getType());
+        showAlert("zaneto Gaiidam", AlertType.INFO.getType(), pane);
         transition.play();
     }
-    public void showAlert(String message, String alertType) {
+    public void showAlert(String message, String alertType, Pane currentPane) {
         if (!isAlert) {
-            alert = new Alert(message, alertType);
-            alert.setLayoutX(1100);
-            alert.setLayoutY(50);
-            pane.getChildren().add(alert);
+            alert = new Alert(message, alertType, currentPane);
+            alert.setLayoutX(currentPane.getWidth() - alert.width - 20);
+            alert.setLayoutY(35);
+            currentPane.getChildren().add(alert);
             isAlert = true;
             Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5)));
             timeline.play();
             timeline.setOnFinished(actionEvent ->  {
                 isAlert = false;
-                removeAlert();
+                removeAlert(currentPane);
             });
         }
     }
-    public void removeAlert() {
-        pane.getChildren().remove(alert);
+    public void removeAlert(Pane currentPane) {
+        currentPane.getChildren().remove(alert);
         isAlert = false;
     }
-//    private BackgroundImage createBackgroundImage() {
-//        Image image = new Image(Main.class.getResource(App.getCurrentMenu().getBackGroundImagePath()).toExternalForm(), 1400, 800, false, false);
-//        BackgroundImage backgroundImage = new BackgroundImage(image,
-//                BackgroundRepeat.NO_REPEAT,
-//                BackgroundRepeat.NO_REPEAT,
-//                BackgroundPosition.DEFAULT,
-//                BackgroundSize.DEFAULT);
-//        return backgroundImage;
-//    }
 
     @Override
     public void start(Stage stage) {

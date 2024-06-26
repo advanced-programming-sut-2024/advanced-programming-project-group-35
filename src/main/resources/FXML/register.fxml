@@ -23,13 +23,13 @@
         <HBox alignment="CENTER" prefWidth="100" spacing="15.0">
             <Text styleClass="register-text" text="Do you want a random password?"/>
             <Button fx:id="generateRandomPassword" maxHeight="20" minWidth="50" onMouseClicked="#generateRandomPassword"
-                    style="-fx-font-size: 12;" styleClass="ice-blue-button" text="Random password"/>
+                    style="-fx-font-size: 12;" styleClass="brown-button" text="Random password"/>
         </HBox>
         <HBox alignment="CENTER" prefWidth="100" spacing="15.0">
             <Text styleClass="register-text" text="Stay logged in?"/>
             <CheckBox fx:id="stayLoggedInCheckBox" styleClass="custom-checkbox"/>
         </HBox>
-        <Button fx:id="registerButton" minWidth="150" onMouseClicked="#openRegisterStage" styleClass="ice-blue-button"
+        <Button fx:id="registerButton" minWidth="150" onMouseClicked="#openRegisterStage" styleClass="brown-button"
                 text="Register"/>
     </VBox>
 
