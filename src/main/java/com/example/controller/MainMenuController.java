@@ -13,10 +13,6 @@ public class MainMenuController extends AppController {
             throw new RuntimeException();
         }
     }
-    @Override
-    public void runCommand(String input) {
-
-    }
     public void createGame(String opponentName) {
 
     }

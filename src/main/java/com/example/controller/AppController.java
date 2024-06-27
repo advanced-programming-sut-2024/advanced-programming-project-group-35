@@ -1,11 +1,7 @@
 package com.example.controller;
 
-import com.example.model.App;
-import com.example.view.Menu;
-
-import java.util.Scanner;
+import com.example.model.IO.errors.Errors;
 
 public abstract class AppController {
     public abstract void run();
-    public abstract void runCommand(String input);
 }

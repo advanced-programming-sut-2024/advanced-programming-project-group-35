@@ -7,12 +7,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane onKeyPressed="#keyPressed" prefHeight="800" prefWidth="1400" styleClass="login-menu-background"
+<AnchorPane prefHeight="800" prefWidth="1400" styleClass="login-menu-background"
             stylesheets="@../CSS/allMenu.css, @../CSS/allFiles.css" xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.example.view.menuControllers.LoginMenuControllerView">
     <VBox alignment="CENTER" prefHeight="800" prefWidth="1400" spacing="30.0">
-
         <Button fx:id="loginButton" minWidth="250" onMouseClicked="#openLoginStage" styleClass="brown-button"
                 text="Login">
             <VBox.margin>
@@ -22,12 +21,4 @@
         <Button fx:id="registerButton" minWidth="250" onMouseClicked="#openRegisterStage" styleClass="brown-button"
                 text="Register"/>
     </VBox>
-    <Button fx:id="terminalButton" layoutX="90.0" layoutY="640.0" onMouseClicked="#showTerminal"
-            onMouseEntered="#blurringImage" onMouseExited="#UnBlurringImage" styleClass="brown-button">
-        <graphic>
-            <ImageView fitHeight="50.0" preserveRatio="true">
-                <Image url="@../images/command_line_button.png"/>
-            </ImageView>
-        </graphic>
-    </Button>
 </AnchorPane>

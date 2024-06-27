@@ -15,7 +15,8 @@ public enum Controller {
     public void run() {
         this.controller.run();
     }
-    public void runCommand(String input){
-        this.controller.runCommand(input);
+
+    public AppController getController() {
+        return controller;
     }
 }

@@ -5,10 +5,6 @@ public class ProfileMenuController extends AppController {
     public void run() {
 
     }
-    @Override
-    public void runCommand(String input) {
-
-    }
     public void changeUsername(String newUsername) {
 
     }

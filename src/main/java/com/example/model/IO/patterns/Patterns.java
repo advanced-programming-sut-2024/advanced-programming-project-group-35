@@ -3,7 +3,7 @@ package com.example.model.IO.patterns;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public enum LoginMenuPatterns {
+public enum Patterns {
     //register -u <username> -p <password> <password_confirm> -n <nickname> -e <email>
     REGISTER_USER("register -u (?<username>\\S+) -p (?<password>\\S+) (?<confirmPassword>\\S+) -n (?<nickname>\\S+) -e (?<email>\\S+)"),
     //pick question -q <question_number> -a <answer> -c <answer_confirm>
@@ -22,7 +22,7 @@ public enum LoginMenuPatterns {
     EXIT("exit");
     public final String pattern;
 
-    LoginMenuPatterns(String pattern) {
+    Patterns(String pattern) {
         this.pattern = pattern;
     }
 

@@ -5,10 +5,6 @@ public class PregameController extends AppController {
     public void run() {
 
     }
-    @Override
-    public void runCommand(String input) {
-
-    }
     public void showFactions() {
 
     }
