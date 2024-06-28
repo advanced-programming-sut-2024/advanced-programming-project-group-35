@@ -90,7 +90,7 @@ public class User {
     }
 
     public String getSecurityQuestion() {
-        return securityQuestion + ". " + App.getSecurityQuestions().get(securityQuestion);
+        return App.getSecurityQuestions().get(securityQuestion);
     }
 
     public String getSecurityQuestionAnswer() {
@@ -106,5 +106,25 @@ public class User {
 
     public void setSecurityQuestionAnswer(String securityQuestionAnswer) {
         this.securityQuestionAnswer = securityQuestionAnswer;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public String getEmail() {
+        return email;
     }
 }

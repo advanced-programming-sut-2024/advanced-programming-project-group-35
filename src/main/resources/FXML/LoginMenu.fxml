@@ -15,7 +15,7 @@
         <Button fx:id="loginButton" minWidth="250" onMouseClicked="#openLoginStage" styleClass="brown-button"
                 text="Login">
             <VBox.margin>
-                <Insets top="70.0"/>
+                <Insets top="100.0"/>
             </VBox.margin>
         </Button>
         <Button fx:id="registerButton" minWidth="250" onMouseClicked="#openRegisterStage" styleClass="brown-button"

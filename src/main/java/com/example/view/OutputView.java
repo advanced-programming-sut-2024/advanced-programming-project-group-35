@@ -41,6 +41,16 @@ public class OutputView {
                 App.getAppView().showAlert("Set your new password", AlertType.SUCCESS.getType());
             case WRONG_SECURITY_QUESTION:
                 App.getAppView().showAlert("Wrong security question", AlertType.ERROR.getType());
+            case USERNAME_CHANGED:
+                App.getAppView().showAlert("Username changed", AlertType.SUCCESS.getType());
+            case INVALID_NICKNAME:
+                App.getAppView().showAlert("Invalid nickname", AlertType.ERROR.getType());
+            case NICKNAME_CHANGED:
+                App.getAppView().showAlert("Nickname changed", AlertType.SUCCESS.getType());
+            case EMAIL_CHANGED:
+                App.getAppView().showAlert("Email changed", AlertType.SUCCESS.getType());
+            case PASSWORD_IS_SAME:
+                App.getAppView().showAlert("Password is the same", AlertType.ERROR.getType());
             default:
                 return null;
         }

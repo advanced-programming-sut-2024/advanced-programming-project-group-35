@@ -22,6 +22,7 @@ import java.util.Objects;
 
 public class LoginMenuControllerView {
     private final Stage stage = App.getAppView().getPrimaryStage();
+    private Pane pane = App.getAppView().getPane();
     public TextField usernameFieldLogin;
     public PasswordField passwordFieldLogin;
     public CheckBox stayLoggedInCheckBoxLogin;
@@ -33,7 +34,6 @@ public class LoginMenuControllerView {
     public TextField securityAnswerResetPassword;
     public PasswordField passwordFieldResetPassword;
     public PasswordField confirmPasswordFieldResetPassword;
-    private Pane pane = App.getAppView().getPane();
     @FXML
     private TextField usernameFieldRegister;
     @FXML
@@ -52,54 +52,6 @@ public class LoginMenuControllerView {
     private TextField securityAnswerRegister;
 
     LoginMenuController controller = (LoginMenuController) Controller.LOGIN_MENU_CONTROLLER.getController();
-
-
-//    public void blurringImage(MouseEvent mouseEvent) {
-//        BoxBlur blur = new BoxBlur();
-//        blur.setWidth(5);
-//        blur.setHeight(5);
-//        blur.setIterations(1);
-//        terminalButton.setEffect(blur);
-//    }
-
-//    public void UnBlurringImage(MouseEvent mouseEvent) {
-//        terminalButton.setEffect(null);
-//    }
-
-//    public void showTerminal() {
-//        App.getAppView().showTerminal();
-//    }
-
-//    @Override
-//    public void hideTerminalButton() {
-//        terminalButton.setVisible(false);
-//    }
-//
-//    @Override
-//    public void showTerminalButton() {
-//        terminalButton.setVisible(true);
-//        terminalButton.requestFocus();
-//        GaussianBlur blur = new GaussianBlur(30);
-//        terminalButton.setEffect(blur);
-//
-//        Timeline timeline = new Timeline(
-//                new KeyFrame(Duration.seconds(0), new KeyValue(blur.radiusProperty(), 30)),
-//                new KeyFrame(Duration.millis(200), new KeyValue(blur.radiusProperty(), 0))
-//        );
-//        timeline.play();
-//    }
-
-//    public void keyPressed(KeyEvent event) {
-//        if (event.getCode().toString().equals("TAB")) {
-//            App.getAppView().showTerminal();
-//        } else if (event.getCode().toString().equals("ESCAPE")) {
-//            App.getAppView().removeTerminal();
-//        } else if (event.getCode().toString().equals("PAGE_UP")) {
-//            //App.getAppView().getTerminal().scrollUp();
-//        } else if (event.getCode().toString().equals("PAGE_DOWN")) {
-//            // App.getAppView().getTerminal().scrollDown();
-//        }
-//    }
 
     public void openLoginStage(MouseEvent mouseEvent) throws IOException {
         paneChanger("Login", "login.fxml");

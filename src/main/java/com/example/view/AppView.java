@@ -46,31 +46,6 @@ public class AppView extends Application {
         primaryStage.show();
     }
 
-//    public void showTerminal() {
-//        pane.getChildren().add(terminal);
-//        TranslateTransition transition = new TranslateTransition(Duration.millis(700), terminal);
-//        transition.setFromY(800);
-//        transition.setToY(530);
-//        transition.play();
-//        try {
-//            viewController.hideTerminalButton();
-//        } catch (NullPointerException e1) {}
-//    }
-
-//    public void removeTerminal() {
-//        TranslateTransition transition = new TranslateTransition(Duration.millis(700), terminal);
-//        transition.setFromY(530);
-//        transition.setToY(800);
-//        transition.setOnFinished(e -> {
-//            pane.getChildren().remove(terminal);
-//            try {
-//                viewController.showTerminalButton();
-//            } catch (NullPointerException e1) {
-//            }
-//        });
-//        showAlert("zaneto Gaiidam", AlertType.INFO.getType(), pane);
-//        transition.play();
-//    }
     public void showAlert(String message, String alertType) {
         if (!isAlert) {
             alert = new Alert(message, alertType);

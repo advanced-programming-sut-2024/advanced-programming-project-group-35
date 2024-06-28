@@ -53,3 +53,8 @@
     -fx-font-size: 16px;
     -fx-prompt-text-fill: #6b553c;
 }
+
+.profile-menu-titles {
+    -fx-font-size: 20px;
+    -fx-text-fill: #ffffff;
+}

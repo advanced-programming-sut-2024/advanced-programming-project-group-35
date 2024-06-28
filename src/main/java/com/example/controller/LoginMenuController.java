@@ -29,46 +29,6 @@ public class LoginMenuController extends AppController {
         }
     }
 
-    private Errors runCommandSetPassword(String input) {
-        Matcher matcher;
-        if ((matcher = Patterns.SET_PASSWORD.getMather(input)) == null) {
-            return Errors.INVALID_COMMAND;
-        }
-        Errors error = handlePassword(matcher.group("password"), matcher.group("confirmPassword"));
-        if (error != null) {
-            return error;
-        }
-        String newPassword = matcher.group("password");
-        forgotenPasswordUser.setPassword(newPassword);
-        currentStep = LoginMenuStep.NOTHING;
-        return Errors.PASSWORD_CHANGED;
-    }
-
-//    private Errors runCommandForgotPassword(String input) {
-//        Matcher matcher;
-//        if ((matcher = Patterns.ANSWER_QUESTION.getMather(input)) == null) {
-//            return Errors.INVALID_COMMAND;
-//        }
-//        String securityQuestionAnswer = matcher.group("answer");
-//        if (!forgotenPasswordUser.getSecurityQuestionAnswer().equals(securityQuestionAnswer)) {
-//            return Errors.WRONG_ANSWER_CONFIRMATION;
-//        }
-//        currentStep = LoginMenuStep.SET_PASSWORD;
-//        return Errors.SET_PASSWORD;
-//    }
-
-
-//    private Errors runCommandRegisterFirstStep(String input) {
-//        Matcher matcher;
-//        if ((matcher = Patterns.PICK_QUESTION.getMather(input)) == null) {
-//            return Errors.INVALID_COMMAND;
-//        }
-//        int securityQuestionNumber = Integer.parseInt(matcher.group("questionNumber"));
-//        String securityQuestionAnswer = matcher.group("answer");
-//        String securityQuestionAnswerConfirmation = matcher.group("confirmAnswer");
-//        return setSecurityQuestion(securityQuestionAnswer, securityQuestionAnswerConfirmation, securityQuestionNumber);
-//    }
-
     public Errors finalizeRegisterUser(String securityQuestionAnswer, String securityQuestionAnswerConfirmation, int securityQuestionNumber) {
         if (!securityQuestionAnswer.equals(securityQuestionAnswerConfirmation)) {
             return OutputView.showOutputAlert(Errors.WRONG_ANSWER_CONFIRMATION);
@@ -76,27 +36,9 @@ public class LoginMenuController extends AppController {
         registeringUser.setSecurityQuestion(App.getSecurityQuestions().get(securityQuestionNumber));
         registeringUser.setSecurityQuestionAnswer(securityQuestionAnswer);
         App.addNewUser(registeringUser);
+        App.setLoggedInUser(registeringUser);
         currentStep = LoginMenuStep.NOTHING;
         return OutputView.showOutputAlert(Errors.REGISTER_SUCCESSFUL);
-    }
-
-    private Errors runCommandNothingStep(String input) {
-        Matcher matcher;
-        Errors error = null;
-        if ((matcher = Patterns.REGISTER_USER.getMather(input)) != null) {
-//            error = terminalRegisterUser(matcher);
-        } else if ((matcher = Patterns.LOGIN_USER.getMather(input)) != null) {
-//            error = terminalLoginUser(matcher);
-        } else if ((matcher = Patterns.FORGOT_PASSWORD.getMather(input)) != null) {
-//            error = terminalForgotPassword(matcher);
-        } else if ((matcher = Patterns.EXIT.getMather(input)) != null) {
-//            App.getAppView().getTerminal().printMessage("Goodbye!");
-//            App.getAppView().getTerminal().close();
-            return Errors.NO_ERROR;
-        } else {
-            error = Errors.INVALID_COMMAND;
-        }
-        return error;
     }
 
     public Errors loginUser(String username, String password, Boolean stayLoggedIn) {
@@ -108,25 +50,8 @@ public class LoginMenuController extends AppController {
             return OutputView.showOutputAlert(Errors.PASSWORD_DOESNT_MATCH);
         }
         App.setLoggedInUser(user);
-//        goToMainMenu();
         return OutputView.showOutputAlert(Errors.LOGIN_SUCCESSFUL);
     }
-
-//    private void goToMainMenu() {
-//        App.setCurrentMenu(Menu.MAIN_MENU);
-//        Controller.MAIN_MENU_CONTROLLER.run();
-//    }
-
-//    private Errors terminalForgotPassword(Matcher matcher) {
-//        String username = matcher.group("username");
-//        forgotenPasswordUser = App.getUserByUsername(username);
-//        if (forgotenPasswordUser == null) {
-//            return Errors.USER_DOESNT_EXIST;
-//        }
-//        //showSecurityQuestion(forgotenPasswordUser);
-//        currentStep = LoginMenuStep.FORGOT_PASSWORD;
-//        return Errors.NO_ERROR;
-//    }
 
     private Errors handlePassword(String newPassword, String confirmPassword) {
         if (!isValidPassword(newPassword)) {
@@ -140,21 +65,6 @@ public class LoginMenuController extends AppController {
         }
         return null;
     }
-
-//    private void showSecurityQuestion(User user) {
-////        App.getAppView().getTerminal().printMessage(user.getSecurityQuestion());
-//    }
-
-//    private Errors terminalRegisterUser(Matcher matcher) {
-//        String username = matcher.group("username");
-//        String password = matcher.group("password");
-//        String confirmPassword = matcher.group("confirmPassword");
-//        String nickname = matcher.group("nickname");
-//        String email = matcher.group("email");
-//
-//
-//        return registerUser(username, password, confirmPassword, nickname, email, false);
-//    }
 
     public Errors registerUser(String username, String password, String confirmPassword, String nickname, String email, Boolean stayLoggedIn) {
         if (username == null || !isValidUsername(username)) {
@@ -175,13 +85,6 @@ public class LoginMenuController extends AppController {
         return OutputView.showOutputAlert(Errors.REGISTER_FIRST_STEP_SUCCESSFUL);
     }
 
-//    private void showSecurityQuestions() {
-//        App.getAppView().getTerminal().printMessage("Choose a security question:");
-//        for (int i = 1; i <= App.getSecurityQuestions().size(); i++) {
-//            App.getAppView().getTerminal().printMessage(i + ". " + App.getSecurityQuestions().get(i - 1));
-//        }
-//    }
-
     private boolean isValidEmail(String email) {
         return email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
     }
@@ -196,23 +99,6 @@ public class LoginMenuController extends AppController {
 
     private boolean isValidUsername(String username) {
         return username.matches("^[a-zA-Z0-9-]*$");
-    }
-
-//    private void printInvalidCommand() {
-//        App.getAppView().getTerminal().printError("invalid command");
-//    }
-
-    public void menuEnter(Menu menu) {
-    }
-
-    public void menuExit() {
-
-    }
-
-    public void showCurrentMenu() {
-    }
-
-    public void registerNewUser(String username, String password, String nickname, String email, int securityQuestionNumber, String securityQuestionAnswer) {
     }
 
     public String generateRandomPassword() {
@@ -245,6 +131,7 @@ public class LoginMenuController extends AppController {
             return OutputView.showOutputAlert(Errors.USER_DOESNT_EXIST);
         }
         if (!forgotenPasswordUser.getSecurityQuestion().equals(securityQuestion)) {
+            System.out.println(forgotenPasswordUser.getSecurityQuestion() + " " + securityQuestion);
             return OutputView.showOutputAlert(Errors.WRONG_SECURITY_QUESTION);
         }
         if (!forgotenPasswordUser.getSecurityQuestionAnswer().equals(securityAnswer)) {
