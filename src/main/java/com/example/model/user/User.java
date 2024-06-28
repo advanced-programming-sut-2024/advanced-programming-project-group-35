@@ -1,12 +1,11 @@
 package com.example.model.user;
 
 import com.example.model.App;
-import com.example.model.card.Card;
 import com.example.model.card.enums.FactionsType;
-import com.example.model.game.GameData;
+import com.example.model.GameData;
+import com.example.model.game.Deck;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class User {
     private String username;
@@ -34,25 +33,8 @@ public class User {
     private int numberOfLostGames = 0;
     private int numberOfSpellCards;
     private int numberOfMinionCards;
-    private HashMap<String, String> QandA;
-    private ArrayList<Card> storageCards;
     private ArrayList<GameData> gameData; // mitoonim az queue estefade konim (vali ta hala kar nakardam bahash)
-    private Deck deck;
-
-
-
-    public User(String username, String password, String nickname, String email, int securityQuestionNumber, String securityQuestionAnswer) {
-        this.username = username;
-        this.password = password;
-        this.nickname = nickname;
-        this.email = email;
-        this.securityQuestion = securityQuestionNumber;
-        this.securityQuestionAnswer = securityQuestionAnswer;
-        this.currentFactionType = generateRandomFactionType();
-        this.storageCards = new ArrayList<Card>();
-        this.gameData = new ArrayList<>();
-        this.deck = new Deck();
-    }
+    private ArrayList<String> decksAddresses;
 
     public User(String username, String password, String nickname, String email) {
         this.username = username;
@@ -60,10 +42,9 @@ public class User {
         this.nickname = nickname;
         this.email = email;
         this.currentFactionType = generateRandomFactionType();
-        this.storageCards = new ArrayList<Card>();
         this.gameData = new ArrayList<>();
-        this.deck = new Deck();
-        App.addNewUser(this);
+        this.decksAddresses = new ArrayList<>();
+        //App.addNewUser(this);
     }
 
     private FactionsType generateRandomFactionType() {
@@ -97,6 +78,7 @@ public class User {
     public String getSecurityQuestionAnswer() {
         return securityQuestionAnswer;
     }
+
     public int calculateRank() {
         return 0;
     }

@@ -1,6 +1,6 @@
 package com.example.model.card.enums;
 
-public enum UnitAbility {
+public enum AbilityName {
     COMMANDERS_HORN,
     DECOY,
     MEDIC,

@@ -1,4 +1,4 @@
-package com.example.model.card.enums;
+package com.example.model.game.place;
 
 public enum UnitPlace {
     CLOSE, RANGED, SIEGE, AGILE, SPECIAL, WHOKNOWS;

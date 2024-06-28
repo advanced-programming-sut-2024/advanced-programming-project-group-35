@@ -26,8 +26,6 @@ public class AppView extends Application {
     public Terminal getTerminal() {
         return terminal;
     }
-
-
     public void showMenu(Menu menu) throws Exception {
         primaryStage.centerOnScreen();
 

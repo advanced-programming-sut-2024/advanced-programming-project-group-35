@@ -1,6 +1,5 @@
 package com.example.controller;
 
-import com.example.model.IO.errors.Errors;
 import com.example.model.card.Card;
 
 import java.util.regex.Matcher;
