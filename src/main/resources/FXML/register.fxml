@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Text?>
+<Pane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.view.menuControllers.LoginMenuControllerView"
+            prefHeight="800.0" prefWidth="1400.0"
+            stylesheets="@../CSS/allFiles.css, @../CSS/allMenu.css"
+            styleClass="register-background">
+    <VBox alignment="CENTER" prefHeight="800" prefWidth="1400" spacing="15.0">
+        <TextField fx:id="usernameFieldRegister" maxWidth="250" promptText="Username" styleClass="custom-text-field"/>
+        <PasswordField fx:id="passwordFieldRegister" maxWidth="250" promptText="Password" styleClass="custom-text-field"/>
+        <PasswordField fx:id="confirmPasswordFieldRegister" maxWidth="250" promptText="Confirm Password" styleClass="custom-text-field"/>
+        <TextField fx:id="emailFieldRegister" maxWidth="250" promptText="email" styleClass="custom-text-field"/>
+        <TextField fx:id="nicknameFieldRegister" maxWidth="250" promptText="nickname (optional)" styleClass="custom-text-field"/>
+        <HBox alignment="CENTER" prefWidth="100" spacing="15.0">
+            <Text text="Do you want a random password?"/>
+            <Button maxHeight="20" minWidth="50" onMouseClicked="#generateRandomPassword"
+                    style="-fx-font-size: 12;" styleClass="brown-button" text="Random password"/>
+        </HBox>
+        <HBox alignment="CENTER" prefWidth="100" spacing="15.0">
+            <Text text="Stay logged in?"/>
+            <CheckBox fx:id="stayLoggedInCheckBoxRegister" styleClass="custom-checkbox"/>
+        </HBox>
+        <Button minWidth="150" onMouseClicked="#registerUser" styleClass="brown-button"
+                text="Register"/>
+    </VBox>
+    <Button translateX="20" translateY="30" minWidth="50" onMouseClicked="#backToLoginMenu" styleClass="brown-button" text="Back"/>
+</Pane>

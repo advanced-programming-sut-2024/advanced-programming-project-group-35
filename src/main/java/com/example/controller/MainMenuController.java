@@ -1,9 +1,11 @@
 package com.example.controller;
 
 import com.example.model.App;
+import com.example.model.user.User;
 import com.example.view.Menu;
 
 public class MainMenuController extends AppController {
+    private final User loggedInUser = App.getLoggedInUser();
     @Override
     public void run() {
         try {
@@ -13,18 +15,16 @@ public class MainMenuController extends AppController {
             throw new RuntimeException();
         }
     }
-    @Override
-    public void runCommand(String input) {
-
-    }
     public void createGame(String opponentName) {
 
     }
-
-    public void menuEnter(Menu menu) {
-    }
     public void logout() {
+        App.setLoggedInUser(null);
+        App.setCurrentMenu(Menu.LOGIN_MENU);
+        Controller.LOGIN_MENU_CONTROLLER.run();
     }
-    public void showCurrentMenu() {
+    public void openProfileMenu() {
+        App.setCurrentMenu(Menu.PROFILE_MENU);
+        Controller.PROFILE_MENU_CONTROLLER.run();
     }
 }

@@ -1,0 +1,48 @@
+.login-menu-background {
+    -fx-background-image: url("/Images/login-menu-background.jpg");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+.register-background {
+    -fx-background-image: url("/Images/register-background.jpg");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+.login-background {
+    -fx-background-image: url("/Images/login-background.jpg");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+.security-question-background {
+    -fx-background-image: url("/Images/security-question-background.jpg");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+.main-menu-background {
+    -fx-background-image: url("/Images/main-menu-background.jpg");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+.profile-menu-background {
+    -fx-background-image: url("/Images/profile-menu-background.jpg");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+.user-data-menu-background {
+    -fx-background-image: url("/Images/user-data-menu-background.jpg");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}

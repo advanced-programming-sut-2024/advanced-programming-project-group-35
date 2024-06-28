@@ -1,12 +1,11 @@
 package com.example.model.user;
 
 import com.example.model.App;
-import com.example.model.card.Card;
 import com.example.model.card.enums.FactionsType;
-import com.example.model.game.GameData;
+import com.example.model.GameData;
+import com.example.model.game.Deck;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class User {
     private String username;
@@ -20,38 +19,22 @@ public class User {
     private String name;
     private String lastName;
     private String profilePicture;
-    private int wins;
-    private int losses;
-    private int score;
+    private int wins = 0;
+    private int losses = 0;
+    private int score = 0;
+    private int bestScore = 0;
     private int money;
     private int numberOfFlags;
-    private int numberOfKills;
-    private int numberOfDeaths;
+    private int numberOfKills = 0;
+    private int numberOfDeaths = 0;
     private int numberOfDraws;
-    private int numberOfPlayedGames;
-    private int numberOfWonGames;
-    private int numberOfLostGames;
+    private int numberOfPlayedGames = 0;
+    private int numberOfWonGames = 0;
+    private int numberOfLostGames = 0;
     private int numberOfSpellCards;
     private int numberOfMinionCards;
-    private HashMap<String, String> QandA;
-    private ArrayList<Card> storageCards;
     private ArrayList<GameData> gameData; // mitoonim az queue estefade konim (vali ta hala kar nakardam bahash)
-    private Deck deck;
-
-
-
-    public User(String username, String password, String nickname, String email, int securityQuestionNumber, String securityQuestionAnswer) {
-        this.username = username;
-        this.password = password;
-        this.nickname = nickname;
-        this.email = email;
-        this.securityQuestion = securityQuestionNumber;
-        this.securityQuestionAnswer = securityQuestionAnswer;
-        this.currentFactionType = generateRandomFactionType();
-        this.storageCards = new ArrayList<Card>();
-        this.gameData = new ArrayList<>();
-        this.deck = new Deck();
-    }
+    private ArrayList<String> decksAddresses;
 
     public User(String username, String password, String nickname, String email) {
         this.username = username;
@@ -59,9 +42,8 @@ public class User {
         this.nickname = nickname;
         this.email = email;
         this.currentFactionType = generateRandomFactionType();
-        this.storageCards = new ArrayList<Card>();
         this.gameData = new ArrayList<>();
-        this.deck = new Deck();
+        this.decksAddresses = new ArrayList<>();
         App.addNewUser(this);
     }
 
@@ -90,12 +72,13 @@ public class User {
     }
 
     public String getSecurityQuestion() {
-        return securityQuestion + ". " + App.getSecurityQuestions().get(securityQuestion);
+        return App.getSecurityQuestions().get(securityQuestion);
     }
 
     public String getSecurityQuestionAnswer() {
         return securityQuestionAnswer;
     }
+
     public int calculateRank() {
         return 0;
     }
@@ -106,5 +89,57 @@ public class User {
 
     public void setSecurityQuestionAnswer(String securityQuestionAnswer) {
         this.securityQuestionAnswer = securityQuestionAnswer;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public int getWins() {
+        return wins;
+    }
+
+    public int getLosses() {
+        return losses;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public int getNumberOfPlayedGames() {
+        return numberOfPlayedGames;
+    }
+
+    public int getNumberOfDraws() {
+        return numberOfDraws;
+    }
+
+    public int getBestScore() {
+        return bestScore;
+    }
+
+    public int getNumberOfWonGames() {
+        return numberOfWonGames;
+    }
+
+    public int getNumberOfLostGames() {
+        return numberOfLostGames;
     }
 }

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.PasswordField?>
+<Pane prefHeight="800.0" prefWidth="1400.0" styleClass="profile-menu-background"
+      stylesheets="@../CSS/allMenu.css, @../CSS/allFiles.css" xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.view.menuControllers.ProfileMenuControllerView">
+    <VBox translateY="200" translateX="197" alignment="CENTER" prefHeight="150.0" prefWidth="230.0" spacing="15.0">
+        <Label layoutX="100" layoutY="100" styleClass="profile-menu-titles" text="Change Username"/>
+        <TextField fx:id="newUsernameField" layoutX="100" layoutY="150" prefHeight="25" prefWidth="200"
+                   promptText="New Username" styleClass="custom-text-field"/>
+        <Button layoutX="100" layoutY="200" minWidth="150" onMouseClicked="#editUsername" styleClass="brown-button"
+                text="Edit Username"/>
+    </VBox>
+    <VBox translateY="600" translateX="197" alignment="CENTER" prefHeight="150.0" prefWidth="230.0" spacing="15.0">
+        <Label layoutX="100" layoutY="100" styleClass="profile-menu-titles" text="Change Nickname"/>
+        <TextField fx:id="newNicknameField" layoutX="100" layoutY="150" prefHeight="25" prefWidth="200"
+                   promptText="New Nickname" styleClass="custom-text-field"/>
+        <Button layoutX="100" layoutY="200" minWidth="150" onMouseClicked="#editNickname" styleClass="brown-button"
+                text="Edit Nickname"/>
+    </VBox>
+    <VBox translateY="497" translateX="601" alignment="CENTER" prefHeight="150.0" prefWidth="230.0" spacing="10.0">
+        <Button minWidth="200" onMouseClicked="#openUserDataMenu" styleClass="brown-button"
+                text="Your Data"/>
+        <Button minWidth="200" onMouseClicked="#openGameHistoryMenu" styleClass="brown-button"
+                text="Game History"/>
+    </VBox>
+    <VBox translateY="280" translateX="601" alignment="CENTER" prefHeight="150.0" prefWidth="230.0" spacing="10.0">
+        <Label fx:id="usernameShower" layoutX="100" layoutY="100" styleClass="profile-menu-titles" text="Username"/>
+        <Label fx:id="nicknameShower" layoutX="100" layoutY="100" styleClass="profile-menu-titles" text="Nickname"/>
+    </VBox>
+    <VBox translateY="600" translateX="986" alignment="CENTER" prefHeight="150.0" prefWidth="230.0" spacing="15.0">
+        <Label layoutX="100" layoutY="100" styleClass="profile-menu-titles" text="Change Email"/>
+        <TextField fx:id="newEmailField" layoutX="100" layoutY="150" prefHeight="25" prefWidth="200"
+                   promptText="New Email" styleClass="custom-text-field"/>
+        <Button layoutX="100" layoutY="200" minWidth="150" onMouseClicked="#editEmail" styleClass="brown-button"
+                text="Edit Email"/>
+    </VBox>
+    <VBox translateY="170" translateX="986" alignment="CENTER" prefHeight="150.0" prefWidth="230.0" spacing="15.0">
+        <Label layoutX="100" layoutY="100" styleClass="profile-menu-titles" text="Change Password"/>
+        <PasswordField fx:id="oldPasswordField" layoutX="100" layoutY="150" prefHeight="25" prefWidth="200"
+                   promptText="Old Password" styleClass="custom-text-field"/>
+        <PasswordField fx:id="newPasswordField" layoutX="100" layoutY="150" prefHeight="25" prefWidth="200"
+                   promptText="New Password" styleClass="custom-text-field"/>
+        <PasswordField fx:id="confirmNewPasswordField" layoutX="100" layoutY="150" prefHeight="25" prefWidth="200"
+                   promptText="Confirm New Password" styleClass="custom-text-field"/>
+        <Button layoutX="100" layoutY="200" minWidth="150" onMouseClicked="#editPassword" styleClass="brown-button"
+                text="Edit Password"/>
+    </VBox>
+    <Button minWidth="50" onMouseClicked="#backToMainMenu" styleClass="brown-button" text="Back" translateX="20"
+            translateY="30"/>
+</Pane>
