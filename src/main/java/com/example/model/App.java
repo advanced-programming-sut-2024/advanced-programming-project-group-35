@@ -75,4 +75,16 @@ public class App {
     public static ArrayList<String> getSecurityQuestions() {
         return App.securityQuestions;
     }
+    public static int getRankByUsername(String username) {
+        int rank = 1;
+        for (User user : App.allUsers) {
+            if (user.getUsername().equals(username)) {
+                for (User user1 : App.allUsers) {
+                    if (user1.getScore() > user.getScore()) rank++;
+                }
+                return rank;
+            }
+        }
+        return 0;
+    }
 }

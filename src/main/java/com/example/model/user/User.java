@@ -20,17 +20,18 @@ public class User {
     private String name;
     private String lastName;
     private String profilePicture;
-    private int wins;
-    private int losses;
-    private int score;
+    private int wins = 0;
+    private int losses = 0;
+    private int score = 0;
+    private int bestScore = 0;
     private int money;
     private int numberOfFlags;
-    private int numberOfKills;
-    private int numberOfDeaths;
+    private int numberOfKills = 0;
+    private int numberOfDeaths = 0;
     private int numberOfDraws;
-    private int numberOfPlayedGames;
-    private int numberOfWonGames;
-    private int numberOfLostGames;
+    private int numberOfPlayedGames = 0;
+    private int numberOfWonGames = 0;
+    private int numberOfLostGames = 0;
     private int numberOfSpellCards;
     private int numberOfMinionCards;
     private HashMap<String, String> QandA;
@@ -126,5 +127,37 @@ public class User {
 
     public String getEmail() {
         return email;
+    }
+
+    public int getWins() {
+        return wins;
+    }
+
+    public int getLosses() {
+        return losses;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public int getNumberOfPlayedGames() {
+        return numberOfPlayedGames;
+    }
+
+    public int getNumberOfDraws() {
+        return numberOfDraws;
+    }
+
+    public int getBestScore() {
+        return bestScore;
+    }
+
+    public int getNumberOfWonGames() {
+        return numberOfWonGames;
+    }
+
+    public int getNumberOfLostGames() {
+        return numberOfLostGames;
     }
 }

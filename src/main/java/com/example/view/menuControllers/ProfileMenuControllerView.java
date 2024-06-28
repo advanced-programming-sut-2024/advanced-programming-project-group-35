@@ -25,23 +25,42 @@ public class ProfileMenuControllerView {
     private final Stage stage = App.getAppView().getPrimaryStage();
     public TextField newUsernameField;
     public TextField newNicknameField;
-    public Label usernameShower;
-    public Label nicknameShower;
+    public Label usernameShower = new Label();
+    public Label nicknameShower = new Label();
     public TextField newEmailField;
     public PasswordField oldPasswordField;
     public PasswordField newPasswordField;
     public PasswordField confirmNewPasswordField;
+    public Label usernameDataMenu = new Label();
+    public Label nicknameDataMenu = new Label();
+    public Label bestScoreDataMenu = new Label();
+    public Label rankDataMenu = new Label();
+    public Label gamesPlayedDataMenu = new Label();
+    public Label wonGamesDataMenu = new Label();
+    public Label drawGamesDataMenu = new Label();
+    public Label lostGamesDataMenu = new Label();
     private Pane pane = App.getAppView().getPane();
     ProfileMenuController controller = (ProfileMenuController) Controller.PROFILE_MENU_CONTROLLER.getController();
+
     @FXML
     public void initialize() {
         usernameShower.setText(App.getLoggedInUser().getUsername());
         nicknameShower.setText(App.getLoggedInUser().getNickname());
+        usernameDataMenu.setText("Username: " + App.getLoggedInUser().getUsername());
+        nicknameDataMenu.setText("Nickname: " + App.getLoggedInUser().getNickname());
+        bestScoreDataMenu.setText("Best Score: " + App.getLoggedInUser().getBestScore());
+        rankDataMenu.setText("Rank: " + App.getRankByUsername(App.getLoggedInUser().getUsername()));
+        gamesPlayedDataMenu.setText("Games Played: " + App.getLoggedInUser().getNumberOfPlayedGames());
+        wonGamesDataMenu.setText("Won Games: " + App.getLoggedInUser().getNumberOfWonGames());
+        drawGamesDataMenu.setText("Draw Games: " + App.getLoggedInUser().getNumberOfDraws());
+        lostGamesDataMenu.setText("Lost Games: " + App.getLoggedInUser().getNumberOfLostGames());
     }
+
     public void backToMainMenu(MouseEvent mouseEvent) {
         App.setCurrentMenu(Menu.MAIN_MENU);
         Controller.MAIN_MENU_CONTROLLER.run();
     }
+
     private void paneChanger(String stageTitle, String fxmlFileName) throws IOException {
         stage.setTitle(stageTitle);
         String fxmlFilePath = "/FXML/";
@@ -57,6 +76,7 @@ public class ProfileMenuControllerView {
         controller.editUsername(newUsernameField.getText());
         if (OutputView.getLastError() == Errors.USERNAME_CHANGED) {
             usernameShower.setText(newUsernameField.getText());
+            newUsernameField.clear();
         }
     }
 
@@ -64,11 +84,12 @@ public class ProfileMenuControllerView {
         controller.editNickname(newNicknameField.getText());
         if (OutputView.getLastError() == Errors.NICKNAME_CHANGED) {
             nicknameShower.setText(newNicknameField.getText());
+            newNicknameField.clear();
         }
     }
 
     public void openUserDataMenu(MouseEvent mouseEvent) throws IOException {
-        paneChanger("User Data Menu", "resetPassword.fxml");
+        paneChanger("User Data Menu", "userDataMenu.fxml");
     }
 
     public void openGameHistoryMenu(MouseEvent mouseEvent) throws IOException {
@@ -77,9 +98,21 @@ public class ProfileMenuControllerView {
 
     public void editEmail(MouseEvent mouseEvent) {
         controller.editEmail(newEmailField.getText());
+        if (OutputView.getLastError() == Errors.EMAIL_CHANGED) {
+            newEmailField.clear();
+        }
     }
 
     public void editPassword(MouseEvent mouseEvent) {
         controller.editPassword(oldPasswordField.getText(), newPasswordField.getText(), confirmNewPasswordField.getText());
+        if (OutputView.getLastError() == Errors.PASSWORD_CHANGED) {
+            oldPasswordField.clear();
+            newPasswordField.clear();
+            confirmNewPasswordField.clear();
+        }
+    }
+
+    public void backToProfileMenu(MouseEvent mouseEvent) throws IOException {
+        paneChanger("Profile Menu", "ProfileMenu.fxml");
     }
 }

@@ -12,9 +12,6 @@
 <Pane prefHeight="800.0" prefWidth="1400.0" styleClass="profile-menu-background"
       stylesheets="@../CSS/allMenu.css, @../CSS/allFiles.css" xmlns="http://javafx.com/javafx/21"
       xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.view.menuControllers.ProfileMenuControllerView">
-<!--    <ImageView fitHeight="800" fitWidth="1400" layoutX="0" layoutY="0">-->
-<!--        <Image url="@../images/profile-menu-background.jpg"/>-->
-<!--    </ImageView>-->
     <VBox translateY="200" translateX="197" alignment="CENTER" prefHeight="150.0" prefWidth="230.0" spacing="15.0">
         <Label layoutX="100" layoutY="100" styleClass="profile-menu-titles" text="Change Username"/>
         <TextField fx:id="newUsernameField" layoutX="100" layoutY="150" prefHeight="25" prefWidth="200"
