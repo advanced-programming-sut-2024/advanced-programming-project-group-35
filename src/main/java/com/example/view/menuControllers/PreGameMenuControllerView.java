@@ -8,8 +8,6 @@ import com.example.model.card.factions.Factions;
 import com.example.model.card.factions.Monsters;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -191,11 +189,6 @@ public class PreGameMenuControllerView {
                 new PreGameCard(PreGameCardData.monsters_earth_elemental.getName(), PreGameCardData.monsters_earth_elemental.getPower(), PreGameCardData.monsters_earth_elemental.getAbility(), srcPath + PreGameCardData.monsters_earth_elemental.getImageAddress()),
                 new PreGameCard(PreGameCardData.monsters_ekkima.getName(), PreGameCardData.monsters_ekkima.getPower(), PreGameCardData.monsters_ekkima.getAbility(), srcPath + PreGameCardData.monsters_ekkima.getImageAddress()),
                 new PreGameCard(PreGameCardData.monsters_endrega.getName(), PreGameCardData.monsters_endrega.getPower(), PreGameCardData.monsters_endrega.getAbility(), srcPath + PreGameCardData.monsters_endrega.getImageAddress()),
-                new PreGameCard(PreGameCardData.monsters_eredin_bronze.getName(), PreGameCardData.monsters_eredin_bronze.getPower(), PreGameCardData.monsters_eredin_bronze.getAbility(), srcPath + PreGameCardData.monsters_eredin_bronze.getImageAddress()),
-                new PreGameCard(PreGameCardData.monsters_eredin_gold.getName(), PreGameCardData.monsters_eredin_gold.getPower(), PreGameCardData.monsters_eredin_gold.getAbility(), srcPath + PreGameCardData.monsters_eredin_gold.getImageAddress()),
-                new PreGameCard(PreGameCardData.monsters_eredin_silver.getName(), PreGameCardData.monsters_eredin_silver.getPower(), PreGameCardData.monsters_eredin_silver.getAbility(), srcPath + PreGameCardData.monsters_eredin_silver.getImageAddress()),
-                new PreGameCard(PreGameCardData.monsters_eredin_copper.getName(), PreGameCardData.monsters_eredin_copper.getPower(), PreGameCardData.monsters_eredin_copper.getAbility(), srcPath + PreGameCardData.monsters_eredin_copper.getImageAddress()),
-                new PreGameCard(PreGameCardData.monsters_eredin_the_treacherous.getName(), PreGameCardData.monsters_eredin_the_treacherous.getPower(), PreGameCardData.monsters_eredin_the_treacherous.getAbility(), srcPath + PreGameCardData.monsters_eredin_the_treacherous.getImageAddress()),
                 new PreGameCard(PreGameCardData.monsters_fiend.getName(), PreGameCardData.monsters_fiend.getPower(), PreGameCardData.monsters_fiend.getAbility(), srcPath + PreGameCardData.monsters_fiend.getImageAddress()),
                 new PreGameCard(PreGameCardData.monsters_fire_elemental.getName(), PreGameCardData.monsters_fire_elemental.getPower(), PreGameCardData.monsters_fire_elemental.getAbility(), srcPath + PreGameCardData.monsters_fire_elemental.getImageAddress()),
                 new PreGameCard(PreGameCardData.monsters_fleder.getName(), PreGameCardData.monsters_fleder.getPower(), PreGameCardData.monsters_fleder.getAbility(), srcPath + PreGameCardData.monsters_fleder.getImageAddress()),
@@ -208,7 +201,7 @@ public class PreGameMenuControllerView {
                 new PreGameCard(PreGameCardData.monsters_ghoul_1.getName(), PreGameCardData.monsters_ghoul_1.getPower(), PreGameCardData.monsters_ghoul_1.getAbility(), srcPath + PreGameCardData.monsters_ghoul_1.getImageAddress()),
                 new PreGameCard(PreGameCardData.monsters_ghoul_2.getName(), PreGameCardData.monsters_ghoul_2.getPower(), PreGameCardData.monsters_ghoul_2.getAbility(), srcPath + PreGameCardData.monsters_ghoul_2.getImageAddress()),
                 new PreGameCard(PreGameCardData.monsters_gravehag.getName(), PreGameCardData.monsters_gravehag.getPower(), PreGameCardData.monsters_gravehag.getAbility(), srcPath + PreGameCardData.monsters_gravehag.getImageAddress()),
-                new PreGameCard(PreGameCardData.monsters_griffin.getName(), PreGameCardData.monsters_griffin.getPower(), PreGameCardData.monsters_griffin.getAbility(), srcPath + PreGameCardData.monsters_griffin.getImageAddress()),
+                new PreGameCard(PreGameCardData.monsters_gryffin.getName(), PreGameCardData.monsters_gryffin.getPower(), PreGameCardData.monsters_gryffin.getAbility(), srcPath + PreGameCardData.monsters_gryffin.getImageAddress()),
                 new PreGameCard(PreGameCardData.monsters_harpy.getName(), PreGameCardData.monsters_harpy.getPower(), PreGameCardData.monsters_harpy.getAbility(), srcPath + PreGameCardData.monsters_harpy.getImageAddress()),
                 new PreGameCard(PreGameCardData.monsters_imlerith.getName(), PreGameCardData.monsters_imlerith.getPower(), PreGameCardData.monsters_imlerith.getAbility(), srcPath + PreGameCardData.monsters_imlerith.getImageAddress()),
                 new PreGameCard(PreGameCardData.monsters_katakan.getName(), PreGameCardData.monsters_katakan.getPower(), PreGameCardData.monsters_katakan.getAbility(), srcPath + PreGameCardData.monsters_katakan.getImageAddress()),
@@ -224,7 +217,7 @@ public class PreGameMenuControllerView {
                 new PreGameCard(PreGameCardData.monsters_witch_velen.getName(), PreGameCardData.monsters_witch_velen.getPower(), PreGameCardData.monsters_witch_velen.getAbility(), srcPath + PreGameCardData.monsters_witch_velen.getImageAddress()),
                 new PreGameCard(PreGameCardData.monsters_witch_velen_1.getName(), PreGameCardData.monsters_witch_velen_1.getPower(), PreGameCardData.monsters_witch_velen_1.getAbility(), srcPath + PreGameCardData.monsters_witch_velen_1.getImageAddress()),
                 new PreGameCard(PreGameCardData.monsters_witch_velen_2.getName(), PreGameCardData.monsters_witch_velen_2.getPower(), PreGameCardData.monsters_witch_velen_2.getAbility(), srcPath + PreGameCardData.monsters_witch_velen_2.getImageAddress()),
-                new PreGameCard(PreGameCardData.monster_wyvern.getName(), PreGameCardData.monster_wyvern.getPower(), PreGameCardData.monster_wyvern.getAbility(), srcPath + PreGameCardData.monster_wyvern.getImageAddress())
+                new PreGameCard(PreGameCardData.monsters_wyvern.getName(), PreGameCardData.monsters_wyvern.getPower(), PreGameCardData.monsters_wyvern.getAbility(), srcPath + PreGameCardData.monsters_wyvern.getImageAddress())
                 );
     }
 

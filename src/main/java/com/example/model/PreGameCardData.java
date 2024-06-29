@@ -12,11 +12,6 @@ public enum PreGameCardData {
     monsters_earth_elemental("monsters_earth_elemental", "monsters_earth_elemental.jpg", 6, "soldier"),
     monsters_ekkima("monsters_ekkima", "monsters_ekkima.jpg", 6, "soldier"),
     monsters_endrega("monsters_endrega", "monsters_endrega.jpg", 6, "soldier"),
-    monsters_eredin_bronze("monsters_eredin_bronze", "monsters_eredin_bronze.jpg", 6, "soldier"),
-    monsters_eredin_gold("monsters_eredin_gold", "monsters_eredin_gold.jpg", 6, "soldier"),
-    monsters_eredin_silver("monsters_eredin_silver", "monsters_eredin_silver.jpg", 6, "soldier"),
-    monsters_eredin_copper("monsters_eredin_copper", "monsters_eredin_copper.jpg", 6, "soldier"),
-    monsters_eredin_the_treacherous("monsters_eredin_the_treacherous", "monsters_eredin_the_treacherous.jpg", 6, "soldier"),
     monsters_fiend("monsters_fiend", "monsters_fiend.jpg", 6, "soldier"),
     monsters_fire_elemental("monsters_fire_elemental", "monsters_fire_elemental.jpg", 6, "soldier"),
     monsters_fleder("monsters_fleder", "monsters_fleder.jpg", 6, "soldier"),
@@ -29,7 +24,7 @@ public enum PreGameCardData {
     monsters_ghoul_1("monsters_ghoul_1", "monsters_ghoul_1.jpg", 6, "soldier"),
     monsters_ghoul_2("monsters_ghoul_2", "monsters_ghoul_2.jpg", 6, "soldier"),
     monsters_gravehag("monsters_gravehag", "monsters_gravehag.jpg", 6, "soldier"),
-    monsters_griffin("monsters_griffin", "monsters_griffin.jpg", 6, "soldier"),
+    monsters_gryffin("monsters_gryffin", "monsters_gryffin.jpg", 6, "soldier"),
     monsters_harpy("monsters_harpy", "monsters_harpy.jpg", 6, "soldier"),
     monsters_imlerith("monsters_imlerith", "monsters_imlerith.jpg", 6, "soldier"),
     monsters_katakan("monsters_katakan", "monsters_katakan.jpg", 6, "soldier"),
@@ -45,7 +40,7 @@ public enum PreGameCardData {
     monsters_witch_velen("monsters_witch_velen" , "monsters_witch_velen.jpg", 6, "soldier"),
     monsters_witch_velen_1("monsters_witch_velen_1", "monsters_witch_velen_1.jpg", 6, "soldier"),
     monsters_witch_velen_2("monsters_witch_velen_2", "monsters_witch_velen_2.jpg", 6, "soldier"),
-    monster_wyvern("monster_wyvern", "monster_wyvern.jpg", 6, "soldier"),
+    monsters_wyvern("monsters_wyvern", "monsters_wyvern.jpg", 6, "soldier"),
 
 
 
