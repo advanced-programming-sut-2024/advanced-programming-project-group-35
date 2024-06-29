@@ -4,14 +4,16 @@ import com.example.model.App;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 public class Alert extends StackPane {
     private String alertType;
     private String message;
-    private final double width = 250;
-    private final double height = 80;
+    public final double width = 250;
+    public final double height = 80;
 
     public Alert(String message, String alertType) {
         this.alertType = alertType;
@@ -20,15 +22,23 @@ public class Alert extends StackPane {
     }
     private void init() {
         this.getStylesheets().add(Alert.class.getResource("/CSS/alertStyle.css").toExternalForm());
-        ImageView imageView = new ImageView(new Image(Alert.class.getResource("/images/terminal-exit-button.png").toExternalForm()));
-        imageView.setOnMouseClicked(e -> App.getAppView().removeAlert());
+        ImageView imageView = new ImageView(new Image(Alert.class.getResource("/images/terminal-exit-button.png").toExternalForm(), 20, 20, true, true));
+        imageView.setOnMouseClicked(e -> App.getAppView().removeAlert(App.getAppView().getPane()));
+
+        String containerStyleClassName = alertType + "-vbox-button-container";
 
         VBox buttonContainer = new VBox(imageView);
-        buttonContainer.getStyleClass().add("vbox-button-container");
+        buttonContainer.getStyleClass().add(containerStyleClassName);
         buttonContainer.prefWidth(width);
 
-        VBox labelContainer = new VBox(new Label(message));
-        labelContainer.getStyleClass().add("vbox-label-container");
+        String labelContainerStyleClassName = alertType + "-vbox-label-container";
+        String labelStyleClassName = alertType + "-label-message";
+
+        Text label = new Text(message);
+        VBox labelContainer = new VBox(label);
+        label.setWrappingWidth(230);
+        label.getStyleClass().add(labelStyleClassName);
+        labelContainer.getStyleClass().add(labelContainerStyleClassName);
         labelContainer.setPrefWidth(width);
         labelContainer.setPrefHeight(height);
 

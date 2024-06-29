@@ -1,14 +1,20 @@
 package com.example.model.card.factions;
 
+import com.example.model.card.AbilityContext;
 import com.example.model.card.enums.FactionsType;
+import com.example.model.game.Player;
 
 public class ScoiaTeal implements Factions {
+    FactionsType factionsType = FactionsType.ScoiaTael;
 
+    @Override
     public FactionsType getFaction() {
-        return FactionsType.ScoiaTael;
+        return factionsType;
     }
 
-    public void executeSpecialAbility() {
-        //
+    @Override
+    public void apply(AbilityContext abilityContext, Player player) {
+
     }
+
 }

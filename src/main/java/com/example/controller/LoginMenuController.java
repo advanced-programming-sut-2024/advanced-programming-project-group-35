@@ -2,12 +2,16 @@ package com.example.controller;
 
 import com.example.model.App;
 import com.example.model.IO.Steps.LoginMenuStep;
-import com.example.model.IO.errors.LoginMenuErrors;
-import com.example.model.IO.patterns.LoginMenuPatterns;
+import com.example.model.IO.errors.Errors;
+import com.example.model.IO.patterns.Patterns;
 import com.example.model.user.User;
-import com.example.view.LoginMenuView;
+import com.example.view.OutputView;
 import com.example.view.Menu;
 
+import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.regex.Matcher;
 
 public class LoginMenuController extends AppController {
@@ -25,179 +29,60 @@ public class LoginMenuController extends AppController {
         }
     }
 
-    @Override
-    public void runCommand(String input) {
-        try {
-            LoginMenuErrors error = null;
-            if (currentStep == LoginMenuStep.NOTHING) {
-                error = runCommandNothingStep(input);
-            } else if (currentStep == LoginMenuStep.REGISTER_FIRST_STEP) {
-                error = runCommandRegisterFirstStep(input);
-            } else if (currentStep == LoginMenuStep.FORGOT_PASSWORD) {
-                error = runCommandForgotPassword(input);
-            } else if (currentStep == LoginMenuStep.SET_PASSWORD) {
-                error = runCommandSetPassword(input);
-            }
-            if (error != null) {
-                App.getAppView().getTerminal().printError(LoginMenuView.toString(error));
-            }
-        } catch (NullPointerException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private LoginMenuErrors runCommandSetPassword(String input) {
-        Matcher matcher;
-        if ((matcher = LoginMenuPatterns.SET_PASSWORD.getMather(input)) == null) {
-            return LoginMenuErrors.INVALID_COMMAND;
-        }
-        LoginMenuErrors error = handlePassword(matcher.group("password"), matcher.group("confirmPassword"));
-        if (error != null) {
-            return error;
-        }
-        String newPassword = matcher.group("password");
-        forgotenPasswordUser.setPassword(newPassword);
-        currentStep = LoginMenuStep.NOTHING;
-        return LoginMenuErrors.PASSWORD_CHANGED;
-    }
-
-    private LoginMenuErrors runCommandForgotPassword(String input) {
-        Matcher matcher;
-        if ((matcher = LoginMenuPatterns.ANSWER_QUESTION.getMather(input)) == null) {
-            return LoginMenuErrors.INVALID_COMMAND;
-        }
-        String securityQuestionAnswer = matcher.group("answer");
-        if (!forgotenPasswordUser.getSecurityQuestionAnswer().equals(securityQuestionAnswer)) {
-            return LoginMenuErrors.WRONG_ANSWER_CONFIRMATION;
-        }
-        currentStep = LoginMenuStep.SET_PASSWORD;
-        return LoginMenuErrors.SET_PASSWORD;
-    }
-
-
-    private LoginMenuErrors runCommandRegisterFirstStep(String input) {
-        Matcher matcher;
-        if ((matcher = LoginMenuPatterns.PICK_QUESTION.getMather(input)) == null) {
-            return LoginMenuErrors.INVALID_COMMAND;
-        }
-        int securityQuestionNumber = Integer.parseInt(matcher.group("questionNumber"));
-        String securityQuestionAnswer = matcher.group("answer");
-        String securityQuestionAnswerConfirmation = matcher.group("confirmAnswer");
+    public Errors finalizeRegisterUser(String securityQuestionAnswer, String securityQuestionAnswerConfirmation, int securityQuestionNumber) {
         if (!securityQuestionAnswer.equals(securityQuestionAnswerConfirmation)) {
-            return LoginMenuErrors.WRONG_ANSWER_CONFIRMATION;
+            return OutputView.showOutputAlert(Errors.WRONG_ANSWER_CONFIRMATION);
         }
         registeringUser.setSecurityQuestion(App.getSecurityQuestions().get(securityQuestionNumber));
         registeringUser.setSecurityQuestionAnswer(securityQuestionAnswer);
         App.addNewUser(registeringUser);
+        App.setLoggedInUser(registeringUser);
         currentStep = LoginMenuStep.NOTHING;
-        return LoginMenuErrors.REGISTER_SUCCESSFUL;
+        return OutputView.showOutputAlert(Errors.REGISTER_SUCCESSFUL);
     }
 
-    private LoginMenuErrors runCommandNothingStep(String input) {
-        Matcher matcher;
-        LoginMenuErrors error;
-        if ((matcher = LoginMenuPatterns.REGISTER_USER.getMather(input)) != null) {
-            error = terminalRegisterUser(matcher);
-        } else if ((matcher = LoginMenuPatterns.LOGIN_USER.getMather(input)) != null) {
-            error = terminalLoginUser(matcher);
-        } else if ((matcher = LoginMenuPatterns.FORGOT_PASSWORD.getMather(input)) != null) {
-            error = terminalForgotPassword(matcher);
-        } else if ((matcher = LoginMenuPatterns.EXIT.getMather(input)) != null) {
-            App.getAppView().getTerminal().printMessage("Goodbye!");
-            App.getAppView().getTerminal().close();
-            return LoginMenuErrors.NO_ERROR;
-        } else {
-            error = LoginMenuErrors.INVALID_COMMAND;
-        }
-        return error;
-    }
-
-    private LoginMenuErrors terminalLoginUser(Matcher matcher) {
-        String username = matcher.group("username");
-        String password = matcher.group("password");
+    public Errors loginUser(String username, String password, Boolean stayLoggedIn) {
         User user = App.getUserByUsername(username);
         if (user == null) {
-            return LoginMenuErrors.USER_DOESNT_EXIST;
+            return OutputView.showOutputAlert(Errors.USER_DOESNT_EXIST);
         }
         if (!user.getPassword().equals(password)) {
-            return LoginMenuErrors.PASSWORD_DOESNT_MATCH;
+            return OutputView.showOutputAlert(Errors.PASSWORD_DOESNT_MATCH);
         }
-        loginUser(user);
-        goToMainMenu();
-        return LoginMenuErrors.LOGIN_SUCCESSFUL;
+        App.setLoggedInUser(user);
+        return OutputView.showOutputAlert(Errors.LOGIN_SUCCESSFUL);
     }
 
-    private void goToMainMenu() {
-        App.setCurrentMenu(Menu.MAIN_MENU);
-        Controller.MAIN_MENU_CONTROLLER.run();
-    }
-
-    private LoginMenuErrors terminalForgotPassword(Matcher matcher) {
-        String username = matcher.group("username");
-        forgotenPasswordUser = App.getUserByUsername(username);
-        if (forgotenPasswordUser == null) {
-            return LoginMenuErrors.USER_DOESNT_EXIST;
-        }
-        showSecurityQuestion(forgotenPasswordUser);
-        currentStep = LoginMenuStep.FORGOT_PASSWORD;
-        return LoginMenuErrors.NO_ERROR;
-    }
-
-    private LoginMenuErrors handlePassword(String newPassword, String confirmPassword) {
+    private Errors handlePassword(String newPassword, String confirmPassword) {
         if (!isValidPassword(newPassword)) {
-            return LoginMenuErrors.INVALID_PASSWORD;
+            return Errors.INVALID_PASSWORD;
         }
         if (isWeakPassword(newPassword)) {
-            return LoginMenuErrors.WEAK_PASSWORD;
+            return Errors.WEAK_PASSWORD;
         }
         if (!newPassword.equals(confirmPassword)) {
-            return LoginMenuErrors.PASSWORD_DOESNT_MATCH;
+            return Errors.PASSWORD_DOESNT_MATCH;
         }
         return null;
     }
 
-    private void showSecurityQuestion(User user) {
-        App.getAppView().getTerminal().printMessage(user.getSecurityQuestion());
-    }
-
-    private LoginMenuErrors terminalRegisterUser(Matcher matcher) {
-        String username = matcher.group("username");
-        String password = matcher.group("password");
-        String confirmPassword = matcher.group("confirmPassword");
-        String nickname = matcher.group("nickname");
-        String email = matcher.group("email");
-
-
-        return registerUser(username, password, confirmPassword, nickname, email);
-    }
-
-    private LoginMenuErrors registerUser(String username, String password, String confirmPassword, String nickname, String email) {
-        if (!isValidUsername(username)) {
-            return LoginMenuErrors.INVALID_USERNAME;
+    public Errors registerUser(String username, String password, String confirmPassword, String nickname, String email, Boolean stayLoggedIn) {
+        if (username == null || !isValidUsername(username)) {
+            return OutputView.showOutputAlert(Errors.INVALID_USERNAME_FORMAT);
         }
         if (App.getUserByUsername(username) != null) {
-            return LoginMenuErrors.USER_ALREADY_EXISTS;
+            return OutputView.showOutputAlert(Errors.USER_ALREADY_EXISTS);
         }
-        LoginMenuErrors error = handlePassword(password, confirmPassword);
+        Errors error = handlePassword(password, confirmPassword);
         if (error != null) {
-            return error;
+            return OutputView.showOutputAlert(error);
         }
         if (!isValidEmail(email)) {
-            return LoginMenuErrors.INVALID_EMAIL;
+            return OutputView.showOutputAlert(Errors.INVALID_EMAIL);
         }
-
-        showSecurityQuestions();
         registeringUser = new User(username, password, nickname, email);
         currentStep = LoginMenuStep.REGISTER_FIRST_STEP;
-        return LoginMenuErrors.REGISTER_FIRST_STEP_SUCCESSFUL;
-    }
-
-    private void showSecurityQuestions() {
-        App.getAppView().getTerminal().printMessage("Choose a security question:");
-        for (int i = 1; i <= App.getSecurityQuestions().size(); i++) {
-            App.getAppView().getTerminal().printMessage(i + ". " + App.getSecurityQuestions().get(i - 1));
-        }
-        //TODO
+        return OutputView.showOutputAlert(Errors.REGISTER_FIRST_STEP_SUCCESSFUL);
     }
 
     private boolean isValidEmail(String email) {
@@ -216,28 +101,53 @@ public class LoginMenuController extends AppController {
         return username.matches("^[a-zA-Z0-9-]*$");
     }
 
-    private void printInvalidCommand() {
-        App.getAppView().getTerminal().printError("invalid command");
+    public String generateRandomPassword() {
+        SecureRandom random = new SecureRandom();
+        final String DIGITS = "0123456789";
+        final String LOWERCASE = "abcdefghijklmnopqrstuvwxyz";
+        final String UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        final String SPECIAL_CHARACTERS = "@#$%^&+=";
+        final int length = 10;
+        List<Character> password = new ArrayList<>();
+        password.add(DIGITS.charAt(random.nextInt(DIGITS.length())));
+        password.add(LOWERCASE.charAt(random.nextInt(LOWERCASE.length())));
+        password.add(UPPERCASE.charAt(random.nextInt(UPPERCASE.length())));
+        password.add(SPECIAL_CHARACTERS.charAt(random.nextInt(SPECIAL_CHARACTERS.length())));
+        String allCharacters = DIGITS + LOWERCASE + UPPERCASE + SPECIAL_CHARACTERS;
+        for (int i = 4; i < length; i++) {
+            password.add(allCharacters.charAt(random.nextInt(allCharacters.length())));
+        }
+        Collections.shuffle(password, random);
+        StringBuilder finalPassword = new StringBuilder();
+        for (char c : password) {
+            finalPassword.append(c);
+        }
+        return finalPassword.toString();
     }
 
-    public void menuEnter(Menu menu) {
+    public Errors checkSecurityQuestions(String username, String securityQuestion, String securityAnswer) {
+        forgotenPasswordUser = App.getUserByUsername(username);
+        if (forgotenPasswordUser == null) {
+            return OutputView.showOutputAlert(Errors.USER_DOESNT_EXIST);
+        }
+        if (!forgotenPasswordUser.getSecurityQuestion().equals(securityQuestion)) {
+            System.out.println(forgotenPasswordUser.getSecurityQuestion() + " " + securityQuestion);
+            return OutputView.showOutputAlert(Errors.WRONG_SECURITY_QUESTION);
+        }
+        if (!forgotenPasswordUser.getSecurityQuestionAnswer().equals(securityAnswer)) {
+            return OutputView.showOutputAlert(Errors.WRONG_ANSWER_CONFIRMATION);
+        }
+        currentStep = LoginMenuStep.SET_PASSWORD;
+        return OutputView.showOutputAlert(Errors.NO_ERROR);
     }
 
-    public void menuExit() {
-
-    }
-
-    public void showCurrentMenu() {
-    }
-
-    public void registerNewUser(String username, String password, String nickname, String email, int securityQuestionNumber, String securityQuestionAnswer) {
-    }
-
-    private String generateRandomPassword() {
-        return null;
-    }
-
-    public void loginUser(User user) {
-        App.setLoggedInUser(user);
+    public Errors setNewPassword(String password, String confirmPassword) {
+        Errors error = handlePassword(password, confirmPassword);
+        if (error != null) {
+            return OutputView.showOutputAlert(error);
+        }
+        forgotenPasswordUser.setPassword(password);
+        currentStep = LoginMenuStep.NOTHING;
+        return OutputView.showOutputAlert(Errors.PASSWORD_CHANGED);
     }
 }

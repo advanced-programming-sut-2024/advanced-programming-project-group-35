@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.text.Text?>
+<Pane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.view.menuControllers.ProfileMenuControllerView"
+            prefHeight="800.0" prefWidth="1400.0" styleClass="user-data-menu-background"
+            stylesheets="@../CSS/allMenu.css, @../CSS/allFiles.css">
+<!--        <ImageView fitHeight="800" fitWidth="1400" layoutX="0" layoutY="0">-->
+<!--            <Image url="@../images/user-data-menu-background.jpg"/>-->
+<!--        </ImageView>-->
+    <VBox alignment="CENTER" layoutX="170" layoutY="300" spacing="20">
+        <Label fx:id="usernameDataMenu" maxWidth="350" styleClass="user-data-menu-title" text="Username"/>
+        <Label fx:id="nicknameDataMenu" maxWidth="350" styleClass="user-data-menu-title" text="Nickname"/>
+        <Label fx:id="bestScoreDataMenu" maxWidth="350" styleClass="user-data-menu-title" text="Best Score"/>
+        <Label fx:id="rankDataMenu" maxWidth="350" styleClass="user-data-menu-title" text="Rank"/>
+    </VBox>
+    <VBox alignment="CENTER" layoutX="900" layoutY="300" spacing="20">
+        <Label fx:id="gamesPlayedDataMenu" maxWidth="350" styleClass="user-data-menu-title" text="Games Played"/>
+        <Label fx:id="wonGamesDataMenu" maxWidth="350" styleClass="user-data-menu-title" text="Won Games"/>
+        <Label fx:id="drawGamesDataMenu" maxWidth="350" styleClass="user-data-menu-title" text="Draw Games"/>
+        <Label fx:id="lostGamesDataMenu" maxWidth="350" styleClass="user-data-menu-title" text="Lost Games"/>
+    </VBox>
+
+    <Button minWidth="50" onMouseClicked="#backToProfileMenu" styleClass="brown-button" text="Back" translateX="20"
+            translateY="30"/>
+</Pane>

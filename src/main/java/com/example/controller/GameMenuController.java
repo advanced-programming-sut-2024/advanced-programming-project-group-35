@@ -1,7 +1,7 @@
 package com.example.controller;
 
 import com.example.model.card.Card;
-import java.util.Scanner;
+
 import java.util.regex.Matcher;
 
 public class GameMenuController extends AppController {
@@ -9,9 +9,6 @@ public class GameMenuController extends AppController {
     public void run() {
     }
 
-    @Override
-    public void runCommand(String input) {
-    }
 
     public void menuEnter(Matcher matcher) {
     }

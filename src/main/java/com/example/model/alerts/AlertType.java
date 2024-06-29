@@ -4,6 +4,7 @@ public enum AlertType {
     INFO("info"),
     WARNING("warning"),
     ERROR("error"),
+    SUCCESS("success")
     ;
     private final String type;
 

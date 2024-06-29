@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.collections.FXCollections?>
+<Pane xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.view.menuControllers.LoginMenuControllerView"
+      prefHeight="800.0" prefWidth="1400.0"
+      stylesheets="@../CSS/allFiles.css, @../CSS/allMenu.css"
+      styleClass="security-question-background">
+    <VBox alignment="CENTER" prefHeight="800.0" prefWidth="1400.0" spacing="15.0">
+        <ComboBox fx:id="securityQuestionRegister" maxWidth="250" promptText="Security Question" styleClass="custom-text-field">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="What is your favorite color?" />
+                    <String fx:value="What is your favorite food?" />
+                    <String fx:value="What is your favorite movie?" />
+                    <String fx:value="What is your favorite book?" />
+                    <String fx:value="What is your favorite song?" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+        <TextField fx:id="securityAnswerRegister" maxWidth="250" promptText="Answer" styleClass="custom-text-field"/>
+        <TextField fx:id="securityAnswerConfirmationRegister" maxWidth="250" promptText="Confirm Answer" styleClass="custom-text-field"/>
+        <Button minWidth="150" onMouseClicked="#finalizeRegisterUser" styleClass="brown-button"
+                text="Register"/>
+    </VBox>
+
+</Pane>

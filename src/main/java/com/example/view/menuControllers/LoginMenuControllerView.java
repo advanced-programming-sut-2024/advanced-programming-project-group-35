@@ -3,69 +3,148 @@ package com.example.view.menuControllers;
 import com.example.controller.Controller;
 import com.example.controller.LoginMenuController;
 import com.example.model.App;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
+import com.example.model.IO.errors.Errors;
+import com.example.model.alerts.Alert;
+import com.example.model.alerts.AlertType;
+import com.example.view.Menu;
+import com.example.view.OutputView;
 import javafx.fxml.FXML;
-import javafx.scene.effect.BoxBlur;
-import javafx.scene.effect.GaussianBlur;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.util.Duration;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
-public class LoginMenuControllerView extends ViewController {
+import java.io.IOException;
+import java.util.Objects;
 
+public class LoginMenuControllerView {
+    private final Stage stage = App.getAppView().getPrimaryStage();
+    private Pane pane = App.getAppView().getPane();
+    public TextField usernameFieldLogin;
+    public PasswordField passwordFieldLogin;
+    public CheckBox stayLoggedInCheckBoxLogin;
+    public TextField securityAnswerConfirmationRegister;
+    public VBox questionVBox;
+    public VBox passwordVBox;
+    public TextField usernameFieldResetPassword;
+    public ComboBox securityQuestionResetPassword;
+    public TextField securityAnswerResetPassword;
+    public PasswordField passwordFieldResetPassword;
+    public PasswordField confirmPasswordFieldResetPassword;
     @FXML
-    private ImageView terminalButton;
+    private TextField usernameFieldRegister;
+    @FXML
+    private PasswordField passwordFieldRegister;
+    @FXML
+    private PasswordField confirmPasswordFieldRegister;
+    @FXML
+    private TextField emailFieldRegister;
+    @FXML
+    private TextField nicknameFieldRegister;
+    @FXML
+    private CheckBox stayLoggedInCheckBoxRegister;
+    @FXML
+    private ComboBox securityQuestionRegister;
+    @FXML
+    private TextField securityAnswerRegister;
 
-    public void blurringImage(MouseEvent mouseEvent) {
-        BoxBlur blur = new BoxBlur();
-        blur.setWidth(5);
-        blur.setHeight(5);
-        blur.setIterations(1);
-        terminalButton.setEffect(blur);
+    LoginMenuController controller = (LoginMenuController) Controller.LOGIN_MENU_CONTROLLER.getController();
+
+    public void openLoginStage(MouseEvent mouseEvent) throws IOException {
+        paneChanger("Login", "login.fxml");
     }
 
-    public void UnBlurringImage(MouseEvent mouseEvent) {
-        terminalButton.setEffect(null);
+    public void openRegisterStage(MouseEvent mouseEvent) throws IOException {
+        paneChanger("Register", "register.fxml");
     }
 
-    public void showTerminal() {
-        App.getAppView().showTerminal();
-    }
-    @Override
-    public void hideTerminalButton() {
-        terminalButton.setVisible(false);
+    public void openResetPasswordStage(MouseEvent mouseEvent) throws IOException {
+        paneChanger("Reset Password", "resetPassword.fxml");
     }
 
-    @Override
-    public void showTerminalButton() {
-        terminalButton.setVisible(true);
-        terminalButton.requestFocus();
-        GaussianBlur blur = new GaussianBlur(30);
-        terminalButton.setEffect(blur);
-
-        Timeline timeline = new Timeline(
-                new KeyFrame(Duration.seconds(0), new KeyValue(blur.radiusProperty(), 30)),
-                new KeyFrame(Duration.millis(200), new KeyValue(blur.radiusProperty(), 0))
-        );
-        timeline.play();
+    public void generateRandomPassword(MouseEvent mouseEvent) {
+        String randomPassword = controller.generateRandomPassword();
+        passwordFieldRegister.setText(randomPassword);
+        confirmPasswordFieldRegister.setText(randomPassword);
+        App.getAppView().showAlert("Your random password is: " + randomPassword, AlertType.INFO.getType());
     }
 
-    public void keyPressed(KeyEvent event) {
-        if (event.getCode().toString().equals("TAB")) {
-            App.getAppView().showTerminal();
+    private void paneChanger(String stageTitle, String fxmlFileName) throws IOException {
+        stage.setTitle(stageTitle);
+        String fxmlFilePath = "/FXML/";
+        fxmlFilePath += fxmlFileName;
+        pane = FXMLLoader.load(Objects.requireNonNull(LoginMenuControllerView.class.getResource(fxmlFilePath)));
+        stage.setScene(new Scene(pane));
+        stage.setResizable(false);
+        stage.centerOnScreen();
+        App.getAppView().setPane(pane);
+    }
+
+    public void loginUser(MouseEvent mouseEvent) {
+        String username = usernameFieldLogin.getText();
+        String password = passwordFieldLogin.getText();
+        boolean stayLoggedIn = stayLoggedInCheckBoxLogin.isSelected();
+        controller.loginUser(username, password, stayLoggedIn);
+        if (OutputView.getLastError() == Errors.LOGIN_SUCCESSFUL) {
+            App.setCurrentMenu(Menu.MAIN_MENU);
+            Controller.MAIN_MENU_CONTROLLER.run();
         }
-        else if (event.getCode().toString().equals("ESCAPE")) {
-            App.getAppView().removeTerminal();
-        }
-        else if (event.getCode().toString().equals("PAGE_UP")) {
-            //App.getAppView().getTerminal().scrollUp();
-        }
-        else if (event.getCode().toString().equals("PAGE_DOWN")) {
-           // App.getAppView().getTerminal().scrollDown();
+    }
+
+    public void registerUser(MouseEvent mouseEvent) throws IOException {
+        String username = usernameFieldRegister.getText();
+        String password = passwordFieldRegister.getText();
+        String confirmPassword = confirmPasswordFieldRegister.getText();
+        String email = emailFieldRegister.getText();
+        String nickname = nicknameFieldRegister.getText();
+        boolean stayLoggedIn = stayLoggedInCheckBoxRegister.isSelected();
+        controller.registerUser(username, password, confirmPassword, nickname, email, stayLoggedIn);
+        if (OutputView.getLastError() == Errors.REGISTER_FIRST_STEP_SUCCESSFUL) {
+            paneChanger("Security Question", "securityQuestion.fxml");
         }
     }
 
+    public void finalizeRegisterUser(MouseEvent mouseEvent) {
+        int securityQuestionIndex = securityQuestionRegister.getSelectionModel().getSelectedIndex();
+        String securityAnswer = securityAnswerRegister.getText();
+        String securityAnswerConfirmation = securityAnswerConfirmationRegister.getText();
+        controller.finalizeRegisterUser(securityAnswer, securityAnswerConfirmation, securityQuestionIndex);
+        if (OutputView.getLastError() == Errors.REGISTER_SUCCESSFUL) {
+            App.setCurrentMenu(Menu.MAIN_MENU);
+            Controller.MAIN_MENU_CONTROLLER.run();
+        }
+    }
+
+    public void backToLoginMenu(MouseEvent mouseEvent) {
+        try {
+            paneChanger("Gwent", "LoginMenu.fxml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void checkSecurityQuestions(MouseEvent mouseEvent) {
+        String username = usernameFieldResetPassword.getText();
+        securityQuestionResetPassword.getSelectionModel().select(0);
+        String securityQuestion = securityQuestionResetPassword.getSelectionModel().getSelectedItem().toString();
+        String securityAnswer = securityAnswerResetPassword.getText();
+        controller.checkSecurityQuestions(username, securityQuestion, securityAnswer);
+        if (OutputView.getLastError() == Errors.NO_ERROR) {
+            questionVBox.setVisible(false);
+            passwordVBox.setVisible(true);
+        }
+    }
+
+    public void setNewPassword(MouseEvent mouseEvent) {
+        String password = passwordFieldResetPassword.getText();
+        String confirmPassword = confirmPasswordFieldResetPassword.getText();
+        controller.setNewPassword(password, confirmPassword);
+        if (OutputView.getLastError() == Errors.PASSWORD_CHANGED) {
+            App.setCurrentMenu(Menu.LOGIN_MENU);
+            Controller.LOGIN_MENU_CONTROLLER.run();
+        }
+    }
 }

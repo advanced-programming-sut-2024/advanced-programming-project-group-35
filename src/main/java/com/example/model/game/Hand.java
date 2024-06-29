@@ -5,5 +5,11 @@ import com.example.model.card.Card;
 import java.util.ArrayList;
 
 public class Hand {
-    ArrayList<Card> cards = new ArrayList<Card>();
+    private ArrayList<Card> cards = new ArrayList<>();
+    public void addCard(Card card) {
+        cards.add(card);
+    }
+    public void removeCard(Card card) {
+        cards.remove(card);
+    }
 }

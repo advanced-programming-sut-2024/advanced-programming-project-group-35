@@ -1,0 +1,65 @@
+* {
+    -fx-font-family: "Gwent";
+    -fx-font-size: 16px; /* Set your desired font size */
+}
+
+.ice-blue-button {
+    -fx-background-color: #336274;
+    -fx-text-fill: #D2E3D8;
+    -fx-padding: 10px;
+    -fx-border-color: #6994A2 ;
+    -fx-border-width: 2px;
+    -fx-font-size: 16px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 15, 0.1, 0, 0); /* Drop shadow */
+}
+.brown-button {
+    -fx-background-color: #4e342e; /* Brown background color */
+    -fx-text-fill: white; /* White text color */
+    -fx-font-size: 16px; /* Font size */
+    -fx-padding: 8; /* Padding around the text, adjust as needed */
+    -fx-border-color: #3e2723; /* Darker brown border color */
+    -fx-border-width: 2px; /* Border width */
+    -fx-border-insets: 2; /* Move border inwards */
+    -fx-background-radius: 0; /* Rounded corners */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 15, 0.1, 0, 0); /* Drop shadow */
+    -fx-cursor: hand; /* Change cursor to hand */
+    -fx-transition: 0.3s; /* Add transition */
+}
+
+.brown-button:hover {
+    -fx-background-color: #6d4c41; /* Slightly lighter brown background */
+    -fx-border-color: #5d4037; /* Slightly lighter border color */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.9), 15, 0.1, 0, 0); /* Stronger shadow effect */
+    -fx-cursor: hand;
+    -fx-transition: 0.3s; /* Add transition */
+}
+.custom-checkbox {
+    -fx-background-color: #575d81;
+    -fx-text-fill: #f8ffed;
+    -fx-border-width: 2;
+    -fx-border-color: #707ab5;
+}
+
+.custom-text-field {
+    -fx-background-color: #a79377;
+    -fx-text-fill: #6b553c;
+    -fx-border-width: 2;
+    -fx-border-insets: 2;
+    -fx-padding: 5;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-border-color: #6b553c;
+    -fx-font-size: 16px;
+    -fx-prompt-text-fill: #6b553c;
+}
+
+.profile-menu-titles {
+    -fx-font-size: 20px;
+    -fx-text-fill: #ffffff;
+}
+
+.user-data-menu-title {
+    -fx-font-size: 20px;
+    -fx-text-fill: #ffffff;
+}

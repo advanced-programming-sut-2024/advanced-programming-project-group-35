@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<?import javafx.scene.control.CheckBox?>
+<Pane prefHeight="800.0" prefWidth="1400.0" styleClass="login-background"
+      stylesheets="@../CSS/allFiles.css, @../CSS/allMenu.css" xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.view.menuControllers.LoginMenuControllerView">
+    <VBox alignment="CENTER" prefHeight="800" prefWidth="1400" spacing="15.0">
+        <TextField fx:id="usernameFieldLogin" maxWidth="250" promptText="Username" styleClass="custom-text-field"/>
+        <PasswordField fx:id="passwordFieldLogin" maxWidth="250" promptText="Password" styleClass="custom-text-field"/>
+        <HBox alignment="CENTER" prefWidth="100" spacing="15.0">
+            <Text text="Forgot your password?"/>
+            <Button maxHeight="20" minWidth="50" onMouseClicked="#openResetPasswordStage"
+                    style="-fx-font-size: 12;" styleClass="brown-button" text="Reset"/>
+        </HBox>
+        <HBox alignment="CENTER" prefWidth="100" spacing="15.0">
+            <Text text="Stay logged in?"/>
+            <CheckBox fx:id="stayLoggedInCheckBoxLogin" styleClass="custom-checkbox"/>
+        </HBox>
+        <Button minWidth="150" onMouseClicked="#loginUser" styleClass="brown-button"
+                text="Login"/>
+    </VBox>
+    <Button translateX="20" translateY="30" minWidth="50" onMouseClicked="#backToLoginMenu" styleClass="brown-button" text="Back"/>
+</Pane>
