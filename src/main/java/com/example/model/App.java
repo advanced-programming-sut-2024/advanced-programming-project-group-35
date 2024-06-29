@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 public class App {
     private static ArrayList<String> securityQuestions = new ArrayList<String>();
+
     static {
         securityQuestions.add("What is your favorite color?");
         securityQuestions.add("What is your favorite food?");
@@ -24,6 +25,7 @@ public class App {
         securityQuestions.add("What is your favorite book?");
         securityQuestions.add("What is your favorite song?");
     }
+
     private static ArrayList<User> allUsers = new ArrayList<User>();
     private static ArrayList<Card> allCards = new ArrayList<Card>();
     private static Controller currentController;
@@ -81,6 +83,7 @@ public class App {
     public static ArrayList<String> getSecurityQuestions() {
         return App.securityQuestions;
     }
+
     public static int getRankByUsername(String username) {
         int rank = 1;
         for (User user : App.allUsers) {
@@ -93,6 +96,7 @@ public class App {
         }
         return 0;
     }
+
     public static void saveUsers(String filename) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         try (FileWriter writer = new FileWriter(filename)) {
@@ -105,10 +109,15 @@ public class App {
     public static void loadUsers(String filename) {
         Gson gson = new GsonBuilder().create();
         try (FileReader reader = new FileReader(filename)) {
-            Type userListType = new TypeToken<ArrayList<User>>() {}.getType();
+            Type userListType = new TypeToken<ArrayList<User>>() {
+            }.getType();
             allUsers = gson.fromJson(reader, userListType);
             System.out.println("Users data loaded successfully.");
         } catch (IOException e) {
         }
+    }
+
+    public static ArrayList<User> getAllUsers() {
+        return allUsers;
     }
 }

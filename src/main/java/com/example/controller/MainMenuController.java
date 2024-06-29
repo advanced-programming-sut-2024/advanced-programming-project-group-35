@@ -27,4 +27,14 @@ public class MainMenuController extends AppController {
         App.setCurrentMenu(Menu.PROFILE_MENU);
         Controller.PROFILE_MENU_CONTROLLER.run();
     }
+
+    public void openPreGameMenu() {
+        App.setCurrentMenu(Menu.PREGAME_MENU);
+        Controller.PRE_GAME_MENU_CONTROLLER.run();
+    }
+
+    public void openScoreTable() {
+        App.setCurrentMenu(Menu.SCORE_TABLE_MENU);
+        Controller.SCORE_TABLE_MENU_CONTROLLER.run();
+    }
 }

@@ -141,4 +141,5 @@ public class User {
     public int getNumberOfLostGames() {
         return numberOfLostGames;
     }
+
 }

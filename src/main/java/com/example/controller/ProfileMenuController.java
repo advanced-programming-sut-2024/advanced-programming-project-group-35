@@ -18,11 +18,9 @@ public class ProfileMenuController extends AppController {
             throw new RuntimeException();
         }
     }
-    public void showUserInfo() {
-
-    }
-    public void showGameHistory(int number) {
-
+    public void showGameHistory() {
+        App.setCurrentMenu(Menu.GAME_HISTORY_MENU);
+        Controller.GAME_HISTORY_MENU_CONTROLLER.run();
     }
 
     public Errors editUsername(String username) {
