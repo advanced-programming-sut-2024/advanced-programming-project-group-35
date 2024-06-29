@@ -7,7 +7,7 @@ public class CommandersHornCardAbility implements Ability {
     @Override
     public void apply(AbilityContext abilityContext) {
        for (UnitCard card : abilityContext.getRow().getCards()) {
-           card.applyCommanderHorn();
+           card.duplicatePower();
        }
     }
 }

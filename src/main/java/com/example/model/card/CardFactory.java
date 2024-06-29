@@ -13,40 +13,75 @@ public class CardFactory {
         Card card;
         switch (cardName) {
             case "Mardoeme" -> {
-                card = new SpecialCard("", UnitPlace.SPECIAL,new MardroemeAbility(), CardName.MARDOEME);
+                card = new SpecialCard(UnitPlace.SPECIAL, new MardroemeAbility(), CardName.MARDOEME);
                 return card;
             }
             case "Berserker" -> {
-                card = new UnitCard(4, "", new BreskerAbility(), UnitPlace.CLOSE, false, CardName.BERSERKER, false);
+                card = new UnitCard(4, new BreskerAbility(), UnitPlace.CLOSE, false, CardName.BERSERKER, false);
                 return card;
             }
             case "Vidkaarl" -> {
-                card = new UnitCard(14, "", new MoralBoostAbility(), UnitPlace.CLOSE, false, CardName.VIDKAARL, false);
+                card = new UnitCard(14, new MoralBoostAbility(), UnitPlace.CLOSE, false, CardName.VIDKAARL, false);
                 return card;
             }
             case "Svanrige" -> {
-                card = new UnitCard(4, "1", null, UnitPlace.CLOSE, false,  CardName.SVANRIGE, false);
+                card = new UnitCard(4, null, UnitPlace.CLOSE, false, CardName.SVANRIGE, false);
                 return card;
             }
             case "Udalryk" -> {
-                card = new UnitCard(4, "2", null, UnitPlace.CLOSE, false,  CardName.UDALRYK, false);
+                card = new UnitCard(4, null, UnitPlace.CLOSE, false, CardName.UDALRYK, false);
                 return card;
             }
             case "Donar an Hindar" -> {
-                card = new UnitCard(4, "3", null, UnitPlace.CLOSE, false,  CardName.DONAR_AN_HINDAR, false);
+                card = new UnitCard(4, null, UnitPlace.CLOSE, false, CardName.DONAR_AN_HINDAR, false);
                 return card;
             }
             case "Clan An Craite" -> {
-                card = new UnitCard(6, "", new TightBondAbility(), UnitPlace.CLOSE,  false, CardName.CLAN_AN_CRAITE, false);
+                card = new UnitCard(6, new TightBondAbility(), UnitPlace.CLOSE, false, CardName.CLAN_AN_CRAITE, false);
                 return card;
             }
             case "Blueboy Lugos" -> {
-                card = new UnitCard(6, "", null, UnitPlace.CLOSE, false,  CardName.BLUEBOY_LUGOS, false);
+                card = new UnitCard(6, null, UnitPlace.CLOSE, false, CardName.BLUEBOY_LUGOS, false);
                 return card;
             }
             default -> {
                 return null;
             }
         }
+    }
+}
+class BitingFrostAbility implements Ability {
+
+    @Override
+    public void apply(AbilityContext abilityContext) {
+
+    }
+}
+class ImpenetrableFog implements Ability {
+
+    @Override
+    public void apply(AbilityContext abilityContext) {
+
+    }
+}
+class TorrentialRain implements Ability {
+
+    @Override
+    public void apply(AbilityContext abilityContext) {
+
+    }
+}
+class SkelligeStorm implements Ability {
+
+    @Override
+    public void apply(AbilityContext abilityContext) {
+
+    }
+}
+class ClearWeather implements Ability {
+
+    @Override
+    public void apply(AbilityContext abilityContext) {
+
     }
 }

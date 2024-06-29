@@ -8,7 +8,6 @@ import com.example.model.game.*;
 import com.example.model.game.place.Row;
 import com.example.model.game.place.SpellPlace;
 
-import java.nio.file.Watchable;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -17,7 +16,7 @@ public class LeaderFactory {
         LeaderCard leaderCard;
         switch (cardName) {
             case "King Bran" -> {
-                leaderCard = new LeaderCard("", LeaderName.KING_BRAN, null); // کاری انجام نمیده صرفا برای انجام توانایی آب و هوا باید چک شه اگه لیدر این بود پاور کمتر کم میشه
+                leaderCard = new LeaderCard("", LeaderName.KING_BRAN, null); // TODO کاری انجام نمیده صرفا برای انجام توانایی آب و هوا باید چک شه اگه لیدر این بود پاور کمتر کم میشه
                 return leaderCard;
             }
             case "Crach an Craite" -> {
@@ -84,10 +83,93 @@ public class LeaderFactory {
                 leaderCard = new LeaderCard("", LeaderName.THE_WHITE_FLAME, new TheWhiteFlame());
                 return leaderCard;
             }
+            case "Son of Medell" -> {
+                leaderCard = new LeaderCard("", LeaderName.SON_OF_MEDELL, new SonOfMedellAbility());
+                return leaderCard;
+            }
+            case "Lord Commander of the North" -> {
+                leaderCard = new LeaderCard("", LeaderName.LORD_COMMANDER_OF_THE_NORTH, new LordCommanderOfTheNorth());
+                return leaderCard;
+            }
+            case "King of Temeria" -> {
+                leaderCard = new LeaderCard("", LeaderName.KING_OF_TEMERIA, new KingOfTermeriaAbility());
+                return leaderCard;
+            }
+            case "The Steel-Forged" -> {
+                leaderCard = new LeaderCard("", LeaderName.THE_STEEL_FORGED, null);//TODO کاری نمیکنه صرفا اگه لیدر این بود آب و هوا بر میگرده سر جاش
+                return leaderCard;
+            }
+            case "The Siegemaster" -> {
+                leaderCard = new LeaderCard("", LeaderName.THE_SIEGEMASTER, new TheSiegeMaster());
+                return leaderCard;
+            }
             default -> {
                 return null;
             }
         }
+    }
+
+    static void removeMaxPoweredCardInARow(Player player, Row row) {
+        if (!row.isEmpty() && row.getStrength() >= 10) {
+            int maximumPowerInRow = 0;
+            UnitCard maxPoweredCard = new UnitCard(0, "", null, null, false, null, false);
+            for (UnitCard card : player.getBoard().getRangedCardPlace().getCards()) {
+                if (maxPoweredCard.getCurrentPower() >= maximumPowerInRow) {
+                    maxPoweredCard = card;
+                    maximumPowerInRow = maxPoweredCard.getCurrentPower();
+                }
+            }
+            player.getBoard().getRangedCardPlace().removeCard(maxPoweredCard);
+            player.getBoard().getDiscardPile().addCard(maxPoweredCard);
+        }
+    }
+}
+class TheSiegeMaster implements LeaderAbility {
+
+    @Override
+    public void apply(Table table) {
+        Hand hand = table.getCurrentPlayer().getBoard().getHand();
+        SpellPlace spellPlace = table.getSpellPlace();
+        Card weatherCard = hand.getCardByName(CardName.IMPENETRABLE_FOG);
+        if (weatherCard != null) {
+            if (!spellPlace.isSpellPlaceFull()) {
+                hand.removeCard(weatherCard);
+                spellPlace.addCard((WeatherCard) weatherCard);
+                //TODO گرافیک انتقال کارت
+                if (table.getCurrentPlayer().getBoard().getDeck().getLeader().getLeaderName() == LeaderName.THE_STEEL_FORGED) {
+                    hand.addCard(weatherCard);
+                    spellPlace.removeCard((WeatherCard) weatherCard);
+                } else {
+                    weatherCard.getAbility().apply(new AbilityContext(table, null, null));
+                    // TODO تو ابیلیتی ودر کارت ها باید چک شه که لیدر کینگ برن نباشه
+                }
+            }
+        }
+    }
+}
+class KingOfTermeriaAbility implements LeaderAbility {
+
+    @Override
+    public void apply(Table table) {
+        Row siege = table.getCurrentPlayer().getBoard().getSiegeCardPlace();
+        if (!(siege.getSpecialPlace().getAbility() instanceof CommandersHornCardAbility)) {
+            for (UnitCard card : siege.getCards()) {
+                card.duplicatePower();
+            }
+        }
+    }
+}
+class LordCommanderOfTheNorth implements LeaderAbility {
+    @Override
+    public void apply(Table table) {
+        LeaderFactory.removeMaxPoweredCardInARow(table.getOpponent(), table.getOpponent().getBoard().getSiegeCardPlace());
+    }
+}
+
+class SonOfMedellAbility implements LeaderAbility {
+    @Override
+    public void apply(Table table) {
+        LeaderFactory.removeMaxPoweredCardInARow(table.getOpponent(), table.getOpponent().getBoard().getRangedCardPlace());
     }
 }
 
@@ -95,7 +177,17 @@ class TheWhiteFlame implements LeaderAbility {
 
     @Override
     public void apply(Table table) {
-
+        Hand hand = table.getCurrentPlayer().getBoard().getHand();
+        ArrayList<Card> handCopy = new ArrayList<>(hand.getCards());
+        for (Card card : handCopy) {
+            if (card.getCardName() == CardName.TORRENTIAL_RAIN) {
+                if (!table.getSpellPlace().isSpellPlaceFull()) {
+                    hand.removeCard(card);
+                    table.getSpellPlace().addCard((WeatherCard) card);
+                    card.getAbility().apply(new AbilityContext(table, null, null));
+                }
+            }
+        }
     }
 }
 
@@ -145,7 +237,7 @@ class BringerOfDeath implements LeaderAbility {
         Row close = table.getCurrentPlayer().getBoard().getCloseCombatCardPlace();
         if (close.getSpecialPlace().getAbility() instanceof CommandersHornCardAbility) {
             for (UnitCard card : close.getCards()) {
-                card.applyCommanderHorn();
+                card.duplicatePower();
             }
         }
     }
@@ -196,7 +288,7 @@ class TheTreacherous implements LeaderAbility {
         for (Row row : rows) {
             for (UnitCard card : row.getCards()) {
                 if (card.getAbility() instanceof SpyAbility)
-                    card.applyCommanderHorn();
+                    card.duplicatePower();
             }
         }
     }
@@ -205,23 +297,8 @@ class TheTreacherous implements LeaderAbility {
 class QueenOfDolBlathanna implements LeaderAbility {
     @Override
     public void apply(Table table) {
-        if (table.getOpponent().getBoard().getRangedCardPlace().getStrength() >= 10) {
-            removeMaximumPoweredCardFromClose(table.getOpponent());
-        }
-    }
-
-    private void removeMaximumPoweredCardFromClose(Player opponent) {
-        if (!opponent.getBoard().getCloseCombatCardPlace().getCards().isEmpty() && opponent.getBoard().getCloseCombatCardPlace().getStrength() >= 10) {
-            int maximumPowerInRow = 0;
-            UnitCard maxPoweredCard = new UnitCard(0, "", null, null, false, null, false);
-            for (UnitCard card : opponent.getBoard().getRangedCardPlace().getCards()) {
-                if (maxPoweredCard.getCurrentPower() >= maximumPowerInRow) {
-                    maxPoweredCard = card;
-                    maximumPowerInRow = maxPoweredCard.getCurrentPower();
-                }
-            }
-            opponent.getBoard().getRangedCardPlace().removeCard(maxPoweredCard);
-            opponent.getBoard().getDiscardPile().addCard(maxPoweredCard);
+        if (!table.getOpponent().getBoard().getRangedCardPlace().isEmpty() && table.getOpponent().getBoard().getRangedCardPlace().getStrength() >= 10) {
+            LeaderFactory.removeMaxPoweredCardInARow(table.getCurrentPlayer(), table.getOpponent().getBoard().getCloseCombatCardPlace());
         }
     }
 }
@@ -232,7 +309,7 @@ class TheBeautifulAbility implements LeaderAbility {
         Row ranged = table.getCurrentPlayer().getBoard().getRangedCardPlace();
         if (!(ranged.getSpecialPlace().getAbility() instanceof CommandersHornCardAbility)) {
             for (UnitCard card : ranged.getCards()) {
-                card.applyCommanderHorn();
+                card.duplicatePower();
             }
         }
     }

@@ -18,7 +18,11 @@ public enum LeaderName {
     THE_RELENTLESS("The Relentless"),
     EMPEROR_OF_NILFGAARD("Emperor of Nilfgaard"),
     HIS_IMPERIAL_MAJESTY("His Imperial Majesty"),
-    THE_WHITE_FLAME("The White Flame");
+    THE_WHITE_FLAME("The White Flame"),
+    SON_OF_MEDELL("Son of Medell"),
+    LORD_COMMANDER_OF_THE_NORTH("Lord Commander of the North"),
+    KING_OF_TEMERIA("King of Temeria"),
+    THE_SIEGEMASTER("The Siegemaster");
     private final String name;
 
     LeaderName(String name) {

@@ -11,7 +11,8 @@ public enum CardName {
     BLUEBOY_LUGOS("Blueboy Lugos"),
     MARDOEME("Mardoeme"),
     BITING_FROST("Biting Frost"),
-    TORRENTIAL_RAIN("Torrential Rain");
+    TORRENTIAL_RAIN("Torrential Rain"),
+    IMPENETRABLE_FOG("Impenetrable fog");
 
     private final String name;
 
