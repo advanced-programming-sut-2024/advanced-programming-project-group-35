@@ -1,12 +1,12 @@
 package com.example.view.menuControllers;
 
 import com.example.Main;
+import com.example.controller.Controller;
 import com.example.model.PreGameCardData;
 import com.example.model.App;
 import com.example.model.card.PreGameCard;
-import com.example.model.card.factions.Factions;
-import com.example.model.card.factions.Monsters;
-import com.example.model.card.factions.RealmNorthern;
+import com.example.model.card.factions.*;
+import com.example.view.Menu;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -54,19 +54,17 @@ public class PreGameMenuControllerView {
 
     @FXML
     public void initialize() {
-        faction = new RealmNorthern();
+        faction = new Skellige();
 
         resetMenu();
 
         allCardsPane = new FlowPane(20, 10);
         playerDeckPane = new FlowPane(20, 10);
 
-        // ایجاد ScrollPane برای allCardsPane
         leftScrollPane.setContent(allCardsPane);
         leftScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         leftScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
 
-        // ایجاد ScrollPane برای playerDeckPane
         rightScrollPane.setContent(playerDeckPane);
         rightScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         rightScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
@@ -77,22 +75,10 @@ public class PreGameMenuControllerView {
         setSwapCardEventHandlers(false);
 
 
-        System.out.println("pre game menu");
-        //mainHBox.getChildren().addAll(leftScrollPane, infoColumn, rightScrollPane);
-        System.out.println("pre game menu");
         // تنظیم اولویت رشد برای ScrollPane ها
         HBox.setHgrow(leftScrollPane, Priority.ALWAYS);
         HBox.setHgrow(rightScrollPane, Priority.ALWAYS);
 
-//        mainPane.getChildren().add(mainHBox);
-        //set root on the center
-//        mainHBox.setLayoutX((scene.getWidth() - mainHBox.getPrefWidth()) / 2);
-//        mainHBox.setLayoutY((scene.getHeight() - mainHBox.getPrefHeight()) / 2);
-
-//        Scene scene = new Scene(root, 1000, 600);
-//        primaryStage.setTitle("Pre-Game Menu");
-//        primaryStage.setScene(scene);
-//        primaryStage.show();
         playerNameLabel.setText("player name: " + App.getLoggedInUser().getUsername());
 
         updateDeckInfo();
@@ -104,8 +90,7 @@ public class PreGameMenuControllerView {
         for (PreGameCard card : allCards) {
             card.setOnMouseClicked(event -> {
                 if (allCards.contains(card)) {
-                    playerDeck.add(card);
-                    allCards.remove(card);
+                    addCardToDeck(card);
                 } else {
                     allCards.add(card);
                     playerDeck.remove(card);
@@ -115,6 +100,25 @@ public class PreGameMenuControllerView {
                 updateDeckInfo();
             });
         }
+    }
+
+    private void addCardToDeck(PreGameCard card) {
+        if (specialCardsCountLabel.getText().equals("special cards count: 10") && card.getAbility().equals("special")) {
+            specialCardsCountLabel.setTextFill(Color.RED);
+            new java.util.Timer().schedule(
+                    new java.util.TimerTask() {
+                        @Override
+                        public void run() {
+                            specialCardsCountLabel.setTextFill(Color.BLACK);
+                        }
+                    },
+                    3000
+            );
+
+            return;
+        }
+        playerDeck.add(card);
+        allCards.remove(card);
     }
 
     private void updateDeckCardsPane() {
@@ -140,7 +144,6 @@ public class PreGameMenuControllerView {
         }
         addAllCards(faction);
 
-        // تنظیم اطلاعات اولیه
         realmNameLabel.setText("faction name: " + faction.getFaction().toString());
 
         updateDeckInfo();
@@ -248,8 +251,24 @@ public class PreGameMenuControllerView {
     }
 
     public void startGameButtonAction(ActionEvent actionEvent) {
+        if (playerDeck.size() < 22) {
+            totalCardsLabel.setTextFill(Color.RED);
+            new java.util.Timer().schedule(
+                    new java.util.TimerTask() {
+                        @Override
+                        public void run() {
+                            totalCardsLabel.setTextFill(Color.BLACK);
+                        }
+                    },
+                    3000
+            );
+            return;
+        }
+        //TODO: start game
     }
 
     public void backButtonAction(ActionEvent actionEvent) {
+        App.setCurrentMenu(Menu.MAIN_MENU);
+        Controller.MAIN_MENU_CONTROLLER.run();
     }
 }
