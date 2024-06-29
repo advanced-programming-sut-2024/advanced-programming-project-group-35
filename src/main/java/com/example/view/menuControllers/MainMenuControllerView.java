@@ -28,6 +28,7 @@ public class MainMenuControllerView {
     }
 
     public void startGame(MouseEvent mouseEvent) {
+        controller.openPreGameMenu();
     }
 
     public void logout(MouseEvent mouseEvent) {
@@ -39,5 +40,6 @@ public class MainMenuControllerView {
     }
 
     public void openScoreTable(MouseEvent mouseEvent) {
+        controller.openScoreTable();
     }
 }

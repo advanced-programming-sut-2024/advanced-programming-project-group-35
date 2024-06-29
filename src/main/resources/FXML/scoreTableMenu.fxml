@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.view.menuControllers.ScoreTableMenuControllerView"
+            prefHeight="800" prefWidth="1400" styleClass="score-table-menu-background"
+            stylesheets="@../CSS/allMenu.css, @../CSS/allFiles.css">
+    <ImageView fitHeight="800" fitWidth="1400" preserveRatio="true">
+        <Image url="@../images/score-table-menu-background.jpg"/>
+    </ImageView>
+    <VBox prefWidth="1400" prefHeight="800" spacing="20" alignment="CENTER">
+        <Text styleClass="white-text, score-board-title" text="Scoreboard"/>
+        <TableView styleClass="scoreboard-table" fx:id="scoreboardTable" maxWidth="806.0" minHeight="400.0">
+            <columns>
+                <TableColumn minWidth="200" styleClass="column-header" fx:id="usernameColumn" prefWidth="200.0" text="Username"/>
+                <TableColumn minWidth="100" styleClass="column-header" fx:id="rankColumn" prefWidth="200.0" text="Best Score"/>
+                <TableColumn minWidth="100" styleClass="column-header" fx:id="scoreColumn" prefWidth="200.0" text="Score"/>
+                <TableColumn minWidth="100" styleClass="column-header" fx:id="gamesWonColumn" prefWidth="200.0" text="Games Won"/>
+            </columns>
+        </TableView>
+    </VBox>
+    <Button translateX="20" translateY="30" minWidth="50" onMouseClicked="#backToMainMenu" styleClass="brown-button"
+            text="Back"/>
+</AnchorPane>

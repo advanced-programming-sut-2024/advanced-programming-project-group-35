@@ -1,9 +1,17 @@
 package com.example.controller;
 
-public class PregameController extends AppController {
+import com.example.model.App;
+import com.example.view.Menu;
+
+public class PreGameController extends AppController {
     @Override
     public void run() {
-
+        try {
+            App.getAppView().showMenu(Menu.PREGAME_MENU);
+            App.setCurrentController(Controller.PRE_GAME_MENU_CONTROLLER);
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
     }
     public void showFactions() {
 

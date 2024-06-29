@@ -63,3 +63,37 @@
     -fx-font-size: 20px;
     -fx-text-fill: #ffffff;
 }
+.white-text {
+    -fx-fill: #ffffff !important;
+}
+.scoreboard-table {
+    -fx-background-color: linear-gradient(to bottom, #a79377, #3e2723);
+    -fx-text-fill: #ffffff;
+    -fx-background-radius: 10;
+    -fx-border-radius: 8;
+    -fx-border-width: 2;
+    -fx-border-color: #3e2723;
+    -fx-fill: #ffffff;
+}
+.column-header {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-fill: #ffffff;
+    -fx-background-color: linear-gradient(to bottom, #a79377, #6b553c);
+    -fx-text-fill: #ffffff;
+}
+.table-view {
+    -fx-text-fill: #3e2723; /* Change to the color you desire */
+}
+.table-cell {
+    -fx-text-fill: #3e2723;
+}
+.table-row-cell {
+    -fx-background-color: #a79377; /* Change to the color you desire */
+}
+
+.score-board-title {
+    -fx-font-size: 40px;
+    -fx-text-fill: #ffffff;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 15, 0.1, 0, 0);
+}

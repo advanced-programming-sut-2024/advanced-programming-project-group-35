@@ -93,7 +93,7 @@ public class ProfileMenuControllerView {
     }
 
     public void openGameHistoryMenu(MouseEvent mouseEvent) throws IOException {
-        paneChanger("Game History Menu", "resetPassword.fxml");
+        controller.showGameHistory();
     }
 
     public void editEmail(MouseEvent mouseEvent) {
