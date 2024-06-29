@@ -5,7 +5,7 @@ public enum Controller {
     MAIN_MENU_CONTROLLER(new MainMenuController()),
     PROFILE_MENU_CONTROLLER(new ProfileMenuController()),
     GAME_MENU_CONTROLLER(new GameMenuController()),
-    PRE_GAME_MENU_CONTROLLER(new PreGameController()),
+    PRE_GAME_MENU_CONTROLLER(new PreGameMenuController()),
     GAME_HISTORY_MENU_CONTROLLER(new GameHistoryController()),
     SCORE_TABLE_MENU_CONTROLLER(new ScoreTableController()),
     ;

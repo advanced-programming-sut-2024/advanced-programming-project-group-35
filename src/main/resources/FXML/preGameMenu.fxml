@@ -6,30 +6,40 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <Pane xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.example.view.menuControllers.PreGameMenuControllerView"
       prefHeight="800.0" prefWidth="1400.0"
       stylesheets="@../CSS/allMenu.css, @../CSS/allFiles.css"
-      styleClass="main-menu-background"
+      styleClass="pre-game-menu-background"
       fx:id="mainPane">
-        <HBox fx:id="mainHBox" spacing="20" prefHeight="800" prefWidth="1400" alignment="CENTER">
-            <ScrollPane fx:id="leftScrollPane" prefHeight="800" prefWidth="600">
-
-            </ScrollPane>
-            <VBox fx:id="infoVBox" spacing="20" prefHeight="800" prefWidth="200" alignment="CENTER">
-                <Label fx:id="playerNameLabel" text="Player Name: " styleClass="label"/>
-                <Label fx:id="realmNameLabel" text="Real Name: " styleClass="label"/>
-                <Label fx:id="totalCardsLabel" text="Total Cards: " styleClass="label"/>
-                <Label fx:id="soldiersCountLabel" text="Soldiers: " styleClass="label"/>
-                <Label fx:id="specialCardsCountLabel" text="Workers: " styleClass="label"/>
-                <Label fx:id="heroCardsCountLabel" text="Special Cards: " styleClass="label"/>
-                <Label fx:id="totalPowerLabel" text="Total Money: " styleClass="label"/>
-                <Button fx:id="startGameButton" text="Start Game" onAction="#startGameButtonAction"/>
-                <Button fx:id="backButton" text="Back" onAction="#backButtonAction"/>
-            </VBox>
-            <ScrollPane fx:id="rightScrollPane" prefHeight="800" prefWidth="600">
-
-            </ScrollPane>
-        </HBox>
+    <HBox fx:id="mainHBox" spacing="25" prefHeight="800" prefWidth="1400" alignment="CENTER">
+        <ScrollPane styleClass="scroll-pane-pre-game-menu" fx:id="leftScrollPane" prefHeight="700" prefWidth="500"
+                    maxHeight="700" maxWidth="500">
+            <FlowPane styleClass="transparent-background, flow-pane-pre-game-menu" fx:id="allCardsPane" prefHeight="700"
+                      prefWidth="450" alignment="CENTER" hgap="15" vgap="20" maxWidth="450">
+            </FlowPane>
+        </ScrollPane>
+        <VBox fx:id="infoVBox" spacing="20" prefHeight="700" prefWidth="300" alignment="CENTER" maxHeight="300"
+              maxWidth="700">
+            <Label fx:id="playerNameLabel" text="Player Name: " styleClass="pre-game-menu-label"/>
+            <Label fx:id="realmNameLabel" text="Real Name: " styleClass="pre-game-menu-label"/>
+            <Label fx:id="totalCardsLabel" text="Total Cards: " styleClass="pre-game-menu-label"/>
+            <Label fx:id="soldiersCountLabel" text="Soldiers: " styleClass="pre-game-menu-label"/>
+            <Label fx:id="specialCardsCountLabel" text="Workers: " styleClass="pre-game-menu-label"/>
+            <Label fx:id="heroCardsCountLabel" text="Special Cards: " styleClass="pre-game-menu-label"/>
+            <Label fx:id="totalPowerLabel" text="Total Money: " styleClass="pre-game-menu-label"/>
+            <Button minWidth="150" styleClass="brown-button" fx:id="startGameButton" text="Start Game"
+                    onAction="#startGameButtonAction"/>
+            <Button minWidth="150" styleClass="brown-button" fx:id="backButton" text="Back" onAction="#backToMainMenu"/>
+        </VBox>
+        <ScrollPane styleClass="scroll-pane-pre-game-menu" fx:id="rightScrollPane" prefHeight="700" prefWidth="500"
+                    maxHeight="700" maxWidth="500" hbarPolicy="NEVER">
+            <FlowPane styleClass="transparent-background, flow-pane-pre-game-menu" fx:id="playerDeckPane"
+                      prefHeight="700" prefWidth="450" alignment="CENTER" hgap="15" vgap="20" maxWidth="450">
+            </FlowPane>
+        </ScrollPane>
+    </HBox>
 </Pane>

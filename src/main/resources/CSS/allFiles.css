@@ -97,3 +97,69 @@
     -fx-text-fill: #ffffff;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 15, 0.1, 0, 0);
 }
+
+.pre-game-menu-label {
+    -fx-font-size: 20px;
+    -fx-text-fill: #ffffff;
+}
+
+.scroll-pane-pre-game-menu {
+    -fx-background-color: transparent;
+    -fx-padding: 10;
+}
+.scroll-pane-pre-game-menu .viewport {
+    -fx-background-color: transparent;
+}
+.transparent-background {
+    -fx-background-color: transparent !important;
+}
+
+.flow-pane-pre-game-menu {
+    -fx-background-color: transparent !important;
+    -fx-padding: 10;
+}
+
+/* styles.css */
+
+/* Style for the scroll pane */
+.scroll-pane-pre-game-menu {
+    -fx-background-color: transparent;
+}
+
+/* Style for the vertical scroll bar */
+.scroll-pane .scroll-bar:vertical {
+    -fx-background-color: transparent;
+}
+
+/* Style for the horizontal scroll bar */
+.scroll-pane .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+}
+
+/* Style for the track of the scroll bar */
+.scroll-pane .scroll-bar .track {
+    -fx-background-color: #a79377;
+    -fx-background-radius: 5;
+}
+
+/* Style for the thumb of the scroll bar */
+.scroll-pane .scroll-bar .thumb {
+    -fx-background-color: #6b553c;
+    -fx-background-insets: 2;
+    -fx-background-radius: 5;
+}
+
+/* Style for the thumb when hovered */
+.scroll-pane .scroll-bar .thumb:hover {
+    -fx-background-color: #3e2723;
+}
+
+/* Style for the increment button of the scroll bar */
+.scroll-pane .scroll-bar .increment-button {
+    -fx-background-color: transparent;
+}
+
+/* Style for the decrement button of the scroll bar */
+.scroll-pane .scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+}
