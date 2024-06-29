@@ -7,11 +7,29 @@
 <?import javafx.scene.layout.*?>
 
 <Pane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.view.menuControllers.PreGameMenuControllerView"
-            prefHeight="800.0" prefWidth="1400.0"
-            stylesheets="@../CSS/allMenu.css, @../CSS/allFiles.css"
-            styleClass="main-menu-background"
-fx:id="mainPane">
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.view.menuControllers.PreGameMenuControllerView"
+      prefHeight="800.0" prefWidth="1400.0"
+      stylesheets="@../CSS/allMenu.css, @../CSS/allFiles.css"
+      styleClass="main-menu-background"
+      fx:id="mainPane">
+        <HBox fx:id="mainHBox" spacing="20" prefHeight="800" prefWidth="1400" alignment="CENTER">
+            <ScrollPane fx:id="leftScrollPane" prefHeight="800" prefWidth="600">
 
+            </ScrollPane>
+            <VBox fx:id="infoVBox" spacing="20" prefHeight="800" prefWidth="200" alignment="CENTER">
+                <Label fx:id="playerNameLabel" text="Player Name: " styleClass="label"/>
+                <Label fx:id="realmNameLabel" text="Real Name: " styleClass="label"/>
+                <Label fx:id="totalCardsLabel" text="Total Cards: " styleClass="label"/>
+                <Label fx:id="soldiersCountLabel" text="Soldiers: " styleClass="label"/>
+                <Label fx:id="specialCardsCountLabel" text="Workers: " styleClass="label"/>
+                <Label fx:id="heroCardsCountLabel" text="Special Cards: " styleClass="label"/>
+                <Label fx:id="totalPowerLabel" text="Total Money: " styleClass="label"/>
+                <Button fx:id="startGameButton" text="Start Game" onAction="#startGameButtonAction"/>
+                <Button fx:id="backButton" text="Back" onAction="#backButtonAction"/>
+            </VBox>
+            <ScrollPane fx:id="rightScrollPane" prefHeight="800" prefWidth="600">
+
+            </ScrollPane>
+        </HBox>
 </Pane>
