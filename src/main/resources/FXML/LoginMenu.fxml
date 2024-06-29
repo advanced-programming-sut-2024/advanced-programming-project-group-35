@@ -20,5 +20,8 @@
         </Button>
         <Button fx:id="registerButton" minWidth="250" onMouseClicked="#openRegisterStage" styleClass="brown-button"
                 text="Register"/>
+        <Button minWidth="150" onMouseClicked="#testApp" styleClass="brown-button"
+                text="Test App"/>
+
     </VBox>
 </AnchorPane>

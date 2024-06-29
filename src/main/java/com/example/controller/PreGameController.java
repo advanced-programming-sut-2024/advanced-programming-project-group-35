@@ -3,7 +3,7 @@ package com.example.controller;
 import com.example.model.App;
 import com.example.view.Menu;
 
-public class PregameController extends AppController {
+public class PreGameController extends AppController {
     @Override
     public void run() {
         try {
