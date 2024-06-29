@@ -44,7 +44,6 @@ public class User {
         this.currentFactionType = generateRandomFactionType();
         this.gameData = new ArrayList<>();
         this.decksAddresses = new ArrayList<>();
-        App.addNewUser(this);
     }
 
     private FactionsType generateRandomFactionType() {

@@ -10,6 +10,7 @@ public enum CardName {
     CLAN_AN_CRAITE("Clan An Craite"),
     BLUEBOY_LUGOS("Blueboy Lugos"),
     MARDOEME("Mardoeme"),
+    KING_BRAN("King Bran"),
     ;
     private final String name;
 

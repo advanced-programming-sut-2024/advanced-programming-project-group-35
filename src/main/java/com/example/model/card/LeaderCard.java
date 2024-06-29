@@ -8,10 +8,9 @@ public class LeaderCard {
     private CardName cardName;
     private String imageAddress;
 
-    public LeaderCard(String imageAddress,CardName cardName ,boolean canDoAction, LeaderAbility ability) {
+    public LeaderCard(String imageAddress,CardName cardName, LeaderAbility ability) {
         this.imageAddress = imageAddress;
         this.ability = ability;
-        this.canDoAction = canDoAction;
     }
 
     public CardName getCardName() {
@@ -21,7 +20,7 @@ public class LeaderCard {
         return cardName.getName();
     }
 
-    public boolean isCanDoAction() {
+    public boolean CanDoAction() {
         return canDoAction;
     }
 

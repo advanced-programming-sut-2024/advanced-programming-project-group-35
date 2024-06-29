@@ -1,13 +1,22 @@
 package com.example.controller;
 
+import com.example.model.App;
 import com.example.model.card.Card;
+import com.example.view.Menu;
 
 import java.util.regex.Matcher;
 
 public class GameMenuController extends AppController {
     @Override
     public void run() {
+        try {
+            App.getAppView().showMenu(Menu.GAME_MENU);
+            App.setCurrentController(Controller.GAME_MENU_CONTROLLER);
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
     }
+
 
 
     public void menuEnter(Matcher matcher) {
