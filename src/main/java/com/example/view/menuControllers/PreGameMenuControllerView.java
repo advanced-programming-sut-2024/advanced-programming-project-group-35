@@ -1,13 +1,16 @@
 package com.example.view.menuControllers;
 
 import com.example.Main;
+import com.example.controller.Controller;
 import com.example.model.PreGameCardData;
 import com.example.model.App;
 import com.example.model.card.PreGameCard;
 import com.example.model.card.factions.Factions;
 import com.example.model.card.factions.Monsters;
+import com.example.view.Menu;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -29,10 +32,9 @@ public class PreGameMenuControllerView {
     private Factions faction;
     private ObservableList<PreGameCard> allCards = FXCollections.observableArrayList();
     private ObservableList<PreGameCard> playerDeck = FXCollections.observableArrayList();
-    private FlowPane allCardsPane;
-    private FlowPane playerDeckPane;
+    public FlowPane allCardsPane;
+    public FlowPane playerDeckPane;
 
-    // برچسب‌های اطلاعات
     @FXML
     private Label playerNameLabel = new Label("player name: ");
     @FXML
@@ -56,15 +58,15 @@ public class PreGameMenuControllerView {
 
         resetMenu();
 
-        allCardsPane = new FlowPane(20, 10);
-        playerDeckPane = new FlowPane(20, 10);
+        leftScrollPane.setBackground(Background.EMPTY);
+        rightScrollPane.setBackground(Background.EMPTY);
+        allCardsPane.setBackground(Background.EMPTY);
+        playerDeckPane.setBackground(Background.EMPTY);
 
-        // ایجاد ScrollPane برای allCardsPane
         leftScrollPane.setContent(allCardsPane);
         leftScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         leftScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
 
-        // ایجاد ScrollPane برای playerDeckPane
         rightScrollPane.setContent(playerDeckPane);
         rightScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         rightScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
@@ -74,27 +76,19 @@ public class PreGameMenuControllerView {
         setSwapCardEventHandlers(true);
         setSwapCardEventHandlers(false);
 
-        System.out.println("pre game menu");
-        //mainHBox.getChildren().addAll(leftScrollPane, infoColumn, rightScrollPane);
-        System.out.println("pre game menu");
-        // تنظیم اولویت رشد برای ScrollPane ها
         HBox.setHgrow(leftScrollPane, Priority.ALWAYS);
         HBox.setHgrow(rightScrollPane, Priority.ALWAYS);
 
-//        mainPane.getChildren().add(mainHBox);
-        //set root on the center
-//        mainHBox.setLayoutX((scene.getWidth() - mainHBox.getPrefWidth()) / 2);
-//        mainHBox.setLayoutY((scene.getHeight() - mainHBox.getPrefHeight()) / 2);
-
-//        Scene scene = new Scene(root, 1000, 600);
-//        primaryStage.setTitle("Pre-Game Menu");
-//        primaryStage.setScene(scene);
-//        primaryStage.show();
         playerNameLabel.setText("player name: " + App.getLoggedInUser().getUsername());
 
         updateDeckInfo();
 
         System.out.println("pre game menu");
+
+        Node flowPaneBackground = playerDeckPane.lookup(".flow-pane-pre-game-menu");
+        if (flowPaneBackground != null) {
+            flowPaneBackground.setStyle("-fx-background-color: transparent;");
+        }
     }
 
     private void setSwapCardEventHandlers(boolean fromAllPane) {
@@ -137,7 +131,6 @@ public class PreGameMenuControllerView {
         }
         addAllCards(faction);
 
-        // تنظیم اطلاعات اولیه
         realmNameLabel.setText("faction name: " + faction.getFaction().toString());
 
         updateDeckInfo();
@@ -257,6 +250,8 @@ public class PreGameMenuControllerView {
     public void startGameButtonAction(ActionEvent actionEvent) {
     }
 
-    public void backButtonAction(ActionEvent actionEvent) {
+    public void backToMainMenu(ActionEvent actionEvent) {
+        App.setCurrentMenu(Menu.MAIN_MENU);
+        Controller.MAIN_MENU_CONTROLLER.run();
     }
 }

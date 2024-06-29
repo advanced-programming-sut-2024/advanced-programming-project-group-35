@@ -23,6 +23,7 @@ public class PreGameCard extends StackPane {
         this.image = new Image(imagePath);
 
         Rectangle cardBase = new Rectangle(120, 200);
+        cardBase.setStyle("-fx-background-radius: 15; -fx-border-radius: 15; -fx-background-color: transparent;");
         //cardBase.setArcWidth(15);
         //cardBase.setArcHeight(15);
         cardBase.setFill(Color.DARKGRAY);
@@ -30,6 +31,7 @@ public class PreGameCard extends StackPane {
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(120);
         imageView.setFitHeight(200);
+        imageView.setStyle("-fx-background-radius: 15; -fx-border-radius: 15; -fx-background-color: transparent;");
 
         //Label nameLabel = new Label(name);
 //        nameLabel.setFont(Font.font("Arial", FontWeight.BOLD, 14));
@@ -51,10 +53,9 @@ public class PreGameCard extends StackPane {
 //        imageView.setTranslateY(-40);
 //        cardInfo.setTranslateY(40);
 
-        this.setOnMouseEntered(e -> this.setScaleX(1.1));
-        this.setOnMouseEntered(e -> this.setScaleY(1.1));
-        this.setOnMouseExited(e -> this.setScaleX(1));
-        this.setOnMouseExited(e -> this.setScaleY(1));
+        this.setOnMouseEntered(e -> {this.setScaleX(1.1); this.setScaleY(1.1);});
+        this.setOnMouseExited(e -> {this.setScaleX(1); this.setScaleY(1);});
+        this.setStyle("-fx-cursor: hand; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 10, 0, 0, 0); -fx-background-radius: 15; -fx-border-radius: 15; -fx-background-color: transparent;");
     }
 
     public String getName() {
