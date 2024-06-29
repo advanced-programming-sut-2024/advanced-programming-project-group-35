@@ -10,8 +10,9 @@ public enum CardName {
     CLAN_AN_CRAITE("Clan An Craite"),
     BLUEBOY_LUGOS("Blueboy Lugos"),
     MARDOEME("Mardoeme"),
-    KING_BRAN("King Bran"),
-    ;
+    BITING_FROST("Biting Frost"),
+    TORRENTIAL_RAIN("Torrential Rain");
+
     private final String name;
 
     CardName(String name) {

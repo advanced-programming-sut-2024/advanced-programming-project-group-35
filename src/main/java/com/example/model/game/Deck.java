@@ -6,6 +6,7 @@ import com.example.model.card.enums.FactionsType;
 import com.example.model.card.Card;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Deck {
     private FactionsType faction;
@@ -41,7 +42,7 @@ public class Deck {
         return cards.size();
     }
     public void shuffle() {
-        // shuffle the deck
+        Collections.shuffle(cards);
     }
     public void setFaction(FactionsType faction) {
         this.faction = faction;

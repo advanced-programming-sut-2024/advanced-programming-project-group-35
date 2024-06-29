@@ -14,6 +14,18 @@ public class Board {
     private SiegeRow siegeCardPlace = new SiegeRow();
     private ArrayList<Row> rows = new ArrayList<>(Arrays.asList(closeCombatCardPlace, rangedCardPlace, siegeCardPlace));
 
+    public CloseCombatRow getCloseCombatCardPlace() {
+        return closeCombatCardPlace;
+    }
+
+    public RangedRow getRangedCardPlace() {
+        return rangedCardPlace;
+    }
+
+    public SiegeRow getSiegeCardPlace() {
+        return siegeCardPlace;
+    }
+
     public Hand getHand() {
         return hand;
     }

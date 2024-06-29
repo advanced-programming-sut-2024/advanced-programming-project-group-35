@@ -19,4 +19,8 @@ public class DiscardPile {
     public Card getCard(int index) {
         return cards.get(index);
     }
+
+    public ArrayList<Card> getCards() {
+        return cards;
+    }
 }
