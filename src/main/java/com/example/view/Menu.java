@@ -4,7 +4,7 @@ public enum Menu {
     LOGIN_MENU("Gwent", "/FXML/LoginMenu.fxml"),
     MAIN_MENU("Main Menu", "/FXML/MainMenu.fxml"),
     PROFILE_MENU("Profile Menu", "/FXML/ProfileMenu.fxml"),
-    PREGAME_MENU("Pre Game Menu", ""),
+    PREGAME_MENU("Pre Game Menu", "/FXML/preGameMenu.fxml"),
     GAME_MENU("Game Menu", "");
     private final String title;
     private final String fxmlFile;
