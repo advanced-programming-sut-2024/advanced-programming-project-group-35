@@ -60,25 +60,24 @@ public class PreGameMenuControllerView {
 
     @FXML
     public void initialize() {
-        faction = new EmpireNilfgaardian();
+        faction = new Monsters();
         leaderCard = defaultLeaderCard();
-
-        resetMenu();//everytime faction changes, reset menu function should be called
 
         leftScrollPane.setBackground(Background.EMPTY);
         rightScrollPane.setBackground(Background.EMPTY);
         allCardsPane.setBackground(Background.EMPTY);
         playerDeckPane.setBackground(Background.EMPTY);
 
-        leftScrollPane.setContent(allCardsPane);
         leftScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         leftScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
 
-        rightScrollPane.setContent(playerDeckPane);
+
         rightScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         rightScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
 
-        allCardsPane.getChildren().addAll(allCards);
+        resetMenu();//everytime faction changes, reset menu function should be called
+
+
 
         setSwapCardEventHandlers(true);
         setSwapCardEventHandlers(false);
@@ -163,6 +162,12 @@ public class PreGameMenuControllerView {
     }
 
     private void resetMenu() {
+        if (allCardsPane.getChildren().size() > 0){
+            allCardsPane.getChildren().clear();
+        }
+        if (playerDeckPane.getChildren().size() > 0){
+            playerDeckPane.getChildren().clear();
+        }
         if (allCards.size() > 0) {
             allCards.clear();
         }
@@ -171,12 +176,19 @@ public class PreGameMenuControllerView {
         }
         addAllCards(faction);
         leaderCard = defaultLeaderCard();
+
         realmNameLabel.setText("faction name: " + faction.getFaction().toString());
 
+        leftScrollPane.setContent(allCardsPane);
+        rightScrollPane.setContent(playerDeckPane);
+        allCardsPane.getChildren().addAll(allCards);
         updateDeckInfo();
     }
 
     private void addAllCards(Factions faction) {
+        addAllCardsSpecial();
+        addAllWeatherCards();
+        addAllCardsNeutral();
         switch (faction.getFaction()) {
             case EmpireNilfgaardian:
                 addAllCardsNilfgaardian();
@@ -194,8 +206,13 @@ public class PreGameMenuControllerView {
                 addAllCardsSkellige();
                 break;
         }
-        addAllCardsNeutral();
-        addAllCardsSpecial();
+    }
+
+    private void addAllWeatherCards() {
+        for (PreGameCardData cardData : PreGameCardData.values()) {
+            if (cardData.getName().startsWith("weather"))
+                allCards.add(new PreGameCard(cardData.getName(), cardData.getPower(), cardData.getAbility(), srcPath + cardData.getImageAddress()));
+        }
     }
 
     private void addAllCardsSkellige() {
