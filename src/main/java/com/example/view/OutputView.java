@@ -51,6 +51,10 @@ public class OutputView {
                 App.getAppView().showAlert("Email changed", AlertType.SUCCESS.getType());
             case PASSWORD_IS_SAME:
                 App.getAppView().showAlert("Password is the same", AlertType.ERROR.getType());
+            case SPECIAL_CARD_ERROR:
+                App.getAppView().showAlert("You already selected 10 special cards", AlertType.ERROR.getType());
+            case NOT_ENOUGH_CARDS:
+                App.getAppView().showAlert("You have to choose 22 cards at least", AlertType.ERROR.getType());
             default:
                 return null;
         }
