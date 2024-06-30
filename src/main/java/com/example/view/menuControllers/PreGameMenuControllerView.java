@@ -148,16 +148,6 @@ public class PreGameMenuControllerView {
         imageView.setFitWidth(imageView.getFitWidth() / 1.2);
     }
 
-    private void enlargeImage(ImageView imageView) {
-        imageView.setFitHeight(imageView.getFitHeight() * 1.2);
-        imageView.setFitWidth(imageView.getFitWidth() * 1.2);
-    }
-
-    private void resetImageSize(ImageView imageView) {
-        imageView.setFitHeight(imageView.getFitHeight() / 1.2);
-        imageView.setFitWidth(imageView.getFitWidth() / 1.2);
-    }
-
     private void setSwapCardEventHandlers(boolean fromAllPane) {
         for (PreGameCard card : allCards) {
             card.setOnMouseClicked(event -> {
