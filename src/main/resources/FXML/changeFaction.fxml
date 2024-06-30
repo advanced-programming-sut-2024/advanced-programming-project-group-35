@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<Pane xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.view.menuControllers.PreGameMenuControllerView"
+      prefHeight="800.0" prefWidth="1400.0"
+      stylesheets="@../CSS/allMenu.css, @../CSS/allFiles.css"
+      styleClass="change-faction-menu-background">
+    <ImageView fitHeight="800" fitWidth="1400" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../images/change-faction-menu-background.jpg"/>
+    </ImageView>
+    <VBox fx:id="infoVBox" spacing="0" prefHeight="800" prefWidth="1400" alignment="CENTER">
+        <HBox fx:id="mainHBox" spacing="30" prefHeight="600" prefWidth="1120" alignment="CENTER">
+            <ImageView fx:id="factionCard1" styleClass="faction-card, monster-faction-card" fitHeight="270" fitWidth="180" pickOnBounds="true" preserveRatio="true">
+                <Image url="@../images/cards/faction_monsters.jpg"/>
+            </ImageView>
+            <ImageView fx:id="factionCard2" styleClass="faction-card, nilfgaard-faction-card" fitHeight="270" fitWidth="180" pickOnBounds="true" preserveRatio="true">
+                <Image url="@../images/cards/faction_nilfgaard.jpg"/>
+            </ImageView>
+            <ImageView fx:id="factionCard3" styleClass="faction-card, realms-faction-card" fitHeight="270" fitWidth="180" pickOnBounds="true" preserveRatio="true">
+                <Image url="@../images/cards/faction_realms.jpg"/>
+            </ImageView>
+            <ImageView fx:id="factionCard4" styleClass="faction-card, scoiatael-faction-card" fitHeight="270" fitWidth="180" pickOnBounds="true" preserveRatio="true">
+                <Image url="@../images/cards/faction_scoiatael.jpg"/>
+            </ImageView>
+            <ImageView fx:id="factionCard5" styleClass="faction-card, skellige-faction-card" fitHeight="270" fitWidth="180" pickOnBounds="true" preserveRatio="true">
+                <Image url="@../images/cards/faction_skellige.jpg"/>
+            </ImageView>
+        </HBox>
+    </VBox>
+    <Button translateX="20" translateY="30" minWidth="50" onMouseClicked="#backToPreGameMenu" styleClass="brown-button"
+            text="Back"/>
+</Pane>

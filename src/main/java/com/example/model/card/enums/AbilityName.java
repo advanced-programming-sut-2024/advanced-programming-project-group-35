@@ -13,4 +13,8 @@ public enum AbilityName {
     MARDROEME,
     TRANSFORMER,
     NONE;
+
+    public static AbilityName getAbilityByName(String ability) {
+        return NONE;
+    }
 }
