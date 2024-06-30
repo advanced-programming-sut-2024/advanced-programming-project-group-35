@@ -1,9 +1,8 @@
-package com.example.model;
+package com.example.model.card.enums;
 
-import com.example.model.card.enums.AbilityName;
-import com.example.model.card.enums.PlaceToBe;
+import com.example.model.game.place.Place;
 
-public enum PreGameCardData {
+public enum CardData {
     leaders_monsters_eredin_bronze("leaders_monsters_eredin_bronze", "monsters_eredin_bronze.jpg", 0, "leader", "", "leader"),
     leaders_monsters_eredin_gold("leaders_monsters_eredin_gold", "monsters_eredin_gold.jpg", 0, "leader", "", "leader"),
     leaders_monsters_eredin_silver("leaders_monsters_eredin_silver", "monsters_eredin_silver.jpg", 0, "leader", "", "leader"),
@@ -215,9 +214,9 @@ public enum PreGameCardData {
     skellige_young_berserker("skellige_young_berserker", "skellige_young_berserker.jpg", 2, "soldier", "tight_bound", "ranged"),
     skellige_young_vildkaarl("skellige_young_vildkaarl", "skellige_young_vildkaarl.jpg", 8, "soldier", "berserker", "ranged"),
 
-    special_decoy("special_decoy", "special_decoy.jpg", 0, "special", "", "spell"),
-    special_decoy_1("special_decoy_1", "special_decoy.jpg", 0, "special", "", "spell"),
-    special_decoy_2("special_decoy_2", "special_decoy.jpg", 0, "special", "", "spell"),
+    special_decoy("special_decoy", "special_decoy.jpg", 0, "special", "decoy", "spell"),
+    special_decoy_1("special_decoy_1", "special_decoy.jpg", 0, "special", "decoy", "spell"),
+    special_decoy_2("special_decoy_2", "special_decoy.jpg", 0, "special", "decoy", "spell"),
     special_horn("special_horn", "special_horn.jpg", 0, "special", "", "spell"),
     special_horn_1("special_horn_1", "special_horn.jpg", 0, "special", "", "spell"),
     special_horn_2("special_horn_2", "special_horn.jpg", 0, "special", "", "spell"),
@@ -228,43 +227,42 @@ public enum PreGameCardData {
     special_scorch_1("special_scorch_1", "special_scorch.jpg", 0, "special", "", "spell"),
     special_scorch_2("special_scorch_2", "special_scorch.jpg", 0, "special", "", "spell"),
 
-    weather_fog("weather_fog", "weather_fog.jpg", 0, "special", "", "weather"),
-    weather_fog_1("weather_fog_1", "weather_fog.jpg", 0, "special", "", "weather"),
-    weather_frost("weather_frost", "weather_frost.jpg", 0, "special", "", "weather"),
-    weather_frost_1("weather_frost_1", "weather_frost.jpg", 0, "special", "", "weather"),
-    weather_rain("weather_rain", "weather_rain.jpg", 0, "special", "", "weather"),
-    weather_rain_1("weather_rain_1", "weather_rain.jpg", 0, "special", "", "weather"),
-    weather_clear("weather_clear", "weather_clear.jpg", 0, "special", "", "weather"),
-    weather_clear_1("weather_clear_1", "weather_clear.jpg", 0, "special", "", "weather"),
-    weather_storm("weather_storm", "weather_storm.jpg", 0, "special", "", "weather"),
-    weather_storm_1("weather_storm_1", "weather_storm.jpg", 0, "special", "", "weather"),
+    weather_fog("weather_fog", "weather_fog.jpg", 0, "special", "weather", "weather"),
+    weather_fog_1("weather_fog_1", "weather_fog.jpg", 0, "special", "weather", "weather"),
+    weather_frost("weather_frost", "weather_frost.jpg", 0, "special", "weather", "weather"),
+    weather_frost_1("weather_frost_1", "weather_frost.jpg", 0, "special", "weather", "weather"),
+    weather_rain("weather_rain", "weather_rain.jpg", 0, "special", "weather", "weather"),
+    weather_rain_1("weather_rain_1", "weather_rain.jpg", 0, "special", "weather", "weather"),
+    weather_clear("weather_clear", "weather_clear.jpg", 0, "special", "weather", "weather"),
+    weather_clear_1("weather_clear_1", "weather_clear.jpg", 0, "special", "weather", "weather"),
+    weather_storm("weather_storm", "weather_storm.jpg", 0, "special", "weather", "weather"),
+    weather_storm_1("weather_storm_1", "weather_storm.jpg", 0, "special", "weather", "weather"),
     ;
 
     private final String name;
     private final String imageAddress;
     private final int power;
     private final String type;
-    private final AbilityName abilityName;
-    private final PlaceToBe placeToBe;
+    private final String abilityName;
+    private final Place placeToBe;
+    public static final CardData nilfgaard_leader = leaders_nilfgaard_emhyr_bronze;
+    public static final CardData monsters_leader = leaders_monsters_eredin_bronze;
+    public static final CardData realms_leader = leaders_realms_foltest_bronze;
+    public static final CardData scoiatael_leader = leaders_scoiatael_francesca_bronze;
+    public static final CardData skellige_leader = leaders_skellige_crach_an_craite;
 
-    public static final PreGameCardData nilfgaard_leader = leaders_nilfgaard_emhyr_bronze;
-    public static final PreGameCardData monsters_leader = leaders_monsters_eredin_bronze;
-    public static final PreGameCardData realms_leader = leaders_realms_foltest_bronze;
-    public static final PreGameCardData scoiatael_leader = leaders_scoiatael_francesca_bronze;
-    public static final PreGameCardData skellige_leader = leaders_skellige_crach_an_craite;
 
-
-    PreGameCardData(String name, String imageAddress, int power, String type, String ability, String placeToBe) {
+    CardData(String name, String imageAddress, int power, String type, String abilityName, String placeToBe) {
         this.name = name;
         this.imageAddress = imageAddress;
         this.power = power;
         this.type = type;
-        this.abilityName = AbilityName.getAbilityByName(ability);
-        this.placeToBe = PlaceToBe.getPlaceToBeByName(placeToBe);
+        this.abilityName = abilityName;
+        this.placeToBe = Place.getPlaceToBeByName(placeToBe);
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public String getImageAddress() {
@@ -279,4 +277,19 @@ public enum PreGameCardData {
         return type;
     }
 
+    public String getAbilityName() {
+        return abilityName;
+    }
+
+    public Place getPlaceToBe() {
+        return placeToBe;
+    }
+
+    public static CardData getCardDataByName(String cardName) {
+        for (CardData cardData : CardData.values()) {
+            if (cardData.name.equals(cardName))
+                return cardData;
+        }
+        return null;
+    }
 }

@@ -1,28 +1,26 @@
 package com.example.model.card;
 
-import com.example.model.card.enums.AbilityName;
-import com.example.model.card.enums.CardName;
-import com.example.model.game.place.UnitPlace;
-import javafx.scene.shape.Rectangle;
+import com.example.model.card.enums.CardData;
+import com.example.model.game.place.Place;
 
 public class Card {
-    private UnitPlace place;
+    private Place place;
     private Ability ability;
-    private CardName cardName;
-    public Card(UnitPlace place, Ability ability, CardName cardName) {
-        this.cardName = cardName;
+    private CardData cardData;
+    public Card(Place place, Ability ability, CardData cardData) {
+        this.cardData = cardData;
         this.place = place;
         this.ability = ability;
     }
 
-    public CardName getCardName() {
-        return cardName;
+    public CardData getCardName() {
+        return cardData;
     }
     public String getName() {
-        return cardName.getName();
+        return cardData.getName();
     }
 
-    public UnitPlace getPlace() {
+    public Place getPlace() {
         return place;
     }
 

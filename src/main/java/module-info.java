@@ -15,4 +15,7 @@ module gwent {
     exports com.example.view;
     exports com.example.view.menuControllers;
     exports com.example.model.alerts;
+    exports com.example.model.card.enums;
+    exports com.example.model.game.place;
+    opens com.example.model.game.place to com.google.gson;
 }

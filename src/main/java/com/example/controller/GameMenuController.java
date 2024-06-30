@@ -1,19 +1,15 @@
 package com.example.controller;
 
 import com.example.model.App;
-import com.example.model.GameData;
 import com.example.model.card.AbilityContext;
 import com.example.model.card.Card;
 import com.example.model.card.LeaderCard;
+import com.example.model.card.enums.CardData;
 import com.example.model.card.enums.FactionsType;
-import com.example.model.card.enums.LeaderName;
 import com.example.model.game.*;
-import com.example.model.user.User;
 import com.example.view.Menu;
 
-import java.util.ArrayList;
 import java.util.Random;
-import java.util.regex.Matcher;
 
 public class GameMenuController extends AppController {
     @Override
@@ -94,10 +90,10 @@ public class GameMenuController extends AppController {
         if (table.getRoundNumber() == 1) {
             LeaderCard leaderCard1 = table.getCurrentPlayer().getBoard().getDeck().getLeader();
             LeaderCard leaderCard2 = table.getOpponent().getBoard().getDeck().getLeader();
-            if (leaderCard1.canDoAction() && leaderCard1.getLeaderName() == LeaderName.DAISY_OF_THE_VALLEY) {
+            if (leaderCard1.canDoAction() && leaderCard1.getLeaderName() == CardData.leaders_scoiatael_francesca_copper) {
                 leaderCard1.getAbility().apply(table);
             }
-            if (leaderCard2.canDoAction() && leaderCard2.getLeaderName() == LeaderName.DAISY_OF_THE_VALLEY) {
+            if (leaderCard2.canDoAction() && leaderCard2.getLeaderName() == CardData.leaders_scoiatael_francesca_copper) {
                 leaderCard2.getAbility().apply(table);
             }
         } else if (table.getRoundNumber() == 3) {

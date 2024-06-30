@@ -3,14 +3,14 @@ package com.example.model.card.cardsAbilities;
 import com.example.model.card.Ability;
 import com.example.model.card.AbilityContext;
 import com.example.model.card.UnitCard;
-import com.example.model.card.enums.CardName;
+import com.example.model.card.enums.CardData;
 import com.example.model.game.place.Row;
 
 import java.util.ArrayList;
-public class Scorch implements Ability {
+public class ScorchAbility implements Ability {
     @Override
     public void apply(AbilityContext abilityContext) {
-        if (abilityContext.getCard().getCardName() == CardName.SCORCH) {
+        if (abilityContext.getCard().getCardName() == CardData.special_scorch) {
             applyAbilityForScorchCard(abilityContext);
         } else {
             applyAbilityForNonScorchCards(abilityContext);

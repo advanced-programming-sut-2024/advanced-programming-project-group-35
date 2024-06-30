@@ -1,29 +1,28 @@
 package com.example.model.card;
 
-import com.example.model.card.enums.CardName;
-import com.example.model.card.enums.LeaderName;
+import com.example.model.card.enums.CardData;
+import com.example.model.card.leaderCardsAbilities.LeaderAbility;
 
 public class LeaderCard {
     private boolean canDoAction; //TODO باید چک شه وفتی میخوایم توانایی لیدر استفاده کنیم این ترو باشه
     private LeaderAbility ability;
-    private LeaderName leaderName;
-    private String imageAddress;
+    private CardData cardData;
 
-    public LeaderCard(String imageAddress,LeaderName leaderName, LeaderAbility ability) {
-        this.imageAddress = imageAddress;
+    public LeaderCard(CardData cardData, LeaderAbility ability) {
         this.ability = ability;
-        this.leaderName = leaderName;
+        this.cardData = cardData;
+        this.canDoAction = true;
     }
 
     public LeaderAbility getAbility() {
         return ability;
     }
 
-    public LeaderName getLeaderName() {
-        return leaderName;
+    public CardData getLeaderName() {
+        return cardData;
     }
     public String getName() {
-        return leaderName.getName();
+        return cardData.getName();
     }
 
     public boolean canDoAction() {

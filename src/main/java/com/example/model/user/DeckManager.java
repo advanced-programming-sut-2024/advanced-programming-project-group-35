@@ -2,7 +2,6 @@ package com.example.model.user;
 
 import com.example.model.card.Card;
 import com.example.model.card.CardFactory;
-import com.example.model.card.LeaderCard;
 import com.example.model.card.LeaderFactory;
 import com.example.model.card.enums.FactionsType;
 import com.example.model.game.Deck;

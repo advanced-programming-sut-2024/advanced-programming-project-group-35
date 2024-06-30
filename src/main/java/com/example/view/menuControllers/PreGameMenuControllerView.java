@@ -3,16 +3,13 @@ package com.example.view.menuControllers;
 import com.example.Main;
 import com.example.controller.Controller;
 import com.example.model.IO.errors.Errors;
-import com.example.model.PreGameCardData;
+import com.example.model.card.enums.CardData;
 import com.example.model.App;
 import com.example.model.card.PreGameCard;
 import com.example.model.card.factions.EmpireNilfgaardian;
 import com.example.model.card.factions.Factions;
 import com.example.model.card.factions.Monsters;
 import com.example.model.card.factions.Skellige;
-import com.example.model.card.enums.FactionsType;
-import com.example.model.card.factions.*;
-import com.example.model.card.enums.FactionsType;
 import com.example.model.card.factions.*;
 import com.example.view.Menu;
 import com.example.view.OutputView;
@@ -125,15 +122,15 @@ public class PreGameMenuControllerView {
     private PreGameCard defaultLeaderCard() {
         switch (faction.getFaction()) {
             case EmpireNilfgaardian:
-                return new PreGameCard(PreGameCardData.nilfgaard_leader.getName(), PreGameCardData.nilfgaard_leader.getPower(), PreGameCardData.nilfgaard_leader.getAbility(), srcPath + PreGameCardData.nilfgaard_leader.getImageAddress());
+                return new PreGameCard(CardData.nilfgaard_leader.getName(), CardData.nilfgaard_leader.getPower(), CardData.nilfgaard_leader.getAbility(), srcPath + CardData.nilfgaard_leader.getImageAddress());
             case Monsters:
-                return new PreGameCard(PreGameCardData.monsters_leader.getName(), PreGameCardData.monsters_leader.getPower(), PreGameCardData.monsters_leader.getAbility(), srcPath + PreGameCardData.monsters_leader.getImageAddress());
+                return new PreGameCard(CardData.monsters_leader.getName(), CardData.monsters_leader.getPower(), CardData.monsters_leader.getAbility(), srcPath + CardData.monsters_leader.getImageAddress());
             case RealmsNorthern:
-                return new PreGameCard(PreGameCardData.realms_leader.getName(), PreGameCardData.realms_leader.getPower(), PreGameCardData.realms_leader.getAbility(), srcPath + PreGameCardData.realms_leader.getImageAddress());
+                return new PreGameCard(CardData.realms_leader.getName(), CardData.realms_leader.getPower(), CardData.realms_leader.getAbility(), srcPath + CardData.realms_leader.getImageAddress());
             case ScoiaTael:
-                return new PreGameCard(PreGameCardData.scoiatael_leader.getName(), PreGameCardData.scoiatael_leader.getPower(), PreGameCardData.scoiatael_leader.getAbility(), srcPath + PreGameCardData.scoiatael_leader.getImageAddress());
+                return new PreGameCard(CardData.scoiatael_leader.getName(), CardData.scoiatael_leader.getPower(), CardData.scoiatael_leader.getAbility(), srcPath + CardData.scoiatael_leader.getImageAddress());
             case Skellige:
-                return new PreGameCard(PreGameCardData.skellige_leader.getName(), PreGameCardData.skellige_leader.getPower(), PreGameCardData.skellige_leader.getAbility(), srcPath + PreGameCardData.skellige_leader.getImageAddress());
+                return new PreGameCard(CardData.skellige_leader.getName(), CardData.skellige_leader.getPower(), CardData.skellige_leader.getAbility(), srcPath + CardData.skellige_leader.getImageAddress());
         }
         return null;
     }
@@ -250,21 +247,21 @@ public class PreGameMenuControllerView {
     }
 
     private void addAllWeatherCards() {
-        for (PreGameCardData cardData : PreGameCardData.values()) {
+        for (CardData cardData : CardData.values()) {
             if (cardData.getName().startsWith("weather"))
                 allCards.add(new PreGameCard(cardData.getName(), cardData.getPower(), cardData.getAbility(), srcPath + cardData.getImageAddress()));
         }
     }
 
     private void addAllCardsSkellige() {
-        for (PreGameCardData cardData : PreGameCardData.values()) {
+        for (CardData cardData : CardData.values()) {
             if (cardData.getName().startsWith("skellige"))
                 allCards.add(new PreGameCard(cardData.getName(), cardData.getPower(), cardData.getAbility(), srcPath + cardData.getImageAddress()));
         }
     }
 
     private void addAllCardsScoiaTael() {
-        for (PreGameCardData cardData : PreGameCardData.values()) {
+        for (CardData cardData : CardData.values()) {
             if (cardData.getName().startsWith("scoiatael"))
                 allCards.add(new PreGameCard(cardData.getName(), cardData.getPower(), cardData.getAbility(), srcPath + cardData.getImageAddress()));
         }
@@ -272,35 +269,35 @@ public class PreGameMenuControllerView {
 
 
     private void addAllCardsNorthernRealms() {
-        for (PreGameCardData cardData : PreGameCardData.values()) {
+        for (CardData cardData : CardData.values()) {
             if (cardData.getName().startsWith("realms"))
                 allCards.add(new PreGameCard(cardData.getName(), cardData.getPower(), cardData.getAbility(), srcPath + cardData.getImageAddress()));
         }
     }
 
     private void addAllCardsMonsters() {
-        for (PreGameCardData cardData : PreGameCardData.values()) {
+        for (CardData cardData : CardData.values()) {
             if (cardData.getName().startsWith("monsters"))
                 allCards.add(new PreGameCard(cardData.getName(), cardData.getPower(), cardData.getAbility(), srcPath + cardData.getImageAddress()));
         }
     }
 
     private void addAllCardsNilfgaardian() {
-        for (PreGameCardData cardData : PreGameCardData.values()) {
+        for (CardData cardData : CardData.values()) {
             if (cardData.getName().startsWith("nilfgaard"))
                 allCards.add(new PreGameCard(cardData.getName(), cardData.getPower(), cardData.getAbility(), srcPath + cardData.getImageAddress()));
         }
     }
 
     private void addAllCardsNeutral() {
-        for (PreGameCardData cardData : PreGameCardData.values()) {
+        for (CardData cardData : CardData.values()) {
             if (cardData.getName().startsWith("neutral"))
                 allCards.add(new PreGameCard(cardData.getName(), cardData.getPower(), cardData.getAbility(), srcPath + cardData.getImageAddress()));
         }
     }
 
     private void addAllCardsSpecial() {
-        for (PreGameCardData cardData : PreGameCardData.values()) {
+        for (CardData cardData : CardData.values()) {
             if (cardData.getName().startsWith("special"))
                 allCards.add(new PreGameCard(cardData.getName(), cardData.getPower(), cardData.getAbility(), srcPath + cardData.getImageAddress()));
         }

@@ -1,7 +1,7 @@
-package com.example.model.card.enums;
+package com.example.model.game.place;
 
-public enum PlaceToBe {
-    MELEE,
+public enum Place {
+    CLOSE_COMBAT,
     RANGED,
     SIEGE,
     WEATHER,
@@ -9,10 +9,10 @@ public enum PlaceToBe {
     AGILE,
     SPECIAL;
 
-    public static PlaceToBe getPlaceToBeByName(String placeToBe) {
+    public static Place getPlaceToBeByName(String placeToBe) {
         switch (placeToBe) {
             case "melee" -> {
-                return MELEE;
+                return CLOSE_COMBAT;
             }
             case "ranged" -> {
                 return RANGED;

@@ -46,9 +46,9 @@ public class Board {
         this.deck = deck;
     }
 
-    public Row getRowByName(UnitPlace place) {
+    public Row getRowByName(Place place) {
         switch (place) {
-            case CLOSE -> {
+            case CLOSE_COMBAT -> {
                 return closeCombatCardPlace;
             }
             case RANGED -> {

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Row {
     private SpecialCard specialPlace;
-    private UnitPlace place;
+    private Place place;
     private boolean applyWeather = false;
     private int strength = 0;
 
@@ -33,11 +33,11 @@ public class Row {
         return cards;
     }
 
-    public UnitPlace getPlace() {
+    public Place getPlace() {
         return place;
     }
 
-    public void setPlace(UnitPlace place) {
+    public void setPlace(Place place) {
         this.place = place;
     }
 

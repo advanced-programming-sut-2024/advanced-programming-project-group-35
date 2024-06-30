@@ -1,7 +1,7 @@
 package com.example.model.game;
 
 import com.example.model.card.Card;
-import com.example.model.card.enums.CardName;
+import com.example.model.card.enums.CardData;
 
 import java.util.ArrayList;
 
@@ -13,9 +13,9 @@ public class Hand {
     public void removeCard(Card card) {
         cards.remove(card);
     }
-    public Card getCardByName(CardName cardName) {
+    public Card getCardByName(CardData cardData) {
         for (Card card : cards) {
-            if (card.getCardName() == cardName) return card;
+            if (card.getCardName() == cardData) return card;
         }
         return null;
     }
