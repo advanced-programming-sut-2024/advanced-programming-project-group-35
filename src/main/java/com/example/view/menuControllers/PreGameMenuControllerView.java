@@ -12,6 +12,8 @@ import com.example.model.card.factions.Monsters;
 import com.example.model.card.factions.Skellige;
 import com.example.model.card.enums.FactionsType;
 import com.example.model.card.factions.*;
+import com.example.model.card.enums.FactionsType;
+import com.example.model.card.factions.*;
 import com.example.view.Menu;
 import com.example.view.OutputView;
 import javafx.event.ActionEvent;
@@ -134,6 +136,16 @@ public class PreGameMenuControllerView {
                 return new PreGameCard(PreGameCardData.skellige_leader.getName(), PreGameCardData.skellige_leader.getPower(), PreGameCardData.skellige_leader.getAbility(), srcPath + PreGameCardData.skellige_leader.getImageAddress());
         }
         return null;
+    }
+
+    private void enlargeImage(ImageView imageView) {
+        imageView.setFitHeight(imageView.getFitHeight() * 1.2);
+        imageView.setFitWidth(imageView.getFitWidth() * 1.2);
+    }
+
+    private void resetImageSize(ImageView imageView) {
+        imageView.setFitHeight(imageView.getFitHeight() / 1.2);
+        imageView.setFitWidth(imageView.getFitWidth() / 1.2);
     }
 
     private void enlargeImage(ImageView imageView) {
