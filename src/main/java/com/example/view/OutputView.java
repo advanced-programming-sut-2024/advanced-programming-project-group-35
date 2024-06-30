@@ -55,6 +55,8 @@ public class OutputView {
                 App.getAppView().showAlert("You already selected 10 special cards", AlertType.ERROR.getType());
             case NOT_ENOUGH_CARDS:
                 App.getAppView().showAlert("You have to choose 22 cards at least", AlertType.ERROR.getType());
+            case DONT_HAVE_PLAYED_GAME:
+                App.getAppView().showAlert("You diden't played any game to show game data.", AlertType.ERROR.getType());
             default:
                 return null;
         }
