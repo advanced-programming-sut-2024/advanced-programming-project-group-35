@@ -7,6 +7,4 @@ import com.example.model.game.Player;
 public interface Factions {
     FactionsType getFaction();
     void apply(AbilityContext abilityContext, Player player);
-
-    // بعد از اتمام هر دور باید اینا فراخوانی شن
 }

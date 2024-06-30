@@ -12,7 +12,9 @@ public enum CardName {
     MARDOEME("Mardoeme"),
     BITING_FROST("Biting Frost"),
     TORRENTIAL_RAIN("Torrential Rain"),
-    IMPENETRABLE_FOG("Impenetrable fog");
+    IMPENETRABLE_FOG("Impenetrable fog"),
+    SKELLIGE_STORM("Skellige Storm"),
+    CLEAR_WEATHER("Clear Weather");
 
     private final String name;
 

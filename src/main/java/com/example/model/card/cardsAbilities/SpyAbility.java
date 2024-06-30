@@ -1,9 +1,8 @@
-package com.example.model.card.unitCardsAbilities;
+package com.example.model.card.cardsAbilities;
 
 import com.example.model.card.Ability;
 import com.example.model.card.AbilityContext;
 import com.example.model.card.Card;
-import com.example.model.card.UnitCard;
 import com.example.model.game.Deck;
 import com.example.model.game.Hand;
 
@@ -25,10 +24,12 @@ public class SpyAbility implements Ability {
             deck.removeCard(selectedCard2);
             hand.addCard(selectedCard1);
             hand.addCard(selectedCard2);
+            //TODO گرافیک انتقال کارت
         } else if (deck.getSize() == 1) {
             Card selectedCard = deck.getCard(0);
             deck.removeCard(selectedCard);
             hand.addCard(selectedCard);
+            //TODO گرافیک انتقال کارت
         }
     }
 }

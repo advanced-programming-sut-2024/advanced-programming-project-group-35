@@ -9,6 +9,16 @@ public class Row {
 
     private SpecialCard specialPlace;
     private UnitPlace place;
+    private boolean applyWeather = false;
+    private int strength = 0;
+
+    public boolean isApplyWeather() {
+        return applyWeather;
+    }
+
+    public void setApplyWeather(boolean applyWeather) {
+        this.applyWeather = applyWeather;
+    }
 
     public SpecialCard getSpecialPlace() {
         return specialPlace;
@@ -45,11 +55,7 @@ public class Row {
     }
 
     public int getStrength() {
-        int result = 0;
-        for (UnitCard card : cards) {
-            result += card.getCurrentPower();
-        }
-        return result;
+        return strength;
     }
 
     public int getNonHeroStrength() {
@@ -61,7 +67,16 @@ public class Row {
         }
         return result;
     }
+
     public boolean isEmpty() {
         return cards.isEmpty();
+    }
+
+    public void updateStrength() {
+        int result = 0;
+        for (UnitCard card : cards) {
+            result += card.getCurrentPower();
+        }
+        strength = result;
     }
 }

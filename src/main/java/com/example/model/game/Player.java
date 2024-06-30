@@ -3,6 +3,8 @@ package com.example.model.game;
 import java.util.HashMap;
 
 public class Player {
+    private int numberOfCrystals;
+    private int numberOfVetoCards;
     private String name;
     private Board board;
     private int score;
@@ -12,7 +14,29 @@ public class Player {
         this.name = name;
         this.board = new Board();
         this.scoresOfRounds = new HashMap<>();
+        this.numberOfCrystals = 2;
+        this.numberOfVetoCards = 2;
+
     }
+
+    public boolean canVetoCard() {
+        if (numberOfVetoCards > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public void decreaseNumberOfVetoCards() {
+        numberOfVetoCards--;
+    }
+
+    public int getNumberOfCrystals() {
+        return numberOfCrystals;
+    }
+    public void increaseCrystals() {
+        numberOfCrystals++;
+    }
+
     public void enterScore(int key, int value) {
         scoresOfRounds.put(key, value);
     }

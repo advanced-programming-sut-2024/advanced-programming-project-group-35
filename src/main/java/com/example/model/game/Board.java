@@ -58,4 +58,8 @@ public class Board {
             }
         }
     }
+
+    public void setHandForStartGame() {
+        //TODO اضافه کردن 10 تا کارت رندوم (حداقل دو تا اسپشیال اگه بود انتخاب شه)
+    }
 }

@@ -1,4 +1,4 @@
-package com.example.model.card.unitCardsAbilities;
+package com.example.model.card.cardsAbilities;
 
 import com.example.model.card.Ability;
 import com.example.model.card.AbilityContext;

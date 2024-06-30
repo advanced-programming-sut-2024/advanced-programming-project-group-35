@@ -12,7 +12,6 @@ import com.example.model.game.place.Row;
 import java.util.Random;
 
 public class Skellige implements Factions {
-    // در اول راند سه باید کال شه
     FactionsType factionsType = FactionsType.Skellige;
 
     @Override
@@ -35,13 +34,17 @@ public class Skellige implements Factions {
                 Row row2 = player.getBoard().getRowByName(selectedCard2.getPlace());
                 if (selectedCard1 instanceof SpecialCard) {
                     row1.setSpecialPlace((SpecialCard) selectedCard1);
+                    //TODO گرافیک انتقال کارت
                 } else {
                     row1.addCard((UnitCard) selectedCard1);
+                    //TODO گرافیک انتقال کارت
                 }
                 if (selectedCard2 instanceof SpecialCard) {
                     row2.setSpecialPlace((SpecialCard) selectedCard2);
+                    //TODO گرافیک انتقال کارت
                 } else {
                     row2.addCard((UnitCard) selectedCard2);
+                    //TODO گرافیک انتقال کارت
                 }
                 deck.removeCard(selectedCard1);
                 deck.removeCard(selectedCard2);
@@ -51,8 +54,10 @@ public class Skellige implements Factions {
                 Row row = player.getBoard().getRowByName(selectedCard.getPlace());
                 if (selectedCard instanceof SpecialCard) {
                     row.setSpecialPlace((SpecialCard) selectedCard);
+                    //TODO گرافیک انتقال کارت
                 } else {
                     row.addCard((UnitCard) selectedCard);
+                    //TODO گرافیک انتقال کارت
                 }
             }
         }

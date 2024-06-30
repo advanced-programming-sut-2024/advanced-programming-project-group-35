@@ -14,6 +14,7 @@ public enum Controller {
     Controller(AppController controller) {
         this.controller = controller;
     }
+
     public void run() {
         this.controller.run();
     }
@@ -21,4 +22,5 @@ public enum Controller {
     public AppController getController() {
         return controller;
     }
+
 }

@@ -8,8 +8,6 @@ import com.example.model.game.Player;
 import java.util.Random;
 
 public class RealmNorthern implements Factions {
-    // در آخر هر راند باید کال شه
-
     FactionsType factionsType = FactionsType.RealmsNorthern;
 
     @Override
@@ -19,11 +17,12 @@ public class RealmNorthern implements Factions {
 
     @Override
     public void apply(AbilityContext abilityContext, Player player) {
-        if (abilityContext.getTable().isRoundWon()) {
+        if (abilityContext.getTable().getCurrentRound().isWon() && abilityContext.getTable().getCurrentRound().getWinner() == player) {
             if (!player.getBoard().getDeck().isEmpty()) {
                 Card drawnCard = player.getBoard().getDeck().getCard(new Random().nextInt(player.getBoard().getDeck().getSize()));
                 player.getBoard().getDeck().removeCard(drawnCard);
                 player.getBoard().getHand().addCard(drawnCard);
+                //TODO گرافیک انتفال کارت
             }
         }
     }

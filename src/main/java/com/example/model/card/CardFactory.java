@@ -1,11 +1,9 @@
 package com.example.model.card;
 
-import com.example.model.card.enums.AbilityName;
 import com.example.model.card.enums.CardName;
-import com.example.model.card.unitCardsAbilities.BreskerAbility;
-import com.example.model.card.unitCardsAbilities.MardroemeAbility;
-import com.example.model.card.unitCardsAbilities.MoralBoostAbility;
-import com.example.model.card.unitCardsAbilities.TightBondAbility;
+import com.example.model.card.cardsAbilities.MardroemeAbility;
+import com.example.model.card.cardsAbilities.MoralBoostAbility;
+import com.example.model.card.cardsAbilities.TightBondAbility;
 import com.example.model.game.place.UnitPlace;
 
 public class CardFactory {
@@ -17,7 +15,7 @@ public class CardFactory {
                 return card;
             }
             case "Berserker" -> {
-                card = new UnitCard(4, new BreskerAbility(), UnitPlace.CLOSE, false, CardName.BERSERKER, false);
+                card = new UnitCard(4, null,  UnitPlace.CLOSE, false, CardName.BERSERKER, false);
                 return card;
             }
             case "Vidkaarl" -> {
@@ -48,40 +46,5 @@ public class CardFactory {
                 return null;
             }
         }
-    }
-}
-class BitingFrostAbility implements Ability {
-
-    @Override
-    public void apply(AbilityContext abilityContext) {
-
-    }
-}
-class ImpenetrableFog implements Ability {
-
-    @Override
-    public void apply(AbilityContext abilityContext) {
-
-    }
-}
-class TorrentialRain implements Ability {
-
-    @Override
-    public void apply(AbilityContext abilityContext) {
-
-    }
-}
-class SkelligeStorm implements Ability {
-
-    @Override
-    public void apply(AbilityContext abilityContext) {
-
-    }
-}
-class ClearWeather implements Ability {
-
-    @Override
-    public void apply(AbilityContext abilityContext) {
-
     }
 }

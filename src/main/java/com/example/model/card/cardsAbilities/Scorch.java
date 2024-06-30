@@ -1,4 +1,4 @@
-package com.example.model.card.unitCardsAbilities;
+package com.example.model.card.cardsAbilities;
 
 import com.example.model.card.Ability;
 import com.example.model.card.AbilityContext;
@@ -31,20 +31,24 @@ public class Scorch implements Ability {
             for (UnitCard card : maximumPoweredCardsForCurrentPlayer) {
                 abilityContext.getTable().getCurrentPlayer().getBoard().getRowByName(card.getPlace()).removeCard(card);
                 abilityContext.getTable().getCurrentPlayer().getBoard().getDiscardPile().addCard(card);
+                //TODO گرافیک انتقال کارت
             }
             for (UnitCard card : maximumPoweredCardsForOpponentPlayer) {
                 abilityContext.getTable().getOpponent().getBoard().getRowByName(card.getPlace()).removeCard(card);
                 abilityContext.getTable().getOpponent().getBoard().getDiscardPile().addCard(card);
+                //TODO گرافیک انتقال کارت
             }
         } else if (maximumPowerForCurrentPlayer > maximumPowerForOpponentPlayer) {
             for (UnitCard card : maximumPoweredCardsForCurrentPlayer) {
                 abilityContext.getTable().getCurrentPlayer().getBoard().getRowByName(card.getPlace()).removeCard(card);
                 abilityContext.getTable().getCurrentPlayer().getBoard().getDiscardPile().addCard(card);
+                //TODO گرافیک انتقال کارت
             }
         } else {
             for (UnitCard card : maximumPoweredCardsForOpponentPlayer) {
                 abilityContext.getTable().getOpponent().getBoard().getRowByName(card.getPlace()).removeCard(card);
                 abilityContext.getTable().getOpponent().getBoard().getDiscardPile().addCard(card);
+                //TODO گرافیک انتقال کارت
             }
         }
     }
@@ -77,6 +81,7 @@ public class Scorch implements Ability {
         for (UnitCard card : maximumPoweredCards) {
             row.removeCard(card);
             abilityContext.getTable().getOpponent().getBoard().getDiscardPile().addCard(card);
+            //TODO گرافیک انتقال کارت
         }
     }
 }

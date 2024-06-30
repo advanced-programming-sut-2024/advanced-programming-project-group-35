@@ -2,8 +2,8 @@ package com.example.model.card;
 
 import com.example.model.card.enums.CardName;
 import com.example.model.card.enums.LeaderName;
-import com.example.model.card.unitCardsAbilities.CommandersHornCardAbility;
-import com.example.model.card.unitCardsAbilities.SpyAbility;
+import com.example.model.card.cardsAbilities.CommandersHornCardAbility;
+import com.example.model.card.cardsAbilities.SpyAbility;
 import com.example.model.game.*;
 import com.example.model.game.place.Row;
 import com.example.model.game.place.SpellPlace;
@@ -96,7 +96,7 @@ public class LeaderFactory {
                 return leaderCard;
             }
             case "The Steel-Forged" -> {
-                leaderCard = new LeaderCard("", LeaderName.THE_STEEL_FORGED, null);//TODO کاری نمیکنه صرفا اگه لیدر این بود آب و هوا بر میگرده سر جاش
+                leaderCard = new LeaderCard("", LeaderName.THE_STEEL_FORGED, new TheSteelForgedAbility());
                 return leaderCard;
             }
             case "The Siegemaster" -> {
@@ -141,10 +141,17 @@ class TheSiegeMaster implements LeaderAbility {
                     spellPlace.removeCard((WeatherCard) weatherCard);
                 } else {
                     weatherCard.getAbility().apply(new AbilityContext(table, null, null));
-                    // TODO تو ابیلیتی ودر کارت ها باید چک شه که لیدر کینگ برن نباشه
                 }
             }
         }
+        table.getCurrentPlayer().getBoard().getDeck().getLeader().setCanDoAction(false);
+    }
+}
+class TheSteelForgedAbility implements LeaderAbility {
+
+    @Override
+    public void apply(Table table) {
+        //TODO از بین بردن آب و هوا ها
     }
 }
 class KingOfTermeriaAbility implements LeaderAbility {
@@ -157,12 +164,14 @@ class KingOfTermeriaAbility implements LeaderAbility {
                 card.duplicatePower();
             }
         }
+        table.getCurrentPlayer().getBoard().getDeck().getLeader().setCanDoAction(false);
     }
 }
 class LordCommanderOfTheNorth implements LeaderAbility {
     @Override
     public void apply(Table table) {
         LeaderFactory.removeMaxPoweredCardInARow(table.getOpponent(), table.getOpponent().getBoard().getSiegeCardPlace());
+        table.getCurrentPlayer().getBoard().getDeck().getLeader().setCanDoAction(false);
     }
 }
 
@@ -170,6 +179,7 @@ class SonOfMedellAbility implements LeaderAbility {
     @Override
     public void apply(Table table) {
         LeaderFactory.removeMaxPoweredCardInARow(table.getOpponent(), table.getOpponent().getBoard().getRangedCardPlace());
+        table.getCurrentPlayer().getBoard().getDeck().getLeader().setCanDoAction(false);
     }
 }
 
@@ -188,6 +198,7 @@ class TheWhiteFlame implements LeaderAbility {
                 }
             }
         }
+        table.getCurrentPlayer().getBoard().getDeck().getLeader().setCanDoAction(false);
     }
 }
 
@@ -196,6 +207,7 @@ class HisImperialMajesty implements LeaderAbility {
     @Override
     public void apply(Table table) {
         //TODO باید سه کارت رندوم از هند حریف نمایش داده بشه
+        table.getCurrentPlayer().getBoard().getDeck().getLeader().setCanDoAction(false);
     }
 }
 
@@ -204,6 +216,7 @@ class EmperorOfNilfGaard implements LeaderAbility {
     @Override
     public void apply(Table table) {
         table.getOpponent().getBoard().getDeck().getLeader().setCanDoAction(false);
+        table.getCurrentPlayer().getBoard().getDeck().getLeader().setCanDoAction(false);
     }
 }
 
@@ -212,6 +225,7 @@ class TheRelentless implements LeaderAbility {
     @Override
     public void apply(Table table) {
         //TODO تمام کارت های غیر هیرو کارتای مرده حریف باید نشون داده بشه و یکی انتخاب شه و وارد هند بشه
+        table.getCurrentPlayer().getBoard().getDeck().getLeader().setCanDoAction(false);
     }
 }
 
@@ -221,6 +235,7 @@ class InvaderOfTheNorth implements LeaderAbility {
     public void apply(Table table) {
         removeRandomCardFromDiscardPileAndAddToHand(table.getCurrentPlayer().getBoard());
         removeRandomCardFromDiscardPileAndAddToHand(table.getOpponent().getBoard());
+        table.getCurrentPlayer().getBoard().getDeck().getLeader().setCanDoAction(false);
     }
 
     private void removeRandomCardFromDiscardPileAndAddToHand(Board board) {
@@ -240,6 +255,7 @@ class BringerOfDeath implements LeaderAbility {
                 card.duplicatePower();
             }
         }
+        table.getCurrentPlayer().getBoard().getDeck().getLeader().setCanDoAction(false);
     }
 }
 
@@ -248,6 +264,7 @@ class KingOfTheWildHunt implements LeaderAbility {
     @Override
     public void apply(Table table) {
         //TODO  کارت های غیر هیرو از کارتای مرده نشون داده میشه و یکی انتخاب میشه و وارد هند میشه
+        table.getCurrentPlayer().getBoard().getDeck().getLeader().setCanDoAction(false);
     }
 }
 
@@ -256,6 +273,7 @@ class DestroyerOfTheWorlds implements LeaderAbility {
     @Override
     public void apply(Table table) {
         // TODO کارت های هند نشون داده میشه دوتا انتخاب میشه و از هند حذف میشن و کارت های دک نشون داده میشن یکی انتخاب میشه و وارد هند میشه
+        table.getCurrentPlayer().getBoard().getDeck().getLeader().setCanDoAction(false);
     }
 }
 
@@ -274,6 +292,7 @@ class CommnderOfTheRedRiders implements LeaderAbility {
             }
         }
         //TODO باید اینکارت ها نمایش داده بشه یدونش انتخاب شه و بازی شه
+        table.getCurrentPlayer().getBoard().getDeck().getLeader().setCanDoAction(false);
     }
 }
 
@@ -282,6 +301,7 @@ class TheTreacherous implements LeaderAbility {
     public void apply(Table table) {
         duplicateSpyCardsInRows(table.getCurrentPlayer().getBoard().getRows());
         duplicateSpyCardsInRows(table.getOpponent().getBoard().getRows());
+        table.getCurrentPlayer().getBoard().getDeck().getLeader().setCanDoAction(false);
     }
 
     private void duplicateSpyCardsInRows(ArrayList<Row> rows) {
@@ -300,6 +320,7 @@ class QueenOfDolBlathanna implements LeaderAbility {
         if (!table.getOpponent().getBoard().getRangedCardPlace().isEmpty() && table.getOpponent().getBoard().getRangedCardPlace().getStrength() >= 10) {
             LeaderFactory.removeMaxPoweredCardInARow(table.getCurrentPlayer(), table.getOpponent().getBoard().getCloseCombatCardPlace());
         }
+        table.getCurrentPlayer().getBoard().getDeck().getLeader().setCanDoAction(false);
     }
 }
 
@@ -312,6 +333,7 @@ class TheBeautifulAbility implements LeaderAbility {
                 card.duplicatePower();
             }
         }
+        table.getCurrentPlayer().getBoard().getDeck().getLeader().setCanDoAction(false);
     }
 }
 
@@ -323,6 +345,7 @@ class DaisyOfTheValleyAbility implements LeaderAbility {
         Card card = deck.getCard(new Random().nextInt(deck.getSize()));
         deck.removeCard(card);
         table.getCurrentPlayer().getBoard().getHand().addCard(card);
+        table.getCurrentPlayer().getBoard().getDeck().getLeader().setCanDoAction(false);
     }
 }
 
@@ -346,6 +369,7 @@ class PurebloodElfAbility implements LeaderAbility {
                 }
             }
         }
+        table.getCurrentPlayer().getBoard().getDeck().getLeader().setCanDoAction(false);
     }
 }
 
@@ -355,6 +379,7 @@ class HopeOfTheAenSeidheAbility implements LeaderAbility {
         Row close = table.getCurrentPlayer().getBoard().getCloseCombatCardPlace();
         Row ranged = table.getCurrentPlayer().getBoard().getRangedCardPlace();
         transferSiegeCards(close, ranged);
+        table.getCurrentPlayer().getBoard().getDeck().getLeader().setCanDoAction(false);
     }
 
     private void transferSiegeCards(Row close, Row ranged) {
@@ -380,6 +405,7 @@ class CrachAnCraiteAbility implements LeaderAbility {
     public void apply(Table table) {
         moveCardsFromDiscardPileToDeck(table.getCurrentPlayer().getBoard());
         moveCardsFromDiscardPileToDeck(table.getOpponent().getBoard());
+        table.getCurrentPlayer().getBoard().getDeck().getLeader().setCanDoAction(false);
     }
 
     private void moveCardsFromDiscardPileToDeck(Board board) {

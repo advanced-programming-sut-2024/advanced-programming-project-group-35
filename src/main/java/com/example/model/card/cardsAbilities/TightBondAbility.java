@@ -1,9 +1,8 @@
-package com.example.model.card.unitCardsAbilities;
+package com.example.model.card.cardsAbilities;
 
 import com.example.model.card.Ability;
 import com.example.model.card.AbilityContext;
 import com.example.model.card.UnitCard;
-import com.example.model.game.place.Row;
 
 import java.util.ArrayList;
 public class TightBondAbility implements Ability {
@@ -20,5 +19,6 @@ public class TightBondAbility implements Ability {
         for (UnitCard card : tightBondCards) {
            card.setCurrentPower(sumOfTightBondCardsPowers);
         }
+        abilityContext.getRow().updateStrength();
     }
 }

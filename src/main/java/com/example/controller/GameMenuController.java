@@ -1,9 +1,16 @@
 package com.example.controller;
 
 import com.example.model.App;
+import com.example.model.card.AbilityContext;
 import com.example.model.card.Card;
+import com.example.model.game.Deck;
+import com.example.model.game.Hand;
+import com.example.model.game.Player;
+import com.example.model.game.Table;
 import com.example.view.Menu;
 
+import java.util.ArrayList;
+import java.util.Random;
 import java.util.regex.Matcher;
 
 public class GameMenuController extends AppController {
@@ -16,100 +23,46 @@ public class GameMenuController extends AppController {
             throw new RuntimeException();
         }
     }
-
-
-
-    public void menuEnter(Matcher matcher) {
+    public void vetoCard(Player player, Card selectedCard) {
+        //TODO  گذاشتن دکمه وتو کارت رو صفحه
+        if (player.canVetoCard()) {
+            Deck deck = player.getBoard().getDeck();
+            Hand hand = player.getBoard().getHand();
+            Card ranomCard = deck.getCard(new Random().nextInt(deck.getSize()));
+            hand.removeCard(selectedCard);
+            hand.addCard(ranomCard);
+            deck.removeCard(ranomCard);
+            deck.addCard(selectedCard);
+            player.decreaseNumberOfVetoCards();
+            //TODO گرافیک جابه جایی کارت
+        } else {
+            //TODO نمایش خطا در صفحه که نمیتونی کارت وتو کنی
+        }
     }
-
-    public void menuExit() {
+    public void doCardAction(Card card, AbilityContext abilityContext) {
+        if (card.getAbility() != null) {
+            card.getAbility().apply(abilityContext);
+        }
     }
-
-    public void showCurrentMenu() {
+    public void startNewGame(String player1Name, String player2Name, Deck player1Deck, Deck plyer2Deck) {
+        Player player1 = new Player(player1Name);
+        Player player2 = new Player(player2Name);
+        player1.getBoard().setHandForStartGame();
+        player1.getBoard().setHandForStartGame();
+        Table table = new Table(player1, player2);
     }
+    private void startRound() {
 
-    public void vetoCard(int cardNumber) {
-        // veto card <card_number>
     }
-
-    public void showAllCardsInHand() {
-        // in hand deck
-    }
-
-    public void showCardInHand(int cardNumber) {
-        // in hand deck –option <card_number>
-    }
-
-    public void showRemainingCards() {
-        // remaining cards to play
-    }
-
-    public void showOutOfPlayCards() {
-        // out of play cards
-    }
-
-    public void showCardsInRow(int rowNumber) {
-        // cards in rou <row_number>
-    }
-
-    public void showSpellCards() {
-        // spells in play
-    }
-
-    public void putCard(int cardNumber, int rowNumber) {
-        // place card <card_number> in row <row_number>
-    }
-
-    public void showCommander() {
-        // show commander
-    }
-
-    public void commanderPowerPlay() {
-        // commander power play
-    }
-
-    public void showPlayersInfo() {
-        // show players info
-    }
-
-    public void showPlayersLives() {
-        // show players lives
-    }
-
-    public void showNumberOfCardsInHand() {
-        // show number of cards in hand
-    }
-
-    public void showTurnInfo() {
-        // show turn info
-    }
-
-    public void showTotalScore() {
-        // show total score
-    }
-
-    public void showTotalScoreOfRow(int rowNumber) {
-        // show total score of row <row_number>
-    }
-
-    public void passRound() {
-        // pass round
-    }
-
     public void endRound() {
-        // end round
-    }
 
-    public void endGame() {
-        // end game
     }
+    public void changeRound() {
 
-    public void showWinnerData() {
     }
+    public void changeTurn() {
 
-    // maybe this method should be deleted
-    private Card getRandomCard() {
-        return null;
     }
-
+    public void disApplyWeatherCards() {
+    }
 }

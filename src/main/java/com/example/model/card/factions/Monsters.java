@@ -9,8 +9,6 @@ import com.example.model.game.place.Row;
 import java.util.Random;
 
 public class Monsters implements Factions {
-    // در آخر هر راند باید کال شه
-
     FactionsType factionsType = FactionsType.Monsters;
 
     @Override
