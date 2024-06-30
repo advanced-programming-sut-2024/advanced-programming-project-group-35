@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import com.example.model.App;
+import com.example.model.GameData;
 import com.example.model.IO.errors.Errors;
 import com.example.model.user.User;
 import com.example.view.Menu;
@@ -19,8 +20,13 @@ public class ProfileMenuController extends AppController {
         }
     }
     public void showGameHistory() {
-        App.setCurrentMenu(Menu.GAME_HISTORY_MENU);
-        Controller.GAME_HISTORY_MENU_CONTROLLER.run();
+        if (App.getLoggedInUser().getNumberOfPlayedGames() == 0) {
+            OutputView.showOutputAlert(Errors.DONT_HAVE_PLAYED_GAME);
+        }
+        else {
+            App.setCurrentMenu(Menu.GAME_HISTORY_MENU);
+            Controller.GAME_HISTORY_MENU_CONTROLLER.run();
+        }
     }
 
     public Errors editUsername(String username) {
