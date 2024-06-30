@@ -163,3 +163,31 @@
 .scroll-pane .scroll-bar .decrement-button {
     -fx-background-color: transparent;
 }
+
+.faction-card {
+    -fx-cursor: hand;
+}
+.monster-faction-card:hover {
+    -fx-effect: dropshadow(gaussian, rgba(108, 31, 33, 1), 25, 0.1, 0, 0);
+}
+
+.nilfgaard-faction-card:hover {
+    -fx-effect: dropshadow(gaussian, rgba(54, 50, 49, 1), 25, 0.1, 0, 0);
+}
+
+.realms-faction-card:hover {
+    -fx-effect: dropshadow(gaussian, rgba(56, 61, 129, 1), 25, 0.1, 0, 0);
+}
+
+.scoiatael-faction-card:hover {
+    -fx-effect: dropshadow(gaussian, rgba(36, 106, 43, 1), 25, 0.1, 0, 0);
+}
+
+.skellige-faction-card:hover {
+    -fx-effect: dropshadow(gaussian, rgba(89, 56, 109, 1), 25, 0.1, 0, 0);
+}
+
+.faction-label {
+    -fx-font-size: 20px;
+    -fx-text-fill: #ffffff;
+}

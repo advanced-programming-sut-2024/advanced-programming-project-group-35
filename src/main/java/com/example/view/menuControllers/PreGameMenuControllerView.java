@@ -2,6 +2,7 @@ package com.example.view.menuControllers;
 
 import com.example.Main;
 import com.example.controller.Controller;
+import com.example.model.IO.errors.Errors;
 import com.example.model.PreGameCardData;
 import com.example.model.App;
 import com.example.model.card.PreGameCard;
@@ -9,23 +10,42 @@ import com.example.model.card.factions.EmpireNilfgaardian;
 import com.example.model.card.factions.Factions;
 import com.example.model.card.factions.Monsters;
 import com.example.model.card.factions.Skellige;
+import com.example.model.card.enums.FactionsType;
+import com.example.model.card.factions.*;
+import com.example.model.card.enums.FactionsType;
+import com.example.model.card.factions.*;
 import com.example.view.Menu;
+import com.example.view.OutputView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.io.IOException;
+import java.util.Objects;
+
 import java.util.List;
 
 public class PreGameMenuControllerView {
+    private final Stage stage = App.getAppView().getPrimaryStage();
+    public AnchorPane changeFactionPane;
+    public ImageView factionCard1;
+    public ImageView factionCard2;
+    public ImageView factionCard3;
+    public ImageView factionCard4;
+    public ImageView factionCard5;
+    private Pane pane = App.getAppView().getPane();
     private final String srcPath = Main.class.getResource("/images/cards/").toExternalForm();
     public Pane mainPane;
     public ScrollPane leftScrollPane;
@@ -78,10 +98,6 @@ public class PreGameMenuControllerView {
         resetMenu();//everytime faction changes, reset menu function should be called
 
 
-
-        setSwapCardEventHandlers(true);
-        setSwapCardEventHandlers(false);
-
         HBox.setHgrow(leftScrollPane, Priority.ALWAYS);
         HBox.setHgrow(rightScrollPane, Priority.ALWAYS);
 
@@ -95,6 +111,15 @@ public class PreGameMenuControllerView {
         if (flowPaneBackground != null) {
             flowPaneBackground.setStyle("-fx-background-color: transparent;");
         }
+        addMouseHoverEffect(factionCard1);
+        addMouseHoverEffect(factionCard2);
+        addMouseHoverEffect(factionCard3);
+        addMouseHoverEffect(factionCard4);
+        addMouseHoverEffect(factionCard5);
+    }
+    private void addMouseHoverEffect(ImageView imageView) {
+        imageView.setOnMouseEntered(event -> enlargeImage(imageView));
+        imageView.setOnMouseExited(event -> resetImageSize(imageView));
     }
 
     private PreGameCard defaultLeaderCard() {
@@ -111,6 +136,26 @@ public class PreGameMenuControllerView {
                 return new PreGameCard(PreGameCardData.skellige_leader.getName(), PreGameCardData.skellige_leader.getPower(), PreGameCardData.skellige_leader.getAbility(), srcPath + PreGameCardData.skellige_leader.getImageAddress());
         }
         return null;
+    }
+
+    private void enlargeImage(ImageView imageView) {
+        imageView.setFitHeight(imageView.getFitHeight() * 1.2);
+        imageView.setFitWidth(imageView.getFitWidth() * 1.2);
+    }
+
+    private void resetImageSize(ImageView imageView) {
+        imageView.setFitHeight(imageView.getFitHeight() / 1.2);
+        imageView.setFitWidth(imageView.getFitWidth() / 1.2);
+    }
+
+    private void enlargeImage(ImageView imageView) {
+        imageView.setFitHeight(imageView.getFitHeight() * 1.2);
+        imageView.setFitWidth(imageView.getFitWidth() * 1.2);
+    }
+
+    private void resetImageSize(ImageView imageView) {
+        imageView.setFitHeight(imageView.getFitHeight() / 1.2);
+        imageView.setFitWidth(imageView.getFitWidth() / 1.2);
     }
 
     private void setSwapCardEventHandlers(boolean fromAllPane) {
@@ -132,11 +177,12 @@ public class PreGameMenuControllerView {
     private void addCardToDeck(PreGameCard card) {
         if (specialCardsCountLabel.getText().equals("special cards count: 10") && card.getAbility().equals("special")) {
             specialCardsCountLabel.setTextFill(Color.RED);
+            OutputView.showOutputAlert(Errors.SPECIAL_CARD_ERROR);
             new java.util.Timer().schedule(
                     new java.util.TimerTask() {
                         @Override
                         public void run() {
-                            specialCardsCountLabel.setTextFill(Color.BLACK);
+                            specialCardsCountLabel.setTextFill(Color.WHITE);
                         }
                     },
                     3000
@@ -182,6 +228,10 @@ public class PreGameMenuControllerView {
         leftScrollPane.setContent(allCardsPane);
         rightScrollPane.setContent(playerDeckPane);
         allCardsPane.getChildren().addAll(allCards);
+
+        setSwapCardEventHandlers(true);
+        setSwapCardEventHandlers(false);
+
         updateDeckInfo();
     }
 
@@ -192,6 +242,7 @@ public class PreGameMenuControllerView {
         switch (faction.getFaction()) {
             case EmpireNilfgaardian:
                 addAllCardsNilfgaardian();
+                System.out.println("nilfgaardian");
                 break;
             case Monsters:
                 addAllCardsMonsters();
@@ -297,11 +348,12 @@ public class PreGameMenuControllerView {
     public void startGameButtonAction(ActionEvent actionEvent) {
         if (playerDeck.size() < 22) {
             totalCardsLabel.setTextFill(Color.RED);
+            OutputView.showOutputAlert(Errors.NOT_ENOUGH_CARDS);
             new java.util.Timer().schedule(
                     new java.util.TimerTask() {
                         @Override
                         public void run() {
-                            totalCardsLabel.setTextFill(Color.BLACK);
+                            totalCardsLabel.setTextFill(Color.WHITE);
                         }
                     },
                     3000
@@ -327,5 +379,54 @@ public class PreGameMenuControllerView {
     public void backToMainMenu(ActionEvent actionEvent) {
         App.setCurrentMenu(Menu.MAIN_MENU);
         Controller.MAIN_MENU_CONTROLLER.run();
+    }
+
+    public void openChangeFactionMenu(ActionEvent actionEvent) {
+        mainPane.setVisible(true);
+        changeFactionPane.setVisible(true);
+    }
+
+    private void paneChanger(String stageTitle, String fxmlFileName) throws IOException {
+        stage.setTitle(stageTitle);
+        String fxmlFilePath = "/FXML/";
+        fxmlFilePath += fxmlFileName;
+        pane = FXMLLoader.load(Objects.requireNonNull(LoginMenuControllerView.class.getResource(fxmlFilePath)));
+        stage.setScene(new Scene(pane));
+        stage.setResizable(false);
+        stage.centerOnScreen();
+        App.getAppView().setPane(pane);
+    }
+
+    public void backToPreGameMenu(MouseEvent mouseEvent) {
+        mainPane.setVisible(true);
+        changeFactionPane.setVisible(false);
+    }
+
+    public void changeFactionToSkellige(MouseEvent mouseEvent) {
+        faction = new Skellige();
+        resetMenu();
+        backToPreGameMenu(null);
+    }
+
+    public void changeFactionToScoiatael(MouseEvent mouseEvent) {
+        faction = new ScoiaTeal();
+        resetMenu();
+        backToPreGameMenu(null);
+    }
+    public void changeFactionToRealms(MouseEvent mouseEvent) {
+        faction = new RealmNorthern();
+        resetMenu();
+        backToPreGameMenu(null);
+    }
+
+    public void changeFactionToNilfgaard(MouseEvent mouseEvent) {
+        faction = new EmpireNilfgaardian();
+        resetMenu();
+        backToPreGameMenu(null);
+    }
+    public void changeFactionToMonsters(MouseEvent mouseEvent) {
+        faction = new Monsters();
+        resetMenu();
+        backToPreGameMenu(null);
     }
 }

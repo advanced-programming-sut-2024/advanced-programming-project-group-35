@@ -67,3 +67,10 @@
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
 }
+
+.change-faction-menu-background {
+    -fx-background-image: url("/Images/change-faction-menu-background.jpg");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
