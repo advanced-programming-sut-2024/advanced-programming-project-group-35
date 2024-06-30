@@ -45,6 +45,9 @@ public class User {
         this.gameData = new ArrayList<>();
         this.decksAddresses = new ArrayList<>();
     }
+    public void addGameData(GameData gameData) {
+        this.gameData.add(gameData);
+    }
 
     private FactionsType generateRandomFactionType() {
         return null;

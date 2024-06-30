@@ -1,24 +1,18 @@
 package com.example.model;
 
-
-import com.example.model.user.User;
-
-import java.util.Date;
-import java.util.HashMap;
-
 public class GameData {
     private String opponentName;
     private String date;
-    private int starterPlayerFinalScore;
+    private int currentPlayerFinalScore;
     private int opponentFinalScore;
     private int starterPlayerScores[];
     private int opponentPlayerScores[];
-    private String winnerName;
+    private String winnerName; //TODO چک شه اگه نال بود باید بنویسه مساوی
 
-    public GameData(String opponentName, String date, int starterPlayerFinalScore, int opponentFinalScore, int[] starterPlayerScores, int[] opponentPlayerScores, String winnerName) {
+    public GameData(String opponentName, String date, int currentPlayerFinalScore, int opponentFinalScore, int[] starterPlayerScores, int[] opponentPlayerScores, String winnerName) {
         this.opponentName = opponentName;
         this.date = date;
-        this.starterPlayerFinalScore = starterPlayerFinalScore;
+        this.currentPlayerFinalScore = currentPlayerFinalScore;
         this.opponentFinalScore = opponentFinalScore;
         this.starterPlayerScores = starterPlayerScores;
         this.opponentPlayerScores = opponentPlayerScores;
@@ -33,8 +27,8 @@ public class GameData {
         return date;
     }
 
-    public int getStarterPlayerFinalScore() {
-        return starterPlayerFinalScore;
+    public int getCurrentPlayerFinalScore() {
+        return currentPlayerFinalScore;
     }
 
     public int getOpponentFinalScore() {

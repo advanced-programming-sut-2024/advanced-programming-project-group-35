@@ -16,7 +16,7 @@ public class UnitCard extends Card {
         this.noRemove = noRemove;
     }
 
-    public boolean isNoRemove() {
+    public boolean NoRemove() {
         return noRemove;
     }
 
@@ -54,9 +54,5 @@ public class UnitCard extends Card {
 
     public void applyMardroeme() {
         //TODO
-    }
-
-    public void disApplyMardroeme() {
-
     }
 }

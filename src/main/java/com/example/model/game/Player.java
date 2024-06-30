@@ -8,6 +8,7 @@ public class Player {
     private String name;
     private Board board;
     private int score;
+    private boolean passRound;
     private HashMap<Integer, Integer> scoresOfRounds;
 
     public Player(String name) {
@@ -16,7 +17,15 @@ public class Player {
         this.scoresOfRounds = new HashMap<>();
         this.numberOfCrystals = 2;
         this.numberOfVetoCards = 2;
+        this.passRound = false;
+    }
 
+    public boolean isPassRound() {
+        return passRound;
+    }
+
+    public void setPassRound(boolean passRound) {
+        this.passRound = passRound;
     }
 
     public boolean canVetoCard() {
@@ -26,6 +35,7 @@ public class Player {
             return false;
         }
     }
+
     public void decreaseNumberOfVetoCards() {
         numberOfVetoCards--;
     }

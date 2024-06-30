@@ -7,7 +7,7 @@ public class Round {
     private boolean isDraw;
     private boolean isWon;
     private Player winner;
-    private HashMap<Player, Integer> scores;
+    private HashMap<Player, Integer> scores = new HashMap<>();
 
     public Round(int roundNumber) {
         this.roundNumber = roundNumber;

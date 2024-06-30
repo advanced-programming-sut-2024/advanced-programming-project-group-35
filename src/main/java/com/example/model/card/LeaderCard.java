@@ -15,6 +15,10 @@ public class LeaderCard {
         this.leaderName = leaderName;
     }
 
+    public LeaderAbility getAbility() {
+        return ability;
+    }
+
     public LeaderName getLeaderName() {
         return leaderName;
     }
@@ -22,7 +26,7 @@ public class LeaderCard {
         return leaderName.getName();
     }
 
-    public boolean CanDoAction() {
+    public boolean canDoAction() {
         return canDoAction;
     }
 

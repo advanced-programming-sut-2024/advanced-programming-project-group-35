@@ -6,7 +6,6 @@ import com.example.model.card.UnitCard;
 import java.util.ArrayList;
 
 public class Row {
-
     private SpecialCard specialPlace;
     private UnitPlace place;
     private boolean applyWeather = false;

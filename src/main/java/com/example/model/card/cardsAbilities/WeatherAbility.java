@@ -34,7 +34,7 @@ public class WeatherAbility implements Ability {
                 setPowerOne(abilityContext.getTable().getOpponent().getBoard().getSiegeCardPlace());
             }
             case CardName.CLEAR_WEATHER -> {
-                ((GameMenuController)Controller.GAME_MENU_CONTROLLER.getController()).disApplyWeatherCards();
+                ((GameMenuController)Controller.GAME_MENU_CONTROLLER.getController()).disApplyWeatherCards(abilityContext.getTable());
             }
         }
     }
