@@ -9,7 +9,7 @@ public enum FactionsType {
     ScoiaTael,
     Skellige,
     ;
-
+    public final static int numberOfFactions = 5;
     public static FactionsType getFactionByName(String factionName) {
         switch (factionName) {
             case "EmpireNilfgaardian" -> {
