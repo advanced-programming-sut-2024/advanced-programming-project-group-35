@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<Pane xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.view.menuControllers.PreGameMenuControllerView"
+      prefHeight="800.0" prefWidth="1400.0"
+      stylesheets="@../CSS/allMenu.css, @../CSS/allFiles.css"
+      styleClass="change-faction-menu-background">
+    <ImageView fitHeight="800" fitWidth="1400" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../images/choose-leader-background.jpg"/>
+    </ImageView>
+    <FlowPane fx:id="leadersCardsPane" prefHeight="800" prefWidth="1400" alignment="CENTER">
+    </FlowPane>
+    <Button translateX="20" translateY="30" minWidth="50" onMouseClicked="#backToPreGameMenu" styleClass="brown-button"
+            text="Back"/>
+</Pane>

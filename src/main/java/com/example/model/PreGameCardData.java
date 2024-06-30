@@ -1,7 +1,9 @@
 package com.example.model;
 
 import com.example.model.card.enums.AbilityName;
+import com.example.model.card.enums.FactionsType;
 import com.example.model.card.enums.PlaceToBe;
+import com.example.model.card.factions.Factions;
 
 public enum PreGameCardData {
     leaders_monsters_eredin_bronze("leaders_monsters_eredin_bronze", "monsters_eredin_bronze.jpg", 0, "leader", "", "leader"),
@@ -279,4 +281,23 @@ public enum PreGameCardData {
         return type;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public FactionsType getFaction() {
+        if (name.startsWith("leaders_monsters")) {
+            return FactionsType.Monsters;
+        } else if (name.startsWith("leaders_nilfgaard")) {
+            return FactionsType.EmpireNilfgaardian;
+        } else if (name.startsWith("leaders_realms")) {
+            return FactionsType.RealmsNorthern;
+        } else if (name.startsWith("leaders_scoiatael")) {
+            return FactionsType.ScoiaTael;
+        } else if (name.startsWith("leaders_skellige")) {
+            return FactionsType.Skellige;
+        } else {
+            return null;
+        }
+    }
 }
