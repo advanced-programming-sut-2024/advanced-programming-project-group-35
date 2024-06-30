@@ -1,6 +1,29 @@
 package com.example.model;
 
 public enum PreGameCardData {
+    leaders_monsters_eredin_bronze("leaders_monsters_eredin_bronze", "monsters_eredin_bronze.jpg", 0, "leader"),
+    leaders_monsters_eredin_gold("leaders_monsters_eredin_gold", "monsters_eredin_gold.jpg", 0, "leader"),
+    leaders_monsters_eredin_silver("leaders_monsters_eredin_silver", "monsters_eredin_silver.jpg", 0, "leader"),
+    leaders_monsters_eredin_copper("leaders_monsters_eredin_copper", "monsters_eredin_copper.jpg", 0, "leader"),
+    leaders_monsters_eredin_the_treacherous("leaders_monsters_eredin_the_treacherous", "monsters_eredin_the_treacherous.jpg", 0, "leader"),
+    leaders_nilfgaard_emhyr_bronze("leaders_nilfgaard_emhyr_bronze", "nilfgaard_emhyr_bronze.jpg", 0, "leader"),
+    leaders_nilfgaard_emhyr_gold("leaders_nilfgaard_emhyr_gold", "nilfgaard_emhyr_gold.jpg", 0, "leader"),
+    leaders_nilfgaard_emhyr_silver("leaders_nilfgaard_emhyr_silver", "nilfgaard_emhyr_silver.jpg", 0, "leader"),
+    leaders_nilfgaard_emhyr_copper("leaders_nilfgaard_emhyr_copper", "nilfgaard_emhyr_copper.jpg", 0, "leader"),
+    leaders_nilfgaard_emhyr_invader_of_the_north("leaders_nilfgaard_emhyr_invader_of_the_north", "nilfgaard_emhyr_invader_of_the_north.jpg", 0, "leader"),
+    leaders_realms_foltest_bronze("leaders_realms_foltest_bronze", "realms_foltest_bronze.jpg", 0, "leader"),
+    leaders_realms_foltest_gold("leaders_realms_foltest_gold", "realms_foltest_gold.jpg", 0, "leader"),
+    leaders_realms_foltest_silver("leaders_realms_foltest_silver", "realms_foltest_silver.jpg", 0, "leader"),
+    leaders_realms_foltest_copper("leaders_realms_foltest_copper", "realms_foltest_copper.jpg", 0, "leader"),
+    leaders_realms_foltest_son_of_medell("leaders_realms_foltest_son_of_medell", "realms_foltest_son_of_medell.jpg", 0, "leader"),
+    leaders_scoiatael_francesca_bronze("leaders_scoiatael_francesca_bronze", "scoiatael_francesca_bronze.jpg", 0, "leader"),
+    leaders_scoiatael_francesca_gold("leaders_scoiatael_francesca_gold", "scoiatael_francesca_gold.jpg", 0, "leader"),
+    leaders_scoiatael_francesca_silver("leaders_scoiatael_francesca_silver", "scoiatael_francesca_silver.jpg", 0, "leader"),
+    leaders_scoiatael_francesca_copper("leaders_scoiatael_francesca_copper", "scoiatael_francesca_copper.jpg", 0, "leader"),
+    leaders_scoiatael_francesca_hope_of_the_aen_seidhe("leaders_scoiatael_francesca_hope_of_the_aen_seidhe", "scoiatael_francesca_hope_of_the_aen_seidhe.jpg", 0, "leader"),
+    leaders_skellige_crach_an_craite("leaders_skellige_crach_an_craite", "skellige_crach_an_craite.jpg", 0, "leader"),
+    leaders_skellige_king_bran("leaders_skellige_king_bran", "skellige_king_bran.jpg", 0, "leader"),
+
     monsters_arachas("monsters_arachas", "monsters_arachas.jpg", 4, "soldier"),
     monsters_arachas_1("monsters_arachas_1", "monsters_arachas_1.jpg", 4, "soldier"),
     monsters_arachas_2("monsters_arachas_2", "monsters_arachas_2.jpg", 4, "soldier"),
@@ -219,6 +242,12 @@ public enum PreGameCardData {
     private final String imageAddress;
     private final int power;
     private final String ability;
+
+    public static final PreGameCardData nilfgaard_leader = leaders_nilfgaard_emhyr_bronze;
+    public static final PreGameCardData monsters_leader = leaders_monsters_eredin_bronze;
+    public static final PreGameCardData realms_leader = leaders_realms_foltest_bronze;
+    public static final PreGameCardData scoiatael_leader = leaders_scoiatael_francesca_bronze;
+    public static final PreGameCardData skellige_leader = leaders_skellige_crach_an_craite;
 
 
     PreGameCardData(String name, String imageAddress, int power, String ability) {

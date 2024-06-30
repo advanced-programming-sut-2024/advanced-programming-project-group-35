@@ -5,6 +5,7 @@ import com.example.controller.Controller;
 import com.example.model.PreGameCardData;
 import com.example.model.App;
 import com.example.model.card.PreGameCard;
+import com.example.model.card.factions.EmpireNilfgaardian;
 import com.example.model.card.factions.Factions;
 import com.example.model.card.factions.Monsters;
 import com.example.model.card.factions.Skellige;
@@ -22,6 +23,8 @@ import javafx.stage.Stage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.List;
+
 public class PreGameMenuControllerView {
     private final String srcPath = Main.class.getResource("/images/cards/").toExternalForm();
     public Pane mainPane;
@@ -34,6 +37,7 @@ public class PreGameMenuControllerView {
     private Factions faction;
     private ObservableList<PreGameCard> allCards = FXCollections.observableArrayList();
     private ObservableList<PreGameCard> playerDeck = FXCollections.observableArrayList();
+    private PreGameCard leaderCard;
     public FlowPane allCardsPane;
     public FlowPane playerDeckPane;
 
@@ -56,9 +60,10 @@ public class PreGameMenuControllerView {
 
     @FXML
     public void initialize() {
-        faction = new Skellige();
+        faction = new EmpireNilfgaardian();
+        leaderCard = defaultLeaderCard();
 
-        resetMenu();
+        resetMenu();//everytime faction changes, reset menu function should be called
 
         leftScrollPane.setBackground(Background.EMPTY);
         rightScrollPane.setBackground(Background.EMPTY);
@@ -93,6 +98,22 @@ public class PreGameMenuControllerView {
         }
     }
 
+    private PreGameCard defaultLeaderCard() {
+        switch (faction.getFaction()) {
+            case EmpireNilfgaardian:
+                return new PreGameCard(PreGameCardData.nilfgaard_leader.getName(), PreGameCardData.nilfgaard_leader.getPower(), PreGameCardData.nilfgaard_leader.getAbility(), srcPath + PreGameCardData.nilfgaard_leader.getImageAddress());
+            case Monsters:
+                return new PreGameCard(PreGameCardData.monsters_leader.getName(), PreGameCardData.monsters_leader.getPower(), PreGameCardData.monsters_leader.getAbility(), srcPath + PreGameCardData.monsters_leader.getImageAddress());
+            case RealmsNorthern:
+                return new PreGameCard(PreGameCardData.realms_leader.getName(), PreGameCardData.realms_leader.getPower(), PreGameCardData.realms_leader.getAbility(), srcPath + PreGameCardData.realms_leader.getImageAddress());
+            case ScoiaTael:
+                return new PreGameCard(PreGameCardData.scoiatael_leader.getName(), PreGameCardData.scoiatael_leader.getPower(), PreGameCardData.scoiatael_leader.getAbility(), srcPath + PreGameCardData.scoiatael_leader.getImageAddress());
+            case Skellige:
+                return new PreGameCard(PreGameCardData.skellige_leader.getName(), PreGameCardData.skellige_leader.getPower(), PreGameCardData.skellige_leader.getAbility(), srcPath + PreGameCardData.skellige_leader.getImageAddress());
+        }
+        return null;
+    }
+
     private void setSwapCardEventHandlers(boolean fromAllPane) {
         for (PreGameCard card : allCards) {
             card.setOnMouseClicked(event -> {
@@ -121,7 +142,6 @@ public class PreGameMenuControllerView {
                     },
                     3000
             );
-
             return;
         }
         playerDeck.add(card);
@@ -150,7 +170,7 @@ public class PreGameMenuControllerView {
             playerDeck.clear();
         }
         addAllCards(faction);
-
+        leaderCard = defaultLeaderCard();
         realmNameLabel.setText("faction name: " + faction.getFaction().toString());
 
         updateDeckInfo();
@@ -271,7 +291,20 @@ public class PreGameMenuControllerView {
             );
             return;
         }
-        //TODO: start game
+        List<String> playerDeckNames = getPreGameCardNames(playerDeck);
+        String leaderName = getLeaderName(leaderCard);
+    }
+
+    private String getLeaderName(PreGameCard leaderCard) {
+        return leaderCard.getName();
+    }
+
+    private List<String> getPreGameCardNames(ObservableList<PreGameCard> playerDeck) {
+        List<String> playerDeckNames = new java.util.ArrayList<>();
+        for (PreGameCard card : playerDeck) {
+            playerDeckNames.add(card.getName());
+        }
+        return playerDeckNames;
     }
 
     public void backToMainMenu(ActionEvent actionEvent) {
