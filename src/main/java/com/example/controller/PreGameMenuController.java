@@ -72,7 +72,8 @@ public class PreGameMenuController extends AppController {
     }
 
     public void startGame() {
-        
+        App.setCurrentMenu(Menu.GAME_MENU);
+        Controller.GAME_MENU_CONTROLLER.run();
     }
 
     public void addRandomCardsToHand() {
