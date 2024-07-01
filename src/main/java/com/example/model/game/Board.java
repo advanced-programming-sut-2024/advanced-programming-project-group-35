@@ -42,9 +42,13 @@ public class Board {
         return deck;
     }
 
-    public Row getRowByName(UnitPlace place) {
+    public void setDeck(Deck deck) {
+        this.deck = deck;
+    }
+
+    public Row getRowByName(Place place) {
         switch (place) {
-            case CLOSE -> {
+            case CLOSE_COMBAT -> {
                 return closeCombatCardPlace;
             }
             case RANGED -> {
@@ -57,5 +61,9 @@ public class Board {
                 return null;
             }
         }
+    }
+
+    public void setHandForStartGame(Deck deck) {
+        //TODO اضافه کردن 10 تا کارت رندوم (حداقل دو تا اسپشیال اگه بود انتخاب شه)
     }
 }

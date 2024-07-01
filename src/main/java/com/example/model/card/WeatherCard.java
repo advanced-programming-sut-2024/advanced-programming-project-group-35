@@ -1,10 +1,10 @@
 package com.example.model.card;
 
-import com.example.model.card.enums.CardName;
-import com.example.model.game.place.UnitPlace;
+import com.example.model.card.enums.CardData;
+import com.example.model.game.place.Place;
 
 public class WeatherCard extends SpecialCard {
-    public WeatherCard(UnitPlace place, Ability ability, CardName cardName) {
-        super(place, ability, cardName);
+    public WeatherCard(Place place, Ability ability, CardData cardData) {
+        super(place, ability, cardData);
     }
 }

@@ -1,87 +1,30 @@
 package com.example.model.card;
 
-import com.example.model.card.enums.AbilityName;
-import com.example.model.card.enums.CardName;
-import com.example.model.card.unitCardsAbilities.BreskerAbility;
-import com.example.model.card.unitCardsAbilities.MardroemeAbility;
-import com.example.model.card.unitCardsAbilities.MoralBoostAbility;
-import com.example.model.card.unitCardsAbilities.TightBondAbility;
-import com.example.model.game.place.UnitPlace;
+import com.example.model.card.cardsAbilities.WeatherAbility;
+import com.example.model.card.enums.Abilities;
+import com.example.model.card.enums.CardData;
+import com.example.model.game.place.Place;
 
 public class CardFactory {
     public static Card getCardByName(String cardName) {
-        Card card;
-        switch (cardName) {
-            case "Mardoeme" -> {
-                card = new SpecialCard(UnitPlace.SPECIAL, new MardroemeAbility(), CardName.MARDOEME);
-                return card;
+        CardData cardData = CardData.getCardDataByName(cardName);
+        switch (cardData.getName()) {
+            case "soldier" -> {
+                return new UnitCard(cardData.getPower(), Abilities.getAbilityByName(cardData.getAbilityName()), cardData.getPlaceToBe(), false, cardData, false);
             }
-            case "Berserker" -> {
-                card = new UnitCard(4, new BreskerAbility(), UnitPlace.CLOSE, false, CardName.BERSERKER, false);
-                return card;
+            case "hero" -> {
+                return new UnitCard(cardData.getPower(), Abilities.getAbilityByName(cardData.getAbilityName()), cardData.getPlaceToBe(), true, cardData, false);
             }
-            case "Vidkaarl" -> {
-                card = new UnitCard(14, new MoralBoostAbility(), UnitPlace.CLOSE, false, CardName.VIDKAARL, false);
-                return card;
-            }
-            case "Svanrige" -> {
-                card = new UnitCard(4, null, UnitPlace.CLOSE, false, CardName.SVANRIGE, false);
-                return card;
-            }
-            case "Udalryk" -> {
-                card = new UnitCard(4, null, UnitPlace.CLOSE, false, CardName.UDALRYK, false);
-                return card;
-            }
-            case "Donar an Hindar" -> {
-                card = new UnitCard(4, null, UnitPlace.CLOSE, false, CardName.DONAR_AN_HINDAR, false);
-                return card;
-            }
-            case "Clan An Craite" -> {
-                card = new UnitCard(6, new TightBondAbility(), UnitPlace.CLOSE, false, CardName.CLAN_AN_CRAITE, false);
-                return card;
-            }
-            case "Blueboy Lugos" -> {
-                card = new UnitCard(6, null, UnitPlace.CLOSE, false, CardName.BLUEBOY_LUGOS, false);
-                return card;
+            case "special" -> {
+                if (cardData.getAbility().equals("weather")) {
+                    return new WeatherCard(cardData.getPlaceToBe(), new WeatherAbility(), cardData);
+                } else {
+                    return new SpecialCard(cardData.getPlaceToBe(), null, cardData);
+                }
             }
             default -> {
                 return null;
             }
         }
-    }
-}
-class BitingFrostAbility implements Ability {
-
-    @Override
-    public void apply(AbilityContext abilityContext) {
-
-    }
-}
-class ImpenetrableFog implements Ability {
-
-    @Override
-    public void apply(AbilityContext abilityContext) {
-
-    }
-}
-class TorrentialRain implements Ability {
-
-    @Override
-    public void apply(AbilityContext abilityContext) {
-
-    }
-}
-class SkelligeStorm implements Ability {
-
-    @Override
-    public void apply(AbilityContext abilityContext) {
-
-    }
-}
-class ClearWeather implements Ability {
-
-    @Override
-    public void apply(AbilityContext abilityContext) {
-
     }
 }

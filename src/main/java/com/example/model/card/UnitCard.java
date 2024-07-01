@@ -1,7 +1,7 @@
 package com.example.model.card;
 
-import com.example.model.card.enums.CardName;
-import com.example.model.game.place.UnitPlace;
+import com.example.model.card.enums.CardData;
+import com.example.model.game.place.Place;
 
 public class UnitCard extends Card {
     private final int power;
@@ -9,14 +9,14 @@ public class UnitCard extends Card {
     private boolean isHero;
     private boolean noRemove; // برای وقتیه که ما میخوایم دور رو عوض کنیم و اگه یه کارتی اینش ترو باشه نباید از صفحه حدف شه (برای ابیلیتی مانستر)
 
-    public UnitCard(int power, Ability ability, UnitPlace place, boolean isHero, CardName cardName, boolean noRemove) {
-        super(place, ability, cardName);
+    public UnitCard(int power, Ability ability, Place place, boolean isHero, CardData cardData, boolean noRemove) {
+        super(place, ability, cardData);
         this.power = power;
         this.isHero = isHero;
         this.noRemove = noRemove;
     }
 
-    public boolean isNoRemove() {
+    public boolean NoRemove() {
         return noRemove;
     }
 
@@ -54,9 +54,5 @@ public class UnitCard extends Card {
 
     public void applyMardroeme() {
         //TODO
-    }
-
-    public void disApplyMardroeme() {
-
     }
 }

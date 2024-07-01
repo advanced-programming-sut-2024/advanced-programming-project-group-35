@@ -1,4 +1,4 @@
-package com.example.model.card;
+package com.example.model.card.leaderCardsAbilities;
 
 import com.example.model.game.Table;
 

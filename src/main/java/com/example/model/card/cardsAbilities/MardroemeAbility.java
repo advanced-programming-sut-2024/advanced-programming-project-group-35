@@ -1,4 +1,4 @@
-package com.example.model.card.unitCardsAbilities;
+package com.example.model.card.cardsAbilities;
 
 import com.example.model.card.Ability;
 import com.example.model.card.AbilityContext;
@@ -8,7 +8,8 @@ public class MardroemeAbility implements Ability {
     @Override
     public void apply(AbilityContext abilityContext) {
         for (UnitCard card : abilityContext.getRow().getCards()) {
-            card.applyMardroeme();
+            if (card.getAbility() instanceof BreskerAbility)
+                card.applyMardroeme();
         }
     }
 }

@@ -1,7 +1,6 @@
 package com.example.controller;
 
 import com.example.model.App;
-import com.example.model.GameData;
 import com.example.model.IO.errors.Errors;
 import com.example.model.user.User;
 import com.example.view.Menu;

@@ -4,9 +4,9 @@ package com.example.model.card.factions;
 import com.example.model.card.AbilityContext;
 import com.example.model.card.enums.FactionsType;
 import com.example.model.game.Player;
+import com.example.model.game.Table;
 
 public class EmpireNilfgaardian implements Factions {
-    // در آخر هر راند باید کال شه
     FactionsType factionsType = FactionsType.EmpireNilfgaardian;
 
     @Override
@@ -15,9 +15,9 @@ public class EmpireNilfgaardian implements Factions {
     }
 
     @Override
-    public void apply(AbilityContext abilityContext, Player player) {
-        if (abilityContext.getTable().isRoundDraw()) {
-            abilityContext.getTable().setRoundWinner(player);
+    public void apply(Table table, Player player) {
+        if (table.getCurrentRound().isDraw()) {
+            table.getCurrentRound().setWinner(player);
         }
     }
 }

@@ -3,7 +3,6 @@ package com.example.model.user;
 import com.example.model.App;
 import com.example.model.card.enums.FactionsType;
 import com.example.model.GameData;
-import com.example.model.game.Deck;
 
 import java.util.ArrayList;
 
@@ -44,6 +43,9 @@ public class User {
         this.currentFactionType = generateRandomFactionType();
         this.gameData = new ArrayList<>();
         this.decksAddresses = new ArrayList<>();
+    }
+    public void addGameData(GameData gameData) {
+        this.gameData.add(gameData);
     }
 
     private FactionsType generateRandomFactionType() {

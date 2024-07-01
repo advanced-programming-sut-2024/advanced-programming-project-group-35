@@ -2,7 +2,6 @@ package com.example.model.user;
 
 import com.example.model.card.Card;
 import com.example.model.card.CardFactory;
-import com.example.model.card.LeaderCard;
 import com.example.model.card.LeaderFactory;
 import com.example.model.card.enums.FactionsType;
 import com.example.model.game.Deck;
@@ -14,6 +13,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +38,8 @@ public class DeckManager {
     public static Deck loadDeck(String filename) {
         Gson gson = new GsonBuilder().create();
         try (FileReader reader = new FileReader(filename)) {
-            Type deckDataType = new TypeToken<Map<String, Object>>() {}.getType();
+            Type deckDataType = new TypeToken<Map<String, Object>>() {
+            }.getType();
             Map<String, Object> deckData = gson.fromJson(reader, deckDataType);
 
             String faction = (String) deckData.get("faction");
@@ -58,5 +59,15 @@ public class DeckManager {
             System.err.println("Failed to load deck: " + e.getMessage());
             return null;
         }
+    }
+
+    public static Deck loadDeck(ArrayList<String> cardNames) {
+        Deck deck = new Deck();
+        deck.setLeader(LeaderFactory.getLeaderCardByName(cardNames.get(1)));
+        deck.setFaction(FactionsType.getFactionByName(cardNames.get(0)));
+        for (int i = 2; i < cardNames.size(); i++) {
+            deck.addCard(CardFactory.getCardByName(cardNames.get(i)));
+        }
+        return deck;
     }
 }

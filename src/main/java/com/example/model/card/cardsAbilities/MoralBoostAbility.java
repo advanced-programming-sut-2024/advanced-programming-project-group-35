@@ -1,4 +1,4 @@
-package com.example.model.card.unitCardsAbilities;
+package com.example.model.card.cardsAbilities;
 
 import com.example.model.card.Ability;
 import com.example.model.card.AbilityContext;
@@ -8,7 +8,9 @@ public class MoralBoostAbility implements Ability {
     @Override
     public void apply(AbilityContext abilityContext) {
         for (UnitCard card : abilityContext.getRow().getCards()) {
-            card.applyMoralBoost();
+            if (card != abilityContext.getCard())
+                card.applyMoralBoost();
         }
+        abilityContext.getRow().updateStrength();
     }
 }

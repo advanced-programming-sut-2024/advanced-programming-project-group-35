@@ -7,12 +7,12 @@ import com.example.model.card.UnitCard;
 import com.example.model.card.enums.FactionsType;
 import com.example.model.game.Deck;
 import com.example.model.game.Player;
+import com.example.model.game.Table;
 import com.example.model.game.place.Row;
 
 import java.util.Random;
 
 public class Skellige implements Factions {
-    // در اول راند سه باید کال شه
     FactionsType factionsType = FactionsType.Skellige;
 
     @Override
@@ -21,8 +21,8 @@ public class Skellige implements Factions {
     }
 
     @Override
-    public void apply(AbilityContext abilityContext, Player player) {
-        if (abilityContext.getTable().getRoundNumber() == 3) {
+    public void apply(Table table, Player player) {
+        if (table.getRoundNumber() == 3) {
             Deck deck = player.getBoard().getDeck();
             if (deck.getSize() > 1) {
                 int index1 = new Random().nextInt(deck.getSize());
@@ -35,13 +35,17 @@ public class Skellige implements Factions {
                 Row row2 = player.getBoard().getRowByName(selectedCard2.getPlace());
                 if (selectedCard1 instanceof SpecialCard) {
                     row1.setSpecialPlace((SpecialCard) selectedCard1);
+                    //TODO گرافیک انتقال کارت
                 } else {
                     row1.addCard((UnitCard) selectedCard1);
+                    //TODO گرافیک انتقال کارت
                 }
                 if (selectedCard2 instanceof SpecialCard) {
                     row2.setSpecialPlace((SpecialCard) selectedCard2);
+                    //TODO گرافیک انتقال کارت
                 } else {
                     row2.addCard((UnitCard) selectedCard2);
+                    //TODO گرافیک انتقال کارت
                 }
                 deck.removeCard(selectedCard1);
                 deck.removeCard(selectedCard2);
@@ -51,8 +55,10 @@ public class Skellige implements Factions {
                 Row row = player.getBoard().getRowByName(selectedCard.getPlace());
                 if (selectedCard instanceof SpecialCard) {
                     row.setSpecialPlace((SpecialCard) selectedCard);
+                    //TODO گرافیک انتقال کارت
                 } else {
                     row.addCard((UnitCard) selectedCard);
+                    //TODO گرافیک انتقال کارت
                 }
             }
         }
