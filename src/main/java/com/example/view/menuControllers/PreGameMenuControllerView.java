@@ -45,8 +45,8 @@ public class PreGameMenuControllerView {
     public ImageView factionCard3;
     public ImageView factionCard4;
     public ImageView factionCard5;
-    public AnchorPane changeLeaderCard;
     public FlowPane leaderCardPane;
+    public AnchorPane chooseLeaderAnchorPane;
     private Pane pane = App.getAppView().getPane();
     private final String srcPath = Main.class.getResource("/images/cards/").toExternalForm();
     public Pane mainPane;
