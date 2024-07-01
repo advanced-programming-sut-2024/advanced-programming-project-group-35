@@ -2,8 +2,10 @@ package com.example.view.menuControllers;
 
 import com.example.Main;
 import com.example.controller.Controller;
+import com.example.controller.GameMenuController;
 import com.example.controller.MainMenuController;
 import com.example.controller.PreGameMenuController;
+import com.example.model.DeckManager;
 import com.example.model.IO.errors.Errors;
 import com.example.model.card.enums.CardData;
 import com.example.model.App;
@@ -13,6 +15,7 @@ import com.example.model.card.factions.Factions;
 import com.example.model.card.factions.Monsters;
 import com.example.model.card.factions.Skellige;
 import com.example.model.card.factions.*;
+import com.example.model.game.Deck;
 import com.example.view.Menu;
 import com.example.view.OutputView;
 import javafx.event.ActionEvent;
@@ -32,6 +35,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 import java.util.List;
@@ -45,10 +49,8 @@ public class PreGameMenuControllerView {
     public ImageView factionCard3;
     public ImageView factionCard4;
     public ImageView factionCard5;
-    public AnchorPane chooseLeaderAnchorPane;
-
-    public AnchorPane changeLeaderCard;
     public FlowPane leaderCardPane;
+    public AnchorPane chooseLeaderAnchorPane;
     private Pane pane = App.getAppView().getPane();
     private final String srcPath = Main.class.getResource("/images/cards/").toExternalForm();
     public Pane mainPane;
@@ -208,10 +210,10 @@ public class PreGameMenuControllerView {
     }
 
     private void resetMenu() {
-        if (allCardsPane.getChildren().size() > 0){
+        if (allCardsPane.getChildren().size() > 0) {
             allCardsPane.getChildren().clear();
         }
-        if (playerDeckPane.getChildren().size() > 0){
+        if (playerDeckPane.getChildren().size() > 0) {
             playerDeckPane.getChildren().clear();
         }
         if (allCards.size() > 0) {
@@ -232,7 +234,7 @@ public class PreGameMenuControllerView {
         setSwapCardEventHandlers(true);
         setSwapCardEventHandlers(false);
 
-        if (leadersCardsPane.getChildren().size() > 0){
+        if (leadersCardsPane.getChildren().size() > 0) {
             leadersCardsPane.getChildren().clear();
         }
         leaderCards.clear();
@@ -385,17 +387,29 @@ public class PreGameMenuControllerView {
             );
             return;
         }
-        List<String> playerDeckNames = getPreGameCardNames(playerDeck);
-        String leaderName = getLeaderName(leaderCard);
-        controller.startGame();
+        ArrayList<String> playerDeckNames = getPreGameCardNames(playerDeck);
+        Deck playerDeck = DeckManager.loadDeck(playerDeckNames);
+        GameMenuController gameMenuController = (GameMenuController) Controller.GAME_MENU_CONTROLLER.getController();
+        gameMenuController.startNewGame(App.getLoggedInUser().getUsername(), opponentName(), playerDeck, playerDeck);
+    }
+
+    private ArrayList<String> opponentDeck() {
+        //TODO
+        return null;
+    }
+
+    private String opponentName() {
+        return "opponent";
     }
 
     private String getLeaderName(PreGameCard leaderCard) {
         return leaderCard.getName();
     }
 
-    private List<String> getPreGameCardNames(ObservableList<PreGameCard> playerDeck) {
-        List<String> playerDeckNames = new java.util.ArrayList<>();
+    private ArrayList<String> getPreGameCardNames(ObservableList<PreGameCard> playerDeck) {
+        ArrayList<String> playerDeckNames = new java.util.ArrayList<>();
+        playerDeckNames.add(faction.getFaction().toString());
+        playerDeckNames.add(getLeaderName(leaderCard));
         for (PreGameCard card : playerDeck) {
             playerDeckNames.add(card.getName());
         }
@@ -440,6 +454,7 @@ public class PreGameMenuControllerView {
         resetMenu();
         backToPreGameMenu(null);
     }
+
     public void changeFactionToRealms(MouseEvent mouseEvent) {
         faction = new RealmNorthern();
         resetMenu();
@@ -451,6 +466,7 @@ public class PreGameMenuControllerView {
         resetMenu();
         backToPreGameMenu(null);
     }
+
     public void changeFactionToMonsters(MouseEvent mouseEvent) {
         faction = new Monsters();
         resetMenu();

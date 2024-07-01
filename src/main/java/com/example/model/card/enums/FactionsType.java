@@ -32,4 +32,27 @@ public enum FactionsType {
             }
         }
     }
+
+    public static String toSting(FactionsType factionsType) {
+        switch (factionsType) {
+            case EmpireNilfgaardian -> {
+                return ("EmpireNilfgaardian");
+            }
+            case Monsters -> {
+                return ("Monsters");
+            }
+            case RealmsNorthern -> {
+                return ("RealmsNorthern");
+            }
+            case ScoiaTael -> {
+                return ("ScoiaTael");
+            }
+            case Skellige -> {
+                return ("Skellige");
+            }
+            default -> {
+                return null;
+            }
+        }
+    }
 }
