@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import com.example.model.App;
+import com.example.model.DeckManager;
 import com.example.model.card.AbilityContext;
 import com.example.model.card.Card;
 import com.example.model.card.LeaderCard;
@@ -9,6 +10,7 @@ import com.example.model.card.enums.FactionsType;
 import com.example.model.game.*;
 import com.example.view.Menu;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class GameMenuController extends AppController {
@@ -61,7 +63,9 @@ public class GameMenuController extends AppController {
         }
     }
 
-    public void startNewGame(String player1Name, String player2Name, Deck player1Deck, Deck player2Deck) {
+    public void startNewGame(String player1Name, String player2Name, ArrayList<String> player1DeckNames, ArrayList<String> player2DeckNames) {
+        Deck player1Deck = DeckManager.loadDeck(player1DeckNames);
+        Deck player2Deck = DeckManager.loadDeck(player2DeckNames);
         Player player1 = new Player(player1Name);
         Player player2 = new Player(player2Name);
         player1.getBoard().setDeck(player1Deck);

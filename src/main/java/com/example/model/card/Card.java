@@ -13,6 +13,10 @@ public class Card {
         this.ability = ability;
     }
 
+    public CardData getCardData() {
+        return cardData;
+    }
+
     public CardData getCardName() {
         return cardData;
     }

@@ -388,9 +388,8 @@ public class PreGameMenuControllerView {
             return;
         }
         ArrayList<String> playerDeckNames = getPreGameCardNames(playerDeck);
-        Deck playerDeck = DeckManager.loadDeck(playerDeckNames);
         GameMenuController gameMenuController = (GameMenuController) Controller.GAME_MENU_CONTROLLER.getController();
-        gameMenuController.startNewGame(App.getLoggedInUser().getUsername(), opponentName(), playerDeck, playerDeck);
+        gameMenuController.startNewGame(App.getLoggedInUser().getUsername(), opponentName(), playerDeckNames, playerDeckNames);
     }
 
     private ArrayList<String> opponentDeck() {
