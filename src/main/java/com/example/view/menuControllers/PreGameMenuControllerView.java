@@ -39,11 +39,14 @@ import java.util.List;
 public class PreGameMenuControllerView {
     private final Stage stage = App.getAppView().getPrimaryStage();
     public AnchorPane changeFactionPane;
+    public FlowPane leadersCardsPane;
     public ImageView factionCard1;
     public ImageView factionCard2;
     public ImageView factionCard3;
     public ImageView factionCard4;
     public ImageView factionCard5;
+    public AnchorPane chooseLeaderAnchorPane;
+
     public AnchorPane changeLeaderCard;
     public FlowPane leaderCardPane;
     private Pane pane = App.getAppView().getPane();
@@ -58,6 +61,7 @@ public class PreGameMenuControllerView {
     private Factions faction;
     private ObservableList<PreGameCard> allCards = FXCollections.observableArrayList();
     private ObservableList<PreGameCard> playerDeck = FXCollections.observableArrayList();
+    private ObservableList<PreGameCard> leaderCards = FXCollections.observableArrayList();
     private PreGameCard leaderCard;
     public FlowPane allCardsPane;
     public FlowPane playerDeckPane;
@@ -111,12 +115,18 @@ public class PreGameMenuControllerView {
         if (flowPaneBackground != null) {
             flowPaneBackground.setStyle("-fx-background-color: transparent;");
         }
+
+        addMouseHoverOnCard();
+    }
+
+    private void addMouseHoverOnCard() {
         addMouseHoverEffect(factionCard1);
         addMouseHoverEffect(factionCard2);
         addMouseHoverEffect(factionCard3);
         addMouseHoverEffect(factionCard4);
         addMouseHoverEffect(factionCard5);
     }
+
     private void addMouseHoverEffect(ImageView imageView) {
         imageView.setOnMouseEntered(event -> enlargeImage(imageView));
         imageView.setOnMouseExited(event -> resetImageSize(imageView));
@@ -222,7 +232,33 @@ public class PreGameMenuControllerView {
         setSwapCardEventHandlers(true);
         setSwapCardEventHandlers(false);
 
+        if (leadersCardsPane.getChildren().size() > 0){
+            leadersCardsPane.getChildren().clear();
+        }
+        leaderCards.clear();
+        addToLeaderCardsPane();
+        addOnMouseClickedEventToLeaderCards();
+        leadersCardsPane.getChildren().addAll(leaderCards);
+
         updateDeckInfo();
+    }
+
+    private void addOnMouseClickedEventToLeaderCards() {
+        for (PreGameCard card : leaderCards) {
+            card.setOnMouseClicked(event -> {
+                leaderCard = card;
+                backToPreGameMenu(null);
+                updateDeckInfo();
+            });
+        }
+    }
+
+    private void addToLeaderCardsPane() {
+        for (CardData cardData : CardData.values()) {
+            if (cardData.getType().equals("leader") && cardData.getFaction().equals(faction.getFaction())) {
+                leaderCards.add(new PreGameCard(cardData.getName(), cardData.getPower(), cardData.getAbility(), srcPath + cardData.getImageAddress()));
+            }
+        }
     }
 
     private void addAllCards(Factions faction) {
@@ -390,6 +426,7 @@ public class PreGameMenuControllerView {
     public void backToPreGameMenu(MouseEvent mouseEvent) {
         mainPane.setVisible(true);
         changeFactionPane.setVisible(false);
+        chooseLeaderAnchorPane.setVisible(false);
     }
 
     public void changeFactionToSkellige(MouseEvent mouseEvent) {
@@ -418,5 +455,10 @@ public class PreGameMenuControllerView {
         faction = new Monsters();
         resetMenu();
         backToPreGameMenu(null);
+    }
+
+    public void openChooseLeader(ActionEvent actionEvent) {
+        mainPane.setVisible(true);
+        chooseLeaderAnchorPane.setVisible(true);
     }
 }
