@@ -28,6 +28,8 @@
             <Label fx:id="realmNameLabel" text="Faction: " styleClass="pre-game-menu-label"/>
             <Button minWidth="150" styleClass="brown-button" text="Change Faction"
                     onAction="#openChangeFactionMenu"/>
+            <Button minWidth="150" styleClass="brown-button" text="Change Leader"
+                    onAction="#openChooseLeader"/>
             <Label fx:id="totalCardsLabel" text="Total Cards: " styleClass="pre-game-menu-label"/>
             <Label fx:id="soldiersCountLabel" text="Soldiers: " styleClass="pre-game-menu-label"/>
             <Label fx:id="specialCardsCountLabel" text="Workers: " styleClass="pre-game-menu-label"/>
@@ -92,17 +94,13 @@
                 styleClass="brown-button"
                 text="Back"/>
     </AnchorPane>
-    <AnchorPane fx:id="changeLeaderCard" visible="false" prefHeight="800.0" prefWidth="1400.0"
+    <AnchorPane fx:id="chooseLeaderAnchorPane" visible="false" prefHeight="800.0" prefWidth="1400.0"
                 styleClass="change-faction-menu-background">
         <ImageView fitHeight="800" fitWidth="1400" pickOnBounds="true" preserveRatio="true">
-            <Image url="@../images/change-leader-card-menu-background.jpg"/>
+            <Image url="@../images/choose-leader-background.jpg"/>
         </ImageView>
-        <VBox spacing="0" prefHeight="800" prefWidth="1400" alignment="CENTER">
-            <FlowPane styleClass="transparent-background, flow-pane-pre-game-menu" fx:id="leaderCardPane" prefHeight="600"
-                      prefWidth="1120" alignment="CENTER" hgap="15" vgap="20" maxWidth="450">
-
-            </FlowPane>
-        </VBox>
+        <FlowPane fx:id="leadersCardsPane" hgap="30" prefHeight="800" prefWidth="1400" alignment="CENTER">
+        </FlowPane>
         <Button translateX="20" translateY="30" minWidth="50" onMouseClicked="#backToPreGameMenu"
                 styleClass="brown-button"
                 text="Back"/>
