@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import com.example.model.App;
+import com.example.model.DeckManager;
 import com.example.model.card.AbilityContext;
 import com.example.model.card.Card;
 import com.example.model.card.LeaderCard;
@@ -9,9 +10,13 @@ import com.example.model.card.enums.FactionsType;
 import com.example.model.game.*;
 import com.example.view.Menu;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class GameMenuController extends AppController {
+    private Deck player1Deck;
+    private Deck player2Deck;
+    private Table table;
     @Override
     public void run() {
         try {
@@ -61,14 +66,16 @@ public class GameMenuController extends AppController {
         }
     }
 
-    public void startNewGame(String player1Name, String player2Name, Deck player1Deck, Deck player2Deck) {
+    public void startNewGame(String player1Name, String player2Name, ArrayList<String> player1CardNames, ArrayList<String> player2CardNames) {
+        player1Deck = DeckManager.loadDeck(player1CardNames);
+        player2Deck = DeckManager.loadDeck(player2CardNames);
         Player player1 = new Player(player1Name);
         Player player2 = new Player(player2Name);
         player1.getBoard().setDeck(player1Deck);
         player2.getBoard().setDeck(player2Deck);
         player1.getBoard().setHandForStartGame(player1Deck);
         player1.getBoard().setHandForStartGame(player2Deck);
-        Table table = new Table(player1, player2);
+        table = new Table(player1, player2);
         table.setRoundNumber(1);
         Round round1 = new Round(1);
         table.addRound(round1);
@@ -179,5 +186,17 @@ public class GameMenuController extends AppController {
     }
 
     public void disApplyWeatherCards(Table table) {
+    }
+
+    public Deck getPlayer1Deck() {
+        return player1Deck;
+    }
+
+    public Deck getPlayer2Deck() {
+        return player2Deck;
+    }
+
+    public Table getTable() {
+        return table;
     }
 }

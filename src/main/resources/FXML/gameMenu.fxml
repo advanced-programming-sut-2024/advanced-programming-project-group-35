@@ -16,7 +16,7 @@
 <!--    <ImageView fitHeight="800.0" fitWidth="1400.0" pickOnBounds="true" preserveRatio="true">-->
 <!--        <Image url="@../images/game-board-template.jpg" />-->
 <!--    </ImageView>-->
-   <Rectangle fx:id="player2ShadowRectangle" fill="#00000081" height="101.0" layoutY="195.0" width="324.0" />
+   <Rectangle fx:id="opponentPlayerShadowRectangle" fill="#00000081" height="101.0" layoutY="195.0" width="324.0" />
    <Rectangle fx:id="currentPlayerShadowRectangle" fill="#00000081" height="101.0" layoutY="494.0" width="324.0" />
    <Label fx:id="opponentPlayerSiegePower" alignment="CENTER" layoutX="377.0" layoutY="40.0" style="-fx-font-size: 24px;" styleClass="white-text" text="10" textAlignment="CENTER" />
    <Label fx:id="opponentPlayerRangedPower" alignment="CENTER" layoutX="377.0" layoutY="137.0" style="-fx-font-size: 24px;" styleClass="white-text" text="10" textAlignment="CENTER" />
@@ -25,15 +25,11 @@
    <Label fx:id="currentPlayerRangedPower" alignment="CENTER" layoutX="377.0" layoutY="448.0" style="-fx-font-size: 24px;" styleClass="white-text" text="10" textAlignment="CENTER" />
    <Label fx:id="currentPlayerSiegePower" alignment="CENTER" layoutX="377.0" layoutY="551.0" style="-fx-font-size: 24px;" styleClass="white-text" text="10" textAlignment="CENTER" />
    <ImageView fitHeight="45.0" fitWidth="40.0" layoutX="305.0" layoutY="523.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../images/icons/score_total_me.png" />
-      </image>
+      <Image url="@../images/icons/score_total_me.png"/>
    </ImageView>
    <Label fx:id="currentPlayerAllScoreCounter" alignment="CENTER" layoutX="316.0" layoutY="528.0" style="-fx-font-size: 24px;" styleClass="white-text" text="10" textAlignment="CENTER" />
    <ImageView fitHeight="45.0" fitWidth="40.0" layoutX="305.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../images/icons/score_total_op.png" />
-      </image>
+      <Image url="@../images/icons/score_total_op.png"/>
    </ImageView>
    <Label fx:id="opponentPlayerAllScoreCounter" alignment="CENTER" layoutX="316.0" layoutY="231.0" style="-fx-font-size: 24px;" styleClass="white-text" text="10" textAlignment="CENTER" />
    <Label fx:id="currentPlayerUsername" layoutX="168.0" layoutY="553.0" styleClass="yellow-text" text="Username 1" />
@@ -42,16 +38,14 @@
    <Label fx:id="opponentPlayerUsername" layoutX="168.0" layoutY="199.0" styleClass="yellow-text" text="Username 2" />
    <Label fx:id="opponentPlayerFactionName" layoutX="168.0" layoutY="218.0" styleClass="yellow-text" text="Faction 2" />
    <Label fx:id="opponentPlayerSpecialCardCounter" alignment="CENTER" layoutX="188.0" layoutY="252.0" style="-fx-font-size: 24px;" styleClass="yellow-text" text="10" textAlignment="CENTER" />
-   <ImageView fx:id="opponentPlayerDeckPlace" fitHeight="110.0" fitWidth="73.0" layoutX="1270.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../images/icons/deck_back_skellige.jpg" />
-      </image>
+   <ImageView fx:id="opponentPlayerDeckPlace" fitHeight="110.0" fitWidth="73.0" layoutX="1270.0" layoutY="50.0"
+              pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/icons/deck_back_skellige.jpg"/>
    </ImageView>
    <VBox fx:id="opponentPlayerDiscardPlace" layoutX="1136.0" layoutY="50.0" prefHeight="110.0" prefWidth="82.0" />
-   <ImageView fx:id="currentPlayerDeckPlace" fitHeight="110.0" fitWidth="82.0" layoutX="1270.0" layoutY="613.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../images/icons/deck_back_monsters.jpg" />
-      </image>
+   <ImageView fx:id="currentPlayerDeckPlace" fitHeight="110.0" fitWidth="82.0" layoutX="1270.0" layoutY="613.0"
+              pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/icons/deck_back_monsters.jpg"/>
    </ImageView>
    <VBox fx:id="currentPlayerDiscardPlace" layoutX="1136.0" layoutY="613.0" prefHeight="110.0" prefWidth="82.0" />
    <FlowPane fx:id="currentPlayerHand" layoutX="417.0" layoutY="624.0" prefHeight="96.0" prefWidth="696.0" />
@@ -72,76 +66,70 @@
    <Label fx:id="opponentPlayerDeckCardCounter" alignment="CENTER" contentDisplay="CENTER" layoutX="1300.0" layoutY="165.0" styleClass="white-text" text="23" textAlignment="CENTER" />
    <Label fx:id="currentPlayerDeckCardCounter" alignment="CENTER" contentDisplay="CENTER" layoutX="1300.0" layoutY="728.0" styleClass="white-text" text="23" textAlignment="CENTER" />
    <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="163.0" layoutY="256.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../images/icons/icon_card_count.png" />
-      </image></ImageView>
-   <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="163.0" layoutY="514.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../images/icons/icon_card_count.png" />
-      </image></ImageView>
-   <ImageView fx:id="currentPlayerFirstJem" fitHeight="30.0" fitWidth="30.0" layoutX="218.0" layoutY="508.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../images/icons/icon_gem_on.png" />
-      </image></ImageView>
-   <ImageView fx:id="currentPlayerSecondJem" fitHeight="30.0" fitWidth="30.0" layoutX="253.0" layoutY="508.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../images/icons/icon_gem_on.png" />
-      </image></ImageView>
-   <ImageView fx:id="opponentPlayerFirstJem" fitHeight="30.0" fitWidth="30.0" layoutX="218.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../images/icons/icon_gem_on.png" />
-      </image></ImageView>
-   <ImageView fx:id="opponentPlayerSecondJem" fitHeight="30.0" fitWidth="30.0" layoutX="253.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../images/icons/icon_gem_on.png" />
-      </image></ImageView>
-   <ImageView fx:id="opponentPlayerExcellenceShower" fitHeight="75.0" fitWidth="75.0" layoutX="288.0" layoutY="223.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../images/icons/icon_high_score.png" />
-      </image></ImageView>
-   <ImageView fx:id="currentPlayerExcellenceShower" fitHeight="75.0" fitWidth="75.0" layoutX="288.0" layoutY="521.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../images/icons/icon_high_score.png" />
-      </image></ImageView>
-   <Button layoutX="229.0" layoutY="650.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="73.0" styleClass="brown-button" text="Pass" />
-   <ImageView fx:id="musicToggleIcon" fitHeight="35.0" fitWidth="35.0" layoutX="358.0" layoutY="655.0" pickOnBounds="true" preserveRatio="true" />
-   <ImageView fx:id="opponentPlayerLeaderAbilityEnable" fitHeight="30.0" fitWidth="30.0" layoutX="179.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../images/icons/icon_leader_active.png" />
-      </image></ImageView>
-   <ImageView fx:id="currentPlayerLeaderAbilityEnable" fitHeight="30.0" fitWidth="30.0" layoutX="179.0" layoutY="653.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../images/icons/icon_leader_active.png" />
-      </image></ImageView>
-   <ImageView fx:id="currentPlayerProfilePic" fitHeight="84.0" fitWidth="73.0" layoutX="75.0" layoutY="509.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../images/icons/profile.png" />
-      </image></ImageView>
-   <ImageView fx:id="currentPlayerProfilePicBorder" fitHeight="95.0" fitWidth="95.0" layoutX="65.0" layoutY="497.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../images/icons/icon_player_border.png" />
-      </image>
+      <Image url="@../images/icons/icon_card_count.png"/>
    </ImageView>
-   <ImageView fx:id="opponentPlayerProfilePic" fitHeight="84.0" fitWidth="73.0" layoutX="75.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../images/icons/profile.png" />
-      </image></ImageView>
-   <ImageView fx:id="opponentPlayerProfilePicBorder" fitHeight="95.0" fitWidth="95.0" layoutX="65.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../images/icons/icon_player_border.png" />
-      </image>
+   <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="163.0" layoutY="514.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/icons/icon_card_count.png"/>
+   </ImageView>
+   <ImageView fx:id="currentPlayerFirstJem" fitHeight="30.0" fitWidth="30.0" layoutX="218.0" layoutY="508.0"
+              pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/icons/icon_gem_on.png"/>
+   </ImageView>
+   <ImageView fx:id="currentPlayerSecondJem" fitHeight="30.0" fitWidth="30.0" layoutX="253.0" layoutY="508.0"
+              pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/icons/icon_gem_on.png"/>
+   </ImageView>
+   <ImageView fx:id="opponentPlayerFirstJem" fitHeight="30.0" fitWidth="30.0" layoutX="218.0" layoutY="250.0"
+              pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/icons/icon_gem_on.png"/>
+   </ImageView>
+   <ImageView fx:id="opponentPlayerSecondJem" fitHeight="30.0" fitWidth="30.0" layoutX="253.0" layoutY="250.0"
+              pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/icons/icon_gem_on.png"/>
+   </ImageView>
+   <ImageView fx:id="opponentPlayerExcellenceShower" fitHeight="75.0" fitWidth="75.0" layoutX="288.0" layoutY="223.0"
+              pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/icons/icon_high_score.png"/>
+   </ImageView>
+   <ImageView fx:id="currentPlayerExcellenceShower" fitHeight="75.0" fitWidth="75.0" layoutX="288.0" layoutY="521.0"
+              pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/icons/icon_high_score.png"/>
+   </ImageView>
+   <Button onMouseClicked="#passRound" layoutX="229.0" layoutY="650.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="73.0" styleClass="brown-button" text="Pass" />
+   <ImageView fx:id="musicToggleIcon" fitHeight="35.0" fitWidth="35.0" layoutX="358.0" layoutY="655.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="opponentPlayerLeaderAbilityEnable" fitHeight="30.0" fitWidth="30.0" layoutX="179.0" layoutY="95.0"
+              pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/icons/icon_leader_active.png"/>
+   </ImageView>
+   <ImageView fx:id="currentPlayerLeaderAbilityEnable" fitHeight="30.0" fitWidth="30.0" layoutX="179.0" layoutY="653.0"
+              pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/icons/icon_leader_active.png"/>
+   </ImageView>
+   <ImageView fx:id="currentPlayerProfilePic" fitHeight="84.0" fitWidth="73.0" layoutX="75.0" layoutY="509.0"
+              pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/icons/profile.png"/>
+   </ImageView>
+   <ImageView fx:id="currentPlayerProfilePicBorder" fitHeight="95.0" fitWidth="95.0" layoutX="65.0" layoutY="497.0"
+              pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/icons/icon_player_border.png"/>
+   </ImageView>
+   <ImageView fx:id="opponentPlayerProfilePic" fitHeight="84.0" fitWidth="73.0" layoutX="75.0" layoutY="210.0"
+              pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/icons/profile.png"/>
+   </ImageView>
+   <ImageView fx:id="opponentPlayerProfilePicBorder" fitHeight="95.0" fitWidth="95.0" layoutX="65.0" layoutY="198.0"
+              pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/icons/icon_player_border.png"/>
    </ImageView>
    <FlowPane fx:id="weatherCardPlace" layoutX="93.0" layoutY="331.0" prefHeight="107.0" prefWidth="208.0" />
    <ImageView fx:id="cardDetailShower" fitHeight="300.0" fitWidth="200.0" layoutX="1141.0" layoutY="230.0" pickOnBounds="true" preserveRatio="true" />
-   <ImageView fx:id="currentPlayerFactionIcon" fitHeight="40.0" fitWidth="29.0" layoutX="64.0" layoutY="554.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../images/icons/deck_shield_monsters.png" />
-      </image>
+   <ImageView fx:id="currentPlayerFactionIcon" fitHeight="40.0" fitWidth="29.0" layoutX="64.0" layoutY="554.0"
+              pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/icons/deck_shield_monsters.png"/>
    </ImageView>
-   <ImageView fx:id="opponentPlayerFactionIcon" fitHeight="40.0" fitWidth="29.0" layoutX="64.0" layoutY="204.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../images/icons/deck_shield_monsters.png" />
-      </image>
+   <ImageView fx:id="opponentPlayerFactionIcon" fitHeight="40.0" fitWidth="29.0" layoutX="64.0" layoutY="204.0"
+              pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/icons/deck_shield_monsters.png"/>
    </ImageView>
    <ImageView fx:id="weatherRow1" fitHeight="85.0" fitWidth="599.0" layoutX="516.0" layoutY="525.0" pickOnBounds="true" preserveRatio="true" visible="false" />
    <ImageView fx:id="weatherRow2" fitHeight="85.0" fitWidth="599.0" layoutX="516.0" layoutY="424.0" pickOnBounds="true" preserveRatio="true" visible="false" />
