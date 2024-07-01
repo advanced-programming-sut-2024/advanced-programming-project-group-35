@@ -3,7 +3,6 @@ package com.example.view.menuControllers;
 import com.example.Main;
 import com.example.controller.Controller;
 import com.example.controller.GameMenuController;
-import com.example.controller.MainMenuController;
 import com.example.controller.PreGameMenuController;
 import com.example.model.DeckManager;
 import com.example.model.IO.errors.Errors;
@@ -38,8 +37,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import java.util.List;
-
 public class PreGameMenuControllerView {
     private final Stage stage = App.getAppView().getPrimaryStage();
     public AnchorPane changeFactionPane;
@@ -67,6 +64,10 @@ public class PreGameMenuControllerView {
     private PreGameCard leaderCard;
     public FlowPane allCardsPane;
     public FlowPane playerDeckPane;
+    public static int player1OfflineID = -1;
+    public static int player2OfflineID = -1;
+    public static Deck player1OfflineDeck;
+    public static Deck player2OfflineDeck;
 
     @FXML
     private Label playerNameLabel = new Label("player name: ");
@@ -387,10 +388,26 @@ public class PreGameMenuControllerView {
             );
             return;
         }
-        ArrayList<String> playerDeckNames = getPreGameCardNames(playerDeck);
-        Deck playerDeck = DeckManager.loadDeck(playerDeckNames);
-        GameMenuController gameMenuController = (GameMenuController) Controller.GAME_MENU_CONTROLLER.getController();
-        gameMenuController.startNewGame(App.getLoggedInUser().getUsername(), opponentName(), playerDeck, playerDeck);
+        if (player1OfflineID == -1 && player2OfflineID == -1) {
+            player1OfflineID = App.getLoggedInUser().getID();
+            player1OfflineDeck = DeckManager.loadDeck(getPreGameCardNames(playerDeck));
+            //go to login menu
+            App.setCurrentMenu(Menu.LOGIN_MENU);
+            Controller.LOGIN_MENU_CONTROLLER.run();
+        } else if((player1OfflineID == App.getLoggedInUser().getID()) && player2OfflineID == -1) {
+            App.setCurrentMenu(Menu.LOGIN_MENU);
+            Controller.LOGIN_MENU_CONTROLLER.run();
+            OutputView.showOutputAlert(Errors.YOU_CANT_PLAY_WITH_YOURSELF);
+        } else {
+            player2OfflineID = App.getLoggedInUser().getID();
+            player2OfflineDeck = DeckManager.loadDeck(getPreGameCardNames(playerDeck));
+            GameMenuController gameMenuController = (GameMenuController) Controller.GAME_MENU_CONTROLLER.getController();
+            App.setCurrentMenu(Menu.GAME_MENU);
+            gameMenuController.run();
+            gameMenuController.startNewGame(player1OfflineID, player2OfflineID, player1OfflineDeck, player1OfflineDeck);
+            player1OfflineID = player2OfflineID = -1;
+        }
+
     }
 
     private ArrayList<String> opponentDeck() {

@@ -4,7 +4,6 @@ import com.example.controller.Controller;
 import com.example.controller.LoginMenuController;
 import com.example.model.App;
 import com.example.model.IO.errors.Errors;
-import com.example.model.alerts.Alert;
 import com.example.model.alerts.AlertType;
 import com.example.view.Menu;
 import com.example.view.OutputView;
@@ -148,9 +147,20 @@ public class LoginMenuControllerView {
         }
     }
 
-    public void testApp(MouseEvent mouseEvent) {
+    public void testApp1(MouseEvent mouseEvent) {
         String username = "ali";
         String password = "@li0083Moi";
+        boolean stayLoggedIn = false;
+        controller.loginUser(username, password, stayLoggedIn);
+        if (OutputView.getLastError() == Errors.LOGIN_SUCCESSFUL) {
+            App.setCurrentMenu(Menu.MAIN_MENU);
+            Controller.MAIN_MENU_CONTROLLER.run();
+        }
+    }
+
+    public void testApp2(MouseEvent mouseEvent) {
+        String username = "parsa";
+        String password = "endn=20&Y+";
         boolean stayLoggedIn = false;
         controller.loginUser(username, password, stayLoggedIn);
         if (OutputView.getLastError() == Errors.LOGIN_SUCCESSFUL) {

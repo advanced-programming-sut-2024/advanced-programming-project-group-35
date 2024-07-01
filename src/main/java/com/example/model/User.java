@@ -5,8 +5,10 @@ import com.example.model.card.enums.FactionsType;
 import com.example.model.GameData;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class User {
+    private int id;
     private String username;
     private String password;
     private String nickname;
@@ -43,7 +45,27 @@ public class User {
         this.currentFactionType = generateRandomFactionType();
         this.gameData = new ArrayList<>();
         this.decksAddresses = new ArrayList<>();
+        setID();
     }
+
+    private void setID() {
+        Date date = new Date();
+        this.id = date.hashCode();
+    }
+
+    public int getID() {
+        return id;
+    }
+
+    public static User getUserByID(int id) {
+        for (User user : App.getAllUsers()) {
+            if (user.getID() == id) {
+                return user;
+            }
+        }
+        return null;
+    }
+
     public void addGameData(GameData gameData) {
         this.gameData.add(gameData);
     }

@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import com.example.model.App;
+import com.example.model.User;
 import com.example.model.card.AbilityContext;
 import com.example.model.card.Card;
 import com.example.model.card.LeaderCard;
@@ -61,9 +62,9 @@ public class GameMenuController extends AppController {
         }
     }
 
-    public void startNewGame(String player1Name, String player2Name, Deck player1Deck, Deck player2Deck) {
-        Player player1 = new Player(player1Name);
-        Player player2 = new Player(player2Name);
+    public void startNewGame(int player1Name, int player2Name, Deck player1Deck, Deck player2Deck) {
+        Player player1 = new Player(User.getUserByID(player1Name).getUsername());
+        Player player2 = new Player(User.getUserByID(player2Name).getUsername());
         player1.getBoard().setDeck(player1Deck);
         player2.getBoard().setDeck(player2Deck);
         player1.getBoard().setHandForStartGame(player1Deck);
