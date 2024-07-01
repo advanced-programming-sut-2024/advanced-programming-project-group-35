@@ -83,4 +83,16 @@ public class AppView extends Application {
     public void setPane(Pane pane) {
         this.pane = pane;
     }
+
+    public void showLoading() {
+        try {
+            fxmlLoader = new FXMLLoader(Main.class.getResource("/FXML/loadingPage.fxml"));
+            pane = fxmlLoader.load();
+            Scene scene = new Scene(pane);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
