@@ -2,6 +2,8 @@ package com.example.view.menuControllers;
 
 import com.example.Main;
 import com.example.controller.Controller;
+import com.example.controller.MainMenuController;
+import com.example.controller.PreGameMenuController;
 import com.example.model.IO.errors.Errors;
 import com.example.model.PreGameCardData;
 import com.example.model.App;
@@ -45,6 +47,8 @@ public class PreGameMenuControllerView {
     public ImageView factionCard3;
     public ImageView factionCard4;
     public ImageView factionCard5;
+    public AnchorPane changeLeaderCard;
+    public FlowPane leaderCardPane;
     private Pane pane = App.getAppView().getPane();
     private final String srcPath = Main.class.getResource("/images/cards/").toExternalForm();
     public Pane mainPane;
@@ -77,6 +81,7 @@ public class PreGameMenuControllerView {
     private Label totalPowerLabel = new Label("total power: 0");
     Stage primaryStage = App.getAppView().getPrimaryStage();
     Scene scene = App.getAppView().getPane().getScene();
+    PreGameMenuController controller = (PreGameMenuController) Controller.PRE_GAME_MENU_CONTROLLER.getController();
 
     @FXML
     public void initialize() {
@@ -104,8 +109,6 @@ public class PreGameMenuControllerView {
         playerNameLabel.setText("player name: " + App.getLoggedInUser().getUsername());
 
         updateDeckInfo();
-
-        System.out.println("pre game menu");
 
         Node flowPaneBackground = playerDeckPane.lookup(".flow-pane-pre-game-menu");
         if (flowPaneBackground != null) {
@@ -136,16 +139,6 @@ public class PreGameMenuControllerView {
                 return new PreGameCard(PreGameCardData.skellige_leader.getName(), PreGameCardData.skellige_leader.getPower(), PreGameCardData.skellige_leader.getAbility(), srcPath + PreGameCardData.skellige_leader.getImageAddress());
         }
         return null;
-    }
-
-    private void enlargeImage(ImageView imageView) {
-        imageView.setFitHeight(imageView.getFitHeight() * 1.2);
-        imageView.setFitWidth(imageView.getFitWidth() * 1.2);
-    }
-
-    private void resetImageSize(ImageView imageView) {
-        imageView.setFitHeight(imageView.getFitHeight() / 1.2);
-        imageView.setFitWidth(imageView.getFitWidth() / 1.2);
     }
 
     private void enlargeImage(ImageView imageView) {
@@ -242,7 +235,6 @@ public class PreGameMenuControllerView {
         switch (faction.getFaction()) {
             case EmpireNilfgaardian:
                 addAllCardsNilfgaardian();
-                System.out.println("nilfgaardian");
                 break;
             case Monsters:
                 addAllCardsMonsters();
@@ -362,6 +354,7 @@ public class PreGameMenuControllerView {
         }
         List<String> playerDeckNames = getPreGameCardNames(playerDeck);
         String leaderName = getLeaderName(leaderCard);
+        controller.startGame();
     }
 
     private String getLeaderName(PreGameCard leaderCard) {

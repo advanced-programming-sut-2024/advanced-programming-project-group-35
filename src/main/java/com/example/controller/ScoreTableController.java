@@ -67,11 +67,11 @@ public class ScoreTableController extends AppController {
                     setStyle("");
                 } else {
                     if (getIndex() == 0) {
-                        setStyle("-fx-background-color: linear-gradient(to bottom, #fda949, #f06d39);");
+                        setStyle("-fx-background-color: linear-gradient(to bottom, #FFD700, #B8860B);");
                     } else if (getIndex() == 1) {
-                        setStyle("-fx-background-color: linear-gradient(to bottom, #9b9fc0, #64678d);");
+                        setStyle("-fx-background-color: linear-gradient(to bottom, #D3D3D3, #A9A9A9);");
                     } else if (getIndex() == 2) {
-                        setStyle("-fx-background-color: linear-gradient(to bottom, #40b0f2, #2b53c2);");
+                        setStyle("-fx-background-color: linear-gradient(to bottom, #CD7F32, #8C7853);");
                     } else {
                         setStyle("");
                     }

@@ -65,6 +65,11 @@
 }
 .white-text {
     -fx-fill: #ffffff !important;
+    -fx-text-fill: #ffffff !important
+}
+.yellow-text {
+    -fx-fill: #e2aa21 !important;
+    -fx-text-fill: #e2aa21 !important;
 }
 .scoreboard-table {
     -fx-background-color: linear-gradient(to bottom, #a79377, #3e2723);
@@ -83,13 +88,14 @@
     -fx-text-fill: #ffffff;
 }
 .table-view {
-    -fx-text-fill: #3e2723; /* Change to the color you desire */
+    -fx-text-fill: #ffffff; /* Change to the color you desire */
 }
 .table-cell {
-    -fx-text-fill: #3e2723;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #3e2723;
 }
 .table-row-cell {
-    -fx-background-color: #a79377; /* Change to the color you desire */
+    -fx-background-color: #4e342e; /* Change to the color you desire */
 }
 
 .score-board-title {
