@@ -1,7 +1,7 @@
 package com.example.controller;
 
 import com.example.model.App;
-import com.example.model.user.User;
+import com.example.model.User;
 import com.example.view.Menu;
 
 public class MainMenuController extends AppController {

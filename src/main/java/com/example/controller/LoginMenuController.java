@@ -3,8 +3,7 @@ package com.example.controller;
 import com.example.model.App;
 import com.example.model.IO.Steps.LoginMenuStep;
 import com.example.model.IO.errors.Errors;
-import com.example.model.IO.patterns.Patterns;
-import com.example.model.user.User;
+import com.example.model.User;
 import com.example.view.OutputView;
 import com.example.view.Menu;
 
@@ -12,7 +11,6 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.regex.Matcher;
 
 public class LoginMenuController extends AppController {
     private LoginMenuStep currentStep = LoginMenuStep.NOTHING;

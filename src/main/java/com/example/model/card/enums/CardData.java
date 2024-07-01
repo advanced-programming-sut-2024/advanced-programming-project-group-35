@@ -281,6 +281,21 @@ public enum CardData {
         return type;
     }
 
+    public String getAbilityName() {
+        return abilityName;
+    }
+
+    public Place getPlaceToBe() {
+        return placeToBe;
+    }
+
+    public static CardData getCardDataByName(String cardName) {
+        for (CardData cardData : CardData.values()) {
+            if (cardData.name.equals(cardName))
+                return cardData;
+        }
+        return null;
+    }
     public String getType() {
         return type;
     }
@@ -299,20 +314,5 @@ public enum CardData {
         } else {
             return null;
         }
-    }
-    public String getAbilityName() {
-        return abilityName;
-    }
-
-    public Place getPlaceToBe() {
-        return placeToBe;
-    }
-
-    public static CardData getCardDataByName(String cardName) {
-        for (CardData cardData : CardData.values()) {
-            if (cardData.name.equals(cardName))
-                return cardData;
-        }
-        return null;
     }
 }
