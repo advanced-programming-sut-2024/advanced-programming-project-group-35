@@ -54,21 +54,21 @@
       </image>
    </ImageView>
    <VBox id="nemidoonam10" layoutX="1136.0" layoutY="613.0" prefHeight="110.0" prefWidth="82.0" />
-   <FlowPane id="nemidoonam11" layoutX="417.0" layoutY="624.0" prefHeight="96.0" prefWidth="696.0" />
-   <FlowPane id="nemidoonam12" layoutX="516.0" layoutY="525.0" prefHeight="85.0" prefWidth="599.0" />
-   <FlowPane id="nemidoonam13" layoutX="516.0" layoutY="424.0" prefHeight="85.0" prefWidth="599.0" />
-   <FlowPane id="nemidoonam14" layoutX="516.0" layoutY="325.0" prefHeight="85.0" prefWidth="599.0" />
-   <FlowPane id="nemidoonam15" layoutX="516.0" layoutY="214.0" prefHeight="85.0" prefWidth="599.0" />
-   <FlowPane id="nemidoonam16" layoutX="516.0" layoutY="112.0" prefHeight="85.0" prefWidth="599.0" />
-   <FlowPane id="nemidoonam17" layoutX="516.0" layoutY="15.0" prefHeight="85.0" prefWidth="599.0" />
+   <FlowPane fx:id="currentPlayerHand" layoutX="417.0" layoutY="624.0" prefHeight="96.0" prefWidth="696.0" />
+   <FlowPane fx:id="currentPlayerSiege" layoutX="516.0" layoutY="525.0" prefHeight="85.0" prefWidth="599.0" />
+   <FlowPane fx:id="currentPlayerRanged" layoutX="516.0" layoutY="424.0" prefHeight="85.0" prefWidth="599.0" />
+   <FlowPane fx:id="currentPlayerCloseCombat" layoutX="516.0" layoutY="325.0" prefHeight="85.0" prefWidth="599.0" />
+   <FlowPane fx:id="opponentCloseCombat" layoutX="516.0" layoutY="214.0" prefHeight="85.0" prefWidth="599.0" />
+   <FlowPane fx:id="opponentRanged" layoutX="516.0" layoutY="112.0" prefHeight="85.0" prefWidth="599.0" />
+   <FlowPane fx:id="opponentSiege" layoutX="516.0" layoutY="15.0" prefHeight="85.0" prefWidth="599.0" />
    <VBox id="player2LeaderCard" layoutX="91.0" layoutY="60.0" prefHeight="100.0" prefWidth="76.0" />
    <VBox id="player1LeaderCard" layoutX="91.0" layoutY="617.0" prefHeight="100.0" prefWidth="76.0" />
-   <FlowPane id="nemidoonam18" layoutX="412.0" layoutY="526.0" prefHeight="85.0" prefWidth="96.0" />
-   <FlowPane id="nemidoonam19" layoutX="412.0" layoutY="424.0" prefHeight="85.0" prefWidth="96.0" />
-   <FlowPane id="nemidoonam20" layoutX="412.0" layoutY="325.0" prefHeight="85.0" prefWidth="96.0" />
-   <FlowPane id="nemidoonam21" layoutX="412.0" layoutY="214.0" prefHeight="85.0" prefWidth="96.0" />
-   <FlowPane id="nemidoonam22" layoutX="412.0" layoutY="112.0" prefHeight="85.0" prefWidth="96.0" />
-   <FlowPane id="nemidoonam23" layoutX="412.0" layoutY="15.0" prefHeight="85.0" prefWidth="96.0" />
+   <FlowPane fx:id="currentPlayerSiegeSpecialPlace" layoutX="412.0" layoutY="525.0" prefHeight="85.0" prefWidth="96.0" />
+   <FlowPane fx:id="currentPlayerRangedSpecialPlace" layoutX="412.0" layoutY="424.0" prefHeight="85.0" prefWidth="96.0" />
+   <FlowPane fx:id="currentPlayerCloseCombatSpecialPlace" layoutX="412.0" layoutY="325.0" prefHeight="85.0" prefWidth="96.0" />
+   <FlowPane fx:id="opponentCloseCombatSpecialPlace" layoutX="412.0" layoutY="214.0" prefHeight="85.0" prefWidth="96.0" />
+   <FlowPane fx:id="opponentRangedSpecialPlace" layoutX="412.0" layoutY="112.0" prefHeight="85.0" prefWidth="96.0" />
+   <FlowPane fx:id="opponentSiegeSpecialPlace" layoutX="412.0" layoutY="15.0" prefHeight="85.0" prefWidth="96.0" />
    <Label id="player2DeckCardCounter" alignment="CENTER" contentDisplay="CENTER" layoutX="1300.0" layoutY="165.0" styleClass="white-text" text="23" textAlignment="CENTER" />
    <Label id="player1DeckCardCounter" alignment="CENTER" contentDisplay="CENTER" layoutX="1300.0" layoutY="728.0" styleClass="white-text" text="23" textAlignment="CENTER" />
    <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="163.0" layoutY="256.0" pickOnBounds="true" preserveRatio="true">

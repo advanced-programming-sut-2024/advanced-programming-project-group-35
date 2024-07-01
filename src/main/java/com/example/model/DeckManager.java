@@ -1,4 +1,4 @@
-package com.example.model.user;
+package com.example.model;
 
 import com.example.model.card.Card;
 import com.example.model.card.CardFactory;

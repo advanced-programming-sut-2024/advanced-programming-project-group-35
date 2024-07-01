@@ -3,7 +3,7 @@ package com.example.view.menuControllers;
 import com.example.controller.Controller;
 import com.example.controller.ScoreTableController;
 import com.example.model.App;
-import com.example.model.user.User;
+import com.example.model.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TableView;

@@ -1,4 +1,4 @@
-package com.example.model.user;
+package com.example.model;
 
 import com.example.model.App;
 import com.example.model.card.enums.FactionsType;

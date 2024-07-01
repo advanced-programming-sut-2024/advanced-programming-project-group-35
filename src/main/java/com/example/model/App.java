@@ -2,7 +2,6 @@ package com.example.model;
 
 import com.example.controller.Controller;
 import com.example.model.card.Card;
-import com.example.model.user.User;
 import com.example.view.AppView;
 import com.example.view.Menu;
 import com.google.gson.Gson;
