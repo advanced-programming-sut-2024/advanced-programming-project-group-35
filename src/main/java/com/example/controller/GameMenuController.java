@@ -14,6 +14,9 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class GameMenuController extends AppController {
+    private Deck player1Deck;
+    private Deck player2Deck;
+    private Table table;
     @Override
     public void run() {
         try {
@@ -72,7 +75,7 @@ public class GameMenuController extends AppController {
         player2.getBoard().setDeck(player2Deck);
         player1.getBoard().setHandForStartGame(player1Deck);
         player1.getBoard().setHandForStartGame(player2Deck);
-        Table table = new Table(player1, player2);
+        table = new Table(player1, player2);
         table.setRoundNumber(1);
         Round round1 = new Round(1);
         table.addRound(round1);
@@ -183,5 +186,17 @@ public class GameMenuController extends AppController {
     }
 
     public void disApplyWeatherCards(Table table) {
+    }
+
+    public Deck getPlayer1Deck() {
+        return player1Deck;
+    }
+
+    public Deck getPlayer2Deck() {
+        return player2Deck;
+    }
+
+    public Table getTable() {
+        return table;
     }
 }

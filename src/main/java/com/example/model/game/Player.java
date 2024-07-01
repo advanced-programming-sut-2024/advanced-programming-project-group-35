@@ -5,14 +5,14 @@ import java.util.HashMap;
 public class Player {
     private int numberOfCrystals;
     private int numberOfVetoCards;
-    private String name;
+    private String username;
     private Board board;
     private int score;
     private boolean passRound;
     private HashMap<Integer, Integer> scoresOfRounds;
 
-    public Player(String name) {
-        this.name = name;
+    public Player(String username) {
+        this.username = username;
         this.board = new Board();
         this.scoresOfRounds = new HashMap<>();
         this.numberOfCrystals = 2;
@@ -60,8 +60,8 @@ public class Player {
         return score;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
     public Board getBoard() {
