@@ -1,9 +1,10 @@
 package com.example.model.card.enums;
 
-import com.example.model.card.enums.AbilityName;
+//import com.example.model.card.enums.AbilityName;
 import com.example.model.card.enums.FactionsType;
-import com.example.model.card.enums.PlaceToBe;
+//import com.example.model.card.enums.PlaceToBe;
 import com.example.model.card.factions.Factions;
+import com.example.model.game.place.Place;
 
 public enum CardData {
     leaders_monsters_eredin_bronze("leaders_monsters_eredin_bronze", "monsters_eredin_bronze.jpg", 0, "leader", "", "leader"),

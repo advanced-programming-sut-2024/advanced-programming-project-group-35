@@ -251,7 +251,7 @@ public class PreGameMenuControllerView {
     }
 
     private void addToLeaderCardsPane() {
-        for (PreGameCardData cardData : PreGameCardData.values()) {
+        for (CardData cardData : CardData.values()) {
             if (cardData.getType().equals("leader") && cardData.getFaction().equals(faction.getFaction())) {
                 leaderCards.add(new PreGameCard(cardData.getName(), cardData.getPower(), cardData.getAbility(), srcPath + cardData.getImageAddress()));
             }
