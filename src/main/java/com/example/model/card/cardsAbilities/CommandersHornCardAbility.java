@@ -8,7 +8,8 @@ public class CommandersHornCardAbility implements Ability {
     @Override
     public void apply(AbilityContext abilityContext) {
        for (UnitCard card : abilityContext.getRow().getCards()) {
-           card.duplicatePower();
+           if (card != abilityContext.getCard())
+               card.duplicatePower();
        }
        abilityContext.getRow().updateStrength();
     }

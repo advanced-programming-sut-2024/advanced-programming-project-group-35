@@ -8,7 +8,7 @@ public class MardroemeAbility implements Ability {
     @Override
     public void apply(AbilityContext abilityContext) {
         for (UnitCard card : abilityContext.getRow().getCards()) {
-            if (card.getAbility() instanceof BreskerAbility)
+            if (card.getAbility() instanceof BerskerAbility)
                 card.applyMardroeme();
         }
     }

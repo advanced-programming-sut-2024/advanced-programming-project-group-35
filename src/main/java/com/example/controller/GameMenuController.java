@@ -28,7 +28,7 @@ public class GameMenuController extends AppController {
     }
 
     public void vetoCard(Player player, Card selectedCard) {
-        //TODO  گذاشتن دکمه وتو کارت رو صفحه
+        //TODO
         if (player.canVetoCard()) {
             Deck deck = player.getBoard().getDeck();
             Hand hand = player.getBoard().getHand();
@@ -39,8 +39,6 @@ public class GameMenuController extends AppController {
             deck.addCard(selectedCard);
             player.decreaseNumberOfVetoCards();
             //TODO گرافیک جابه جایی کارت
-        } else {
-            //TODO نمایش خطا در صفحه که نمیتونی کارت وتو کنی
         }
     }
 
@@ -76,7 +74,6 @@ public class GameMenuController extends AppController {
         player1.getBoard().setHandForStartGame(player1Deck);
         player1.getBoard().setHandForStartGame(player2Deck);
         table = new Table(player1, player2);
-        table.setRoundNumber(1);
         Round round1 = new Round(1);
         table.addRound(round1);
         table.setCurrentRound(round1);
@@ -153,7 +150,6 @@ public class GameMenuController extends AppController {
         if (table.getOpponent().getBoard().getDeck().getFaction() == FactionsType.RealmsNorthern) {
             table.getCurrentPlayer().getBoard().getDeck().getFactionAbility().apply(table, table.getOpponent());
         }
-        changeRound(table);
     }
 
     private void backCardsToDiscardPiles(Table table) {
@@ -168,6 +164,8 @@ public class GameMenuController extends AppController {
             endGame(table, table.getCurrentPlayer());
         } else {
             Round round = new Round(table.getRoundNumber() + 1);
+            table.getCurrentPlayer().setPassRound(false);
+            table.getOpponent().setPassRound(false);
             table.addRound(round);
             table.setCurrentRound(round);
             table.setRoundNumber(table.getRoundNumber() + 1);
@@ -177,6 +175,7 @@ public class GameMenuController extends AppController {
 
     private void changeTurn(Table table) {
         table.swapPlayers();
+        //TODO گرافیک
     }
 
     private void endGame(Table table, Player winner) {

@@ -2,7 +2,6 @@ package com.example.model.game;
 
 import com.example.model.card.enums.FactionsType;
 import com.example.model.game.place.SpellPlace;
-
 import java.util.ArrayList;
 
 public class Table {
@@ -22,6 +21,7 @@ public class Table {
             this.opponent = player2;
         }
         this.rounds = new ArrayList<>();
+        this.roundNumber = 1;
     }
     public void addRound(Round round) {
         rounds.add(round);

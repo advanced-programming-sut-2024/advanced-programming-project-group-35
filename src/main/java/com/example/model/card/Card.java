@@ -7,10 +7,15 @@ public class Card {
     private Place place;
     private Ability ability;
     private CardData cardData;
+    private GameCardView gameCardView;
     public Card(Place place, Ability ability, CardData cardData) {
         this.cardData = cardData;
         this.place = place;
         this.ability = ability;
+    }
+
+    public void setGameCardView(GameCardView gameCardView) {
+        this.gameCardView = gameCardView;
     }
 
     public CardData getCardData() {
