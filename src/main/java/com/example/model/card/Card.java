@@ -1,5 +1,6 @@
 package com.example.model.card;
 
+import com.example.model.card.enums.AbilityName;
 import com.example.model.card.enums.CardData;
 import com.example.model.game.place.Place;
 
@@ -8,12 +9,26 @@ public class Card {
     private Ability ability;
     private CardData cardData;
     private GameCardView gameCardView;
-    public Card(Place place, Ability ability, CardData cardData) {
+    private AbilityName abilityName;
+    private int idInGame;
+    public Card(Place place, Ability ability, AbilityName abilityName, CardData cardData) {
+        this.abilityName = abilityName;
         this.cardData = cardData;
         this.place = place;
         this.ability = ability;
     }
 
+    public int getIdInGame() {
+        return idInGame;
+    }
+
+    public void setIdInGame(int idInGame) {
+        this.idInGame = idInGame;
+    }
+
+    public AbilityName getAbilityName() {
+        return abilityName;
+    }
 
     public void setGameCardView(GameCardView gameCardView) {
         this.gameCardView = gameCardView;

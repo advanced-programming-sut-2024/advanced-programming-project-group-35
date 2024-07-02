@@ -222,18 +222,18 @@ public enum CardData {
     skellige_young_berserker("skellige_young_berserker", "skellige_young_berserker.jpg", 2, "soldier", "tight_bound", "ranged"),
     skellige_young_vildkaarl("skellige_young_vildkaarl", "skellige_young_vildkaarl.jpg", 8, "soldier", "berserker", "ranged"),
 
-    special_decoy("special_decoy", "special_decoy.jpg", 0, "special", "decoy", "spell"),
-    special_decoy_1("special_decoy_1", "special_decoy.jpg", 0, "special", "decoy", "spell"),
-    special_decoy_2("special_decoy_2", "special_decoy.jpg", 0, "special", "decoy", "spell"),
-    special_horn("special_horn", "special_horn.jpg", 0, "special", "commander_horn", "spell"),
-    special_horn_1("special_horn_1", "special_horn.jpg", 0, "special", "commander_horn", "spell"),
-    special_horn_2("special_horn_2", "special_horn.jpg", 0, "special", "commander_horn", "spell"),
+    special_decoy("special_decoy", "special_decoy.jpg", 0, "special", "decoy", "special"),
+    special_decoy_1("special_decoy_1", "special_decoy.jpg", 0, "special", "decoy", "special"),
+    special_decoy_2("special_decoy_2", "special_decoy.jpg", 0, "special", "decoy", "special"),
+    special_horn("special_horn", "special_horn.jpg", 0, "special", "commander_horn", "special"),
+    special_horn_1("special_horn_1", "special_horn.jpg", 0, "special", "commander_horn", "special"),
+    special_horn_2("special_horn_2", "special_horn.jpg", 0, "special", "commander_horn", "special"),
     special_mardroeme("special_mardroeme", "special_mardroeme.jpg", 0, "special", "", "special"),
     special_mardroeme_1("special_mardroeme_1", "special_mardroeme.jpg", 0, "special", "", "special"),
     special_mardroeme_2("special_mardroeme_2", "special_mardroeme.jpg", 0, "special", "", "special"),
-    special_scorch("special_scorch", "special_scorch.jpg", 0, "special", "", "spell"),
-    special_scorch_1("special_scorch_1", "special_scorch.jpg", 0, "special", "", "spell"),
-    special_scorch_2("special_scorch_2", "special_scorch.jpg", 0, "special", "", "spell"),
+    special_scorch("special_scorch", "special_scorch.jpg", 0, "special", "", "special"),
+    special_scorch_1("special_scorch_1", "special_scorch.jpg", 0, "special", "", "special"),
+    special_scorch_2("special_scorch_2", "special_scorch.jpg", 0, "special", "", "special"),
 
     weather_fog("weather_fog", "weather_fog.jpg", 0, "special", "weather", "weather"),
     weather_fog_1("weather_fog_1", "weather_fog.jpg", 0, "special", "weather", "weather"),
@@ -386,6 +386,10 @@ public enum CardData {
         return type;
     }
 
+    public Place getPlaceToBe() {
+        return placeToBe;
+    }
+
     public FactionsType getFaction() {
         if (name.startsWith("leaders_monsters")) {
             return FactionsType.Monsters;
@@ -400,9 +404,5 @@ public enum CardData {
         } else {
             return null;
         }
-    }
-
-    public Place getPlaceToBe() {
-        return placeToBe;
     }
 }
