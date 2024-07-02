@@ -1,0 +1,190 @@
+{
+  "player1": "ali",
+  "player1Faction": "Monsters",
+  "player1Hand": [
+    {
+      "name": "special_decoy_1",
+      "id": 101
+    },
+    {
+      "name": "special_decoy_2",
+      "id": 103
+    },
+    {
+      "name": "special_mardroeme_1",
+      "id": 105
+    },
+    {
+      "name": "weather_fog",
+      "id": 107
+    },
+    {
+      "name": "weather_frost",
+      "id": 109
+    },
+    {
+      "name": "neutral_emiel",
+      "id": 111
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 113
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 115
+    },
+    {
+      "name": "neutral_triss",
+      "id": 117
+    },
+    {
+      "name": "neutral_villen",
+      "id": 119
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 121
+    }
+  ],
+  "player1Deck": [
+    {
+      "name": "special_decoy",
+      "id": 102
+    },
+    {
+      "name": "special_mardroeme",
+      "id": 104
+    },
+    {
+      "name": "special_mardroeme_2",
+      "id": 106
+    },
+    {
+      "name": "weather_fog_1",
+      "id": 108
+    },
+    {
+      "name": "weather_frost_1",
+      "id": 110
+    },
+    {
+      "name": "neutral_gaunter_odimm",
+      "id": 112
+    },
+    {
+      "name": "neutral_geralt",
+      "id": 114
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 116
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 118
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 120
+    },
+    {
+      "name": "monsters_vampire_bruxa",
+      "id": 122
+    }
+  ],
+  "player2": "opponent",
+  "player2Faction": "Monsters",
+  "player2Hand": [
+    {
+      "name": "special_decoy_1",
+      "id": 201
+    },
+    {
+      "name": "special_decoy_2",
+      "id": 203
+    },
+    {
+      "name": "special_mardroeme_1",
+      "id": 205
+    },
+    {
+      "name": "weather_fog",
+      "id": 207
+    },
+    {
+      "name": "weather_frost",
+      "id": 209
+    },
+    {
+      "name": "neutral_emiel",
+      "id": 211
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 213
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 215
+    },
+    {
+      "name": "neutral_triss",
+      "id": 217
+    },
+    {
+      "name": "neutral_villen",
+      "id": 219
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 221
+    }
+  ],
+  "player2Deck": [
+    {
+      "name": "special_decoy",
+      "id": 202
+    },
+    {
+      "name": "special_mardroeme",
+      "id": 204
+    },
+    {
+      "name": "special_mardroeme_2",
+      "id": 206
+    },
+    {
+      "name": "weather_fog_1",
+      "id": 208
+    },
+    {
+      "name": "weather_frost_1",
+      "id": 210
+    },
+    {
+      "name": "neutral_gaunter_odimm",
+      "id": 212
+    },
+    {
+      "name": "neutral_geralt",
+      "id": 214
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 216
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 218
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 220
+    },
+    {
+      "name": "monsters_vampire_bruxa",
+      "id": 222
+    }
+  ]
+}

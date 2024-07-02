@@ -1,0 +1,198 @@
+{
+  "player1": "ali",
+  "player1Faction": "Monsters",
+  "player1Hand": [
+    {
+      "name": "special_mardroeme_1",
+      "id": 101
+    },
+    {
+      "name": "special_horn_2",
+      "id": 103
+    },
+    {
+      "name": "special_mardroeme",
+      "id": 105
+    },
+    {
+      "name": "special_decoy_2",
+      "id": 107
+    },
+    {
+      "name": "neutral_triss",
+      "id": 109
+    },
+    {
+      "name": "neutral_villen",
+      "id": 111
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 113
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 115
+    },
+    {
+      "name": "monsters_vampire_bruxa",
+      "id": 117
+    },
+    {
+      "name": "monsters_cockatrice",
+      "id": 119
+    },
+    {
+      "name": "monsters_fiend",
+      "id": 121
+    }
+  ],
+  "player1Deck": [
+    {
+      "name": "special_mardroeme_2",
+      "id": 102
+    },
+    {
+      "name": "special_horn_1",
+      "id": 104
+    },
+    {
+      "name": "special_decoy_1",
+      "id": 106
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 108
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 110
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 112
+    },
+    {
+      "name": "neutral_geralt",
+      "id": 114
+    },
+    {
+      "name": "monsters_arachas_behemoth",
+      "id": 116
+    },
+    {
+      "name": "monsters_celaeno_harpy",
+      "id": 118
+    },
+    {
+      "name": "monsters_draug",
+      "id": 120
+    },
+    {
+      "name": "monsters_fire_elemental",
+      "id": 122
+    },
+    {
+      "name": "monsters_vampire_fleder",
+      "id": 123
+    }
+  ],
+  "player2": "opponent",
+  "player2Faction": "Monsters",
+  "player2Hand": [
+    {
+      "name": "special_mardroeme_1",
+      "id": 201
+    },
+    {
+      "name": "special_horn_2",
+      "id": 203
+    },
+    {
+      "name": "special_mardroeme",
+      "id": 205
+    },
+    {
+      "name": "special_decoy_2",
+      "id": 207
+    },
+    {
+      "name": "neutral_triss",
+      "id": 209
+    },
+    {
+      "name": "neutral_villen",
+      "id": 211
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 213
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 215
+    },
+    {
+      "name": "monsters_vampire_bruxa",
+      "id": 217
+    },
+    {
+      "name": "monsters_cockatrice",
+      "id": 219
+    },
+    {
+      "name": "monsters_fiend",
+      "id": 221
+    }
+  ],
+  "player2Deck": [
+    {
+      "name": "special_mardroeme_2",
+      "id": 202
+    },
+    {
+      "name": "special_horn_1",
+      "id": 204
+    },
+    {
+      "name": "special_decoy_1",
+      "id": 206
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 208
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 210
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 212
+    },
+    {
+      "name": "neutral_geralt",
+      "id": 214
+    },
+    {
+      "name": "monsters_arachas_behemoth",
+      "id": 216
+    },
+    {
+      "name": "monsters_celaeno_harpy",
+      "id": 218
+    },
+    {
+      "name": "monsters_draug",
+      "id": 220
+    },
+    {
+      "name": "monsters_fire_elemental",
+      "id": 222
+    },
+    {
+      "name": "monsters_vampire_fleder",
+      "id": 223
+    }
+  ]
+}

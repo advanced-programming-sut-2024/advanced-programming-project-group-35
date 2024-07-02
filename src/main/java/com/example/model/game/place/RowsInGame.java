@@ -1,14 +1,21 @@
 package com.example.model.game.place;
 
 public enum RowsInGame {
-    currentPlayerHandObservableList("currentPlayerHandObservableList"),
-    currentPlayerCloseCombatObservableList("currentPlayerCloseCombatObservableList"),
-    currentPlayerRangedObservableList("currentPlayerRangedObservableList"),
-    currentPlayerSiegeObservableList("currentPlayerSiegeObservableList"),
+    currentPlayerHand("currentPlayerHandObservableList"),
     weatherObservableList("weatherObservableList"),
+    currentPlayerCloseCombat("currentPlayerCloseCombatObservableList"),
+    currentPlayerRanged("currentPlayerRangedObservableList"),
+    currentPlayerSiege("currentPlayerSiegeObservableList"),
     currentPlayerCloseCombatSpecialPlace("currentPlayerCloseCombatSpecialPlaceObservableList"),
     currentPlayerRangedSpecialPlace("currentPlayerRangedSpecialPlaceObservableList"),
-    currentPlayerSiegeSpecialPlace("currentPlayerSiegeSpecialPlaceObservableList")
+    currentPlayerSiegeSpecialPlace("currentPlayerSiegeSpecialPlaceObservableList"),
+    opponentPlayerCloseCombat("opponentPlayerCloseCombatObservableList"),
+    opponentPlayerRanged("opponentPlayerRangedObservableList"),
+    opponentPlayerSiege("opponentPlayerSiegeObservableList"),
+    opponentPlayerCloseCombatSpecialPlace("opponentPlayerCloseCombatSpecialPlaceObservableList"),
+    opponentPlayerRangedSpecialPlace("opponentPlayerRangedSpecialPlaceObservableList"),
+    opponentPlayerSiegeSpecialPlace("opponentPlayerSiegeSpecialPlaceObservableList"),
+
     ;
     private final String listName;
 

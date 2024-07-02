@@ -1,0 +1,202 @@
+{
+  "player1": "ali",
+  "player1Faction": "Monsters",
+  "player1Hand": [
+    {
+      "name": "weather_rain",
+      "id": 101
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 103
+    },
+    {
+      "name": "monsters_vampire_bruxa",
+      "id": 105
+    },
+    {
+      "name": "monsters_vampire_ekkimara",
+      "id": 107
+    },
+    {
+      "name": "monsters_fiend",
+      "id": 109
+    },
+    {
+      "name": "monsters_vampire_fleder",
+      "id": 111
+    },
+    {
+      "name": "monsters_forktail",
+      "id": 113
+    },
+    {
+      "name": "monsters_frightener",
+      "id": 115
+    },
+    {
+      "name": "monsters_ghoul",
+      "id": 117
+    },
+    {
+      "name": "monsters_ghoul_2",
+      "id": 119
+    },
+    {
+      "name": "monsters_gryffin",
+      "id": 121
+    }
+  ],
+  "player1Deck": [
+    {
+      "name": "neutral_ciri",
+      "id": 102
+    },
+    {
+      "name": "monsters_arachas_behemoth",
+      "id": 104
+    },
+    {
+      "name": "monsters_earth_elemental",
+      "id": 106
+    },
+    {
+      "name": "monsters_endrega",
+      "id": 108
+    },
+    {
+      "name": "monsters_fire_elemental",
+      "id": 110
+    },
+    {
+      "name": "monsters_foglet",
+      "id": 112
+    },
+    {
+      "name": "monsters_ice_giant",
+      "id": 114
+    },
+    {
+      "name": "monsters_gargoyle",
+      "id": 116
+    },
+    {
+      "name": "monsters_ghoul_1",
+      "id": 118
+    },
+    {
+      "name": "monsters_gravehag",
+      "id": 120
+    },
+    {
+      "name": "monsters_harpy",
+      "id": 122
+    },
+    {
+      "name": "monsters_imlerith",
+      "id": 123
+    }
+  ],
+  "player2": "opponent",
+  "player2Faction": "Monsters",
+  "player2Hand": [
+    {
+      "name": "weather_rain",
+      "id": 201
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 203
+    },
+    {
+      "name": "monsters_vampire_bruxa",
+      "id": 205
+    },
+    {
+      "name": "monsters_vampire_ekkimara",
+      "id": 207
+    },
+    {
+      "name": "monsters_fiend",
+      "id": 209
+    },
+    {
+      "name": "monsters_vampire_fleder",
+      "id": 211
+    },
+    {
+      "name": "monsters_forktail",
+      "id": 213
+    },
+    {
+      "name": "monsters_frightener",
+      "id": 215
+    },
+    {
+      "name": "monsters_ghoul",
+      "id": 217
+    },
+    {
+      "name": "monsters_ghoul_2",
+      "id": 219
+    },
+    {
+      "name": "monsters_gryffin",
+      "id": 221
+    }
+  ],
+  "player2Deck": [
+    {
+      "name": "neutral_ciri",
+      "id": 202
+    },
+    {
+      "name": "monsters_arachas_behemoth",
+      "id": 204
+    },
+    {
+      "name": "monsters_earth_elemental",
+      "id": 206
+    },
+    {
+      "name": "monsters_endrega",
+      "id": 208
+    },
+    {
+      "name": "monsters_fire_elemental",
+      "id": 210
+    },
+    {
+      "name": "monsters_foglet",
+      "id": 212
+    },
+    {
+      "name": "monsters_ice_giant",
+      "id": 214
+    },
+    {
+      "name": "monsters_gargoyle",
+      "id": 216
+    },
+    {
+      "name": "monsters_ghoul_1",
+      "id": 218
+    },
+    {
+      "name": "monsters_gravehag",
+      "id": 220
+    },
+    {
+      "name": "monsters_harpy",
+      "id": 222
+    },
+    {
+      "name": "monsters_imlerith",
+      "id": 223
+    }
+  ],
+  "commands": [
+    "cardWithId: 109 for PlayerWithId: ali movedFrom: currentPlayerHandObservableList to: currentPlayerCloseCombatObservableList",
+    "cardWithId: 115 for PlayerWithId: ali movedFrom: currentPlayerHandObservableList to: currentPlayerCloseCombatObservableList"
+  ]
+}

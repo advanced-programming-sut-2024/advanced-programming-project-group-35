@@ -2,10 +2,8 @@ package com.example.model.card;
 
 import com.example.Main;
 import com.example.model.card.enums.CardData;
-import javafx.animation.TranslateTransition;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -14,7 +12,6 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.util.Duration;
 
 public class GameCardView extends Pane {
     private final String srcPath = Main.class.getResource("/images/inGameCards/").toExternalForm();
@@ -23,9 +20,6 @@ public class GameCardView extends Pane {
     private Card card;
     private CardData cardData;
     private Rectangle cardBase;
-
-    // Static variable to track the currently selected card
-    private static GameCardView selectedCard = null;
 
     public GameCardView(Card card) {
         this.card = card;
@@ -39,69 +33,9 @@ public class GameCardView extends Pane {
         imageView.setFitHeight(height);
         imageView.setStyle("-fx-background-radius: 15; -fx-border-radius: 15; -fx-background-color: transparent;");
 
-        // Add mouse event handlers for hover effect
-        imageView.setOnMouseEntered(event -> onMouseEnter());
-        imageView.setOnMouseExited(event -> onMouseExit());
-        imageView.setOnMouseClicked(event -> onMouseClicked());
-
         this.getChildren().addAll(cardBase, imageView);
         setLabelAndAbilitiesLabel();
         addCardViewToCard();
-    }
-
-    private void onMouseEnter() {
-        // Check if the Y position is less than 600
-        if (this.getLayoutY() == 0) {
-            return; // Disable event
-        }
-
-        // Move the pane up by 15 pixels if it's not already selected
-        if (selectedCard != this) {
-            this.setTranslateY(-15);
-        }
-
-        // Add drop shadow effect if it's not already selected
-        if (selectedCard != this) {
-            DropShadow dropShadow = new DropShadow();
-            dropShadow.setColor(Color.YELLOW);
-            dropShadow.setRadius(10);
-            this.setEffect(dropShadow);
-        }
-    }
-
-    private void onMouseExit() {
-        // Check if the Y position is less than 600
-        if (this.getLayoutY() == 0) {
-            return; // Disable event
-        }
-
-        // Move the pane back to original position if it's not selected
-        if (selectedCard != this) {
-            this.setTranslateY(0);
-            this.setEffect(null);
-        }
-    }
-
-    private void onMouseClicked() {
-        // Check if the Y position is less than 600
-        if (this.getLayoutY() == 0) {
-            return; // Disable event
-        }
-
-        // Deselect the previously selected card
-        if (selectedCard != null) {
-            selectedCard.setTranslateY(0);
-            selectedCard.setEffect(null);
-        }
-
-        // Select the current card
-        selectedCard = this;
-        this.setTranslateY(-15);
-
-        DropShadow dropShadow = new DropShadow();
-        dropShadow.setColor(Color.YELLOW);
-        dropShadow.setRadius(10);
-        this.setEffect(dropShadow);
     }
 
     private void setLabelAndAbilitiesLabel() {

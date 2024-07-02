@@ -8,6 +8,7 @@ import com.example.model.card.*;
 import com.example.model.card.enums.CardData;
 import com.example.model.card.enums.FactionsType;
 import com.example.model.game.*;
+import com.example.model.game.place.RowsInGame;
 import com.example.view.Menu;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
@@ -85,7 +86,6 @@ public class GameMenuController extends AppController {
         Round round1 = new Round(1);
         table.addRound(round1);
         table.setCurrentRound(round1);
-//        //TODO لود عکس های صفحه
         startRound(table);
     }
 
@@ -194,12 +194,12 @@ public class GameMenuController extends AppController {
 
     private static String getString(Table table) throws URISyntaxException {
         String rootPath = new File(GameMenuController.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile().getParentFile().getPath();
-        String logsDirPath = rootPath + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "gameLogs";
+        String logsDirPath = rootPath + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "gameLogs" ;
         File logsDir = new File(logsDirPath);
         if (!logsDir.exists()) {
             logsDir.mkdirs();
         }
-        String filePath = logsDirPath + File.separator + table.getGameId() + ".json";
+        String filePath = logsDirPath + File.separator + table.getGameId() + ".json" ;
         return filePath;
     }
 

@@ -14,13 +14,16 @@ import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
@@ -44,9 +47,7 @@ public class GameMenuControllerView {
     public Label opponentPlayerFactionName;
     public Label opponentPlayerSpecialCardCounter;
     public ImageView opponentPlayerDeckPlace;
-    public FlowPane opponentPlayerDiscardPlace;
     public ImageView currentPlayerDeckPlace;
-    public FlowPane currentPlayerDiscardPlace;
     public VBox opponentPlayerLeaderCard;
     public VBox currentPlayerLeaderCard;
     public Label opponentPlayerDeckCardCounter;
@@ -64,7 +65,6 @@ public class GameMenuControllerView {
     public ImageView currentPlayerProfilePicBorder;
     public ImageView opponentPlayerProfilePic;
     public ImageView opponentPlayerProfilePicBorder;
-    public FlowPane weatherCardPlace;
     public ImageView cardDetailShower;
     public ImageView currentPlayerFactionIcon;
     public ImageView opponentPlayerFactionIcon;
@@ -100,6 +100,12 @@ public class GameMenuControllerView {
     private FlowPane opponentRangedSpecialPlace;
     @FXML
     private FlowPane opponentSiegeSpecialPlace;
+    @FXML
+    private FlowPane currentPlayerDiscardPlace;
+    @FXML
+    private FlowPane weatherCardPlace;
+    @FXML
+    private FlowPane opponentPlayerDiscardPlace;
     private ObservableList<GameCardView> allCardsInGame = FXCollections.observableArrayList();
     private ObservableList<GameCardView> currentPlayerDeckObservableList = FXCollections.observableArrayList();
     private ObservableList<GameCardView> currentPlayerHandObservableList = FXCollections.observableArrayList();
@@ -111,9 +117,13 @@ public class GameMenuControllerView {
     private ObservableList<GameCardView> weatherObservableList = FXCollections.observableArrayList();
     private ObservableList<GameCardView> opponentPlayerHandObservableList = FXCollections.observableArrayList();
     private ObservableList<GameCardView> opponentPlayerDeckObservableList = FXCollections.observableArrayList();
-
-
-    private ObservableList<Card> playerDeck = FXCollections.observableArrayList();
+    private ObservableList<GameCardView> currentPlayerCloseCombatSpecialPlaceObservableList = FXCollections.observableArrayList();
+    private ObservableList<GameCardView> currentPlayerRangedSpecialPlaceObservableList = FXCollections.observableArrayList();
+    private ObservableList<GameCardView> currentPlayerSiegeSpecialPlaceObservableList = FXCollections.observableArrayList();
+    private ObservableList<GameCardView> opponentSiegeObservableList = FXCollections.observableArrayList();
+    private ObservableList<GameCardView> opponentSiegeSpecialPlaceObservableList = FXCollections.observableArrayList();
+    private ObservableList<GameCardView> opponentCloseCombatSpecialPlaceObservableList = FXCollections.observableArrayList();
+    private ObservableList<GameCardView> opponentRangedSpecialPlaceObservableList = FXCollections.observableArrayList();
     private Table table;
     GameMenuController controller = (GameMenuController) Controller.GAME_MENU_CONTROLLER.getController();
 
@@ -167,18 +177,7 @@ public class GameMenuControllerView {
         if (!currentPlayerHand.getChildren().isEmpty()) {
             currentPlayerHand.getChildren().clear();
         }
-        //playerDeck.clear();
-        //addToCurrentPlayerHand();
-        //addOnMouseClickedEventToCards();
-        //currentPlayerHand.getChildren().addAll((Node) playerDeck);
 
-//        if (!currentPlayerHand.getChildren().isEmpty()) {
-//            currentPlayerHand.getChildren().clear();
-//        }
-//        playerDeck.clear();
-//        addToCurrentPlayerHand();
-//        addOnMouseClickedEventToLeaderCards();
-//        currentPlayerHand.getChildren().addAll(playerDeck);
         addCurrentPlayerHandCards(table);
 
     }
@@ -198,18 +197,6 @@ public class GameMenuControllerView {
         }
     }
 
-//    private void addToCurrentPlayerHand() {
-//        for (int i = 0; i < table.getCurrentPlayer().getBoard().getDeck().getSize(); i++) {
-//            playerDeck.add(table.getCurrentPlayer().getBoard().getDeck().getCard(i));
-//        }
-//    }
-//    private void addOnMouseClickedEventToCards() {
-//        for (Card card : playerDeck) {
-//            card.setOnMouseClicked(event -> {
-//                leaderCard = card;
-//            });
-//        }
-//    }
 
     private void addCurrentPlayerHandCards(Table table) {
         for (GameCardView gameCardView : allCardsInGame) {
@@ -228,10 +215,15 @@ public class GameMenuControllerView {
     private void addMouseEventsForHandCards() {
         for (GameCardView gameCardView : currentPlayerHandObservableList) {
             gameCardView.setOnMouseEntered(e -> {
-                //TODO
+                gameCardView.setTranslateY(-15);
+                DropShadow dropShadow = new DropShadow();
+                dropShadow.setColor(Color.YELLOW);
+                dropShadow.setRadius(10);
+                gameCardView.setEffect(dropShadow);
             });
             gameCardView.setOnMouseExited(e -> {
-                //TODO
+                gameCardView.setTranslateY(0);
+                gameCardView.setEffect(null);
             });
             gameCardView.setOnMouseClicked(e -> {
                 setOnMouseClickForDestinationFlowPane(gameCardView.getCard().getIdInGame());
@@ -262,7 +254,7 @@ public class GameMenuControllerView {
                 removeStyleClass();
                 currentPlayerCloseCombat.getStyleClass().add("highlighted-flow-pane");
                 currentPlayerCloseCombat.setOnMouseClicked(e -> {
-                    moveCardToDestinationFlowPane(cardId, RowsInGame.currentPlayerHandObservableList.toString(), RowsInGame.currentPlayerCloseCombatObservableList.toString());
+                    moveCardToDestinationFlowPane(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.currentPlayerCloseCombat.toString());
                     removeStyleClass();
                 });
             }
@@ -270,7 +262,7 @@ public class GameMenuControllerView {
                 removeStyleClass();
                 currentPlayerRanged.getStyleClass().add("highlighted-flow-pane");
                 currentPlayerRanged.setOnMouseClicked(e -> {
-                    moveCardToDestinationFlowPane(cardId, RowsInGame.currentPlayerHandObservableList.toString(), RowsInGame.currentPlayerRangedObservableList.toString());
+                    moveCardToDestinationFlowPane(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.currentPlayerRanged.toString());
                     removeStyleClass();
                 });
             }
@@ -278,7 +270,7 @@ public class GameMenuControllerView {
                 removeStyleClass();
                 currentPlayerSiege.getStyleClass().add("highlighted-flow-pane");
                 currentPlayerSiege.setOnMouseClicked(e -> {
-                    moveCardToDestinationFlowPane(cardId, RowsInGame.currentPlayerHandObservableList.toString(), RowsInGame.currentPlayerSiegeObservableList.toString());
+                    moveCardToDestinationFlowPane(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.currentPlayerSiege.toString());
                     removeStyleClass();
                 });
             }
@@ -287,11 +279,11 @@ public class GameMenuControllerView {
                 currentPlayerCloseCombat.getStyleClass().add("highlighted-flow-pane");
                 currentPlayerRanged.getStyleClass().add("highlighted-flow-pane");
                 currentPlayerCloseCombat.setOnMouseClicked(e -> {
-                    moveCardToDestinationFlowPane(cardId, RowsInGame.currentPlayerHandObservableList.toString(), RowsInGame.currentPlayerCloseCombatObservableList.toString());
+                    moveCardToDestinationFlowPane(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.currentPlayerCloseCombat.toString());
                     removeStyleClass();
                 });
                 currentPlayerRanged.setOnMouseClicked(e -> {
-                    moveCardToDestinationFlowPane(cardId, RowsInGame.currentPlayerHandObservableList.toString(), RowsInGame.currentPlayerRangedObservableList.toString());
+                    moveCardToDestinationFlowPane(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.currentPlayerRanged.toString());
                     removeStyleClass();
                 });
             }
@@ -299,7 +291,7 @@ public class GameMenuControllerView {
                 removeStyleClass();
                 weatherCardPlace.getStyleClass().add("highlighted-flow-pane");
                 weatherCardPlace.setOnMouseClicked(e -> {
-                    moveCardToDestinationFlowPane(cardId, RowsInGame.currentPlayerHandObservableList.toString(), RowsInGame.weatherObservableList.toString());
+                    moveCardToDestinationFlowPane(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.weatherObservableList.toString());
                     removeStyleClass();
                 });
             }
@@ -310,39 +302,36 @@ public class GameMenuControllerView {
                     currentPlayerRanged.getStyleClass().add("highlighted-flow-pane");
                     currentPlayerSiege.getStyleClass().add("highlighted-flow-pane");
                     currentPlayerCloseCombat.setOnMouseClicked(e -> {
-                        moveCardToDestinationFlowPane(cardId, RowsInGame.currentPlayerHandObservableList.toString(), RowsInGame.currentPlayerCloseCombatObservableList.toString());
+                        moveCardToDestinationFlowPane(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.currentPlayerCloseCombat.toString());
                         removeStyleClass();
                     });
                     currentPlayerRanged.setOnMouseClicked(e -> {
-                        moveCardToDestinationFlowPane(cardId, RowsInGame.currentPlayerHandObservableList.toString(), RowsInGame.currentPlayerRangedObservableList.toString());
+                        moveCardToDestinationFlowPane(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.currentPlayerRanged.toString());
                         removeStyleClass();
                     });
                     currentPlayerSiege.setOnMouseClicked(e -> {
-                        moveCardToDestinationFlowPane(cardId, RowsInGame.currentPlayerHandObservableList.toString(), RowsInGame.currentPlayerSiegeObservableList.toString());
+                        moveCardToDestinationFlowPane(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.currentPlayerSiege.toString());
                         removeStyleClass();
                     });
                 } else {
                     if (currentPlayerCloseCombatSpecialPlace.getChildren().isEmpty()) {
-                        //TODO add style class to the place that you want
-                        currentPlayerCloseCombatSpecialPlace.getChildren().add(gameCardView);
+                        currentPlayerCloseCombatSpecialPlace.getStyleClass().add("highlighted-flow-pane");
                         currentPlayerCloseCombatSpecialPlace.setOnMouseClicked(e -> {
-                            moveCardToDestinationFlowPane(cardId, RowsInGame.currentPlayerHandObservableList.toString(), RowsInGame.currentPlayerCloseCombatSpecialPlace.toString());
+                            moveCardToDestinationFlowPane(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.currentPlayerCloseCombatSpecialPlace.toString());
                             removeStyleClass();
                         });
                     }
                     if (currentPlayerRangedSpecialPlace.getChildren().isEmpty()) {
-                        //TODO add style class to the place that you want
-                        currentPlayerRangedSpecialPlace.getChildren().add(gameCardView);
+                        currentPlayerRangedSpecialPlace.getStyleClass().add("highlighted-flow-pane");
                         currentPlayerRangedSpecialPlace.setOnMouseClicked(e -> {
-                            moveCardToDestinationFlowPane(cardId, RowsInGame.currentPlayerHandObservableList.toString(), RowsInGame.currentPlayerRangedSpecialPlace.toString());
+                            moveCardToDestinationFlowPane(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.currentPlayerRangedSpecialPlace.toString());
                             removeStyleClass();
                         });
                     }
                     if (currentPlayerSiegeSpecialPlace.getChildren().isEmpty()) {
-                        //TODO add style class to the place that you want
-                        currentPlayerSiegeSpecialPlace.getChildren().add(gameCardView);
+                        currentPlayerSiegeSpecialPlace.getStyleClass().add("highlighted-flow-pane");
                         currentPlayerSiegeSpecialPlace.setOnMouseClicked(e -> {
-                            moveCardToDestinationFlowPane(cardId, RowsInGame.currentPlayerHandObservableList.toString(), RowsInGame.currentPlayerSiegeSpecialPlace.toString());
+                            moveCardToDestinationFlowPane(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.currentPlayerSiegeSpecialPlace.toString());
                             removeStyleClass();
                         });
                     }
@@ -363,11 +352,17 @@ public class GameMenuControllerView {
 
     private ObservableList<GameCardView> getObservableListWithName(String listName) {
         switch (listName) {
-            case "currentPlayerDeck" -> {
+            case "currentPlayerDeckObservableList" -> {
                 return currentPlayerDeckObservableList;
+            }
+            case "opponentPlayerDeckObservableList" -> {
+                return opponentPlayerDeckObservableList;
             }
             case "currentPlayerHandObservableList" -> {
                 return currentPlayerHandObservableList;
+            }
+            case "opponentPlayerHandObservableList" -> {
+                return opponentPlayerHandObservableList;
             }
             case "currentPlayerSiegeObservableList" -> {
                 return currentPlayerSiegeObservableList;
@@ -378,11 +373,32 @@ public class GameMenuControllerView {
             case "currentPlayerCloseCombatObservableList" -> {
                 return currentPlayerCloseCombatObservableList;
             }
+            case "currentPlayerCloseCombatSpecialPlaceObservableList" -> {
+                return currentPlayerCloseCombatSpecialPlaceObservableList;
+            }
+            case "currentPlayerRangedSpecialPlaceObservableList" -> {
+                return currentPlayerRangedSpecialPlaceObservableList;
+            }
+            case "currentPlayerSiegeSpecialPlaceObservableList" -> {
+                return currentPlayerSiegeSpecialPlaceObservableList;
+            }
+            case "opponentSiegeObservableList" -> {
+                return opponentSiegeObservableList;
+            }
             case "opponentCloseCombatObservableList" -> {
                 return opponentCloseCombatObservableList;
             }
             case "opponentRangedObservableList" -> {
                 return opponentRangedObservableList;
+            }
+            case "opponentSiegeSpecialPlaceObservableList" -> {
+                return opponentSiegeSpecialPlaceObservableList;
+            }
+            case "opponentCloseCombatSpecialPlaceObservableList" -> {
+                return opponentCloseCombatSpecialPlaceObservableList;
+            }
+            case "opponentRangedSpecialPlaceObservableList" -> {
+                return opponentRangedSpecialPlaceObservableList;
             }
             case "weatherObservableList" -> {
                 return weatherObservableList;
@@ -395,9 +411,6 @@ public class GameMenuControllerView {
 
     private FlowPane getFlowPaneWithName(String listName) {
         switch (listName) {
-            case "currentPlayerDeck" -> {
-                return null;
-            }
             case "currentPlayerHandObservableList" -> {
                 return currentPlayerHand;
             }
@@ -410,14 +423,35 @@ public class GameMenuControllerView {
             case "currentPlayerCloseCombatObservableList" -> {
                 return currentPlayerCloseCombat;
             }
+            case "currentPlayerCloseCombatSpecialPlaceObservableList" -> {
+                return currentPlayerCloseCombatSpecialPlace;
+            }
+            case "currentPlayerRangedSpecialPlaceObservableList" -> {
+                return currentPlayerRangedSpecialPlace;
+            }
+            case "currentPlayerSiegeSpecialPlaceObservableList" -> {
+                return currentPlayerSiegeSpecialPlace;
+            }
+            case "opponentSiegeObservableList" -> {
+                return opponentSiege;
+            }
             case "opponentCloseCombatObservableList" -> {
-                return null;
+                return opponentCloseCombat;
             }
             case "opponentRangedObservableList" -> {
-                return null;
+                return opponentRanged;
+            }
+            case "opponentSiegeSpecialPlaceObservableList" -> {
+                return opponentSiegeSpecialPlace;
+            }
+            case "opponentCloseCombatSpecialPlaceObservableList" -> {
+                return opponentCloseCombatSpecialPlace;
+            }
+            case "opponentRangedSpecialPlaceObservableList" -> {
+                return opponentRangedSpecialPlace;
             }
             case "weatherObservableList" -> {
-                return null;
+                return weatherCardPlace;
             }
             default -> {
                 return null;
@@ -425,29 +459,47 @@ public class GameMenuControllerView {
         }
     }
 
-    //TODO Ali Task
     private void moveCardToDestinationFlowPane(int cardId, String initialObservableListName, String destinationObservableListName) {
         GameCardView gameCardView = getGameCardViewWithCardId(cardId);
-        TranslateTransition transition = new TranslateTransition(Duration.seconds(2), gameCardView);
         ObservableList<GameCardView> initialObservableList = getObservableListWithName(initialObservableListName);
         ObservableList<GameCardView> destinationObservableList = getObservableListWithName(destinationObservableListName);
         initialObservableList.remove(gameCardView);
         destinationObservableList.add(gameCardView);
-        FlowPane destinationFLowPane = getFlowPaneWithName(destinationObservableListName);
+
+        FlowPane destinationFlowPane = getFlowPaneWithName(destinationObservableListName);
         FlowPane initialFlowPane = getFlowPaneWithName(initialObservableListName);
-        transition.setToX(destinationFLowPane.getTranslateX());
-        transition.setToY(destinationFLowPane.getTranslateY());
+
+        moveAnimation(gameCardView, destinationFlowPane, initialFlowPane, initialObservableList, destinationObservableList);
+
+        disableMouseEventsForHandCard(cardId);
+        destinationFlowPane.setOnMouseClicked(null);
+        controller.saveLog("cardWithId: " + gameCardView.getCard().getIdInGame() + " for PlayerWithId: " + table.getCurrentPlayer().getUsername() + " movedFrom: " + initialObservableListName + " to: " + destinationObservableListName);
+    }
+    private void moveAnimation(GameCardView gameCardView, FlowPane destinationFlowPane, FlowPane initialFlowPane, ObservableList<GameCardView> initialObservableList, ObservableList<GameCardView> destinationObservableList) {
+        Bounds initialBounds = gameCardView.localToScene(gameCardView.getBoundsInLocal());
+        Bounds destinationBounds = destinationFlowPane.localToScene(destinationFlowPane.getBoundsInLocal());
+
+        double destinationCenterX = destinationBounds.getMinX() + destinationBounds.getWidth() / 2 - gameCardView.getBoundsInLocal().getWidth() / 2;
+        double destinationCenterY = destinationBounds.getMinY() + destinationFlowPane.getHeight() / 2 - gameCardView.getBoundsInLocal().getHeight() / 2;
+
+        double distanceX = destinationCenterX - initialBounds.getMinX();
+        double distanceY = destinationCenterY - initialBounds.getMinY();
+
+        TranslateTransition transition = new TranslateTransition(Duration.seconds(1), gameCardView);
+        transition.setByX(distanceX);
+        transition.setByY(distanceY);
+
         transition.setOnFinished(event -> {
+            initialObservableList.remove(gameCardView);
+            destinationObservableList.add(gameCardView);
+            destinationFlowPane.getChildren().add(gameCardView);
             initialFlowPane.getChildren().remove(gameCardView);
-            destinationFLowPane.getChildren().addAll(gameCardView);
             gameCardView.setTranslateX(0);
             gameCardView.setTranslateY(0);
             nonLeaderCardsDoAbility(gameCardView);
         });
+
         transition.play();
-        disableMouseEventsForHandCard(cardId);
-        destinationFLowPane.setOnMouseClicked(null);
-        controller.saveLog("cardWithId: " + gameCardView.getCard().getIdInGame() + " for PlayerWithId: " + table.getCurrentPlayer().getUsername() + " movedFrom: " + initialObservableListName + " to: " + destinationObservableListName);
     }
 
     private void nonLeaderCardsDoAbility(GameCardView gameCardView) {

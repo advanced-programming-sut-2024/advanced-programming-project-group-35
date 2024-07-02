@@ -1,0 +1,190 @@
+{
+  "player1": "ali",
+  "player1Faction": "Monsters",
+  "player1Hand": [
+    {
+      "name": "special_horn_1",
+      "id": 101
+    },
+    {
+      "name": "special_mardroeme",
+      "id": 103
+    },
+    {
+      "name": "special_mardroeme_2",
+      "id": 105
+    },
+    {
+      "name": "special_scorch_1",
+      "id": 107
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 109
+    },
+    {
+      "name": "neutral_triss",
+      "id": 111
+    },
+    {
+      "name": "neutral_villen",
+      "id": 113
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 115
+    },
+    {
+      "name": "monsters_arachas_1",
+      "id": 117
+    },
+    {
+      "name": "monsters_arachas_behemoth",
+      "id": 119
+    },
+    {
+      "name": "monsters_celaeno_harpy",
+      "id": 121
+    }
+  ],
+  "player1Deck": [
+    {
+      "name": "special_horn_2",
+      "id": 102
+    },
+    {
+      "name": "special_mardroeme_1",
+      "id": 104
+    },
+    {
+      "name": "special_scorch",
+      "id": 106
+    },
+    {
+      "name": "neutral_geralt",
+      "id": 108
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 110
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 112
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 114
+    },
+    {
+      "name": "monsters_arachas",
+      "id": 116
+    },
+    {
+      "name": "monsters_arachas_2",
+      "id": 118
+    },
+    {
+      "name": "monsters_vampire_bruxa",
+      "id": 120
+    },
+    {
+      "name": "monsters_cockatrice",
+      "id": 122
+    }
+  ],
+  "player2": "opponent",
+  "player2Faction": "Monsters",
+  "player2Hand": [
+    {
+      "name": "special_horn_1",
+      "id": 201
+    },
+    {
+      "name": "special_mardroeme",
+      "id": 203
+    },
+    {
+      "name": "special_mardroeme_2",
+      "id": 205
+    },
+    {
+      "name": "special_scorch_1",
+      "id": 207
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 209
+    },
+    {
+      "name": "neutral_triss",
+      "id": 211
+    },
+    {
+      "name": "neutral_villen",
+      "id": 213
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 215
+    },
+    {
+      "name": "monsters_arachas_1",
+      "id": 217
+    },
+    {
+      "name": "monsters_arachas_behemoth",
+      "id": 219
+    },
+    {
+      "name": "monsters_celaeno_harpy",
+      "id": 221
+    }
+  ],
+  "player2Deck": [
+    {
+      "name": "special_horn_2",
+      "id": 202
+    },
+    {
+      "name": "special_mardroeme_1",
+      "id": 204
+    },
+    {
+      "name": "special_scorch",
+      "id": 206
+    },
+    {
+      "name": "neutral_geralt",
+      "id": 208
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 210
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 212
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 214
+    },
+    {
+      "name": "monsters_arachas",
+      "id": 216
+    },
+    {
+      "name": "monsters_arachas_2",
+      "id": 218
+    },
+    {
+      "name": "monsters_vampire_bruxa",
+      "id": 220
+    },
+    {
+      "name": "monsters_cockatrice",
+      "id": 222
+    }
+  ]
+}

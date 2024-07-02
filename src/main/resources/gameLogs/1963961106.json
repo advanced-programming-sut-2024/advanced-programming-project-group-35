@@ -1,0 +1,210 @@
+{
+  "player1": "ali",
+  "player1Faction": "Monsters",
+  "player1Hand": [
+    {
+      "name": "special_horn_1",
+      "id": 101
+    },
+    {
+      "name": "special_decoy_1",
+      "id": 103
+    },
+    {
+      "name": "special_scorch_1",
+      "id": 105
+    },
+    {
+      "name": "weather_fog_1",
+      "id": 107
+    },
+    {
+      "name": "weather_clear",
+      "id": 109
+    },
+    {
+      "name": "neutral_emiel",
+      "id": 111
+    },
+    {
+      "name": "neutral_villen",
+      "id": 113
+    },
+    {
+      "name": "monsters_arachas_2",
+      "id": 115
+    },
+    {
+      "name": "monsters_endrega",
+      "id": 117
+    },
+    {
+      "name": "monsters_gargoyle",
+      "id": 119
+    },
+    {
+      "name": "monsters_gravehag",
+      "id": 121
+    }
+  ],
+  "player1Deck": [
+    {
+      "name": "special_decoy",
+      "id": 102
+    },
+    {
+      "name": "special_mardroeme",
+      "id": 104
+    },
+    {
+      "name": "weather_fog",
+      "id": 106
+    },
+    {
+      "name": "weather_rain",
+      "id": 108
+    },
+    {
+      "name": "neutral_chort",
+      "id": 110
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 112
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 114
+    },
+    {
+      "name": "monsters_vampire_ekkimara",
+      "id": 116
+    },
+    {
+      "name": "monsters_foglet",
+      "id": 118
+    },
+    {
+      "name": "monsters_ghoul",
+      "id": 120
+    },
+    {
+      "name": "monsters_gryffin",
+      "id": 122
+    },
+    {
+      "name": "monsters_harpy",
+      "id": 123
+    },
+    {
+      "name": "monsters_imlerith",
+      "id": 124
+    }
+  ],
+  "player2": "opponent",
+  "player2Faction": "Monsters",
+  "player2Hand": [
+    {
+      "name": "special_horn_1",
+      "id": 201
+    },
+    {
+      "name": "special_decoy_1",
+      "id": 203
+    },
+    {
+      "name": "special_scorch_1",
+      "id": 205
+    },
+    {
+      "name": "weather_fog_1",
+      "id": 207
+    },
+    {
+      "name": "weather_clear",
+      "id": 209
+    },
+    {
+      "name": "neutral_emiel",
+      "id": 211
+    },
+    {
+      "name": "neutral_villen",
+      "id": 213
+    },
+    {
+      "name": "monsters_arachas_2",
+      "id": 215
+    },
+    {
+      "name": "monsters_endrega",
+      "id": 217
+    },
+    {
+      "name": "monsters_gargoyle",
+      "id": 219
+    },
+    {
+      "name": "monsters_gravehag",
+      "id": 221
+    }
+  ],
+  "player2Deck": [
+    {
+      "name": "special_decoy",
+      "id": 202
+    },
+    {
+      "name": "special_mardroeme",
+      "id": 204
+    },
+    {
+      "name": "weather_fog",
+      "id": 206
+    },
+    {
+      "name": "weather_rain",
+      "id": 208
+    },
+    {
+      "name": "neutral_chort",
+      "id": 210
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 212
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 214
+    },
+    {
+      "name": "monsters_vampire_ekkimara",
+      "id": 216
+    },
+    {
+      "name": "monsters_foglet",
+      "id": 218
+    },
+    {
+      "name": "monsters_ghoul",
+      "id": 220
+    },
+    {
+      "name": "monsters_gryffin",
+      "id": 222
+    },
+    {
+      "name": "monsters_harpy",
+      "id": 223
+    },
+    {
+      "name": "monsters_imlerith",
+      "id": 224
+    }
+  ],
+  "commands": [
+    "cardWithId: 105 for PlayerWithId: ali movedFrom: currentPlayerHandObservableList to: currentPlayerSiegeSpecialPlaceObservableList",
+    "cardWithId: 101 for PlayerWithId: ali movedFrom: currentPlayerHandObservableList to: currentPlayerRangedSpecialPlaceObservableList"
+  ]
+}
