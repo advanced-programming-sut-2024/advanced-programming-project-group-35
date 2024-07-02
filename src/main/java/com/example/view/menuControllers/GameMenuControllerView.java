@@ -2,12 +2,15 @@ package com.example.view.menuControllers;
 
 import com.example.controller.Controller;
 import com.example.controller.GameMenuController;
-import com.example.model.card.PreGameCard;
+import com.example.model.card.Card;
+import com.example.model.card.enums.FactionsType;
 import com.example.model.game.Table;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
@@ -88,7 +91,7 @@ public class GameMenuControllerView {
     private FlowPane opponentRangedSpecialPlace;
     @FXML
     private FlowPane opponentSiegeSpecialPlace;
-    private ObservableList<PreGameCard> playerDeck = FXCollections.observableArrayList();
+    private ObservableList<Card> playerDeck = FXCollections.observableArrayList();
     private Table table;
 
     public void passRound(MouseEvent mouseEvent) {
@@ -100,64 +103,62 @@ public class GameMenuControllerView {
         table = controller.getTable();
         currentPlayerFactionName.setText(table.getCurrentPlayer().getBoard().getDeck().getFaction().toString());
         currentPlayerUsername.setText(table.getCurrentPlayer().getUsername());
-        //currentPlayerCloseCombatPower.setText(String.valueOf(table.getCurrentPlayer().getBoard().getCloseCombatPower()));
-        //currentPlayerRangedPower.setText(String.valueOf(table.getCurrentPlayer().getBoard().getRangedPower()));
-        //currentPlayerSiegePower.setText(String.valueOf(table.getCurrentPlayer().getBoard().getSiegePower()));
+        currentPlayerCloseCombatPower.setText("0");
+        currentPlayerRangedPower.setText("0");
+        currentPlayerSiegePower.setText("0");
         currentPlayerAllScoreCounter.setText(String.valueOf(table.getCurrentPlayer().getScore()));
         //currentPlayerSpecialCardCounter.setText(String.valueOf(table.getCurrentPlayer().getBoard().getSpecialCardCounter()));
         currentPlayerDeckCardCounter.setText(String.valueOf(table.getCurrentPlayer().getBoard().getDeck().getSize()));
         //currentPlayerLeaderAbilityEnable.setVisible(table.getCurrentPlayer().getBoard().getLeader().isAbilityEnable());
         //currentPlayerLeaderCard.getChildren().add(new PreGameCard(table.getCurrentPlayer().getBoard().getLeader().getName(), table.getCurrentPlayer().getBoard().getLeader().getPower(), table.getCurrentPlayer().getBoard().getLeader().getAbility(), table.getCurrentPlayer().getBoard().getLeader().getImageAddress()));
-        //currentPlayerFactionIcon.setImage(table.getCurrentPlayer().getFactionIcon());
+        Image currentFactionIcon = new Image(FactionsType.getFactionDeckShieldImageAddress(table.getCurrentPlayer().getBoard().getDeck().getFaction()));
+        currentPlayerFactionIcon.setImage(currentFactionIcon);
         currentPlayerFirstJem.setVisible(true);
         currentPlayerSecondJem.setVisible(true);
         currentPlayerExcellenceShower.setVisible(false);
-        //currentPlayerProfilePic.setImage(table.getCurrentPlayer().getProfilePic());
-        //currentPlayerProfilePicBorder.setImage(table.getCurrentPlayer().getProfilePicBorder());
+        Image currentDeckPlace = new Image(FactionsType.getFactionBackDeckImageAddress(table.getCurrentPlayer().getBoard().getDeck().getFaction()));
+        currentPlayerDeckPlace.setImage(currentDeckPlace);
 
         opponentPlayerFactionName.setText(table.getOpponent().getBoard().getDeck().getFaction().toString());
         opponentPlayerUsername.setText(table.getOpponent().getUsername());
-        //opponentPlayerCloseCombatPower.setText(String.valueOf(table.getOpponent().getBoard().getCloseCombatPower()));
-        //opponentPlayerRangedPower.setText(String.valueOf(table.getOpponent().getBoard().getRangedPower()));
-        //opponentPlayerSiegePower.setText(String.valueOf(table.getOpponent().getBoard().getSiegePower()));
+        opponentPlayerCloseCombatPower.setText("0");
+        opponentPlayerRangedPower.setText("0");
+        opponentPlayerSiegePower.setText("0");
         opponentPlayerAllScoreCounter.setText(String.valueOf(table.getOpponent().getScore()));
         //opponentPlayerSpecialCardCounter.setText(String.valueOf(table.getOpponent().getBoard().getSpecialCardCounter()));
         opponentPlayerDeckCardCounter.setText(String.valueOf(table.getOpponent().getBoard().getDeck().getSize()));
         //opponentPlayerLeaderAbilityEnable.setVisible(table.getOpponent().getBoard().getLeader().isAbilityEnable());
         //opponentPlayerLeaderCard.getChildren().add(new PreGameCard(table.getOpponent().getBoard().getLeader().getName(), table.getOpponent().getBoard().getLeader().getPower(), table.getOpponent().getBoard().getLeader().getAbility(), table.getOpponent().getBoard().getLeader().getImageAddress()));
-        //opponentPlayerFactionIcon.setImage(table.getOpponent().getFactionIcon());
+        Image opponentFactionIcon = new Image(FactionsType.getFactionDeckShieldImageAddress(table.getOpponent().getBoard().getDeck().getFaction()));
+        opponentPlayerFactionIcon.setImage(opponentFactionIcon);
         opponentPlayerFirstJem.setVisible(true);
         opponentPlayerSecondJem.setVisible(true);
         opponentPlayerExcellenceShower.setVisible(false);
-        //opponentPlayerProfilePic.setImage(table.getOpponent().getProfilePic());
-        //opponentPlayerProfilePicBorder.setImage(table.getOpponent().getProfilePicBorder());
+        Image opponentDeckPlace = new Image(FactionsType.getFactionBackDeckImageAddress(table.getCurrentPlayer().getBoard().getDeck().getFaction()));
+        opponentPlayerDeckPlace.setImage(opponentDeckPlace);
 
-
-//        if (!currentPlayerHand.getChildren().isEmpty()) {
-//            currentPlayerHand.getChildren().clear();
-//        }
-//        playerDeck.clear();
-//        addToCurrentPlayerHand();
-//        addOnMouseClickedEventToLeaderCards();
-//        currentPlayerHand.getChildren().addAll(playerDeck);
+        if (!currentPlayerHand.getChildren().isEmpty()) {
+            currentPlayerHand.getChildren().clear();
+        }
+        //playerDeck.clear();
+        //addToCurrentPlayerHand();
+        //addOnMouseClickedEventToCards();
+        //currentPlayerHand.getChildren().addAll((Node) playerDeck);
 
     }
 //    private void addToCurrentPlayerHand() {
-//        for (CardData cardData : CardData.values()) {
-//            if (cardData.getType().equals("leader") && cardData.getFaction().equals(faction.getFaction())) {
-//                leaderCards.add(new PreGameCard(cardData.getName(), cardData.getPower(), cardData.getAbility(), srcPath + cardData.getImageAddress()));
-//            }
+//        for (int i = 0; i < table.getCurrentPlayer().getBoard().getDeck().getSize(); i++) {
+//            playerDeck.add(table.getCurrentPlayer().getBoard().getDeck().getCard(i));
 //        }
 //    }
-//    private void addOnMouseClickedEventToLeaderCards() {
-//        for (PreGameCard card : leaderCards) {
+//    private void addOnMouseClickedEventToCards() {
+//        for (Card card : playerDeck) {
 //            card.setOnMouseClicked(event -> {
 //                leaderCard = card;
-//                backToPreGameMenu(null);
-//                updateDeckInfo();
 //            });
 //        }
 //    }
 
-
+    public void toggleMusic(MouseEvent mouseEvent) {
+    }
 }

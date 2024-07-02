@@ -2,8 +2,9 @@ package com.example.model.card;
 
 import com.example.model.card.enums.CardData;
 import com.example.model.game.place.Place;
+import javafx.scene.shape.Rectangle;
 
-public class Card {
+public class Card extends Rectangle {
     private Place place;
     private Ability ability;
     private CardData cardData;
