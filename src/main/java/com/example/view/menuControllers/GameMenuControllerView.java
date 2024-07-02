@@ -425,29 +425,43 @@ public class GameMenuControllerView {
         }
     }
 
-    //TODO Ali Task
     private void moveCardToDestinationFlowPane(int cardId, String initialObservableListName, String destinationObservableListName) {
         GameCardView gameCardView = getGameCardViewWithCardId(cardId);
-        TranslateTransition transition = new TranslateTransition(Duration.seconds(2), gameCardView);
+        gameCardView.setDragged(true);
         ObservableList<GameCardView> initialObservableList = getObservableListWithName(initialObservableListName);
         ObservableList<GameCardView> destinationObservableList = getObservableListWithName(destinationObservableListName);
-        initialObservableList.remove(gameCardView);
-        destinationObservableList.add(gameCardView);
         FlowPane destinationFLowPane = getFlowPaneWithName(destinationObservableListName);
         FlowPane initialFlowPane = getFlowPaneWithName(initialObservableListName);
-        transition.setToX(destinationFLowPane.getTranslateX());
-        transition.setToY(destinationFLowPane.getTranslateY());
-        transition.setOnFinished(event -> {
-            initialFlowPane.getChildren().remove(gameCardView);
-            destinationFLowPane.getChildren().addAll(gameCardView);
-            gameCardView.setTranslateX(0);
-            gameCardView.setTranslateY(0);
-            nonLeaderCardsDoAbility(gameCardView);
-        });
-        transition.play();
+        double startX = gameCardView.getLayoutX();
+        double startY = gameCardView.getLayoutY();
+        double endX = destinationFLowPane.getLayoutX() - initialFlowPane.getLayoutX();
+        double endY = destinationFLowPane.getLayoutY() - initialFlowPane.getLayoutY();
+
+        cardMoveAnimation(gameCardView, 0, 0, endX, endY, initialObservableList, initialFlowPane, destinationObservableList, destinationFLowPane);
         disableMouseEventsForHandCard(cardId);
         destinationFLowPane.setOnMouseClicked(null);
         controller.saveLog("cardWithId: " + gameCardView.getCard().getIdInGame() + " for PlayerWithId: " + table.getCurrentPlayer().getUsername() + " movedFrom: " + initialObservableListName + " to: " + destinationObservableListName);
+    }
+
+    private static void cardMoveAnimation(GameCardView gameCardView, double startX, double startY, double endX, double endY, ObservableList<GameCardView> initialObservableList, FlowPane initialFlowPane, ObservableList<GameCardView> destinationObservableList, FlowPane destinationFLowPane) {
+        TranslateTransition transition = new TranslateTransition(Duration.seconds(1), gameCardView);
+        transition.setFromX(startX);
+        transition.setFromY(startY);
+        transition.setToX(endX);
+        transition.setToY(endY);
+
+        transition.setOnFinished(event -> {
+            initialObservableList.remove(gameCardView);
+            initialFlowPane.getChildren().remove(gameCardView);
+
+            destinationObservableList.add(gameCardView);
+            destinationFLowPane.getChildren().add(gameCardView);
+
+            gameCardView.setTranslateX(0);
+            gameCardView.setTranslateY(0);
+        });
+
+        transition.play();
     }
 
     private void nonLeaderCardsDoAbility(GameCardView gameCardView) {
