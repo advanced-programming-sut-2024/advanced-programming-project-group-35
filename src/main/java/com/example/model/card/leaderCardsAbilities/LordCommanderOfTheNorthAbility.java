@@ -14,7 +14,7 @@ public class LordCommanderOfTheNorthAbility implements LeaderAbility {
     private void removeMaxPoweredCardInARow(Player player, Row row) {
         if (!row.isEmpty() && row.getStrength() >= 10) {
             int maximumPowerInRow = 0;
-            UnitCard maxPoweredCard = new UnitCard(0, null, null, false, null, false);
+            UnitCard maxPoweredCard = new UnitCard(0, null, null,null, false, null, false);
             for (UnitCard card : player.getBoard().getRangedCardPlace().getCards()) {
                 if (maxPoweredCard.getCurrentPower() >= maximumPowerInRow) {
                     maxPoweredCard = card;

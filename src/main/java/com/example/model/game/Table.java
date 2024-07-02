@@ -3,8 +3,10 @@ package com.example.model.game;
 import com.example.model.card.enums.FactionsType;
 import com.example.model.game.place.SpellPlace;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Table {
+    private int gameId;
     private Player currentPlayer;
     private Player opponent;
     private SpellPlace spellPlace;
@@ -22,7 +24,13 @@ public class Table {
         }
         this.rounds = new ArrayList<>();
         this.roundNumber = 1;
+        this.gameId = new Date().hashCode();
     }
+
+    public int getGameId() {
+        return gameId;
+    }
+
     public void addRound(Round round) {
         rounds.add(round);
     }

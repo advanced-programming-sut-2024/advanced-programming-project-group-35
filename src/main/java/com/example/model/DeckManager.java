@@ -60,13 +60,14 @@ public class DeckManager {
         }
     }
 
-    public static Deck loadDeck(ArrayList<String> cardNames) {
+    public static Deck loadDeck(ArrayList<String> cardNames, int first) {
         Deck deck = new Deck();
         deck.setLeader(LeaderFactory.getLeaderCardByName(cardNames.get(1)));
         deck.setFaction(FactionsType.getFactionByName(cardNames.get(0)));
-
         for (int i = 2; i < cardNames.size(); i++) {
-            deck.addCard(CardFactory.getCardByName(cardNames.get(i)));
+            Card card = CardFactory.getCardByName(cardNames.get(i));
+            card.setIdInGame(first * 100 + i - 1);
+            deck.addCard(card);
         }
         return deck;
     }

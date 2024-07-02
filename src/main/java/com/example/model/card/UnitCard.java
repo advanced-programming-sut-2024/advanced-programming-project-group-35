@@ -1,5 +1,6 @@
 package com.example.model.card;
 
+import com.example.model.card.enums.AbilityName;
 import com.example.model.card.enums.CardData;
 import com.example.model.game.place.Place;
 
@@ -9,8 +10,8 @@ public class UnitCard extends Card {
     private boolean isHero;
     private boolean noRemove; // برای وقتیه که ما میخوایم دور رو عوض کنیم و اگه یه کارتی اینش ترو باشه نباید از صفحه حدف شه (برای ابیلیتی مانستر)
 
-    public UnitCard(int power, Ability ability, Place place, boolean isHero, CardData cardData, boolean noRemove) {
-        super(place, ability, cardData);
+    public UnitCard(int power, Ability ability, AbilityName abilityName, Place place, boolean isHero, CardData cardData, boolean noRemove) {
+        super(place, ability, abilityName,cardData);
         this.power = power;
         this.currentPower = power;
         this.isHero = isHero;

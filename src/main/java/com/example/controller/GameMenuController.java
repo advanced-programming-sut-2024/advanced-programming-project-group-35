@@ -1,20 +1,29 @@
 package com.example.controller;
 
+import com.example.Main;
 import com.example.model.App;
 import com.example.model.DeckManager;
+import com.example.model.GameData;
 import com.example.model.card.*;
 import com.example.model.card.enums.CardData;
 import com.example.model.card.enums.FactionsType;
 import com.example.model.game.*;
 import com.example.view.Menu;
+import com.google.gson.*;
+import com.google.gson.reflect.TypeToken;
 
-import java.util.ArrayList;
-import java.util.Random;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.net.URISyntaxException;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class GameMenuController extends AppController {
-    private Deck player1Deck;
-    private Deck player2Deck;
     private Table table;
+
     @Override
     public void run() {
         try {
@@ -63,8 +72,8 @@ public class GameMenuController extends AppController {
     }
 
     public void startNewGame(String player1Name, String player2Name, ArrayList<String> player1DeckNames, ArrayList<String> player2DeckNames) {
-        Deck player1Deck = DeckManager.loadDeck(player1DeckNames);
-        Deck player2Deck = DeckManager.loadDeck(player2DeckNames);
+        Deck player1Deck = DeckManager.loadDeck(player1DeckNames, 1);
+        Deck player2Deck = DeckManager.loadDeck(player2DeckNames, 2);
         Player player1 = new Player(player1Name);
         Player player2 = new Player(player2Name);
         player1.getBoard().setDeck(player1Deck);
@@ -72,11 +81,126 @@ public class GameMenuController extends AppController {
         player1.getBoard().setHandForStartGame(player1Deck);
         player2.getBoard().setHandForStartGame(player2Deck);
         table = new Table(player1, player2);
+        saveLog(generateInitialDeckData());
         Round round1 = new Round(1);
         table.addRound(round1);
         table.setCurrentRound(round1);
 //        //TODO لود عکس های صفحه
         startRound(table);
+    }
+
+    public void saveLog(String command) {
+        try {
+            String filePath = getString(table);
+            JsonObject jsonObject;
+
+            File jsonFile = new File(filePath);
+            if (jsonFile.exists()) {
+                try (FileReader reader = new FileReader(jsonFile)) {
+                    jsonObject = JsonParser.parseReader(reader).getAsJsonObject();
+                }
+            } else {
+                jsonObject = new JsonObject();
+            }
+
+            JsonArray commands;
+            if (jsonObject.has("commands")) {
+                commands = jsonObject.getAsJsonArray("commands");
+            } else {
+                commands = new JsonArray();
+                jsonObject.add("commands", commands);
+            }
+
+            commands.add(command);
+
+            try (FileWriter writer = new FileWriter(filePath)) {
+                Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                gson.toJson(jsonObject, writer);
+                System.out.println("game log Saved Successfully.");
+            }
+        } catch (IOException | URISyntaxException e) {
+            e.printStackTrace();
+            System.err.println("Failed to save game log." + e.getMessage());
+        }
+    }
+
+    private void saveLog(LinkedHashMap<String, Object> deckData) {
+        try {
+            String filePath = getString(table);
+            JsonObject jsonObject;
+
+            File jsonFile = new File(filePath);
+            if (jsonFile.exists()) {
+                try (FileReader reader = new FileReader(jsonFile)) {
+                    jsonObject = JsonParser.parseReader(reader).getAsJsonObject();
+                }
+            } else {
+                jsonObject = new JsonObject();
+            }
+
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            for (Map.Entry<String, Object> entry : deckData.entrySet()) {
+                JsonElement element = gson.toJsonTree(entry.getValue());
+                jsonObject.add(entry.getKey(), element);
+            }
+
+            try (FileWriter writer = new FileWriter(filePath)) {
+                gson.toJson(jsonObject, writer);
+                System.out.println("game log Saved Successfully.");
+            }
+        } catch (IOException | URISyntaxException e) {
+            e.printStackTrace();
+            System.err.println("Failed to save game log." + e.getMessage());
+        }
+    }
+
+    private LinkedHashMap<String, Object> generateInitialDeckData() {
+        LinkedHashMap<String, Object> deckData = new LinkedHashMap<>();
+        deckData.put("player1", table.getCurrentPlayer().getUsername());
+        deckData.put("player1Faction", FactionsType.toSting(table.getCurrentPlayer().getBoard().getDeck().getFaction()));
+        deckData.put("player1Hand", table.getCurrentPlayer().getBoard().getHand().getCards().stream()
+                .map(card -> {
+                    Map<String, Object> cardData = new LinkedHashMap<>();
+                    cardData.put("name", card.getName());
+                    cardData.put("id", card.getIdInGame());
+                    return cardData;
+                }).collect(Collectors.toList()));
+        deckData.put("player1Deck", table.getCurrentPlayer().getBoard().getDeck().getCards().stream()
+                .map(card -> {
+                    Map<String, Object> cardData = new LinkedHashMap<>();
+                    cardData.put("name", card.getName());
+                    cardData.put("id", card.getIdInGame());
+                    return cardData;
+                }).collect(Collectors.toList()));
+
+        deckData.put("player2", table.getOpponent().getUsername());
+        deckData.put("player2Faction", FactionsType.toSting(table.getOpponent().getBoard().getDeck().getFaction()));
+        deckData.put("player2Hand", table.getOpponent().getBoard().getHand().getCards().stream()
+                .map(card -> {
+                    Map<String, Object> cardData = new LinkedHashMap<>();
+                    cardData.put("name", card.getName());
+                    cardData.put("id", card.getIdInGame());
+                    return cardData;
+                }).collect(Collectors.toList()));
+        deckData.put("player2Deck", table.getOpponent().getBoard().getDeck().getCards().stream()
+                .map(card -> {
+                    Map<String, Object> cardData = new LinkedHashMap<>();
+                    cardData.put("name", card.getName());
+                    cardData.put("id", card.getIdInGame());
+                    return cardData;
+                }).collect(Collectors.toList()));
+        return deckData;
+    }
+
+    private static String getString(Table table) throws URISyntaxException {
+        String rootPath = new File(GameMenuController.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile().getParentFile().getPath();
+        String logsDirPath = rootPath + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "gameLogs";
+        File logsDir = new File(logsDirPath);
+        if (!logsDir.exists()) {
+            logsDir.mkdirs();
+        }
+        String filePath = logsDirPath + File.separator + table.getGameId() + ".json";
+        return filePath;
     }
 
     public void passRound(Table table) {
@@ -184,14 +308,6 @@ public class GameMenuController extends AppController {
 
     public void disApplyWeatherCards(Table table) {
         //TODO
-    }
-
-    public Deck getPlayer1Deck() {
-        return player1Deck;
-    }
-
-    public Deck getPlayer2Deck() {
-        return player2Deck;
     }
 
     public Table getTable() {
