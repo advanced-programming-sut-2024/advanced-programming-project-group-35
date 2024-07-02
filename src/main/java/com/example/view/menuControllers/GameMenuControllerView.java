@@ -461,42 +461,38 @@ public class GameMenuControllerView {
 
     private void moveCardToDestinationFlowPane(int cardId, String initialObservableListName, String destinationObservableListName) {
         GameCardView gameCardView = getGameCardViewWithCardId(cardId);
+        gameCardView.setDragged(true);
         ObservableList<GameCardView> initialObservableList = getObservableListWithName(initialObservableListName);
         ObservableList<GameCardView> destinationObservableList = getObservableListWithName(destinationObservableListName);
-        initialObservableList.remove(gameCardView);
-        destinationObservableList.add(gameCardView);
-
-        FlowPane destinationFlowPane = getFlowPaneWithName(destinationObservableListName);
+        FlowPane destinationFLowPane = getFlowPaneWithName(destinationObservableListName);
         FlowPane initialFlowPane = getFlowPaneWithName(initialObservableListName);
+        double startX = gameCardView.getLayoutX();
+        double startY = gameCardView.getLayoutY();
+        double endX = destinationFLowPane.getLayoutX() - initialFlowPane.getLayoutX();
+        double endY = destinationFLowPane.getLayoutY() - initialFlowPane.getLayoutY();
 
-        moveAnimation(gameCardView, destinationFlowPane, initialFlowPane, initialObservableList, destinationObservableList);
-
+        cardMoveAnimation(gameCardView, 0, 0, endX, endY, initialObservableList, initialFlowPane, destinationObservableList, destinationFLowPane);
         disableMouseEventsForHandCard(cardId);
-        destinationFlowPane.setOnMouseClicked(null);
+        destinationFLowPane.setOnMouseClicked(null);
         controller.saveLog("cardWithId: " + gameCardView.getCard().getIdInGame() + " for PlayerWithId: " + table.getCurrentPlayer().getUsername() + " movedFrom: " + initialObservableListName + " to: " + destinationObservableListName);
     }
-    private void moveAnimation(GameCardView gameCardView, FlowPane destinationFlowPane, FlowPane initialFlowPane, ObservableList<GameCardView> initialObservableList, ObservableList<GameCardView> destinationObservableList) {
-        Bounds initialBounds = gameCardView.localToScene(gameCardView.getBoundsInLocal());
-        Bounds destinationBounds = destinationFlowPane.localToScene(destinationFlowPane.getBoundsInLocal());
 
-        double destinationCenterX = destinationBounds.getMinX() + destinationBounds.getWidth() / 2 - gameCardView.getBoundsInLocal().getWidth() / 2;
-        double destinationCenterY = destinationBounds.getMinY() + destinationFlowPane.getHeight() / 2 - gameCardView.getBoundsInLocal().getHeight() / 2;
-
-        double distanceX = destinationCenterX - initialBounds.getMinX();
-        double distanceY = destinationCenterY - initialBounds.getMinY();
-
+    private static void cardMoveAnimation(GameCardView gameCardView, double startX, double startY, double endX, double endY, ObservableList<GameCardView> initialObservableList, FlowPane initialFlowPane, ObservableList<GameCardView> destinationObservableList, FlowPane destinationFLowPane) {
         TranslateTransition transition = new TranslateTransition(Duration.seconds(1), gameCardView);
-        transition.setByX(distanceX);
-        transition.setByY(distanceY);
+        transition.setFromX(startX);
+        transition.setFromY(startY);
+        transition.setToX(endX);
+        transition.setToY(endY);
 
         transition.setOnFinished(event -> {
             initialObservableList.remove(gameCardView);
-            destinationObservableList.add(gameCardView);
-            destinationFlowPane.getChildren().add(gameCardView);
             initialFlowPane.getChildren().remove(gameCardView);
+
+            destinationObservableList.add(gameCardView);
+            destinationFLowPane.getChildren().add(gameCardView);
+
             gameCardView.setTranslateX(0);
             gameCardView.setTranslateY(0);
-            nonLeaderCardsDoAbility(gameCardView);
         });
 
         transition.play();

@@ -1,6 +1,7 @@
 package com.example.model.card;
 
 import com.example.Main;
+import com.example.model.App;
 import com.example.model.card.enums.CardData;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -20,6 +21,7 @@ public class GameCardView extends Pane {
     private Card card;
     private CardData cardData;
     private Rectangle cardBase;
+    boolean isDragged = false;
 
     public GameCardView(Card card) {
         this.card = card;
@@ -101,5 +103,9 @@ public class GameCardView extends Pane {
 
     public com.example.model.card.enums.CardData getCardData() {
         return cardData;
+    }
+
+    public void setDragged(boolean dragged) {
+        isDragged = dragged;
     }
 }
