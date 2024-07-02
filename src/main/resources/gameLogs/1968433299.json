@@ -1,0 +1,207 @@
+{
+  "player1": "ali",
+  "player1Faction": "Monsters",
+  "player1Hand": [
+    {
+      "name": "special_horn_1",
+      "id": 101
+    },
+    {
+      "name": "special_mardroeme",
+      "id": 103
+    },
+    {
+      "name": "special_mardroeme_2",
+      "id": 105
+    },
+    {
+      "name": "weather_fog_1",
+      "id": 107
+    },
+    {
+      "name": "weather_frost_1",
+      "id": 109
+    },
+    {
+      "name": "neutral_ciri",
+      "id": 111
+    },
+    {
+      "name": "neutral_dandelion",
+      "id": 113
+    },
+    {
+      "name": "neutral_gaunter_odimm",
+      "id": 115
+    },
+    {
+      "name": "neutral_geralt",
+      "id": 117
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 119
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 121
+    }
+  ],
+  "player1Deck": [
+    {
+      "name": "special_horn_2",
+      "id": 102
+    },
+    {
+      "name": "special_mardroeme_1",
+      "id": 104
+    },
+    {
+      "name": "weather_fog",
+      "id": 106
+    },
+    {
+      "name": "weather_frost",
+      "id": 108
+    },
+    {
+      "name": "weather_rain",
+      "id": 110
+    },
+    {
+      "name": "neutral_cow",
+      "id": 112
+    },
+    {
+      "name": "neutral_emiel",
+      "id": 114
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 116
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 118
+    },
+    {
+      "name": "neutral_triss",
+      "id": 120
+    },
+    {
+      "name": "neutral_villen",
+      "id": 122
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 123
+    }
+  ],
+  "player2": "opponent",
+  "player2Faction": "Monsters",
+  "player2Hand": [
+    {
+      "name": "special_horn_1",
+      "id": 201
+    },
+    {
+      "name": "special_mardroeme",
+      "id": 203
+    },
+    {
+      "name": "special_mardroeme_2",
+      "id": 205
+    },
+    {
+      "name": "weather_fog_1",
+      "id": 207
+    },
+    {
+      "name": "weather_frost_1",
+      "id": 209
+    },
+    {
+      "name": "neutral_ciri",
+      "id": 211
+    },
+    {
+      "name": "neutral_dandelion",
+      "id": 213
+    },
+    {
+      "name": "neutral_gaunter_odimm",
+      "id": 215
+    },
+    {
+      "name": "neutral_geralt",
+      "id": 217
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 219
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 221
+    }
+  ],
+  "player2Deck": [
+    {
+      "name": "special_horn_2",
+      "id": 202
+    },
+    {
+      "name": "special_mardroeme_1",
+      "id": 204
+    },
+    {
+      "name": "weather_fog",
+      "id": 206
+    },
+    {
+      "name": "weather_frost",
+      "id": 208
+    },
+    {
+      "name": "weather_rain",
+      "id": 210
+    },
+    {
+      "name": "neutral_cow",
+      "id": 212
+    },
+    {
+      "name": "neutral_emiel",
+      "id": 214
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 216
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 218
+    },
+    {
+      "name": "neutral_triss",
+      "id": 220
+    },
+    {
+      "name": "neutral_villen",
+      "id": 222
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 223
+    }
+  ],
+  "commands": [
+    "cardWithId: 111 for PlayerWithId: ali movedFrom: currentPlayerHandObservableList to: currentPlayerCloseCombatObservableList",
+    "cardWithId: 103 for PlayerWithId: ali movedFrom: currentPlayerHandObservableList to: currentPlayerRangedSpecialPlaceObservableList",
+    "cardWithId: 113 for PlayerWithId: ali movedFrom: currentPlayerHandObservableList to: currentPlayerCloseCombatObservableList",
+    "cardWithId: 119 for PlayerWithId: ali movedFrom: currentPlayerHandObservableList to: currentPlayerCloseCombatObservableList",
+    "cardWithId: 117 for PlayerWithId: ali movedFrom: currentPlayerHandObservableList to: currentPlayerCloseCombatObservableList",
+    "cardWithId: 109 for PlayerWithId: ali movedFrom: currentPlayerHandObservableList to: weatherObservableList",
+    "cardWithId: 101 for PlayerWithId: ali movedFrom: currentPlayerHandObservableList to: currentPlayerCloseCombatSpecialPlaceObservableList"
+  ]
+}

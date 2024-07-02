@@ -8,6 +8,7 @@ import com.example.model.card.*;
 import com.example.model.card.enums.CardData;
 import com.example.model.card.enums.FactionsType;
 import com.example.model.game.*;
+import com.example.model.game.place.Row;
 import com.example.model.game.place.RowsInGame;
 import com.example.view.Menu;
 import com.google.gson.*;
@@ -35,20 +36,20 @@ public class GameMenuController extends AppController {
         }
     }
 
-    public void vetoCard(Player player, Card selectedCard) {
-        //TODO
-        if (player.canVetoCard()) {
-            Deck deck = player.getBoard().getDeck();
-            Hand hand = player.getBoard().getHand();
-            Card ranomCard = deck.getCard(new Random().nextInt(deck.getSize()));
-            hand.removeCard(selectedCard);
-            hand.addCard(ranomCard);
-            deck.removeCard(ranomCard);
-            deck.addCard(selectedCard);
-            player.decreaseNumberOfVetoCards();
-            //TODO گرافیک جابه جایی کارت
-        }
-    }
+//    public void vetoCard(Player player, Card selectedCard) {
+//        //TODO
+//        if (player.canVetoCard()) {
+//            Deck deck = player.getBoard().getDeck();
+//            Hand hand = player.getBoard().getHand();
+//            Card ranomCard = deck.getCard(new Random().nextInt(deck.getSize()));
+//            hand.removeCard(selectedCard);
+//            hand.addCard(ranomCard);
+//            deck.removeCard(ranomCard);
+//            deck.addCard(selectedCard);
+//            player.decreaseNumberOfVetoCards();
+//            //TODO گرافیک جابه جایی کارت
+//        }
+//    }
 
     public void doUnitCardAction(Card card, AbilityContext abilityContext) {
         if (card.getAbility() != null) {
@@ -70,6 +71,64 @@ public class GameMenuController extends AppController {
         } else if (!table.getOpponent().isPassRound()) {
             changeTurn(table);
         }
+    }
+
+    public void moveCardFromOriginToDestination(RowsInGame origin, RowsInGame destination, Card card) {
+        switch (origin) {
+            case currentPlayerHand -> table.getCurrentPlayer().getBoard().getHand().removeCard(card);
+            case currentPlayerSiege ->
+                    table.getCurrentPlayer().getBoard().getSiegeCardPlace().removeCard((UnitCard) card);
+            case currentPlayerRanged ->
+                    table.getCurrentPlayer().getBoard().getRangedCardPlace().removeCard((UnitCard) card);
+            case currentPlayerCloseCombat ->
+                    table.getCurrentPlayer().getBoard().getCloseCombatCardPlace().removeCard((UnitCard) card);
+            case weather -> table.getSpellPlace().removeCard((WeatherCard) card);
+            case opponentPlayerSiege -> table.getOpponent().getBoard().getSiegeCardPlace().removeCard((UnitCard) card);
+            case opponentPlayerRanged ->
+                    table.getOpponent().getBoard().getRangedCardPlace().removeCard((UnitCard) card);
+            case opponentPlayerCloseCombat ->
+                    table.getOpponent().getBoard().getCloseCombatCardPlace().removeCard((UnitCard) card);
+            case currentPlayerSiegeSpecialPlace ->
+                    table.getCurrentPlayer().getBoard().getSiegeCardPlace().setSpecialPlace(null);
+            case currentPlayerRangedSpecialPlace ->
+                    table.getCurrentPlayer().getBoard().getRangedCardPlace().setSpecialPlace(null);
+            case opponentPlayerSiegeSpecialPlace ->
+                    table.getOpponent().getBoard().getSiegeCardPlace().setSpecialPlace(null);
+            case opponentPlayerRangedSpecialPlace ->
+                    table.getOpponent().getBoard().getRangedCardPlace().setSpecialPlace(null);
+            case currentPlayerCloseCombatSpecialPlace ->
+                    table.getCurrentPlayer().getBoard().getCloseCombatCardPlace().setSpecialPlace(null);
+            case opponentPlayerCloseCombatSpecialPlace ->
+                    table.getOpponent().getBoard().getCloseCombatCardPlace().setSpecialPlace(null);
+        }
+        switch (destination) {
+            case currentPlayerHand -> table.getCurrentPlayer().getBoard().getHand().addCard(card);
+            case currentPlayerSiege ->
+                    table.getCurrentPlayer().getBoard().getSiegeCardPlace().addCard((UnitCard) card);
+            case currentPlayerRanged ->
+                    table.getCurrentPlayer().getBoard().getRangedCardPlace().addCard((UnitCard) card);
+            case currentPlayerCloseCombat ->
+                    table.getCurrentPlayer().getBoard().getCloseCombatCardPlace().addCard((UnitCard) card);
+            case weather -> table.getSpellPlace().addCard((WeatherCard) card);
+            case opponentPlayerSiege -> table.getOpponent().getBoard().getSiegeCardPlace().addCard((UnitCard) card);
+            case opponentPlayerRanged ->
+                    table.getOpponent().getBoard().getRangedCardPlace().addCard((UnitCard) card);
+            case opponentPlayerCloseCombat ->
+                    table.getOpponent().getBoard().getCloseCombatCardPlace().addCard((UnitCard) card);
+            case currentPlayerSiegeSpecialPlace ->
+                    table.getCurrentPlayer().getBoard().getSiegeCardPlace().setSpecialPlace((SpecialCard) card);
+            case currentPlayerRangedSpecialPlace ->
+                    table.getCurrentPlayer().getBoard().getRangedCardPlace().setSpecialPlace((SpecialCard) card);
+            case opponentPlayerSiegeSpecialPlace ->
+                    table.getOpponent().getBoard().getSiegeCardPlace().setSpecialPlace((SpecialCard) card);
+            case opponentPlayerRangedSpecialPlace ->
+                    table.getOpponent().getBoard().getRangedCardPlace().setSpecialPlace((SpecialCard) card);
+            case currentPlayerCloseCombatSpecialPlace ->
+                    table.getCurrentPlayer().getBoard().getCloseCombatCardPlace().setSpecialPlace((SpecialCard) card);
+            case opponentPlayerCloseCombatSpecialPlace ->
+                    table.getOpponent().getBoard().getCloseCombatCardPlace().setSpecialPlace((SpecialCard) card);
+        }
+        saveLog("card with id: " + card.getIdInGame() + " moved from: " + origin + " to" + destination);
     }
 
     public void startNewGame(String player1Name, String player2Name, ArrayList<String> player1DeckNames, ArrayList<String> player2DeckNames) {

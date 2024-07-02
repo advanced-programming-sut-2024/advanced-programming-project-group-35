@@ -2,7 +2,7 @@ package com.example.model.game.place;
 
 public enum RowsInGame {
     currentPlayerHand("currentPlayerHandObservableList"),
-    weatherObservableList("weatherObservableList"),
+    weather("weatherObservableList"),
     currentPlayerCloseCombat("currentPlayerCloseCombatObservableList"),
     currentPlayerRanged("currentPlayerRangedObservableList"),
     currentPlayerSiege("currentPlayerSiegeObservableList"),
@@ -26,5 +26,11 @@ public enum RowsInGame {
     @Override
     public String toString() {
         return listName;
+    }
+    public static RowsInGame getRowInGameByName(String rowName) {
+        for (RowsInGame row : RowsInGame.values()) {
+            if (row.listName.equals(rowName)) return row;
+        }
+        return null;
     }
 }

@@ -291,7 +291,7 @@ public class GameMenuControllerView {
                 removeStyleClass();
                 weatherCardPlace.getStyleClass().add("highlighted-flow-pane");
                 weatherCardPlace.setOnMouseClicked(e -> {
-                    moveCardToDestinationFlowPane(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.weatherObservableList.toString());
+                    moveCardToDestinationFlowPane(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.weather.toString());
                     removeStyleClass();
                 });
             }
@@ -473,8 +473,7 @@ public class GameMenuControllerView {
 
         cardMoveAnimation(gameCardView, 0, 0, endX, endY, initialObservableList, initialFlowPane, destinationObservableList, destinationFLowPane);
         disableMouseEventsForHandCard(cardId);
-        destinationFLowPane.setOnMouseClicked(null);
-        controller.saveLog("cardWithId: " + gameCardView.getCard().getIdInGame() + " for PlayerWithId: " + table.getCurrentPlayer().getUsername() + " movedFrom: " + initialObservableListName + " to: " + destinationObservableListName);
+        controller.moveCardFromOriginToDestination(RowsInGame.getRowInGameByName(initialObservableListName), RowsInGame.getRowInGameByName(destinationObservableListName), gameCardView.getCard());
     }
 
     private static void cardMoveAnimation(GameCardView gameCardView, double startX, double startY, double endX, double endY, ObservableList<GameCardView> initialObservableList, FlowPane initialFlowPane, ObservableList<GameCardView> destinationObservableList, FlowPane destinationFLowPane) {
