@@ -1,6 +1,7 @@
 package com.example.model.card;
 
 import com.example.Main;
+import com.example.model.App;
 import com.example.model.card.enums.CardData;
 import javafx.animation.TranslateTransition;
 import javafx.geometry.Pos;
@@ -23,6 +24,7 @@ public class GameCardView extends Pane {
     private Card card;
     private CardData cardData;
     private Rectangle cardBase;
+    boolean isDragged = false;
 
     // Static variable to track the currently selected card
     private static GameCardView selectedCard = null;
@@ -51,7 +53,9 @@ public class GameCardView extends Pane {
 
     private void onMouseEnter() {
         // Check if the Y position is less than 600
-        if (this.getLayoutY() == 0) {
+        if (isDragged) {
+            this.setTranslateY(0);
+            this.setEffect(null);
             return; // Disable event
         }
 
@@ -71,7 +75,9 @@ public class GameCardView extends Pane {
 
     private void onMouseExit() {
         // Check if the Y position is less than 600
-        if (this.getLayoutY() == 0) {
+        if (isDragged) {
+            this.setTranslateY(0);
+            this.setEffect(null);
             return; // Disable event
         }
 
@@ -84,7 +90,9 @@ public class GameCardView extends Pane {
 
     private void onMouseClicked() {
         // Check if the Y position is less than 600
-        if (this.getLayoutY() == 0) {
+        if (isDragged) {
+            this.setTranslateY(0);
+            this.setEffect(null);
             return; // Disable event
         }
 
@@ -167,5 +175,9 @@ public class GameCardView extends Pane {
 
     public com.example.model.card.enums.CardData getCardData() {
         return cardData;
+    }
+
+    public void setDragged(boolean dragged) {
+        isDragged = dragged;
     }
 }

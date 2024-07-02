@@ -1,0 +1,197 @@
+{
+  "player1": "ali",
+  "player1Faction": "Monsters",
+  "player1Hand": [
+    {
+      "name": "weather_storm",
+      "id": 101
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 103
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 105
+    },
+    {
+      "name": "neutral_triss",
+      "id": 107
+    },
+    {
+      "name": "neutral_villen",
+      "id": 109
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 111
+    },
+    {
+      "name": "monsters_arachas_1",
+      "id": 113
+    },
+    {
+      "name": "monsters_arachas_behemoth",
+      "id": 115
+    },
+    {
+      "name": "monsters_celaeno_harpy",
+      "id": 117
+    },
+    {
+      "name": "monsters_draug",
+      "id": 119
+    },
+    {
+      "name": "monsters_vampire_ekkimara",
+      "id": 121
+    }
+  ],
+  "player1Deck": [
+    {
+      "name": "neutral_gaunter_odimm",
+      "id": 102
+    },
+    {
+      "name": "neutral_geralt",
+      "id": 104
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 106
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 108
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 110
+    },
+    {
+      "name": "monsters_arachas",
+      "id": 112
+    },
+    {
+      "name": "monsters_arachas_2",
+      "id": 114
+    },
+    {
+      "name": "monsters_vampire_bruxa",
+      "id": 116
+    },
+    {
+      "name": "monsters_cockatrice",
+      "id": 118
+    },
+    {
+      "name": "monsters_earth_elemental",
+      "id": 120
+    },
+    {
+      "name": "monsters_endrega",
+      "id": 122
+    }
+  ],
+  "player2": "opponent",
+  "player2Faction": "Monsters",
+  "player2Hand": [
+    {
+      "name": "weather_storm",
+      "id": 201
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 203
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 205
+    },
+    {
+      "name": "neutral_triss",
+      "id": 207
+    },
+    {
+      "name": "neutral_villen",
+      "id": 209
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 211
+    },
+    {
+      "name": "monsters_arachas_1",
+      "id": 213
+    },
+    {
+      "name": "monsters_arachas_behemoth",
+      "id": 215
+    },
+    {
+      "name": "monsters_celaeno_harpy",
+      "id": 217
+    },
+    {
+      "name": "monsters_draug",
+      "id": 219
+    },
+    {
+      "name": "monsters_vampire_ekkimara",
+      "id": 221
+    }
+  ],
+  "player2Deck": [
+    {
+      "name": "neutral_gaunter_odimm",
+      "id": 202
+    },
+    {
+      "name": "neutral_geralt",
+      "id": 204
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 206
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 208
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 210
+    },
+    {
+      "name": "monsters_arachas",
+      "id": 212
+    },
+    {
+      "name": "monsters_arachas_2",
+      "id": 214
+    },
+    {
+      "name": "monsters_vampire_bruxa",
+      "id": 216
+    },
+    {
+      "name": "monsters_cockatrice",
+      "id": 218
+    },
+    {
+      "name": "monsters_earth_elemental",
+      "id": 220
+    },
+    {
+      "name": "monsters_endrega",
+      "id": 222
+    }
+  ],
+  "commands": [
+    "cardWithId: 107 for PlayerWithId: ali movedFrom: currentPlayerHandObservableList to: currentPlayerCloseCombatObservableList",
+    "cardWithId: 111 for PlayerWithId: ali movedFrom: currentPlayerHandObservableList to: currentPlayerCloseCombatObservableList",
+    "cardWithId: 115 for PlayerWithId: ali movedFrom: currentPlayerHandObservableList to: currentPlayerSiegeObservableList",
+    "cardWithId: 117 for PlayerWithId: ali movedFrom: currentPlayerHandObservableList to: currentPlayerRangedObservableList",
+    "cardWithId: 119 for PlayerWithId: ali movedFrom: currentPlayerHandObservableList to: currentPlayerCloseCombatObservableList"
+  ]
+}
