@@ -1,5 +1,7 @@
 package com.example.model.game;
 
+import com.example.model.User;
+
 import java.util.HashMap;
 
 public class Player {
@@ -13,6 +15,15 @@ public class Player {
 
     public Player(String name) {
         this.name = name;
+        this.board = new Board();
+        this.scoresOfRounds = new HashMap<>();
+        this.numberOfCrystals = 2;
+        this.numberOfVetoCards = 2;
+        this.passRound = false;
+    }
+
+    public Player(int ID){
+        this.name = User.getUserByID(ID).getUsername();
         this.board = new Board();
         this.scoresOfRounds = new HashMap<>();
         this.numberOfCrystals = 2;
