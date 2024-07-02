@@ -334,5 +334,29 @@
     "numberOfMinionCards": 0,
     "gameData": [],
     "decksAddresses": []
+  },
+  {
+    "username": "salam",
+    "password": "+Fs4PXE%3w",
+    "nickname": "jkahsj",
+    "email": "asgd@jhasghd.com",
+    "securityQuestion": 0,
+    "securityQuestionAnswer": "as",
+    "wins": 0,
+    "losses": 0,
+    "score": 0,
+    "bestScore": 0,
+    "money": 0,
+    "numberOfFlags": 0,
+    "numberOfKills": 0,
+    "numberOfDeaths": 0,
+    "numberOfDraws": 0,
+    "numberOfPlayedGames": 0,
+    "numberOfWonGames": 0,
+    "numberOfLostGames": 0,
+    "numberOfSpellCards": 0,
+    "numberOfMinionCards": 0,
+    "gameData": [],
+    "decksAddresses": []
   }
 ]

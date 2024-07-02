@@ -86,7 +86,7 @@ public class Board {
 //            deck.removeCard(deck.getCard(i));
 //        }
         //TODO تابع زیر برای تست کارو راحت میکنه
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 11; i++) {
             hand.addCard(deck.getCard(i));
             deck.removeCard(deck.getCard(i));
         }

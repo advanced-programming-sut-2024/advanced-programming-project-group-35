@@ -24,6 +24,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
+import java.util.concurrent.Flow;
+
 public class GameMenuControllerView {
     public Rectangle opponentPlayerShadowRectangle;
     public Rectangle currentPlayerShadowRectangle;
@@ -42,9 +44,9 @@ public class GameMenuControllerView {
     public Label opponentPlayerFactionName;
     public Label opponentPlayerSpecialCardCounter;
     public ImageView opponentPlayerDeckPlace;
-    public VBox opponentPlayerDiscardPlace;
+    public FlowPane opponentPlayerDiscardPlace;
     public ImageView currentPlayerDeckPlace;
-    public VBox currentPlayerDiscardPlace;
+    public FlowPane currentPlayerDiscardPlace;
     public VBox opponentPlayerLeaderCard;
     public VBox currentPlayerLeaderCard;
     public Label opponentPlayerDeckCardCounter;
@@ -256,60 +258,107 @@ public class GameMenuControllerView {
     private void setOnMouseClickForDestinationFlowPane(int cardId) {
         GameCardView gameCardView = getGameCardViewWithCardId(cardId);
         switch (gameCardView.getCardData().getPlaceToBe()) {
-            //TODO زرد شدن مقصد
             case CLOSE_COMBAT -> {
+                removeStyleClass();
+                currentPlayerCloseCombat.getStyleClass().add("highlighted-flow-pane");
                 currentPlayerCloseCombat.setOnMouseClicked(e -> {
                     moveCardToDestinationFlowPane(cardId, RowsInGame.currentPlayerHandObservableList.toString(), RowsInGame.currentPlayerCloseCombatObservableList.toString());
+                    removeStyleClass();
                 });
             }
             case RANGED -> {
+                removeStyleClass();
+                currentPlayerRanged.getStyleClass().add("highlighted-flow-pane");
                 currentPlayerRanged.setOnMouseClicked(e -> {
                     moveCardToDestinationFlowPane(cardId, RowsInGame.currentPlayerHandObservableList.toString(), RowsInGame.currentPlayerRangedObservableList.toString());
+                    removeStyleClass();
                 });
             }
             case SIEGE -> {
+                removeStyleClass();
+                currentPlayerSiege.getStyleClass().add("highlighted-flow-pane");
                 currentPlayerSiege.setOnMouseClicked(e -> {
                     moveCardToDestinationFlowPane(cardId, RowsInGame.currentPlayerHandObservableList.toString(), RowsInGame.currentPlayerSiegeObservableList.toString());
+                    removeStyleClass();
                 });
             }
             case AGILE -> {
+                removeStyleClass();
+                currentPlayerCloseCombat.getStyleClass().add("highlighted-flow-pane");
+                currentPlayerRanged.getStyleClass().add("highlighted-flow-pane");
                 currentPlayerCloseCombat.setOnMouseClicked(e -> {
                     moveCardToDestinationFlowPane(cardId, RowsInGame.currentPlayerHandObservableList.toString(), RowsInGame.currentPlayerCloseCombatObservableList.toString());
+                    removeStyleClass();
                 });
                 currentPlayerRanged.setOnMouseClicked(e -> {
                     moveCardToDestinationFlowPane(cardId, RowsInGame.currentPlayerHandObservableList.toString(), RowsInGame.currentPlayerRangedObservableList.toString());
+                    removeStyleClass();
                 });
             }
             case WEATHER -> {
+                removeStyleClass();
+                weatherCardPlace.getStyleClass().add("highlighted-flow-pane");
                 weatherCardPlace.setOnMouseClicked(e -> {
                     moveCardToDestinationFlowPane(cardId, RowsInGame.currentPlayerHandObservableList.toString(), RowsInGame.weatherObservableList.toString());
+                    removeStyleClass();
                 });
             }
             case SPECIAL -> {
                 if (gameCardView.getCard().getAbilityName() == AbilityName.DECOY) {
+                    removeStyleClass();
+                    currentPlayerCloseCombat.getStyleClass().add("highlighted-flow-pane");
+                    currentPlayerRanged.getStyleClass().add("highlighted-flow-pane");
+                    currentPlayerSiege.getStyleClass().add("highlighted-flow-pane");
                     currentPlayerCloseCombat.setOnMouseClicked(e -> {
                         moveCardToDestinationFlowPane(cardId, RowsInGame.currentPlayerHandObservableList.toString(), RowsInGame.currentPlayerCloseCombatObservableList.toString());
+                        removeStyleClass();
                     });
                     currentPlayerRanged.setOnMouseClicked(e -> {
                         moveCardToDestinationFlowPane(cardId, RowsInGame.currentPlayerHandObservableList.toString(), RowsInGame.currentPlayerRangedObservableList.toString());
+                        removeStyleClass();
                     });
                     currentPlayerSiege.setOnMouseClicked(e -> {
                         moveCardToDestinationFlowPane(cardId, RowsInGame.currentPlayerHandObservableList.toString(), RowsInGame.currentPlayerSiegeObservableList.toString());
+                        removeStyleClass();
                     });
                 } else {
-                    //TODO اول چک بشه که محل کارت خاص خالیه یا نه
-                    currentPlayerCloseCombatSpecialPlace.setOnMouseClicked(e -> {
-                        moveCardToDestinationFlowPane(cardId, RowsInGame.currentPlayerHandObservableList.toString(), RowsInGame.currentPlayerCloseCombatSpecialPlace.toString());
-                    });
-                    currentPlayerRangedSpecialPlace.setOnMouseClicked(e -> {
-                        moveCardToDestinationFlowPane(cardId, RowsInGame.currentPlayerHandObservableList.toString(), RowsInGame.currentPlayerRangedSpecialPlace.toString());
-                    });
-                    currentPlayerSiegeSpecialPlace.setOnMouseClicked(e -> {
-                        moveCardToDestinationFlowPane(cardId, RowsInGame.currentPlayerHandObservableList.toString(), RowsInGame.currentPlayerSiegeSpecialPlace.toString());
-                    });
+                    if (currentPlayerCloseCombatSpecialPlace.getChildren().isEmpty()) {
+                        //TODO add style class to the place that you want
+                        currentPlayerCloseCombatSpecialPlace.getChildren().add(gameCardView);
+                        currentPlayerCloseCombatSpecialPlace.setOnMouseClicked(e -> {
+                            moveCardToDestinationFlowPane(cardId, RowsInGame.currentPlayerHandObservableList.toString(), RowsInGame.currentPlayerCloseCombatSpecialPlace.toString());
+                            removeStyleClass();
+                        });
+                    }
+                    if (currentPlayerRangedSpecialPlace.getChildren().isEmpty()) {
+                        //TODO add style class to the place that you want
+                        currentPlayerRangedSpecialPlace.getChildren().add(gameCardView);
+                        currentPlayerRangedSpecialPlace.setOnMouseClicked(e -> {
+                            moveCardToDestinationFlowPane(cardId, RowsInGame.currentPlayerHandObservableList.toString(), RowsInGame.currentPlayerRangedSpecialPlace.toString());
+                            removeStyleClass();
+                        });
+                    }
+                    if (currentPlayerSiegeSpecialPlace.getChildren().isEmpty()) {
+                        //TODO add style class to the place that you want
+                        currentPlayerSiegeSpecialPlace.getChildren().add(gameCardView);
+                        currentPlayerSiegeSpecialPlace.setOnMouseClicked(e -> {
+                            moveCardToDestinationFlowPane(cardId, RowsInGame.currentPlayerHandObservableList.toString(), RowsInGame.currentPlayerSiegeSpecialPlace.toString());
+                            removeStyleClass();
+                        });
+                    }
                 }
             }
         }
+    }
+
+    private void removeStyleClass() {
+        currentPlayerCloseCombat.getStyleClass().remove("highlighted-flow-pane");
+        currentPlayerRanged.getStyleClass().remove("highlighted-flow-pane");
+        currentPlayerSiege.getStyleClass().remove("highlighted-flow-pane");
+        weatherCardPlace.getStyleClass().remove("highlighted-flow-pane");
+        currentPlayerCloseCombatSpecialPlace.getStyleClass().remove("highlighted-flow-pane");
+        currentPlayerRangedSpecialPlace.getStyleClass().remove("highlighted-flow-pane");
+        currentPlayerSiegeSpecialPlace.getStyleClass().remove("highlighted-flow-pane");
     }
 
     private ObservableList<GameCardView> getObservableListWithName(String listName) {
@@ -376,6 +425,7 @@ public class GameMenuControllerView {
         }
     }
 
+    //TODO Ali Task
     private void moveCardToDestinationFlowPane(int cardId, String initialObservableListName, String destinationObservableListName) {
         GameCardView gameCardView = getGameCardViewWithCardId(cardId);
         TranslateTransition transition = new TranslateTransition(Duration.seconds(2), gameCardView);
@@ -395,12 +445,16 @@ public class GameMenuControllerView {
             nonLeaderCardsDoAbility(gameCardView);
         });
         transition.play();
+        disableMouseEventsForHandCard(cardId);
         destinationFLowPane.setOnMouseClicked(null);
         controller.saveLog("cardWithId: " + gameCardView.getCard().getIdInGame() + " for PlayerWithId: " + table.getCurrentPlayer().getUsername() + " movedFrom: " + initialObservableListName + " to: " + destinationObservableListName);
     }
 
     private void nonLeaderCardsDoAbility(GameCardView gameCardView) {
 
+    }
+
+    public void toggleMusic(MouseEvent mouseEvent) {
     }
 }
 

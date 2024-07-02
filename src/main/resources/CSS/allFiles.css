@@ -197,3 +197,13 @@
     -fx-font-size: 20px;
     -fx-text-fill: #ffffff;
 }
+.highlighted-flow-pane {
+    -fx-background-color: rgba(197, 148, 29, 0.21);
+    -fx-border-color: #ecbd5e;
+    -fx-border-width: 2;
+}
+.highlighted-flow-pane:hover {
+    -fx-background-color: rgba(197, 148, 29, 0.35);
+    -fx-border-color: #e8af3c;
+    -fx-border-width: 2;
+}
