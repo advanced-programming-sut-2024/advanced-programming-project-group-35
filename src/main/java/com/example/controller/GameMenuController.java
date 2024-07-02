@@ -2,9 +2,7 @@ package com.example.controller;
 
 import com.example.model.App;
 import com.example.model.DeckManager;
-import com.example.model.card.AbilityContext;
-import com.example.model.card.Card;
-import com.example.model.card.LeaderCard;
+import com.example.model.card.*;
 import com.example.model.card.enums.CardData;
 import com.example.model.card.enums.FactionsType;
 import com.example.model.game.*;
@@ -28,7 +26,7 @@ public class GameMenuController extends AppController {
     }
 
     public void vetoCard(Player player, Card selectedCard) {
-        //TODO  گذاشتن دکمه وتو کارت رو صفحه
+        //TODO
         if (player.canVetoCard()) {
             Deck deck = player.getBoard().getDeck();
             Hand hand = player.getBoard().getHand();
@@ -39,12 +37,10 @@ public class GameMenuController extends AppController {
             deck.addCard(selectedCard);
             player.decreaseNumberOfVetoCards();
             //TODO گرافیک جابه جایی کارت
-        } else {
-            //TODO نمایش خطا در صفحه که نمیتونی کارت وتو کنی
         }
     }
 
-    public void doCardAction(Card card, AbilityContext abilityContext) {
+    public void doUnitCardAction(Card card, AbilityContext abilityContext) {
         if (card.getAbility() != null) {
             card.getAbility().apply(abilityContext);
         }
@@ -66,21 +62,20 @@ public class GameMenuController extends AppController {
         }
     }
 
-    public void startNewGame(String player1Name, String player2Name, ArrayList<String> player1CardNames, ArrayList<String> player2CardNames) {
-        player1Deck = DeckManager.loadDeck(player1CardNames);
-        player2Deck = DeckManager.loadDeck(player2CardNames);
+    public void startNewGame(String player1Name, String player2Name, ArrayList<String> player1DeckNames, ArrayList<String> player2DeckNames) {
+        Deck player1Deck = DeckManager.loadDeck(player1DeckNames);
+        Deck player2Deck = DeckManager.loadDeck(player2DeckNames);
         Player player1 = new Player(player1Name);
         Player player2 = new Player(player2Name);
         player1.getBoard().setDeck(player1Deck);
         player2.getBoard().setDeck(player2Deck);
         player1.getBoard().setHandForStartGame(player1Deck);
-        player1.getBoard().setHandForStartGame(player2Deck);
+        player2.getBoard().setHandForStartGame(player2Deck);
         table = new Table(player1, player2);
-        table.setRoundNumber(1);
         Round round1 = new Round(1);
         table.addRound(round1);
         table.setCurrentRound(round1);
-        //TODO لود عکس های صفحه
+//        //TODO لود عکس های صفحه
         startRound(table);
     }
 
@@ -153,7 +148,6 @@ public class GameMenuController extends AppController {
         if (table.getOpponent().getBoard().getDeck().getFaction() == FactionsType.RealmsNorthern) {
             table.getCurrentPlayer().getBoard().getDeck().getFactionAbility().apply(table, table.getOpponent());
         }
-        changeRound(table);
     }
 
     private void backCardsToDiscardPiles(Table table) {
@@ -168,6 +162,8 @@ public class GameMenuController extends AppController {
             endGame(table, table.getCurrentPlayer());
         } else {
             Round round = new Round(table.getRoundNumber() + 1);
+            table.getCurrentPlayer().setPassRound(false);
+            table.getOpponent().setPassRound(false);
             table.addRound(round);
             table.setCurrentRound(round);
             table.setRoundNumber(table.getRoundNumber() + 1);
@@ -177,6 +173,7 @@ public class GameMenuController extends AppController {
 
     private void changeTurn(Table table) {
         table.swapPlayers();
+        //TODO گرافیک
     }
 
     private void endGame(Table table, Player winner) {
@@ -186,6 +183,7 @@ public class GameMenuController extends AppController {
     }
 
     public void disApplyWeatherCards(Table table) {
+        //TODO
     }
 
     public Deck getPlayer1Deck() {

@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 public class Board {
     private DiscardPile discardPile;
-    private Hand hand;
+    private Hand hand = new Hand();
     private Deck deck;
     private CloseCombatRow closeCombatCardPlace = new CloseCombatRow();
     private RangedRow rangedCardPlace = new RangedRow();
@@ -64,6 +64,31 @@ public class Board {
     }
 
     public void setHandForStartGame(Deck deck) {
-        //TODO اضافه کردن 10 تا کارت رندوم (حداقل دو تا اسپشیال اگه بود انتخاب شه)
+//        int specialCards = 0, heroCards = 0;
+//        Collections.shuffle(deck.getCards());
+//        for (Card card : deck.getCards()) {
+//            if (card instanceof SpecialCard) {
+//                hand.addCard(card);
+//                deck.removeCard(card);
+//                if ((++specialCards) == 4) break;
+//            }
+//        }
+//        Collections.shuffle(deck.getCards());
+//        for (Card card : deck.getCards()) {
+//            if (card instanceof UnitCard && ((UnitCard) card).isHero()) {
+//                hand.addCard(card);
+//                deck.removeCard(card);
+//                if ((++heroCards) == 2) break;
+//            }
+//        }
+//        for (int i = 0; i < 10 - specialCards - heroCards; i++) {
+//            hand.addCard(deck.getCard(i));
+//            deck.removeCard(deck.getCard(i));
+//        }
+        //TODO تابع زیر برای تست کارو راحت میکنه
+        for (int i = 0; i < 10; i++) {
+            hand.addCard(deck.getCard(i));
+            deck.removeCard(deck.getCard(i));
+        }
     }
 }

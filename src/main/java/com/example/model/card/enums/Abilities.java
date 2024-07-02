@@ -35,7 +35,7 @@ public enum Abilities {
                 return new MedicAbility();
             }
             case "berserker" -> {
-                return new BreskerAbility();
+                return new BerskerAbility();
             }
             case "transformer" -> {
                 return new TransformerAbility();

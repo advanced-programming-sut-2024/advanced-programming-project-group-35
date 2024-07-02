@@ -2,7 +2,9 @@ package com.example.model;
 
 import com.example.model.card.Card;
 import com.example.model.card.CardFactory;
+import com.example.model.card.LeaderCard;
 import com.example.model.card.LeaderFactory;
+import com.example.model.card.enums.CardData;
 import com.example.model.card.enums.FactionsType;
 import com.example.model.game.Deck;
 import com.google.gson.Gson;
@@ -13,10 +15,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class DeckManager {
     public static void saveDeck(Deck deck, String filename) {
@@ -65,6 +64,7 @@ public class DeckManager {
         Deck deck = new Deck();
         deck.setLeader(LeaderFactory.getLeaderCardByName(cardNames.get(1)));
         deck.setFaction(FactionsType.getFactionByName(cardNames.get(0)));
+
         for (int i = 2; i < cardNames.size(); i++) {
             deck.addCard(CardFactory.getCardByName(cardNames.get(i)));
         }
