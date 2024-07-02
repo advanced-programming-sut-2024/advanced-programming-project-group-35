@@ -2,9 +2,7 @@ package com.example.controller;
 
 import com.example.model.App;
 import com.example.model.DeckManager;
-import com.example.model.card.AbilityContext;
-import com.example.model.card.Card;
-import com.example.model.card.LeaderCard;
+import com.example.model.card.*;
 import com.example.model.card.enums.CardData;
 import com.example.model.card.enums.FactionsType;
 import com.example.model.game.*;
@@ -42,7 +40,7 @@ public class GameMenuController extends AppController {
         }
     }
 
-    public void doCardAction(Card card, AbilityContext abilityContext) {
+    public void doUnitCardAction(Card card, AbilityContext abilityContext) {
         if (card.getAbility() != null) {
             card.getAbility().apply(abilityContext);
         }
@@ -72,12 +70,12 @@ public class GameMenuController extends AppController {
         player1.getBoard().setDeck(player1Deck);
         player2.getBoard().setDeck(player2Deck);
         player1.getBoard().setHandForStartGame(player1Deck);
-        player1.getBoard().setHandForStartGame(player2Deck);
+        player2.getBoard().setHandForStartGame(player2Deck);
         table = new Table(player1, player2);
         Round round1 = new Round(1);
         table.addRound(round1);
         table.setCurrentRound(round1);
-        //TODO لود عکس های صفحه
+//        //TODO لود عکس های صفحه
         startRound(table);
     }
 
@@ -185,6 +183,7 @@ public class GameMenuController extends AppController {
     }
 
     public void disApplyWeatherCards(Table table) {
+        //TODO
     }
 
     public Deck getPlayer1Deck() {

@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 public class Board {
     private DiscardPile discardPile;
-    private Hand hand;
+    private Hand hand = new Hand();
     private Deck deck;
     private CloseCombatRow closeCombatCardPlace = new CloseCombatRow();
     private RangedRow rangedCardPlace = new RangedRow();

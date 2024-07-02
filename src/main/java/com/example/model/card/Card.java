@@ -14,6 +14,7 @@ public class Card {
         this.ability = ability;
     }
 
+
     public void setGameCardView(GameCardView gameCardView) {
         this.gameCardView = gameCardView;
     }

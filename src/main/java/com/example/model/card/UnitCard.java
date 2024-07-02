@@ -12,6 +12,7 @@ public class UnitCard extends Card {
     public UnitCard(int power, Ability ability, Place place, boolean isHero, CardData cardData, boolean noRemove) {
         super(place, ability, cardData);
         this.power = power;
+        this.currentPower = power;
         this.isHero = isHero;
         this.noRemove = noRemove;
     }

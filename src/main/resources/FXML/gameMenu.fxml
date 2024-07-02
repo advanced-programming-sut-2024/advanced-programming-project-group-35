@@ -18,26 +18,26 @@
 <!--    </ImageView>-->
    <Rectangle fx:id="opponentPlayerShadowRectangle" fill="#00000081" height="101.0" layoutY="195.0" width="324.0" />
    <Rectangle fx:id="currentPlayerShadowRectangle" fill="#00000081" height="101.0" layoutY="494.0" width="324.0" />
-   <Label fx:id="opponentPlayerSiegePower" alignment="CENTER" layoutX="377.0" layoutY="40.0" style="-fx-font-size: 24px;" styleClass="white-text" text="10" textAlignment="CENTER" />
-   <Label fx:id="opponentPlayerRangedPower" alignment="CENTER" layoutX="377.0" layoutY="137.0" style="-fx-font-size: 24px;" styleClass="white-text" text="10" textAlignment="CENTER" />
-   <Label fx:id="opponentPlayerCloseCombatPower" alignment="CENTER" layoutX="377.0" layoutY="240.0" style="-fx-font-size: 24px;" styleClass="white-text" text="10" textAlignment="CENTER" />
-   <Label fx:id="currentPlayerCloseCombatPower" alignment="CENTER" layoutX="377.0" layoutY="349.0" style="-fx-font-size: 24px;" styleClass="white-text" text="10" textAlignment="CENTER" />
-   <Label fx:id="currentPlayerRangedPower" alignment="CENTER" layoutX="377.0" layoutY="448.0" style="-fx-font-size: 24px;" styleClass="white-text" text="10" textAlignment="CENTER" />
-   <Label fx:id="currentPlayerSiegePower" alignment="CENTER" layoutX="377.0" layoutY="551.0" style="-fx-font-size: 24px;" styleClass="white-text" text="10" textAlignment="CENTER" />
+   <Label fx:id="opponentPlayerSiegePower" alignment="CENTER" layoutX="377.0" layoutY="40.0" style="-fx-font-size: 24px;" styleClass="white-text" text="0" textAlignment="CENTER" />
+   <Label fx:id="opponentPlayerRangedPower" alignment="CENTER" layoutX="377.0" layoutY="137.0" style="-fx-font-size: 24px;" styleClass="white-text" text="0" textAlignment="CENTER" />
+   <Label fx:id="opponentPlayerCloseCombatPower" alignment="CENTER" layoutX="377.0" layoutY="240.0" style="-fx-font-size: 24px;" styleClass="white-text" text="0" textAlignment="CENTER" />
+   <Label fx:id="currentPlayerCloseCombatPower" alignment="CENTER" layoutX="377.0" layoutY="349.0" style="-fx-font-size: 24px;" styleClass="white-text" text="0" textAlignment="CENTER" />
+   <Label fx:id="currentPlayerRangedPower" alignment="CENTER" layoutX="377.0" layoutY="448.0" style="-fx-font-size: 24px;" styleClass="white-text" text="0" textAlignment="CENTER" />
+   <Label fx:id="currentPlayerSiegePower" alignment="CENTER" layoutX="377.0" layoutY="551.0" style="-fx-font-size: 24px;" styleClass="white-text" text="0" textAlignment="CENTER" />
    <ImageView fitHeight="45.0" fitWidth="40.0" layoutX="305.0" layoutY="523.0" pickOnBounds="true" preserveRatio="true">
       <Image url="@../images/icons/score_total_me.png"/>
    </ImageView>
-   <Label fx:id="currentPlayerAllScoreCounter" alignment="CENTER" layoutX="316.0" layoutY="528.0" style="-fx-font-size: 24px;" styleClass="white-text" text="10" textAlignment="CENTER" />
+   <Label fx:id="currentPlayerAllScoreCounter" alignment="CENTER" layoutX="316.0" layoutY="528.0" style="-fx-font-size: 24px;" styleClass="white-text" text="0" textAlignment="CENTER" />
    <ImageView fitHeight="45.0" fitWidth="40.0" layoutX="305.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
       <Image url="@../images/icons/score_total_op.png"/>
    </ImageView>
-   <Label fx:id="opponentPlayerAllScoreCounter" alignment="CENTER" layoutX="316.0" layoutY="231.0" style="-fx-font-size: 24px;" styleClass="white-text" text="10" textAlignment="CENTER" />
+   <Label fx:id="opponentPlayerAllScoreCounter" alignment="CENTER" layoutX="316.0" layoutY="231.0" style="-fx-font-size: 24px;" styleClass="white-text" text="0" textAlignment="CENTER" />
    <Label fx:id="currentPlayerUsername" layoutX="168.0" layoutY="553.0" styleClass="yellow-text" text="Username 1" />
    <Label fx:id="currentPlayerFactionName" layoutX="168.0" layoutY="572.0" styleClass="yellow-text" text="Faction 1" />
-   <Label fx:id="currentPlayerSpecialCardCounter" alignment="CENTER" layoutX="188.0" layoutY="511.0" style="-fx-font-size: 24px;" styleClass="yellow-text" text="10" textAlignment="CENTER" />
+   <Label fx:id="currentPlayerSpecialCardCounter" alignment="CENTER" layoutX="188.0" layoutY="511.0" style="-fx-font-size: 24px;" styleClass="yellow-text" text="0" textAlignment="CENTER" />
    <Label fx:id="opponentPlayerUsername" layoutX="168.0" layoutY="199.0" styleClass="yellow-text" text="Username 2" />
    <Label fx:id="opponentPlayerFactionName" layoutX="168.0" layoutY="218.0" styleClass="yellow-text" text="Faction 2" />
-   <Label fx:id="opponentPlayerSpecialCardCounter" alignment="CENTER" layoutX="188.0" layoutY="252.0" style="-fx-font-size: 24px;" styleClass="yellow-text" text="10" textAlignment="CENTER" />
+   <Label fx:id="opponentPlayerSpecialCardCounter" alignment="CENTER" layoutX="188.0" layoutY="252.0" style="-fx-font-size: 24px;" styleClass="yellow-text" text="0" textAlignment="CENTER" />
    <ImageView fx:id="opponentPlayerDeckPlace" fitHeight="110.0" fitWidth="73.0" layoutX="1270.0" layoutY="50.0"
               pickOnBounds="true" preserveRatio="true">
       <Image url="@../images/icons/deck_back_skellige.jpg"/>

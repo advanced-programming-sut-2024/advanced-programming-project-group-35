@@ -1,12 +1,12 @@
 package com.example.model.game.place;
 
-import com.example.model.card.CardData;
+import com.example.model.card.SpecialCard;
 import com.example.model.card.UnitCard;
 
 import java.util.ArrayList;
 
 public class Row {
-    private CardData specialPlace;
+    private SpecialCard specialPlace;
     private Place place;
     private boolean applyWeather = false;
     private int strength = 0;
@@ -19,11 +19,11 @@ public class Row {
         this.applyWeather = applyWeather;
     }
 
-    public CardData getSpecialPlace() {
+    public SpecialCard getSpecialPlace() {
         return specialPlace;
     }
 
-    public void setSpecialPlace(CardData specialPlace) {
+    public void setSpecialPlace(SpecialCard specialPlace) {
         this.specialPlace = specialPlace;
     }
 

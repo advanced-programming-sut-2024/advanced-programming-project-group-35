@@ -1,7 +1,7 @@
 package com.example.model.card.factions;
 
 import com.example.model.card.Card;
-import com.example.model.card.CardData;
+import com.example.model.card.SpecialCard;
 import com.example.model.card.UnitCard;
 import com.example.model.card.enums.FactionsType;
 import com.example.model.game.Deck;
@@ -32,15 +32,15 @@ public class Skellige implements Factions {
                 Card selectedCard2 = deck.getCard(index2);
                 Row row1 = player.getBoard().getRowByName(selectedCard1.getPlace());
                 Row row2 = player.getBoard().getRowByName(selectedCard2.getPlace());
-                if (selectedCard1 instanceof CardData) {
-                    row1.setSpecialPlace((CardData) selectedCard1);
+                if (selectedCard1 instanceof SpecialCard) {
+                    row1.setSpecialPlace((SpecialCard) selectedCard1);
                     //TODO گرافیک انتقال کارت
                 } else {
                     row1.addCard((UnitCard) selectedCard1);
                     //TODO گرافیک انتقال کارت
                 }
-                if (selectedCard2 instanceof CardData) {
-                    row2.setSpecialPlace((CardData) selectedCard2);
+                if (selectedCard2 instanceof SpecialCard) {
+                    row2.setSpecialPlace((SpecialCard) selectedCard2);
                     //TODO گرافیک انتقال کارت
                 } else {
                     row2.addCard((UnitCard) selectedCard2);
@@ -52,8 +52,8 @@ public class Skellige implements Factions {
                 Card selectedCard = deck.getCard(0);
                 deck.removeCard(selectedCard);
                 Row row = player.getBoard().getRowByName(selectedCard.getPlace());
-                if (selectedCard instanceof CardData) {
-                    row.setSpecialPlace((CardData) selectedCard);
+                if (selectedCard instanceof SpecialCard) {
+                    row.setSpecialPlace((SpecialCard) selectedCard);
                     //TODO گرافیک انتقال کارت
                 } else {
                     row.addCard((UnitCard) selectedCard);

@@ -401,4 +401,8 @@ public enum CardData {
             return null;
         }
     }
+
+    public Place getPlaceToBe() {
+        return placeToBe;
+    }
 }
