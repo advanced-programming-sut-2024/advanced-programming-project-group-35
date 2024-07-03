@@ -3,6 +3,7 @@ package com.example.view.menuControllers;
 import com.example.controller.Controller;
 import com.example.controller.LoginMenuController;
 import com.example.controller.ProfileMenuController;
+import com.example.controller.server.ServerConnector;
 import com.example.model.App;
 import com.example.model.IO.errors.Errors;
 import com.example.view.Menu;
@@ -59,6 +60,10 @@ public class ProfileMenuControllerView {
     public void backToMainMenu(MouseEvent mouseEvent) {
         App.setCurrentMenu(Menu.MAIN_MENU);
         Controller.MAIN_MENU_CONTROLLER.run();
+
+        //send message to parsa:
+        ServerConnector serverConnector = new ServerConnector();
+        serverConnector.sendMessage("back to main menu");
     }
 
     private void paneChanger(String stageTitle, String fxmlFileName) throws IOException {

@@ -1,6 +1,7 @@
 package com.example.model;
 
 import com.example.controller.Controller;
+import com.example.controller.server.ClientConnector;
 import com.example.controller.server.ServerConnector;
 import com.example.model.card.Card;
 import com.example.view.AppView;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 
 public class App {
     private static ServerConnector serverConnector = new ServerConnector();
+    public static ClientConnector clientConnector ;
     private static ArrayList<String> securityQuestions = new ArrayList<String>();
 
     static {
@@ -69,9 +71,20 @@ public class App {
     public static void setLoggedInUser(User loggedInUser) {
         if (App.loggedInUser != null) {
             serverConnector.setUserOffline(App.loggedInUser);
+            clientConnector.close();
         }
         App.loggedInUser = loggedInUser;
+        connectSereverToApp();
         serverConnector.setUserOnline(loggedInUser);
+    }
+
+    private static void connectSereverToApp() {
+        try {
+            clientConnector = new ClientConnector(loggedInUser.getID());
+            new Thread(clientConnector).start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static User getUserByUsername(String username) {
@@ -128,5 +141,10 @@ public class App {
         App.socket = socket;
         App.out = out;
         App.in = in;
+    }
+
+    public void updateUserInfo() {
+        updateUsersFromServer();
+        appView.updateUserInfo();
     }
 }

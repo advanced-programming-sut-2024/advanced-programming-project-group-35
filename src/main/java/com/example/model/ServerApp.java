@@ -1,5 +1,8 @@
 package com.example.model;
 
+import com.example.controller.server.ClientConnector;
+import com.example.controller.server.PlayerHandler;
+import com.example.controller.server.Server;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -11,6 +14,16 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class ServerApp {
+    private static Server server;
+
+    public static void setServer(Server server) {
+        ServerApp.server = server;
+    }
+
+    public static Server getServer() {
+        return server;
+    }
+
     private static ArrayList<User> allUsers = new ArrayList<User>();
     public static void saveUsers(String filename) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -60,5 +73,14 @@ public class ServerApp {
     public static void setUserOffline(int userID) {
         User user = allUsers.get(userID);
         user.setOnline(false);
+    }
+
+    public static void sendMessage(int receiverID, String message) {
+        //find user connector
+        PlayerHandler clientConnector = server.getClientConnector(receiverID);
+        //send message
+        StringBuilder messageBuilder = new StringBuilder();
+        messageBuilder.append("MESSAGE|").append(receiverID).append("|").append(message);
+        clientConnector.sendMessage(messageBuilder.toString());
     }
 }

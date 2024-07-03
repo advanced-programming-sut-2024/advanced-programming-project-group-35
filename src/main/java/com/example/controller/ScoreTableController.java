@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ScoreTableController extends AppController {
+    private TableView<User> scoreboardTable;
     @Override
     public void run() {
         try {
@@ -26,7 +27,7 @@ public class ScoreTableController extends AppController {
         }
     }
 
-    public void setScoreboardTable(TableView<User> scoreboardTable, ArrayList<User> allUsers) {
+    public void makeScoreboardTable(ArrayList<User> allUsers) {
         allUsers.sort(Comparator.comparing(User::getScore).reversed());
 
         // Limit the list to the top 10 users
@@ -84,5 +85,9 @@ public class ScoreTableController extends AppController {
     public void backToMainMenu() throws Exception {
         App.getAppView().showMenu(Menu.MAIN_MENU);
         App.setCurrentController(Controller.MAIN_MENU_CONTROLLER);
+    }
+
+    public void setScoreboardTable(TableView<User> scoreboardTable) {
+        this.scoreboardTable = scoreboardTable;
     }
 }

@@ -19,7 +19,8 @@ public class ScoreTableMenuControllerView {
         controller = (ScoreTableController) Controller.SCORE_TABLE_MENU_CONTROLLER.getController();
         //scoreboardTable = (TableView) App.getAppView().getPrimaryStage().getScene().lookup("#scoreboardTable");
         disableScrolling(scoreboardTable);
-        controller.setScoreboardTable(scoreboardTable, App.getAllUsers());
+        controller.setScoreboardTable(scoreboardTable);
+        controller.makeScoreboardTable(App.getAllUsers());
     }
 
     public void backToMainMenu(MouseEvent mouseEvent) throws Exception {

@@ -132,4 +132,16 @@ public class ServerConnector {
             e.printStackTrace();
         }
     }
+
+    public void sendMessage(String backToMainMenu) {
+        try (
+                Socket socket = new Socket(SERVER_IP, SERVER_PORT);
+                PrintWriter out = new PrintWriter(socket.getOutputStream(), true)
+        ) {
+            out.println("Message|2");
+            out.println(backToMainMenu);
+        } catch (IOException e) {
+            e.printStackTrace();
+    }
+    }
 }

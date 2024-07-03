@@ -2,6 +2,8 @@ package com.example.view;
 
 import com.example.Main;
 import com.example.controller.Controller;
+import com.example.controller.ScoreTableController;
+import com.example.model.App;
 import com.example.model.alerts.Alert;
 import com.example.model.Terminal;
 import javafx.animation.KeyFrame;
@@ -94,5 +96,13 @@ public class AppView extends Application {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void updateUserInfo() {
+        ((ScoreTableController) Controller.SCORE_TABLE_MENU_CONTROLLER.getController()).makeScoreboardTable(App.getAllUsers());
+    }
+
+    public void showMessage(String part) {
+        showAlert(part, "info");
     }
 }

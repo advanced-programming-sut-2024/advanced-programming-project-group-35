@@ -1,6 +1,4 @@
 package com.example.controller.server;// Server.java
-import com.example.controller.server.PlayerHandler;
-import com.example.model.App;
 import com.example.model.ServerApp;
 import com.example.model.game.OnlineTable;
 import com.example.model.game.Player;
@@ -13,6 +11,7 @@ public class Server {
     private static final int PORT = 8080;
     private ConcurrentHashMap<Integer, PlayerHandler> players = new ConcurrentHashMap<>();
     private ConcurrentHashMap<Integer, OnlineTable> games = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<Integer, PlayerHandler> clientConnectors = new ConcurrentHashMap<>();
 
     public void start() {
         ServerApp.loadUsers("users.json");
@@ -55,6 +54,14 @@ public class Server {
 
     public static void main(String[] args) {
         new Server().start();
+    }
+
+    public void addClientConnector(int id, PlayerHandler playerHandler) {
+        clientConnectors.put(id, playerHandler);
+    }
+
+    public PlayerHandler getClientConnector(int receiverID) {
+        return clientConnectors.get(receiverID);
     }
 }
 

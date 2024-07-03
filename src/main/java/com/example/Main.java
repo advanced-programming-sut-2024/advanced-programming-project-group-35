@@ -1,6 +1,7 @@
 package com.example;
 
 
+import com.example.controller.server.ClientConnector;
 import com.example.model.App;
 import com.example.view.AppView;
 import javafx.application.Application;
@@ -11,6 +12,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+
+import static com.example.model.App.clientConnector;
 
 public class Main extends Application {
     private static final String SERVER_IP = "localhost";
