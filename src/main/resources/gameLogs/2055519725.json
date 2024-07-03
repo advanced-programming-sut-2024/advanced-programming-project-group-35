@@ -271,6 +271,12 @@
     "card with id: 112 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableListand ability applied",
     "card with id: 117 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableListand ability applied",
     "card with id: 114 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableListand ability applied",
-    "card with id: 103 moved from currentPlayerHandObservableList to currentPlayerCloseCombatSpecialPlaceObservableListand ability applied"
+    "card with id: 103 moved from currentPlayerHandObservableList to currentPlayerCloseCombatSpecialPlaceObservableListand ability applied",
+    "card with id: 121 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableListand ability applied",
+    "card with id: 120 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableListand ability applied",
+    "card with id: 122 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableListand ability applied",
+    "card with id: 119 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableListand ability applied",
+    "card with id: 108 moved from currentPlayerHandObservableList to weatherObservableListand ability applied",
+    "card with id: 102 moved from currentPlayerHandObservableList to currentPlayerRangedSpecialPlaceObservableListand ability applied"
   ]
 }

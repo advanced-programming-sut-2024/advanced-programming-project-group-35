@@ -151,6 +151,8 @@ public class GameCardView extends Pane {
             }
             case COMMANDER_HORN -> {
                 return GameCardView.class.getResource("/images/icons/anim_horn.png").toExternalForm();
+            }  case TIGHT_BOND -> {
+                return GameCardView.class.getResource("/images/icons/anim_bond.png").toExternalForm();
             }
             default -> {
                 return null;

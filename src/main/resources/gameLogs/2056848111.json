@@ -1,0 +1,385 @@
+{
+  "player1": "ali",
+  "player1Faction": "RealmsNorthern",
+  "player1Hand": [
+    {
+      "name": "realms_blue_stripes",
+      "id": 128
+    },
+    {
+      "name": "realms_catapult_1",
+      "id": 129
+    },
+    {
+      "name": "realms_crinfrid",
+      "id": 130
+    },
+    {
+      "name": "realms_poor_infantry",
+      "id": 141
+    },
+    {
+      "name": "special_horn",
+      "id": 101
+    },
+    {
+      "name": "special_horn_2",
+      "id": 103
+    },
+    {
+      "name": "special_mardroeme_1",
+      "id": 105
+    },
+    {
+      "name": "special_scorch",
+      "id": 107
+    },
+    {
+      "name": "special_scorch_2",
+      "id": 109
+    },
+    {
+      "name": "neutral_chort",
+      "id": 111
+    },
+    {
+      "name": "neutral_cow",
+      "id": 113
+    },
+    {
+      "name": "neutral_emiel",
+      "id": 115
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 117
+    }
+  ],
+  "player1Deck": [
+    {
+      "name": "special_horn_1",
+      "id": 102
+    },
+    {
+      "name": "special_mardroeme",
+      "id": 104
+    },
+    {
+      "name": "special_mardroeme_2",
+      "id": 106
+    },
+    {
+      "name": "special_scorch_1",
+      "id": 108
+    },
+    {
+      "name": "weather_fog",
+      "id": 110
+    },
+    {
+      "name": "neutral_ciri",
+      "id": 112
+    },
+    {
+      "name": "neutral_dandelion",
+      "id": 114
+    },
+    {
+      "name": "neutral_gaunter_odimm",
+      "id": 116
+    },
+    {
+      "name": "neutral_geralt",
+      "id": 118
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 119
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 120
+    },
+    {
+      "name": "neutral_triss",
+      "id": 121
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 122
+    },
+    {
+      "name": "neutral_villen",
+      "id": 123
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 124
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 125
+    },
+    {
+      "name": "realms_ballista",
+      "id": 126
+    },
+    {
+      "name": "realms_banner_nurse",
+      "id": 127
+    },
+    {
+      "name": "realms_dethmold",
+      "id": 131
+    },
+    {
+      "name": "realms_dijkstra",
+      "id": 132
+    },
+    {
+      "name": "realms_esterad",
+      "id": 133
+    },
+    {
+      "name": "realms_kaedwen_siege",
+      "id": 134
+    },
+    {
+      "name": "realms_kaedwen_siege_1",
+      "id": 135
+    },
+    {
+      "name": "realms_kaedwen_siege_2",
+      "id": 136
+    },
+    {
+      "name": "realms_keira",
+      "id": 137
+    },
+    {
+      "name": "realms_natalis",
+      "id": 138
+    },
+    {
+      "name": "realms_philippa",
+      "id": 139
+    },
+    {
+      "name": "realms_stennis",
+      "id": 140
+    },
+    {
+      "name": "realms_redania",
+      "id": 142
+    },
+    {
+      "name": "realms_redania_1",
+      "id": 143
+    },
+    {
+      "name": "realms_sabrina",
+      "id": 144
+    },
+    {
+      "name": "realms_sheala",
+      "id": 145
+    }
+  ],
+  "player2": "opponent",
+  "player2Faction": "RealmsNorthern",
+  "player2Hand": [
+    {
+      "name": "realms_blue_stripes",
+      "id": 228
+    },
+    {
+      "name": "realms_catapult_1",
+      "id": 229
+    },
+    {
+      "name": "realms_crinfrid",
+      "id": 230
+    },
+    {
+      "name": "realms_poor_infantry",
+      "id": 241
+    },
+    {
+      "name": "special_horn",
+      "id": 201
+    },
+    {
+      "name": "special_horn_2",
+      "id": 203
+    },
+    {
+      "name": "special_mardroeme_1",
+      "id": 205
+    },
+    {
+      "name": "special_scorch",
+      "id": 207
+    },
+    {
+      "name": "special_scorch_2",
+      "id": 209
+    },
+    {
+      "name": "neutral_chort",
+      "id": 211
+    },
+    {
+      "name": "neutral_cow",
+      "id": 213
+    },
+    {
+      "name": "neutral_emiel",
+      "id": 215
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 217
+    }
+  ],
+  "player2Deck": [
+    {
+      "name": "special_horn_1",
+      "id": 202
+    },
+    {
+      "name": "special_mardroeme",
+      "id": 204
+    },
+    {
+      "name": "special_mardroeme_2",
+      "id": 206
+    },
+    {
+      "name": "special_scorch_1",
+      "id": 208
+    },
+    {
+      "name": "weather_fog",
+      "id": 210
+    },
+    {
+      "name": "neutral_ciri",
+      "id": 212
+    },
+    {
+      "name": "neutral_dandelion",
+      "id": 214
+    },
+    {
+      "name": "neutral_gaunter_odimm",
+      "id": 216
+    },
+    {
+      "name": "neutral_geralt",
+      "id": 218
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 219
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 220
+    },
+    {
+      "name": "neutral_triss",
+      "id": 221
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 222
+    },
+    {
+      "name": "neutral_villen",
+      "id": 223
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 224
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 225
+    },
+    {
+      "name": "realms_ballista",
+      "id": 226
+    },
+    {
+      "name": "realms_banner_nurse",
+      "id": 227
+    },
+    {
+      "name": "realms_dethmold",
+      "id": 231
+    },
+    {
+      "name": "realms_dijkstra",
+      "id": 232
+    },
+    {
+      "name": "realms_esterad",
+      "id": 233
+    },
+    {
+      "name": "realms_kaedwen_siege",
+      "id": 234
+    },
+    {
+      "name": "realms_kaedwen_siege_1",
+      "id": 235
+    },
+    {
+      "name": "realms_kaedwen_siege_2",
+      "id": 236
+    },
+    {
+      "name": "realms_keira",
+      "id": 237
+    },
+    {
+      "name": "realms_natalis",
+      "id": 238
+    },
+    {
+      "name": "realms_philippa",
+      "id": 239
+    },
+    {
+      "name": "realms_stennis",
+      "id": 240
+    },
+    {
+      "name": "realms_redania",
+      "id": 242
+    },
+    {
+      "name": "realms_redania_1",
+      "id": 243
+    },
+    {
+      "name": "realms_sabrina",
+      "id": 244
+    },
+    {
+      "name": "realms_sheala",
+      "id": 245
+    }
+  ],
+  "commands": [
+    "card with id: 141 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableListand ability applied",
+    "card with id: 128 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableListand ability applied",
+    "card with id: 103 moved from currentPlayerHandObservableList to currentPlayerCloseCombatSpecialPlaceObservableListand ability applied",
+    "card with id: 113 moved from currentPlayerHandObservableList to currentPlayerRangedObservableListand ability applied",
+    "card with id: 117 moved from currentPlayerHandObservableList to currentPlayerRangedObservableListand ability applied",
+    "card with id: 130 moved from currentPlayerHandObservableList to currentPlayerRangedObservableListand ability applied",
+    "card with id: 129 moved from currentPlayerHandObservableList to currentPlayerSiegeObservableListand ability applied",
+    "card with id: 115 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableListand ability applied",
+    "card with id: 101 moved from currentPlayerHandObservableList to currentPlayerRangedSpecialPlaceObservableListand ability applied"
+  ]
+}

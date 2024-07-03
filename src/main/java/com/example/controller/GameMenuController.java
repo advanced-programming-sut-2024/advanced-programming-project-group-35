@@ -141,6 +141,15 @@ public class GameMenuController extends AppController {
                 Timeline timeline = new Timeline(keyFrame);
                 timeline.setCycleCount(1);
                 timeline.play();
+            } else if (card.getAbilityName() == AbilityName.TIGHT_BOND) {
+                AbilityContext abilityContext = new AbilityContext(table, (UnitCard) card, getRowByName(destination));
+                gameMenuControllerView.getGameCardViewWithCardId(cardId).doAbilityAnimation(AbilityName.TIGHT_BOND);
+                KeyFrame keyFrame = new KeyFrame(Duration.seconds(1.5), event -> {
+                    card.getAbility().apply(abilityContext);
+                });
+                Timeline timeline = new Timeline(keyFrame);
+                timeline.setCycleCount(1);
+                timeline.play();
             }
         } else if (card instanceof SpecialCard) {
             if (card.getAbilityName() == AbilityName.COMMANDER_HORN) {
