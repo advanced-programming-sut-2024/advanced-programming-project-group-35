@@ -3,97 +3,97 @@
   "player1Faction": "Monsters",
   "player1Hand": [
     {
-      "name": "neutral_dandelion",
+      "name": "special_decoy",
       "id": 101
     },
     {
-      "name": "special_horn",
+      "name": "weather_clear_1",
       "id": 102
     },
     {
-      "name": "special_horn_1",
-      "id": 103
-    },
-    {
-      "name": "special_horn_2",
+      "name": "weather_storm_1",
       "id": 104
     },
     {
-      "name": "weather_clear",
-      "id": 105
-    },
-    {
-      "name": "weather_storm",
-      "id": 107
-    },
-    {
       "name": "neutral_geralt",
-      "id": 109
+      "id": 106
     },
     {
       "name": "neutral_olgierd",
-      "id": 111
+      "id": 108
     },
     {
       "name": "neutral_vesemir",
-      "id": 113
+      "id": 110
     },
     {
       "name": "neutral_yennefer",
-      "id": 115
+      "id": 112
     },
     {
       "name": "monsters_arachas",
-      "id": 117
+      "id": 114
     },
     {
       "name": "monsters_arachas_2",
-      "id": 119
+      "id": 116
     },
     {
       "name": "monsters_vampire_bruxa",
-      "id": 121
+      "id": 118
     }
   ],
   "player1Deck": [
     {
-      "name": "weather_clear_1",
-      "id": 106
+      "name": "weather_storm",
+      "id": 103
     },
     {
       "name": "neutral_gaunter_odimm_darkness",
-      "id": 108
+      "id": 105
     },
     {
       "name": "neutral_mysterious_elf",
-      "id": 110
+      "id": 107
     },
     {
       "name": "neutral_triss",
-      "id": 112
+      "id": 109
     },
     {
       "name": "neutral_villen",
-      "id": 114
+      "id": 111
     },
     {
       "name": "neutral_zoltan",
-      "id": 116
+      "id": 113
     },
     {
       "name": "monsters_arachas_1",
-      "id": 118
+      "id": 115
     },
     {
       "name": "monsters_arachas_behemoth",
-      "id": 120
-    },
-    {
-      "name": "monsters_celaeno_harpy",
-      "id": 122
+      "id": 117
     },
     {
       "name": "monsters_cockatrice",
+      "id": 119
+    },
+    {
+      "name": "monsters_draug",
+      "id": 120
+    },
+    {
+      "name": "monsters_vampire_ekkimara",
+      "id": 121
+    },
+    {
+      "name": "monsters_endrega",
+      "id": 122
+    },
+    {
+      "name": "monsters_fiend",
       "id": 123
     }
   ],
@@ -101,107 +101,108 @@
   "player2Faction": "Monsters",
   "player2Hand": [
     {
-      "name": "neutral_dandelion",
+      "name": "special_decoy",
       "id": 201
     },
     {
-      "name": "special_horn",
+      "name": "weather_clear_1",
       "id": 202
     },
     {
-      "name": "special_horn_1",
-      "id": 203
-    },
-    {
-      "name": "special_horn_2",
+      "name": "weather_storm_1",
       "id": 204
     },
     {
-      "name": "weather_clear",
-      "id": 205
-    },
-    {
-      "name": "weather_storm",
-      "id": 207
-    },
-    {
       "name": "neutral_geralt",
-      "id": 209
+      "id": 206
     },
     {
       "name": "neutral_olgierd",
-      "id": 211
+      "id": 208
     },
     {
       "name": "neutral_vesemir",
-      "id": 213
+      "id": 210
     },
     {
       "name": "neutral_yennefer",
-      "id": 215
+      "id": 212
     },
     {
       "name": "monsters_arachas",
-      "id": 217
+      "id": 214
     },
     {
       "name": "monsters_arachas_2",
-      "id": 219
+      "id": 216
     },
     {
       "name": "monsters_vampire_bruxa",
-      "id": 221
+      "id": 218
     }
   ],
   "player2Deck": [
     {
-      "name": "weather_clear_1",
-      "id": 206
+      "name": "weather_storm",
+      "id": 203
     },
     {
       "name": "neutral_gaunter_odimm_darkness",
-      "id": 208
+      "id": 205
     },
     {
       "name": "neutral_mysterious_elf",
-      "id": 210
+      "id": 207
     },
     {
       "name": "neutral_triss",
-      "id": 212
+      "id": 209
     },
     {
       "name": "neutral_villen",
-      "id": 214
+      "id": 211
     },
     {
       "name": "neutral_zoltan",
-      "id": 216
+      "id": 213
     },
     {
       "name": "monsters_arachas_1",
-      "id": 218
+      "id": 215
     },
     {
       "name": "monsters_arachas_behemoth",
-      "id": 220
-    },
-    {
-      "name": "monsters_celaeno_harpy",
-      "id": 222
+      "id": 217
     },
     {
       "name": "monsters_cockatrice",
+      "id": 219
+    },
+    {
+      "name": "monsters_draug",
+      "id": 220
+    },
+    {
+      "name": "monsters_vampire_ekkimara",
+      "id": 221
+    },
+    {
+      "name": "monsters_endrega",
+      "id": 222
+    },
+    {
+      "name": "monsters_fiend",
       "id": 223
     }
   ],
   "commands": [
-    "card with id: 109 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableListand ability applied",
-    "card with id: 111 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableListand ability applied",
-    "card with id: 117 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableListand ability applied",
-    "card with id: 119 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableListand ability applied",
+    "card with id: 110 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableListand ability applied",
+    "card with id: 114 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableListand ability applied",
     "card with id: 118 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableListand ability applied",
+    "card with id: 116 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableListand ability applied",
+    "card with id: 115 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableListand ability applied",
+    "card with id: 121 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableListand ability applied",
     "card with id: 101 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableListand ability applied",
-    "card with id: 104 moved from currentPlayerHandObservableList to currentPlayerCloseCombatSpecialPlaceObservableListand ability applied"
+    "decoy ability done, decoyCardId: 101 selectedCardId 114"
   ]
 }

@@ -64,27 +64,27 @@ public class GameMenuController extends AppController {
         }
     }
 
-    public void doUnitCardAction(Card card, AbilityContext abilityContext) {
-        if (card.getAbility() != null) {
-            card.getAbility().apply(abilityContext);
-        }
-        if (abilityContext.getTable().getCurrentPlayer().getBoard().getHand().getCards().isEmpty()) {
-            passRound(abilityContext.getTable());
-        } else if (!abilityContext.getTable().getOpponent().isPassRound()) {
-            changeTurn(abilityContext.getTable());
-        }
-    }
-
-    public void doLeaderCardAction(LeaderCard leaderCard, Table table) {
-        if (leaderCard.getAbility() != null && leaderCard.canDoAction()) {
-            leaderCard.getAbility().apply(table);
-        }
-        if (table.getCurrentPlayer().getBoard().getHand().getCards().isEmpty()) {
-            passRound(table);
-        } else if (!table.getOpponent().isPassRound()) {
-            changeTurn(table);
-        }
-    }
+//    public void doUnitCardAction(Card card, AbilityContext abilityContext) {
+//        if (card.getAbility() != null) {
+//            card.getAbility().apply(abilityContext);
+//        }
+//        if (abilityContext.getTable().getCurrentPlayer().getBoard().getHand().getCards().isEmpty()) {
+//            passRound(abilityContext.getTable());
+//        } else if (!abilityContext.getTable().getOpponent().isPassRound()) {
+//            changeTurn(abilityContext.getTable());
+//        }
+//    }
+//
+//    public void doLeaderCardAction(LeaderCard leaderCard, Table table) {
+//        if (leaderCard.getAbility() != null && leaderCard.canDoAction()) {
+//            leaderCard.getAbility().apply(table);
+//        }
+//        if (table.getCurrentPlayer().getBoard().getHand().getCards().isEmpty()) {
+//            passRound(table);
+//        } else if (!table.getOpponent().isPassRound()) {
+//            changeTurn(table);
+//        }
+//    }
 
     private Card getCardById(int cardId, ObservableList<Card> originRow) {
         for (Card card : originRow) {
@@ -106,55 +106,50 @@ public class GameMenuController extends AppController {
             if (card.getAbilityName() == AbilityName.MUSTER) {
                 AbilityContext abilityContext = new AbilityContext(table, (UnitCard) card, getRowByName(destination));
                 abilityContext.addParam("dest", destination);
-
-                gameMenuControllerView.getGameCardViewWithCardId(cardId).doAbilityAnimation(AbilityName.MUSTER);
-                KeyFrame keyFrame = new KeyFrame(Duration.seconds(1.5), event -> {
-                    card.getAbility().apply(abilityContext);
-                });
-                Timeline timeline = new Timeline(keyFrame);
-                timeline.setCycleCount(1);
-                timeline.play();
+                doNonLeaderCardsAbility(card, abilityContext, AbilityName.MUSTER);
             } else if (card.getAbilityName() == AbilityName.MORALE_BOOST) {
                 AbilityContext abilityContext = new AbilityContext(table, (UnitCard) card, getRowByName(destination));
-                gameMenuControllerView.getGameCardViewWithCardId(cardId).doAbilityAnimation(AbilityName.MORALE_BOOST);
-                KeyFrame keyFrame = new KeyFrame(Duration.seconds(1.5), event -> {
-                    card.getAbility().apply(abilityContext);
-                });
-                Timeline timeline = new Timeline(keyFrame);
-                timeline.setCycleCount(1);
-                timeline.play();
+                doNonLeaderCardsAbility(card, abilityContext, AbilityName.MORALE_BOOST);
             } else if (card.getAbilityName() == AbilityName.SPY) {
                 AbilityContext abilityContext = new AbilityContext(table, null, null);
-                gameMenuControllerView.getGameCardViewWithCardId(cardId).doAbilityAnimation(AbilityName.SPY);
-                KeyFrame keyFrame = new KeyFrame(Duration.seconds(1.5), event -> {
-                    card.getAbility().apply(abilityContext);
-                });
-                Timeline timeline = new Timeline(keyFrame);
-                timeline.setCycleCount(1);
-                timeline.play();
+                doNonLeaderCardsAbility(card, abilityContext, AbilityName.SPY);
             } else if (card.getAbilityName() == AbilityName.COMMANDER_HORN) {
                 AbilityContext abilityContext = new AbilityContext(table, (UnitCard) card, getRowByName(destination));
-                gameMenuControllerView.getGameCardViewWithCardId(cardId).doAbilityAnimation(AbilityName.COMMANDER_HORN);
-                KeyFrame keyFrame = new KeyFrame(Duration.seconds(1.5), event -> {
-                    card.getAbility().apply(abilityContext);
-                });
-                Timeline timeline = new Timeline(keyFrame);
-                timeline.setCycleCount(1);
-                timeline.play();
+                doNonLeaderCardsAbility(card, abilityContext, AbilityName.COMMANDER_HORN);
             } else if (card.getAbilityName() == AbilityName.TIGHT_BOND) {
                 AbilityContext abilityContext = new AbilityContext(table, (UnitCard) card, getRowByName(destination));
-                gameMenuControllerView.getGameCardViewWithCardId(cardId).doAbilityAnimation(AbilityName.TIGHT_BOND);
-                KeyFrame keyFrame = new KeyFrame(Duration.seconds(1.5), event -> {
-                    card.getAbility().apply(abilityContext);
-                });
-                Timeline timeline = new Timeline(keyFrame);
-                timeline.setCycleCount(1);
-                timeline.play();
+                doNonLeaderCardsAbility(card, abilityContext, AbilityName.TIGHT_BOND);
             }
         } else if (card instanceof SpecialCard) {
             if (card.getAbilityName() == AbilityName.COMMANDER_HORN) {
                 AbilityContext abilityContext = new AbilityContext(table, null, getRowByName(getRowNameBySpecialPlaceName(destination)));
-                gameMenuControllerView.getGameCardViewWithCardId(cardId).doAbilityAnimation(AbilityName.COMMANDER_HORN);
+                doNonLeaderCardsAbility(card, abilityContext, AbilityName.COMMANDER_HORN);
+            }
+        }
+
+
+        table.getCurrentPlayer().updateScore();
+        table.getOpponent().updateScore();
+        saveLog("card with id: " + cardId + " moved from " + origin + " to " + destination + "and ability applied");
+    }
+    public void doDecoyAbility(int decoyCardId, int selectedCardId, String dest) {
+        Card decoyCard = getCardById(decoyCardId, table.getCurrentPlayer().getBoard().getHand().getCards());
+        Card selectedCard = getCardById(selectedCardId, (ObservableList<Card>) getRowListByName(dest));
+        AbilityContext abilityContext = new AbilityContext(table, null, getRowByName(dest));
+        abilityContext.addParam("decoyCard", decoyCard);
+        abilityContext.addParam("cardToSwap", selectedCard);
+        abilityContext.addParam("dest", dest);
+        doNonLeaderCardsAbility(decoyCard, abilityContext, null);
+        gameMenuControllerView.removeStyleClass();
+        saveLog("decoy ability done, decoyCardId: " + decoyCardId + " selectedCardId " + selectedCardId);
+    }
+
+    private void doNonLeaderCardsAbility(Card card, AbilityContext abilityContext, AbilityName abilityName) {
+        if (card.getAbility() != null) {
+            if (card.getAbilityName() == AbilityName.DECOY) {
+                card.getAbility().apply(abilityContext);
+            } else {
+                gameMenuControllerView.getGameCardViewWithCardId(card.getIdInGame()).doAbilityAnimation(abilityName);
                 KeyFrame keyFrame = new KeyFrame(Duration.seconds(1.5), event -> {
                     card.getAbility().apply(abilityContext);
                 });
@@ -163,11 +158,6 @@ public class GameMenuController extends AppController {
                 timeline.play();
             }
         }
-
-
-        table.getCurrentPlayer().updateScore();
-        table.getOpponent().updateScore();
-        saveLog("card with id: " + cardId + " moved from " + origin + " to " + destination + "and ability applied");
     }
 
     private String getRowNameBySpecialPlaceName(String specialPlaceName) {

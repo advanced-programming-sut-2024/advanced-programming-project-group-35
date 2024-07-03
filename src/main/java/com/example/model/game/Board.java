@@ -92,7 +92,7 @@ public class Board {
         //TODO تابع زیر برای تست کارو راحت میکنه
         List<Card> deckCopy = new ArrayList<>(deck.getCards());
         for (Card card : deckCopy) {
-            if (card.getAbilityName() == AbilityName.TIGHT_BOND) {
+            if (card.getAbilityName() == AbilityName.DECOY) {
                 hand.addCard(card);
                 deck.removeCard(card);
             }

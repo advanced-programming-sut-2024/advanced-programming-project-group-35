@@ -2,6 +2,7 @@ package com.example.model.card.cardsAbilities;
 
 import com.example.model.card.Ability;
 import com.example.model.card.AbilityContext;
+import com.example.model.card.Card;
 import com.example.model.card.UnitCard;
 import com.example.model.card.enums.CardData;
 import com.example.model.game.place.Row;
@@ -54,14 +55,14 @@ public class ScorchAbility implements Ability {
     }
     private int getMaximumPoweredCards(ArrayList<UnitCard> maximumPoweredCardsForCurrentPlayer, Row row) {
         int maximumPowerForCurrentPlayer = 0;
-        for (UnitCard card : row.getCards()) {
-            if (!card.isHero()) {
-                if (card.getCurrentPower() > maximumPowerForCurrentPlayer) {
+        for (Card card : row.getCards()) {
+            if (!((UnitCard)card).isHero()) {
+                if (((UnitCard)card).getCurrentPower() > maximumPowerForCurrentPlayer) {
                     maximumPoweredCardsForCurrentPlayer.clear();
-                    maximumPoweredCardsForCurrentPlayer.add(card);
-                    maximumPowerForCurrentPlayer = card.getCurrentPower();
-                } else if (card.getCurrentPower() == maximumPowerForCurrentPlayer) {
-                    maximumPoweredCardsForCurrentPlayer.add(card);
+                    maximumPoweredCardsForCurrentPlayer.add(((UnitCard)card));
+                    maximumPowerForCurrentPlayer = ((UnitCard)card).getCurrentPower();
+                } else if (((UnitCard)card).getCurrentPower() == maximumPowerForCurrentPlayer) {
+                    maximumPoweredCardsForCurrentPlayer.add(((UnitCard)card));
                 }
             }
         }

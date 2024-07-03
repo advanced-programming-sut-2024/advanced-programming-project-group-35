@@ -1,5 +1,6 @@
 package com.example.model.card.leaderCardsAbilities;
 
+import com.example.model.card.Card;
 import com.example.model.card.UnitCard;
 import com.example.model.game.Player;
 import com.example.model.game.Table;
@@ -17,9 +18,9 @@ public class QueenOfDolBlathanna implements LeaderAbility {
         if (!row.isEmpty() && row.getStrength() >= 10) {
             int maximumPowerInRow = 0;
             UnitCard maxPoweredCard = new UnitCard(0, null, null,null, false, null, false);
-            for (UnitCard card : player.getBoard().getRangedCardPlace().getCards()) {
+            for (Card card : player.getBoard().getRangedCardPlace().getCards()) {
                 if (maxPoweredCard.getCurrentPower() >= maximumPowerInRow) {
-                    maxPoweredCard = card;
+                    maxPoweredCard = ((UnitCard)card);
                     maximumPowerInRow = maxPoweredCard.getCurrentPower();
                 }
             }

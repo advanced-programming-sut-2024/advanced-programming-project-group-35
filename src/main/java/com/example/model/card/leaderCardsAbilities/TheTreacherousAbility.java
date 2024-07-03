@@ -1,7 +1,9 @@
 package com.example.model.card.leaderCardsAbilities;
 
+import com.example.model.card.Card;
 import com.example.model.card.UnitCard;
 import com.example.model.card.cardsAbilities.SpyAbility;
+import com.example.model.card.enums.AbilityName;
 import com.example.model.game.Table;
 import com.example.model.game.place.Row;
 
@@ -17,9 +19,9 @@ public class TheTreacherousAbility implements LeaderAbility {
 
     private void duplicateSpyCardsInRows(ArrayList<Row> rows) {
         for (Row row : rows) {
-            for (UnitCard card : row.getCards()) {
-                if (card.getAbility() instanceof SpyAbility)
-                    card.duplicatePower();
+            for (Card card : row.getCards()) {
+                if (card.getAbilityName() == AbilityName.SPY)
+                    ((UnitCard)card).duplicatePower();
             }
         }
     }

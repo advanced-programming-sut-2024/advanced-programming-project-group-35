@@ -235,6 +235,30 @@ public class GameMenuControllerView {
             });
         }
     }
+    public void addMouseEventForDecoyAbility(ObservableList<GameCardView> gameCardViews, int decoyCardId,  String originRow) {
+        for (GameCardView gameCardView : gameCardViews) {
+            gameCardView.setOnMouseEntered(e -> {
+                DropShadow dropShadow = new DropShadow();
+                dropShadow.setColor(Color.YELLOW);
+                dropShadow.setRadius(10);
+                gameCardView.setEffect(dropShadow);
+            });
+            gameCardView.setOnMouseExited(e -> {
+                gameCardView.setEffect(null);
+            });
+            gameCardView.setOnMouseClicked(e -> {
+                controller.doDecoyAbility(decoyCardId, gameCardView.getCard().getIdInGame() ,originRow);
+                removeEventForDecoyAbility(gameCardViews);
+            });
+        }
+    }
+    public void removeEventForDecoyAbility(ObservableList<GameCardView> gameCardViews) {
+       for (GameCardView gameCardView : gameCardViews) {
+           gameCardView.setOnMouseEntered(null);
+           gameCardView.setOnMouseExited(null);
+           gameCardView.setOnMouseClicked(null);
+       }
+    }
 
     private void disableMouseEventsForHandCard(int cardId) {
         GameCardView gameCardView = getGameCardViewWithCardId(cardId);
@@ -311,19 +335,23 @@ public class GameMenuControllerView {
                     opponentCloseCombat.setOnMouseClicked(e -> {
                         controller.moveCardFromOriginToDestinationAndDoAbility(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.opponentPlayerCloseCombat.toString());
                         removeStyleClass();
+                        opponentRanged.setOnMouseClicked(null);
                     });
                     opponentRanged.setOnMouseClicked(e -> {
                         controller.moveCardFromOriginToDestinationAndDoAbility(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.opponentPlayerRanged.toString());
                         removeStyleClass();
+                        opponentCloseCombat.setOnMouseClicked(null);
                     });
                 } else {
                     currentPlayerCloseCombat.setOnMouseClicked(e -> {
                         controller.moveCardFromOriginToDestinationAndDoAbility(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.currentPlayerCloseCombat.toString());
                         removeStyleClass();
+                        currentPlayerRanged.setOnMouseClicked(null);
                     });
                     currentPlayerRanged.setOnMouseClicked(e -> {
                         controller.moveCardFromOriginToDestinationAndDoAbility(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.currentPlayerRanged.toString());
                         removeStyleClass();
+                        currentPlayerCloseCombat.setOnMouseClicked(null);
                     });
                 }
             }
@@ -338,21 +366,18 @@ public class GameMenuControllerView {
             case SPECIAL -> {
                 if (gameCardView.getCard().getAbilityName() == AbilityName.DECOY) {
                     removeStyleClass();
-                    currentPlayerCloseCombat.getStyleClass().add("highlighted-flow-pane");
-                    currentPlayerRanged.getStyleClass().add("highlighted-flow-pane");
-                    currentPlayerSiege.getStyleClass().add("highlighted-flow-pane");
-                    currentPlayerCloseCombat.setOnMouseClicked(e -> {
-                        controller.moveCardFromOriginToDestinationAndDoAbility(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.currentPlayerCloseCombat.toString());
-                        removeStyleClass();
-                    });
-                    currentPlayerRanged.setOnMouseClicked(e -> {
-                        controller.moveCardFromOriginToDestinationAndDoAbility(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.currentPlayerRanged.toString());
-                        removeStyleClass();
-                    });
-                    currentPlayerSiege.setOnMouseClicked(e -> {
-                        controller.moveCardFromOriginToDestinationAndDoAbility(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.currentPlayerSiege.toString());
-                        removeStyleClass();
-                    });
+                    if (!currentPlayerCloseCombatObservableList.isEmpty()) {
+                        currentPlayerCloseCombat.getStyleClass().add("highlighted-flow-pane");
+                        addMouseEventForDecoyAbility(currentPlayerCloseCombatObservableList, gameCardView.getCard().getIdInGame(), RowsInGame.currentPlayerCloseCombat.toString());
+                    }
+                    if (!currentPlayerRangedObservableList.isEmpty()) {
+                        currentPlayerRanged.getStyleClass().add("highlighted-flow-pane");
+                        addMouseEventForDecoyAbility(currentPlayerRangedObservableList, gameCardView.getCard().getIdInGame(), RowsInGame.currentPlayerRanged.toString());
+                    }
+                    if (!currentPlayerSiegeObservableList.isEmpty()) {
+                        currentPlayerSiege.getStyleClass().add("highlighted-flow-pane");
+                        addMouseEventForDecoyAbility(currentPlayerSiegeObservableList, gameCardView.getCard().getIdInGame(), RowsInGame.currentPlayerSiege.toString());
+                    }
                 } else {
                     removeStyleClass();
                     if (currentPlayerCloseCombatSpecialPlace.getChildren().isEmpty()) {
@@ -381,7 +406,7 @@ public class GameMenuControllerView {
         }
     }
 
-    private void removeStyleClass() {
+    public void removeStyleClass() {
         currentPlayerCloseCombat.getStyleClass().remove("highlighted-flow-pane");
         currentPlayerRanged.getStyleClass().remove("highlighted-flow-pane");
         currentPlayerSiege.getStyleClass().remove("highlighted-flow-pane");

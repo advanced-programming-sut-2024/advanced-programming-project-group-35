@@ -1,5 +1,6 @@
 package com.example.model.card.leaderCardsAbilities;
 
+import com.example.model.card.Card;
 import com.example.model.card.UnitCard;
 import com.example.model.card.cardsAbilities.CommandersHornCardAbility;
 import com.example.model.card.enums.AbilityName;
@@ -12,8 +13,8 @@ public class KingOfTermeriaAbility implements LeaderAbility {
     public void apply(Table table) {
         Row siege = table.getCurrentPlayer().getBoard().getSiegeCardPlace();
         if (!(siege.getSpecialCard().getAbilityName() == AbilityName.COMMANDER_HORN)) {
-            for (UnitCard card : siege.getCards()) {
-                card.duplicatePower();
+            for (Card card : siege.getCards()) {
+                ((UnitCard)card).duplicatePower();
             }
         }
         table.getCurrentPlayer().getBoard().getDeck().getLeader().setCanDoAction(false);

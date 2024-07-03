@@ -4,6 +4,7 @@ import com.example.controller.Controller;
 import com.example.controller.GameMenuController;
 import com.example.model.card.Ability;
 import com.example.model.card.AbilityContext;
+import com.example.model.card.Card;
 import com.example.model.card.UnitCard;
 import com.example.model.card.enums.CardData;
 import com.example.model.game.place.Row;
@@ -40,8 +41,8 @@ public class WeatherAbility implements Ability {
     }
     private void setPowerOne(Row row) {
         row.setApplyWeather(true);
-        for (UnitCard card : row.getCards()) {
-            card.setCurrentPower(1);
+        for (Card card : row.getCards()) {
+            ((UnitCard)card).setCurrentPower(1);
         }
     }
 }

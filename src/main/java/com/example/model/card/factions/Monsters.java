@@ -2,6 +2,7 @@ package com.example.model.card.factions;
 
 
 import com.example.model.card.AbilityContext;
+import com.example.model.card.UnitCard;
 import com.example.model.card.enums.FactionsType;
 import com.example.model.game.Player;
 import com.example.model.game.Table;
@@ -21,7 +22,7 @@ public class Monsters implements Factions {
     public void apply(Table table, Player player) {
         for (Row row : player.getBoard().getRows()) {
             if (!row.isEmpty()) {
-                row.getCards().get(new Random().nextInt(row.getCards().size())).setNoRemove(true);
+                ((UnitCard)row.getCards().get(new Random().nextInt(row.getCards().size()))).setNoRemove(true);
                 break;
             }
         }
