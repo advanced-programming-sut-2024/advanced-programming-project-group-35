@@ -46,6 +46,10 @@ public class UnitCard extends Card {
         currentPower++;
     }
 
+    public int getPower() {
+        return power;
+    }
+
     public void disApplyMoralBoost() {
         currentPower = power;
     }

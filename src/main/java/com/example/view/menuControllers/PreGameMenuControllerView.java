@@ -36,6 +36,7 @@ import javafx.collections.ObservableList;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Objects;
 
 import java.util.List;
@@ -387,7 +388,7 @@ public class PreGameMenuControllerView {
             );
             return;
         }
-        ArrayList<String> playerDeckNames = getPreGameCardNames(playerDeck);
+        LinkedList<String> playerDeckNames = getPreGameCardNames(playerDeck);
         GameMenuController gameMenuController = (GameMenuController) Controller.GAME_MENU_CONTROLLER.getController();
         gameMenuController.startNewGame(App.getLoggedInUser().getUsername(), opponentName(), playerDeckNames, playerDeckNames);
         App.setCurrentMenu(Menu.GAME_MENU);
@@ -407,8 +408,8 @@ public class PreGameMenuControllerView {
         return leaderCard.getName();
     }
 
-    private ArrayList<String> getPreGameCardNames(ObservableList<PreGameCard> playerDeck) {
-        ArrayList<String> playerDeckNames = new java.util.ArrayList<>();
+    private LinkedList<String> getPreGameCardNames(ObservableList<PreGameCard> playerDeck) {
+        LinkedList<String> playerDeckNames = new LinkedList<>();
         playerDeckNames.add(faction.getFaction().toString());
         playerDeckNames.add(getLeaderName(leaderCard));
         for (PreGameCard card : playerDeck) {

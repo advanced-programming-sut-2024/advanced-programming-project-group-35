@@ -2,17 +2,23 @@ package com.example.model.card;
 
 import com.example.Main;
 import com.example.model.App;
+import com.example.model.card.enums.Abilities;
+import com.example.model.card.enums.AbilityName;
 import com.example.model.card.enums.CardData;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.PixelReader;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.util.Duration;
 
 public class GameCardView extends Pane {
     private final String srcPath = Main.class.getResource("/images/inGameCards/").toExternalForm();
@@ -22,6 +28,8 @@ public class GameCardView extends Pane {
     private CardData cardData;
     private Rectangle cardBase;
     boolean isDragged = false;
+    private Label power;
+    private ImageView powerBackGround;
 
     public GameCardView(Card card) {
         this.card = card;
@@ -58,14 +66,13 @@ public class GameCardView extends Pane {
     }
 
     private void setLabelAndAbilitiesLabelForNonSpecialCards() {
-        Label power = new Label("" + ((UnitCard) card).getCurrentPower());
+        power = new Label("" + ((UnitCard) card).getCurrentPower());
         power.setFont(Font.font("GWENT", FontWeight.BOLD, 15));
         power.setAlignment(Pos.CENTER);
         power.setTranslateX(4);
         power.setTranslateY(4);
         power.setPrefHeight(20);
         power.setPrefWidth(20);
-        ImageView powerBackGround;
         ImageView type = CardData.getPlaceToBeImageAddress(card.getPlace());
         type.setFitHeight(20);
         type.setFitWidth(20);
@@ -101,11 +108,70 @@ public class GameCardView extends Pane {
         return card;
     }
 
-    public com.example.model.card.enums.CardData getCardData() {
+    public CardData getCardData() {
         return cardData;
     }
 
     public void setDragged(boolean dragged) {
         isDragged = dragged;
+    }
+
+    public void doAbilityAnimation(AbilityName abilityName) {
+        Image musterImage = new Image(getSrcPathForAnimImagesWithAbilityName(abilityName));
+        ImageView musterImageView = new ImageView(musterImage);
+
+        musterImageView.setFitWidth(40);
+        musterImageView.setFitHeight(40);
+        musterImageView.setTranslateX((width - 40) / 2);
+        musterImageView.setTranslateY((height - 40) / 2);
+
+
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.5), event -> {
+            Timeline timeline1 = new Timeline(new KeyFrame(Duration.seconds(0.5), event1 -> {
+                this.getChildren().remove(musterImageView);
+            }));
+            this.getChildren().add(musterImageView);
+            timeline1.setCycleCount(1);
+            timeline1.play();
+        }));
+        timeline.setCycleCount(1);
+        timeline.play();
+    }
+
+    private String getSrcPathForAnimImagesWithAbilityName(AbilityName abilityName) {
+        switch (abilityName) {
+            case MUSTER -> {
+                return GameCardView.class.getResource("/images/icons/anim_muster.png").toExternalForm();
+            }
+            case MORALE_BOOST -> {
+                return GameCardView.class.getResource("/images/icons/anim_morale.png").toExternalForm();
+            }
+            case SPY -> {
+                return GameCardView.class.getResource("/images/icons/anim_spy.png").toExternalForm();
+            }
+            default -> {
+                return null;
+            }
+        }
+    }
+
+    public void updatePowerLabel() {
+        if (((UnitCard) card).isHero()) {
+            power.setText("" + ((UnitCard) card).getCurrentPower());
+            power.setTextFill(Paint.valueOf(Color.rgb(219, 136, 40).toString()));
+        } else if (!((UnitCard) card).isHero()) {
+            power.setText("" + ((UnitCard) card).getCurrentPower());
+            power.setTextFill(Paint.valueOf(Color.rgb(219, 136, 40).toString()));
+        }
+    }
+
+    public void setPowerDefault() {
+        if (((UnitCard) card).isHero()) {
+            power.setText("" + ((UnitCard) card).getPower());
+            power.setTextFill(Paint.valueOf("white"));
+        } else if (!((UnitCard) card).isHero()) {
+            power.setText("" + ((UnitCard) card).getPower());
+            power.setTextFill(Paint.valueOf("black"));
+        }
     }
 }

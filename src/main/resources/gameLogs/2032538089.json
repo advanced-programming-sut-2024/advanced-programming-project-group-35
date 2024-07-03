@@ -1,0 +1,193 @@
+{
+  "player1": "ali",
+  "player1Faction": "Monsters",
+  "player1Hand": [
+    {
+      "name": "neutral_olgierd",
+      "id": 101
+    },
+    {
+      "name": "monsters_fiend",
+      "id": 103
+    },
+    {
+      "name": "monsters_vampire_fleder",
+      "id": 105
+    },
+    {
+      "name": "monsters_forktail",
+      "id": 107
+    },
+    {
+      "name": "monsters_frightener",
+      "id": 109
+    },
+    {
+      "name": "monsters_ghoul",
+      "id": 111
+    },
+    {
+      "name": "monsters_ghoul_1",
+      "id": 113
+    },
+    {
+      "name": "monsters_gravehag",
+      "id": 115
+    },
+    {
+      "name": "monsters_harpy",
+      "id": 117
+    },
+    {
+      "name": "monsters_vampire_katakan",
+      "id": 119
+    },
+    {
+      "name": "monsters_leshen",
+      "id": 121
+    }
+  ],
+  "player1Deck": [
+    {
+      "name": "neutral_yennefer",
+      "id": 102
+    },
+    {
+      "name": "monsters_fire_elemental",
+      "id": 104
+    },
+    {
+      "name": "monsters_foglet",
+      "id": 106
+    },
+    {
+      "name": "monsters_ice_giant",
+      "id": 108
+    },
+    {
+      "name": "monsters_gargoyle",
+      "id": 110
+    },
+    {
+      "name": "monsters_vampire_garkain",
+      "id": 112
+    },
+    {
+      "name": "monsters_ghoul_2",
+      "id": 114
+    },
+    {
+      "name": "monsters_gryffin",
+      "id": 116
+    },
+    {
+      "name": "monsters_imlerith",
+      "id": 118
+    },
+    {
+      "name": "monsters_kayran",
+      "id": 120
+    },
+    {
+      "name": "monsters_plague_maiden",
+      "id": 122
+    }
+  ],
+  "player2": "opponent",
+  "player2Faction": "Monsters",
+  "player2Hand": [
+    {
+      "name": "neutral_olgierd",
+      "id": 201
+    },
+    {
+      "name": "monsters_fiend",
+      "id": 203
+    },
+    {
+      "name": "monsters_vampire_fleder",
+      "id": 205
+    },
+    {
+      "name": "monsters_forktail",
+      "id": 207
+    },
+    {
+      "name": "monsters_frightener",
+      "id": 209
+    },
+    {
+      "name": "monsters_ghoul",
+      "id": 211
+    },
+    {
+      "name": "monsters_ghoul_1",
+      "id": 213
+    },
+    {
+      "name": "monsters_gravehag",
+      "id": 215
+    },
+    {
+      "name": "monsters_harpy",
+      "id": 217
+    },
+    {
+      "name": "monsters_vampire_katakan",
+      "id": 219
+    },
+    {
+      "name": "monsters_leshen",
+      "id": 221
+    }
+  ],
+  "player2Deck": [
+    {
+      "name": "neutral_yennefer",
+      "id": 202
+    },
+    {
+      "name": "monsters_fire_elemental",
+      "id": 204
+    },
+    {
+      "name": "monsters_foglet",
+      "id": 206
+    },
+    {
+      "name": "monsters_ice_giant",
+      "id": 208
+    },
+    {
+      "name": "monsters_gargoyle",
+      "id": 210
+    },
+    {
+      "name": "monsters_vampire_garkain",
+      "id": 212
+    },
+    {
+      "name": "monsters_ghoul_2",
+      "id": 214
+    },
+    {
+      "name": "monsters_gryffin",
+      "id": 216
+    },
+    {
+      "name": "monsters_imlerith",
+      "id": 218
+    },
+    {
+      "name": "monsters_kayran",
+      "id": 220
+    },
+    {
+      "name": "monsters_plague_maiden",
+      "id": 222
+    }
+  ],
+  "commands": [
+    "card with id: 101 moved from currentPlayerHandObservableList to currentPlayerRangedObservableListand ability applied"
+  ]
+}

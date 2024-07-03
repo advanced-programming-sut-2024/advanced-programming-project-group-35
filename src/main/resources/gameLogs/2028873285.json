@@ -1,0 +1,310 @@
+{
+  "player1": "ali",
+  "player1Faction": "Monsters",
+  "player1Hand": [
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 101
+    },
+    {
+      "name": "monsters_arachas_1",
+      "id": 103
+    },
+    {
+      "name": "monsters_arachas_behemoth",
+      "id": 105
+    },
+    {
+      "name": "monsters_celaeno_harpy",
+      "id": 107
+    },
+    {
+      "name": "monsters_draug",
+      "id": 109
+    },
+    {
+      "name": "monsters_vampire_ekkimara",
+      "id": 111
+    },
+    {
+      "name": "monsters_fiend",
+      "id": 113
+    },
+    {
+      "name": "monsters_vampire_fleder",
+      "id": 115
+    },
+    {
+      "name": "monsters_forktail",
+      "id": 117
+    },
+    {
+      "name": "monsters_frightener",
+      "id": 119
+    },
+    {
+      "name": "monsters_ghoul",
+      "id": 121
+    }
+  ],
+  "player1Deck": [
+    {
+      "name": "neutral_gaunter_odimm",
+      "id": 102
+    },
+    {
+      "name": "monsters_arachas_2",
+      "id": 104
+    },
+    {
+      "name": "monsters_vampire_bruxa",
+      "id": 106
+    },
+    {
+      "name": "monsters_cockatrice",
+      "id": 108
+    },
+    {
+      "name": "monsters_earth_elemental",
+      "id": 110
+    },
+    {
+      "name": "monsters_endrega",
+      "id": 112
+    },
+    {
+      "name": "monsters_fire_elemental",
+      "id": 114
+    },
+    {
+      "name": "monsters_foglet",
+      "id": 116
+    },
+    {
+      "name": "monsters_ice_giant",
+      "id": 118
+    },
+    {
+      "name": "monsters_gargoyle",
+      "id": 120
+    },
+    {
+      "name": "monsters_vampire_garkain",
+      "id": 122
+    },
+    {
+      "name": "monsters_ghoul_1",
+      "id": 123
+    },
+    {
+      "name": "monsters_ghoul_2",
+      "id": 124
+    },
+    {
+      "name": "monsters_gravehag",
+      "id": 125
+    },
+    {
+      "name": "monsters_gryffin",
+      "id": 126
+    },
+    {
+      "name": "monsters_harpy",
+      "id": 127
+    },
+    {
+      "name": "monsters_imlerith",
+      "id": 128
+    },
+    {
+      "name": "monsters_vampire_katakan",
+      "id": 129
+    },
+    {
+      "name": "monsters_kayran",
+      "id": 130
+    },
+    {
+      "name": "monsters_leshen",
+      "id": 131
+    },
+    {
+      "name": "monsters_plague_maiden",
+      "id": 132
+    },
+    {
+      "name": "monsters_nekker",
+      "id": 133
+    },
+    {
+      "name": "monsters_nekker_1",
+      "id": 134
+    },
+    {
+      "name": "monsters_nekker_2",
+      "id": 135
+    },
+    {
+      "name": "monsters_botchling",
+      "id": 136
+    },
+    {
+      "name": "monsters_toad",
+      "id": 137
+    }
+  ],
+  "player2": "opponent",
+  "player2Faction": "Monsters",
+  "player2Hand": [
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 201
+    },
+    {
+      "name": "monsters_arachas_1",
+      "id": 203
+    },
+    {
+      "name": "monsters_arachas_behemoth",
+      "id": 205
+    },
+    {
+      "name": "monsters_celaeno_harpy",
+      "id": 207
+    },
+    {
+      "name": "monsters_draug",
+      "id": 209
+    },
+    {
+      "name": "monsters_vampire_ekkimara",
+      "id": 211
+    },
+    {
+      "name": "monsters_fiend",
+      "id": 213
+    },
+    {
+      "name": "monsters_vampire_fleder",
+      "id": 215
+    },
+    {
+      "name": "monsters_forktail",
+      "id": 217
+    },
+    {
+      "name": "monsters_frightener",
+      "id": 219
+    },
+    {
+      "name": "monsters_ghoul",
+      "id": 221
+    }
+  ],
+  "player2Deck": [
+    {
+      "name": "neutral_gaunter_odimm",
+      "id": 202
+    },
+    {
+      "name": "monsters_arachas_2",
+      "id": 204
+    },
+    {
+      "name": "monsters_vampire_bruxa",
+      "id": 206
+    },
+    {
+      "name": "monsters_cockatrice",
+      "id": 208
+    },
+    {
+      "name": "monsters_earth_elemental",
+      "id": 210
+    },
+    {
+      "name": "monsters_endrega",
+      "id": 212
+    },
+    {
+      "name": "monsters_fire_elemental",
+      "id": 214
+    },
+    {
+      "name": "monsters_foglet",
+      "id": 216
+    },
+    {
+      "name": "monsters_ice_giant",
+      "id": 218
+    },
+    {
+      "name": "monsters_gargoyle",
+      "id": 220
+    },
+    {
+      "name": "monsters_vampire_garkain",
+      "id": 222
+    },
+    {
+      "name": "monsters_ghoul_1",
+      "id": 223
+    },
+    {
+      "name": "monsters_ghoul_2",
+      "id": 224
+    },
+    {
+      "name": "monsters_gravehag",
+      "id": 225
+    },
+    {
+      "name": "monsters_gryffin",
+      "id": 226
+    },
+    {
+      "name": "monsters_harpy",
+      "id": 227
+    },
+    {
+      "name": "monsters_imlerith",
+      "id": 228
+    },
+    {
+      "name": "monsters_vampire_katakan",
+      "id": 229
+    },
+    {
+      "name": "monsters_kayran",
+      "id": 230
+    },
+    {
+      "name": "monsters_leshen",
+      "id": 231
+    },
+    {
+      "name": "monsters_plague_maiden",
+      "id": 232
+    },
+    {
+      "name": "monsters_nekker",
+      "id": 233
+    },
+    {
+      "name": "monsters_nekker_1",
+      "id": 234
+    },
+    {
+      "name": "monsters_nekker_2",
+      "id": 235
+    },
+    {
+      "name": "monsters_botchling",
+      "id": 236
+    },
+    {
+      "name": "monsters_toad",
+      "id": 237
+    }
+  ]
+}

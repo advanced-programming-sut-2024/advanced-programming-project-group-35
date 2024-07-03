@@ -1,0 +1,246 @@
+{
+  "player1": "ali",
+  "player1Faction": "Monsters",
+  "player1Hand": [
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 101
+    },
+    {
+      "name": "neutral_triss",
+      "id": 103
+    },
+    {
+      "name": "neutral_villen",
+      "id": 105
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 107
+    },
+    {
+      "name": "monsters_arachas_1",
+      "id": 109
+    },
+    {
+      "name": "monsters_arachas_behemoth",
+      "id": 111
+    },
+    {
+      "name": "monsters_celaeno_harpy",
+      "id": 113
+    },
+    {
+      "name": "monsters_draug",
+      "id": 115
+    },
+    {
+      "name": "monsters_vampire_ekkimara",
+      "id": 117
+    },
+    {
+      "name": "monsters_fiend",
+      "id": 119
+    },
+    {
+      "name": "monsters_vampire_fleder",
+      "id": 121
+    }
+  ],
+  "player1Deck": [
+    {
+      "name": "neutral_olgierd",
+      "id": 102
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 104
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 106
+    },
+    {
+      "name": "monsters_arachas",
+      "id": 108
+    },
+    {
+      "name": "monsters_arachas_2",
+      "id": 110
+    },
+    {
+      "name": "monsters_vampire_bruxa",
+      "id": 112
+    },
+    {
+      "name": "monsters_cockatrice",
+      "id": 114
+    },
+    {
+      "name": "monsters_earth_elemental",
+      "id": 116
+    },
+    {
+      "name": "monsters_endrega",
+      "id": 118
+    },
+    {
+      "name": "monsters_fire_elemental",
+      "id": 120
+    },
+    {
+      "name": "monsters_foglet",
+      "id": 122
+    },
+    {
+      "name": "monsters_forktail",
+      "id": 123
+    },
+    {
+      "name": "monsters_ice_giant",
+      "id": 124
+    },
+    {
+      "name": "monsters_frightener",
+      "id": 125
+    },
+    {
+      "name": "monsters_gargoyle",
+      "id": 126
+    },
+    {
+      "name": "monsters_ghoul",
+      "id": 127
+    },
+    {
+      "name": "monsters_vampire_garkain",
+      "id": 128
+    },
+    {
+      "name": "monsters_ghoul_1",
+      "id": 129
+    }
+  ],
+  "player2": "opponent",
+  "player2Faction": "Monsters",
+  "player2Hand": [
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 201
+    },
+    {
+      "name": "neutral_triss",
+      "id": 203
+    },
+    {
+      "name": "neutral_villen",
+      "id": 205
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 207
+    },
+    {
+      "name": "monsters_arachas_1",
+      "id": 209
+    },
+    {
+      "name": "monsters_arachas_behemoth",
+      "id": 211
+    },
+    {
+      "name": "monsters_celaeno_harpy",
+      "id": 213
+    },
+    {
+      "name": "monsters_draug",
+      "id": 215
+    },
+    {
+      "name": "monsters_vampire_ekkimara",
+      "id": 217
+    },
+    {
+      "name": "monsters_fiend",
+      "id": 219
+    },
+    {
+      "name": "monsters_vampire_fleder",
+      "id": 221
+    }
+  ],
+  "player2Deck": [
+    {
+      "name": "neutral_olgierd",
+      "id": 202
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 204
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 206
+    },
+    {
+      "name": "monsters_arachas",
+      "id": 208
+    },
+    {
+      "name": "monsters_arachas_2",
+      "id": 210
+    },
+    {
+      "name": "monsters_vampire_bruxa",
+      "id": 212
+    },
+    {
+      "name": "monsters_cockatrice",
+      "id": 214
+    },
+    {
+      "name": "monsters_earth_elemental",
+      "id": 216
+    },
+    {
+      "name": "monsters_endrega",
+      "id": 218
+    },
+    {
+      "name": "monsters_fire_elemental",
+      "id": 220
+    },
+    {
+      "name": "monsters_foglet",
+      "id": 222
+    },
+    {
+      "name": "monsters_forktail",
+      "id": 223
+    },
+    {
+      "name": "monsters_ice_giant",
+      "id": 224
+    },
+    {
+      "name": "monsters_frightener",
+      "id": 225
+    },
+    {
+      "name": "monsters_gargoyle",
+      "id": 226
+    },
+    {
+      "name": "monsters_ghoul",
+      "id": 227
+    },
+    {
+      "name": "monsters_vampire_garkain",
+      "id": 228
+    },
+    {
+      "name": "monsters_ghoul_1",
+      "id": 229
+    }
+  ]
+}

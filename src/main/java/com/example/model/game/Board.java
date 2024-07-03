@@ -1,9 +1,13 @@
 package com.example.model.game;
 
+import com.example.model.card.Card;
+import com.example.model.card.UnitCard;
+import com.example.model.card.enums.AbilityName;
 import com.example.model.game.place.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Board {
     private DiscardPile discardPile;
@@ -86,7 +90,14 @@ public class Board {
 //            deck.removeCard(deck.getCard(i));
 //        }
         //TODO تابع زیر برای تست کارو راحت میکنه
-        for (int i = 0; i < 11; i++) {
+        List<Card> deckCopy = new ArrayList<>(deck.getCards());
+        for (Card card : deckCopy) {
+            if (card.getAbilityName() == AbilityName.SPY) {
+                hand.addCard(card);
+                deck.removeCard(card);
+            }
+        }
+        for (int i = 0; i < 9; i++) {
             hand.addCard(deck.getCard(i));
             deck.removeCard(deck.getCard(i));
         }

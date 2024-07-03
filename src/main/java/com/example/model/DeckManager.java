@@ -60,7 +60,7 @@ public class DeckManager {
         }
     }
 
-    public static Deck loadDeck(ArrayList<String> cardNames, int first) {
+    public static Deck loadDeck(LinkedList<String> cardNames, int first) {
         Deck deck = new Deck();
         deck.setLeader(LeaderFactory.getLeaderCardByName(cardNames.get(1)));
         deck.setFaction(FactionsType.getFactionByName(cardNames.get(0)));

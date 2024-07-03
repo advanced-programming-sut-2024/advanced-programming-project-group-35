@@ -16,7 +16,10 @@ import com.example.view.Menu;
 import com.example.view.menuControllers.GameMenuControllerView;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.ObservableList;
+import javafx.util.Duration;
 
 import java.io.File;
 import java.io.FileReader;
@@ -40,6 +43,10 @@ public class GameMenuController extends AppController {
         } catch (Exception e) {
             throw new RuntimeException();
         }
+    }
+
+    public GameMenuControllerView getGameMenuControllerView() {
+        return gameMenuControllerView;
     }
 
     public void vetoCard(Player player, Card selectedCard) {
@@ -79,51 +86,74 @@ public class GameMenuController extends AppController {
         }
     }
 
+    private Card getCardById(int cardId, ObservableList<Card> originRow) {
+        for (Card card : originRow) {
+            if (card != null && card.getIdInGame() == cardId) {
+                return card;
+            }
+        }
+        return null;
+    }
+
     public void moveCardFromOriginToDestinationAndDoAbility(int cardId, String origin, String destination) {
         ObservableList<Card> originRow = (ObservableList<Card>) getRowListByName(origin);
         ObservableList<Card> destinationRow = (ObservableList<Card>) getRowListByName(destination);
-        Card card = null;
-        for (Card card1 : originRow) {
-            if (card1.getIdInGame() == cardId) {
-                card = card1;
-                break;
-            }
-        }
+        Card card = getCardById(cardId, originRow);
         originRow.remove(card);
         destinationRow.add(card);
         gameMenuControllerView.moveCardToDestinationFlowPane(cardId, origin, destination);
-
 
         if (card instanceof UnitCard) {
             if (card.getAbilityName() == AbilityName.MUSTER) {
-                AbilityContext abilityContext = new AbilityContext(table, (UnitCard)card, getRowByName(destination));
+                AbilityContext abilityContext = new AbilityContext(table, (UnitCard) card, getRowByName(destination));
                 abilityContext.addParam("dest", destination);
-                card.getAbility().apply(abilityContext);
+
+                gameMenuControllerView.getGameCardViewWithCardId(cardId).doAbilityAnimation(AbilityName.MUSTER);
+                KeyFrame keyFrame = new KeyFrame(Duration.seconds(1.5), event -> {
+                    card.getAbility().apply(abilityContext);
+                });
+                Timeline timeline = new Timeline(keyFrame);
+                timeline.setCycleCount(1);
+                timeline.play();
+            } else if (card.getAbilityName() == AbilityName.MORALE_BOOST) {
+                AbilityContext abilityContext = new AbilityContext(table, (UnitCard) card, getRowByName(destination));
+                gameMenuControllerView.getGameCardViewWithCardId(cardId).doAbilityAnimation(AbilityName.MORALE_BOOST);
+                KeyFrame keyFrame = new KeyFrame(Duration.seconds(1.5), event -> {
+                    card.getAbility().apply(abilityContext);
+                });
+                Timeline timeline = new Timeline(keyFrame);
+                timeline.setCycleCount(1);
+                timeline.play();
+            } else if (card.getAbilityName() == AbilityName.SPY) {
+                AbilityContext abilityContext = new AbilityContext(table, null, null);
+                gameMenuControllerView.getGameCardViewWithCardId(cardId).doAbilityAnimation(AbilityName.SPY);
+                KeyFrame keyFrame = new KeyFrame(Duration.seconds(1.5), event -> {
+                    card.getAbility().apply(abilityContext);
+                });
+                Timeline timeline = new Timeline(keyFrame);
+                timeline.setCycleCount(1);
+                timeline.play();
             }
         }
 
 
         table.getCurrentPlayer().updateScore();
         table.getOpponent().updateScore();
-        saveLog("card with id: " + cardId + " moved from " + origin + " to " + destination);
+        saveLog("card with id: " + cardId + " moved from " + origin + " to " + destination + "and ability applied");
     }
+
     public void moveCardFromOriginToDestinationAndDontDoAbility(int cardId, String origin, String destination) {
         ObservableList<Card> originRow = (ObservableList<Card>) getRowListByName(origin);
         ObservableList<Card> destinationRow = (ObservableList<Card>) getRowListByName(destination);
-        Card card = null;
-        for (Card card1 : originRow) {
-            if (card1.getIdInGame() == cardId) {
-                card = card1;
-                break;
-            }
-        }
+        Card card = getCardById(cardId, originRow);
         originRow.remove(card);
         destinationRow.add(card);
         gameMenuControllerView.moveCardToDestinationFlowPane(cardId, origin, destination);
         table.getCurrentPlayer().updateScore();
         table.getOpponent().updateScore();
-        saveLog("card with id: " + cardId + " moved from " + origin + " to " + destination);
+        saveLog("card with id: " + cardId + " moved from " + origin + " to " + destination + "and ability applied");
     }
+
     private Row getRowByName(String rowName) {
         switch (rowName) {
             case "currentPlayerSiegeObservableList" -> {
@@ -155,6 +185,9 @@ public class GameMenuController extends AppController {
             case "currentPlayerHandObservableList" -> {
                 return table.getCurrentPlayer().getBoard().getHand().getCards();
             }
+            case "currentPlayerDeckObservableList" -> {
+                return table.getCurrentPlayer().getBoard().getDeck().getCards();
+            }
             case "currentPlayerSiegeObservableList" -> {
                 return table.getCurrentPlayer().getBoard().getSiegeCardPlace().getCards();
             }
@@ -176,7 +209,7 @@ public class GameMenuController extends AppController {
             case "opponentSiegeObservableList" -> {
                 return table.getOpponent().getBoard().getSiegeCardPlace().getCards();
             }
-            case "opponentCloseCombatObservableList" -> {
+            case "opponentPlayerCloseCombatObservableList" -> {
                 return table.getOpponent().getBoard().getCloseCombatCardPlace().getCards();
             }
             case "opponentRangedObservableList" -> {
@@ -200,7 +233,7 @@ public class GameMenuController extends AppController {
         }
     }
 
-    public void startNewGame(String player1Name, String player2Name, ArrayList<String> player1DeckNames, ArrayList<String> player2DeckNames) {
+    public void startNewGame(String player1Name, String player2Name, LinkedList<String> player1DeckNames, LinkedList<String> player2DeckNames) {
         Deck player1Deck = DeckManager.loadDeck(player1DeckNames, 1);
         Deck player2Deck = DeckManager.loadDeck(player2DeckNames, 2);
         Player player1 = new Player(player1Name);
