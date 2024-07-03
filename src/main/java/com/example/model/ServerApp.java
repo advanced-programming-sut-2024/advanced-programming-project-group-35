@@ -31,4 +31,34 @@ public class ServerApp {
         } catch (IOException e) {
         }
     }
+
+    public static void acceptFriendRequest(int userID, int friendUserID) {
+        User user = allUsers.get(userID);
+        User friend = allUsers.get(friendUserID);
+        user.addFriend(friend);
+        friend.addFriend(user);
+    }
+
+    public static void rejectFriendRequest(int userID, int friendUserID) {
+        User user = allUsers.get(userID);
+        User friend = allUsers.get(friendUserID);
+        FriendRequest friendRequest = user.getFriendRequest(friend);
+        friendRequest.reject();
+    }
+
+    public static void sendFriendRequest(int userID, int friendUserID) {
+        User user = allUsers.get(userID);
+        User friend = allUsers.get(friendUserID);
+        User.sendFriendRequest(user, friend);
+    }
+
+    public static void setUserOnline(int userID) {
+        User user = allUsers.get(userID);
+        user.setOnline(true);
+    }
+
+    public static void setUserOffline(int userID) {
+        User user = allUsers.get(userID);
+        user.setOnline(false);
+    }
 }

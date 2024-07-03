@@ -1,5 +1,6 @@
 package com.example.controller.server;
 
+import com.example.model.FriendRequest;
 import com.example.model.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -67,5 +68,68 @@ public class ServerConnector {
 
     public ArrayList<User> getAllUsers() {
         return loadUsers();
+    }
+
+    public void acceptFriendRequest(FriendRequest request) {
+        try (
+                Socket socket = new Socket(SERVER_IP, SERVER_PORT);
+                PrintWriter out = new PrintWriter(socket.getOutputStream(), true)
+        ) {
+            out.println("SYSTEM|ACCEPT_FRIEND_REQUEST");
+            out.println(request.getReceiver().getID());
+            out.println(request.getSender().getID());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void rejectFriendRequest(FriendRequest request) {
+        try (
+                Socket socket = new Socket(SERVER_IP, SERVER_PORT);
+                PrintWriter out = new PrintWriter(socket.getOutputStream(), true)
+        ) {
+            out.println("SYSTEM|REJECT_FRIEND_REQUEST");
+            out.println(request.getReceiver().getID());
+            out.println(request.getSender().getID());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendFriendRequest(FriendRequest request) {
+        try (
+                Socket socket = new Socket(SERVER_IP, SERVER_PORT);
+                PrintWriter out = new PrintWriter(socket.getOutputStream(), true)
+        ) {
+            out.println("SYSTEM|SEND_FRIEND_REQUEST");
+            out.println(request.getSender().getID());
+            out.println(request.getReceiver().getID());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setUserOnline(User loggedInUser) {
+        try (
+                Socket socket = new Socket(SERVER_IP, SERVER_PORT);
+                PrintWriter out = new PrintWriter(socket.getOutputStream(), true)
+        ) {
+            out.println("SYSTEM|SET_USER_ONLINE");
+            out.println(loggedInUser.getID());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setUserOffline(User loggedInUser) {
+        try (
+                Socket socket = new Socket(SERVER_IP, SERVER_PORT);
+                PrintWriter out = new PrintWriter(socket.getOutputStream(), true)
+        ) {
+            out.println("SYSTEM|SET_USER_OFFLINE");
+            out.println(loggedInUser.getID());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

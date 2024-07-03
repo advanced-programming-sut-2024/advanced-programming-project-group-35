@@ -9,10 +9,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.Type;
+import java.net.Socket;
 import java.util.ArrayList;
 
 public class App {
@@ -34,6 +33,10 @@ public class App {
     private static User loggedInUser;
     private static Menu currentMenu = Menu.LOGIN_MENU;
     private static AppView appView;
+    private static Socket socket;
+    private static PrintWriter out;
+    private static BufferedReader in;
+
 
     public static AppView getAppView() {
         return appView;
@@ -64,7 +67,11 @@ public class App {
     }
 
     public static void setLoggedInUser(User loggedInUser) {
+        if (App.loggedInUser != null) {
+            serverConnector.setUserOffline(App.loggedInUser);
+        }
         App.loggedInUser = loggedInUser;
+        serverConnector.setUserOnline(loggedInUser);
     }
 
     public static User getUserByUsername(String username) {
@@ -76,6 +83,7 @@ public class App {
 
     public static void addNewUser(User newUser) {
         App.allUsers().add(newUser);
+        serverConnector.saveUsers(allUsers);
     }
 
     public static void addSecurityQuestion(String question) {
@@ -114,5 +122,11 @@ public class App {
 
     public static ServerConnector getServerApp() {
         return serverConnector;
+    }
+
+    public static void setServerData(Socket socket, PrintWriter out, BufferedReader in) {
+        App.socket = socket;
+        App.out = out;
+        App.in = in;
     }
 }

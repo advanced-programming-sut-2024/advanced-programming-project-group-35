@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class User {
+    private boolean isOnline;
     private int id;
     private String username;
     private String password;
@@ -35,7 +36,26 @@ public class User {
     private int numberOfSpellCards;
     private int numberOfMinionCards;
     private ArrayList<GameData> gameData; // mitoonim az queue estefade konim (vali ta hala kar nakardam bahash)
+    private ArrayList<Log> logs;
     private ArrayList<String> decksAddresses;
+    private ArrayList<User> friends;
+    private ArrayList<FriendRequest> friendRequests;
+
+    public void setFriends(ArrayList<User> friends) {
+        this.friends = friends;
+    }
+
+    public void setFriendRequests(ArrayList<FriendRequest> friendRequests) {
+        this.friendRequests = friendRequests;
+    }
+
+    public ArrayList<User> getFriends() {
+        return friends;
+    }
+
+    public ArrayList<FriendRequest> getFriendRequests() {
+        return friendRequests;
+    }
 
     public User(String username, String password, String nickname, String email) {
         this.username = username;
@@ -175,4 +195,30 @@ public class User {
         return numberOfLostGames;
     }
 
+    public void addFriend(User friend) {
+        friends.add(friend);
+    }
+
+    public FriendRequest getFriendRequest(User friend) {
+        for (FriendRequest friendRequest : friendRequests) {
+            if (friendRequest.getSender().equals(friend)) {
+                return friendRequest;
+            }
+        }
+        return null;
+    }
+
+    public void removeFriendRequest(FriendRequest friendRequest) {
+        friendRequests.remove(friendRequest);
+    }
+
+    public static void sendFriendRequest(User user, User friend) {
+        FriendRequest friendRequest = new FriendRequest(user, friend);
+        user.friendRequests.add(friendRequest);
+        friend.friendRequests.add(friendRequest);
+    }
+
+    public void setOnline(boolean b) {
+        isOnline = b;
+    }
 }

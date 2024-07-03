@@ -45,8 +45,31 @@ public class PlayerHandler implements Runnable {
                     if ("LOAD_USERS".equals(parts[1])) {
                         handleLoadUsers(out);
                     }
-                    if ("SAVE_USERS".equals(parts[1])) {
+                    else if ("SAVE_USERS".equals(parts[1])) {
                         handleSaveUsers(in, out);
+                    }
+                    else if ("ACCEPT_FRIEND_REQUEST".equals(parts[1])){
+                        int userID = Integer.parseInt(parts[2]);
+                        int friendUserID = Integer.parseInt(parts[3]);
+                        ServerApp.acceptFriendRequest(userID, friendUserID);
+                    }
+                    else if ("REJECT_FRIEND_REQUEST".equals(parts[1])){
+                        int userID = Integer.parseInt(parts[2]);
+                        int friendUserID = Integer.parseInt(parts[3]);
+                        ServerApp.rejectFriendRequest(userID, friendUserID);
+                    }
+                    else if ("SEND_FRIEND_REQUEST".equals(parts[1])){
+                        int userID = Integer.parseInt(parts[2]);
+                        int friendUserID = Integer.parseInt(parts[3]);
+                        ServerApp.sendFriendRequest(userID, friendUserID);
+                    }
+                    else if ("SET_USER_ONLINE".equals(parts[1])){
+                        int userID = Integer.parseInt(parts[2]);
+                        ServerApp.setUserOnline(userID);
+                    }
+                    else if ("SET_USER_OFFLINE".equals(parts[1])){
+                        int userID = Integer.parseInt(parts[2]);
+                        ServerApp.setUserOffline(userID);
                     }
                 } else {
                     handleCommand(inputLine);
