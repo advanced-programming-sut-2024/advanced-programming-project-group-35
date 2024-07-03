@@ -68,4 +68,8 @@ public class Table {
         currentPlayer = opponent;
         opponent = tmp;
     }
+
+    public Player getPlayer1() {
+        return currentPlayer;
+    }
 }

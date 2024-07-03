@@ -48,6 +48,15 @@ public class User {
         setID();
     }
 
+    public static User getUserByUsername(String name) {
+        for (User user : App.getAllUsers()) {
+            if (user.getUsername().equals(name)) {
+                return user;
+            }
+        }
+        return null;
+    }
+
     private void setID() {
         Date date = new Date();
         this.id = date.hashCode();

@@ -1,17 +1,16 @@
-package com.example.controller;
+package com.example.controller.server;
 
 import java.util.*;
 import java.util.concurrent.*;
 
-import com.example.model.GameState;
 import com.example.model.game.Player;
 import com.google.gson.Gson;
 
 public class GameServer implements Runnable {
     private Map<Integer, Player> players;
     private List<Integer> spectators;
-    private GameState currentState;
-    private List<GameState> gameHistory;
+    private String currentState;
+    private List<String> gameHistory;
     private Gson gson;
     private BlockingQueue<PlayerAction> actionQueue;
     private volatile boolean running;
@@ -56,13 +55,12 @@ public class GameServer implements Runnable {
         }
     }
 
-    private void sendGameState(int playerId, GameState gameState) {
+    private void sendGameState(int playerId, String gameState) {
         String jsonState = gson.toJson(gameState);
         // Here you would use your networking code to send jsonState to the client
     }
 
     private void startGame() {
-        currentState = new GameState(new ArrayList<>(players.values()));
         gameHistory.add(currentState);
         broadcastGameState();
     }
@@ -73,7 +71,6 @@ public class GameServer implements Runnable {
 
     private void processPlayerAction(int playerId, String action) {
         // Update game state based on player action
-        currentState.updateFromAction(playerId, action);
         gameHistory.add(currentState);
         broadcastGameState();
     }
@@ -93,9 +90,6 @@ public class GameServer implements Runnable {
         System.out.println("Sending to " + clientId + ": " + jsonState);
     }
 
-    public List<GameState> getGameHistory() {
-        return new ArrayList<>(gameHistory);
-    }
 
     public void stop() {
         running = false;

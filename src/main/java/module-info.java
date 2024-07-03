@@ -17,4 +17,7 @@ module gwent {
     exports com.example.model.card.enums;
     exports com.example.model.game.place;
     opens com.example.model.game.place to com.google.gson;
+    exports com.example.model.game;
+    opens com.example.model.game to com.google.gson, javafx.base;
+    exports com.example.controller.server;
 }

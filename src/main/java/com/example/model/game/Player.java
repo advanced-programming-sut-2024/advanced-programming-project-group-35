@@ -7,6 +7,7 @@ import java.util.HashMap;
 public class Player {
     private int numberOfCrystals;
     private int numberOfVetoCards;
+    private int id;
     private String name;
     private Board board;
     private int score;
@@ -15,6 +16,7 @@ public class Player {
 
     public Player(String name) {
         this.name = name;
+        this.id = User.getUserByUsername(name).getID();
         this.board = new Board();
         this.scoresOfRounds = new HashMap<>();
         this.numberOfCrystals = 2;
@@ -24,6 +26,7 @@ public class Player {
 
     public Player(int ID){
         this.name = User.getUserByID(ID).getUsername();
+        this.id = ID;
         this.board = new Board();
         this.scoresOfRounds = new HashMap<>();
         this.numberOfCrystals = 2;
@@ -79,4 +82,7 @@ public class Player {
         return board;
     }
 
+    public int getId() {
+        return id;
+    }
 }
