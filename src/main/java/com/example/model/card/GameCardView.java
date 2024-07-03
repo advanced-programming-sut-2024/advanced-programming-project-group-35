@@ -149,6 +149,9 @@ public class GameCardView extends Pane {
             case SPY -> {
                 return GameCardView.class.getResource("/images/icons/anim_spy.png").toExternalForm();
             }
+            case COMMANDER_HORN -> {
+                return GameCardView.class.getResource("/images/icons/anim_horn.png").toExternalForm();
+            }
             default -> {
                 return null;
             }

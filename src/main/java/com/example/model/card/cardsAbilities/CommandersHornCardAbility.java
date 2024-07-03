@@ -1,16 +1,25 @@
 package com.example.model.card.cardsAbilities;
 
+import com.example.controller.Controller;
+import com.example.controller.GameMenuController;
 import com.example.model.card.Ability;
 import com.example.model.card.AbilityContext;
 import com.example.model.card.UnitCard;
+
 public class CommandersHornCardAbility implements Ability {
-    //TODO نمایش بوق در صفحه
     @Override
     public void apply(AbilityContext abilityContext) {
-       for (UnitCard card : abilityContext.getRow().getCards()) {
-           if (card != abilityContext.getCard())
-               card.duplicatePower();
-       }
-       abilityContext.getRow().updateStrength();
+        for (UnitCard card : abilityContext.getRow().getCards()) {
+            if (card != null) {
+                if (card != abilityContext.getCard()) {
+                    card.duplicatePower();
+                    ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).getGameMenuControllerView().getGameCardViewWithCardId(card.getIdInGame()).updatePowerLabel();
+                } else if (abilityContext.getCard() == null) {
+                    card.duplicatePower();
+                    ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).getGameMenuControllerView().getGameCardViewWithCardId(card.getIdInGame()).updatePowerLabel();
+                }
+            }
+        }
+        abilityContext.getRow().updateStrength();
     }
 }

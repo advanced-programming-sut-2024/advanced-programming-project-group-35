@@ -11,7 +11,7 @@ public class KingOfTermeriaAbility implements LeaderAbility {
     @Override
     public void apply(Table table) {
         Row siege = table.getCurrentPlayer().getBoard().getSiegeCardPlace();
-        if (!(siege.getSpecialCard().getAbilityName() == AbilityName.COMMANDERS_HORN)) {
+        if (!(siege.getSpecialCard().getAbilityName() == AbilityName.COMMANDER_HORN)) {
             for (UnitCard card : siege.getCards()) {
                 card.duplicatePower();
             }

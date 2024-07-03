@@ -132,6 +132,7 @@ public class GameMenuControllerView {
     public void passRound(MouseEvent mouseEvent) {
 
     }
+
     private void setObservableLists() {
 
     }
@@ -185,6 +186,7 @@ public class GameMenuControllerView {
         addCurrentPlayerHandCards(table);
 
     }
+
     private void addGameCardViewsToAllCards() {
         for (Card card : table.getCurrentPlayer().getBoard().getHand().getCards()) {
             allCardsInGame.add(new GameCardView(card));
@@ -293,8 +295,7 @@ public class GameMenuControllerView {
                         controller.moveCardFromOriginToDestinationAndDoAbility(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.opponentPlayerSiege.toString());
                         removeStyleClass();
                     });
-                }
-                else {
+                } else {
                     currentPlayerSiege.getStyleClass().add("highlighted-flow-pane");
                     currentPlayerSiege.setOnMouseClicked(e -> {
                         controller.moveCardFromOriginToDestinationAndDoAbility(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.currentPlayerSiege.toString());
@@ -353,6 +354,7 @@ public class GameMenuControllerView {
                         removeStyleClass();
                     });
                 } else {
+                    removeStyleClass();
                     if (currentPlayerCloseCombatSpecialPlace.getChildren().isEmpty()) {
                         currentPlayerCloseCombatSpecialPlace.getStyleClass().add("highlighted-flow-pane");
                         currentPlayerCloseCombatSpecialPlace.setOnMouseClicked(e -> {

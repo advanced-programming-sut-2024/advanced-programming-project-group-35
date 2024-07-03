@@ -11,7 +11,7 @@ public class BringerOfDeathAbility implements LeaderAbility {
     @Override
     public void apply(Table table) {
         Row close = table.getCurrentPlayer().getBoard().getCloseCombatCardPlace();
-        if (close.getSpecialCard().getAbilityName() == AbilityName.COMMANDERS_HORN) {
+        if (close.getSpecialCard().getAbilityName() == AbilityName.COMMANDER_HORN) {
             for (UnitCard card : close.getCards()) {
                 card.duplicatePower();
             }

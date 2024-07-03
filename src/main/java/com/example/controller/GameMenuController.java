@@ -102,7 +102,6 @@ public class GameMenuController extends AppController {
         originRow.remove(card);
         destinationRow.add(card);
         gameMenuControllerView.moveCardToDestinationFlowPane(cardId, origin, destination);
-
         if (card instanceof UnitCard) {
             if (card.getAbilityName() == AbilityName.MUSTER) {
                 AbilityContext abilityContext = new AbilityContext(table, (UnitCard) card, getRowByName(destination));
@@ -133,6 +132,26 @@ public class GameMenuController extends AppController {
                 Timeline timeline = new Timeline(keyFrame);
                 timeline.setCycleCount(1);
                 timeline.play();
+            } else if (card.getAbilityName() == AbilityName.COMMANDER_HORN) {
+                AbilityContext abilityContext = new AbilityContext(table, (UnitCard) card, getRowByName(destination));
+                gameMenuControllerView.getGameCardViewWithCardId(cardId).doAbilityAnimation(AbilityName.COMMANDER_HORN);
+                KeyFrame keyFrame = new KeyFrame(Duration.seconds(1.5), event -> {
+                    card.getAbility().apply(abilityContext);
+                });
+                Timeline timeline = new Timeline(keyFrame);
+                timeline.setCycleCount(1);
+                timeline.play();
+            }
+        } else if (card instanceof SpecialCard) {
+            if (card.getAbilityName() == AbilityName.COMMANDER_HORN) {
+                AbilityContext abilityContext = new AbilityContext(table, null, getRowByName(getRowNameBySpecialPlaceName(destination)));
+                gameMenuControllerView.getGameCardViewWithCardId(cardId).doAbilityAnimation(AbilityName.COMMANDER_HORN);
+                KeyFrame keyFrame = new KeyFrame(Duration.seconds(1.5), event -> {
+                    card.getAbility().apply(abilityContext);
+                });
+                Timeline timeline = new Timeline(keyFrame);
+                timeline.setCycleCount(1);
+                timeline.play();
             }
         }
 
@@ -140,6 +159,32 @@ public class GameMenuController extends AppController {
         table.getCurrentPlayer().updateScore();
         table.getOpponent().updateScore();
         saveLog("card with id: " + cardId + " moved from " + origin + " to " + destination + "and ability applied");
+    }
+
+    private String getRowNameBySpecialPlaceName(String specialPlaceName) {
+        switch (specialPlaceName) {
+            case "currentPlayerCloseCombatSpecialPlaceObservableList" -> {
+                return RowsInGame.currentPlayerCloseCombat.toString();
+            }
+            case "currentPlayerRangedSpecialPlaceObservableList" -> {
+                return RowsInGame.currentPlayerRanged.toString();
+            }
+            case "currentPlayerSiegeSpecialPlaceObservableList" -> {
+                return RowsInGame.currentPlayerSiege.toString();
+            }
+            case "opponentSiegeSpecialPlaceObservableList" -> {
+                return RowsInGame.opponentPlayerSiege.toString();
+            }
+            case "opponentCloseCombatSpecialPlaceObservableList" -> {
+                return RowsInGame.opponentPlayerCloseCombat.toString();
+            }
+            case "opponentRangedSpecialPlaceObservableList" -> {
+                return RowsInGame.opponentPlayerRanged.toString();
+            }
+            default -> {
+                return null;
+            }
+        }
     }
 
     public void moveCardFromOriginToDestinationAndDontDoAbility(int cardId, String origin, String destination) {

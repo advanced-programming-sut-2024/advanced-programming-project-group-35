@@ -10,7 +10,7 @@ public class TheBeautifulAbility implements LeaderAbility {
     @Override
     public void apply(Table table) {
         Row ranged = table.getCurrentPlayer().getBoard().getRangedCardPlace();
-        if (!(ranged.getSpecialCard().getAbilityName() == AbilityName.COMMANDERS_HORN)) {
+        if (!(ranged.getSpecialCard().getAbilityName() == AbilityName.COMMANDER_HORN)) {
             for (UnitCard card : ranged.getCards()) {
                 card.duplicatePower();
             }

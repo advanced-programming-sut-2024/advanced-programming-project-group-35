@@ -4,7 +4,7 @@ import com.example.model.card.Ability;
 import com.example.model.card.cardsAbilities.*;
 
 public enum AbilityName {
-    COMMANDERS_HORN("commanders_horn"),
+    COMMANDER_HORN("commander_horn"),
     DECOY("decoy"),
     MEDIC("medic"),
     MORALE_BOOST("moral_boost"),
@@ -62,7 +62,7 @@ public enum AbilityName {
             case "mardroeme" -> {
                 return new MardroemeAbility();
             }
-            case "commanders_horn" -> {
+            case "commander_horn" -> {
                 return new CommandersHornCardAbility();
             }
             case "decoy" -> {

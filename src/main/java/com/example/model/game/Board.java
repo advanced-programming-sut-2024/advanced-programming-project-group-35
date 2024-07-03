@@ -92,7 +92,7 @@ public class Board {
         //TODO تابع زیر برای تست کارو راحت میکنه
         List<Card> deckCopy = new ArrayList<>(deck.getCards());
         for (Card card : deckCopy) {
-            if (card.getAbilityName() == AbilityName.SPY) {
+            if (card.getAbilityName() == AbilityName.COMMANDER_HORN) {
                 hand.addCard(card);
                 deck.removeCard(card);
             }
