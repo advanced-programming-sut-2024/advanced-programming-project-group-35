@@ -1,12 +1,10 @@
 package com.example.model.game.place;
 
-import com.example.model.card.Card;
 import com.example.model.card.SpecialCard;
 import com.example.model.card.UnitCard;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.util.ArrayList;
 
 public class Row {
     private ObservableList<SpecialCard> specialPlace = FXCollections.observableArrayList();
@@ -50,10 +48,12 @@ public class Row {
 
     public void addCard(UnitCard card) {
         cards.add(card);
+        updateStrength();
     }
 
     public void removeCard(UnitCard card) {
         cards.remove(card);
+        updateStrength();
     }
 
     public void clear() {
@@ -81,7 +81,9 @@ public class Row {
     public void updateStrength() {
         int result = 0;
         for (UnitCard card : cards) {
-            result += card.getCurrentPower();
+            if (card != null) {
+                result += card.getCurrentPower();
+            }
         }
         strength = result;
     }

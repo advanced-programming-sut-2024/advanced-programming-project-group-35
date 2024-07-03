@@ -2,6 +2,7 @@ package com.example.model.game.place;
 
 public enum RowsInGame {
     currentPlayerHand("currentPlayerHandObservableList"),
+    currentPlayerDeck("currentPlayerDeckObservableList"),
     weather("weatherObservableList"),
     currentPlayerCloseCombat("currentPlayerCloseCombatObservableList"),
     currentPlayerRanged("currentPlayerRangedObservableList"),

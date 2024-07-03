@@ -266,7 +266,7 @@ public class GameMenuControllerView {
                 removeStyleClass();
                 currentPlayerCloseCombat.getStyleClass().add("highlighted-flow-pane");
                 currentPlayerCloseCombat.setOnMouseClicked(e -> {
-                    controller.moveCardFromOriginToDestination(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.currentPlayerCloseCombat.toString());
+                    controller.moveCardFromOriginToDestinationAndDoAbility(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.currentPlayerCloseCombat.toString());
                     removeStyleClass();
                 });
             }
@@ -274,7 +274,7 @@ public class GameMenuControllerView {
                 removeStyleClass();
                 currentPlayerRanged.getStyleClass().add("highlighted-flow-pane");
                 currentPlayerRanged.setOnMouseClicked(e -> {
-                    controller.moveCardFromOriginToDestination(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.currentPlayerRanged.toString());
+                    controller.moveCardFromOriginToDestinationAndDoAbility(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.currentPlayerRanged.toString());
                     removeStyleClass();
                 });
             }
@@ -282,7 +282,7 @@ public class GameMenuControllerView {
                 removeStyleClass();
                 currentPlayerSiege.getStyleClass().add("highlighted-flow-pane");
                 currentPlayerSiege.setOnMouseClicked(e -> {
-                    controller.moveCardFromOriginToDestination(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.currentPlayerSiege.toString());
+                    controller.moveCardFromOriginToDestinationAndDoAbility(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.currentPlayerSiege.toString());
                     removeStyleClass();
                 });
             }
@@ -291,11 +291,11 @@ public class GameMenuControllerView {
                 currentPlayerCloseCombat.getStyleClass().add("highlighted-flow-pane");
                 currentPlayerRanged.getStyleClass().add("highlighted-flow-pane");
                 currentPlayerCloseCombat.setOnMouseClicked(e -> {
-                    controller.moveCardFromOriginToDestination(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.currentPlayerCloseCombat.toString());
+                    controller.moveCardFromOriginToDestinationAndDoAbility(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.currentPlayerCloseCombat.toString());
                     removeStyleClass();
                 });
                 currentPlayerRanged.setOnMouseClicked(e -> {
-                    controller.moveCardFromOriginToDestination(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.currentPlayerRanged.toString());
+                    controller.moveCardFromOriginToDestinationAndDoAbility(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.currentPlayerRanged.toString());
                     removeStyleClass();
                 });
             }
@@ -303,7 +303,7 @@ public class GameMenuControllerView {
                 removeStyleClass();
                 weatherCardPlace.getStyleClass().add("highlighted-flow-pane");
                 weatherCardPlace.setOnMouseClicked(e -> {
-                    controller.moveCardFromOriginToDestination(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.weather.toString());
+                    controller.moveCardFromOriginToDestinationAndDoAbility(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.weather.toString());
                     removeStyleClass();
                 });
             }
@@ -314,36 +314,36 @@ public class GameMenuControllerView {
                     currentPlayerRanged.getStyleClass().add("highlighted-flow-pane");
                     currentPlayerSiege.getStyleClass().add("highlighted-flow-pane");
                     currentPlayerCloseCombat.setOnMouseClicked(e -> {
-                        controller.moveCardFromOriginToDestination(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.currentPlayerCloseCombat.toString());
+                        controller.moveCardFromOriginToDestinationAndDoAbility(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.currentPlayerCloseCombat.toString());
                         removeStyleClass();
                     });
                     currentPlayerRanged.setOnMouseClicked(e -> {
-                        controller.moveCardFromOriginToDestination(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.currentPlayerRanged.toString());
+                        controller.moveCardFromOriginToDestinationAndDoAbility(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.currentPlayerRanged.toString());
                         removeStyleClass();
                     });
                     currentPlayerSiege.setOnMouseClicked(e -> {
-                        controller.moveCardFromOriginToDestination(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.currentPlayerSiege.toString());
+                        controller.moveCardFromOriginToDestinationAndDoAbility(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.currentPlayerSiege.toString());
                         removeStyleClass();
                     });
                 } else {
                     if (currentPlayerCloseCombatSpecialPlace.getChildren().isEmpty()) {
                         currentPlayerCloseCombatSpecialPlace.getStyleClass().add("highlighted-flow-pane");
                         currentPlayerCloseCombatSpecialPlace.setOnMouseClicked(e -> {
-                            controller.moveCardFromOriginToDestination(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.currentPlayerCloseCombatSpecialPlace.toString());
+                            controller.moveCardFromOriginToDestinationAndDoAbility(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.currentPlayerCloseCombatSpecialPlace.toString());
                             removeStyleClass();
                         });
                     }
                     if (currentPlayerRangedSpecialPlace.getChildren().isEmpty()) {
                         currentPlayerRangedSpecialPlace.getStyleClass().add("highlighted-flow-pane");
                         currentPlayerRangedSpecialPlace.setOnMouseClicked(e -> {
-                            controller.moveCardFromOriginToDestination(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.currentPlayerRangedSpecialPlace.toString());
+                            controller.moveCardFromOriginToDestinationAndDoAbility(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.currentPlayerRangedSpecialPlace.toString());
                             removeStyleClass();
                         });
                     }
                     if (currentPlayerSiegeSpecialPlace.getChildren().isEmpty()) {
                         currentPlayerSiegeSpecialPlace.getStyleClass().add("highlighted-flow-pane");
                         currentPlayerSiegeSpecialPlace.setOnMouseClicked(e -> {
-                            controller.moveCardFromOriginToDestination(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.currentPlayerSiegeSpecialPlace.toString());
+                            controller.moveCardFromOriginToDestinationAndDoAbility(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.currentPlayerSiegeSpecialPlace.toString());
                             removeStyleClass();
                         });
                     }
@@ -475,36 +475,38 @@ public class GameMenuControllerView {
         GameCardView gameCardView = getGameCardViewWithCardId(cardId);
         FlowPane destinationFLowPane = getFlowPaneWithName(destinationObservableListName);
         FlowPane initialFlowPane = getFlowPaneWithName(initialObservableListName);
+
 //        double startX = gameCardView.getLayoutX();
 //        double startY = gameCardView.getLayoutY();
 //        double endX = destinationFLowPane.getLayoutX() - initialFlowPane.getLayoutX();
 //        double endY = destinationFLowPane.getLayoutY() - initialFlowPane.getLayoutY();
+//        cardMoveAnimation(gameCardView, startX, startY, endX, endY, initialFlowPane, destinationFLowPane);
+
         destinationFLowPane.getChildren().add(gameCardView);
         initialFlowPane.getChildren().remove(gameCardView);
         disableMouseEventsForHandCard(cardId);
         destinationFLowPane.setOnMouseClicked(null);
     }
 
-//    private static void cardMoveAnimation(GameCardView gameCardView, double startX, double startY, double endX, double endY, ObservableList<GameCardView> initialObservableList, FlowPane initialFlowPane, ObservableList<GameCardView> destinationObservableList, FlowPane destinationFLowPane) {
-//        TranslateTransition transition = new TranslateTransition(Duration.seconds(1), gameCardView);
-//        transition.setFromX(startX);
-//        transition.setFromY(startY);
-//        transition.setToX(endX);
-//        transition.setToY(endY);
-//
-//        transition.setOnFinished(event -> {
-//            initialObservableList.remove(gameCardView);
-//            initialFlowPane.getChildren().remove(gameCardView);
-//
-//            destinationObservableList.add(gameCardView);
-//            destinationFLowPane.getChildren().add(gameCardView);
-//
-//            gameCardView.setTranslateX(0);
-//            gameCardView.setTranslateY(0);
-//        });
-//
-//        transition.play();
-//    }
+    private static void cardMoveAnimation(GameCardView gameCardView, double startX, double startY, double endX, double endY, FlowPane initialFlowPane, FlowPane destinationFLowPane) {
+        TranslateTransition transition = new TranslateTransition(Duration.seconds(1), gameCardView);
+        transition.setFromX(startX);
+        transition.setFromY(startY);
+        transition.setToX(endX);
+        transition.setToY(endY);
+
+        transition.setOnFinished(event -> {
+            initialFlowPane.getChildren().remove(gameCardView);
+
+            destinationFLowPane.getChildren().add(gameCardView);
+
+            gameCardView.setTranslateX(0);
+            gameCardView.setTranslateY(0);
+        });
+
+        transition.play();
+    }
+
 
     private void nonLeaderCardsDoAbility(GameCardView gameCardView) {
 

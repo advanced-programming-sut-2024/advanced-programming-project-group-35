@@ -1,0 +1,195 @@
+{
+  "player1": "ali",
+  "player1Faction": "Monsters",
+  "player1Hand": [
+    {
+      "name": "neutral_chort",
+      "id": 101
+    },
+    {
+      "name": "neutral_cow",
+      "id": 103
+    },
+    {
+      "name": "neutral_emiel",
+      "id": 105
+    },
+    {
+      "name": "monsters_arachas_2",
+      "id": 107
+    },
+    {
+      "name": "monsters_vampire_bruxa",
+      "id": 109
+    },
+    {
+      "name": "monsters_draug",
+      "id": 111
+    },
+    {
+      "name": "monsters_vampire_ekkimara",
+      "id": 113
+    },
+    {
+      "name": "monsters_fiend",
+      "id": 115
+    },
+    {
+      "name": "monsters_vampire_fleder",
+      "id": 117
+    },
+    {
+      "name": "monsters_forktail",
+      "id": 119
+    },
+    {
+      "name": "monsters_frightener",
+      "id": 121
+    }
+  ],
+  "player1Deck": [
+    {
+      "name": "neutral_ciri",
+      "id": 102
+    },
+    {
+      "name": "neutral_dandelion",
+      "id": 104
+    },
+    {
+      "name": "monsters_arachas",
+      "id": 106
+    },
+    {
+      "name": "monsters_arachas_1",
+      "id": 108
+    },
+    {
+      "name": "monsters_cockatrice",
+      "id": 110
+    },
+    {
+      "name": "monsters_earth_elemental",
+      "id": 112
+    },
+    {
+      "name": "monsters_endrega",
+      "id": 114
+    },
+    {
+      "name": "monsters_fire_elemental",
+      "id": 116
+    },
+    {
+      "name": "monsters_foglet",
+      "id": 118
+    },
+    {
+      "name": "monsters_ice_giant",
+      "id": 120
+    },
+    {
+      "name": "monsters_gargoyle",
+      "id": 122
+    }
+  ],
+  "player2": "opponent",
+  "player2Faction": "Monsters",
+  "player2Hand": [
+    {
+      "name": "neutral_chort",
+      "id": 201
+    },
+    {
+      "name": "neutral_cow",
+      "id": 203
+    },
+    {
+      "name": "neutral_emiel",
+      "id": 205
+    },
+    {
+      "name": "monsters_arachas_2",
+      "id": 207
+    },
+    {
+      "name": "monsters_vampire_bruxa",
+      "id": 209
+    },
+    {
+      "name": "monsters_draug",
+      "id": 211
+    },
+    {
+      "name": "monsters_vampire_ekkimara",
+      "id": 213
+    },
+    {
+      "name": "monsters_fiend",
+      "id": 215
+    },
+    {
+      "name": "monsters_vampire_fleder",
+      "id": 217
+    },
+    {
+      "name": "monsters_forktail",
+      "id": 219
+    },
+    {
+      "name": "monsters_frightener",
+      "id": 221
+    }
+  ],
+  "player2Deck": [
+    {
+      "name": "neutral_ciri",
+      "id": 202
+    },
+    {
+      "name": "neutral_dandelion",
+      "id": 204
+    },
+    {
+      "name": "monsters_arachas",
+      "id": 206
+    },
+    {
+      "name": "monsters_arachas_1",
+      "id": 208
+    },
+    {
+      "name": "monsters_cockatrice",
+      "id": 210
+    },
+    {
+      "name": "monsters_earth_elemental",
+      "id": 212
+    },
+    {
+      "name": "monsters_endrega",
+      "id": 214
+    },
+    {
+      "name": "monsters_fire_elemental",
+      "id": 216
+    },
+    {
+      "name": "monsters_foglet",
+      "id": 218
+    },
+    {
+      "name": "monsters_ice_giant",
+      "id": 220
+    },
+    {
+      "name": "monsters_gargoyle",
+      "id": 222
+    }
+  ],
+  "commands": [
+    "card with id: 107 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableList",
+    "card with id: 113 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableList",
+    "card with id: 117 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableList"
+  ]
+}

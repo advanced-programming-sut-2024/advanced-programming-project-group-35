@@ -5,6 +5,7 @@ import com.example.model.App;
 import com.example.model.DeckManager;
 import com.example.model.GameData;
 import com.example.model.card.*;
+import com.example.model.card.enums.AbilityName;
 import com.example.model.card.enums.CardData;
 import com.example.model.card.enums.FactionsType;
 import com.example.model.game.*;
@@ -78,9 +79,9 @@ public class GameMenuController extends AppController {
         }
     }
 
-    public void moveCardFromOriginToDestination(int cardId, String origin, String destination) {
-        ObservableList<Card> originRow = (ObservableList<Card>) getRowByName(origin);
-        ObservableList<Card> destinationRow = (ObservableList<Card>) getRowByName(destination);
+    public void moveCardFromOriginToDestinationAndDoAbility(int cardId, String origin, String destination) {
+        ObservableList<Card> originRow = (ObservableList<Card>) getRowListByName(origin);
+        ObservableList<Card> destinationRow = (ObservableList<Card>) getRowListByName(destination);
         Card card = null;
         for (Card card1 : originRow) {
             if (card1.getIdInGame() == cardId) {
@@ -91,10 +92,65 @@ public class GameMenuController extends AppController {
         originRow.remove(card);
         destinationRow.add(card);
         gameMenuControllerView.moveCardToDestinationFlowPane(cardId, origin, destination);
+
+
+        if (card instanceof UnitCard) {
+            if (card.getAbilityName() == AbilityName.MUSTER) {
+                AbilityContext abilityContext = new AbilityContext(table, (UnitCard)card, getRowByName(destination));
+                abilityContext.addParam("dest", destination);
+                card.getAbility().apply(abilityContext);
+            }
+        }
+
+
+        table.getCurrentPlayer().updateScore();
+        table.getOpponent().updateScore();
         saveLog("card with id: " + cardId + " moved from " + origin + " to " + destination);
     }
+    public void moveCardFromOriginToDestinationAndDontDoAbility(int cardId, String origin, String destination) {
+        ObservableList<Card> originRow = (ObservableList<Card>) getRowListByName(origin);
+        ObservableList<Card> destinationRow = (ObservableList<Card>) getRowListByName(destination);
+        Card card = null;
+        for (Card card1 : originRow) {
+            if (card1.getIdInGame() == cardId) {
+                card = card1;
+                break;
+            }
+        }
+        originRow.remove(card);
+        destinationRow.add(card);
+        gameMenuControllerView.moveCardToDestinationFlowPane(cardId, origin, destination);
+        table.getCurrentPlayer().updateScore();
+        table.getOpponent().updateScore();
+        saveLog("card with id: " + cardId + " moved from " + origin + " to " + destination);
+    }
+    private Row getRowByName(String rowName) {
+        switch (rowName) {
+            case "currentPlayerSiegeObservableList" -> {
+                return table.getCurrentPlayer().getBoard().getSiegeCardPlace();
+            }
+            case "currentPlayerRangedObservableList" -> {
+                return table.getCurrentPlayer().getBoard().getRangedCardPlace();
+            }
+            case "currentPlayerCloseCombatObservableList" -> {
+                return table.getCurrentPlayer().getBoard().getCloseCombatCardPlace();
+            }
+            case "opponentSiegeObservableList" -> {
+                return table.getOpponent().getBoard().getSiegeCardPlace();
+            }
+            case "opponentCloseCombatObservableList" -> {
+                return table.getOpponent().getBoard().getCloseCombatCardPlace();
+            }
+            case "opponentRangedObservableList" -> {
+                return table.getOpponent().getBoard().getRangedCardPlace();
+            }
+            default -> {
+                return null;
+            }
+        }
+    }
 
-    private ObservableList<? extends Card> getRowByName(String rowName) {
+    private ObservableList<? extends Card> getRowListByName(String rowName) {
         switch (rowName) {
             case "currentPlayerHandObservableList" -> {
                 return table.getCurrentPlayer().getBoard().getHand().getCards();
