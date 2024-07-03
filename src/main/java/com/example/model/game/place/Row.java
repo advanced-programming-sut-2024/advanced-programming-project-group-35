@@ -1,12 +1,15 @@
 package com.example.model.game.place;
 
+import com.example.model.card.Card;
 import com.example.model.card.SpecialCard;
 import com.example.model.card.UnitCard;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 
 public class Row {
-    private SpecialCard specialPlace;
+    private ObservableList<SpecialCard> specialPlace = FXCollections.observableArrayList();
     private Place place;
     private boolean applyWeather = false;
     private int strength = 0;
@@ -19,17 +22,21 @@ public class Row {
         this.applyWeather = applyWeather;
     }
 
-    public SpecialCard getSpecialPlace() {
+    public ObservableList<SpecialCard> getSpecialPlace() {
         return specialPlace;
     }
 
-    public void setSpecialPlace(SpecialCard specialPlace) {
-        this.specialPlace = specialPlace;
+    public SpecialCard getSpecialCard() {
+        return specialPlace.get(0);
     }
 
-    private ArrayList<UnitCard> cards = new ArrayList<>();
+    public void setSpecialCard(SpecialCard specialCard) {
+        this.specialPlace.add(specialCard);
+    }
 
-    public ArrayList<UnitCard> getCards() {
+    private ObservableList<UnitCard> cards = FXCollections.observableArrayList();
+
+    public ObservableList<UnitCard> getCards() {
         return cards;
     }
 

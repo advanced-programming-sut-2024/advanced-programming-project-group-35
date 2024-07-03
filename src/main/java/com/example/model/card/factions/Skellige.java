@@ -33,14 +33,14 @@ public class Skellige implements Factions {
                 Row row1 = player.getBoard().getRowByName(selectedCard1.getPlace());
                 Row row2 = player.getBoard().getRowByName(selectedCard2.getPlace());
                 if (selectedCard1 instanceof SpecialCard) {
-                    row1.setSpecialPlace((SpecialCard) selectedCard1);
+                    row1.setSpecialCard((SpecialCard) selectedCard1);
                     //TODO گرافیک انتقال کارت
                 } else {
                     row1.addCard((UnitCard) selectedCard1);
                     //TODO گرافیک انتقال کارت
                 }
                 if (selectedCard2 instanceof SpecialCard) {
-                    row2.setSpecialPlace((SpecialCard) selectedCard2);
+                    row2.setSpecialCard((SpecialCard) selectedCard2);
                     //TODO گرافیک انتقال کارت
                 } else {
                     row2.addCard((UnitCard) selectedCard2);
@@ -53,7 +53,7 @@ public class Skellige implements Factions {
                 deck.removeCard(selectedCard);
                 Row row = player.getBoard().getRowByName(selectedCard.getPlace());
                 if (selectedCard instanceof SpecialCard) {
-                    row.setSpecialPlace((SpecialCard) selectedCard);
+                    row.setSpecialCard((SpecialCard) selectedCard);
                     //TODO گرافیک انتقال کارت
                 } else {
                     row.addCard((UnitCard) selectedCard);

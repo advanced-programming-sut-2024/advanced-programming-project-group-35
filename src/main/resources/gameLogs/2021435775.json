@@ -91,6 +91,10 @@
     {
       "name": "monsters_fire_elemental",
       "id": 122
+    },
+    {
+      "name": "monsters_vampire_fleder",
+      "id": 123
     }
   ],
   "player2": "opponent",
@@ -185,10 +189,17 @@
     {
       "name": "monsters_fire_elemental",
       "id": 222
+    },
+    {
+      "name": "monsters_vampire_fleder",
+      "id": 223
     }
   ],
   "commands": [
-    "cardWithId: 109 for PlayerWithId: ali movedFrom: currentPlayerHandObservableList to: currentPlayerCloseCombatObservableList",
-    "cardWithId: 115 for PlayerWithId: ali movedFrom: currentPlayerHandObservableList to: currentPlayerCloseCombatObservableList"
+    "card with id: 107 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableList",
+    "card with id: 115 moved from currentPlayerHandObservableList to currentPlayerRangedObservableList",
+    "card with id: 113 moved from currentPlayerHandObservableList to currentPlayerSiegeObservableList",
+    "card with id: 111 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableList",
+    "card with id: 119 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableList"
   ]
 }

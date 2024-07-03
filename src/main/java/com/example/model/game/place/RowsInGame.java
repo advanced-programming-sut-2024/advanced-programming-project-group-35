@@ -27,10 +27,4 @@ public enum RowsInGame {
     public String toString() {
         return listName;
     }
-    public static RowsInGame getRowInGameByName(String rowName) {
-        for (RowsInGame row : RowsInGame.values()) {
-            if (row.listName.equals(rowName)) return row;
-        }
-        return null;
-    }
 }

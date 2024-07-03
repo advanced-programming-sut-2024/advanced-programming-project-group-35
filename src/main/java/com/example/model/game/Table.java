@@ -25,6 +25,7 @@ public class Table {
         this.rounds = new ArrayList<>();
         this.roundNumber = 1;
         this.gameId = new Date().hashCode();
+        this.spellPlace = new SpellPlace();
     }
 
     public int getGameId() {

@@ -4,6 +4,7 @@ import com.example.Main;
 import com.example.controller.Controller;
 import com.example.model.alerts.Alert;
 import com.example.model.Terminal;
+import com.example.view.menuControllers.GameMenuControllerView;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -23,14 +24,18 @@ public class AppView extends Application {
     private boolean isAlert = false;
     private Alert alert;
     private boolean terminalVisible = false;
-    public Terminal getTerminal() {
+    private Terminal getTerminal() {
         return terminal;
     }
+    private GameMenuControllerView gameMenuControllerView;
     public void showMenu(Menu menu) throws Exception {
         primaryStage.centerOnScreen();
 
         fxmlLoader = new FXMLLoader(Main.class.getResource(menu.getFxmlFile()));
         pane = fxmlLoader.load();
+        if (menu.getTitle().equals("Game Menu")) {
+            gameMenuControllerView = fxmlLoader.getController();
+        }
 
         Scene scene = new Scene(pane);
         primaryStage.setScene(scene);
@@ -62,6 +67,10 @@ public class AppView extends Application {
     public void removeAlert(Pane currentPane) {
         currentPane.getChildren().remove(alert);
         isAlert = false;
+    }
+
+    public GameMenuControllerView getGameMenuControllerView() {
+        return gameMenuControllerView;
     }
 
     @Override

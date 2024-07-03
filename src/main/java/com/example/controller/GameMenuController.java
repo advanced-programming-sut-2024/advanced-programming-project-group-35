@@ -10,9 +10,12 @@ import com.example.model.card.enums.FactionsType;
 import com.example.model.game.*;
 import com.example.model.game.place.Row;
 import com.example.model.game.place.RowsInGame;
+import com.example.view.AppView;
 import com.example.view.Menu;
+import com.example.view.menuControllers.GameMenuControllerView;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
+import javafx.collections.ObservableList;
 
 import java.io.File;
 import java.io.FileReader;
@@ -25,31 +28,33 @@ import java.util.stream.Collectors;
 
 public class GameMenuController extends AppController {
     private Table table;
+    private GameMenuControllerView gameMenuControllerView;
 
     @Override
     public void run() {
         try {
             App.getAppView().showMenu(Menu.GAME_MENU);
             App.setCurrentController(Controller.GAME_MENU_CONTROLLER);
+            gameMenuControllerView = App.getAppView().getGameMenuControllerView();
         } catch (Exception e) {
             throw new RuntimeException();
         }
     }
 
-//    public void vetoCard(Player player, Card selectedCard) {
-//        //TODO
-//        if (player.canVetoCard()) {
-//            Deck deck = player.getBoard().getDeck();
-//            Hand hand = player.getBoard().getHand();
-//            Card ranomCard = deck.getCard(new Random().nextInt(deck.getSize()));
-//            hand.removeCard(selectedCard);
-//            hand.addCard(ranomCard);
-//            deck.removeCard(ranomCard);
-//            deck.addCard(selectedCard);
-//            player.decreaseNumberOfVetoCards();
-//            //TODO گرافیک جابه جایی کارت
-//        }
-//    }
+    public void vetoCard(Player player, Card selectedCard) {
+        //TODO
+        if (player.canVetoCard()) {
+            Deck deck = player.getBoard().getDeck();
+            Hand hand = player.getBoard().getHand();
+            Card ranomCard = deck.getCard(new Random().nextInt(deck.getSize()));
+            hand.removeCard(selectedCard);
+            hand.addCard(ranomCard);
+            deck.removeCard(ranomCard);
+            deck.addCard(selectedCard);
+            player.decreaseNumberOfVetoCards();
+            //TODO گرافیک جابه جایی کارت
+        }
+    }
 
     public void doUnitCardAction(Card card, AbilityContext abilityContext) {
         if (card.getAbility() != null) {
@@ -73,62 +78,70 @@ public class GameMenuController extends AppController {
         }
     }
 
-    public void moveCardFromOriginToDestination(RowsInGame origin, RowsInGame destination, Card card) {
-        switch (origin) {
-            case currentPlayerHand -> table.getCurrentPlayer().getBoard().getHand().removeCard(card);
-            case currentPlayerSiege ->
-                    table.getCurrentPlayer().getBoard().getSiegeCardPlace().removeCard((UnitCard) card);
-            case currentPlayerRanged ->
-                    table.getCurrentPlayer().getBoard().getRangedCardPlace().removeCard((UnitCard) card);
-            case currentPlayerCloseCombat ->
-                    table.getCurrentPlayer().getBoard().getCloseCombatCardPlace().removeCard((UnitCard) card);
-            case weather -> table.getSpellPlace().removeCard((WeatherCard) card);
-            case opponentPlayerSiege -> table.getOpponent().getBoard().getSiegeCardPlace().removeCard((UnitCard) card);
-            case opponentPlayerRanged ->
-                    table.getOpponent().getBoard().getRangedCardPlace().removeCard((UnitCard) card);
-            case opponentPlayerCloseCombat ->
-                    table.getOpponent().getBoard().getCloseCombatCardPlace().removeCard((UnitCard) card);
-            case currentPlayerSiegeSpecialPlace ->
-                    table.getCurrentPlayer().getBoard().getSiegeCardPlace().setSpecialPlace(null);
-            case currentPlayerRangedSpecialPlace ->
-                    table.getCurrentPlayer().getBoard().getRangedCardPlace().setSpecialPlace(null);
-            case opponentPlayerSiegeSpecialPlace ->
-                    table.getOpponent().getBoard().getSiegeCardPlace().setSpecialPlace(null);
-            case opponentPlayerRangedSpecialPlace ->
-                    table.getOpponent().getBoard().getRangedCardPlace().setSpecialPlace(null);
-            case currentPlayerCloseCombatSpecialPlace ->
-                    table.getCurrentPlayer().getBoard().getCloseCombatCardPlace().setSpecialPlace(null);
-            case opponentPlayerCloseCombatSpecialPlace ->
-                    table.getOpponent().getBoard().getCloseCombatCardPlace().setSpecialPlace(null);
+    public void moveCardFromOriginToDestination(int cardId, String origin, String destination) {
+        ObservableList<Card> originRow = (ObservableList<Card>) getRowByName(origin);
+        ObservableList<Card> destinationRow = (ObservableList<Card>) getRowByName(destination);
+        Card card = null;
+        for (Card card1 : originRow) {
+            if (card1.getIdInGame() == cardId) {
+                card = card1;
+                break;
+            }
         }
-        switch (destination) {
-            case currentPlayerHand -> table.getCurrentPlayer().getBoard().getHand().addCard(card);
-            case currentPlayerSiege ->
-                    table.getCurrentPlayer().getBoard().getSiegeCardPlace().addCard((UnitCard) card);
-            case currentPlayerRanged ->
-                    table.getCurrentPlayer().getBoard().getRangedCardPlace().addCard((UnitCard) card);
-            case currentPlayerCloseCombat ->
-                    table.getCurrentPlayer().getBoard().getCloseCombatCardPlace().addCard((UnitCard) card);
-            case weather -> table.getSpellPlace().addCard((WeatherCard) card);
-            case opponentPlayerSiege -> table.getOpponent().getBoard().getSiegeCardPlace().addCard((UnitCard) card);
-            case opponentPlayerRanged ->
-                    table.getOpponent().getBoard().getRangedCardPlace().addCard((UnitCard) card);
-            case opponentPlayerCloseCombat ->
-                    table.getOpponent().getBoard().getCloseCombatCardPlace().addCard((UnitCard) card);
-            case currentPlayerSiegeSpecialPlace ->
-                    table.getCurrentPlayer().getBoard().getSiegeCardPlace().setSpecialPlace((SpecialCard) card);
-            case currentPlayerRangedSpecialPlace ->
-                    table.getCurrentPlayer().getBoard().getRangedCardPlace().setSpecialPlace((SpecialCard) card);
-            case opponentPlayerSiegeSpecialPlace ->
-                    table.getOpponent().getBoard().getSiegeCardPlace().setSpecialPlace((SpecialCard) card);
-            case opponentPlayerRangedSpecialPlace ->
-                    table.getOpponent().getBoard().getRangedCardPlace().setSpecialPlace((SpecialCard) card);
-            case currentPlayerCloseCombatSpecialPlace ->
-                    table.getCurrentPlayer().getBoard().getCloseCombatCardPlace().setSpecialPlace((SpecialCard) card);
-            case opponentPlayerCloseCombatSpecialPlace ->
-                    table.getOpponent().getBoard().getCloseCombatCardPlace().setSpecialPlace((SpecialCard) card);
+        originRow.remove(card);
+        destinationRow.add(card);
+        gameMenuControllerView.moveCardToDestinationFlowPane(cardId, origin, destination);
+        saveLog("card with id: " + cardId + " moved from " + origin + " to " + destination);
+    }
+
+    private ObservableList<? extends Card> getRowByName(String rowName) {
+        switch (rowName) {
+            case "currentPlayerHandObservableList" -> {
+                return table.getCurrentPlayer().getBoard().getHand().getCards();
+            }
+            case "currentPlayerSiegeObservableList" -> {
+                return table.getCurrentPlayer().getBoard().getSiegeCardPlace().getCards();
+            }
+            case "currentPlayerRangedObservableList" -> {
+                return table.getCurrentPlayer().getBoard().getRangedCardPlace().getCards();
+            }
+            case "currentPlayerCloseCombatObservableList" -> {
+                return table.getCurrentPlayer().getBoard().getCloseCombatCardPlace().getCards();
+            }
+            case "currentPlayerCloseCombatSpecialPlaceObservableList" -> {
+                return table.getCurrentPlayer().getBoard().getCloseCombatCardPlace().getSpecialPlace();
+            }
+            case "currentPlayerRangedSpecialPlaceObservableList" -> {
+                return table.getCurrentPlayer().getBoard().getRangedCardPlace().getSpecialPlace();
+            }
+            case "currentPlayerSiegeSpecialPlaceObservableList" -> {
+                return table.getCurrentPlayer().getBoard().getSiegeCardPlace().getSpecialPlace();
+            }
+            case "opponentSiegeObservableList" -> {
+                return table.getOpponent().getBoard().getSiegeCardPlace().getCards();
+            }
+            case "opponentCloseCombatObservableList" -> {
+                return table.getOpponent().getBoard().getCloseCombatCardPlace().getCards();
+            }
+            case "opponentRangedObservableList" -> {
+                return table.getOpponent().getBoard().getRangedCardPlace().getCards();
+            }
+            case "opponentSiegeSpecialPlaceObservableList" -> {
+                return table.getOpponent().getBoard().getSiegeCardPlace().getSpecialPlace();
+            }
+            case "opponentCloseCombatSpecialPlaceObservableList" -> {
+                return table.getOpponent().getBoard().getCloseCombatCardPlace().getSpecialPlace();
+            }
+            case "opponentRangedSpecialPlaceObservableList" -> {
+                return table.getOpponent().getBoard().getRangedCardPlace().getSpecialPlace();
+            }
+            case "weatherObservableList" -> {
+                return table.getSpellPlace().getCards();
+            }
+            default -> {
+                return null;
+            }
         }
-        saveLog("card with id: " + card.getIdInGame() + " moved from: " + origin + " to" + destination);
     }
 
     public void startNewGame(String player1Name, String player2Name, ArrayList<String> player1DeckNames, ArrayList<String> player2DeckNames) {
@@ -253,12 +266,12 @@ public class GameMenuController extends AppController {
 
     private static String getString(Table table) throws URISyntaxException {
         String rootPath = new File(GameMenuController.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile().getParentFile().getPath();
-        String logsDirPath = rootPath + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "gameLogs" ;
+        String logsDirPath = rootPath + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "gameLogs";
         File logsDir = new File(logsDirPath);
         if (!logsDir.exists()) {
             logsDir.mkdirs();
         }
-        String filePath = logsDirPath + File.separator + table.getGameId() + ".json" ;
+        String filePath = logsDirPath + File.separator + table.getGameId() + ".json";
         return filePath;
     }
 
