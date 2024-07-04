@@ -746,7 +746,6 @@ public class GameMenuControllerView {
     }
 
     public void changeTurn() {
-        App.getAppView().disableCursorInputs();
         KeyFrame keyFrame = new KeyFrame(Duration.seconds(3), event -> {
             swapContents(currentPlayerDeckObservableList, opponentPlayerDeckObservableList, currentPlayerDeck, opponentPlayerDeck);
             swapContents(currentPlayerHandObservableList, opponentPlayerHandObservableList, currentPlayerHand, opponentPlayerHand);
