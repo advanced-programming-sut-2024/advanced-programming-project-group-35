@@ -57,7 +57,7 @@ public class GameCardView extends Pane {
     }
 
     private void setLabelAndAbilitiesLabelForSpecialCards() {
-        ImageView ability = com.example.model.card.enums.CardData.getImageViewAbilitySpecialCards(card.getCardData());
+        ImageView ability = cardData.getImageViewAbilitySpecialCards(card.getCardData());
         ability.setLayoutX(2);
         ability.setLayoutY(2);
         ability.setFitWidth(25);
@@ -79,12 +79,12 @@ public class GameCardView extends Pane {
         type.setTranslateY(height - 20 - 2);
         type.setTranslateX(width - 20 - 2);
         if (card.getAbility() != null) {
-            ImageView ability = CardData.getImageAbilityForUnitCards(card.getAbility());
-            ability.setFitHeight(20);
-            ability.setFitWidth(20);
-            ability.setTranslateY(height - 20 - 2);
-            ability.setTranslateX(width - 20 - 20 - 2 - 2);
-            this.getChildren().add(ability);
+//            ImageView ability = CardData.getImageAbilityForUnitCards(card.getAbilityName().name());
+//            ability.setFitHeight(20);
+//            ability.setFitWidth(20);
+//            ability.setTranslateY(height - 20 - 2);
+//            ability.setTranslateX(width - 20 - 20 - 2 - 2);
+//            this.getChildren().add(ability);
         }
         if (((UnitCard) card).isHero()) {
             power.setTextFill(Paint.valueOf("white"));
@@ -153,6 +153,8 @@ public class GameCardView extends Pane {
                 return GameCardView.class.getResource("/images/icons/anim_horn.png").toExternalForm();
             }  case TIGHT_BOND -> {
                 return GameCardView.class.getResource("/images/icons/anim_bond.png").toExternalForm();
+            } case MEDIC -> {
+                return GameCardView.class.getResource("/images/icons/anim_medic.png").toExternalForm();
             }
             default -> {
                 return null;
@@ -178,5 +180,20 @@ public class GameCardView extends Pane {
             power.setText("" + ((UnitCard) card).getPower());
             power.setTextFill(Paint.valueOf("black"));
         }
+    }
+    public void setScorchPicture() {
+        Image scorchImage = new Image(getClass().getResource("/images/icons/anim_scorch.png").toExternalForm());
+        ImageView scorchImageView = new ImageView(scorchImage);
+        scorchImageView.setFitWidth(57);
+        scorchImageView.setFitHeight(82);
+        scorchImageView.setTranslateX((width - 57) / 2);
+        scorchImageView.setTranslateY((height - 82) / 2);
+        this.getChildren().add(scorchImageView);
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
+            this.getChildren().remove(scorchImageView);
+        }));
+        timeline.setCycleCount(1);
+        timeline.play();
+        setPowerDefault();
     }
 }

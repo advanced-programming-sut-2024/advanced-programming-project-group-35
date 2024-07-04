@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Board {
-    private DiscardPile discardPile;
+    private DiscardPile discardPile = new DiscardPile();
     private Hand hand = new Hand();
     private Deck deck;
     private CloseCombatRow closeCombatCardPlace = new CloseCombatRow();
@@ -92,7 +92,7 @@ public class Board {
         //TODO تابع زیر برای تست کارو راحت میکنه
         List<Card> deckCopy = new ArrayList<>(deck.getCards());
         for (Card card : deckCopy) {
-            if (card.getAbilityName() == AbilityName.DECOY) {
+            if (card.getAbilityName() == AbilityName.SCORCH || card.getAbilityName() == AbilityName.MEDIC) {
                 hand.addCard(card);
                 deck.removeCard(card);
             }

@@ -68,6 +68,16 @@ public class AppView extends Application {
         currentPane.getChildren().remove(alert);
         isAlert = false;
     }
+    public void disableCursorInputs() {
+        pane.setDisable(true);
+        KeyFrame keyFrame = new KeyFrame(Duration.seconds(3), event -> {
+            pane.setDisable(false);
+        });
+
+        Timeline timeline = new Timeline(keyFrame);
+        timeline.setCycleCount(1);
+        timeline.play();
+    }
 
     public GameMenuControllerView getGameMenuControllerView() {
         return gameMenuControllerView;

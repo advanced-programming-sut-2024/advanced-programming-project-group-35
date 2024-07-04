@@ -1,0 +1,242 @@
+{
+  "player1": "ali",
+  "player1Faction": "Monsters",
+  "player1Hand": [
+    {
+      "name": "special_scorch",
+      "id": 104
+    },
+    {
+      "name": "special_scorch_1",
+      "id": 105
+    },
+    {
+      "name": "special_scorch_2",
+      "id": 106
+    },
+    {
+      "name": "neutral_villen",
+      "id": 120
+    },
+    {
+      "name": "special_horn",
+      "id": 101
+    },
+    {
+      "name": "special_horn_2",
+      "id": 103
+    },
+    {
+      "name": "neutral_chort",
+      "id": 108
+    },
+    {
+      "name": "neutral_cow",
+      "id": 110
+    },
+    {
+      "name": "neutral_emiel",
+      "id": 112
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 114
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 116
+    },
+    {
+      "name": "neutral_triss",
+      "id": 118
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 121
+    }
+  ],
+  "player1Deck": [
+    {
+      "name": "special_horn_1",
+      "id": 102
+    },
+    {
+      "name": "weather_fog",
+      "id": 107
+    },
+    {
+      "name": "neutral_ciri",
+      "id": 109
+    },
+    {
+      "name": "neutral_dandelion",
+      "id": 111
+    },
+    {
+      "name": "neutral_gaunter_odimm",
+      "id": 113
+    },
+    {
+      "name": "neutral_geralt",
+      "id": 115
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 117
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 119
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 122
+    },
+    {
+      "name": "monsters_arachas",
+      "id": 123
+    },
+    {
+      "name": "monsters_arachas_1",
+      "id": 124
+    },
+    {
+      "name": "monsters_arachas_2",
+      "id": 125
+    },
+    {
+      "name": "monsters_arachas_behemoth",
+      "id": 126
+    },
+    {
+      "name": "monsters_vampire_bruxa",
+      "id": 127
+    },
+    {
+      "name": "monsters_celaeno_harpy",
+      "id": 128
+    }
+  ],
+  "player2": "opponent",
+  "player2Faction": "Monsters",
+  "player2Hand": [
+    {
+      "name": "special_scorch",
+      "id": 204
+    },
+    {
+      "name": "special_scorch_1",
+      "id": 205
+    },
+    {
+      "name": "special_scorch_2",
+      "id": 206
+    },
+    {
+      "name": "neutral_villen",
+      "id": 220
+    },
+    {
+      "name": "special_horn",
+      "id": 201
+    },
+    {
+      "name": "special_horn_2",
+      "id": 203
+    },
+    {
+      "name": "neutral_chort",
+      "id": 208
+    },
+    {
+      "name": "neutral_cow",
+      "id": 210
+    },
+    {
+      "name": "neutral_emiel",
+      "id": 212
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 214
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 216
+    },
+    {
+      "name": "neutral_triss",
+      "id": 218
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 221
+    }
+  ],
+  "player2Deck": [
+    {
+      "name": "special_horn_1",
+      "id": 202
+    },
+    {
+      "name": "weather_fog",
+      "id": 207
+    },
+    {
+      "name": "neutral_ciri",
+      "id": 209
+    },
+    {
+      "name": "neutral_dandelion",
+      "id": 211
+    },
+    {
+      "name": "neutral_gaunter_odimm",
+      "id": 213
+    },
+    {
+      "name": "neutral_geralt",
+      "id": 215
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 217
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 219
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 222
+    },
+    {
+      "name": "monsters_arachas",
+      "id": 223
+    },
+    {
+      "name": "monsters_arachas_1",
+      "id": 224
+    },
+    {
+      "name": "monsters_arachas_2",
+      "id": 225
+    },
+    {
+      "name": "monsters_arachas_behemoth",
+      "id": 226
+    },
+    {
+      "name": "monsters_vampire_bruxa",
+      "id": 227
+    },
+    {
+      "name": "monsters_celaeno_harpy",
+      "id": 228
+    }
+  ],
+  "commands": [
+    "card with id: 103 moved from currentPlayerHandObservableList to currentPlayerCloseCombatSpecialPlaceObservableListand ability applied",
+    "card with id: 106 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableListand ability applied"
+  ]
+}

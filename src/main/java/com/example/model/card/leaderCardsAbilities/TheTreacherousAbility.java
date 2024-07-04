@@ -1,5 +1,6 @@
 package com.example.model.card.leaderCardsAbilities;
 
+import com.example.model.card.AbilityContext;
 import com.example.model.card.Card;
 import com.example.model.card.UnitCard;
 import com.example.model.card.cardsAbilities.SpyAbility;
@@ -11,10 +12,10 @@ import java.util.ArrayList;
 
 public class TheTreacherousAbility implements LeaderAbility {
     @Override
-    public void apply(Table table) {
-        duplicateSpyCardsInRows(table.getCurrentPlayer().getBoard().getRows());
-        duplicateSpyCardsInRows(table.getOpponent().getBoard().getRows());
-        table.getCurrentPlayer().getBoard().getDeck().getLeader().setCanDoAction(false);
+    public void apply(AbilityContext abilityContext) {
+        duplicateSpyCardsInRows(abilityContext.getTable().getCurrentPlayer().getBoard().getRows());
+        duplicateSpyCardsInRows(abilityContext.getTable().getOpponent().getBoard().getRows());
+        abilityContext.getTable().getCurrentPlayer().getBoard().getDeck().getLeader().setCanDoAction(false);
     }
 
     private void duplicateSpyCardsInRows(ArrayList<Row> rows) {

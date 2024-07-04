@@ -3,6 +3,8 @@ package com.example.model.game.place;
 public enum RowsInGame {
     currentPlayerHand("currentPlayerHandObservableList"),
     currentPlayerDeck("currentPlayerDeckObservableList"),
+    opponentPlayerHand("opponentPlayerHandObservableList"),
+    opponentPlayerDeck("opponentPlayerDeckObservableList"),
     weather("weatherObservableList"),
     currentPlayerCloseCombat("currentPlayerCloseCombatObservableList"),
     currentPlayerRanged("currentPlayerRangedObservableList"),
@@ -16,7 +18,8 @@ public enum RowsInGame {
     opponentPlayerCloseCombatSpecialPlace("opponentPlayerCloseCombatSpecialPlaceObservableList"),
     opponentPlayerRangedSpecialPlace("opponentPlayerRangedSpecialPlaceObservableList"),
     opponentPlayerSiegeSpecialPlace("opponentPlayerSiegeSpecialPlaceObservableList"),
-
+    currentPlayerDiscardPlace("currentPlayerDiscardPlace"),
+    opponentPlayerDiscardPlace("opponentPlayerDiscardPlace"),
     ;
     private final String listName;
 

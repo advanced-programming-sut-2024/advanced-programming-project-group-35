@@ -1,0 +1,241 @@
+{
+  "player1": "ali",
+  "player1Faction": "Monsters",
+  "player1Hand": [
+    {
+      "name": "neutral_villen",
+      "id": 111
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 112
+    },
+    {
+      "name": "neutral_cow",
+      "id": 101
+    },
+    {
+      "name": "neutral_emiel",
+      "id": 103
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 105
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 107
+    },
+    {
+      "name": "neutral_triss",
+      "id": 109
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 113
+    },
+    {
+      "name": "monsters_arachas_1",
+      "id": 115
+    },
+    {
+      "name": "monsters_arachas_behemoth",
+      "id": 117
+    },
+    {
+      "name": "monsters_celaeno_harpy",
+      "id": 119
+    }
+  ],
+  "player1Deck": [
+    {
+      "name": "neutral_dandelion",
+      "id": 102
+    },
+    {
+      "name": "neutral_gaunter_odimm",
+      "id": 104
+    },
+    {
+      "name": "neutral_geralt",
+      "id": 106
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 108
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 110
+    },
+    {
+      "name": "monsters_arachas",
+      "id": 114
+    },
+    {
+      "name": "monsters_arachas_2",
+      "id": 116
+    },
+    {
+      "name": "monsters_vampire_bruxa",
+      "id": 118
+    },
+    {
+      "name": "monsters_cockatrice",
+      "id": 120
+    },
+    {
+      "name": "monsters_draug",
+      "id": 121
+    },
+    {
+      "name": "monsters_earth_elemental",
+      "id": 122
+    },
+    {
+      "name": "monsters_vampire_ekkimara",
+      "id": 123
+    },
+    {
+      "name": "monsters_endrega",
+      "id": 124
+    },
+    {
+      "name": "monsters_fiend",
+      "id": 125
+    },
+    {
+      "name": "monsters_fire_elemental",
+      "id": 126
+    },
+    {
+      "name": "monsters_vampire_fleder",
+      "id": 127
+    },
+    {
+      "name": "monsters_foglet",
+      "id": 128
+    }
+  ],
+  "player2": "opponent",
+  "player2Faction": "Monsters",
+  "player2Hand": [
+    {
+      "name": "neutral_villen",
+      "id": 211
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 212
+    },
+    {
+      "name": "neutral_cow",
+      "id": 201
+    },
+    {
+      "name": "neutral_emiel",
+      "id": 203
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 205
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 207
+    },
+    {
+      "name": "neutral_triss",
+      "id": 209
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 213
+    },
+    {
+      "name": "monsters_arachas_1",
+      "id": 215
+    },
+    {
+      "name": "monsters_arachas_behemoth",
+      "id": 217
+    },
+    {
+      "name": "monsters_celaeno_harpy",
+      "id": 219
+    }
+  ],
+  "player2Deck": [
+    {
+      "name": "neutral_dandelion",
+      "id": 202
+    },
+    {
+      "name": "neutral_gaunter_odimm",
+      "id": 204
+    },
+    {
+      "name": "neutral_geralt",
+      "id": 206
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 208
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 210
+    },
+    {
+      "name": "monsters_arachas",
+      "id": 214
+    },
+    {
+      "name": "monsters_arachas_2",
+      "id": 216
+    },
+    {
+      "name": "monsters_vampire_bruxa",
+      "id": 218
+    },
+    {
+      "name": "monsters_cockatrice",
+      "id": 220
+    },
+    {
+      "name": "monsters_draug",
+      "id": 221
+    },
+    {
+      "name": "monsters_earth_elemental",
+      "id": 222
+    },
+    {
+      "name": "monsters_vampire_ekkimara",
+      "id": 223
+    },
+    {
+      "name": "monsters_endrega",
+      "id": 224
+    },
+    {
+      "name": "monsters_fiend",
+      "id": 225
+    },
+    {
+      "name": "monsters_fire_elemental",
+      "id": 226
+    },
+    {
+      "name": "monsters_vampire_fleder",
+      "id": 227
+    },
+    {
+      "name": "monsters_foglet",
+      "id": 228
+    }
+  ],
+  "commands": [
+    "card with id: 112 moved from currentPlayerHandObservableList to currentPlayerRangedObservableListand ability applied"
+  ]
+}

@@ -1,5 +1,6 @@
 package com.example.model.card.leaderCardsAbilities;
 
+import com.example.model.card.AbilityContext;
 import com.example.model.card.Card;
 import com.example.model.game.Board;
 import com.example.model.game.Deck;
@@ -10,10 +11,10 @@ import java.util.ArrayList;
 
 public class CrachAnCraiteAbility implements LeaderAbility {
     @Override
-    public void apply(Table table) {
-        moveCardsFromDiscardPileToDeck(table.getCurrentPlayer().getBoard());
-        moveCardsFromDiscardPileToDeck(table.getOpponent().getBoard());
-        table.getCurrentPlayer().getBoard().getDeck().getLeader().setCanDoAction(false);
+    public void apply(AbilityContext abilityContext) {
+        moveCardsFromDiscardPileToDeck(abilityContext.getTable().getCurrentPlayer().getBoard());
+        moveCardsFromDiscardPileToDeck(abilityContext.getTable().getOpponent().getBoard());
+        abilityContext.getTable().getCurrentPlayer().getBoard().getDeck().getLeader().setCanDoAction(false);
     }
 
     private void moveCardsFromDiscardPileToDeck(Board board) {

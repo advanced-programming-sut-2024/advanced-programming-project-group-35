@@ -1,0 +1,262 @@
+{
+  "player1": "ali",
+  "player1Faction": "Monsters",
+  "player1Hand": [
+    {
+      "name": "special_scorch",
+      "id": 104
+    },
+    {
+      "name": "neutral_villen",
+      "id": 120
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 121
+    },
+    {
+      "name": "special_mardroeme",
+      "id": 101
+    },
+    {
+      "name": "special_mardroeme_2",
+      "id": 103
+    },
+    {
+      "name": "weather_rain_1",
+      "id": 106
+    },
+    {
+      "name": "neutral_chort",
+      "id": 108
+    },
+    {
+      "name": "neutral_cow",
+      "id": 110
+    },
+    {
+      "name": "neutral_emiel",
+      "id": 112
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 114
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 116
+    },
+    {
+      "name": "neutral_triss",
+      "id": 118
+    }
+  ],
+  "player1Deck": [
+    {
+      "name": "special_mardroeme_1",
+      "id": 102
+    },
+    {
+      "name": "weather_fog_1",
+      "id": 105
+    },
+    {
+      "name": "weather_clear",
+      "id": 107
+    },
+    {
+      "name": "neutral_ciri",
+      "id": 109
+    },
+    {
+      "name": "neutral_dandelion",
+      "id": 111
+    },
+    {
+      "name": "neutral_gaunter_odimm",
+      "id": 113
+    },
+    {
+      "name": "neutral_geralt",
+      "id": 115
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 117
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 119
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 122
+    },
+    {
+      "name": "monsters_arachas",
+      "id": 123
+    },
+    {
+      "name": "monsters_arachas_1",
+      "id": 124
+    },
+    {
+      "name": "monsters_arachas_2",
+      "id": 125
+    },
+    {
+      "name": "monsters_arachas_behemoth",
+      "id": 126
+    },
+    {
+      "name": "monsters_vampire_bruxa",
+      "id": 127
+    },
+    {
+      "name": "monsters_celaeno_harpy",
+      "id": 128
+    },
+    {
+      "name": "monsters_cockatrice",
+      "id": 129
+    },
+    {
+      "name": "monsters_draug",
+      "id": 130
+    },
+    {
+      "name": "monsters_earth_elemental",
+      "id": 131
+    }
+  ],
+  "player2": "opponent",
+  "player2Faction": "Monsters",
+  "player2Hand": [
+    {
+      "name": "special_scorch",
+      "id": 204
+    },
+    {
+      "name": "neutral_villen",
+      "id": 220
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 221
+    },
+    {
+      "name": "special_mardroeme",
+      "id": 201
+    },
+    {
+      "name": "special_mardroeme_2",
+      "id": 203
+    },
+    {
+      "name": "weather_rain_1",
+      "id": 206
+    },
+    {
+      "name": "neutral_chort",
+      "id": 208
+    },
+    {
+      "name": "neutral_cow",
+      "id": 210
+    },
+    {
+      "name": "neutral_emiel",
+      "id": 212
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 214
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 216
+    },
+    {
+      "name": "neutral_triss",
+      "id": 218
+    }
+  ],
+  "player2Deck": [
+    {
+      "name": "special_mardroeme_1",
+      "id": 202
+    },
+    {
+      "name": "weather_fog_1",
+      "id": 205
+    },
+    {
+      "name": "weather_clear",
+      "id": 207
+    },
+    {
+      "name": "neutral_ciri",
+      "id": 209
+    },
+    {
+      "name": "neutral_dandelion",
+      "id": 211
+    },
+    {
+      "name": "neutral_gaunter_odimm",
+      "id": 213
+    },
+    {
+      "name": "neutral_geralt",
+      "id": 215
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 217
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 219
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 222
+    },
+    {
+      "name": "monsters_arachas",
+      "id": 223
+    },
+    {
+      "name": "monsters_arachas_1",
+      "id": 224
+    },
+    {
+      "name": "monsters_arachas_2",
+      "id": 225
+    },
+    {
+      "name": "monsters_arachas_behemoth",
+      "id": 226
+    },
+    {
+      "name": "monsters_vampire_bruxa",
+      "id": 227
+    },
+    {
+      "name": "monsters_celaeno_harpy",
+      "id": 228
+    },
+    {
+      "name": "monsters_cockatrice",
+      "id": 229
+    },
+    {
+      "name": "monsters_draug",
+      "id": 230
+    },
+    {
+      "name": "monsters_earth_elemental",
+      "id": 231
+    }
+  ]
+}

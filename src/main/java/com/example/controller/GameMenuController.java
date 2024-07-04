@@ -1,9 +1,7 @@
 package com.example.controller;
 
-import com.example.Main;
 import com.example.model.App;
 import com.example.model.DeckManager;
-import com.example.model.GameData;
 import com.example.model.card.*;
 import com.example.model.card.enums.AbilityName;
 import com.example.model.card.enums.CardData;
@@ -11,11 +9,9 @@ import com.example.model.card.enums.FactionsType;
 import com.example.model.game.*;
 import com.example.model.game.place.Row;
 import com.example.model.game.place.RowsInGame;
-import com.example.view.AppView;
 import com.example.view.Menu;
 import com.example.view.menuControllers.GameMenuControllerView;
 import com.google.gson.*;
-import com.google.gson.reflect.TypeToken;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.ObservableList;
@@ -25,7 +21,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.net.URISyntaxException;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -119,19 +114,40 @@ public class GameMenuController extends AppController {
             } else if (card.getAbilityName() == AbilityName.TIGHT_BOND) {
                 AbilityContext abilityContext = new AbilityContext(table, (UnitCard) card, getRowByName(destination));
                 doNonLeaderCardsAbility(card, abilityContext, AbilityName.TIGHT_BOND);
+            } else if (card.getAbilityName() == AbilityName.SCORCH) {
+                AbilityContext abilityContext = new AbilityContext(table, (UnitCard) card, null);
+                doNonLeaderCardsAbility(card, abilityContext, AbilityName.SCORCH);
+            } else if (card.getAbilityName() == AbilityName.MEDIC) {
+                AbilityContext abilityContext = new AbilityContext(table, (UnitCard) card, null);
+                doNonLeaderCardsAbility(card, abilityContext, AbilityName.MEDIC);
             }
         } else if (card instanceof SpecialCard) {
             if (card.getAbilityName() == AbilityName.COMMANDER_HORN) {
                 AbilityContext abilityContext = new AbilityContext(table, null, getRowByName(getRowNameBySpecialPlaceName(destination)));
                 doNonLeaderCardsAbility(card, abilityContext, AbilityName.COMMANDER_HORN);
+            } else if (card.getAbilityName() == AbilityName.SCORCH) {
+                AbilityContext abilityContext = new AbilityContext(table, null, null);
+                doNonLeaderCardsAbility(card, abilityContext, AbilityName.SCORCH);
             }
+//            else if (card.getAbilityName() == AbilityName.WEATHER) {
+//                AbilityContext abilityContext = new AbilityContext(table, null, null);
+//                ((WeatherCard)card).setPlayer(table.getCurrentPlayer());
+////                abilityContext.addParam("row1", R);
+//                doNonLeaderCardsAbility(card, abilityContext, AbilityName.SCORCH);
+//            }
         }
 
 
         table.getCurrentPlayer().updateScore();
         table.getOpponent().updateScore();
+        if (table.getCurrentPlayer().getBoard().getHand().getCards().isEmpty()) {
+            passRound();
+        } else if (!table.getOpponent().isPassRound()) {
+            changeTurn();
+        }
         saveLog("card with id: " + cardId + " moved from " + origin + " to " + destination + "and ability applied");
     }
+
     public void doDecoyAbility(int decoyCardId, int selectedCardId, String dest) {
         Card decoyCard = getCardById(decoyCardId, table.getCurrentPlayer().getBoard().getHand().getCards());
         Card selectedCard = getCardById(selectedCardId, (ObservableList<Card>) getRowListByName(dest));
@@ -146,7 +162,7 @@ public class GameMenuController extends AppController {
 
     private void doNonLeaderCardsAbility(Card card, AbilityContext abilityContext, AbilityName abilityName) {
         if (card.getAbility() != null) {
-            if (card.getAbilityName() == AbilityName.DECOY) {
+            if (card.getAbilityName() == AbilityName.DECOY || card.getAbilityName() == AbilityName.SCORCH) {
                 card.getAbility().apply(abilityContext);
             } else {
                 gameMenuControllerView.getGameCardViewWithCardId(card.getIdInGame()).doAbilityAnimation(abilityName);
@@ -250,23 +266,26 @@ public class GameMenuController extends AppController {
             case "currentPlayerSiegeSpecialPlaceObservableList" -> {
                 return table.getCurrentPlayer().getBoard().getSiegeCardPlace().getSpecialPlace();
             }
-            case "opponentSiegeObservableList" -> {
+            case "opponentPlayerSiegeObservableList" -> {
                 return table.getOpponent().getBoard().getSiegeCardPlace().getCards();
             }
             case "opponentPlayerCloseCombatObservableList" -> {
                 return table.getOpponent().getBoard().getCloseCombatCardPlace().getCards();
             }
-            case "opponentRangedObservableList" -> {
+            case "opponentPlayerRangedObservableList" -> {
                 return table.getOpponent().getBoard().getRangedCardPlace().getCards();
             }
-            case "opponentSiegeSpecialPlaceObservableList" -> {
+            case "opponentPlayerSiegeSpecialPlaceObservableList" -> {
                 return table.getOpponent().getBoard().getSiegeCardPlace().getSpecialPlace();
             }
-            case "opponentCloseCombatSpecialPlaceObservableList" -> {
+            case "opponentPlayerCloseCombatSpecialPlaceObservableList" -> {
                 return table.getOpponent().getBoard().getCloseCombatCardPlace().getSpecialPlace();
             }
-            case "opponentRangedSpecialPlaceObservableList" -> {
+            case "opponentPlayerRangedSpecialPlaceObservableList" -> {
                 return table.getOpponent().getBoard().getRangedCardPlace().getSpecialPlace();
+            }
+            case "currentPlayerDiscardPlace" -> {
+                return table.getCurrentPlayer().getBoard().getDiscardPile().getCards();
             }
             case "weatherObservableList" -> {
                 return table.getSpellPlace().getCards();
@@ -408,12 +427,13 @@ public class GameMenuController extends AppController {
         return filePath;
     }
 
-    public void passRound(Table table) {
+    public void passRound() {
+        saveLog("player: " + table.getCurrentPlayer().getUsername() + " passed round");
         table.getCurrentPlayer().setPassRound(true);
         if (table.getOpponent().isPassRound()) {
-            changeRound(table);
+            changeRound();
         } else {
-            changeTurn(table);
+            changeTurn();
         }
     }
 
@@ -422,10 +442,16 @@ public class GameMenuController extends AppController {
             LeaderCard leaderCard1 = table.getCurrentPlayer().getBoard().getDeck().getLeader();
             LeaderCard leaderCard2 = table.getOpponent().getBoard().getDeck().getLeader();
             if (leaderCard1.canDoAction() && leaderCard1.getLeaderName() == CardData.leaders_scoiatael_francesca_copper) {
-                leaderCard1.getAbility().apply(table);
+                AbilityContext abilityContext = new AbilityContext(table, null, null);
+                abilityContext.addParam("origin", RowsInGame.currentPlayerDeck.toString());
+                abilityContext.addParam("dest", RowsInGame.currentPlayerHand.toString());
+                leaderCard1.getAbility().apply(abilityContext);
             }
             if (leaderCard2.canDoAction() && leaderCard2.getLeaderName() == CardData.leaders_scoiatael_francesca_copper) {
-                leaderCard2.getAbility().apply(table);
+                AbilityContext abilityContext = new AbilityContext(table, null, null);
+                abilityContext.addParam("origin", RowsInGame.opponentPlayerDeck.toString());
+                abilityContext.addParam("dest", RowsInGame.opponentPlayerHand.toString());
+                leaderCard2.getAbility().apply(abilityContext);
             }
         } else if (table.getRoundNumber() == 3) {
             FactionsType factionsType1 = table.getCurrentPlayer().getBoard().getDeck().getFaction();
@@ -480,10 +506,10 @@ public class GameMenuController extends AppController {
     }
 
     private void backCardsToDiscardPiles(Table table) {
-        //TODO(گرافیک) باید چک شه اگه ریموو کارت ترو بود حذف کنیم
+
     }
 
-    private void changeRound(Table table) {
+    private void changeRound() {
         endRound(table);
         if (table.getCurrentPlayer().getNumberOfCrystals() == 0) {
             endGame(table, table.getOpponent());
@@ -500,9 +526,9 @@ public class GameMenuController extends AppController {
         }
     }
 
-    private void changeTurn(Table table) {
-        table.swapPlayers();
-        //TODO گرافیک
+    private void changeTurn() {
+        gameMenuControllerView.changeTurn();
+        saveLog("change turn");
     }
 
     private void endGame(Table table, Player winner) {
