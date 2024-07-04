@@ -7,6 +7,7 @@ import com.example.model.IO.errors.Errors;
 import com.example.model.alerts.AlertType;
 import com.example.view.Menu;
 import com.example.view.OutputView;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -103,11 +104,23 @@ public class LoginMenuControllerView {
         String nickname = nicknameFieldRegister.getText();
         boolean stayLoggedIn = stayLoggedInCheckBoxRegister.isSelected();
         controller.registerUser(username, password, confirmPassword, nickname, email, stayLoggedIn);
-        setEmailVerificationCode();
-        if (OutputView.getLastError() == Errors.REGISTER_FIRST_STEP_SUCCESSFUL) {
-            paneChanger("Security Question", "securityQuestion.fxml");
-            OutputView.showOutputAlert(Errors.SENT_CODE);
-        }
+        App.getAppView().showLoading();
+        Thread loadDataThread = new Thread(() -> {
+            Platform.runLater(() -> {
+                try {
+                    setEmailVerificationCode();
+                    if (OutputView.getLastError() == Errors.REGISTER_FIRST_STEP_SUCCESSFUL) {
+                        paneChanger("Security Question", "securityQuestion.fxml");
+                        OutputView.showOutputAlert(Errors.SENT_CODE);
+                    }
+                    //Thread.sleep(4000);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            });
+
+        });
+        loadDataThread.start();
     }
 
     private void setEmailVerificationCode() throws IOException {
