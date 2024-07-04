@@ -776,21 +776,26 @@ public class GameMenuControllerView {
     public void backCardsToDiscardPiles() {
         ObservableList<GameCardView> currentPlayerRangedCopy = FXCollections.observableArrayList(currentPlayerRangedObservableList);
         for (GameCardView gameCardView : currentPlayerRangedCopy) {
-            if (gameCardView.getCard() instanceof UnitCard && ((UnitCard)gameCardView.getCard()).noRemove()) {
+            System.out.println("1");
+            if (gameCardView.getCard() instanceof UnitCard) {
+                System.out.println(((UnitCard)gameCardView.getCard()).noRemove());
                 controller.moveCardFromOriginToDestinationAndDontDoAbility(gameCardView.getCard().getIdInGame(), RowsInGame.currentPlayerRanged.toString(), RowsInGame.currentPlayerDiscardPlace.toString());
             }
         }
 
         ObservableList<GameCardView> currentPlayerSiegeCopy = FXCollections.observableArrayList(currentPlayerSiegeObservableList);
         for (GameCardView gameCardView : currentPlayerSiegeCopy) {
-            if (gameCardView.getCard() instanceof UnitCard && ((UnitCard)gameCardView.getCard()).noRemove()) {
+            if (gameCardView.getCard() instanceof UnitCard) {
+                System.out.println(((UnitCard)gameCardView.getCard()).noRemove());
                 controller.moveCardFromOriginToDestinationAndDontDoAbility(gameCardView.getCard().getIdInGame(), RowsInGame.currentPlayerSiege.toString(), RowsInGame.currentPlayerDiscardPlace.toString());
             }
         }
 
         ObservableList<GameCardView> currentPlayerCloseCombatCopy = FXCollections.observableArrayList(currentPlayerCloseCombatObservableList);
         for (GameCardView gameCardView : currentPlayerCloseCombatCopy) {
-            if (gameCardView.getCard() instanceof UnitCard && ((UnitCard)gameCardView.getCard()).noRemove()) {
+            System.out.println("3");
+            if (gameCardView.getCard() instanceof UnitCard) {
+                System.out.println(((UnitCard)gameCardView.getCard()).noRemove());
                 controller.moveCardFromOriginToDestinationAndDontDoAbility(gameCardView.getCard().getIdInGame(), RowsInGame.currentPlayerCloseCombat.toString(), RowsInGame.currentPlayerDiscardPlace.toString());
             }
         }

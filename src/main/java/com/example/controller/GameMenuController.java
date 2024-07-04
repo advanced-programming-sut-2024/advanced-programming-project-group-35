@@ -192,6 +192,7 @@ public class GameMenuController extends AppController {
         ObservableList<Card> originRow = (ObservableList<Card>) getRowListByName(origin);
         ObservableList<Card> destinationRow = (ObservableList<Card>) getRowListByName(destination);
         Card card = getCardById(cardId, originRow);
+        System.out.println(origin + " " + destination);
         originRow.remove(card);
         destinationRow.add(card);
         gameMenuControllerView.moveCardToDestinationFlowPane(cardId, origin, destination);
