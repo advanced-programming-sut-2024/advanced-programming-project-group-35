@@ -2,12 +2,27 @@ package com.example.controller;
 
 import com.example.model.App;
 import com.example.view.Menu;
+import javafx.application.Platform;
 
 public class PreGameMenuController extends AppController {
     @Override
     public void run() {
         try {
-            App.getAppView().showMenu(Menu.PREGAME_MENU);
+            //first show the loading image:
+            App.getAppView().showLoading();
+            //then show the pregame menu on thread:
+            Thread loadDataThread = new Thread(() -> {
+                Platform.runLater(() -> {
+                    try {
+                        Thread.sleep(4000);
+                        App.getAppView().showMenu(Menu.PREGAME_MENU);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+
+            });
+            loadDataThread.start();
             App.setCurrentController(Controller.PRE_GAME_MENU_CONTROLLER);
         } catch (Exception e) {
             throw new RuntimeException();

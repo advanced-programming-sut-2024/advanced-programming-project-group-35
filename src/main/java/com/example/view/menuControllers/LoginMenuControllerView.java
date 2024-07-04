@@ -4,10 +4,10 @@ import com.example.controller.Controller;
 import com.example.controller.LoginMenuController;
 import com.example.model.App;
 import com.example.model.IO.errors.Errors;
-import com.example.model.alerts.Alert;
 import com.example.model.alerts.AlertType;
 import com.example.view.Menu;
 import com.example.view.OutputView;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -51,6 +51,8 @@ public class LoginMenuControllerView {
     private ComboBox securityQuestionRegister;
     @FXML
     private TextField securityAnswerRegister;
+    private TextField emailVerificationCodeField;
+    private int emailVerificationCode;
 
     LoginMenuController controller = (LoginMenuController) Controller.LOGIN_MENU_CONTROLLER.getController();
 
@@ -103,20 +105,44 @@ public class LoginMenuControllerView {
         String nickname = nicknameFieldRegister.getText();
         boolean stayLoggedIn = stayLoggedInCheckBoxRegister.isSelected();
         controller.registerUser(username, password, confirmPassword, nickname, email, stayLoggedIn);
-        if (OutputView.getLastError() == Errors.REGISTER_FIRST_STEP_SUCCESSFUL) {
-            paneChanger("Security Question", "securityQuestion.fxml");
-        }
+        App.getAppView().showLoading();
+        Thread loadDataThread = new Thread(() -> {
+            Platform.runLater(() -> {
+                try {
+                    setEmailVerificationCode();
+                    if (OutputView.getLastError() == Errors.REGISTER_FIRST_STEP_SUCCESSFUL) {
+                        paneChanger("Security Question", "securityQuestion.fxml");
+                        OutputView.showOutputAlert(Errors.SENT_CODE);
+                    }
+                    //Thread.sleep(4000);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            });
+
+        });
+        loadDataThread.start();
+    }
+
+    private void setEmailVerificationCode() throws IOException {
+        emailVerificationCode = controller.getEmailVerificationCode();
     }
 
     public void finalizeRegisterUser(MouseEvent mouseEvent) {
         int securityQuestionIndex = securityQuestionRegister.getSelectionModel().getSelectedIndex();
         String securityAnswer = securityAnswerRegister.getText();
         String securityAnswerConfirmation = securityAnswerConfirmationRegister.getText();
-        String verificationCode = emailVerificationCode.getText();
+        int emailVerificationCode = Integer.parseInt(emailVerificationCodeField.getText());
+        if (emailVerificationCode != this.emailVerificationCode) {
+            App.getAppView().showAlert("Wrong email verification code", AlertType.ERROR.getType());
+            return;
+        }
         controller.finalizeRegisterUser(securityAnswer, securityAnswerConfirmation, securityQuestionIndex);
         if (OutputView.getLastError() == Errors.REGISTER_SUCCESSFUL) {
             App.setCurrentMenu(Menu.MAIN_MENU);
             Controller.MAIN_MENU_CONTROLLER.run();
+        } else {
+            App.getAppView().showAlert("Error", AlertType.ERROR.getType());
         }
     }
 
@@ -150,9 +176,20 @@ public class LoginMenuControllerView {
         }
     }
 
-    public void testApp(MouseEvent mouseEvent) {
+    public void testApp1(MouseEvent mouseEvent) {
         String username = "ali";
         String password = "@li0083Moi";
+        boolean stayLoggedIn = false;
+        controller.loginUser(username, password, stayLoggedIn);
+        if (OutputView.getLastError() == Errors.LOGIN_SUCCESSFUL) {
+            App.setCurrentMenu(Menu.MAIN_MENU);
+            Controller.MAIN_MENU_CONTROLLER.run();
+        }
+    }
+
+    public void testApp2(MouseEvent mouseEvent) {
+        String username = "parsa";
+        String password = "endn=20&Y+";
         boolean stayLoggedIn = false;
         controller.loginUser(username, password, stayLoggedIn);
         if (OutputView.getLastError() == Errors.LOGIN_SUCCESSFUL) {

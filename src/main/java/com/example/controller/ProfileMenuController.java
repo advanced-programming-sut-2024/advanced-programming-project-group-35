@@ -1,10 +1,14 @@
 package com.example.controller;
 
+import com.example.controller.server.ServerConnector;
 import com.example.model.App;
+import com.example.model.FriendRequest;
 import com.example.model.IO.errors.Errors;
 import com.example.model.User;
 import com.example.view.Menu;
 import com.example.view.OutputView;
+
+import java.util.List;
 
 public class ProfileMenuController extends AppController {
     private User loggedInUser;
@@ -100,5 +104,43 @@ public class ProfileMenuController extends AppController {
 
     private boolean isValidUsername(String username) {
         return username.matches("^[a-zA-Z0-9-]*$");
+    }
+
+    private ServerConnector networkManager; // برای ارتباط با سرور
+
+    // ارسال درخواست دوستی
+    public void sendFriendRequest(int receiverId) {
+        FriendRequest request = new FriendRequest(App.getLoggedInUser().getID(), receiverId);
+        networkManager.sendFriendRequest(request);
+    }
+
+    // دریافت لیست درخواست‌های دوستی
+    public List<FriendRequest> getFriendRequests() {
+        return App.getLoggedInUser().getFriendRequests();
+    }
+
+    // پذیرش درخواست دوستی
+    public void acceptFriendRequest(FriendRequest request) {
+        request.accept();
+        networkManager.acceptFriendRequest(request);
+        App.getLoggedInUser().getFriends().add(request.getSender());
+    }
+
+    // رد درخواست دوستی
+    public void rejectFriendRequest(FriendRequest request) {
+        request.reject();
+        networkManager.rejectFriendRequest(request);
+    }
+
+    // دریافت لیست دوستان
+    public List<User> getFriendList() {
+        return App.getLoggedInUser().getFriends();
+    }
+
+    // به‌روزرسانی اطلاعات کاربر از سرور
+    public void updateUserInfo() {
+        User updatedUser = User.getUserByID(App.getLoggedInUser().getID());
+        App.getLoggedInUser().setFriends(updatedUser.getFriends());
+        App.getLoggedInUser().setFriendRequests(updatedUser.getFriendRequests());
     }
 }

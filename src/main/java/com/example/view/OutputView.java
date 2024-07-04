@@ -6,7 +6,8 @@ import com.example.model.alerts.AlertType;
 
 public class OutputView {
     private static Errors lastError;
-    public static Errors showOutputAlert (Errors error) {
+
+    public static Errors showOutputAlert(Errors error) {
         lastError = error;
         switch (error) {
             case INVALID_COMMAND:
@@ -56,7 +57,11 @@ public class OutputView {
             case NOT_ENOUGH_CARDS:
                 App.getAppView().showAlert("You have to choose 22 cards at least", AlertType.ERROR.getType());
             case DONT_HAVE_PLAYED_GAME:
-                App.getAppView().showAlert("You diden't played any game to show game data.", AlertType.ERROR.getType());
+                App.getAppView().showAlert("You didn't played any game to show game data.", AlertType.ERROR.getType());
+            case YOU_CANT_PLAY_WITH_YOURSELF:
+                App.getAppView().showAlert("You can't play with yourself", AlertType.ERROR.getType());
+            case SENT_CODE:
+                App.getAppView().showAlert("Code sent to your email", AlertType.SUCCESS.getType());
             default:
                 return null;
         }
