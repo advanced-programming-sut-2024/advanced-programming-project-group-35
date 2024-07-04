@@ -1,7 +1,9 @@
 package com.example.view.menuControllers;
 
+import com.example.Main;
 import com.example.controller.Controller;
 import com.example.controller.GameMenuController;
+import com.example.model.App;
 import com.example.model.card.*;
 import com.example.model.card.cardsAbilities.DecoyAbility;
 import com.example.model.card.enums.CardData;
@@ -47,12 +49,12 @@ public class GameMenuControllerView {
     public Label opponentPlayerUsername;
     public Label opponentPlayerFactionName;
     public Label opponentPlayerSpecialCardCounter;
+    public Label opponentPlayerDeckCardCounter;
+    public Label currentPlayerDeckCardCounter;
     public ImageView opponentPlayerDeckPlace;
     public ImageView currentPlayerDeckPlace;
     public VBox opponentPlayerLeaderCard;
     public VBox currentPlayerLeaderCard;
-    public Label opponentPlayerDeckCardCounter;
-    public Label currentPlayerDeckCardCounter;
     public ImageView currentPlayerFirstJem;
     public ImageView currentPlayerSecondJem;
     public ImageView opponentPlayerFirstJem;
@@ -131,6 +133,7 @@ public class GameMenuControllerView {
     public void passRound(MouseEvent mouseEvent) {
 
     }
+
     private void setObservableLists() {
 
     }
@@ -184,6 +187,7 @@ public class GameMenuControllerView {
         addCurrentPlayerHandCards(table);
 
     }
+
     private void handleChanges(ListChangeListener.Change<? extends Card> change, FlowPane fromPane, FlowPane toPane) {
         while (change.next()) {
             if (change.wasAdded()) {
@@ -239,8 +243,14 @@ public class GameMenuControllerView {
             });
             gameCardView.setOnMouseClicked(e -> {
                 setOnMouseClickForDestinationFlowPane(gameCardView.getCard().getIdInGame());
+                setOnMouseClickForShowCardDetails(gameCardView.getCard());
             });
         }
+    }
+
+    private void setOnMouseClickForShowCardDetails(Card card) {
+        String imageAddress = Main.class.getResource("/images/cards/" + card.getCardData().getImageAddress()).toExternalForm();
+        cardDetailShower.setImage(new Image(imageAddress));
     }
 
     private void disableMouseEventsForHandCard(int cardId) {
@@ -360,6 +370,7 @@ public class GameMenuControllerView {
         currentPlayerCloseCombatSpecialPlace.getStyleClass().remove("highlighted-flow-pane");
         currentPlayerRangedSpecialPlace.getStyleClass().remove("highlighted-flow-pane");
         currentPlayerSiegeSpecialPlace.getStyleClass().remove("highlighted-flow-pane");
+        cardDetailShower.setImage(null);
     }
 
     private ObservableList<GameCardView> getObservableListWithName(String listName) {
@@ -511,6 +522,25 @@ public class GameMenuControllerView {
     }
 
     public void toggleMusic(MouseEvent mouseEvent) {
+    }
+
+    public void updateAllLabels() {
+        opponentPlayerSiegePower.setText(String.valueOf(table.getOpponent().getBoard().getSiegeCardPlace().getStrength()));
+        opponentPlayerRangedPower.setText(String.valueOf(table.getOpponent().getBoard().getRangedCardPlace().getStrength()));
+        opponentPlayerCloseCombatPower.setText(String.valueOf(table.getOpponent().getBoard().getCloseCombatCardPlace().getStrength()));
+        currentPlayerSiegePower.setText(String.valueOf(table.getCurrentPlayer().getBoard().getSiegeCardPlace().getStrength()));
+        currentPlayerRangedPower.setText(String.valueOf(table.getCurrentPlayer().getBoard().getRangedCardPlace().getStrength()));
+        currentPlayerCloseCombatPower.setText(String.valueOf(table.getCurrentPlayer().getBoard().getCloseCombatCardPlace().getStrength()));
+        currentPlayerAllScoreCounter.setText(String.valueOf(table.getCurrentPlayer().getScore()));
+        opponentPlayerAllScoreCounter.setText(String.valueOf(table.getOpponent().getScore()));
+        currentPlayerSpecialCardCounter.setText(String.valueOf(table.getCurrentPlayer().getSpecialCardCounter()));
+        opponentPlayerSpecialCardCounter.setText(String.valueOf(table.getOpponent().getSpecialCardCounter()));
+        opponentPlayerDeckCardCounter.setText(String.valueOf(table.getOpponent().getBoard().getDeck().getSize()));
+        currentPlayerDeckCardCounter.setText(String.valueOf(table.getCurrentPlayer().getBoard().getDeck().getSize()));
+    }
+
+    public void openTerminal(MouseEvent mouseEvent) {
+        App.getAppView().showTerminal();
     }
 }
 

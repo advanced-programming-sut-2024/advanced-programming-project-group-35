@@ -110,7 +110,7 @@
       <Image url="@../images/icons/icon_player_border.png" />
    </ImageView>
    <FlowPane hgap="5" alignment="CENTER"  fx:id="weatherCardPlace" layoutX="93.0" layoutY="331.0" prefHeight="107.0" prefWidth="208.0" />
-   <ImageView fx:id="cardDetailShower" fitHeight="300.0" fitWidth="200.0" layoutX="1141.0" layoutY="230.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="cardDetailShower" fitWidth="180.0" layoutX="1141.0" layoutY="230.0" pickOnBounds="true" preserveRatio="true" />
    <ImageView fx:id="currentPlayerFactionIcon" fitHeight="40.0" fitWidth="29.0" layoutX="64.0" layoutY="554.0" pickOnBounds="true" preserveRatio="true">
       <Image url="@../images/icons/deck_shield_monsters.png" />
    </ImageView>
@@ -123,4 +123,6 @@
    <ImageView fx:id="weatherRow4" fitHeight="85.0" fitWidth="599.0" layoutX="516.0" layoutY="214.0" pickOnBounds="true" preserveRatio="true" visible="false" />
    <ImageView fx:id="weatherRow5" fitHeight="85.0" fitWidth="599.0" layoutX="516.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true" visible="false" />
    <ImageView fx:id="weatherRow6" fitHeight="85.0" fitWidth="599.0" layoutX="516.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" visible="false" />
+   <Button layoutX="50" layoutY="740" minWidth="50" onMouseClicked="#openTerminal" styleClass="brown-button"
+           text="Terminal"/>
 </Pane>

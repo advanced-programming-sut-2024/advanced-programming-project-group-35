@@ -1,0 +1,9 @@
+.label-message{
+    -fx-text-fill: #e8af3c;
+    -fx-fill: #e8af3c;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+.container{
+    -fx-background-color: rgba(0, 0, 0, 0.5);
+}

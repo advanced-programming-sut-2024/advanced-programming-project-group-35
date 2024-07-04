@@ -10,6 +10,8 @@ public class Player {
     private int score;
     private boolean passRound;
     private HashMap<Integer, Integer> scoresOfRounds;
+    private int specialCardCounter;
+
 
     public Player(String username) {
         this.username = username;
@@ -68,4 +70,11 @@ public class Player {
         return board;
     }
 
+    public int getSpecialCardCounter() {
+        return specialCardCounter;
+    }
+
+    public void setSpecialCardCounter(int specialCardCounter) {
+        this.specialCardCounter = specialCardCounter;
+    }
 }

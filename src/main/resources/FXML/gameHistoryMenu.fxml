@@ -16,5 +16,6 @@
     <ImageView fitHeight="800" fitWidth="1400" pickOnBounds="true" preserveRatio="true">
         <Image url="@../images/game-history-menu-background.jpg"/>
     </ImageView>
-
+    <Button layoutX="50" layoutY="740" minWidth="50" onMouseClicked="#openTerminal" styleClass="brown-button"
+            text="Terminal"/>
 </AnchorPane>

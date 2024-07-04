@@ -42,4 +42,8 @@ public class MainMenuControllerView {
     public void openScoreTable(MouseEvent mouseEvent) {
         controller.openScoreTable();
     }
+
+    public void openTerminal(MouseEvent mouseEvent) {
+        App.getAppView().showTerminal();
+    }
 }

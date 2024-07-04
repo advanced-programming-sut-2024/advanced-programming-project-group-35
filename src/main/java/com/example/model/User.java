@@ -7,6 +7,7 @@ import com.example.model.GameData;
 import java.util.ArrayList;
 
 public class User {
+    private int id;
     private String username;
     private String password;
     private String nickname;
@@ -43,13 +44,15 @@ public class User {
         this.currentFactionType = generateRandomFactionType();
         this.gameData = new ArrayList<>();
         this.decksAddresses = new ArrayList<>();
+        this.currentFactionType = generateRandomFactionType();
+        //this.id = 10;
     }
     public void addGameData(GameData gameData) {
         this.gameData.add(gameData);
     }
 
     private FactionsType generateRandomFactionType() {
-        return null;
+        return FactionsType.Monsters;
     }
 
     public FactionsType getCurrentFactionType() {
@@ -144,4 +147,59 @@ public class User {
         return numberOfLostGames;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getProfilePicture() {
+        return profilePicture;
+    }
+
+    public int getMoney() {
+        return money;
+    }
+
+    public int getNumberOfFlags() {
+        return numberOfFlags;
+    }
+
+    public int getNumberOfKills() {
+        return numberOfKills;
+    }
+
+    public int getNumberOfDeaths() {
+        return numberOfDeaths;
+    }
+
+    public int getNumberOfSpellCards() {
+        return numberOfSpellCards;
+    }
+
+    public int getNumberOfMinionCards() {
+        return numberOfMinionCards;
+    }
+
+    public ArrayList<GameData> getGameData() {
+        return gameData;
+    }
+
+    public ArrayList<String> getDecksAddresses() {
+        return decksAddresses;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

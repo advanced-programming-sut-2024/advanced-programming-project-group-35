@@ -22,6 +22,8 @@
                 </VBox>
             </HBox>
     </VBox>
+    <Button layoutX="50" layoutY="740" minWidth="50" onMouseClicked="#openTerminal" styleClass="brown-button"
+            text="Terminal"/>
 
 </AnchorPane>
 
