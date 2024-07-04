@@ -14,6 +14,7 @@ public class CommnderOfTheRedRidersAbility implements LeaderAbility {
         for (Card card : abilityContext.getTable().getCurrentPlayer().getBoard().getHand().getCards()) {
             if (card instanceof WeatherCard) {
                 weatherCards.add((WeatherCard) card);
+                break;
             }
         }
         for (Card card : abilityContext.getTable().getCurrentPlayer().getBoard().getDeck().getCards()) {

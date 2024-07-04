@@ -120,4 +120,5 @@
    <ImageView fx:id="weatherRow4" fitHeight="85.0" fitWidth="599.0" layoutX="516.0" layoutY="214.0" pickOnBounds="true" preserveRatio="true" visible="false" />
    <ImageView fx:id="weatherRow5" fitHeight="85.0" fitWidth="599.0" layoutX="516.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true" visible="false" />
    <ImageView fx:id="weatherRow6" fitHeight="85.0" fitWidth="599.0" layoutX="516.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" visible="false" />
+   <Button fx:id="leaderAbility" layoutX="80.0" layoutY="606.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="184.0" text="leader ability" onMouseClicked="#leaderAbilityApply"/>
 </Pane>

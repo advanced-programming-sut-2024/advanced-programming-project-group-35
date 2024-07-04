@@ -3,9 +3,7 @@ package com.example.view.menuControllers;
 import com.example.Main;
 import com.example.controller.Controller;
 import com.example.controller.GameMenuController;
-import com.example.controller.MainMenuController;
 import com.example.controller.PreGameMenuController;
-import com.example.model.DeckManager;
 import com.example.model.IO.errors.Errors;
 import com.example.model.card.enums.CardData;
 import com.example.model.App;
@@ -15,7 +13,6 @@ import com.example.model.card.factions.Factions;
 import com.example.model.card.factions.Monsters;
 import com.example.model.card.factions.Skellige;
 import com.example.model.card.factions.*;
-import com.example.model.game.Deck;
 import com.example.view.Menu;
 import com.example.view.OutputView;
 import javafx.event.ActionEvent;
@@ -390,9 +387,9 @@ public class PreGameMenuControllerView {
         }
         LinkedList<String> playerDeckNames = getPreGameCardNames(playerDeck);
         GameMenuController gameMenuController = (GameMenuController) Controller.GAME_MENU_CONTROLLER.getController();
-        gameMenuController.run();
+        gameMenuController.startNewGame(App.getLoggedInUser().getUsername(), opponentName(), playerDeckNames, playerDeckNames);
         App.setCurrentMenu(Menu.GAME_MENU);
-//        gameMenuController.startNewGame(App.getLoggedInUser().getUsername(), opponentName(), playerDeckNames, playerDeckNames);
+        gameMenuController.run();
     }
 
     private ArrayList<String> opponentDeck() {

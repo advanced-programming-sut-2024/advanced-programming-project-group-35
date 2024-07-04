@@ -1,0 +1,216 @@
+{
+  "player1": "ali",
+  "player1Faction": "Monsters",
+  "player1Hand": [
+    {
+      "name": "neutral_villen",
+      "id": 120
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 121
+    },
+    {
+      "name": "special_mardroeme_1",
+      "id": 101
+    },
+    {
+      "name": "special_decoy_1",
+      "id": 103
+    },
+    {
+      "name": "special_horn",
+      "id": 105
+    },
+    {
+      "name": "weather_storm_1",
+      "id": 107
+    },
+    {
+      "name": "neutral_ciri",
+      "id": 109
+    },
+    {
+      "name": "neutral_dandelion",
+      "id": 111
+    },
+    {
+      "name": "neutral_gaunter_odimm",
+      "id": 113
+    },
+    {
+      "name": "neutral_geralt",
+      "id": 115
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 117
+    }
+  ],
+  "player1Deck": [
+    {
+      "name": "special_decoy",
+      "id": 102
+    },
+    {
+      "name": "special_decoy_2",
+      "id": 104
+    },
+    {
+      "name": "weather_storm",
+      "id": 106
+    },
+    {
+      "name": "neutral_chort",
+      "id": 108
+    },
+    {
+      "name": "neutral_cow",
+      "id": 110
+    },
+    {
+      "name": "neutral_emiel",
+      "id": 112
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 114
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 116
+    },
+    {
+      "name": "neutral_triss",
+      "id": 118
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 119
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 122
+    },
+    {
+      "name": "monsters_arachas",
+      "id": 123
+    },
+    {
+      "name": "monsters_arachas_1",
+      "id": 124
+    }
+  ],
+  "player2": "opponent",
+  "player2Faction": "Monsters",
+  "player2Hand": [
+    {
+      "name": "neutral_villen",
+      "id": 220
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 221
+    },
+    {
+      "name": "special_mardroeme_1",
+      "id": 201
+    },
+    {
+      "name": "special_decoy_1",
+      "id": 203
+    },
+    {
+      "name": "special_horn",
+      "id": 205
+    },
+    {
+      "name": "weather_storm_1",
+      "id": 207
+    },
+    {
+      "name": "neutral_ciri",
+      "id": 209
+    },
+    {
+      "name": "neutral_dandelion",
+      "id": 211
+    },
+    {
+      "name": "neutral_gaunter_odimm",
+      "id": 213
+    },
+    {
+      "name": "neutral_geralt",
+      "id": 215
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 217
+    }
+  ],
+  "player2Deck": [
+    {
+      "name": "special_decoy",
+      "id": 202
+    },
+    {
+      "name": "special_decoy_2",
+      "id": 204
+    },
+    {
+      "name": "weather_storm",
+      "id": 206
+    },
+    {
+      "name": "neutral_chort",
+      "id": 208
+    },
+    {
+      "name": "neutral_cow",
+      "id": 210
+    },
+    {
+      "name": "neutral_emiel",
+      "id": 212
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 214
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 216
+    },
+    {
+      "name": "neutral_triss",
+      "id": 218
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 219
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 222
+    },
+    {
+      "name": "monsters_arachas",
+      "id": 223
+    },
+    {
+      "name": "monsters_arachas_1",
+      "id": 224
+    }
+  ],
+  "commands": [
+    "card with id: 109 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableList and ability applied",
+    "change turn",
+    "card with id: 213 moved from currentPlayerHandObservableList to currentPlayerSiegeObservableList and ability applied",
+    "change turn",
+    "card with id: 109 moved from currentPlayerCloseCombatObservableList to currentPlayerHandObservableList and ability applied",
+    "card with id: 103 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableList and ability applied",
+    "change turn",
+    "decoy ability done, decoyCardId: 103 selectedCardId 109"
+  ]
+}

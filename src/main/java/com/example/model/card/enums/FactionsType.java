@@ -1,6 +1,9 @@
 package com.example.model.card.enums;
 
 import com.example.Main;
+import com.example.model.card.Ability;
+import com.example.model.card.cardsAbilities.*;
+import com.example.model.card.factions.*;
 
 public enum FactionsType {
     EmpireNilfgaardian,
@@ -10,6 +13,28 @@ public enum FactionsType {
     Skellige,
     ;
     public final static int numberOfFactions = 5;
+    public static Factions getAbilityByName(String  factionName) {
+        switch (factionName) {
+            case "EmpireNilfgaardian" -> {
+                return new EmpireNilfgaardian();
+            }
+            case "Monsters" -> {
+                return new Monsters();
+            }
+            case "RealmsNorthern" -> {
+                return new RealmNorthern();
+            }
+            case "ScoiaTael" -> {
+                return new ScoiaTeal();
+            }
+            case "Skellige" -> {
+                return new Skellige();
+            }
+            default -> {
+                return null;
+            }
+        }
+    }
     public static FactionsType getFactionByName(String factionName) {
         switch (factionName) {
             case "EmpireNilfgaardian" -> {

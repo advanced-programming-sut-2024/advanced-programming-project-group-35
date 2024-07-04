@@ -1,0 +1,256 @@
+{
+  "player1": "ali",
+  "player1Faction": "RealmsNorthern",
+  "player1Hand": [
+    {
+      "name": "realms_stennis",
+      "id": 104
+    },
+    {
+      "name": "realms_dijkstra",
+      "id": 113
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 127
+    },
+    {
+      "name": "realms_keira",
+      "id": 101
+    },
+    {
+      "name": "realms_philippa",
+      "id": 103
+    },
+    {
+      "name": "realms_redania",
+      "id": 106
+    },
+    {
+      "name": "realms_sabrina",
+      "id": 108
+    },
+    {
+      "name": "realms_kaedwen_siege_1",
+      "id": 110
+    },
+    {
+      "name": "realms_dethmold",
+      "id": 112
+    },
+    {
+      "name": "realms_sheala",
+      "id": 115
+    },
+    {
+      "name": "realms_siege_tower",
+      "id": 117
+    },
+    {
+      "name": "realms_catapult_1",
+      "id": 119
+    }
+  ],
+  "player1Deck": [
+    {
+      "name": "realms_natalis",
+      "id": 102
+    },
+    {
+      "name": "realms_poor_infantry",
+      "id": 105
+    },
+    {
+      "name": "realms_redania_1",
+      "id": 107
+    },
+    {
+      "name": "realms_kaedwen_siege",
+      "id": 109
+    },
+    {
+      "name": "realms_kaedwen_siege_2",
+      "id": 111
+    },
+    {
+      "name": "realms_esterad",
+      "id": 114
+    },
+    {
+      "name": "realms_sheldon",
+      "id": 116
+    },
+    {
+      "name": "realms_blue_stripes",
+      "id": 118
+    },
+    {
+      "name": "realms_crinfrid",
+      "id": 120
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 121
+    },
+    {
+      "name": "realms_ballista",
+      "id": 122
+    },
+    {
+      "name": "realms_banner_nurse",
+      "id": 123
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 124
+    },
+    {
+      "name": "neutral_villen",
+      "id": 125
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 126
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 128
+    },
+    {
+      "name": "neutral_triss",
+      "id": 129
+    }
+  ],
+  "player2": "opponent",
+  "player2Faction": "RealmsNorthern",
+  "player2Hand": [
+    {
+      "name": "realms_stennis",
+      "id": 204
+    },
+    {
+      "name": "realms_dijkstra",
+      "id": 213
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 227
+    },
+    {
+      "name": "realms_keira",
+      "id": 201
+    },
+    {
+      "name": "realms_philippa",
+      "id": 203
+    },
+    {
+      "name": "realms_redania",
+      "id": 206
+    },
+    {
+      "name": "realms_sabrina",
+      "id": 208
+    },
+    {
+      "name": "realms_kaedwen_siege_1",
+      "id": 210
+    },
+    {
+      "name": "realms_dethmold",
+      "id": 212
+    },
+    {
+      "name": "realms_sheala",
+      "id": 215
+    },
+    {
+      "name": "realms_siege_tower",
+      "id": 217
+    },
+    {
+      "name": "realms_catapult_1",
+      "id": 219
+    }
+  ],
+  "player2Deck": [
+    {
+      "name": "realms_natalis",
+      "id": 202
+    },
+    {
+      "name": "realms_poor_infantry",
+      "id": 205
+    },
+    {
+      "name": "realms_redania_1",
+      "id": 207
+    },
+    {
+      "name": "realms_kaedwen_siege",
+      "id": 209
+    },
+    {
+      "name": "realms_kaedwen_siege_2",
+      "id": 211
+    },
+    {
+      "name": "realms_esterad",
+      "id": 214
+    },
+    {
+      "name": "realms_sheldon",
+      "id": 216
+    },
+    {
+      "name": "realms_blue_stripes",
+      "id": 218
+    },
+    {
+      "name": "realms_crinfrid",
+      "id": 220
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 221
+    },
+    {
+      "name": "realms_ballista",
+      "id": 222
+    },
+    {
+      "name": "realms_banner_nurse",
+      "id": 223
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 224
+    },
+    {
+      "name": "neutral_villen",
+      "id": 225
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 226
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 228
+    },
+    {
+      "name": "neutral_triss",
+      "id": 229
+    }
+  ],
+  "commands": [
+    "card with id: 104 moved from currentPlayerHandObservableList to opponentPlayerCloseCombatObservableList and ability applied",
+    "change turn",
+    "card with id: 102 moved from currentPlayerDeckObservableList to currentPlayerHandObservableList and ability applied",
+    "card with id: 105 moved from currentPlayerDeckObservableList to currentPlayerHandObservableList and ability applied",
+    "card with id: 204 moved from currentPlayerHandObservableList to opponentPlayerCloseCombatObservableList and ability applied",
+    "change turn",
+    "card with id: 202 moved from currentPlayerDeckObservableList to currentPlayerHandObservableList and ability applied",
+    "card with id: 205 moved from currentPlayerDeckObservableList to currentPlayerHandObservableList and ability applied"
+  ]
+}

@@ -1,0 +1,297 @@
+{
+  "player1": "opponent",
+  "player1Faction": "ScoiaTael",
+  "player1Hand": [
+    {
+      "name": "neutral_chort",
+      "id": 201
+    },
+    {
+      "name": "neutral_cow",
+      "id": 203
+    },
+    {
+      "name": "neutral_emiel",
+      "id": 205
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 207
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 209
+    },
+    {
+      "name": "neutral_triss",
+      "id": 211
+    },
+    {
+      "name": "neutral_villen",
+      "id": 213
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 215
+    },
+    {
+      "name": "scoiatael_ciaran",
+      "id": 217
+    }
+  ],
+  "player1Deck": [
+    {
+      "name": "neutral_ciri",
+      "id": 202
+    },
+    {
+      "name": "neutral_dandelion",
+      "id": 204
+    },
+    {
+      "name": "neutral_gaunter_odimm",
+      "id": 206
+    },
+    {
+      "name": "neutral_geralt",
+      "id": 208
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 210
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 212
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 214
+    },
+    {
+      "name": "scoiatael_barclay",
+      "id": 216
+    },
+    {
+      "name": "scoiatael_dol_infantry_2",
+      "id": 218
+    },
+    {
+      "name": "scoiatael_dwarf",
+      "id": 219
+    },
+    {
+      "name": "scoiatael_dwarf_1",
+      "id": 220
+    },
+    {
+      "name": "scoiatael_dwarf_2",
+      "id": 221
+    },
+    {
+      "name": "scoiatael_eithne",
+      "id": 222
+    },
+    {
+      "name": "scoiatael_elf_skirmisher",
+      "id": 223
+    },
+    {
+      "name": "scoiatael_elf_skirmisher_1",
+      "id": 224
+    },
+    {
+      "name": "scoiatael_elf_skirmisher_2",
+      "id": 225
+    },
+    {
+      "name": "scoiatael_filavandrel",
+      "id": 226
+    },
+    {
+      "name": "scoiatael_havekar_nurse",
+      "id": 227
+    },
+    {
+      "name": "scoiatael_havekar_nurse_1",
+      "id": 228
+    },
+    {
+      "name": "scoiatael_havekar_nurse_2",
+      "id": 229
+    },
+    {
+      "name": "scoiatael_havekar_support",
+      "id": 230
+    },
+    {
+      "name": "scoiatael_havekar_support_1",
+      "id": 231
+    },
+    {
+      "name": "scoiatael_havekar_support_2",
+      "id": 232
+    },
+    {
+      "name": "scoiatael_ida",
+      "id": 233
+    },
+    {
+      "name": "scoiatael_iorveth",
+      "id": 234
+    },
+    {
+      "name": "scoiatael_isengrim",
+      "id": 235
+    }
+  ],
+  "player2": "ali",
+  "player2Faction": "ScoiaTael",
+  "player2Hand": [
+    {
+      "name": "neutral_chort",
+      "id": 101
+    },
+    {
+      "name": "neutral_cow",
+      "id": 103
+    },
+    {
+      "name": "neutral_emiel",
+      "id": 105
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 107
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 109
+    },
+    {
+      "name": "neutral_triss",
+      "id": 111
+    },
+    {
+      "name": "neutral_villen",
+      "id": 113
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 115
+    },
+    {
+      "name": "scoiatael_ciaran",
+      "id": 117
+    }
+  ],
+  "player2Deck": [
+    {
+      "name": "neutral_ciri",
+      "id": 102
+    },
+    {
+      "name": "neutral_dandelion",
+      "id": 104
+    },
+    {
+      "name": "neutral_gaunter_odimm",
+      "id": 106
+    },
+    {
+      "name": "neutral_geralt",
+      "id": 108
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 110
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 112
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 114
+    },
+    {
+      "name": "scoiatael_barclay",
+      "id": 116
+    },
+    {
+      "name": "scoiatael_dol_infantry_2",
+      "id": 118
+    },
+    {
+      "name": "scoiatael_dwarf",
+      "id": 119
+    },
+    {
+      "name": "scoiatael_dwarf_1",
+      "id": 120
+    },
+    {
+      "name": "scoiatael_dwarf_2",
+      "id": 121
+    },
+    {
+      "name": "scoiatael_eithne",
+      "id": 122
+    },
+    {
+      "name": "scoiatael_elf_skirmisher",
+      "id": 123
+    },
+    {
+      "name": "scoiatael_elf_skirmisher_1",
+      "id": 124
+    },
+    {
+      "name": "scoiatael_elf_skirmisher_2",
+      "id": 125
+    },
+    {
+      "name": "scoiatael_filavandrel",
+      "id": 126
+    },
+    {
+      "name": "scoiatael_havekar_nurse",
+      "id": 127
+    },
+    {
+      "name": "scoiatael_havekar_nurse_1",
+      "id": 128
+    },
+    {
+      "name": "scoiatael_havekar_nurse_2",
+      "id": 129
+    },
+    {
+      "name": "scoiatael_havekar_support",
+      "id": 130
+    },
+    {
+      "name": "scoiatael_havekar_support_1",
+      "id": 131
+    },
+    {
+      "name": "scoiatael_havekar_support_2",
+      "id": 132
+    },
+    {
+      "name": "scoiatael_ida",
+      "id": 133
+    },
+    {
+      "name": "scoiatael_iorveth",
+      "id": 134
+    },
+    {
+      "name": "scoiatael_isengrim",
+      "id": 135
+    }
+  ],
+  "commands": [
+    "change turn"
+  ]
+}

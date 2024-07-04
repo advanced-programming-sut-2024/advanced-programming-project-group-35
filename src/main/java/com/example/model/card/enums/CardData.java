@@ -254,9 +254,9 @@ public enum CardData {
     private final String abilityName;
     private final Place placeToBe;
     public static final CardData nilfgaard_leader = leaders_nilfgaard_emhyr_bronze;
-    public static final CardData monsters_leader = leaders_monsters_eredin_bronze;
+    public static final CardData monsters_leader = leaders_monsters_eredin_the_treacherous;
     public static final CardData realms_leader = leaders_realms_foltest_bronze;
-    public static final CardData scoiatael_leader = leaders_scoiatael_francesca_bronze;
+    public static final CardData scoiatael_leader = leaders_scoiatael_francesca_copper;
     public static final CardData skellige_leader = leaders_skellige_crach_an_craite;
 
 

@@ -1,5 +1,7 @@
 package com.example.model.card.leaderCardsAbilities;
 
+import com.example.controller.Controller;
+import com.example.controller.GameMenuController;
 import com.example.model.card.AbilityContext;
 import com.example.model.card.Card;
 import com.example.model.card.UnitCard;
@@ -21,8 +23,10 @@ public class TheTreacherousAbility implements LeaderAbility {
     private void duplicateSpyCardsInRows(ArrayList<Row> rows) {
         for (Row row : rows) {
             for (Card card : row.getCards()) {
-                if (card.getAbilityName() == AbilityName.SPY)
+                if (card != null && card.getAbilityName() == AbilityName.SPY) {
                     ((UnitCard)card).duplicatePower();
+                    ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).getGameMenuControllerView().getGameCardViewWithCardId(card.getIdInGame()).updatePowerLabel();
+                }
             }
         }
     }
