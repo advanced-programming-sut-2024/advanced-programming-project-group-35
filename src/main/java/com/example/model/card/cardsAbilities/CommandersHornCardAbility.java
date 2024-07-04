@@ -21,6 +21,5 @@ public class CommandersHornCardAbility implements Ability {
                 }
             }
         }
-        abilityContext.getRow().updateStrength();
     }
 }

@@ -14,14 +14,16 @@ public class Notification extends VBox {
     public final double width = 1400;
     public final double height = 100;
 
-    public Notification(String message, String imageAddress) {
+    public Notification(String message, String imageAddress, String username) {
         this.imageAddress = imageAddress;
-        this.message = message;
+        if (username != null) this.message = username + message;
+        else this.message = message;
         this.setPrefHeight(800);
         this.setPrefWidth(1400);
         this.setAlignment(javafx.geometry.Pos.CENTER);
         init();
     }
+
     private void init() {
         this.getStylesheets().add(Alert.class.getResource("/CSS/notificationStyle.css").toExternalForm());
 

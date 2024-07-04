@@ -73,9 +73,9 @@ public class AppView extends Application {
         currentPane.getChildren().remove(alert);
         isAlert = false;
     }
-    public void showNotification(String message, String imageAddress) {
+    public void showNotification(String message, String imageAddress, String username) {
         if (!isNotification) {
-            notification = new Notification(message, imageAddress);
+            notification = new Notification(message, imageAddress, username);
             notification.setLayoutX(0);
             notification.setLayoutY(0);
             pane.getChildren().add(notification);

@@ -38,7 +38,7 @@ public class GameMenuController extends AppController {
             App.setCurrentController(Controller.GAME_MENU_CONTROLLER);
             gameMenuControllerView = App.getAppView().getGameMenuControllerView();
             startRound(table);
-            App.getAppView().showNotification(NotificationsData.ROUND_START.getMessage(), NotificationsData.ROUND_START.getImageAddress());
+            App.getAppView().showNotification(NotificationsData.ROUND_START.getMessage(), NotificationsData.ROUND_START.getImageAddress(), null);
         } catch (Exception e) {
             throw new RuntimeException();
         }

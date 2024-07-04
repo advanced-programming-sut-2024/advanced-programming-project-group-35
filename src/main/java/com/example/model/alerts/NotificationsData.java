@@ -11,6 +11,7 @@ public enum NotificationsData {
     OPPONENT_TURN("Opponent's Turn", "notif_op_turn.png"),
     YOUR_TURN("Your Turn", "notif_me_turn.png"),
     ROUND_START("Round Start", "notif_round_start.png"),
+    USERNAME_TURN("'s Turn", "notif_me_turn.png"),
     ;
     private final String message;
     private final String imageAddress;
