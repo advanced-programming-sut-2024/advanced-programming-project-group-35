@@ -7,7 +7,6 @@ import com.example.model.App;
 import com.example.model.alerts.NotificationsData;
 import com.example.model.card.*;
 import com.example.model.card.Card;
-import com.example.model.card.enums.CardData;
 import com.example.model.card.enums.FactionsType;
 import com.example.model.card.enums.AbilityName;
 import com.example.model.game.Table;
@@ -26,7 +25,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
@@ -644,6 +642,9 @@ public class GameMenuControllerView {
             case "weatherObservableList" -> {
                 return weatherObservableList;
             }
+            case "opponentPlayerDiscardPlace" -> {
+                return opponentPlayerDiscardPlaceObservablePlace;
+            }
             default -> {
                 return null;
             }
@@ -697,6 +698,9 @@ public class GameMenuControllerView {
             case "opponentPlayerRangedSpecialPlaceObservableList" -> {
                 return opponentRangedSpecialPlace;
             }
+            case "opponentPlayerDiscardPlace" -> {
+                return opponentPlayerDiscardPlace;
+            }
             case "weatherObservableList" -> {
                 return weatherCardPlace;
             }
@@ -711,13 +715,23 @@ public class GameMenuControllerView {
 
         ObservableList<GameCardView> initialObservableList = getObservableListWithName(initialObservableListName);
         ObservableList<GameCardView> destinationObservableList = getObservableListWithName(destinationObservableListName);
-        initialObservableList.remove(gameCardView);
-        destinationObservableList.add(gameCardView);
+        synchronized (initialObservableList) {
+            initialObservableList.remove(gameCardView);
+        }
+        synchronized (destinationObservableList) {
+            if (!destinationObservableList.contains(gameCardView)) {
+                destinationObservableList.add(gameCardView);
+            }
+        }
 
         FlowPane destinationFLowPane = getFlowPaneWithName(destinationObservableListName);
         FlowPane initialFlowPane = getFlowPaneWithName(initialObservableListName);
 
-        destinationFLowPane.getChildren().add(gameCardView);
+        synchronized (destinationFLowPane) {
+            if (!destinationFLowPane.getChildren().contains(gameCardView)) {
+                destinationFLowPane.getChildren().add(gameCardView);
+            }
+        }
         initialFlowPane.getChildren().remove(gameCardView);
         disableMouseEventsForHandCard(cardId);
         destinationFLowPane.setOnMouseClicked(null);
@@ -798,99 +812,61 @@ public class GameMenuControllerView {
     }
 
     public void backCardsToDiscardPiles() {
+        // For current player
         synchronized (currentPlayerRangedObservableList) {
-            ObservableList<GameCardView> currentPlayerRangedCopy = FXCollections.observableArrayList(currentPlayerRangedObservableList);
-            for (GameCardView gameCardView : currentPlayerRangedCopy) {
-                System.out.println("1");
-                if (gameCardView.getCard() instanceof UnitCard) {
-                    System.out.println(((UnitCard) gameCardView.getCard()).noRemove());
-                    controller.moveCardFromOriginToDestinationAndDontDoAbility(gameCardView.getCard().getIdInGame(), RowsInGame.currentPlayerRanged.toString(), RowsInGame.currentPlayerDiscardPlace.toString());
-                }
-            }
+            moveCardsToDiscardPile(currentPlayerRangedObservableList, RowsInGame.currentPlayerRangedSpecialPlace.toString(), RowsInGame.currentPlayerDiscardPlace.toString());
         }
-
         synchronized (currentPlayerSiegeObservableList) {
-            ObservableList<GameCardView> currentPlayerSiegeCopy = FXCollections.observableArrayList(currentPlayerSiegeObservableList);
-            for (GameCardView gameCardView : currentPlayerSiegeCopy) {
-                if (gameCardView.getCard() instanceof UnitCard) {
-                    System.out.println(((UnitCard) gameCardView.getCard()).noRemove());
-                    controller.moveCardFromOriginToDestinationAndDontDoAbility(gameCardView.getCard().getIdInGame(), RowsInGame.currentPlayerSiege.toString(), RowsInGame.currentPlayerDiscardPlace.toString());
-                }
-            }
+            moveCardsToDiscardPile(currentPlayerSiegeObservableList, RowsInGame.currentPlayerSiege.toString(), RowsInGame.currentPlayerDiscardPlace.toString());
+        }
+        synchronized (currentPlayerCloseCombatObservableList) {
+            moveCardsToDiscardPile(currentPlayerCloseCombatObservableList, RowsInGame.currentPlayerCloseCombat.toString(), RowsInGame.currentPlayerDiscardPlace.toString());
+        }
+        synchronized (currentPlayerRangedSpecialPlaceObservableList) {
+            moveCardsToDiscardPile(currentPlayerRangedSpecialPlaceObservableList, RowsInGame.currentPlayerRangedSpecialPlace.toString(), RowsInGame.currentPlayerDiscardPlace.toString());
+        }
+        synchronized (currentPlayerSiegeSpecialPlaceObservableList) {
+            moveCardsToDiscardPile(currentPlayerSiegeSpecialPlaceObservableList, RowsInGame.currentPlayerSiegeSpecialPlace.toString(), RowsInGame.currentPlayerDiscardPlace.toString());
+        }
+        synchronized (currentPlayerCloseCombatSpecialPlaceObservableList) {
+            moveCardsToDiscardPile(currentPlayerCloseCombatSpecialPlaceObservableList, RowsInGame.currentPlayerCloseCombatSpecialPlace.toString(), RowsInGame.currentPlayerDiscardPlace.toString());
         }
 
-        ObservableList<GameCardView> currentPlayerCloseCombatCopy = FXCollections.observableArrayList(currentPlayerCloseCombatObservableList);
-        for (GameCardView gameCardView : currentPlayerCloseCombatCopy) {
-            System.out.println("3");
+        // For opponent player
+        synchronized (opponentRangedObservableList) {
+            moveCardsToDiscardPile(opponentRangedObservableList, RowsInGame.opponentPlayerRanged.toString(), RowsInGame.opponentPlayerDiscardPlace.toString());
+        }
+        synchronized (opponentSiegeObservableList) {
+            moveCardsToDiscardPile(opponentSiegeObservableList, RowsInGame.opponentPlayerSiege.toString(), RowsInGame.opponentPlayerDiscardPlace.toString());
+        }
+        synchronized (opponentCloseCombatObservableList) {
+            moveCardsToDiscardPile(opponentCloseCombatObservableList, RowsInGame.opponentPlayerCloseCombat.toString(), RowsInGame.opponentPlayerDiscardPlace.toString());
+        }
+        synchronized (opponentRangedSpecialPlaceObservableList) {
+            moveCardsToDiscardPile(opponentRangedSpecialPlaceObservableList, RowsInGame.opponentPlayerRangedSpecialPlace.toString(), RowsInGame.opponentPlayerDiscardPlace.toString());
+        }
+        synchronized (opponentSiegeSpecialPlaceObservableList) {
+            moveCardsToDiscardPile(opponentSiegeSpecialPlaceObservableList, RowsInGame.opponentPlayerSiegeSpecialPlace.toString(), RowsInGame.opponentPlayerDiscardPlace.toString());
+        }
+        synchronized (opponentCloseCombatSpecialPlaceObservableList) {
+            moveCardsToDiscardPile(opponentCloseCombatSpecialPlaceObservableList, RowsInGame.opponentPlayerCloseCombatSpecialPlace.toString(), RowsInGame.opponentPlayerDiscardPlace.toString());
+        }
+    }
+
+    private void moveCardsToDiscardPile(ObservableList<GameCardView> cardList, String origin, String destination) {
+        ObservableList<GameCardView> cardListCopy = FXCollections.observableArrayList(cardList);
+        for (GameCardView gameCardView : cardListCopy) {
             if (gameCardView.getCard() instanceof UnitCard) {
-                System.out.println(((UnitCard) gameCardView.getCard()).noRemove());
-                controller.moveCardFromOriginToDestinationAndDontDoAbility(gameCardView.getCard().getIdInGame(), RowsInGame.currentPlayerCloseCombat.toString(), RowsInGame.currentPlayerDiscardPlace.toString());
-            }
-        }
-
-        ObservableList<GameCardView> currentPlayerRangedSpecialPlaceCopy = FXCollections.observableArrayList(currentPlayerRangedSpecialPlaceObservableList);
-        for (GameCardView gameCardView : currentPlayerRangedSpecialPlaceCopy) {
-            if (gameCardView.getCard() instanceof UnitCard && ((UnitCard) gameCardView.getCard()).noRemove()) {
-                controller.moveCardFromOriginToDestinationAndDontDoAbility(gameCardView.getCard().getIdInGame(), RowsInGame.currentPlayerRangedSpecialPlace.toString(), RowsInGame.currentPlayerDiscardPlace.toString());
-            }
-        }
-
-        ObservableList<GameCardView> currentPlayerSiegeSpecialPlaceCopy = FXCollections.observableArrayList(currentPlayerSiegeSpecialPlaceObservableList);
-        for (GameCardView gameCardView : currentPlayerSiegeSpecialPlaceCopy) {
-            if (gameCardView.getCard() instanceof UnitCard && ((UnitCard) gameCardView.getCard()).noRemove()) {
-                controller.moveCardFromOriginToDestinationAndDontDoAbility(gameCardView.getCard().getIdInGame(), RowsInGame.currentPlayerSiegeSpecialPlace.toString(), RowsInGame.currentPlayerDiscardPlace.toString());
-            }
-        }
-
-        ObservableList<GameCardView> currentPlayerCloseCombatSpecialPlaceCopy = FXCollections.observableArrayList(currentPlayerCloseCombatSpecialPlaceObservableList);
-        for (GameCardView gameCardView : currentPlayerCloseCombatSpecialPlaceCopy) {
-            if (gameCardView.getCard() instanceof UnitCard && ((UnitCard) gameCardView.getCard()).noRemove()) {
-                controller.moveCardFromOriginToDestinationAndDontDoAbility(gameCardView.getCard().getIdInGame(), RowsInGame.currentPlayerCloseCombatSpecialPlace.toString(), RowsInGame.currentPlayerDiscardPlace.toString());
-            }
-        }
-
-        ObservableList<GameCardView> opponentRangedCopy = FXCollections.observableArrayList(opponentRangedObservableList);
-        for (GameCardView gameCardView : opponentRangedCopy) {
-            if (gameCardView.getCard() instanceof UnitCard && ((UnitCard) gameCardView.getCard()).noRemove()) {
-                controller.moveCardFromOriginToDestinationAndDontDoAbility(gameCardView.getCard().getIdInGame(), RowsInGame.currentPlayerRanged.toString(), RowsInGame.currentPlayerDiscardPlace.toString());
-            }
-        }
-
-        ObservableList<GameCardView> opponentSiegeCopy = FXCollections.observableArrayList(opponentSiegeObservableList);
-        for (GameCardView gameCardView : opponentSiegeCopy) {
-            if (gameCardView.getCard() instanceof UnitCard && ((UnitCard) gameCardView.getCard()).noRemove()) {
-                controller.moveCardFromOriginToDestinationAndDontDoAbility(gameCardView.getCard().getIdInGame(), RowsInGame.opponentPlayerSiege.toString(), RowsInGame.opponentPlayerDiscardPlace.toString());
-            }
-        }
-
-        ObservableList<GameCardView> opponentCloseCombatCopy = FXCollections.observableArrayList(opponentCloseCombatObservableList);
-        for (GameCardView gameCardView : opponentCloseCombatCopy) {
-            if (gameCardView.getCard() instanceof UnitCard && ((UnitCard) gameCardView.getCard()).noRemove()) {
-                controller.moveCardFromOriginToDestinationAndDontDoAbility(gameCardView.getCard().getIdInGame(), RowsInGame.opponentPlayerCloseCombat.toString(), RowsInGame.opponentPlayerDiscardPlace.toString());
-            }
-        }
-
-        ObservableList<GameCardView> opponentRangedSpecialPlaceCopy = FXCollections.observableArrayList(opponentRangedSpecialPlaceObservableList);
-        for (GameCardView gameCardView : opponentRangedSpecialPlaceCopy) {
-            if (gameCardView.getCard() instanceof UnitCard && ((UnitCard) gameCardView.getCard()).noRemove()) {
-                controller.moveCardFromOriginToDestinationAndDontDoAbility(gameCardView.getCard().getIdInGame(), RowsInGame.opponentPlayerRangedSpecialPlace.toString(), RowsInGame.opponentPlayerDiscardPlace.toString());
-            }
-        }
-
-        ObservableList<GameCardView> opponentSiegeSpecialPlaceCopy = FXCollections.observableArrayList(opponentSiegeSpecialPlaceObservableList);
-        for (GameCardView gameCardView : opponentSiegeSpecialPlaceCopy) {
-            if (gameCardView.getCard() instanceof UnitCard && ((UnitCard) gameCardView.getCard()).noRemove()) {
-                controller.moveCardFromOriginToDestinationAndDontDoAbility(gameCardView.getCard().getIdInGame(), RowsInGame.opponentPlayerSiegeSpecialPlace.toString(), RowsInGame.opponentPlayerDiscardPlace.toString());
-            }
-        }
-
-        ObservableList<GameCardView> opponentCloseCombatSpecialPlaceCopy = FXCollections.observableArrayList(opponentCloseCombatSpecialPlaceObservableList);
-        for (GameCardView gameCardView : opponentCloseCombatSpecialPlaceCopy) {
-            if (gameCardView.getCard() instanceof UnitCard && ((UnitCard) gameCardView.getCard()).noRemove()) {
-                controller.moveCardFromOriginToDestinationAndDontDoAbility(gameCardView.getCard().getIdInGame(), RowsInGame.opponentPlayerCloseCombatSpecialPlace.toString(), RowsInGame.opponentPlayerDiscardPlace.toString());
+                UnitCard unitCard = (UnitCard) gameCardView.getCard();
+                if (!unitCard.noRemove()) {
+                    controller.moveCardFromOriginToDestinationAndDontDoAbility(unitCard.getIdInGame(), origin, destination);
+                }
+            } else {
+                controller.moveCardFromOriginToDestinationAndDontDoAbility(gameCardView.getCard().getIdInGame(), origin, destination);
             }
         }
     }
+
 
     public void setPowerOfCardsDefault() {
         for (GameCardView gameCardView : currentPlayerRangedObservableList) {
@@ -963,32 +939,32 @@ public class GameMenuControllerView {
         opponentPlayerLeaderCard.setImage(new Image(Main.class.getResource("/images/inGameCards/" + table.getOpponent().getBoard().getDeck().getLeader().getLeaderName().getImageAddress()).toExternalForm()));
         currentPlayerLeaderCard.setImage(new Image(Main.class.getResource("/images/inGameCards/" + table.getCurrentPlayer().getBoard().getDeck().getLeader().getLeaderName().getImageAddress()).toExternalForm()));
         if (currentPlayerSiegeObservableList.size() > 9) {
-            currentPlayerSiege.setHgap(-8);
+            currentPlayerSiege.setHgap(0);
         } else {
             currentPlayerSiege.setHgap(5);
         }
         if (currentPlayerRangedObservableList.size() > 9) {
-            currentPlayerRanged.setHgap(-8);
+            currentPlayerRanged.setHgap(0);
         } else {
             currentPlayerRanged.setHgap(5);
         }
         if (currentPlayerCloseCombatObservableList.size() > 9) {
-            currentPlayerCloseCombat.setHgap(-8);
+            currentPlayerCloseCombat.setHgap(0);
         } else {
             currentPlayerCloseCombat.setHgap(5);
         }
         if (opponentSiegeObservableList.size() > 9) {
-            opponentSiege.setHgap(-8);
+            opponentSiege.setHgap(0);
         } else {
             opponentSiege.setHgap(5);
         }
         if (opponentRangedObservableList.size() > 9) {
-            opponentRanged.setHgap(-8);
+            opponentRanged.setHgap(0);
         } else {
             opponentRanged.setHgap(5);
         }
         if (opponentCloseCombatObservableList.size() > 9) {
-            opponentCloseCombat.setHgap(-8);
+            opponentCloseCombat.setHgap(0);
         } else {
             opponentCloseCombat.setHgap(5);
         }

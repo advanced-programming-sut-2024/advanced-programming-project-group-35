@@ -7,6 +7,7 @@ import com.example.model.card.Ability;
 import com.example.model.card.AbilityContext;
 import com.example.model.card.Card;
 import com.example.model.game.DiscardPile;
+import com.example.model.game.place.Place;
 import com.example.model.game.place.RowsInGame;
 
 import java.util.Random;
@@ -16,10 +17,22 @@ public class MedicAbility implements Ability {
     public void apply(AbilityContext abilityContext) {
         DiscardPile discardPile = abilityContext.getTable().getCurrentPlayer().getBoard().getDiscardPile();
         if (!discardPile.getCards().isEmpty()) {
-            Card cardToRevive = discardPile.getCard(new Random().nextInt(discardPile.getSize()));
+            int random = new Random().nextInt(discardPile.getSize());
+            System.out.println(random);
+            Card cardToRevive = discardPile.getCard(random);
             discardPile.removeCard(cardToRevive);
-            abilityContext.getTable().getCurrentPlayer().getBoard().getHand().addCard(cardToRevive);
-            ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDontDoAbility(cardToRevive.getIdInGame(), RowsInGame.currentPlayerDiscardPlace.toString(), RowsInGame.currentPlayerHand.toString());
+            if (cardToRevive != null) {
+                if (cardToRevive.getPlace() == Place.CLOSE_COMBAT) {
+                    abilityContext.getTable().getCurrentPlayer().getBoard().getHand().addCard(cardToRevive);
+                    ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(cardToRevive.getIdInGame(), RowsInGame.currentPlayerDiscardPlace.toString(), RowsInGame.currentPlayerCloseCombat.toString());
+                } else if (cardToRevive.getPlace() == Place.SIEGE) {
+                    abilityContext.getTable().getCurrentPlayer().getBoard().getHand().addCard(cardToRevive);
+                    ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(cardToRevive.getIdInGame(), RowsInGame.currentPlayerDiscardPlace.toString(), RowsInGame.currentPlayerSiege.toString());
+                } else {
+                    abilityContext.getTable().getCurrentPlayer().getBoard().getHand().addCard(cardToRevive);
+                    ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(cardToRevive.getIdInGame(), RowsInGame.currentPlayerDiscardPlace.toString(), RowsInGame.currentPlayerRanged.toString());
+                }
+            }
         }
     }
 }

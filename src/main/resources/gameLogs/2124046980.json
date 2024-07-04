@@ -1,0 +1,247 @@
+{
+  "player1": "opponent",
+  "player1Faction": "ScoiaTael",
+  "player1Hand": [
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 204
+    },
+    {
+      "name": "neutral_gaunter_odimm",
+      "id": 201
+    },
+    {
+      "name": "neutral_geralt",
+      "id": 203
+    },
+    {
+      "name": "neutral_triss",
+      "id": 206
+    },
+    {
+      "name": "neutral_villen",
+      "id": 208
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 210
+    },
+    {
+      "name": "scoiatael_ciaran",
+      "id": 212
+    },
+    {
+      "name": "scoiatael_dol_archer",
+      "id": 214
+    },
+    {
+      "name": "scoiatael_dol_infantry_1",
+      "id": 216
+    },
+    {
+      "name": "scoiatael_dwarf",
+      "id": 218
+    }
+  ],
+  "player1Deck": [
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 202
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 205
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 207
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 209
+    },
+    {
+      "name": "scoiatael_barclay",
+      "id": 211
+    },
+    {
+      "name": "scoiatael_dennis",
+      "id": 213
+    },
+    {
+      "name": "scoiatael_dol_infantry",
+      "id": 215
+    },
+    {
+      "name": "scoiatael_dol_infantry_2",
+      "id": 217
+    },
+    {
+      "name": "scoiatael_dwarf_1",
+      "id": 219
+    },
+    {
+      "name": "scoiatael_dwarf_2",
+      "id": 220
+    },
+    {
+      "name": "scoiatael_eithne",
+      "id": 221
+    },
+    {
+      "name": "scoiatael_elf_skirmisher",
+      "id": 222
+    },
+    {
+      "name": "scoiatael_elf_skirmisher_1",
+      "id": 223
+    },
+    {
+      "name": "scoiatael_elf_skirmisher_2",
+      "id": 224
+    },
+    {
+      "name": "scoiatael_filavandrel",
+      "id": 225
+    },
+    {
+      "name": "scoiatael_havekar_nurse",
+      "id": 226
+    },
+    {
+      "name": "scoiatael_havekar_nurse_1",
+      "id": 227
+    },
+    {
+      "name": "scoiatael_havekar_nurse_2",
+      "id": 228
+    }
+  ],
+  "player2": "ali",
+  "player2Faction": "ScoiaTael",
+  "player2Hand": [
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 104
+    },
+    {
+      "name": "neutral_gaunter_odimm",
+      "id": 101
+    },
+    {
+      "name": "neutral_geralt",
+      "id": 103
+    },
+    {
+      "name": "neutral_triss",
+      "id": 106
+    },
+    {
+      "name": "neutral_villen",
+      "id": 108
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 110
+    },
+    {
+      "name": "scoiatael_ciaran",
+      "id": 112
+    },
+    {
+      "name": "scoiatael_dol_archer",
+      "id": 114
+    },
+    {
+      "name": "scoiatael_dol_infantry_1",
+      "id": 116
+    },
+    {
+      "name": "scoiatael_dwarf",
+      "id": 118
+    }
+  ],
+  "player2Deck": [
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 102
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 105
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 107
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 109
+    },
+    {
+      "name": "scoiatael_barclay",
+      "id": 111
+    },
+    {
+      "name": "scoiatael_dennis",
+      "id": 113
+    },
+    {
+      "name": "scoiatael_dol_infantry",
+      "id": 115
+    },
+    {
+      "name": "scoiatael_dol_infantry_2",
+      "id": 117
+    },
+    {
+      "name": "scoiatael_dwarf_1",
+      "id": 119
+    },
+    {
+      "name": "scoiatael_dwarf_2",
+      "id": 120
+    },
+    {
+      "name": "scoiatael_eithne",
+      "id": 121
+    },
+    {
+      "name": "scoiatael_elf_skirmisher",
+      "id": 122
+    },
+    {
+      "name": "scoiatael_elf_skirmisher_1",
+      "id": 123
+    },
+    {
+      "name": "scoiatael_elf_skirmisher_2",
+      "id": 124
+    },
+    {
+      "name": "scoiatael_filavandrel",
+      "id": 125
+    },
+    {
+      "name": "scoiatael_havekar_nurse",
+      "id": 126
+    },
+    {
+      "name": "scoiatael_havekar_nurse_1",
+      "id": 127
+    },
+    {
+      "name": "scoiatael_havekar_nurse_2",
+      "id": 128
+    }
+  ],
+  "commands": [
+    "player: opponent passed round",
+    "change turn",
+    "card with id: 103 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableList and ability applied",
+    "card with id: 101 moved from currentPlayerHandObservableList to currentPlayerSiegeObservableList and ability applied",
+    "player: ali passed round",
+    "card with id: 101 moved from currentPlayerSiegeObservableList to currentPlayerDiscardPlace and ability applied",
+    "card with id: 103 moved from currentPlayerCloseCombatObservableList to currentPlayerDiscardPlace and ability applied"
+  ]
+}
