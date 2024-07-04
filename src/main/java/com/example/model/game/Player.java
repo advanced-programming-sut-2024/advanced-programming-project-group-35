@@ -1,5 +1,7 @@
 package com.example.model.game;
 
+import com.example.model.game.place.Row;
+
 import java.util.HashMap;
 
 public class Player {
@@ -20,6 +22,13 @@ public class Player {
         this.numberOfCrystals = 2;
         this.numberOfVetoCards = 2;
         this.passRound = false;
+    }
+    public void updateScore() {
+        int result = 0;
+        for (Row row : board.getRows()) {
+            result += row.getStrength();
+        }
+        score = result;
     }
 
     public boolean isPassRound() {
@@ -56,6 +65,10 @@ public class Player {
 
     public void increaseScore(int a) {
         score += a;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 
     public int getScore() {

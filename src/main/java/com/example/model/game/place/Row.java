@@ -6,7 +6,6 @@ import com.example.model.card.UnitCard;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.util.ArrayList;
 
 public class Row {
     private ObservableList<SpecialCard> specialPlace = FXCollections.observableArrayList();
@@ -34,9 +33,9 @@ public class Row {
         this.specialPlace.add(specialCard);
     }
 
-    private ObservableList<UnitCard> cards = FXCollections.observableArrayList();
+    private ObservableList<Card> cards = FXCollections.observableArrayList();
 
-    public ObservableList<UnitCard> getCards() {
+    public ObservableList<Card> getCards() {
         return cards;
     }
 
@@ -48,12 +47,14 @@ public class Row {
         this.place = place;
     }
 
-    public void addCard(UnitCard card) {
+    public void addCard(Card card) {
         cards.add(card);
+        updateStrength();
     }
 
-    public void removeCard(UnitCard card) {
+    public void removeCard(Card card) {
         cards.remove(card);
+        updateStrength();
     }
 
     public void clear() {
@@ -66,9 +67,9 @@ public class Row {
 
     public int getNonHeroStrength() {
         int result = 0;
-        for (UnitCard card : cards) {
-            if (!card.isHero()) {
-                result += card.getCurrentPower();
+        for (Card card : cards) {
+            if (card != null && (card instanceof UnitCard) && !((UnitCard)card).isHero()) {
+                result += ((UnitCard)card).getCurrentPower();
             }
         }
         return result;
@@ -80,8 +81,10 @@ public class Row {
 
     public void updateStrength() {
         int result = 0;
-        for (UnitCard card : cards) {
-            result += card.getCurrentPower();
+        for (Card card : cards) {
+            if (card != null && (card instanceof UnitCard)) {
+                result += ((UnitCard)card).getCurrentPower();
+            }
         }
         strength = result;
     }

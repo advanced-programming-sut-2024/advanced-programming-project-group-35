@@ -231,9 +231,9 @@ public enum CardData {
     special_mardroeme("special_mardroeme", "special_mardroeme.jpg", 0, "special", "", "special"),
     special_mardroeme_1("special_mardroeme_1", "special_mardroeme.jpg", 0, "special", "", "special"),
     special_mardroeme_2("special_mardroeme_2", "special_mardroeme.jpg", 0, "special", "", "special"),
-    special_scorch("special_scorch", "special_scorch.jpg", 0, "special", "", "special"),
-    special_scorch_1("special_scorch_1", "special_scorch.jpg", 0, "special", "", "special"),
-    special_scorch_2("special_scorch_2", "special_scorch.jpg", 0, "special", "", "special"),
+    special_scorch("special_scorch", "special_scorch.jpg", 0, "special", "scorch", "special"),
+    special_scorch_1("special_scorch_1", "special_scorch.jpg", 0, "special", "scorch", "special"),
+    special_scorch_2("special_scorch_2", "special_scorch.jpg", 0, "special", "scorch", "special"),
 
     weather_fog("weather_fog", "weather_fog.jpg", 0, "special", "weather", "weather"),
     weather_fog_1("weather_fog_1", "weather_fog.jpg", 0, "special", "weather", "weather"),
@@ -254,9 +254,9 @@ public enum CardData {
     private final String abilityName;
     private final Place placeToBe;
     public static final CardData nilfgaard_leader = leaders_nilfgaard_emhyr_bronze;
-    public static final CardData monsters_leader = leaders_monsters_eredin_bronze;
+    public static final CardData monsters_leader = leaders_monsters_eredin_the_treacherous;
     public static final CardData realms_leader = leaders_realms_foltest_bronze;
-    public static final CardData scoiatael_leader = leaders_scoiatael_francesca_bronze;
+    public static final CardData scoiatael_leader = leaders_scoiatael_francesca_copper;
     public static final CardData skellige_leader = leaders_skellige_crach_an_craite;
 
 
@@ -324,29 +324,39 @@ public enum CardData {
         return abilityName;
     }
 
-    public static ImageView getImageAbilityForUnitCards(Ability ability) {
+    public static ImageView getImageAbilityForUnitCards(String ability) {
         String srcPath = Main.class.getResource("/images/icons/").toExternalForm();
-        if (ability instanceof BerskerAbility) {
+        if (ability == AbilityName.BERSERKER.name()) {
+            System.out.println("CardData 1");
             return new ImageView(new Image(srcPath + "card_ability_berserker.png"));
-        } else if (ability instanceof TightBondAbility) {
+        } else if (ability == AbilityName.TIGHT_BOND.name()) {
+            System.out.println("CardData 2");
             return new ImageView(new Image(srcPath + "card_ability_bond.png"));
-        } else if (ability instanceof DecoyAbility) {
+        } else if (ability == AbilityName.DECOY.name()) {
+            System.out.println("CardData 3");
             return new ImageView(new Image(srcPath + "card_ability_decoy.png"));
-        } else if (ability instanceof CommandersHornCardAbility) {
+        } else if (ability == AbilityName.COMMANDER_HORN.name()) {
+            System.out.println("CardData 4");
             return new ImageView(new Image(srcPath + "card_ability_horn.png"));
-        } else if (ability instanceof MardroemeAbility) {
+        } else if (ability == AbilityName.MARDROEME.name()) {
+            System.out.println("CardData 5");
             return new ImageView(new Image(srcPath + "card_ability_mardroeme.png"));
-        } else if (ability instanceof MedicAbility) {
+        } else if (ability == AbilityName.MEDIC.name()) {
             return new ImageView(new Image(srcPath + "card_ability_medic.png"));
-        } else if (ability instanceof MoralBoostAbility) {
+        } else if (ability == AbilityName.MORALE_BOOST.name()) {
+            System.out.println("CardData 7");
             return new ImageView(new Image(srcPath + "card_ability_morale.png"));
-        } else if (ability instanceof MusterAbility) {
+        } else if (ability == AbilityName.MUSTER.name()) {
+            System.out.println("CardData 8");
             return new ImageView(new Image(srcPath + "card_ability_muster.png"));
-        } else if (ability instanceof ScorchAbility) {
+        } else if (ability == AbilityName.SCORCH.name()) {
+            System.out.println("CardData 9");
             return new ImageView(new Image(srcPath + "card_ability_scorch.png"));
-        } else if (ability instanceof SpyAbility) {
+        } else if (ability == AbilityName.SPY.name()) {
+            System.out.println("CardData 10");
             return new ImageView(new Image(srcPath + "card_ability_spy.png"));
-        } else if (ability instanceof TransformerAbility) {
+        } else if (ability == AbilityName.BERSERKER.name()) {
+            System.out.println("CardData 11");
             return new ImageView(new Image(srcPath + "card_ability_avenger.png"));
         } else {
             return null;

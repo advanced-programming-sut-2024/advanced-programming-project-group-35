@@ -4,6 +4,7 @@ import com.example.controller.Controller;
 import com.example.controller.GameMenuController;
 import com.example.model.card.Ability;
 import com.example.model.card.AbilityContext;
+import com.example.model.card.Card;
 import com.example.model.card.UnitCard;
 import com.example.model.card.enums.CardData;
 import com.example.model.game.place.Row;
@@ -11,7 +12,7 @@ import com.example.model.game.place.Row;
 public class WeatherAbility implements Ability {
     @Override
     public void apply(AbilityContext abilityContext) {
-       //TODO اول چک کنیم میتونیم اجرا کنیم توانایی رو یا نه
+       //TODO اول چک کنیم میتونیم اجرا کنیم توانایی رو یا نه stellFOrged
         switch (abilityContext.getCard().getCardName()) {
             case CardData.weather_frost -> {
                 setPowerOne(abilityContext.getTable().getCurrentPlayer().getBoard().getCloseCombatCardPlace());
@@ -34,14 +35,14 @@ public class WeatherAbility implements Ability {
                 setPowerOne(abilityContext.getTable().getOpponent().getBoard().getSiegeCardPlace());
             }
             case CardData.weather_clear -> {
-                ((GameMenuController)Controller.GAME_MENU_CONTROLLER.getController()).disApplyWeatherCards(abilityContext.getTable());
+                ((GameMenuController)Controller.GAME_MENU_CONTROLLER.getController()).disApplyWeatherCards();
             }
         }
     }
     private void setPowerOne(Row row) {
         row.setApplyWeather(true);
-        for (UnitCard card : row.getCards()) {
-            card.setCurrentPower(1);
+        for (Card card : row.getCards()) {
+            ((UnitCard)card).setCurrentPower(1);
         }
     }
 }

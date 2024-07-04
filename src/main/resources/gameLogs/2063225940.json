@@ -1,0 +1,190 @@
+{
+  "player1": "ali",
+  "player1Faction": "Monsters",
+  "player1Hand": [
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 101
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 103
+    },
+    {
+      "name": "neutral_triss",
+      "id": 105
+    },
+    {
+      "name": "neutral_villen",
+      "id": 107
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 109
+    },
+    {
+      "name": "monsters_arachas_2",
+      "id": 111
+    },
+    {
+      "name": "monsters_forktail",
+      "id": 113
+    },
+    {
+      "name": "monsters_frightener",
+      "id": 115
+    },
+    {
+      "name": "monsters_ghoul",
+      "id": 117
+    }
+  ],
+  "player1Deck": [
+    {
+      "name": "neutral_geralt",
+      "id": 102
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 104
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 106
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 108
+    },
+    {
+      "name": "monsters_arachas_1",
+      "id": 110
+    },
+    {
+      "name": "monsters_arachas_behemoth",
+      "id": 112
+    },
+    {
+      "name": "monsters_ice_giant",
+      "id": 114
+    },
+    {
+      "name": "monsters_gargoyle",
+      "id": 116
+    },
+    {
+      "name": "monsters_vampire_garkain",
+      "id": 118
+    },
+    {
+      "name": "monsters_ghoul_2",
+      "id": 119
+    },
+    {
+      "name": "monsters_gravehag",
+      "id": 120
+    },
+    {
+      "name": "monsters_gryffin",
+      "id": 121
+    },
+    {
+      "name": "monsters_harpy",
+      "id": 122
+    }
+  ],
+  "player2": "opponent",
+  "player2Faction": "Monsters",
+  "player2Hand": [
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 201
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 203
+    },
+    {
+      "name": "neutral_triss",
+      "id": 205
+    },
+    {
+      "name": "neutral_villen",
+      "id": 207
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 209
+    },
+    {
+      "name": "monsters_arachas_2",
+      "id": 211
+    },
+    {
+      "name": "monsters_forktail",
+      "id": 213
+    },
+    {
+      "name": "monsters_frightener",
+      "id": 215
+    },
+    {
+      "name": "monsters_ghoul",
+      "id": 217
+    }
+  ],
+  "player2Deck": [
+    {
+      "name": "neutral_geralt",
+      "id": 202
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 204
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 206
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 208
+    },
+    {
+      "name": "monsters_arachas_1",
+      "id": 210
+    },
+    {
+      "name": "monsters_arachas_behemoth",
+      "id": 212
+    },
+    {
+      "name": "monsters_ice_giant",
+      "id": 214
+    },
+    {
+      "name": "monsters_gargoyle",
+      "id": 216
+    },
+    {
+      "name": "monsters_vampire_garkain",
+      "id": 218
+    },
+    {
+      "name": "monsters_ghoul_2",
+      "id": 219
+    },
+    {
+      "name": "monsters_gravehag",
+      "id": 220
+    },
+    {
+      "name": "monsters_gryffin",
+      "id": 221
+    },
+    {
+      "name": "monsters_harpy",
+      "id": 222
+    }
+  ]
+}

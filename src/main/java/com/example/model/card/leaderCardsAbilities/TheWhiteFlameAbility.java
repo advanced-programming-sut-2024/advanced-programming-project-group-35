@@ -12,18 +12,18 @@ import java.util.ArrayList;
 public class TheWhiteFlameAbility implements LeaderAbility {
 
     @Override
-    public void apply(Table table) {
-        Hand hand = table.getCurrentPlayer().getBoard().getHand();
+    public void apply(AbilityContext abilityContext) {
+        Hand hand = abilityContext.getTable().getCurrentPlayer().getBoard().getHand();
         ArrayList<Card> handCopy = new ArrayList<>(hand.getCards());
         for (Card card : handCopy) {
             if (card.getCardName() == CardData.weather_rain) {
-                if (!table.getSpellPlace().isSpellPlaceFull()) {
+                if (!abilityContext.getTable().getSpellPlace().isSpellPlaceFull()) {
                     hand.removeCard(card);
-                    table.getSpellPlace().addCard((WeatherCard) card);
-                    card.getAbility().apply(new AbilityContext(table, null, null));
+                    abilityContext.getTable().getSpellPlace().addCard((WeatherCard) card);
+                    card.getAbility().apply(new AbilityContext(abilityContext.getTable(), null, null));
                 }
             }
         }
-        table.getCurrentPlayer().getBoard().getDeck().getLeader().setCanDoAction(false);
+        abilityContext.getTable().getCurrentPlayer().getBoard().getDeck().getLeader().setCanDoAction(false);
     }
 }

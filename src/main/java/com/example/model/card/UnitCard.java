@@ -8,7 +8,7 @@ public class UnitCard extends Card {
     private final int power;
     private int currentPower;
     private boolean isHero;
-    private boolean noRemove; // برای وقتیه که ما میخوایم دور رو عوض کنیم و اگه یه کارتی اینش ترو باشه نباید از صفحه حدف شه (برای ابیلیتی مانستر)
+    private boolean noRemove;
 
     public UnitCard(int power, Ability ability, AbilityName abilityName, Place place, boolean isHero, CardData cardData, boolean noRemove) {
         super(place, ability, abilityName,cardData);
@@ -18,7 +18,7 @@ public class UnitCard extends Card {
         this.noRemove = noRemove;
     }
 
-    public boolean NoRemove() {
+    public boolean noRemove() {
         return noRemove;
     }
 
@@ -44,6 +44,10 @@ public class UnitCard extends Card {
 
     public void applyMoralBoost() {
         currentPower++;
+    }
+
+    public int getPower() {
+        return power;
     }
 
     public void disApplyMoralBoost() {

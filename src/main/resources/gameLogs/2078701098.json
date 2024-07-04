@@ -3,6 +3,14 @@
   "player1Faction": "Monsters",
   "player1Hand": [
     {
+      "name": "neutral_villen",
+      "id": 107
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 108
+    },
+    {
       "name": "neutral_gaunter_odimm_darkness",
       "id": 101
     },
@@ -13,10 +21,6 @@
     {
       "name": "neutral_triss",
       "id": 105
-    },
-    {
-      "name": "neutral_villen",
-      "id": 107
     },
     {
       "name": "neutral_zoltan",
@@ -41,10 +45,6 @@
     {
       "name": "monsters_vampire_ekkimara",
       "id": 119
-    },
-    {
-      "name": "monsters_fiend",
-      "id": 121
     }
   ],
   "player1Deck": [
@@ -59,10 +59,6 @@
     {
       "name": "neutral_vesemir",
       "id": 106
-    },
-    {
-      "name": "neutral_yennefer",
-      "id": 108
     },
     {
       "name": "monsters_arachas",
@@ -89,17 +85,45 @@
       "id": 120
     },
     {
+      "name": "monsters_fiend",
+      "id": 121
+    },
+    {
       "name": "monsters_fire_elemental",
       "id": 122
     },
     {
       "name": "monsters_vampire_fleder",
       "id": 123
+    },
+    {
+      "name": "monsters_foglet",
+      "id": 124
+    },
+    {
+      "name": "monsters_forktail",
+      "id": 125
+    },
+    {
+      "name": "monsters_ice_giant",
+      "id": 126
+    },
+    {
+      "name": "monsters_frightener",
+      "id": 127
     }
   ],
   "player2": "opponent",
   "player2Faction": "Monsters",
   "player2Hand": [
+    {
+      "name": "neutral_villen",
+      "id": 207
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 208
+    },
     {
       "name": "neutral_gaunter_odimm_darkness",
       "id": 201
@@ -111,10 +135,6 @@
     {
       "name": "neutral_triss",
       "id": 205
-    },
-    {
-      "name": "neutral_villen",
-      "id": 207
     },
     {
       "name": "neutral_zoltan",
@@ -139,10 +159,6 @@
     {
       "name": "monsters_vampire_ekkimara",
       "id": 219
-    },
-    {
-      "name": "monsters_fiend",
-      "id": 221
     }
   ],
   "player2Deck": [
@@ -157,10 +173,6 @@
     {
       "name": "neutral_vesemir",
       "id": 206
-    },
-    {
-      "name": "neutral_yennefer",
-      "id": 208
     },
     {
       "name": "monsters_arachas",
@@ -187,19 +199,38 @@
       "id": 220
     },
     {
+      "name": "monsters_fiend",
+      "id": 221
+    },
+    {
       "name": "monsters_fire_elemental",
       "id": 222
     },
     {
       "name": "monsters_vampire_fleder",
       "id": 223
+    },
+    {
+      "name": "monsters_foglet",
+      "id": 224
+    },
+    {
+      "name": "monsters_forktail",
+      "id": 225
+    },
+    {
+      "name": "monsters_ice_giant",
+      "id": 226
+    },
+    {
+      "name": "monsters_frightener",
+      "id": 227
     }
   ],
   "commands": [
-    "card with id: 107 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableList",
-    "card with id: 115 moved from currentPlayerHandObservableList to currentPlayerRangedObservableList",
-    "card with id: 113 moved from currentPlayerHandObservableList to currentPlayerSiegeObservableList",
-    "card with id: 111 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableList",
-    "card with id: 119 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableList"
+    "card with id: 111 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableListand ability applied",
+    "card with id: 211 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableListand ability applied",
+    "card with id: 210 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableListand ability applied",
+    "card with id: 212 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableListand ability applied"
   ]
 }

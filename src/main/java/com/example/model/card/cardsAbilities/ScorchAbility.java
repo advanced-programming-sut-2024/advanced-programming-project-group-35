@@ -1,16 +1,21 @@
 package com.example.model.card.cardsAbilities;
 
+import com.example.controller.Controller;
+import com.example.controller.GameMenuController;
 import com.example.model.card.Ability;
 import com.example.model.card.AbilityContext;
+import com.example.model.card.Card;
 import com.example.model.card.UnitCard;
 import com.example.model.card.enums.CardData;
+import com.example.model.game.place.Place;
 import com.example.model.game.place.Row;
+import com.example.model.game.place.RowsInGame;
 
 import java.util.ArrayList;
 public class ScorchAbility implements Ability {
     @Override
     public void apply(AbilityContext abilityContext) {
-        if (abilityContext.getCard().getCardName() == CardData.special_scorch) {
+        if (abilityContext.getCard() != null) {
             applyAbilityForScorchCard(abilityContext);
         } else {
             applyAbilityForNonScorchCards(abilityContext);
@@ -31,7 +36,7 @@ public class ScorchAbility implements Ability {
             for (UnitCard card : maximumPoweredCardsForCurrentPlayer) {
                 abilityContext.getTable().getCurrentPlayer().getBoard().getRowByName(card.getPlace()).removeCard(card);
                 abilityContext.getTable().getCurrentPlayer().getBoard().getDiscardPile().addCard(card);
-                //TODO گرافیک انتقال کارت
+                //TODO
             }
             for (UnitCard card : maximumPoweredCardsForOpponentPlayer) {
                 abilityContext.getTable().getOpponent().getBoard().getRowByName(card.getPlace()).removeCard(card);
@@ -54,14 +59,14 @@ public class ScorchAbility implements Ability {
     }
     private int getMaximumPoweredCards(ArrayList<UnitCard> maximumPoweredCardsForCurrentPlayer, Row row) {
         int maximumPowerForCurrentPlayer = 0;
-        for (UnitCard card : row.getCards()) {
-            if (!card.isHero()) {
-                if (card.getCurrentPower() > maximumPowerForCurrentPlayer) {
+        for (Card card : row.getCards()) {
+            if (card instanceof UnitCard && !((UnitCard)card).isHero()) {
+                if (((UnitCard)card).getCurrentPower() > maximumPowerForCurrentPlayer) {
                     maximumPoweredCardsForCurrentPlayer.clear();
-                    maximumPoweredCardsForCurrentPlayer.add(card);
-                    maximumPowerForCurrentPlayer = card.getCurrentPower();
-                } else if (card.getCurrentPower() == maximumPowerForCurrentPlayer) {
-                    maximumPoweredCardsForCurrentPlayer.add(card);
+                    maximumPoweredCardsForCurrentPlayer.add(((UnitCard)card));
+                    maximumPowerForCurrentPlayer = ((UnitCard)card).getCurrentPower();
+                } else if (((UnitCard)card).getCurrentPower() == maximumPowerForCurrentPlayer) {
+                    maximumPoweredCardsForCurrentPlayer.add(((UnitCard)card));
                 }
             }
         }

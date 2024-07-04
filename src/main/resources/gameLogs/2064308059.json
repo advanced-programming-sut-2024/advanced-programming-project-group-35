@@ -1,0 +1,198 @@
+{
+  "player1": "ali",
+  "player1Faction": "Monsters",
+  "player1Hand": [
+    {
+      "name": "special_horn_1",
+      "id": 101
+    },
+    {
+      "name": "neutral_ciri",
+      "id": 103
+    },
+    {
+      "name": "monsters_draug",
+      "id": 105
+    },
+    {
+      "name": "monsters_vampire_ekkimara",
+      "id": 107
+    },
+    {
+      "name": "special_scorch",
+      "id": 109
+    },
+    {
+      "name": "special_scorch_2",
+      "id": 111
+    },
+    {
+      "name": "weather_clear_1",
+      "id": 113
+    },
+    {
+      "name": "weather_storm_1",
+      "id": 115
+    },
+    {
+      "name": "monsters_endrega",
+      "id": 117
+    }
+  ],
+  "player1Deck": [
+    {
+      "name": "neutral_cow",
+      "id": 102
+    },
+    {
+      "name": "monsters_cockatrice",
+      "id": 104
+    },
+    {
+      "name": "monsters_earth_elemental",
+      "id": 106
+    },
+    {
+      "name": "special_mardroeme",
+      "id": 108
+    },
+    {
+      "name": "special_scorch_1",
+      "id": 110
+    },
+    {
+      "name": "weather_fog",
+      "id": 112
+    },
+    {
+      "name": "weather_storm",
+      "id": 114
+    },
+    {
+      "name": "neutral_chort",
+      "id": 116
+    },
+    {
+      "name": "monsters_fiend",
+      "id": 118
+    },
+    {
+      "name": "monsters_fire_elemental",
+      "id": 119
+    },
+    {
+      "name": "monsters_vampire_fleder",
+      "id": 120
+    },
+    {
+      "name": "monsters_foglet",
+      "id": 121
+    },
+    {
+      "name": "monsters_forktail",
+      "id": 122
+    },
+    {
+      "name": "monsters_ice_giant",
+      "id": 123
+    }
+  ],
+  "player2": "opponent",
+  "player2Faction": "Monsters",
+  "player2Hand": [
+    {
+      "name": "special_horn_1",
+      "id": 201
+    },
+    {
+      "name": "neutral_ciri",
+      "id": 203
+    },
+    {
+      "name": "monsters_draug",
+      "id": 205
+    },
+    {
+      "name": "monsters_vampire_ekkimara",
+      "id": 207
+    },
+    {
+      "name": "special_scorch",
+      "id": 209
+    },
+    {
+      "name": "special_scorch_2",
+      "id": 211
+    },
+    {
+      "name": "weather_clear_1",
+      "id": 213
+    },
+    {
+      "name": "weather_storm_1",
+      "id": 215
+    },
+    {
+      "name": "monsters_endrega",
+      "id": 217
+    }
+  ],
+  "player2Deck": [
+    {
+      "name": "neutral_cow",
+      "id": 202
+    },
+    {
+      "name": "monsters_cockatrice",
+      "id": 204
+    },
+    {
+      "name": "monsters_earth_elemental",
+      "id": 206
+    },
+    {
+      "name": "special_mardroeme",
+      "id": 208
+    },
+    {
+      "name": "special_scorch_1",
+      "id": 210
+    },
+    {
+      "name": "weather_fog",
+      "id": 212
+    },
+    {
+      "name": "weather_storm",
+      "id": 214
+    },
+    {
+      "name": "neutral_chort",
+      "id": 216
+    },
+    {
+      "name": "monsters_fiend",
+      "id": 218
+    },
+    {
+      "name": "monsters_fire_elemental",
+      "id": 219
+    },
+    {
+      "name": "monsters_vampire_fleder",
+      "id": 220
+    },
+    {
+      "name": "monsters_foglet",
+      "id": 221
+    },
+    {
+      "name": "monsters_forktail",
+      "id": 222
+    },
+    {
+      "name": "monsters_ice_giant",
+      "id": 223
+    }
+  ]
+}

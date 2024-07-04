@@ -6,6 +6,7 @@ import com.example.model.card.LeaderCard;
 import com.example.model.card.LeaderFactory;
 import com.example.model.card.enums.CardData;
 import com.example.model.card.enums.FactionsType;
+import com.example.model.card.factions.Factions;
 import com.example.model.game.Deck;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -48,6 +49,7 @@ public class DeckManager {
             Deck deck = new Deck();
             deck.setLeader(LeaderFactory.getLeaderCardByName(leaderCardName));
             deck.setFaction(FactionsType.getFactionByName(faction));
+            deck.setFactionAbility(FactionsType.getAbilityByName(faction));
             for (String cardName : cardNames) {
                 deck.addCard(CardFactory.getCardByName(cardName));
             }
@@ -60,10 +62,11 @@ public class DeckManager {
         }
     }
 
-    public static Deck loadDeck(ArrayList<String> cardNames, int first) {
+    public static Deck loadDeck(LinkedList<String> cardNames, int first) {
         Deck deck = new Deck();
         deck.setLeader(LeaderFactory.getLeaderCardByName(cardNames.get(1)));
         deck.setFaction(FactionsType.getFactionByName(cardNames.get(0)));
+        deck.setFactionAbility(FactionsType.getAbilityByName(cardNames.get(0)));
         for (int i = 2; i < cardNames.size(); i++) {
             Card card = CardFactory.getCardByName(cardNames.get(i));
             card.setIdInGame(first * 100 + i - 1);

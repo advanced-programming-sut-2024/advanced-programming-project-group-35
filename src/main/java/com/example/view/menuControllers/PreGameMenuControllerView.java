@@ -3,9 +3,7 @@ package com.example.view.menuControllers;
 import com.example.Main;
 import com.example.controller.Controller;
 import com.example.controller.GameMenuController;
-import com.example.controller.MainMenuController;
 import com.example.controller.PreGameMenuController;
-import com.example.model.DeckManager;
 import com.example.model.IO.errors.Errors;
 import com.example.model.card.enums.CardData;
 import com.example.model.App;
@@ -15,7 +13,6 @@ import com.example.model.card.factions.Factions;
 import com.example.model.card.factions.Monsters;
 import com.example.model.card.factions.Skellige;
 import com.example.model.card.factions.*;
-import com.example.model.game.Deck;
 import com.example.view.Menu;
 import com.example.view.OutputView;
 import javafx.event.ActionEvent;
@@ -36,6 +33,7 @@ import javafx.collections.ObservableList;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Objects;
 
 import java.util.List;
@@ -387,7 +385,7 @@ public class PreGameMenuControllerView {
             );
             return;
         }
-        ArrayList<String> playerDeckNames = getPreGameCardNames(playerDeck);
+        LinkedList<String> playerDeckNames = getPreGameCardNames(playerDeck);
         String specialCardsCount = specialCardsCountLabel.getText().substring(specialCardsCountLabel.getText().lastIndexOf(" ") + 1);
         GameMenuController gameMenuController = (GameMenuController) Controller.GAME_MENU_CONTROLLER.getController();
         gameMenuController.startNewGame(App.getLoggedInUser().getUsername(), opponentName(), playerDeckNames, playerDeckNames, specialCardsCount, specialCardsCount);
@@ -408,8 +406,8 @@ public class PreGameMenuControllerView {
         return leaderCard.getName();
     }
 
-    private ArrayList<String> getPreGameCardNames(ObservableList<PreGameCard> playerDeck) {
-        ArrayList<String> playerDeckNames = new java.util.ArrayList<>();
+    private LinkedList<String> getPreGameCardNames(ObservableList<PreGameCard> playerDeck) {
+        LinkedList<String> playerDeckNames = new LinkedList<>();
         playerDeckNames.add(faction.getFaction().toString());
         playerDeckNames.add(getLeaderName(leaderCard));
         for (PreGameCard card : playerDeck) {

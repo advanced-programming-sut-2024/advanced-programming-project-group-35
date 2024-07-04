@@ -93,6 +93,11 @@ public class AppView extends Application {
         isNotification = false;
     }
 
+        Timeline timeline = new Timeline(keyFrame);
+        timeline.setCycleCount(1);
+        timeline.play();
+    }
+
     public GameMenuControllerView getGameMenuControllerView() {
         return gameMenuControllerView;
     }

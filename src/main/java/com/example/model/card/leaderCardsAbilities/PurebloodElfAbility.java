@@ -10,24 +10,24 @@ import com.example.model.game.place.SpellPlace;
 
 public class PurebloodElfAbility implements LeaderAbility {
     @Override
-    public void apply(Table table) {
-        Hand hand = table.getCurrentPlayer().getBoard().getHand();
-        SpellPlace spellPlace = table.getSpellPlace();
+    public void apply(AbilityContext abilityContext) {
+        Hand hand = abilityContext.getTable().getCurrentPlayer().getBoard().getHand();
+        SpellPlace spellPlace = abilityContext.getTable().getSpellPlace();
         Card weatherCard = hand.getCardByName(CardData.weather_frost);
         if (weatherCard != null) {
             if (!spellPlace.isSpellPlaceFull()) {
                 hand.removeCard(weatherCard);
                 spellPlace.addCard((WeatherCard) weatherCard);
                 //TODO گرافیک انتقال کارت
-                if (table.getCurrentPlayer().getBoard().getDeck().getLeader().getLeaderName() == CardData.leaders_realms_foltest_gold) {
+                if (abilityContext.getTable().getCurrentPlayer().getBoard().getDeck().getLeader().getLeaderName() == CardData.leaders_realms_foltest_gold) {
                     hand.addCard(weatherCard);
                     spellPlace.removeCard((WeatherCard) weatherCard);
                 } else {
-                    weatherCard.getAbility().apply(new AbilityContext(table, null, null));
+                    weatherCard.getAbility().apply(new AbilityContext(abilityContext.getTable(), null, null));
                     // TODO تو ابیلیتی ودر کارت ها باید چک شه که لیدر کینگ برن نباشه
                 }
             }
         }
-        table.getCurrentPlayer().getBoard().getDeck().getLeader().setCanDoAction(false);
+        abilityContext.getTable().getCurrentPlayer().getBoard().getDeck().getLeader().setCanDoAction(false);
     }
 }

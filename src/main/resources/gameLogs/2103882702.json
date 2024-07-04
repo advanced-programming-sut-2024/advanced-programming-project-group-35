@@ -1,0 +1,206 @@
+{
+  "player1": "opponent",
+  "player1Faction": "ScoiaTael",
+  "player1Hand": [
+    {
+      "name": "scoiatael_toruviel",
+      "id": 201
+    },
+    {
+      "name": "scoiatael_vrihedd_brigade_1",
+      "id": 203
+    },
+    {
+      "name": "scoiatael_saskia",
+      "id": 205
+    },
+    {
+      "name": "scoiatael_mahakam_3",
+      "id": 207
+    },
+    {
+      "name": "scoiatael_milva",
+      "id": 209
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 211
+    },
+    {
+      "name": "neutral_triss",
+      "id": 213
+    },
+    {
+      "name": "neutral_villen",
+      "id": 215
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 217
+    }
+  ],
+  "player1Deck": [
+    {
+      "name": "scoiatael_vrihedd_brigade",
+      "id": 202
+    },
+    {
+      "name": "scoiatael_riordain",
+      "id": 204
+    },
+    {
+      "name": "scoiatael_schirru",
+      "id": 206
+    },
+    {
+      "name": "scoiatael_mahakam_4",
+      "id": 208
+    },
+    {
+      "name": "scoiatael_mahakam",
+      "id": 210
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 212
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 214
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 216
+    },
+    {
+      "name": "scoiatael_barclay",
+      "id": 218
+    },
+    {
+      "name": "scoiatael_ciaran",
+      "id": 219
+    },
+    {
+      "name": "scoiatael_dennis",
+      "id": 220
+    },
+    {
+      "name": "scoiatael_dol_archer",
+      "id": 221
+    },
+    {
+      "name": "scoiatael_dol_infantry",
+      "id": 222
+    },
+    {
+      "name": "scoiatael_dol_infantry_1",
+      "id": 223
+    },
+    {
+      "name": "scoiatael_dol_infantry_2",
+      "id": 224
+    }
+  ],
+  "player2": "ali",
+  "player2Faction": "ScoiaTael",
+  "player2Hand": [
+    {
+      "name": "scoiatael_toruviel",
+      "id": 101
+    },
+    {
+      "name": "scoiatael_vrihedd_brigade_1",
+      "id": 103
+    },
+    {
+      "name": "scoiatael_saskia",
+      "id": 105
+    },
+    {
+      "name": "scoiatael_mahakam_3",
+      "id": 107
+    },
+    {
+      "name": "scoiatael_milva",
+      "id": 109
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 111
+    },
+    {
+      "name": "neutral_triss",
+      "id": 113
+    },
+    {
+      "name": "neutral_villen",
+      "id": 115
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 117
+    }
+  ],
+  "player2Deck": [
+    {
+      "name": "scoiatael_vrihedd_brigade",
+      "id": 102
+    },
+    {
+      "name": "scoiatael_riordain",
+      "id": 104
+    },
+    {
+      "name": "scoiatael_schirru",
+      "id": 106
+    },
+    {
+      "name": "scoiatael_mahakam_4",
+      "id": 108
+    },
+    {
+      "name": "scoiatael_mahakam",
+      "id": 110
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 112
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 114
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 116
+    },
+    {
+      "name": "scoiatael_barclay",
+      "id": 118
+    },
+    {
+      "name": "scoiatael_ciaran",
+      "id": 119
+    },
+    {
+      "name": "scoiatael_dennis",
+      "id": 120
+    },
+    {
+      "name": "scoiatael_dol_archer",
+      "id": 121
+    },
+    {
+      "name": "scoiatael_dol_infantry",
+      "id": 122
+    },
+    {
+      "name": "scoiatael_dol_infantry_1",
+      "id": 123
+    },
+    {
+      "name": "scoiatael_dol_infantry_2",
+      "id": 124
+    }
+  ]
+}

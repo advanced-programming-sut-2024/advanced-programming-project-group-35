@@ -1,0 +1,250 @@
+{
+  "player1": "ali",
+  "player1Faction": "Monsters",
+  "player1Hand": [
+    {
+      "name": "special_scorch",
+      "id": 103
+    },
+    {
+      "name": "special_scorch_1",
+      "id": 104
+    },
+    {
+      "name": "special_scorch_2",
+      "id": 105
+    },
+    {
+      "name": "neutral_villen",
+      "id": 116
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 117
+    },
+    {
+      "name": "special_mardroeme_1",
+      "id": 101
+    },
+    {
+      "name": "weather_fog",
+      "id": 106
+    },
+    {
+      "name": "weather_frost",
+      "id": 108
+    },
+    {
+      "name": "weather_rain",
+      "id": 110
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 112
+    },
+    {
+      "name": "neutral_triss",
+      "id": 114
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 118
+    },
+    {
+      "name": "monsters_vampire_bruxa",
+      "id": 120
+    },
+    {
+      "name": "monsters_cockatrice",
+      "id": 122
+    }
+  ],
+  "player1Deck": [
+    {
+      "name": "special_mardroeme_2",
+      "id": 102
+    },
+    {
+      "name": "weather_fog_1",
+      "id": 107
+    },
+    {
+      "name": "weather_frost_1",
+      "id": 109
+    },
+    {
+      "name": "neutral_geralt",
+      "id": 111
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 113
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 115
+    },
+    {
+      "name": "monsters_arachas",
+      "id": 119
+    },
+    {
+      "name": "monsters_celaeno_harpy",
+      "id": 121
+    },
+    {
+      "name": "monsters_draug",
+      "id": 123
+    },
+    {
+      "name": "monsters_earth_elemental",
+      "id": 124
+    },
+    {
+      "name": "monsters_vampire_ekkimara",
+      "id": 125
+    },
+    {
+      "name": "monsters_endrega",
+      "id": 126
+    },
+    {
+      "name": "monsters_fiend",
+      "id": 127
+    },
+    {
+      "name": "monsters_fire_elemental",
+      "id": 128
+    },
+    {
+      "name": "monsters_vampire_fleder",
+      "id": 129
+    }
+  ],
+  "player2": "opponent",
+  "player2Faction": "Monsters",
+  "player2Hand": [
+    {
+      "name": "special_scorch",
+      "id": 203
+    },
+    {
+      "name": "special_scorch_1",
+      "id": 204
+    },
+    {
+      "name": "special_scorch_2",
+      "id": 205
+    },
+    {
+      "name": "neutral_villen",
+      "id": 216
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 217
+    },
+    {
+      "name": "special_mardroeme_1",
+      "id": 201
+    },
+    {
+      "name": "weather_fog",
+      "id": 206
+    },
+    {
+      "name": "weather_frost",
+      "id": 208
+    },
+    {
+      "name": "weather_rain",
+      "id": 210
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 212
+    },
+    {
+      "name": "neutral_triss",
+      "id": 214
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 218
+    },
+    {
+      "name": "monsters_vampire_bruxa",
+      "id": 220
+    },
+    {
+      "name": "monsters_cockatrice",
+      "id": 222
+    }
+  ],
+  "player2Deck": [
+    {
+      "name": "special_mardroeme_2",
+      "id": 202
+    },
+    {
+      "name": "weather_fog_1",
+      "id": 207
+    },
+    {
+      "name": "weather_frost_1",
+      "id": 209
+    },
+    {
+      "name": "neutral_geralt",
+      "id": 211
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 213
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 215
+    },
+    {
+      "name": "monsters_arachas",
+      "id": 219
+    },
+    {
+      "name": "monsters_celaeno_harpy",
+      "id": 221
+    },
+    {
+      "name": "monsters_draug",
+      "id": 223
+    },
+    {
+      "name": "monsters_earth_elemental",
+      "id": 224
+    },
+    {
+      "name": "monsters_vampire_ekkimara",
+      "id": 225
+    },
+    {
+      "name": "monsters_endrega",
+      "id": 226
+    },
+    {
+      "name": "monsters_fiend",
+      "id": 227
+    },
+    {
+      "name": "monsters_fire_elemental",
+      "id": 228
+    },
+    {
+      "name": "monsters_vampire_fleder",
+      "id": 229
+    }
+  ],
+  "commands": [
+    "card with id: 105 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableListand ability applied",
+    "card with id: 101 moved from currentPlayerHandObservableList to currentPlayerRangedSpecialPlaceObservableListand ability applied"
+  ]
+}
