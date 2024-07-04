@@ -2,6 +2,8 @@ package com.example.controller;
 
 import com.example.model.App;
 import com.example.model.DeckManager;
+import com.example.model.GameData;
+import com.example.model.alerts.NotificationsData;
 import com.example.model.card.*;
 import com.example.model.card.enums.AbilityName;
 import com.example.model.card.enums.CardData;
@@ -36,6 +38,7 @@ public class GameMenuController extends AppController {
             App.setCurrentController(Controller.GAME_MENU_CONTROLLER);
             gameMenuControllerView = App.getAppView().getGameMenuControllerView();
             startRound(table);
+            App.getAppView().showNotification(NotificationsData.ROUND_START.getMessage(), NotificationsData.ROUND_START.getImageAddress(), null);
         } catch (Exception e) {
             throw new RuntimeException();
         }
@@ -283,7 +286,7 @@ public class GameMenuController extends AppController {
         }
     }
 
-    public void startNewGame(String player1Name, String player2Name, LinkedList<String> player1DeckNames, LinkedList<String> player2DeckNames) {
+    public void startNewGame(String player1Name, String player2Name, LinkedList<String> player1DeckNames, LinkedList<String> player2DeckNames, String player1SpecialCard, String player2SpecialCard) {
         Deck player1Deck = DeckManager.loadDeck(player1DeckNames, 1);
         Deck player2Deck = DeckManager.loadDeck(player2DeckNames, 2);
         Player player1 = new Player(player1Name);
@@ -292,6 +295,8 @@ public class GameMenuController extends AppController {
         player2.getBoard().setDeck(player2Deck);
         player1.getBoard().setHandForStartGame(player1Deck);
         player2.getBoard().setHandForStartGame(player2Deck);
+        player1.setSpecialCardCounter(Integer.parseInt(player1SpecialCard));
+        player2.setSpecialCardCounter(Integer.parseInt(player2SpecialCard));
         table = new Table(player1, player2);
         saveLog(generateInitialDeckData());
         Round round1 = new Round(1);

@@ -27,6 +27,5 @@ public class TightBondAbility implements Ability {
                 ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).getGameMenuControllerView().getGameCardViewWithCardId(card.getIdInGame()).updatePowerLabel();
             }
         }
-        abilityContext.getRow().updateStrength();
     }
 }

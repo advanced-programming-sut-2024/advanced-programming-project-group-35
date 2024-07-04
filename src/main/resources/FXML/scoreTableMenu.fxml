@@ -30,4 +30,6 @@
     </VBox>
     <Button translateX="20" translateY="30" minWidth="50" onMouseClicked="#backToMainMenu" styleClass="brown-button"
             text="Back"/>
+    <Button layoutX="50" layoutY="740" minWidth="50" onMouseClicked="#openTerminal" styleClass="brown-button"
+            text="Terminal"/>
 </AnchorPane>

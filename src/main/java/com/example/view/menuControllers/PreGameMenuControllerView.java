@@ -386,8 +386,9 @@ public class PreGameMenuControllerView {
             return;
         }
         LinkedList<String> playerDeckNames = getPreGameCardNames(playerDeck);
+        String specialCardsCount = specialCardsCountLabel.getText().substring(specialCardsCountLabel.getText().lastIndexOf(" ") + 1);
         GameMenuController gameMenuController = (GameMenuController) Controller.GAME_MENU_CONTROLLER.getController();
-        gameMenuController.startNewGame(App.getLoggedInUser().getUsername(), opponentName(), playerDeckNames, playerDeckNames);
+        gameMenuController.startNewGame(App.getLoggedInUser().getUsername(), opponentName(), playerDeckNames, playerDeckNames, specialCardsCount, specialCardsCount);
         App.setCurrentMenu(Menu.GAME_MENU);
         gameMenuController.run();
     }
@@ -475,5 +476,9 @@ public class PreGameMenuControllerView {
     public void openChooseLeader(ActionEvent actionEvent) {
         mainPane.setVisible(true);
         chooseLeaderAnchorPane.setVisible(true);
+    }
+
+    public void openTerminal(MouseEvent mouseEvent) {
+        App.getAppView().showTerminal();
     }
 }

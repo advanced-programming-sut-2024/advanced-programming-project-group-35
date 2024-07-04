@@ -3,6 +3,7 @@ module gwent {
     requires javafx.fxml;
     requires javafx.media;
     requires com.google.gson;
+    requires java.sql;
 
     opens com.example.view.menuControllers to javafx.fxml;
     opens com.example.model to com.google.gson, javafx.base;

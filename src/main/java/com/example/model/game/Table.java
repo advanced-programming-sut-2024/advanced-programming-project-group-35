@@ -13,7 +13,6 @@ public class Table {
     private int roundNumber;
     private ArrayList<Round> rounds;
     private Round currentRound;
-
     public Table(Player player1, Player player2) {
         if (player2.getBoard().getDeck().getFaction().equals(FactionsType.ScoiaTael)) {
             this.currentPlayer = player2;
@@ -77,4 +76,5 @@ public class Table {
         currentPlayer = opponent;
         opponent = tmp;
     }
+
 }

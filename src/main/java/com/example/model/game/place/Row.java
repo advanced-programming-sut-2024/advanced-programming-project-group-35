@@ -49,12 +49,10 @@ public class Row {
 
     public void addCard(Card card) {
         cards.add(card);
-        updateStrength();
     }
 
     public void removeCard(Card card) {
         cards.remove(card);
-        updateStrength();
     }
 
     public void clear() {
@@ -62,6 +60,7 @@ public class Row {
     }
 
     public int getStrength() {
+        updateStrength();
         return strength;
     }
 
@@ -79,7 +78,7 @@ public class Row {
         return cards.isEmpty();
     }
 
-    public void updateStrength() {
+    private void updateStrength() {
         int result = 0;
         for (Card card : cards) {
             if (card != null && (card instanceof UnitCard)) {

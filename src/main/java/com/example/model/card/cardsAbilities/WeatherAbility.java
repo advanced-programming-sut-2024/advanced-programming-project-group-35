@@ -17,8 +17,6 @@ public class WeatherAbility implements Ability {
             case CardData.weather_frost -> {
                 setPowerOne(abilityContext.getTable().getCurrentPlayer().getBoard().getCloseCombatCardPlace());
                 setPowerOne(abilityContext.getTable().getOpponent().getBoard().getCloseCombatCardPlace());
-                abilityContext.getTable().getCurrentPlayer().getBoard().getCloseCombatCardPlace().updateStrength();
-                abilityContext.getTable().getOpponent().getBoard().getCloseCombatCardPlace().updateStrength();
             }
             case CardData.weather_fog -> {
                 setPowerOne(abilityContext.getTable().getCurrentPlayer().getBoard().getRangedCardPlace());

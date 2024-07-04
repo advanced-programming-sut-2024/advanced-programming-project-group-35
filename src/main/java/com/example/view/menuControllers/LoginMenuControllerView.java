@@ -22,6 +22,7 @@ import java.util.Objects;
 
 public class LoginMenuControllerView {
     private final Stage stage = App.getAppView().getPrimaryStage();
+    public TextField emailVerificationCode;
     private Pane pane = App.getAppView().getPane();
     public TextField usernameFieldLogin;
     public PasswordField passwordFieldLogin;
@@ -111,6 +112,7 @@ public class LoginMenuControllerView {
         int securityQuestionIndex = securityQuestionRegister.getSelectionModel().getSelectedIndex();
         String securityAnswer = securityAnswerRegister.getText();
         String securityAnswerConfirmation = securityAnswerConfirmationRegister.getText();
+        String verificationCode = emailVerificationCode.getText();
         controller.finalizeRegisterUser(securityAnswer, securityAnswerConfirmation, securityQuestionIndex);
         if (OutputView.getLastError() == Errors.REGISTER_SUCCESSFUL) {
             App.setCurrentMenu(Menu.MAIN_MENU);

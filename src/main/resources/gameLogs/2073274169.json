@@ -1,0 +1,214 @@
+{
+  "player1": "ali",
+  "player1Faction": "Monsters",
+  "player1Hand": [
+    {
+      "name": "neutral_triss",
+      "id": 101
+    },
+    {
+      "name": "neutral_villen",
+      "id": 103
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 105
+    },
+    {
+      "name": "monsters_arachas_1",
+      "id": 107
+    },
+    {
+      "name": "monsters_arachas_behemoth",
+      "id": 109
+    },
+    {
+      "name": "monsters_celaeno_harpy",
+      "id": 111
+    },
+    {
+      "name": "monsters_draug",
+      "id": 113
+    },
+    {
+      "name": "monsters_vampire_ekkimara",
+      "id": 115
+    },
+    {
+      "name": "weather_clear_1",
+      "id": 117
+    },
+    {
+      "name": "neutral_dandelion",
+      "id": 119
+    },
+    {
+      "name": "neutral_gaunter_odimm",
+      "id": 121
+    }
+  ],
+  "player1Deck": [
+    {
+      "name": "neutral_vesemir",
+      "id": 102
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 104
+    },
+    {
+      "name": "monsters_arachas",
+      "id": 106
+    },
+    {
+      "name": "monsters_arachas_2",
+      "id": 108
+    },
+    {
+      "name": "monsters_vampire_bruxa",
+      "id": 110
+    },
+    {
+      "name": "monsters_cockatrice",
+      "id": 112
+    },
+    {
+      "name": "monsters_earth_elemental",
+      "id": 114
+    },
+    {
+      "name": "weather_storm_1",
+      "id": 116
+    },
+    {
+      "name": "neutral_cow",
+      "id": 118
+    },
+    {
+      "name": "neutral_emiel",
+      "id": 120
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 122
+    },
+    {
+      "name": "neutral_geralt",
+      "id": 123
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 124
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 125
+    }
+  ],
+  "player2": "opponent",
+  "player2Faction": "Monsters",
+  "player2Hand": [
+    {
+      "name": "neutral_triss",
+      "id": 201
+    },
+    {
+      "name": "neutral_villen",
+      "id": 203
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 205
+    },
+    {
+      "name": "monsters_arachas_1",
+      "id": 207
+    },
+    {
+      "name": "monsters_arachas_behemoth",
+      "id": 209
+    },
+    {
+      "name": "monsters_celaeno_harpy",
+      "id": 211
+    },
+    {
+      "name": "monsters_draug",
+      "id": 213
+    },
+    {
+      "name": "monsters_vampire_ekkimara",
+      "id": 215
+    },
+    {
+      "name": "weather_clear_1",
+      "id": 217
+    },
+    {
+      "name": "neutral_dandelion",
+      "id": 219
+    },
+    {
+      "name": "neutral_gaunter_odimm",
+      "id": 221
+    }
+  ],
+  "player2Deck": [
+    {
+      "name": "neutral_vesemir",
+      "id": 202
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 204
+    },
+    {
+      "name": "monsters_arachas",
+      "id": 206
+    },
+    {
+      "name": "monsters_arachas_2",
+      "id": 208
+    },
+    {
+      "name": "monsters_vampire_bruxa",
+      "id": 210
+    },
+    {
+      "name": "monsters_cockatrice",
+      "id": 212
+    },
+    {
+      "name": "monsters_earth_elemental",
+      "id": 214
+    },
+    {
+      "name": "weather_storm_1",
+      "id": 216
+    },
+    {
+      "name": "neutral_cow",
+      "id": 218
+    },
+    {
+      "name": "neutral_emiel",
+      "id": 220
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 222
+    },
+    {
+      "name": "neutral_geralt",
+      "id": 223
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 224
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 225
+    }
+  ]
+}

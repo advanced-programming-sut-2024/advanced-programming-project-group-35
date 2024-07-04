@@ -65,6 +65,7 @@ public class App {
     }
 
     public static User getUserByUsername(String username) {
+        if (allUsers == null) return null;
         for (User user : App.allUsers) {
             if (user.getUsername().equals(username)) return user;
         }
@@ -118,5 +119,9 @@ public class App {
 
     public static ArrayList<User> getAllUsers() {
         return allUsers;
+    }
+
+    public static void setAllUsers(ArrayList<User> allUsers) {
+        App.allUsers = allUsers;
     }
 }

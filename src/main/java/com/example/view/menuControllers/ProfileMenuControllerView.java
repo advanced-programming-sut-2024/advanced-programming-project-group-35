@@ -115,4 +115,11 @@ public class ProfileMenuControllerView {
     public void backToProfileMenu(MouseEvent mouseEvent) throws IOException {
         paneChanger("Profile Menu", "ProfileMenu.fxml");
     }
+
+    public void openFriendsListMenu(MouseEvent mouseEvent) {
+    }
+
+    public void openTerminal(MouseEvent mouseEvent) {
+        App.getAppView().showTerminal();
+    }
 }

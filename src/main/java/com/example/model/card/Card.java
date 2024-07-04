@@ -17,6 +17,8 @@ public class Card extends Rectangle {
         this.cardData = cardData;
         this.place = place;
         this.ability = ability;
+        this.setArcHeight(20);
+        this.setArcWidth(20);
     }
 
     public int getIdInGame() {
