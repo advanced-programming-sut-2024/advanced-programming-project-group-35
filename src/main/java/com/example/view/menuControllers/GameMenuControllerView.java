@@ -150,7 +150,7 @@ public class GameMenuControllerView {
         currentPlayerRangedPower.setText("0");
         currentPlayerSiegePower.setText("0");
         currentPlayerAllScoreCounter.setText(String.valueOf(table.getCurrentPlayer().getScore()));
-        //currentPlayerSpecialCardCounter.setText(String.valueOf(table.getCurrentPlayer().getBoard().getSpecialCardCounter()));
+        currentPlayerSpecialCardCounter.setText(String.valueOf(table.getCurrentPlayer().getSpecialCardCounter()));
         currentPlayerDeckCardCounter.setText(String.valueOf(table.getCurrentPlayer().getBoard().getDeck().getSize()));
         //currentPlayerLeaderAbilityEnable.setVisible(table.getCurrentPlayer().getBoard().getLeader().isAbilityEnable());
         //currentPlayerLeaderCard.getChildren().add(new PreGameCard(table.getCurrentPlayer().getBoard().getLeader().getName(), table.getCurrentPlayer().getBoard().getLeader().getPower(), table.getCurrentPlayer().getBoard().getLeader().getAbility(), table.getCurrentPlayer().getBoard().getLeader().getImageAddress()));
@@ -168,7 +168,7 @@ public class GameMenuControllerView {
         opponentPlayerRangedPower.setText("0");
         opponentPlayerSiegePower.setText("0");
         opponentPlayerAllScoreCounter.setText(String.valueOf(table.getOpponent().getScore()));
-        //opponentPlayerSpecialCardCounter.setText(String.valueOf(table.getOpponent().getBoard().getSpecialCardCounter()));
+        opponentPlayerSpecialCardCounter.setText(String.valueOf(table.getOpponent().getSpecialCardCounter()));
         opponentPlayerDeckCardCounter.setText(String.valueOf(table.getOpponent().getBoard().getDeck().getSize()));
         //opponentPlayerLeaderAbilityEnable.setVisible(table.getOpponent().getBoard().getLeader().isAbilityEnable());
         //opponentPlayerLeaderCard.getChildren().add(new PreGameCard(table.getOpponent().getBoard().getLeader().getName(), table.getOpponent().getBoard().getLeader().getPower(), table.getOpponent().getBoard().getLeader().getAbility(), table.getOpponent().getBoard().getLeader().getImageAddress()));
@@ -188,15 +188,15 @@ public class GameMenuControllerView {
 
     }
 
-    private void handleChanges(ListChangeListener.Change<? extends Card> change, FlowPane fromPane, FlowPane toPane) {
-        while (change.next()) {
-            if (change.wasAdded()) {
-                for (Card card : change.getAddedSubList()) {
-//                    cardMoveAnimation(card, fromPane, toPane);
-                }
-            }
-        }
-    }
+//    private void handleChanges(ListChangeListener.Change<? extends Card> change, FlowPane fromPane, FlowPane toPane) {
+//        while (change.next()) {
+//            if (change.wasAdded()) {
+//                for (Card card : change.getAddedSubList()) {
+////                    cardMoveAnimation(card, fromPane, toPane);
+//                }
+//            }
+//        }
+//    }
 
     private void addGameCardViewsToAllCards() {
         for (Card card : table.getCurrentPlayer().getBoard().getHand().getCards()) {
