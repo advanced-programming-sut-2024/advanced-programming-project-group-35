@@ -7,6 +7,7 @@ import com.example.model.App;
 import com.example.model.alerts.NotificationsData;
 import com.example.model.card.*;
 import com.example.model.card.Card;
+import com.example.model.card.enums.CardData;
 import com.example.model.card.enums.FactionsType;
 import com.example.model.card.enums.AbilityName;
 import com.example.model.game.Table;
@@ -53,8 +54,8 @@ public class GameMenuControllerView {
     public Label currentPlayerDeckCardCounter;
     public ImageView opponentPlayerDeckPlace;
     public ImageView currentPlayerDeckPlace;
-    public VBox opponentPlayerLeaderCard;
-    public VBox currentPlayerLeaderCard;
+    public ImageView opponentPlayerLeaderCard;
+    public ImageView currentPlayerLeaderCard;
     public ImageView currentPlayerFirstJem;
     public ImageView currentPlayerSecondJem;
     public ImageView opponentPlayerFirstJem;
@@ -190,6 +191,9 @@ public class GameMenuControllerView {
         if (!currentPlayerHand.getChildren().isEmpty()) {
             currentPlayerHand.getChildren().clear();
         }
+
+        opponentPlayerLeaderCard.setImage(new Image(Main.class.getResource("/images/inGameCards/" + table.getOpponent().getBoard().getDeck().getLeader().getLeaderName().getImageAddress()).toExternalForm()));
+        currentPlayerLeaderCard.setImage(new Image(Main.class.getResource("/images/inGameCards/" + table.getCurrentPlayer().getBoard().getDeck().getLeader().getLeaderName().getImageAddress()).toExternalForm()));
 
         addCurrentPlayerHandCards(table);
 
@@ -921,6 +925,68 @@ public class GameMenuControllerView {
         currentPlayerFactionName.setText(table.getCurrentPlayer().getBoard().getDeck().getFaction().toString());
         opponentPlayerUsername.setText(table.getOpponent().getUsername());
         opponentPlayerFactionName.setText(table.getOpponent().getBoard().getDeck().getFaction().toString());
+        if (table.getCurrentPlayer().getNumberOfCrystals() == 0) {
+            currentPlayerSecondJem.setImage(new Image(Main.class.getResource("/images/icons/icon_gem_off.png").toExternalForm()));
+            currentPlayerFirstJem.setImage(new Image(Main.class.getResource("/images/icons/icon_gem_off.png").toExternalForm()));
+        } else if (table.getCurrentPlayer().getNumberOfCrystals() == 1) {
+            currentPlayerSecondJem.setImage(new Image(Main.class.getResource("/images/icons/icon_gem_off.png").toExternalForm()));
+            currentPlayerFirstJem.setImage(new Image(Main.class.getResource("/images/icons/icon_gem_on.png").toExternalForm()));
+        } else {
+            currentPlayerSecondJem.setImage(new Image(Main.class.getResource("/images/icons/icon_gem_on.png").toExternalForm()));
+            currentPlayerFirstJem.setImage(new Image(Main.class.getResource("/images/icons/icon_gem_on.png").toExternalForm()));
+        }
+        if (table.getCurrentPlayer().getScore() > table.getOpponent().getScore()) {
+            currentPlayerExcellenceShower.setVisible(true);
+            opponentPlayerExcellenceShower.setVisible(false);
+        } else if (table.getCurrentPlayer().getScore() < table.getOpponent().getScore()) {
+            currentPlayerExcellenceShower.setVisible(false);
+            opponentPlayerExcellenceShower.setVisible(true);
+        } else {
+            currentPlayerExcellenceShower.setVisible(false);
+            opponentPlayerExcellenceShower.setVisible(false);
+        }
+        if (table.getCurrentPlayer().getBoard().getDeck().getLeader().canDoAction()) {
+            currentPlayerLeaderAbilityEnable.setVisible(true);
+        } else {
+            currentPlayerLeaderAbilityEnable.setVisible(false);
+        }
+        if (table.getOpponent().getBoard().getDeck().getLeader().canDoAction()) {
+            opponentPlayerLeaderAbilityEnable.setVisible(true);
+        } else {
+            opponentPlayerLeaderAbilityEnable.setVisible(false);
+        }
+        opponentPlayerLeaderCard.setImage(new Image(Main.class.getResource("/images/inGameCards/" + table.getOpponent().getBoard().getDeck().getLeader().getLeaderName().getImageAddress()).toExternalForm()));
+        currentPlayerLeaderCard.setImage(new Image(Main.class.getResource("/images/inGameCards/" + table.getCurrentPlayer().getBoard().getDeck().getLeader().getLeaderName().getImageAddress()).toExternalForm()));
+        if (currentPlayerSiegeObservableList.size() > 9) {
+            currentPlayerSiege.setHgap(-8);
+        } else {
+            currentPlayerSiege.setHgap(5);
+        }
+        if (currentPlayerRangedObservableList.size() > 9) {
+            currentPlayerRanged.setHgap(-8);
+        } else {
+            currentPlayerRanged.setHgap(5);
+        }
+        if (currentPlayerCloseCombatObservableList.size() > 9) {
+            currentPlayerCloseCombat.setHgap(-8);
+        } else {
+            currentPlayerCloseCombat.setHgap(5);
+        }
+        if (opponentSiegeObservableList.size() > 9) {
+            opponentSiege.setHgap(-8);
+        } else {
+            opponentSiege.setHgap(5);
+        }
+        if (opponentRangedObservableList.size() > 9) {
+            opponentRanged.setHgap(-8);
+        } else {
+            opponentRanged.setHgap(5);
+        }
+        if (opponentCloseCombatObservableList.size() > 9) {
+            opponentCloseCombat.setHgap(-8);
+        } else {
+            opponentCloseCombat.setHgap(5);
+        }
     }
 
     public void openTerminal(MouseEvent mouseEvent) {
