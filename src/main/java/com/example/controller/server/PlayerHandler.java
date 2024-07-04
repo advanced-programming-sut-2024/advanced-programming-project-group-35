@@ -40,7 +40,6 @@ public class PlayerHandler implements Runnable {
             while ((inputLine = in.readLine()) != null) {
                 System.out.println("Received: " + inputLine);
                 String[] parts = inputLine.split("\\|");
-                System.out.println(parts[0] + " " + parts[1]);
                 if ("SYSTEM".equals(parts[0])) {
                     if ("LOAD_USERS".equals(parts[1])) {
                         handleLoadUsers(out);
@@ -69,9 +68,11 @@ public class PlayerHandler implements Runnable {
                     ID = Integer.parseInt(parts[1]);
                     server.addClientConnector(ID, this);
                 } else if ("Message".equals(parts[0])) {
-                    int receiverID = Integer.parseInt(parts[1]);
-                    String message = parts[2];
-                    ServerApp.sendMessage(receiverID, message);
+                    System.out.println("Received message: " + parts[3]);
+                    int receiverID = Integer.parseInt(parts[2]);
+                    int senderID = Integer.parseInt(parts[1]);
+                    String message = parts[3];
+                    ServerApp.sendMessage(senderID, receiverID, message);
                 } else {
                     handleCommand(inputLine);
                 }
@@ -93,7 +94,7 @@ public class PlayerHandler implements Runnable {
         try (FileWriter writer = new FileWriter(USERS_FILE)) {
             writer.write(jsonBuilder.toString());
         }
-
+        ServerApp.loadUsers(USERS_FILE);
         out.println("Users data saved successfully on server.");
     }
 

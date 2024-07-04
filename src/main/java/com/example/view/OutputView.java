@@ -60,6 +60,8 @@ public class OutputView {
                 App.getAppView().showAlert("You didn't played any game to show game data.", AlertType.ERROR.getType());
             case YOU_CANT_PLAY_WITH_YOURSELF:
                 App.getAppView().showAlert("You can't play with yourself", AlertType.ERROR.getType());
+            case SENT_CODE:
+                App.getAppView().showAlert("Code sent to your email", AlertType.SUCCESS.getType());
             default:
                 return null;
         }

@@ -7,6 +7,7 @@ import com.example.model.User;
 import com.example.view.OutputView;
 import com.example.view.Menu;
 
+import java.io.IOException;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -147,5 +148,13 @@ public class LoginMenuController extends AppController {
         forgotenPasswordUser.setPassword(password);
         currentStep = LoginMenuStep.NOTHING;
         return OutputView.showOutputAlert(Errors.PASSWORD_CHANGED);
+    }
+
+    public int getEmailVerificationCode() throws IOException {
+        int code = new SecureRandom().nextInt(9000) + 1000;
+        System.out.println(code);
+        EmailSender.sendEmail(registeringUser.getEmail(), String.valueOf(code));
+        System.out.println("Email sent");
+        return code;
     }
 }

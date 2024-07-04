@@ -49,6 +49,8 @@ public class LoginMenuControllerView {
     private ComboBox securityQuestionRegister;
     @FXML
     private TextField securityAnswerRegister;
+    private TextField emailVerificationCodeField;
+    private int emailVerificationCode;
 
     LoginMenuController controller = (LoginMenuController) Controller.LOGIN_MENU_CONTROLLER.getController();
 
@@ -101,19 +103,32 @@ public class LoginMenuControllerView {
         String nickname = nicknameFieldRegister.getText();
         boolean stayLoggedIn = stayLoggedInCheckBoxRegister.isSelected();
         controller.registerUser(username, password, confirmPassword, nickname, email, stayLoggedIn);
+        setEmailVerificationCode();
         if (OutputView.getLastError() == Errors.REGISTER_FIRST_STEP_SUCCESSFUL) {
             paneChanger("Security Question", "securityQuestion.fxml");
+            OutputView.showOutputAlert(Errors.SENT_CODE);
         }
+    }
+
+    private void setEmailVerificationCode() throws IOException {
+        emailVerificationCode = controller.getEmailVerificationCode();
     }
 
     public void finalizeRegisterUser(MouseEvent mouseEvent) {
         int securityQuestionIndex = securityQuestionRegister.getSelectionModel().getSelectedIndex();
         String securityAnswer = securityAnswerRegister.getText();
         String securityAnswerConfirmation = securityAnswerConfirmationRegister.getText();
+        int emailVerificationCode = Integer.parseInt(emailVerificationCodeField.getText());
+        if (emailVerificationCode != this.emailVerificationCode) {
+            App.getAppView().showAlert("Wrong email verification code", AlertType.ERROR.getType());
+            return;
+        }
         controller.finalizeRegisterUser(securityAnswer, securityAnswerConfirmation, securityQuestionIndex);
         if (OutputView.getLastError() == Errors.REGISTER_SUCCESSFUL) {
             App.setCurrentMenu(Menu.MAIN_MENU);
             Controller.MAIN_MENU_CONTROLLER.run();
+        } else {
+            App.getAppView().showAlert("Error", AlertType.ERROR.getType());
         }
     }
 

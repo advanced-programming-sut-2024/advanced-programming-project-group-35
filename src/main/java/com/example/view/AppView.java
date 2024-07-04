@@ -9,6 +9,7 @@ import com.example.model.Terminal;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
@@ -103,6 +104,8 @@ public class AppView extends Application {
     }
 
     public void showMessage(String part) {
-        showAlert(part, "info");
+        Platform.runLater(() -> {
+            showAlert(part, "info");
+        });
     }
 }

@@ -14,6 +14,10 @@ public class Server {
     private ConcurrentHashMap<Integer, PlayerHandler> clientConnectors = new ConcurrentHashMap<>();
 
     public void start() {
+        System.setProperty("https.protocols", "TLSv1.2,TLSv1.3");
+        System.setProperty("jdk.tls.client.protocols", "TLSv1.2,TLSv1.3");
+
+        ServerApp.setServer(this);
         ServerApp.loadUsers("users.json");
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             ServerApp.saveUsers("users.json");
@@ -61,6 +65,7 @@ public class Server {
     }
 
     public PlayerHandler getClientConnector(int receiverID) {
+        System.out.println("all client connectors: " + clientConnectors);
         return clientConnectors.get(receiverID);
     }
 }

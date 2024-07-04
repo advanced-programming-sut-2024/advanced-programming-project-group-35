@@ -114,7 +114,7 @@ public class ServerConnector {
                 Socket socket = new Socket(SERVER_IP, SERVER_PORT);
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true)
         ) {
-            out.println("SYSTEM|SET_USER_ONLINE");
+            out.print("SYSTEM|SET_USER_ONLINE|");
             out.println(loggedInUser.getID());
         } catch (IOException e) {
             e.printStackTrace();
@@ -126,20 +126,25 @@ public class ServerConnector {
                 Socket socket = new Socket(SERVER_IP, SERVER_PORT);
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true)
         ) {
-            out.println("SYSTEM|SET_USER_OFFLINE");
+            out.print("SYSTEM|SET_USER_OFFLINE|");
             out.println(loggedInUser.getID());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void sendMessage(String backToMainMenu) {
+    public void sendMessage(int senderID, int receiverID, String message) {
         try (
                 Socket socket = new Socket(SERVER_IP, SERVER_PORT);
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true)
         ) {
-            out.println("Message|2");
-            out.println(backToMainMenu);
+            out.print("Message|");
+            out.print(senderID);
+            out.print("|");
+            out.print(receiverID);
+            out.print("|");
+            out.println(message);
+            System.out.println("-message sent to server");
         } catch (IOException e) {
             e.printStackTrace();
     }

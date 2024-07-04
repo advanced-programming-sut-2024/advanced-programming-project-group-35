@@ -69,6 +69,11 @@ public class App {
     }
 
     public static void setLoggedInUser(User loggedInUser) {
+        if (loggedInUser == null) {
+            serverConnector.setUserOffline(App.loggedInUser);
+            clientConnector.close();
+            return;
+        }
         if (App.loggedInUser != null) {
             serverConnector.setUserOffline(App.loggedInUser);
             clientConnector.close();

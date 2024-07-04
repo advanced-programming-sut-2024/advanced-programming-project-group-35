@@ -26,11 +26,15 @@ public class ServerApp {
 
     private static ArrayList<User> allUsers = new ArrayList<User>();
     public static void saveUsers(String filename) {
+        for (User user : allUsers) {
+            System.out.println(user.getUsername());
+        }
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         try (FileWriter writer = new FileWriter(filename)) {
             gson.toJson(allUsers, writer);
             System.out.println("Users data saved successfully.");
         } catch (IOException e) {
+            System.out.println("Error saving users data.");
         }
     }
 
@@ -66,8 +70,17 @@ public class ServerApp {
     }
 
     public static void setUserOnline(int userID) {
-        User user = allUsers.get(userID);
+        User user = getUserByID(userID);
         user.setOnline(true);
+    }
+
+    private static User getUserByID(int userID) {
+        for (User user : allUsers) {
+            if (user.getID() == userID) {
+                return user;
+            }
+        }
+        return null;
     }
 
     public static void setUserOffline(int userID) {
@@ -75,12 +88,15 @@ public class ServerApp {
         user.setOnline(false);
     }
 
-    public static void sendMessage(int receiverID, String message) {
+    public static void sendMessage(int senderID, int receiverID, String message) {
         //find user connector
         PlayerHandler clientConnector = server.getClientConnector(receiverID);
+        if (clientConnector == null) {
+            return;
+        }
         //send message
         StringBuilder messageBuilder = new StringBuilder();
-        messageBuilder.append("MESSAGE|").append(receiverID).append("|").append(message);
+        messageBuilder.append("MESSAGE|").append(senderID).append("|").append(message);
         clientConnector.sendMessage(messageBuilder.toString());
     }
 }
