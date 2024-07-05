@@ -89,7 +89,7 @@ public class Player {
     }
 
     public String getUsername() {
-        return username;
+        return name;
     }
 
     public Board getBoard() {

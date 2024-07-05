@@ -301,7 +301,7 @@ public class GameMenuController extends AppController {
         }
     }
 
-    public void startNewGame(String player1Name, String player2Name, LinkedList<String> player1DeckNames, LinkedList<String> player2DeckNames, String player1SpecialCard, String player2SpecialCard) {
+    public void startNewGame(String player1Name, String player2Name, ArrayList<String> player1DeckNames, ArrayList<String> player2DeckNames, String player1SpecialCard, String player2SpecialCard) {
         Deck player1Deck = DeckManager.loadDeck(player1DeckNames, 1);
         Deck player2Deck = DeckManager.loadDeck(player2DeckNames, 2);
         Player player1 = new Player(player1Name);

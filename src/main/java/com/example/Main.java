@@ -24,7 +24,7 @@ public class Main extends Application {
     private PrintWriter out;
     private BufferedReader in;
     public static void main(String[] args) {
-        App.setAllUsers(DatabaseManager.getAllUsers());
+//        App.setAllUsers(DatabaseManager.getAllUsers());
 //        App.loadUsers("users.json");
 //        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
 //            App.saveUsers("users.json");
@@ -50,16 +50,16 @@ public class Main extends Application {
             e.printStackTrace();
         }
         System.out.println("Shutdown hook completed.");
-        App.saveUsers("users.json");
+//        App.saveUsers("users.json");
     }
 
     public static void saveUsersToDatabase() {
-        ArrayList<User> users = App.getAllUsers();
-        System.out.println("Number of users to save: " + users.size());
-        for (User user : users) {
-//            System.out.println("Saving user: " + user.getUsername());
-            DatabaseManager.insertOrUpdateUser(user);
-        }
+//        ArrayList<User> users = App.getAllUsers();
+//        System.out.println("Number of users to save: " + users.size());
+//        for (User user : users) {
+////            System.out.println("Saving user: " + user.getUsername());
+//            DatabaseManager.insertOrUpdateUser(user);
+//        }
     }
 
 

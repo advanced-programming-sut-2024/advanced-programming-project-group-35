@@ -22,7 +22,7 @@ import java.util.Objects;
 
 public class LoginMenuControllerView {
     private final Stage stage = App.getAppView().getPrimaryStage();
-    public TextField emailVerificationCode;
+   // public TextField emailVerificationCode;
     private Pane pane = App.getAppView().getPane();
     public TextField usernameFieldLogin;
     public PasswordField passwordFieldLogin;
