@@ -1,5 +1,6 @@
 [
   {
+    "isOnline": true,
     "id": 5,
     "username": "ali",
     "password": "@li0083Moi",
@@ -26,6 +27,7 @@
     "decksAddresses": []
   },
   {
+    "isOnline": true,
     "id": 10,
     "username": "ali123",
     "password": "Bp+\u003d%\u003d1%cI",
@@ -33,6 +35,33 @@
     "email": "sjhagdhj@ahsgdh.com",
     "securityQuestion": 0,
     "securityQuestionAnswer": "What is your favorite color?",
+    "currentFactionType": "Monsters",
+    "wins": 0,
+    "losses": 0,
+    "score": 0,
+    "bestScore": 0,
+    "money": 0,
+    "numberOfFlags": 0,
+    "numberOfKills": 0,
+    "numberOfDeaths": 0,
+    "numberOfDraws": 0,
+    "numberOfPlayedGames": 0,
+    "numberOfWonGames": 0,
+    "numberOfLostGames": 0,
+    "numberOfSpellCards": 0,
+    "numberOfMinionCards": 0,
+    "gameData": [],
+    "decksAddresses": []
+  },
+  {
+    "isOnline": true,
+    "id": -2107179492,
+    "username": "kgkj",
+    "password": "emo%XrUG16",
+    "nickname": "",
+    "email": "ali0083moghadasi.mypc@gmail.com",
+    "securityQuestion": 0,
+    "securityQuestionAnswer": "blue",
     "currentFactionType": "Monsters",
     "wins": 0,
     "losses": 0,
