@@ -65,6 +65,8 @@ public class User {
         this.currentFactionType = generateRandomFactionType();
         this.gameData = new ArrayList<>();
         this.decksAddresses = new ArrayList<>();
+        this.friends = new ArrayList<>();
+        this.friendRequests = new ArrayList<>();
     }
 
     public static User getUserByUsername(String name) {
@@ -275,4 +277,6 @@ public class User {
     public void setId(int id) {
         this.id = id;
     }
+
+
 }
