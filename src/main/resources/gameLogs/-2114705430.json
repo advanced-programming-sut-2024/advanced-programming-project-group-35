@@ -1,0 +1,249 @@
+{
+  "player1": "ali",
+  "player1Faction": "RealmsNorthern",
+  "player1Hand": [
+    {
+      "name": "realms_banner_nurse",
+      "id": 112
+    },
+    {
+      "name": "realms_kaedwen_siege",
+      "id": 119
+    },
+    {
+      "name": "realms_kaedwen_siege_1",
+      "id": 120
+    },
+    {
+      "name": "realms_kaedwen_siege_2",
+      "id": 121
+    },
+    {
+      "name": "special_mardroeme_1",
+      "id": 101
+    },
+    {
+      "name": "neutral_ciri",
+      "id": 103
+    },
+    {
+      "name": "neutral_dandelion",
+      "id": 105
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 107
+    },
+    {
+      "name": "neutral_triss",
+      "id": 109
+    },
+    {
+      "name": "realms_ballista",
+      "id": 111
+    },
+    {
+      "name": "realms_catapult_1",
+      "id": 114
+    },
+    {
+      "name": "realms_dethmold",
+      "id": 116
+    },
+    {
+      "name": "realms_esterad",
+      "id": 118
+    }
+  ],
+  "player1Deck": [
+    {
+      "name": "weather_rain_1",
+      "id": 102
+    },
+    {
+      "name": "neutral_cow",
+      "id": 104
+    },
+    {
+      "name": "neutral_geralt",
+      "id": 106
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 108
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 110
+    },
+    {
+      "name": "realms_blue_stripes",
+      "id": 113
+    },
+    {
+      "name": "realms_crinfrid",
+      "id": 115
+    },
+    {
+      "name": "realms_dijkstra",
+      "id": 117
+    },
+    {
+      "name": "realms_keira",
+      "id": 122
+    },
+    {
+      "name": "realms_natalis",
+      "id": 123
+    },
+    {
+      "name": "realms_philippa",
+      "id": 124
+    },
+    {
+      "name": "realms_stennis",
+      "id": 125
+    },
+    {
+      "name": "realms_poor_infantry",
+      "id": 126
+    },
+    {
+      "name": "realms_redania",
+      "id": 127
+    },
+    {
+      "name": "realms_redania_1",
+      "id": 128
+    }
+  ],
+  "player2": "opponent",
+  "player2Faction": "RealmsNorthern",
+  "player2Hand": [
+    {
+      "name": "realms_banner_nurse",
+      "id": 212
+    },
+    {
+      "name": "realms_kaedwen_siege",
+      "id": 219
+    },
+    {
+      "name": "realms_kaedwen_siege_1",
+      "id": 220
+    },
+    {
+      "name": "realms_kaedwen_siege_2",
+      "id": 221
+    },
+    {
+      "name": "special_mardroeme_1",
+      "id": 201
+    },
+    {
+      "name": "neutral_ciri",
+      "id": 203
+    },
+    {
+      "name": "neutral_dandelion",
+      "id": 205
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 207
+    },
+    {
+      "name": "neutral_triss",
+      "id": 209
+    },
+    {
+      "name": "realms_ballista",
+      "id": 211
+    },
+    {
+      "name": "realms_catapult_1",
+      "id": 214
+    },
+    {
+      "name": "realms_dethmold",
+      "id": 216
+    },
+    {
+      "name": "realms_esterad",
+      "id": 218
+    }
+  ],
+  "player2Deck": [
+    {
+      "name": "weather_rain_1",
+      "id": 202
+    },
+    {
+      "name": "neutral_cow",
+      "id": 204
+    },
+    {
+      "name": "neutral_geralt",
+      "id": 206
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 208
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 210
+    },
+    {
+      "name": "realms_blue_stripes",
+      "id": 213
+    },
+    {
+      "name": "realms_crinfrid",
+      "id": 215
+    },
+    {
+      "name": "realms_dijkstra",
+      "id": 217
+    },
+    {
+      "name": "realms_keira",
+      "id": 222
+    },
+    {
+      "name": "realms_natalis",
+      "id": 223
+    },
+    {
+      "name": "realms_philippa",
+      "id": 224
+    },
+    {
+      "name": "realms_stennis",
+      "id": 225
+    },
+    {
+      "name": "realms_poor_infantry",
+      "id": 226
+    },
+    {
+      "name": "realms_redania",
+      "id": 227
+    },
+    {
+      "name": "realms_redania_1",
+      "id": 228
+    }
+  ],
+  "commands": [
+    "card with id: 103 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableList and ability applied",
+    "change turn",
+    "card with id: 220 moved from currentPlayerHandObservableList to currentPlayerSiegeObservableList and ability applied",
+    "change turn",
+    "card with id: 120 moved from currentPlayerHandObservableList to currentPlayerSiegeObservableList and ability applied",
+    "change turn",
+    "card with id: 214 moved from currentPlayerHandObservableList to currentPlayerSiegeObservableList and ability applied",
+    "change turn",
+    "change turn"
+  ]
+}

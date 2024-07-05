@@ -1,11 +1,14 @@
 package com.example.model.card.leaderCardsAbilities;
 
+import com.example.controller.Controller;
+import com.example.controller.GameMenuController;
 import com.example.model.card.AbilityContext;
 import com.example.model.card.Card;
 import com.example.model.card.UnitCard;
 import com.example.model.game.Player;
 import com.example.model.game.Table;
 import com.example.model.game.place.Row;
+import com.example.model.game.place.RowsInGame;
 
 public class LordCommanderOfTheNorthAbility implements LeaderAbility {
     @Override
@@ -17,14 +20,15 @@ public class LordCommanderOfTheNorthAbility implements LeaderAbility {
         if (!row.isEmpty() && row.getStrength() >= 10) {
             int maximumPowerInRow = 0;
             UnitCard maxPoweredCard = new UnitCard(0, null, null,null, false, null, false);
-            for (Card card : player.getBoard().getRangedCardPlace().getCards()) {
-                if (maxPoweredCard.getCurrentPower() >= maximumPowerInRow) {
-                    maxPoweredCard = ((UnitCard)card);
-                    maximumPowerInRow = maxPoweredCard.getCurrentPower();
+            for (Card card : player.getBoard().getSiegeCardPlace().getCards()) {
+                if (card instanceof UnitCard) {
+                    if (((UnitCard)card).getCurrentPower() >= maximumPowerInRow) {
+                        maxPoweredCard.setIdInGame(card.getIdInGame());
+                        maximumPowerInRow = ((UnitCard)card).getCurrentPower();
+                    }
                 }
             }
-            player.getBoard().getRangedCardPlace().removeCard(maxPoweredCard);
-            player.getBoard().getDiscardPile().addCard(maxPoweredCard);
+            ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDontDoAbility(maxPoweredCard.getIdInGame(), RowsInGame.opponentPlayerSiegeSpecialPlace.toString(), RowsInGame.opponentPlayerDiscardPlace.toString());
         }
     }
 }

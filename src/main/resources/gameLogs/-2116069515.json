@@ -1,0 +1,225 @@
+{
+  "player1": "ali",
+  "player1Faction": "Skellige",
+  "player1Hand": [
+    {
+      "name": "neutral_yennefer",
+      "id": 111
+    },
+    {
+      "name": "skellige_birna",
+      "id": 114
+    },
+    {
+      "name": "neutral_dandelion",
+      "id": 101
+    },
+    {
+      "name": "neutral_gaunter_odimm",
+      "id": 103
+    },
+    {
+      "name": "neutral_geralt",
+      "id": 105
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 107
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 109
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 112
+    },
+    {
+      "name": "skellige_blueboy",
+      "id": 115
+    },
+    {
+      "name": "skellige_cerys",
+      "id": 117
+    },
+    {
+      "name": "skellige_dimun_pirate",
+      "id": 119
+    }
+  ],
+  "player1Deck": [
+    {
+      "name": "neutral_emiel",
+      "id": 102
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 104
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 106
+    },
+    {
+      "name": "neutral_triss",
+      "id": 108
+    },
+    {
+      "name": "neutral_villen",
+      "id": 110
+    },
+    {
+      "name": "skellige_berserker",
+      "id": 113
+    },
+    {
+      "name": "skellige_brokva_archer",
+      "id": 116
+    },
+    {
+      "name": "skellige_craite_warrior",
+      "id": 118
+    },
+    {
+      "name": "skellige_donar",
+      "id": 120
+    },
+    {
+      "name": "skellige_draig",
+      "id": 121
+    },
+    {
+      "name": "skellige_hemdall",
+      "id": 122
+    },
+    {
+      "name": "skellige_heymaey",
+      "id": 123
+    },
+    {
+      "name": "skellige_hjalmar",
+      "id": 124
+    }
+  ],
+  "player2": "opponent",
+  "player2Faction": "Skellige",
+  "player2Hand": [
+    {
+      "name": "neutral_yennefer",
+      "id": 211
+    },
+    {
+      "name": "skellige_birna",
+      "id": 214
+    },
+    {
+      "name": "neutral_dandelion",
+      "id": 201
+    },
+    {
+      "name": "neutral_gaunter_odimm",
+      "id": 203
+    },
+    {
+      "name": "neutral_geralt",
+      "id": 205
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 207
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 209
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 212
+    },
+    {
+      "name": "skellige_blueboy",
+      "id": 215
+    },
+    {
+      "name": "skellige_cerys",
+      "id": 217
+    },
+    {
+      "name": "skellige_dimun_pirate",
+      "id": 219
+    }
+  ],
+  "player2Deck": [
+    {
+      "name": "neutral_emiel",
+      "id": 202
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 204
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 206
+    },
+    {
+      "name": "neutral_triss",
+      "id": 208
+    },
+    {
+      "name": "neutral_villen",
+      "id": 210
+    },
+    {
+      "name": "skellige_berserker",
+      "id": 213
+    },
+    {
+      "name": "skellige_brokva_archer",
+      "id": 216
+    },
+    {
+      "name": "skellige_craite_warrior",
+      "id": 218
+    },
+    {
+      "name": "skellige_donar",
+      "id": 220
+    },
+    {
+      "name": "skellige_draig",
+      "id": 221
+    },
+    {
+      "name": "skellige_hemdall",
+      "id": 222
+    },
+    {
+      "name": "skellige_heymaey",
+      "id": 223
+    },
+    {
+      "name": "skellige_hjalmar",
+      "id": 224
+    }
+  ],
+  "commands": [
+    "card with id: 112 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableList and ability applied",
+    "change turn",
+    "card with id: 219 moved from currentPlayerHandObservableList to currentPlayerRangedObservableList and ability applied",
+    "change turn",
+    "card with id: 103 moved from currentPlayerHandObservableList to currentPlayerSiegeObservableList and ability applied",
+    "change turn",
+    "player: opponent passed round",
+    "change turn",
+    "player: ali passed round",
+    "card with id: 103 moved from currentPlayerSiegeObservableList to currentPlayerDiscardPlace and ability applied",
+    "card with id: 112 moved from currentPlayerCloseCombatObservableList to currentPlayerDiscardPlace and ability applied",
+    "card with id: 219 moved from opponentPlayerRangedObservableList to opponentPlayerDiscardPlace and ability applied",
+    "player: ali passed round",
+    "change turn",
+    "card with id: 207 moved from currentPlayerHandObservableList to currentPlayerRangedObservableList and ability applied",
+    "player: opponent passed round",
+    "card with id: 207 moved from currentPlayerRangedSpecialPlaceObservableList to currentPlayerDiscardPlace and ability applied"
+  ]
+}
