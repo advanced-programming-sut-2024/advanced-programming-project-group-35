@@ -18,6 +18,7 @@ public enum RowsInGame {
     opponentPlayerCloseCombatSpecialPlace("opponentPlayerCloseCombatSpecialPlaceObservableList"),
     opponentPlayerRangedSpecialPlace("opponentPlayerRangedSpecialPlaceObservableList"),
     opponentPlayerSiegeSpecialPlace("opponentPlayerSiegeSpecialPlaceObservableList"),
+
     currentPlayerDiscardPlace("currentPlayerDiscardPlace"),
     opponentPlayerDiscardPlace("opponentPlayerDiscardPlace"),
     ;

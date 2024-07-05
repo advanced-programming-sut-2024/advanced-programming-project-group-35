@@ -1,0 +1,215 @@
+{
+  "player1": "ali",
+  "player1Faction": "Monsters",
+  "player1Hand": [
+    {
+      "name": "monsters_fire_elemental",
+      "id": 101
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 103
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 105
+    },
+    {
+      "name": "monsters_arachas_1",
+      "id": 107
+    },
+    {
+      "name": "monsters_arachas_behemoth",
+      "id": 109
+    },
+    {
+      "name": "monsters_celaeno_harpy",
+      "id": 111
+    },
+    {
+      "name": "monsters_draug",
+      "id": 113
+    },
+    {
+      "name": "monsters_vampire_ekkimara",
+      "id": 115
+    },
+    {
+      "name": "monsters_fiend",
+      "id": 117
+    }
+  ],
+  "player1Deck": [
+    {
+      "name": "neutral_villen",
+      "id": 102
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 104
+    },
+    {
+      "name": "monsters_arachas",
+      "id": 106
+    },
+    {
+      "name": "monsters_arachas_2",
+      "id": 108
+    },
+    {
+      "name": "monsters_vampire_bruxa",
+      "id": 110
+    },
+    {
+      "name": "monsters_cockatrice",
+      "id": 112
+    },
+    {
+      "name": "monsters_earth_elemental",
+      "id": 114
+    },
+    {
+      "name": "monsters_endrega",
+      "id": 116
+    },
+    {
+      "name": "monsters_vampire_fleder",
+      "id": 118
+    },
+    {
+      "name": "monsters_foglet",
+      "id": 119
+    },
+    {
+      "name": "monsters_forktail",
+      "id": 120
+    },
+    {
+      "name": "monsters_ice_giant",
+      "id": 121
+    },
+    {
+      "name": "monsters_frightener",
+      "id": 122
+    },
+    {
+      "name": "monsters_gargoyle",
+      "id": 123
+    },
+    {
+      "name": "monsters_ghoul",
+      "id": 124
+    }
+  ],
+  "player2": "opponent",
+  "player2Faction": "Monsters",
+  "player2Hand": [
+    {
+      "name": "monsters_fire_elemental",
+      "id": 201
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 203
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 205
+    },
+    {
+      "name": "monsters_arachas_1",
+      "id": 207
+    },
+    {
+      "name": "monsters_arachas_behemoth",
+      "id": 209
+    },
+    {
+      "name": "monsters_celaeno_harpy",
+      "id": 211
+    },
+    {
+      "name": "monsters_draug",
+      "id": 213
+    },
+    {
+      "name": "monsters_vampire_ekkimara",
+      "id": 215
+    },
+    {
+      "name": "monsters_fiend",
+      "id": 217
+    }
+  ],
+  "player2Deck": [
+    {
+      "name": "neutral_villen",
+      "id": 202
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 204
+    },
+    {
+      "name": "monsters_arachas",
+      "id": 206
+    },
+    {
+      "name": "monsters_arachas_2",
+      "id": 208
+    },
+    {
+      "name": "monsters_vampire_bruxa",
+      "id": 210
+    },
+    {
+      "name": "monsters_cockatrice",
+      "id": 212
+    },
+    {
+      "name": "monsters_earth_elemental",
+      "id": 214
+    },
+    {
+      "name": "monsters_endrega",
+      "id": 216
+    },
+    {
+      "name": "monsters_vampire_fleder",
+      "id": 218
+    },
+    {
+      "name": "monsters_foglet",
+      "id": 219
+    },
+    {
+      "name": "monsters_forktail",
+      "id": 220
+    },
+    {
+      "name": "monsters_ice_giant",
+      "id": 221
+    },
+    {
+      "name": "monsters_frightener",
+      "id": 222
+    },
+    {
+      "name": "monsters_gargoyle",
+      "id": 223
+    },
+    {
+      "name": "monsters_ghoul",
+      "id": 224
+    }
+  ],
+  "commands": [
+    "card with id: 109 moved from currentPlayerHandObservableList to currentPlayerSiegeObservableList and ability applied",
+    "change turn",
+    "card with id: 205 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableList and ability applied",
+    "change turn",
+    "player: ali passed round",
+    "change turn",
+    "player: opponent passed round"
+  ]
+}

@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.layout.HBox?>
 <AnchorPane prefHeight="800" prefWidth="1400" styleClass="login-menu-background"
             stylesheets="@../CSS/allMenu.css, @../CSS/allFiles.css" xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
@@ -20,7 +21,11 @@
         </Button>
         <Button fx:id="registerButton" minWidth="250" onMouseClicked="#openRegisterStage" styleClass="brown-button"
                 text="Register"/>
-        <Button minWidth="150" onMouseClicked="#testApp" styleClass="brown-button"
-                text="Test App"/>
+        <HBox alignment="CENTER" prefHeight="50" prefWidth="500" spacing="30.0">
+            <Button minWidth="150" onMouseClicked="#testApp1" styleClass="brown-button"
+                    text="Test App 1"/>
+            <Button minWidth="150" onMouseClicked="#testApp2" styleClass="brown-button"
+                    text="Test App 2"/>
+        </HBox>
     </VBox>
 </AnchorPane>

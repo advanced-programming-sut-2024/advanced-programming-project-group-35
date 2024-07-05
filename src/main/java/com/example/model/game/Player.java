@@ -1,5 +1,7 @@
 package com.example.model.game;
 
+import com.example.model.User;
+
 import com.example.model.game.place.Row;
 
 import java.util.HashMap;
@@ -7,16 +9,17 @@ import java.util.HashMap;
 public class Player {
     private int numberOfCrystals;
     private int numberOfVetoCards;
-    private String username;
+    private int id;
+    private String name;
     private Board board;
     private int score;
     private boolean passRound;
     private HashMap<Integer, Integer> scoresOfRounds;
     private int specialCardCounter;
 
-
-    public Player(String username) {
-        this.username = username;
+    public Player(String name) {
+        this.name = name;
+        this.id = User.getUserByUsername(name).getID();
         this.board = new Board();
         this.scoresOfRounds = new HashMap<>();
         this.numberOfCrystals = 2;
@@ -29,6 +32,16 @@ public class Player {
             result += row.getStrength();
         }
         score = result;
+    }
+
+    public Player(int ID){
+        this.name = User.getUserByID(ID).getUsername();
+        this.id = ID;
+        this.board = new Board();
+        this.scoresOfRounds = new HashMap<>();
+        this.numberOfCrystals = 2;
+        this.numberOfVetoCards = 2;
+        this.passRound = false;
     }
 
     public boolean isPassRound() {
@@ -76,7 +89,7 @@ public class Player {
     }
 
     public String getUsername() {
-        return username;
+        return name;
     }
 
     public Board getBoard() {
@@ -89,5 +102,8 @@ public class Player {
 
     public void setSpecialCardCounter(int specialCardCounter) {
         this.specialCardCounter = specialCardCounter;
+    }
+    public int getId() {
+        return id;
     }
 }

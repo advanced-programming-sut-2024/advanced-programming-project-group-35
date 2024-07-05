@@ -2,6 +2,8 @@ package com.example.view;
 
 import com.example.Main;
 import com.example.controller.Controller;
+import com.example.controller.ScoreTableController;
+import com.example.model.App;
 import com.example.model.alerts.Alert;
 import com.example.model.Terminal;
 import com.example.model.alerts.AlertType;
@@ -11,6 +13,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
@@ -137,5 +140,27 @@ public class AppView extends Application {
             }
         });
         transition.play();
+    }
+
+    public void showLoading() {
+        try {
+            fxmlLoader = new FXMLLoader(Main.class.getResource("/FXML/loadingPage.fxml"));
+            pane = fxmlLoader.load();
+            Scene scene = new Scene(pane);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateUserInfo() {
+        ((ScoreTableController) Controller.SCORE_TABLE_MENU_CONTROLLER.getController()).makeScoreboardTable(App.getAllUsers());
+    }
+
+    public void showMessage(String part) {
+        Platform.runLater(() -> {
+            showAlert(part, "info");
+        });
     }
 }

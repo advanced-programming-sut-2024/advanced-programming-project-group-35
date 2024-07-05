@@ -4,6 +4,7 @@ import com.example.Main;
 import com.example.controller.Controller;
 import com.example.controller.GameMenuController;
 import com.example.controller.PreGameMenuController;
+import com.example.model.DeckManager;
 import com.example.model.IO.errors.Errors;
 import com.example.model.card.enums.CardData;
 import com.example.model.App;
@@ -13,6 +14,7 @@ import com.example.model.card.factions.Factions;
 import com.example.model.card.factions.Monsters;
 import com.example.model.card.factions.Skellige;
 import com.example.model.card.factions.*;
+import com.example.model.game.Deck;
 import com.example.view.Menu;
 import com.example.view.OutputView;
 import javafx.event.ActionEvent;
@@ -35,8 +37,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Objects;
-
-import java.util.List;
 
 public class PreGameMenuControllerView {
     private final Stage stage = App.getAppView().getPrimaryStage();
@@ -65,6 +65,10 @@ public class PreGameMenuControllerView {
     private PreGameCard leaderCard;
     public FlowPane allCardsPane;
     public FlowPane playerDeckPane;
+    public static int player1OfflineID = -1;
+    public static int player2OfflineID = -1;
+    private ArrayList<String> player1OfflineDeck = new ArrayList<>();
+    private ArrayList<String> player2OfflineDeck = new ArrayList<>();
 
     @FXML
     private Label playerNameLabel = new Label("player name: ");
@@ -385,18 +389,28 @@ public class PreGameMenuControllerView {
             );
             return;
         }
-        LinkedList<String> playerDeckNames = getPreGameCardNames(playerDeck);
-        String specialCardsCount = specialCardsCountLabel.getText().substring(specialCardsCountLabel.getText().lastIndexOf(" ") + 1);
-        GameMenuController gameMenuController = (GameMenuController) Controller.GAME_MENU_CONTROLLER.getController();
-        gameMenuController.startNewGame(App.getLoggedInUser().getUsername(), opponentName(), playerDeckNames, playerDeckNames, specialCardsCount, specialCardsCount);
-        App.setCurrentMenu(Menu.GAME_MENU);
-        gameMenuController.run();
+
+        if (player1OfflineID == -1 && player2OfflineID == -1) {
+            player1OfflineID = App.getLoggedInUser().getID();
+            player1OfflineDeck = getPreGameCardNames(playerDeck);
+            App.setCurrentMenu(Menu.LOGIN_MENU);
+            Controller.LOGIN_MENU_CONTROLLER.run();
+        } else if ((player1OfflineID == App.getLoggedInUser().getID()) && player2OfflineID == -1) {
+            App.setCurrentMenu(Menu.LOGIN_MENU);
+            Controller.LOGIN_MENU_CONTROLLER.run();
+            OutputView.showOutputAlert(Errors.YOU_CANT_PLAY_WITH_YOURSELF);
+        } else {
+            player2OfflineID = App.getLoggedInUser().getID();
+            player2OfflineDeck = getPreGameCardNames(playerDeck);
+            String specialCardsCount = specialCardsCountLabel.getText().substring(specialCardsCountLabel.getText().lastIndexOf(" ") + 1);
+            GameMenuController gameMenuController = (GameMenuController) Controller.GAME_MENU_CONTROLLER.getController();
+            gameMenuController.startNewGame(App.getLoggedInUser().getUsername(), opponentName(), player1OfflineDeck, player2OfflineDeck, specialCardsCount, specialCardsCount);
+            App.setCurrentMenu(Menu.GAME_MENU);
+            gameMenuController.run();
+            player1OfflineID = player2OfflineID = -1;
+        }
     }
 
-    private ArrayList<String> opponentDeck() {
-        //TODO
-        return null;
-    }
 
     private String opponentName() {
         return "opponent";
@@ -406,15 +420,17 @@ public class PreGameMenuControllerView {
         return leaderCard.getName();
     }
 
-    private LinkedList<String> getPreGameCardNames(ObservableList<PreGameCard> playerDeck) {
-        LinkedList<String> playerDeckNames = new LinkedList<>();
+    private ArrayList<String> getPreGameCardNames(ObservableList<PreGameCard> playerDeck) {
+        ArrayList<String> playerDeckNames = new ArrayList<>();
         playerDeckNames.add(faction.getFaction().toString());
         playerDeckNames.add(getLeaderName(leaderCard));
         for (PreGameCard card : playerDeck) {
             playerDeckNames.add(card.getName());
         }
+        System.out.println("getPreGameCardNames: " + playerDeckNames); // اضافه کردن لاگ
         return playerDeckNames;
     }
+
 
     public void backToMainMenu(ActionEvent actionEvent) {
         App.setCurrentMenu(Menu.MAIN_MENU);

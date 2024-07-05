@@ -77,8 +77,14 @@ public class GameMenuController extends AppController {
         ObservableList<Card> originRow = (ObservableList<Card>) getRowListByName(origin);
         ObservableList<Card> destinationRow = (ObservableList<Card>) getRowListByName(destination);
         Card card = getCardById(cardId, originRow);
-        originRow.remove(card);
-        destinationRow.add(card);
+        synchronized (originRow) {
+            originRow.remove(card);
+        }
+        synchronized (destinationRow) {
+            if (!destinationRow.contains(card)) {
+                destinationRow.add(card);
+            }
+        }
         gameMenuControllerView.moveCardToDestinationFlowPane(cardId, origin, destination);
         if (card instanceof UnitCard) {
             if (card.getAbilityName() == AbilityName.MUSTER) {
@@ -112,12 +118,11 @@ public class GameMenuController extends AppController {
                 AbilityContext abilityContext = new AbilityContext(table, null, null);
                 doNonLeaderCardsAbility(card, abilityContext, AbilityName.SCORCH);
             }
-//            else if (card.getAbilityName() == AbilityName.WEATHER) {
-//                AbilityContext abilityContext = new AbilityContext(table, null, null);
-//                ((WeatherCard)card).setPlayer(table.getCurrentPlayer());
-////                abilityContext.addParam("row1", R);
-//                doNonLeaderCardsAbility(card, abilityContext, AbilityName.SCORCH);
-//            }
+            else if (card.getAbilityName() == AbilityName.WEATHER) {
+                AbilityContext abilityContext = new AbilityContext(table, null, null);
+                ((WeatherCard)card).setPlayer(table.getCurrentPlayer());
+                doNonLeaderCardsAbility(card, abilityContext, AbilityName.SCORCH);
+            }
         }
 
         saveLog("card with id: " + cardId + " moved from " + origin + " to " + destination + " and ability applied");
@@ -144,6 +149,7 @@ public class GameMenuController extends AppController {
             passRound();
         } else if (!table.getOpponent().isPassRound()) {
             changeTurn();
+            System.out.println("12345");
         }
         gameMenuControllerView.removeStyleClass();
         saveLog("decoy ability done, decoyCardId: " + decoyCardId + " selectedCardId " + selectedCardId);
@@ -192,11 +198,18 @@ public class GameMenuController extends AppController {
     }
 
     public void moveCardFromOriginToDestinationAndDontDoAbility(int cardId, String origin, String destination) {
+        System.out.println(destination);
         ObservableList<Card> originRow = (ObservableList<Card>) getRowListByName(origin);
         ObservableList<Card> destinationRow = (ObservableList<Card>) getRowListByName(destination);
         Card card = getCardById(cardId, originRow);
-        originRow.remove(card);
-        destinationRow.add(card);
+        synchronized (originRow) {
+            originRow.remove(card);
+        }
+        synchronized (destinationRow) {
+            if (!destinationRow.contains(card)) {
+                destinationRow.add(card);
+            }
+        }
         gameMenuControllerView.moveCardToDestinationFlowPane(cardId, origin, destination);
         table.getCurrentPlayer().updateScore();
         table.getOpponent().updateScore();
@@ -273,6 +286,9 @@ public class GameMenuController extends AppController {
             case "opponentPlayerRangedSpecialPlaceObservableList" -> {
                 return table.getOpponent().getBoard().getRangedCardPlace().getSpecialPlace();
             }
+            case "opponentPlayerDiscardPlace" -> {
+                return table.getOpponent().getBoard().getDiscardPile().getCards();
+            }
             case "currentPlayerDiscardPlace" -> {
                 return table.getCurrentPlayer().getBoard().getDiscardPile().getCards();
             }
@@ -285,7 +301,7 @@ public class GameMenuController extends AppController {
         }
     }
 
-    public void startNewGame(String player1Name, String player2Name, LinkedList<String> player1DeckNames, LinkedList<String> player2DeckNames, String player1SpecialCard, String player2SpecialCard) {
+    public void startNewGame(String player1Name, String player2Name, ArrayList<String> player1DeckNames, ArrayList<String> player2DeckNames, String player1SpecialCard, String player2SpecialCard) {
         Deck player1Deck = DeckManager.loadDeck(player1DeckNames, 1);
         Deck player2Deck = DeckManager.loadDeck(player2DeckNames, 2);
         Player player1 = new Player(player1Name);
@@ -457,7 +473,7 @@ public class GameMenuController extends AppController {
         }
     }
 
-    private void endRound(Table table) {
+    private void endRound() {
         Player player1 = table.getCurrentPlayer();
         Player player2 = table.getOpponent();
         table.getCurrentRound().addScore(player1, player1.getScore());
@@ -466,14 +482,18 @@ public class GameMenuController extends AppController {
             table.getCurrentRound().setDraw(true);
             table.getCurrentRound().setWon(false);
             table.getCurrentRound().setWinner(null);
+            player1.decreaseNumberOfVetoCards();
+            player2.decreaseNumberOfVetoCards();
         } else if (player1.getScore() > player2.getScore()) {
             table.getCurrentRound().setDraw(false);
             table.getCurrentRound().setWon(true);
             table.getCurrentRound().setWinner(player1);
+            player2.decreaseNumberOfVetoCards();
         } else if (player1.getScore() < player2.getScore()) {
             table.getCurrentRound().setDraw(false);
             table.getCurrentRound().setWon(true);
             table.getCurrentRound().setWinner(player2);
+            player1.decreaseNumberOfVetoCards();
         }
         if (table.getCurrentPlayer().getBoard().getDeck().getFaction() == FactionsType.Monsters) {
             table.getCurrentPlayer().getBoard().getDeck().getFactionAbility().apply(table, table.getCurrentPlayer());
@@ -504,10 +524,11 @@ public class GameMenuController extends AppController {
 
     private void backCardsToDiscardPiles() {
         gameMenuControllerView.backCardsToDiscardPiles();
+        gameMenuControllerView.updateAllLabels();
     }
 
     private void changeRound() {
-        endRound(table);
+        endRound();
         if (table.getCurrentPlayer().getNumberOfCrystals() == 0) {
             endGame(table, table.getOpponent());
         } else if (table.getOpponent().getNumberOfCrystals() == 0) {
@@ -529,6 +550,7 @@ public class GameMenuController extends AppController {
     }
 
     private void endGame(Table table, Player winner) {
+        System.out.println("end game");
         //TODO نمایش برنده
         //TODO نمایش مجموع امتیاز های هر فرد در تمام راند ها
         //TODO اضافه کردن گیم دیتا
@@ -554,8 +576,7 @@ public class GameMenuController extends AppController {
         } else {
             if (leaderCard.getAbility() == null) {
                 System.out.println("1");
-            }
-            else if (!leaderCard.canDoAction()) {
+            } else if (!leaderCard.canDoAction()) {
                 System.out.println("2");
             }
             System.out.println("doCurrentPlayerLeaderAbility in GameMenuController");

@@ -1,0 +1,217 @@
+{
+  "player1": "ali",
+  "player1Faction": "Monsters",
+  "player1Hand": [
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 103
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 101
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 104
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 106
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 108
+    },
+    {
+      "name": "monsters_arachas",
+      "id": 110
+    },
+    {
+      "name": "monsters_arachas_2",
+      "id": 112
+    },
+    {
+      "name": "monsters_vampire_bruxa",
+      "id": 114
+    },
+    {
+      "name": "monsters_cockatrice",
+      "id": 116
+    },
+    {
+      "name": "monsters_earth_elemental",
+      "id": 118
+    }
+  ],
+  "player1Deck": [
+    {
+      "name": "neutral_geralt",
+      "id": 102
+    },
+    {
+      "name": "neutral_triss",
+      "id": 105
+    },
+    {
+      "name": "neutral_villen",
+      "id": 107
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 109
+    },
+    {
+      "name": "monsters_arachas_1",
+      "id": 111
+    },
+    {
+      "name": "monsters_arachas_behemoth",
+      "id": 113
+    },
+    {
+      "name": "monsters_celaeno_harpy",
+      "id": 115
+    },
+    {
+      "name": "monsters_draug",
+      "id": 117
+    },
+    {
+      "name": "monsters_vampire_ekkimara",
+      "id": 119
+    },
+    {
+      "name": "monsters_endrega",
+      "id": 120
+    },
+    {
+      "name": "monsters_fiend",
+      "id": 121
+    },
+    {
+      "name": "monsters_fire_elemental",
+      "id": 122
+    },
+    {
+      "name": "monsters_vampire_fleder",
+      "id": 123
+    },
+    {
+      "name": "monsters_foglet",
+      "id": 124
+    }
+  ],
+  "player2": "opponent",
+  "player2Faction": "Monsters",
+  "player2Hand": [
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 203
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 201
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 204
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 206
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 208
+    },
+    {
+      "name": "monsters_arachas",
+      "id": 210
+    },
+    {
+      "name": "monsters_arachas_2",
+      "id": 212
+    },
+    {
+      "name": "monsters_vampire_bruxa",
+      "id": 214
+    },
+    {
+      "name": "monsters_cockatrice",
+      "id": 216
+    },
+    {
+      "name": "monsters_earth_elemental",
+      "id": 218
+    }
+  ],
+  "player2Deck": [
+    {
+      "name": "neutral_geralt",
+      "id": 202
+    },
+    {
+      "name": "neutral_triss",
+      "id": 205
+    },
+    {
+      "name": "neutral_villen",
+      "id": 207
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 209
+    },
+    {
+      "name": "monsters_arachas_1",
+      "id": 211
+    },
+    {
+      "name": "monsters_arachas_behemoth",
+      "id": 213
+    },
+    {
+      "name": "monsters_celaeno_harpy",
+      "id": 215
+    },
+    {
+      "name": "monsters_draug",
+      "id": 217
+    },
+    {
+      "name": "monsters_vampire_ekkimara",
+      "id": 219
+    },
+    {
+      "name": "monsters_endrega",
+      "id": 220
+    },
+    {
+      "name": "monsters_fiend",
+      "id": 221
+    },
+    {
+      "name": "monsters_fire_elemental",
+      "id": 222
+    },
+    {
+      "name": "monsters_vampire_fleder",
+      "id": 223
+    },
+    {
+      "name": "monsters_foglet",
+      "id": 224
+    }
+  ],
+  "commands": [
+    "card with id: 103 moved from currentPlayerHandObservableList to opponentPlayerCloseCombatObservableList and ability applied",
+    "change turn",
+    "card with id: 102 moved from currentPlayerDeckObservableList to currentPlayerHandObservableList and ability applied",
+    "card with id: 105 moved from currentPlayerDeckObservableList to currentPlayerHandObservableList and ability applied",
+    "player: opponent passed round",
+    "change turn",
+    "card with id: 104 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableList and ability applied",
+    "player: ali passed round",
+    "card with id: 104 moved from currentPlayerCloseCombatObservableList to currentPlayerDiscardPlace and ability applied"
+  ]
+}

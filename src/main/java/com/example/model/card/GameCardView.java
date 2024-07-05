@@ -151,9 +151,11 @@ public class GameCardView extends Pane {
             }
             case COMMANDER_HORN -> {
                 return GameCardView.class.getResource("/images/icons/anim_horn.png").toExternalForm();
-            }  case TIGHT_BOND -> {
+            }
+            case TIGHT_BOND -> {
                 return GameCardView.class.getResource("/images/icons/anim_bond.png").toExternalForm();
-            } case MEDIC -> {
+            }
+            case MEDIC -> {
                 return GameCardView.class.getResource("/images/icons/anim_medic.png").toExternalForm();
             }
             default -> {
@@ -163,24 +165,29 @@ public class GameCardView extends Pane {
     }
 
     public void updatePowerLabel() {
-        if (((UnitCard) card).isHero()) {
-            power.setText("" + ((UnitCard) card).getCurrentPower());
-            power.setTextFill(Paint.valueOf(Color.rgb(219, 136, 40).toString()));
-        } else if (!((UnitCard) card).isHero()) {
-            power.setText("" + ((UnitCard) card).getCurrentPower());
-            power.setTextFill(Paint.valueOf(Color.rgb(219, 136, 40).toString()));
+        if (card instanceof UnitCard) {
+            if (((UnitCard) card).isHero()) {
+                power.setText("" + ((UnitCard) card).getCurrentPower());
+                power.setTextFill(Paint.valueOf(Color.rgb(219, 136, 40).toString()));
+            } else if (!((UnitCard) card).isHero()) {
+                power.setText("" + ((UnitCard) card).getCurrentPower());
+                power.setTextFill(Paint.valueOf(Color.rgb(219, 136, 40).toString()));
+            }
         }
     }
 
     public void setPowerDefault() {
-        if (((UnitCard) card).isHero()) {
-            power.setText("" + ((UnitCard) card).getPower());
-            power.setTextFill(Paint.valueOf("white"));
-        } else if (!((UnitCard) card).isHero()) {
-            power.setText("" + ((UnitCard) card).getPower());
-            power.setTextFill(Paint.valueOf("black"));
+        if (card instanceof UnitCard) {
+            if (((UnitCard) card).isHero()) {
+                power.setText("" + ((UnitCard) card).getPower());
+                power.setTextFill(Paint.valueOf("white"));
+            } else if (!((UnitCard) card).isHero()) {
+                power.setText("" + ((UnitCard) card).getPower());
+                power.setTextFill(Paint.valueOf("black"));
+            }
         }
     }
+
     public void setScorchPicture() {
         Image scorchImage = new Image(getClass().getResource("/images/icons/anim_scorch.png").toExternalForm());
         ImageView scorchImageView = new ImageView(scorchImage);

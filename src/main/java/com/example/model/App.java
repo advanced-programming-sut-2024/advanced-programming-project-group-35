@@ -1,6 +1,8 @@
 package com.example.model;
 
 import com.example.controller.Controller;
+import com.example.controller.server.ClientConnector;
+import com.example.controller.server.ServerConnector;
 import com.example.model.card.Card;
 import com.example.view.AppView;
 import com.example.view.Menu;
@@ -8,13 +10,14 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.Type;
+import java.net.Socket;
 import java.util.ArrayList;
 
 public class App {
+    private static ServerConnector serverConnector = new ServerConnector();
+    public static ClientConnector clientConnector ;
     private static ArrayList<String> securityQuestions = new ArrayList<String>();
 
     static {
@@ -25,12 +28,17 @@ public class App {
         securityQuestions.add("What is your favorite song?");
     }
 
-    private static ArrayList<User> allUsers = new ArrayList<User>();
+    //private static ArrayList<User> allUsers = new ArrayList<User>();
     private static ArrayList<Card> allCards = new ArrayList<Card>();
+    private static ArrayList<User> allUsers = new ArrayList<User>();
     private static Controller currentController;
     private static User loggedInUser;
     private static Menu currentMenu = Menu.LOGIN_MENU;
     private static AppView appView;
+    private static Socket socket;
+    private static PrintWriter out;
+    private static BufferedReader in;
+
 
     public static AppView getAppView() {
         return appView;
@@ -61,19 +69,39 @@ public class App {
     }
 
     public static void setLoggedInUser(User loggedInUser) {
+        if (loggedInUser == null) {
+            serverConnector.setUserOffline(App.loggedInUser);
+            clientConnector.close();
+            return;
+        }
+        if (App.loggedInUser != null) {
+            serverConnector.setUserOffline(App.loggedInUser);
+            clientConnector.close();
+        }
         App.loggedInUser = loggedInUser;
+        connectSereverToApp();
+        serverConnector.setUserOnline(loggedInUser);
+    }
+
+    private static void connectSereverToApp() {
+        try {
+            clientConnector = new ClientConnector(loggedInUser.getID());
+            new Thread(clientConnector).start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static User getUserByUsername(String username) {
-        if (allUsers == null) return null;
-        for (User user : App.allUsers) {
+        for (User user : App.allUsers()) {
             if (user.getUsername().equals(username)) return user;
         }
         return null;
     }
 
     public static void addNewUser(User newUser) {
-        App.allUsers.add(newUser);
+        App.allUsers().add(newUser);
+        serverConnector.saveUsers(allUsers);
     }
 
     public static void addSecurityQuestion(String question) {
@@ -86,9 +114,9 @@ public class App {
 
     public static int getRankByUsername(String username) {
         int rank = 1;
-        for (User user : App.allUsers) {
+        for (User user : App.allUsers()) {
             if (user.getUsername().equals(username)) {
-                for (User user1 : App.allUsers) {
+                for (User user1 : App.allUsers()) {
                     if (user1.getScore() > user.getScore()) rank++;
                 }
                 return rank;
@@ -97,31 +125,31 @@ public class App {
         return 0;
     }
 
-    public static void saveUsers(String filename) {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        try (FileWriter writer = new FileWriter(filename)) {
-            gson.toJson(allUsers, writer);
-            System.out.println("Users data saved successfully.");
-        } catch (IOException e) {
-        }
-    }
-
-    public static void loadUsers(String filename) {
-        Gson gson = new GsonBuilder().create();
-        try (FileReader reader = new FileReader(filename)) {
-            Type userListType = new TypeToken<ArrayList<User>>() {
-            }.getType();
-            allUsers = gson.fromJson(reader, userListType);
-            System.out.println("Users data loaded successfully.");
-        } catch (IOException e) {
-        }
-    }
-
     public static ArrayList<User> getAllUsers() {
+        return allUsers();
+    }
+
+    private static ArrayList<User> allUsers(){
+        updateUsersFromServer();
         return allUsers;
     }
 
-    public static void setAllUsers(ArrayList<User> allUsers) {
-        App.allUsers = allUsers;
+    private static void updateUsersFromServer() {
+        allUsers = serverConnector.getAllUsers();
+    }
+
+    public static ServerConnector getServerApp() {
+        return serverConnector;
+    }
+
+    public static void setServerData(Socket socket, PrintWriter out, BufferedReader in) {
+        App.socket = socket;
+        App.out = out;
+        App.in = in;
+    }
+
+    public void updateUserInfo() {
+        updateUsersFromServer();
+        appView.updateUserInfo();
     }
 }
