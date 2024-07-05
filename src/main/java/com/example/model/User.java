@@ -1,6 +1,7 @@
 package com.example.model;
 
 import com.example.model.card.enums.FactionsType;
+import com.example.model.deckmanager.DeckToJson;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,6 +20,7 @@ public class User {
     private String name;
     private String lastName;
     private String profilePicture;
+    private DeckToJson temporaryDeck;
     private int wins = 0;
     private int losses = 0;
     private int score = 0;
@@ -74,6 +76,14 @@ public class User {
             }
         }
         return null;
+    }
+
+    public DeckToJson getTemporaryDeck() {
+        return temporaryDeck;
+    }
+
+    public void setTemporaryDeck(DeckToJson temporaryDeck) {
+        this.temporaryDeck = temporaryDeck;
     }
 
     private void setID() {
@@ -283,7 +293,7 @@ public class User {
             return false;
         }
     }
-    public void addDeckNameToDeckNames(String deckName) {
+    public void addDeckNameToDeckAddresses(String deckName) {
         decksAddresses.add(deckName);
     }
 }

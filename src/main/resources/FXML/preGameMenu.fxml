@@ -22,6 +22,7 @@
             <children>
                <TextField fx:id="loadDeckNameField" promptText="Enter Your Deck Name" visible="false" />
                <Button fx:id="loadDeckButton" mnemonicParsing="false" onMouseClicked="#loadDeck" text="load" />
+               <Button fx:id="fileChooserButton" mnemonicParsing="false" onMouseClicked="#chooseDeckFile" visible="false" text="Button" />
             </children>
          </VBox>
             <Label fx:id="heroCardsCountLabel" styleClass="pre-game-menu-label" text="Special Cards: " />
@@ -30,6 +31,7 @@
             <children>
                <TextField fx:id="saveDeckNameField" promptText="Enter Your Deck Name" visible="false" />
                <Button fx:id="saveDeckButton" mnemonicParsing="false" onMouseClicked="#saveDeck" text="save" />
+               <Button fx:id="chooseDirectoryButton" mnemonicParsing="false" onMouseClicked="#chooseDirectoryToSaveDeckData" text="Button" visible="false" />
             </children>
          </VBox>
             <Button fx:id="startGameButton" minWidth="150" onAction="#startGameButtonAction" styleClass="brown-button" text="Start Game" />

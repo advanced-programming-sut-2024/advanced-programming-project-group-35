@@ -1,13 +1,13 @@
 package com.example.controller;
 
 import com.example.model.App;
-import com.example.model.DeckManager;
-import com.example.model.GameData;
+import com.example.model.deckmanager.DeckManager;
 import com.example.model.alerts.NotificationsData;
 import com.example.model.card.*;
 import com.example.model.card.enums.AbilityName;
 import com.example.model.card.enums.CardData;
 import com.example.model.card.enums.FactionsType;
+import com.example.model.deckmanager.DeckToJson;
 import com.example.model.game.*;
 import com.example.model.game.place.Row;
 import com.example.model.game.place.RowsInGame;
@@ -305,7 +305,7 @@ public class GameMenuController extends AppController {
         }
     }
 
-    public void startNewGame(String player1Name, String player2Name, ArrayList<String> player1DeckNames, ArrayList<String> player2DeckNames) {
+    public void startNewGame(String player1Name, String player2Name, DeckToJson player1DeckNames, DeckToJson player2DeckNames) {
         Deck player1Deck = DeckManager.loadDeck(player1DeckNames, 1);
         Deck player2Deck = DeckManager.loadDeck(player2DeckNames, 2);
         Player player1 = new Player(player1Name);
@@ -314,8 +314,8 @@ public class GameMenuController extends AppController {
         player2.getBoard().setDeck(player2Deck);
         player1.getBoard().setHandForStartGame(player1Deck);
         player2.getBoard().setHandForStartGame(player2Deck);
-        player1.setSpecialCardCounter(Integer.parseInt(player1DeckNames.get(4)));
-        player2.setSpecialCardCounter(Integer.parseInt(player2DeckNames.get(4)));
+        player1.setSpecialCardCounter(player1.getSpecialCardCounter());
+        player2.setSpecialCardCounter(player2.getSpecialCardCounter());
         table = new Table(player1, player2);
         saveLog(generateInitialDeckData());
         Round round1 = new Round(1);
@@ -488,16 +488,19 @@ public class GameMenuController extends AppController {
             table.getCurrentRound().setWinner(null);
             player1.decreaseCrystals();
             player2.decreaseCrystals();
+            gameMenuControllerView.updateAllLabels();
         } else if (player1.getScore() > player2.getScore()) {
             table.getCurrentRound().setDraw(false);
             table.getCurrentRound().setWon(true);
             table.getCurrentRound().setWinner(player1);
             player2.decreaseCrystals();
+            gameMenuControllerView.updateAllLabels();
         } else if (player1.getScore() < player2.getScore()) {
             table.getCurrentRound().setDraw(false);
             table.getCurrentRound().setWon(true);
             table.getCurrentRound().setWinner(player2);
             player1.decreaseCrystals();
+            gameMenuControllerView.updateAllLabels();
         }
         if (table.getCurrentPlayer().getBoard().getDeck().getFaction() == FactionsType.Monsters) {
             table.getCurrentPlayer().getBoard().getDeck().getFactionAbility().apply(table, table.getCurrentPlayer());
