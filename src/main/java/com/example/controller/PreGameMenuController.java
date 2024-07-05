@@ -28,6 +28,8 @@ public class PreGameMenuController extends AppController {
             throw new RuntimeException();
         }
     }
+
+
     public void showFactions() {
 
     }

@@ -1,8 +1,7 @@
 package com.example.model;
 
-import com.example.model.App;
 import com.example.model.card.enums.FactionsType;
-import com.example.model.GameData;
+import com.example.model.deckmanager.DeckToJson;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,6 +20,7 @@ public class User {
     private String name;
     private String lastName;
     private String profilePicture;
+    private DeckToJson temporaryDeck;
     private int wins = 0;
     private int losses = 0;
     private int score = 0;
@@ -57,6 +57,7 @@ public class User {
         return friendRequests;
     }
 
+
     public User(String username, String password, String nickname, String email) {
         this.username = username;
         this.password = password;
@@ -76,6 +77,14 @@ public class User {
             }
         }
         return null;
+    }
+
+    public DeckToJson getTemporaryDeck() {
+        return temporaryDeck;
+    }
+
+    public void setTemporaryDeck(DeckToJson temporaryDeck) {
+        this.temporaryDeck = temporaryDeck;
     }
 
     public void setNewID() {
@@ -266,7 +275,7 @@ public class User {
         return gameData;
     }
 
-    public ArrayList<String> getDecksAddresses() {
+    public ArrayList<String> getDeckNames() {
         return decksAddresses;
     }
 
@@ -278,5 +287,14 @@ public class User {
         this.id = id;
     }
 
-
+    public boolean isADeckExistWithThisName(String deckName) {
+        if (decksAddresses.contains(deckName)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public void addDeckNameToDeckAddresses(String deckName) {
+        decksAddresses.add(deckName);
+    }
 }

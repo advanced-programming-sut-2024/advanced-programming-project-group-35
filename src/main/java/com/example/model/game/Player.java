@@ -63,6 +63,10 @@ public class Player {
     public void decreaseNumberOfVetoCards() {
         numberOfVetoCards--;
     }
+    public void decreaseCrystals() {
+        numberOfCrystals--;
+    }
+
 
     public int getNumberOfCrystals() {
         return numberOfCrystals;

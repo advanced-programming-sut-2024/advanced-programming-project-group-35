@@ -1,13 +1,13 @@
 package com.example.controller;
 
 import com.example.model.App;
-import com.example.model.DeckManager;
-import com.example.model.GameData;
+import com.example.model.deckmanager.DeckManager;
 import com.example.model.alerts.NotificationsData;
 import com.example.model.card.*;
 import com.example.model.card.enums.AbilityName;
 import com.example.model.card.enums.CardData;
 import com.example.model.card.enums.FactionsType;
+import com.example.model.deckmanager.DeckToJson;
 import com.example.model.game.*;
 import com.example.model.game.place.Row;
 import com.example.model.game.place.RowsInGame;
@@ -117,10 +117,9 @@ public class GameMenuController extends AppController {
             } else if (card.getAbilityName() == AbilityName.SCORCH) {
                 AbilityContext abilityContext = new AbilityContext(table, null, null);
                 doNonLeaderCardsAbility(card, abilityContext, AbilityName.SCORCH);
-            }
-            else if (card.getAbilityName() == AbilityName.WEATHER) {
+            } else if (card.getAbilityName() == AbilityName.WEATHER) {
                 AbilityContext abilityContext = new AbilityContext(table, null, null);
-                ((WeatherCard)card).setPlayer(table.getCurrentPlayer());
+                ((WeatherCard) card).setPlayer(table.getCurrentPlayer());
                 doNonLeaderCardsAbility(card, abilityContext, AbilityName.SCORCH);
             }
         }
@@ -128,6 +127,7 @@ public class GameMenuController extends AppController {
         saveLog("card with id: " + cardId + " moved from " + origin + " to " + destination + " and ability applied");
         table.getCurrentPlayer().updateScore();
         table.getOpponent().updateScore();
+        gameMenuControllerView.updateAllLabels();
         if (table.getCurrentPlayer().getBoard().getHand().getCards().isEmpty()) {
             passRound();
         } else if (!table.getOpponent().isPassRound()) {
@@ -211,6 +211,7 @@ public class GameMenuController extends AppController {
             }
         }
         gameMenuControllerView.moveCardToDestinationFlowPane(cardId, origin, destination);
+        gameMenuControllerView.updateAllLabels();
         table.getCurrentPlayer().updateScore();
         table.getOpponent().updateScore();
         saveLog("card with id: " + cardId + " moved from " + origin + " to " + destination + " and ability applied");
@@ -265,6 +266,9 @@ public class GameMenuController extends AppController {
             case "currentPlayerRangedSpecialPlaceObservableList" -> {
                 return table.getCurrentPlayer().getBoard().getRangedCardPlace().getSpecialPlace();
             }
+            case "opponentPlayerHandObservableList" -> {
+                return table.getOpponent().getBoard().getHand().getCards();
+            }
             case "currentPlayerSiegeSpecialPlaceObservableList" -> {
                 return table.getCurrentPlayer().getBoard().getSiegeCardPlace().getSpecialPlace();
             }
@@ -301,7 +305,7 @@ public class GameMenuController extends AppController {
         }
     }
 
-    public void startNewGame(String player1Name, String player2Name, ArrayList<String> player1DeckNames, ArrayList<String> player2DeckNames, String player1SpecialCard, String player2SpecialCard) {
+    public void startNewGame(String player1Name, String player2Name, DeckToJson player1DeckNames, DeckToJson player2DeckNames) {
         Deck player1Deck = DeckManager.loadDeck(player1DeckNames, 1);
         Deck player2Deck = DeckManager.loadDeck(player2DeckNames, 2);
         Player player1 = new Player(player1Name);
@@ -310,8 +314,8 @@ public class GameMenuController extends AppController {
         player2.getBoard().setDeck(player2Deck);
         player1.getBoard().setHandForStartGame(player1Deck);
         player2.getBoard().setHandForStartGame(player2Deck);
-        player1.setSpecialCardCounter(Integer.parseInt(player1SpecialCard));
-        player2.setSpecialCardCounter(Integer.parseInt(player2SpecialCard));
+        player1.setSpecialCardCounter(player1.getSpecialCardCounter());
+        player2.setSpecialCardCounter(player2.getSpecialCardCounter());
         table = new Table(player1, player2);
         saveLog(generateInitialDeckData());
         Round round1 = new Round(1);
@@ -482,18 +486,21 @@ public class GameMenuController extends AppController {
             table.getCurrentRound().setDraw(true);
             table.getCurrentRound().setWon(false);
             table.getCurrentRound().setWinner(null);
-            player1.decreaseNumberOfVetoCards();
-            player2.decreaseNumberOfVetoCards();
+            player1.decreaseCrystals();
+            player2.decreaseCrystals();
+            gameMenuControllerView.updateAllLabels();
         } else if (player1.getScore() > player2.getScore()) {
             table.getCurrentRound().setDraw(false);
             table.getCurrentRound().setWon(true);
             table.getCurrentRound().setWinner(player1);
-            player2.decreaseNumberOfVetoCards();
+            player2.decreaseCrystals();
+            gameMenuControllerView.updateAllLabels();
         } else if (player1.getScore() < player2.getScore()) {
             table.getCurrentRound().setDraw(false);
             table.getCurrentRound().setWon(true);
             table.getCurrentRound().setWinner(player2);
-            player1.decreaseNumberOfVetoCards();
+            player1.decreaseCrystals();
+            gameMenuControllerView.updateAllLabels();
         }
         if (table.getCurrentPlayer().getBoard().getDeck().getFaction() == FactionsType.Monsters) {
             table.getCurrentPlayer().getBoard().getDeck().getFactionAbility().apply(table, table.getCurrentPlayer());

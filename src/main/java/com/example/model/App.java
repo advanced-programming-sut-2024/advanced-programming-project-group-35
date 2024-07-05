@@ -4,6 +4,7 @@ import com.example.controller.Controller;
 import com.example.controller.server.ClientConnector;
 import com.example.controller.server.ServerConnector;
 import com.example.model.card.Card;
+import com.example.model.deckmanager.DeckToJson;
 import com.example.view.AppView;
 import com.example.view.Menu;
 import com.google.gson.Gson;
@@ -31,6 +32,7 @@ public class App {
     //private static ArrayList<User> allUsers = new ArrayList<User>();
     private static ArrayList<Card> allCards = new ArrayList<Card>();
     private static ArrayList<User> allUsers = new ArrayList<User>();
+    public static int temporaryUserID = -1 ;
     private static Controller currentController;
     private static User loggedInUser;
     private static Menu currentMenu = Menu.LOGIN_MENU;
@@ -148,8 +150,26 @@ public class App {
         App.in = in;
     }
 
+    private static DeckToJson temporaryDeck;
+
+    public static void setTemporaryDeck(DeckToJson player1OfflineDeck) {
+        temporaryDeck = player1OfflineDeck;
+    }
+
+    public static DeckToJson getTemporaryDeck() {
+        return temporaryDeck;
+    }
+
     public void updateUserInfo() {
         updateUsersFromServer();
         appView.updateUserInfo();
+    }
+
+    public static void saveUsers(){
+        serverConnector.saveUsers(allUsers);
+    }
+
+    public static void loadUsers(){
+        allUsers = serverConnector.getAllUsers();
     }
 }

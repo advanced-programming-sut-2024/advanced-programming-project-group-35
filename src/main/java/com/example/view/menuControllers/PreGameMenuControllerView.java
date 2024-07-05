@@ -4,8 +4,11 @@ import com.example.Main;
 import com.example.controller.Controller;
 import com.example.controller.GameMenuController;
 import com.example.controller.PreGameMenuController;
-import com.example.model.DeckManager;
+import com.example.model.User;
+import com.example.model.card.enums.FactionsType;
+import com.example.model.deckmanager.DeckManager;
 import com.example.model.IO.errors.Errors;
+import com.example.model.alerts.AlertType;
 import com.example.model.card.enums.CardData;
 import com.example.model.App;
 import com.example.model.card.PreGameCard;
@@ -14,9 +17,10 @@ import com.example.model.card.factions.Factions;
 import com.example.model.card.factions.Monsters;
 import com.example.model.card.factions.Skellige;
 import com.example.model.card.factions.*;
-import com.example.model.game.Deck;
+import com.example.model.deckmanager.DeckToJson;
 import com.example.view.Menu;
 import com.example.view.OutputView;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,17 +29,20 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Objects;
 
 public class PreGameMenuControllerView {
@@ -49,6 +56,12 @@ public class PreGameMenuControllerView {
     public ImageView factionCard5;
     public FlowPane leaderCardPane;
     public AnchorPane chooseLeaderAnchorPane;
+    public TextField saveDeckNameField;
+    public TextField loadDeckNameField;
+    public Button saveDeckButton;
+    public Button loadDeckButton;
+    public Button chooseDirectoryButton;
+    public Button fileChooserButton;
     private Pane pane = App.getAppView().getPane();
     private final String srcPath = Main.class.getResource("/images/cards/").toExternalForm();
     public Pane mainPane;
@@ -56,9 +69,16 @@ public class PreGameMenuControllerView {
     public ScrollPane rightScrollPane;
     public HBox mainHBox;
     public VBox infoVBox;
+    private int saveState = 0;
+    private int loadState = 0;
     public Button startGameButton;
     public Button backButton;
     private Factions faction;
+    private int totalCards = 0;
+    private int soldiersCount = 0;
+    private int specialCardsCount = 0;
+    private int heroCardsCount = 0;
+    private int totalPower = 0;
     private ObservableList<PreGameCard> allCards = FXCollections.observableArrayList();
     private ObservableList<PreGameCard> playerDeck = FXCollections.observableArrayList();
     private ObservableList<PreGameCard> leaderCards = FXCollections.observableArrayList();
@@ -67,8 +87,8 @@ public class PreGameMenuControllerView {
     public FlowPane playerDeckPane;
     public static int player1OfflineID = -1;
     public static int player2OfflineID = -1;
-    private ArrayList<String> player1OfflineDeck = new ArrayList<>();
-    private ArrayList<String> player2OfflineDeck = new ArrayList<>();
+    private DeckToJson player1OfflineDeck;
+    private DeckToJson player2OfflineDeck;
 
     @FXML
     private Label playerNameLabel = new Label("player name: ");
@@ -346,26 +366,8 @@ public class PreGameMenuControllerView {
     }
 
     private void updateDeckInfo() {
-        int totalCards = playerDeck.size();
-        int soldiersCount = 0;
-        int specialCardsCount = 0;
-        int heroCardsCount = 0;
-        int totalPower = 0;
 
-        for (PreGameCard card : playerDeck) {
-            totalPower += card.getPower();
-            switch (card.getAbility()) {
-                case "soldier":
-                    soldiersCount++;
-                    break;
-                case "special":
-                    specialCardsCount++;
-                    break;
-                case "hero":
-                    heroCardsCount++;
-                    break;
-            }
-        }
+        updateNumbers();
 
         totalCardsLabel.setText("total cards: " + totalCards);
         soldiersCountLabel.setText("soldiers count: " + soldiersCount);
@@ -390,30 +392,30 @@ public class PreGameMenuControllerView {
             return;
         }
 
-        if (player1OfflineID == -1 && player2OfflineID == -1) {
+        if (App.temporaryUserID == -1) {
             player1OfflineID = App.getLoggedInUser().getID();
-            player1OfflineDeck = getPreGameCardNames(playerDeck);
+            //App.loadUsers();
+            App.temporaryUserID = player1OfflineID;
+            player1OfflineDeck = new DeckToJson(faction.getFaction().name(), leaderCard.getName(), totalCards, heroCardsCount, soldiersCount, specialCardsCount, totalPower,getPreGameCardNames(playerDeck));
+            App.setTemporaryDeck(player1OfflineDeck);
+            //App.saveUsers();
             App.setCurrentMenu(Menu.LOGIN_MENU);
             Controller.LOGIN_MENU_CONTROLLER.run();
-        } else if ((player1OfflineID == App.getLoggedInUser().getID()) && player2OfflineID == -1) {
+        } else if (App.temporaryUserID == App.getLoggedInUser().getID() && player2OfflineID == -1) {
             App.setCurrentMenu(Menu.LOGIN_MENU);
             Controller.LOGIN_MENU_CONTROLLER.run();
             OutputView.showOutputAlert(Errors.YOU_CANT_PLAY_WITH_YOURSELF);
         } else {
+            player1OfflineID = App.temporaryUserID;
             player2OfflineID = App.getLoggedInUser().getID();
-            player2OfflineDeck = getPreGameCardNames(playerDeck);
-            String specialCardsCount = specialCardsCountLabel.getText().substring(specialCardsCountLabel.getText().lastIndexOf(" ") + 1);
+            player2OfflineDeck = new DeckToJson(faction.getFaction().name(), leaderCard.getName(), totalCards, heroCardsCount, soldiersCount, specialCardsCount, totalPower,getPreGameCardNames(playerDeck));
+            player1OfflineDeck = App.getTemporaryDeck();
+            App.getLoggedInUser().setTemporaryDeck(player2OfflineDeck);
             GameMenuController gameMenuController = (GameMenuController) Controller.GAME_MENU_CONTROLLER.getController();
-            gameMenuController.startNewGame(App.getLoggedInUser().getUsername(), opponentName(), player1OfflineDeck, player2OfflineDeck, specialCardsCount, specialCardsCount);
-            App.setCurrentMenu(Menu.GAME_MENU);
+            gameMenuController.startNewGame(App.getLoggedInUser().getUsername(), User.getUserByID(App.temporaryUserID).getUsername(), player1OfflineDeck, player2OfflineDeck);
             gameMenuController.run();
             player1OfflineID = player2OfflineID = -1;
         }
-    }
-
-
-    private String opponentName() {
-        return "opponent";
     }
 
     private String getLeaderName(PreGameCard leaderCard) {
@@ -422,12 +424,10 @@ public class PreGameMenuControllerView {
 
     private ArrayList<String> getPreGameCardNames(ObservableList<PreGameCard> playerDeck) {
         ArrayList<String> playerDeckNames = new ArrayList<>();
-        playerDeckNames.add(faction.getFaction().toString());
-        playerDeckNames.add(getLeaderName(leaderCard));
+
         for (PreGameCard card : playerDeck) {
             playerDeckNames.add(card.getName());
         }
-        System.out.println("getPreGameCardNames: " + playerDeckNames); // اضافه کردن لاگ
         return playerDeckNames;
     }
 
@@ -496,5 +496,185 @@ public class PreGameMenuControllerView {
 
     public void openTerminal(MouseEvent mouseEvent) {
         App.getAppView().showTerminal();
+    }
+
+    public void loadDeck(MouseEvent mouseEvent) {
+        saveDeckNameField.setVisible(false);
+        chooseDirectoryButton.setVisible(false);
+        saveState = 0;
+        if (loadState == 0) {
+            loadDeckNameField.setVisible(true);
+            fileChooserButton.setVisible(true);
+            loadState = 1;
+        } else if (loadState == 1) {
+            if (loadDeckNameField.getText().equals("")) {
+                App.getAppView().showAlert("Please enter a name from your saved decks", AlertType.ERROR.getType());
+            } else if (!App.getLoggedInUser().isADeckExistWithThisName(loadDeckNameField.getText())) {
+                App.getAppView().showAlert("You don't have a deck with this name", AlertType.ERROR.getType());
+                loadDeckNameField.setVisible(false);
+                fileChooserButton.setVisible(false);
+                loadDeckNameField.setText("");
+                loadState = 0;
+            } else {
+                DeckToJson deckToJson = DeckManager.loadDeck(loadDeckNameField.getText(), App.getLoggedInUser().getID());
+                if (deckToJson == null) {
+                    App.getAppView().showAlert("Unable to load deck", AlertType.ERROR.getType());
+                } else {
+                    loadDeckPictures(deckToJson);
+                }
+                loadDeckNameField.setVisible(false);
+                fileChooserButton.setVisible(false);
+                loadDeckNameField.setText("");
+                loadState = 0;
+            }
+        }
+    }
+
+    private void loadDeckPictures(DeckToJson deckToJson) {
+        faction = FactionsType.getAbilityByName(deckToJson.getFaction());
+        resetMenu();
+        Thread loadDataThread = new Thread(() -> {
+            Platform.runLater(() -> {
+                try {
+                    Thread.sleep(3000);
+                    CardData leaderCardData = CardData.getCardDataByName(deckToJson.getLeader());
+                    System.out.println(CardData.getCardDataByName(deckToJson.getLeader()));
+                    leaderCard = new PreGameCard(leaderCardData.getName(), leaderCardData.getPower(), leaderCardData.getAbilityName(), srcPath + leaderCardData.getImageAddress());
+                    System.out.println(leaderCard.getName());
+                    ArrayList<PreGameCard> copyOfAllCards = new ArrayList<>(allCards);
+                    for (PreGameCard card : copyOfAllCards) {
+                        System.out.println(card.getName());
+                        if (deckToJson.getCards().contains(card.getName())) {
+                            addCardToDeck(card);
+                        }
+                    }
+                    updateDeckCardsPane();
+                    updateAllCardsPane();
+                    updateDeckInfo();
+//                    App.setCurrentController(Controller.PRE_GAME_MENU_CONTROLLER);
+//                    App.getAppView().showMenu(Menu.PREGAME_MENU);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            });
+        });
+        loadDataThread.start();
+    }
+
+    public void saveDeck(MouseEvent mouseEvent) {
+        loadDeckNameField.setVisible(false);
+        fileChooserButton.setVisible(false);
+        loadState = 0;
+        if (saveState == 0) {
+            if (playerDeck.size() < 22) {
+                totalCardsLabel.setTextFill(Color.RED);
+                OutputView.showOutputAlert(Errors.NOT_ENOUGH_CARDS);
+                new java.util.Timer().schedule(
+                        new java.util.TimerTask() {
+                            @Override
+                            public void run() {
+                                totalCardsLabel.setTextFill(Color.WHITE);
+                            }
+                        },
+                        3000
+                );
+            } else {
+                saveDeckNameField.setVisible(true);
+                chooseDirectoryButton.setVisible(true);
+                saveState = 1;
+            }
+        } else if (saveState == 1) {
+            if (saveDeckNameField.getText().equals("")) {
+                App.getAppView().showAlert("Please enter a name for your deck", AlertType.ERROR.getType());
+            } else if (App.getLoggedInUser().isADeckExistWithThisName(saveDeckNameField.getText())) {
+                App.getAppView().showAlert("You already have a Deck with this name", AlertType.ERROR.getType());
+                saveDeckNameField.setVisible(false);
+                saveDeckNameField.setText("");
+                saveState = 0;
+            } else {
+
+                updateNumbers();
+
+                DeckManager.saveDeck(new DeckToJson(faction.getFaction().name(), leaderCard.getName(), totalCards, heroCardsCount, soldiersCount, specialCardsCount, totalPower, getPreGameCardNames(playerDeck)), App.getLoggedInUser().getID(), saveDeckNameField.getText());
+                App.getLoggedInUser().addDeckNameToDeckAddresses(saveDeckNameField.getText());
+                saveDeckNameField.setVisible(false);
+                chooseDirectoryButton.setVisible(false);
+                App.loadUsers();
+                App.getLoggedInUser().addDeckNameToDeckAddresses(saveDeckNameField.getText());
+                App.saveUsers();
+                saveDeckNameField.setText("");
+                saveState = 0;
+                App.getAppView().showAlert("Deck saved successfully", AlertType.SUCCESS.getType());
+            }
+        }
+    }
+
+    public void chooseDirectoryToSaveDeckData(MouseEvent mouseEvent) {
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        directoryChooser.setTitle("Select Directory");
+
+        updateNumbers();
+
+        File selectedDirectory = directoryChooser.showDialog(primaryStage);
+        if (selectedDirectory != null) {
+            if (saveDeckNameField.getText().equals("")) {
+                App.getAppView().showAlert("Please enter a name for your deck", AlertType.ERROR.getType());
+            } else {
+                DeckManager.saveDeck(new DeckToJson(faction.getFaction().name(), leaderCard.getName(), totalCards, heroCardsCount, soldiersCount, specialCardsCount, totalPower, getPreGameCardNames(playerDeck)), selectedDirectory.getAbsolutePath(), saveDeckNameField.getText());
+                saveDeckNameField.setVisible(false);
+                chooseDirectoryButton.setVisible(false);
+                App.getAppView().showAlert("Deck saved successfully", AlertType.SUCCESS.getType());
+                saveDeckNameField.setText("");
+            }
+        } else {
+            App.getAppView().showAlert("Unable to Save Deck", AlertType.ERROR.getType());
+            loadDeckNameField.setText("");
+            loadDeckNameField.setVisible(false);
+            chooseDirectoryButton.setVisible(false);
+        }
+
+    }
+
+    private void updateNumbers() {
+        int i1 = 0, i2 = 0, i3 = 0, i4 = 0;
+        for (PreGameCard card : playerDeck) {
+            i1 += card.getPower();
+            switch (card.getAbility()) {
+                case "soldier":
+                    i2++;
+                    break;
+                case "special":
+                    i3++;
+                    break;
+                case "hero":
+                    i4++;
+                    break;
+            }
+        }
+        totalCards = playerDeck.size();
+        totalPower = i1;
+        soldiersCount = i2;
+        specialCardsCount = i3;
+        heroCardsCount = i4;
+    }
+
+    public void chooseDeckFile(MouseEvent mouseEvent) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open JSON File");
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("JSON Files", "*.json")
+        );
+
+        File selectedFile = fileChooser.showOpenDialog(stage);
+        DeckToJson deck = DeckManager.loadDeck(selectedFile.getAbsolutePath());
+        if (deck == null) {
+            App.getAppView().showAlert("Unable to load Deck", AlertType.ERROR.getType());
+        } else {
+            loadDeckPictures(deck);
+        }
+        loadState = 0;
+        loadDeckNameField.setVisible(false);
+        fileChooserButton.setVisible(false);
+        loadDeckNameField.setVisible(false);
     }
 }

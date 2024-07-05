@@ -119,7 +119,7 @@ public class DatabaseManager {
             pstmt.setInt(25, user.getNumberOfSpellCards());
             pstmt.setInt(26, user.getNumberOfMinionCards());
             pstmt.setString(27, user.getGameData() != null ? user.getGameData().toString() : "");
-            pstmt.setString(28, user.getDecksAddresses() != null ? user.getDecksAddresses().toString() : "");
+            pstmt.setString(28, user.getDeckNames() != null ? user.getDeckNames().toString() : "");
 
             int affectedRows = pstmt.executeUpdate();
 //            System.out.println("User " + user.getUsername() + " has been updated. Rows affected: " + affectedRows);
@@ -185,7 +185,7 @@ public class DatabaseManager {
                 pstmt.setInt(25, user.getNumberOfSpellCards());
                 pstmt.setInt(26, user.getNumberOfMinionCards());
                 pstmt.setString(27, user.getGameData() != null ? user.getGameData().toString() : "");
-                pstmt.setString(28, user.getDecksAddresses() != null ? user.getDecksAddresses().toString() : "");
+                pstmt.setString(28, user.getDeckNames() != null ? user.getDeckNames().toString() : "");
 
                 int affectedRows = pstmt.executeUpdate();
                 if (affectedRows == 0) {

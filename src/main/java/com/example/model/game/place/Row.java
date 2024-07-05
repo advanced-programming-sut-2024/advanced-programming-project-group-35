@@ -26,7 +26,11 @@ public class Row {
     }
 
     public SpecialCard getSpecialCard() {
-        return specialPlace.get(0);
+        if (specialPlace.isEmpty()) {
+            return null;
+        } else {
+            return specialPlace.get(0);
+        }
     }
 
     public void setSpecialCard(SpecialCard specialCard) {
