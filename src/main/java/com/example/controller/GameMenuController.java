@@ -305,7 +305,7 @@ public class GameMenuController extends AppController {
         }
     }
 
-    public void startNewGame(String player1Name, String player2Name, ArrayList<String> player1DeckNames, ArrayList<String> player2DeckNames, String player1SpecialCard, String player2SpecialCard) {
+    public void startNewGame(String player1Name, String player2Name, ArrayList<String> player1DeckNames, ArrayList<String> player2DeckNames) {
         Deck player1Deck = DeckManager.loadDeck(player1DeckNames, 1);
         Deck player2Deck = DeckManager.loadDeck(player2DeckNames, 2);
         Player player1 = new Player(player1Name);
@@ -314,8 +314,8 @@ public class GameMenuController extends AppController {
         player2.getBoard().setDeck(player2Deck);
         player1.getBoard().setHandForStartGame(player1Deck);
         player2.getBoard().setHandForStartGame(player2Deck);
-        player1.setSpecialCardCounter(Integer.parseInt(player1SpecialCard));
-        player2.setSpecialCardCounter(Integer.parseInt(player2SpecialCard));
+        player1.setSpecialCardCounter(Integer.parseInt(player1DeckNames.get(4)));
+        player2.setSpecialCardCounter(Integer.parseInt(player2DeckNames.get(4)));
         table = new Table(player1, player2);
         saveLog(generateInitialDeckData());
         Round round1 = new Round(1);

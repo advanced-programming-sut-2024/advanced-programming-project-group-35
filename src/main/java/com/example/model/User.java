@@ -1,8 +1,6 @@
 package com.example.model;
 
-import com.example.model.App;
 import com.example.model.card.enums.FactionsType;
-import com.example.model.GameData;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -56,6 +54,7 @@ public class User {
     public ArrayList<FriendRequest> getFriendRequests() {
         return friendRequests;
     }
+
 
     public User(String username, String password, String nickname, String email) {
         this.username = username;
@@ -265,7 +264,7 @@ public class User {
         return gameData;
     }
 
-    public ArrayList<String> getDecksAddresses() {
+    public ArrayList<String> getDeckNames() {
         return decksAddresses;
     }
 
@@ -275,5 +274,16 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public boolean isADeckExistWithThisName(String deckName) {
+        if (decksAddresses.contains(deckName)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public void addDeckNameToDeckNames(String deckName) {
+        decksAddresses.add(deckName);
     }
 }

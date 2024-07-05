@@ -6,6 +6,7 @@ import com.example.controller.GameMenuController;
 import com.example.controller.PreGameMenuController;
 import com.example.model.DeckManager;
 import com.example.model.IO.errors.Errors;
+import com.example.model.alerts.AlertType;
 import com.example.model.card.enums.CardData;
 import com.example.model.App;
 import com.example.model.card.PreGameCard;
@@ -25,6 +26,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -49,6 +51,10 @@ public class PreGameMenuControllerView {
     public ImageView factionCard5;
     public FlowPane leaderCardPane;
     public AnchorPane chooseLeaderAnchorPane;
+    public TextField saveDeckNameField;
+    public TextField loadDeckNameField;
+    public Button saveDeckButton;
+    public Button loadDeckButton;
     private Pane pane = App.getAppView().getPane();
     private final String srcPath = Main.class.getResource("/images/cards/").toExternalForm();
     public Pane mainPane;
@@ -56,6 +62,8 @@ public class PreGameMenuControllerView {
     public ScrollPane rightScrollPane;
     public HBox mainHBox;
     public VBox infoVBox;
+    private int saveState = 0;
+    private int loadState = 0;
     public Button startGameButton;
     public Button backButton;
     private Factions faction;
@@ -402,9 +410,8 @@ public class PreGameMenuControllerView {
         } else {
             player2OfflineID = App.getLoggedInUser().getID();
             player2OfflineDeck = getPreGameCardNames(playerDeck);
-            String specialCardsCount = specialCardsCountLabel.getText().substring(specialCardsCountLabel.getText().lastIndexOf(" ") + 1);
             GameMenuController gameMenuController = (GameMenuController) Controller.GAME_MENU_CONTROLLER.getController();
-            gameMenuController.startNewGame(App.getLoggedInUser().getUsername(), opponentName(), player1OfflineDeck, player2OfflineDeck, specialCardsCount, specialCardsCount);
+            gameMenuController.startNewGame(App.getLoggedInUser().getUsername(), opponentName(), player1OfflineDeck, player2OfflineDeck);
             App.setCurrentMenu(Menu.GAME_MENU);
             gameMenuController.run();
             player1OfflineID = player2OfflineID = -1;
@@ -424,10 +431,14 @@ public class PreGameMenuControllerView {
         ArrayList<String> playerDeckNames = new ArrayList<>();
         playerDeckNames.add(faction.getFaction().toString());
         playerDeckNames.add(getLeaderName(leaderCard));
+        playerDeckNames.add(totalCardsLabel.getText());
+        playerDeckNames.add(soldiersCountLabel.getText());
+        playerDeckNames.add(specialCardsCountLabel.getText());
+        playerDeckNames.add(totalPowerLabel.getText());
+
         for (PreGameCard card : playerDeck) {
             playerDeckNames.add(card.getName());
         }
-        System.out.println("getPreGameCardNames: " + playerDeckNames); // اضافه کردن لاگ
         return playerDeckNames;
     }
 
@@ -496,5 +507,54 @@ public class PreGameMenuControllerView {
 
     public void openTerminal(MouseEvent mouseEvent) {
         App.getAppView().showTerminal();
+    }
+
+    public void loadDeck(MouseEvent mouseEvent) {
+        saveDeckNameField.setVisible(false);
+        saveState = 0;
+        if (loadState == 0) {
+            loadDeckNameField.setVisible(true);
+            loadState = 1;
+        } else if (loadState == 1) {
+
+            loadState = 0;
+        }
+    }
+
+    public void saveDeck(MouseEvent mouseEvent) {
+        loadDeckNameField.setVisible(false);
+        loadState = 0;
+        if (saveState == 0) {
+            if (playerDeck.size() < 22) {
+                totalCardsLabel.setTextFill(Color.RED);
+                OutputView.showOutputAlert(Errors.NOT_ENOUGH_CARDS);
+                new java.util.Timer().schedule(
+                        new java.util.TimerTask() {
+                            @Override
+                            public void run() {
+                                totalCardsLabel.setTextFill(Color.WHITE);
+                            }
+                        },
+                        3000
+                );
+            } else {
+                saveDeckNameField.setVisible(true);
+                saveState = 1;
+            }
+        } else if (saveState == 1) {
+            if (saveDeckNameField.getText().equals("")) {
+                App.getAppView().showAlert("Please enter a name for your deck", AlertType.ERROR.getType());
+            } else if (App.getLoggedInUser().isADeckExistWithThisName(saveDeckNameField.getText())) {
+                App.getAppView().showAlert("You already have a Deck with this name", AlertType.ERROR.getType());
+                saveDeckNameField.setVisible(false);
+                saveDeckNameField.setText("");
+                saveState = 0;
+            } else {
+                DeckManager.saveDeck(getPreGameCardNames(playerDeck), App.getLoggedInUser().getID());
+                App.getLoggedInUser().addDeckNameToDeckNames(saveDeckNameField.getText());
+                saveDeckNameField.setVisible(false);
+                saveState = 0;
+            }
+        }
     }
 }

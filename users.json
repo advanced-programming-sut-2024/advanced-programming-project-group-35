@@ -1,5 +1,6 @@
 [
   {
+    "isOnline": true,
     "id": 5,
     "username": "ali",
     "password": "@li0083Moi",
@@ -26,6 +27,7 @@
     "decksAddresses": []
   },
   {
+    "isOnline": false,
     "id": 10,
     "username": "ali123",
     "password": "Bp+\u003d%\u003d1%cI",
