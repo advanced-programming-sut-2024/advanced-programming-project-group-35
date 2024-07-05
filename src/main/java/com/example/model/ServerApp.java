@@ -74,7 +74,7 @@ public class ServerApp {
         user.setOnline(true);
     }
 
-    private static User getUserByID(int userID) {
+    public static User getUserByID(int userID) {
         for (User user : allUsers) {
             if (user.getID() == userID) {
                 return user;
@@ -98,5 +98,28 @@ public class ServerApp {
         StringBuilder messageBuilder = new StringBuilder();
         messageBuilder.append("MESSAGE|").append(senderID).append("|").append(message);
         clientConnector.sendMessage(messageBuilder.toString());
+    }
+
+    public static void sendGameRequest(int senderID, int receiverID) {
+        //check if they are friends:
+        User sender = getUserByID(senderID);
+        User receiver = getUserByID(receiverID);
+        if (sender == null || receiver == null) {
+            sendMessage(senderID, senderID, "User not found.");
+            return;
+        }
+        if (!sender.isFriend(receiver)) {
+            sendMessage(senderID, senderID, "You are not friends.");
+            return;
+        }
+        //find user connector
+        PlayerHandler clientConnector = server.getClientConnector(receiverID);
+        if (clientConnector == null) {
+            return;
+        }
+        //send request
+        StringBuilder requestBuilder = new StringBuilder();
+        requestBuilder.append("REQUEST|").append(senderID).append("|").append(receiverID);
+        clientConnector.sendMessage(requestBuilder.toString());
     }
 }

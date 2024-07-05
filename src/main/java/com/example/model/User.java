@@ -221,4 +221,13 @@ public class User {
     public void setOnline(boolean b) {
         isOnline = b;
     }
+
+    public boolean isFriend(User receiver) {
+        for (User friend : friends) {
+            if (friend.equals(receiver)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

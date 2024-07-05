@@ -8,6 +8,8 @@ public enum Menu {
     GAME_MENU("Game Menu", "/FXML/gameMenu.fxml"),
     GAME_HISTORY_MENU("Game History Menu", "/FXML/gameHistoryMenu.fxml"),
     SCORE_TABLE_MENU("Score Table Menu", "/FXML/scoreTableMenu.fxml"),
+    FRIENDS_MENU("Friends Menu", "/FXML/friendsMenu.fxml")
+
     ;
     private final String title;
     private final String fxmlFile;

@@ -84,6 +84,7 @@ public class App {
     }
 
     private static void connectSereverToApp() {
+        out.println("SET_PLAYER|" + loggedInUser.getID());
         try {
             clientConnector = new ClientConnector(loggedInUser.getID());
             new Thread(clientConnector).start();

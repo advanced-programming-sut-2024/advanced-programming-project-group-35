@@ -30,8 +30,8 @@ public class Main extends Application {
         AppView appView = new AppView();
         App.setAppView(appView);
         connectToServer();
-        App.setServerData(socket, out, in);
         appView.start(stage);
+        App.setServerData(socket, out, in);
     }
 
     private void connectToServer() {

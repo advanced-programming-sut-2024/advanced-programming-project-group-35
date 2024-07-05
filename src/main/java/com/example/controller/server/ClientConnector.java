@@ -51,6 +51,7 @@ public class ClientConnector implements Runnable {
             closeConnection();
         }
     }
+
     private void handleDisconnection(String message) {
         Platform.runLater(() -> {
             App.getAppView().showMessage(message);
@@ -85,7 +86,19 @@ public class ClientConnector implements Runnable {
             App.getAppView().updateUserInfo();
         } else if (message.startsWith("MESSAGE")) {
             processMessageAlert(message);
+        } else if (message.startsWith("REQUEST")) {
+            processRequest(message);
         }
+    }
+
+    private void processRequest(String message) {
+        String[] parts = message.split("\\|");
+        int senderID = Integer.parseInt(parts[1]);
+        String senderName = User.getUserByID(senderID).getUsername();
+        //show a message with accept and reject buttons
+        Platform.runLater(() -> {
+            App.getAppView().showRequest(senderName, senderID);
+        });
     }
 
     private void processMessageAlert(String message) {
