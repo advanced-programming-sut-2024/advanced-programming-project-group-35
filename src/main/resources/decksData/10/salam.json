@@ -1,0 +1,33 @@
+{
+  "faction": "Monsters",
+  "leader": "leaders_monsters_eredin_the_treacherous",
+  "totalNumberOfCards": 22,
+  "totalNumberOfHeros": 2,
+  "totalNumberOfSoldiers": 20,
+  "totalNumberOfSpecialCards": 0,
+  "sumOfPowers": 98,
+  "cards": [
+    "neutral_villen",
+    "neutral_yennefer",
+    "neutral_zoltan",
+    "monsters_arachas",
+    "monsters_arachas_1",
+    "monsters_arachas_2",
+    "monsters_arachas_behemoth",
+    "monsters_vampire_bruxa",
+    "monsters_celaeno_harpy",
+    "monsters_cockatrice",
+    "monsters_draug",
+    "monsters_earth_elemental",
+    "monsters_vampire_ekkimara",
+    "monsters_endrega",
+    "monsters_fiend",
+    "monsters_fire_elemental",
+    "monsters_vampire_fleder",
+    "monsters_foglet",
+    "monsters_forktail",
+    "monsters_frightener",
+    "monsters_gargoyle",
+    "monsters_ghoul"
+  ]
+}

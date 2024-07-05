@@ -101,7 +101,7 @@ public class DeckManager {
         deck.setLeader(LeaderFactory.getLeaderCardByName(deckToJson.getLeader()));
         deck.setFaction(FactionsType.getFactionByName(deckToJson.getFaction()));
         deck.setFactionAbility(FactionsType.getAbilityByName(deckToJson.getFaction()));
-        for (int i = 7; i < deckToJson.getCards().size(); i++) {
+        for (int i = 0; i < deckToJson.getCards().size(); i++) {
             Card card = CardFactory.getCardByName(deckToJson.getCards().get(i));
             card.setIdInGame(first * 100 + i - 1);
             deck.addCard(card);

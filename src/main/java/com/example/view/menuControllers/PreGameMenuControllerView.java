@@ -409,13 +409,7 @@ public class PreGameMenuControllerView {
             player1OfflineID = App.temporaryUserID;
             player2OfflineID = App.getLoggedInUser().getID();
             player2OfflineDeck = new DeckToJson(faction.getFaction().name(), leaderCard.getName(), totalCards, heroCardsCount, soldiersCount, specialCardsCount, totalPower,getPreGameCardNames(playerDeck));
-            if (player2OfflineDeck == null) {
-                System.out.println("2");
-            }
             player1OfflineDeck = App.getTemporaryDeck();
-            if (player1OfflineDeck == null) {
-                System.out.println("3");
-            }
             App.getLoggedInUser().setTemporaryDeck(player2OfflineDeck);
             GameMenuController gameMenuController = (GameMenuController) Controller.GAME_MENU_CONTROLLER.getController();
             gameMenuController.startNewGame(App.getLoggedInUser().getUsername(), User.getUserByID(App.temporaryUserID).getUsername(), player1OfflineDeck, player2OfflineDeck);
