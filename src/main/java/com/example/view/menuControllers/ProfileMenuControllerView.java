@@ -117,6 +117,8 @@ public class ProfileMenuControllerView {
     }
 
     public void openFriendsListMenu(MouseEvent mouseEvent) {
+        App.setCurrentMenu(Menu.FRIENDS_MENU);
+        Controller.FRIENDS_MENU_CONTROLLER.run();
     }
 
     public void openTerminal(MouseEvent mouseEvent) {
