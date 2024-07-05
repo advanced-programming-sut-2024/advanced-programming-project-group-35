@@ -319,4 +319,12 @@ public enum CardData {
             return null;
         }
     }
+
+    public CardData getByName(String name){
+        for (CardData cardData : CardData.values()) {
+            if (cardData.name.equals(name))
+                return cardData;
+        }
+        return null;
+    }
 }

@@ -105,6 +105,14 @@ public class App {
         serverConnector.saveUsers(allUsers);
     }
 
+    public static void saveUsers(){
+        serverConnector.saveUsers(allUsers);
+    }
+
+    public static void loadUsers(){
+        allUsers = serverConnector.getAllUsers();
+    }
+
     public static void addSecurityQuestion(String question) {
         App.securityQuestions.add(question);
     }
@@ -147,6 +155,10 @@ public class App {
         App.socket = socket;
         App.out = out;
         App.in = in;
+    }
+
+    public static ServerConnector getServerConnector() {
+        return serverConnector;
     }
 
     public void updateUserInfo() {

@@ -230,4 +230,8 @@ public class User {
         }
         return false;
     }
+
+    public ArrayList<String> getDeckName() {
+        return decksAddresses;
+    }
 }

@@ -56,7 +56,8 @@ public class ServerConnector {
                 jsonBuilder.append(line).append("\n");
             }
 
-            Type userListType = new TypeToken<ArrayList<User>>(){}.getType();
+            Type userListType = new TypeToken<ArrayList<User>>() {
+            }.getType();
             allUsers = gson.fromJson(jsonBuilder.toString(), userListType);
             System.out.println("Users data loaded successfully.");
         } catch (IOException e) {
@@ -75,9 +76,10 @@ public class ServerConnector {
                 Socket socket = new Socket(SERVER_IP, SERVER_PORT);
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true)
         ) {
-            out.println("SYSTEM|ACCEPT_FRIEND_REQUEST");
+            out.print("SYSTEM|ACCEPT_FRIEND_REQUEST|");
+            out.print(request.getSender().getID());
+            out.print("|");
             out.println(request.getReceiver().getID());
-            out.println(request.getSender().getID());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -88,9 +90,10 @@ public class ServerConnector {
                 Socket socket = new Socket(SERVER_IP, SERVER_PORT);
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true)
         ) {
-            out.println("SYSTEM|REJECT_FRIEND_REQUEST");
+            out.print("SYSTEM|REJECT_FRIEND_REQUEST");
+            out.print(request.getSender().getID());
+            out.print("|");
             out.println(request.getReceiver().getID());
-            out.println(request.getSender().getID());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -101,8 +104,9 @@ public class ServerConnector {
                 Socket socket = new Socket(SERVER_IP, SERVER_PORT);
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true)
         ) {
-            out.println("SYSTEM|SEND_FRIEND_REQUEST");
-            out.println(request.getSender().getID());
+            out.print("SYSTEM|SEND_FRIEND_REQUEST");
+            out.print(request.getSender().getID());
+            out.print("|");
             out.println(request.getReceiver().getID());
         } catch (IOException e) {
             e.printStackTrace();
@@ -147,6 +151,47 @@ public class ServerConnector {
             System.out.println("-message sent to server");
         } catch (IOException e) {
             e.printStackTrace();
+        }
     }
+
+    public void sendGameRequest(int senderID, int receiverID) {
+        try (
+                Socket socket = new Socket(SERVER_IP, SERVER_PORT);
+                PrintWriter out = new PrintWriter(socket.getOutputStream(), true)
+        ) {
+            out.print("GameRequest|");
+            out.print(senderID);
+            out.print("|");
+            out.println(receiverID);
+            System.out.println("-game request sent to server");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendRandomGameRequest(int id) {
+        try (
+                Socket socket = new Socket(SERVER_IP, SERVER_PORT);
+                PrintWriter out = new PrintWriter(socket.getOutputStream(), true)
+        ) {
+            out.print("RandomGameRequest|");
+            out.println(id);
+            System.out.println("-random game request sent to server");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendTournamentGameRequest(int id) {
+        try (
+                Socket socket = new Socket(SERVER_IP, SERVER_PORT);
+                PrintWriter out = new PrintWriter(socket.getOutputStream(), true)
+        ) {
+            out.print("TournamentGameRequest|");
+            out.println(id);
+            System.out.println("-tournament game request sent to server");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

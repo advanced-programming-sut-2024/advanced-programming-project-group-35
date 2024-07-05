@@ -11,7 +11,8 @@ import java.util.ArrayList;
 
 public class GameHandler implements Runnable{
     private ArrayList<PlayerHandler> spectators = new ArrayList<>();
-
+    private int winnerID;
+    private boolean isGameEnded = false;
     private PlayerHandler player1Handler;
     private PlayerHandler player2Handler;
     private BufferedReader player1In;
@@ -69,6 +70,9 @@ public class GameHandler implements Runnable{
                     spectator.getOut().println(inputLine);
                 }
             }
+            inputLine = player1In.readLine();
+            winnerID = Integer.parseInt(inputLine.split("\\|")[1]);
+            isGameEnded = true;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -82,5 +86,13 @@ public class GameHandler implements Runnable{
         }
         spectators.add(spectator);
         spectator.wait();
+    }
+    public int getWinnerID() {
+        return winnerID;
+    }
+
+    // اضافه کردن getter برای isGameEnded
+    public boolean isGameEnded() {
+        return isGameEnded;
     }
 }

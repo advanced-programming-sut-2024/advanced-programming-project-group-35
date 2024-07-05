@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class Server {
     private static final int PORT = 8080;
-    ConcurrentHashMap<Integer, PlayerHandler> players = new ConcurrentHashMap<>();
+    public ConcurrentHashMap<Integer, PlayerHandler> players = new ConcurrentHashMap<>();
     private ConcurrentHashMap<Integer, OnlineTable> games = new ConcurrentHashMap<>();
     private ConcurrentHashMap<Integer, PlayerHandler> clientConnectors = new ConcurrentHashMap<>();
 
@@ -21,6 +21,9 @@ public class Server {
         ServerApp.setServer(this);
         ServerApp.loadUsers("users.json");
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            for (User user : ServerApp.allUsers) {
+                System.out.println(user.getDeckName());
+            }
             ServerApp.saveUsers("users.json");
         }));
         try (ServerSocket serverSocket = new ServerSocket(PORT)) {

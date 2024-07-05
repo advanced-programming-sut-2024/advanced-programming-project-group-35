@@ -6,6 +6,7 @@ import com.example.controller.GameMenuController;
 import com.example.controller.PreGameMenuController;
 import com.example.model.DeckManager;
 import com.example.model.IO.errors.Errors;
+import com.example.model.User;
 import com.example.model.card.enums.CardData;
 import com.example.model.App;
 import com.example.model.card.PreGameCard;
@@ -374,6 +375,7 @@ public class PreGameMenuControllerView {
     }
 
     public void startGameButtonAction(ActionEvent actionEvent) {
+        System.out.println(App.getLoggedInUser().getDeckName());
         if (playerDeck.size() < 22) {
             totalCardsLabel.setTextFill(Color.RED);
             OutputView.showOutputAlert(Errors.NOT_ENOUGH_CARDS);
@@ -408,6 +410,29 @@ public class PreGameMenuControllerView {
             player1OfflineID = player2OfflineID = -1;
         }
 
+    }
+
+    private void startGameWithFriend(String friendUsername) {
+        //send request to server
+    }
+
+    public void sendRequestToFriend(String name) {
+        int senderID = App.getLoggedInUser().getID();
+        User receiver = App.getUserByUsername(name);
+        if (receiver == null) {
+            OutputView.showOutputAlert(Errors.USER_NOT_FOUND);
+            return;
+        }
+        int receiverID = receiver.getID();
+        App.getServerConnector().sendGameRequest(senderID, receiverID);
+    }
+
+    public void sendRandomGameRequest(ActionEvent actionEvent) {
+        App.getServerConnector().sendRandomGameRequest(App.getLoggedInUser().getID());
+    }
+
+    public void sendTournamentGameRequest(ActionEvent actionEvent) {
+        App.getServerConnector().sendTournamentGameRequest(App.getLoggedInUser().getID());
     }
 
     private ArrayList<String> opponentDeck() {

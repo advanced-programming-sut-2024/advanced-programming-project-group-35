@@ -15,6 +15,8 @@ import java.util.ArrayList;
 
 public class ServerApp {
     private static Server server;
+    private static int[] randomPlayers = new int[2];
+    private static int[] tournamentPlayers = new int[8];
 
     public static void setServer(Server server) {
         ServerApp.server = server;
@@ -24,7 +26,8 @@ public class ServerApp {
         return server;
     }
 
-    private static ArrayList<User> allUsers = new ArrayList<User>();
+    public static ArrayList<User> allUsers = new ArrayList<User>();
+
     public static void saveUsers(String filename) {
         for (User user : allUsers) {
             System.out.println(user.getUsername());
@@ -121,5 +124,67 @@ public class ServerApp {
         StringBuilder requestBuilder = new StringBuilder();
         requestBuilder.append("REQUEST|").append(senderID).append("|").append(receiverID);
         clientConnector.sendMessage(requestBuilder.toString());
+    }
+
+    public static void StartOnlineGame(int player1ID, int player2ID) {
+        //find user connector
+        PlayerHandler clientConnector1 = server.getClientConnector(player1ID);
+        PlayerHandler clientConnector2 = server.getClientConnector(player2ID);
+        if (clientConnector1 == null || clientConnector2 == null) {
+            return;
+        }
+        //send request
+        StringBuilder requestBuilder = new StringBuilder();
+        requestBuilder.append("GameStarts|").append(player1ID).append("|").append(player2ID);
+        clientConnector1.sendMessage(requestBuilder.toString());
+        clientConnector2.sendMessage(requestBuilder.toString());
+    }
+
+    public static void randomGame(int senderID) {
+        //find user connector
+        PlayerHandler clientConnector = server.getClientConnector(senderID);
+        if (clientConnector == null) {
+            return;
+        }
+        //find random player
+        if (randomPlayers[0] == 0) {
+            randomPlayers[0] = senderID;
+            return;
+        }
+        randomPlayers[1] = senderID;
+        //send request
+        StartOnlineGame(randomPlayers[0], randomPlayers[1]);
+        randomPlayers[0] = 0;
+        randomPlayers[1] = 0;
+    }
+
+    public static void tournament(int senderID) {
+        //find user connector
+        PlayerHandler clientConnector = server.getClientConnector(senderID);
+        if (clientConnector == null) {
+            return;
+        }
+        //find random player
+        for (int i = 0; i < tournamentPlayers.length; i++) {
+            if (tournamentPlayers[i] == 0) {
+                tournamentPlayers[i] = senderID;
+                return;
+            }
+        }
+        //send request
+        for (int i = 0; i < tournamentPlayers.length; i++) {
+            if (tournamentPlayers[i] == 0) {
+                return;
+            }
+        }
+        startTournament();
+    }
+
+    private static void startTournament() { //2-step elimination
+        //send request
+        StartOnlineGame(tournamentPlayers[0], tournamentPlayers[1]);
+        StartOnlineGame(tournamentPlayers[2], tournamentPlayers[3]);
+        StartOnlineGame(tournamentPlayers[4], tournamentPlayers[5]);
+        StartOnlineGame(tournamentPlayers[6], tournamentPlayers[7]);
     }
 }
