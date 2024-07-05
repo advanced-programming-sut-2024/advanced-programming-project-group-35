@@ -1,0 +1,202 @@
+{
+  "player1": "ali",
+  "player1Faction": "RealmsNorthern",
+  "player1Hand": [
+    {
+      "name": "neutral_yennefer",
+      "id": 105
+    },
+    {
+      "name": "realms_kaedwen_siege_1",
+      "id": 118
+    },
+    {
+      "name": "realms_kaedwen_siege_2",
+      "id": 119
+    },
+    {
+      "name": "neutral_cow",
+      "id": 101
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 103
+    },
+    {
+      "name": "realms_dethmold",
+      "id": 106
+    },
+    {
+      "name": "realms_keira",
+      "id": 108
+    },
+    {
+      "name": "realms_sheldon",
+      "id": 110
+    },
+    {
+      "name": "realms_redania_1",
+      "id": 112
+    },
+    {
+      "name": "realms_siege_tower",
+      "id": 114
+    },
+    {
+      "name": "realms_poor_infantry",
+      "id": 116
+    },
+    {
+      "name": "realms_natalis",
+      "id": 120
+    }
+  ],
+  "player1Deck": [
+    {
+      "name": "neutral_dandelion",
+      "id": 102
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 104
+    },
+    {
+      "name": "realms_philippa",
+      "id": 107
+    },
+    {
+      "name": "realms_sabrina",
+      "id": 109
+    },
+    {
+      "name": "realms_trebuchet_1",
+      "id": 111
+    },
+    {
+      "name": "realms_sheala",
+      "id": 113
+    },
+    {
+      "name": "realms_stennis",
+      "id": 115
+    },
+    {
+      "name": "realms_redania",
+      "id": 117
+    },
+    {
+      "name": "realms_dijkstra",
+      "id": 121
+    },
+    {
+      "name": "realms_esterad",
+      "id": 122
+    }
+  ],
+  "player2": "opponent",
+  "player2Faction": "RealmsNorthern",
+  "player2Hand": [
+    {
+      "name": "neutral_yennefer",
+      "id": 205
+    },
+    {
+      "name": "realms_kaedwen_siege_1",
+      "id": 218
+    },
+    {
+      "name": "realms_kaedwen_siege_2",
+      "id": 219
+    },
+    {
+      "name": "neutral_cow",
+      "id": 201
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 203
+    },
+    {
+      "name": "realms_dethmold",
+      "id": 206
+    },
+    {
+      "name": "realms_keira",
+      "id": 208
+    },
+    {
+      "name": "realms_sheldon",
+      "id": 210
+    },
+    {
+      "name": "realms_redania_1",
+      "id": 212
+    },
+    {
+      "name": "realms_siege_tower",
+      "id": 214
+    },
+    {
+      "name": "realms_poor_infantry",
+      "id": 216
+    },
+    {
+      "name": "realms_natalis",
+      "id": 220
+    }
+  ],
+  "player2Deck": [
+    {
+      "name": "neutral_dandelion",
+      "id": 202
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 204
+    },
+    {
+      "name": "realms_philippa",
+      "id": 207
+    },
+    {
+      "name": "realms_sabrina",
+      "id": 209
+    },
+    {
+      "name": "realms_trebuchet_1",
+      "id": 211
+    },
+    {
+      "name": "realms_sheala",
+      "id": 213
+    },
+    {
+      "name": "realms_stennis",
+      "id": 215
+    },
+    {
+      "name": "realms_redania",
+      "id": 217
+    },
+    {
+      "name": "realms_dijkstra",
+      "id": 221
+    },
+    {
+      "name": "realms_esterad",
+      "id": 222
+    }
+  ],
+  "commands": [
+    "card with id: 110 moved from currentPlayerHandObservableList to currentPlayerRangedObservableList and ability applied",
+    "change turn",
+    "card with id: 206 moved from currentPlayerHandObservableList to currentPlayerRangedObservableList and ability applied",
+    "change turn",
+    "card with id: 106 moved from currentPlayerHandObservableList to currentPlayerRangedObservableList and ability applied",
+    "change turn",
+    "card with id: 208 moved from currentPlayerHandObservableList to currentPlayerRangedObservableList and ability applied",
+    "change turn",
+    "card with id: 108 moved from currentPlayerHandObservableList to currentPlayerRangedObservableList and ability applied",
+    "change turn"
+  ]
+}

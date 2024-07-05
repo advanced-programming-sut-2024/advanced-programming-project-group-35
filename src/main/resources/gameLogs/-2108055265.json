@@ -1,0 +1,205 @@
+{
+  "player1": "opponent",
+  "player1Faction": "ScoiaTael",
+  "player1Hand": [
+    {
+      "name": "neutral_yennefer",
+      "id": 209
+    },
+    {
+      "name": "scoiatael_havekar_nurse",
+      "id": 220
+    },
+    {
+      "name": "scoiatael_havekar_nurse_1",
+      "id": 221
+    },
+    {
+      "name": "scoiatael_havekar_nurse_2",
+      "id": 222
+    },
+    {
+      "name": "neutral_gaunter_odimm",
+      "id": 201
+    },
+    {
+      "name": "neutral_geralt",
+      "id": 203
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 205
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 207
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 210
+    },
+    {
+      "name": "scoiatael_ciaran",
+      "id": 212
+    },
+    {
+      "name": "special_horn",
+      "id": 214
+    },
+    {
+      "name": "special_horn_2",
+      "id": 216
+    },
+    {
+      "name": "scoiatael_elf_skirmisher_2",
+      "id": 218
+    }
+  ],
+  "player1Deck": [
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 202
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 204
+    },
+    {
+      "name": "neutral_triss",
+      "id": 206
+    },
+    {
+      "name": "neutral_villen",
+      "id": 208
+    },
+    {
+      "name": "scoiatael_barclay",
+      "id": 211
+    },
+    {
+      "name": "scoiatael_dennis",
+      "id": 213
+    },
+    {
+      "name": "special_horn_1",
+      "id": 215
+    },
+    {
+      "name": "special_mardroeme",
+      "id": 217
+    },
+    {
+      "name": "scoiatael_filavandrel",
+      "id": 219
+    },
+    {
+      "name": "scoiatael_havekar_support",
+      "id": 223
+    }
+  ],
+  "player2": "ali",
+  "player2Faction": "ScoiaTael",
+  "player2Hand": [
+    {
+      "name": "neutral_yennefer",
+      "id": 109
+    },
+    {
+      "name": "scoiatael_havekar_nurse",
+      "id": 120
+    },
+    {
+      "name": "scoiatael_havekar_nurse_1",
+      "id": 121
+    },
+    {
+      "name": "scoiatael_havekar_nurse_2",
+      "id": 122
+    },
+    {
+      "name": "neutral_gaunter_odimm",
+      "id": 101
+    },
+    {
+      "name": "neutral_geralt",
+      "id": 103
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 105
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 107
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 110
+    },
+    {
+      "name": "scoiatael_ciaran",
+      "id": 112
+    },
+    {
+      "name": "special_horn",
+      "id": 114
+    },
+    {
+      "name": "special_horn_2",
+      "id": 116
+    },
+    {
+      "name": "scoiatael_elf_skirmisher_2",
+      "id": 118
+    }
+  ],
+  "player2Deck": [
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 102
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 104
+    },
+    {
+      "name": "neutral_triss",
+      "id": 106
+    },
+    {
+      "name": "neutral_villen",
+      "id": 108
+    },
+    {
+      "name": "scoiatael_barclay",
+      "id": 111
+    },
+    {
+      "name": "scoiatael_dennis",
+      "id": 113
+    },
+    {
+      "name": "special_horn_1",
+      "id": 115
+    },
+    {
+      "name": "special_mardroeme",
+      "id": 117
+    },
+    {
+      "name": "scoiatael_filavandrel",
+      "id": 119
+    },
+    {
+      "name": "scoiatael_havekar_support",
+      "id": 123
+    }
+  ],
+  "commands": [
+    "card with id: 207 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableList and ability applied",
+    "change turn",
+    "card with id: 107 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableList and ability applied",
+    "change turn",
+    "change turn"
+  ]
+}

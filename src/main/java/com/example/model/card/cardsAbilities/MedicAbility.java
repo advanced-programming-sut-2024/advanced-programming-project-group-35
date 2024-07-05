@@ -23,13 +23,10 @@ public class MedicAbility implements Ability {
             discardPile.removeCard(cardToRevive);
             if (cardToRevive != null) {
                 if (cardToRevive.getPlace() == Place.CLOSE_COMBAT) {
-                    abilityContext.getTable().getCurrentPlayer().getBoard().getHand().addCard(cardToRevive);
                     ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(cardToRevive.getIdInGame(), RowsInGame.currentPlayerDiscardPlace.toString(), RowsInGame.currentPlayerCloseCombat.toString());
                 } else if (cardToRevive.getPlace() == Place.SIEGE) {
-                    abilityContext.getTable().getCurrentPlayer().getBoard().getHand().addCard(cardToRevive);
                     ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(cardToRevive.getIdInGame(), RowsInGame.currentPlayerDiscardPlace.toString(), RowsInGame.currentPlayerSiege.toString());
                 } else {
-                    abilityContext.getTable().getCurrentPlayer().getBoard().getHand().addCard(cardToRevive);
                     ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(cardToRevive.getIdInGame(), RowsInGame.currentPlayerDiscardPlace.toString(), RowsInGame.currentPlayerRanged.toString());
                 }
             }

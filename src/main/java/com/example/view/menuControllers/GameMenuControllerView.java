@@ -683,6 +683,9 @@ public class GameMenuControllerView {
             case "opponentPlayerSiegeObservableList" -> {
                 return opponentSiege;
             }
+            case "opponentPlayerHandObservableList" -> {
+                return opponentPlayerHand;
+            }
             case "opponentPlayerCloseCombatObservableList" -> {
                 return opponentCloseCombat;
             }
@@ -812,7 +815,7 @@ public class GameMenuControllerView {
     }
 
     public void backCardsToDiscardPiles() {
-        // For current player
+        setPowerOfCardsDefault();
         synchronized (currentPlayerRangedObservableList) {
             moveCardsToDiscardPile(currentPlayerRangedObservableList, RowsInGame.currentPlayerRangedSpecialPlace.toString(), RowsInGame.currentPlayerDiscardPlace.toString());
         }
@@ -856,6 +859,7 @@ public class GameMenuControllerView {
     private void moveCardsToDiscardPile(ObservableList<GameCardView> cardList, String origin, String destination) {
         ObservableList<GameCardView> cardListCopy = FXCollections.observableArrayList(cardList);
         for (GameCardView gameCardView : cardListCopy) {
+            System.out.println(gameCardView.getCard().getIdInGame());
             if (gameCardView.getCard() instanceof UnitCard) {
                 UnitCard unitCard = (UnitCard) gameCardView.getCard();
                 if (!unitCard.noRemove()) {
@@ -867,6 +871,38 @@ public class GameMenuControllerView {
         }
     }
 
+    public void setPowerOfCardDefault(int cardId) {
+        for (GameCardView gameCardView : currentPlayerRangedObservableList) {
+            if (gameCardView.getCard().getIdInGame() == cardId) {
+                gameCardView.setPowerDefault();
+            }
+        }
+        for (GameCardView gameCardView : currentPlayerCloseCombatObservableList) {
+            if (gameCardView.getCard().getIdInGame() == cardId) {
+                gameCardView.setPowerDefault();
+            }
+        }
+        for (GameCardView gameCardView : currentPlayerSiegeObservableList) {
+            if (gameCardView.getCard().getIdInGame() == cardId) {
+                gameCardView.setPowerDefault();
+            }
+        }
+        for (GameCardView gameCardView : opponentRangedObservableList) {
+            if (gameCardView.getCard().getIdInGame() == cardId) {
+                gameCardView.setPowerDefault();
+            }
+        }
+        for (GameCardView gameCardView : opponentRangedObservableList) {
+            if (gameCardView.getCard().getIdInGame() == cardId) {
+                gameCardView.setPowerDefault();
+            }
+        }
+        for (GameCardView gameCardView : opponentRangedObservableList) {
+            if (gameCardView.getCard().getIdInGame() == cardId) {
+                gameCardView.setPowerDefault();
+            }
+        }
+    }
 
     public void setPowerOfCardsDefault() {
         for (GameCardView gameCardView : currentPlayerRangedObservableList) {
@@ -973,5 +1009,7 @@ public class GameMenuControllerView {
     public void openTerminal(MouseEvent mouseEvent) {
         App.getAppView().showTerminal();
     }
+
+
 }
 

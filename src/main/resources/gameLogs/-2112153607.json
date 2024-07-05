@@ -1,0 +1,340 @@
+{
+  "player1": "ali",
+  "player1Faction": "RealmsNorthern",
+  "player1Hand": [
+    {
+      "name": "neutral_yennefer",
+      "id": 118
+    },
+    {
+      "name": "realms_banner_nurse",
+      "id": 121
+    },
+    {
+      "name": "realms_kaedwen_siege",
+      "id": 128
+    },
+    {
+      "name": "realms_kaedwen_siege_1",
+      "id": 129
+    },
+    {
+      "name": "realms_kaedwen_siege_2",
+      "id": 130
+    },
+    {
+      "name": "special_horn",
+      "id": 101
+    },
+    {
+      "name": "special_horn_2",
+      "id": 103
+    },
+    {
+      "name": "neutral_chort",
+      "id": 105
+    },
+    {
+      "name": "neutral_cow",
+      "id": 107
+    },
+    {
+      "name": "neutral_emiel",
+      "id": 109
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 111
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 113
+    },
+    {
+      "name": "neutral_triss",
+      "id": 115
+    },
+    {
+      "name": "neutral_villen",
+      "id": 117
+    }
+  ],
+  "player1Deck": [
+    {
+      "name": "special_horn_1",
+      "id": 102
+    },
+    {
+      "name": "special_mardroeme",
+      "id": 104
+    },
+    {
+      "name": "neutral_ciri",
+      "id": 106
+    },
+    {
+      "name": "neutral_dandelion",
+      "id": 108
+    },
+    {
+      "name": "neutral_gaunter_odimm",
+      "id": 110
+    },
+    {
+      "name": "neutral_geralt",
+      "id": 112
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 114
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 116
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 119
+    },
+    {
+      "name": "realms_ballista",
+      "id": 120
+    },
+    {
+      "name": "realms_blue_stripes",
+      "id": 122
+    },
+    {
+      "name": "realms_catapult_1",
+      "id": 123
+    },
+    {
+      "name": "realms_crinfrid",
+      "id": 124
+    },
+    {
+      "name": "realms_dethmold",
+      "id": 125
+    },
+    {
+      "name": "realms_dijkstra",
+      "id": 126
+    },
+    {
+      "name": "realms_esterad",
+      "id": 127
+    },
+    {
+      "name": "realms_keira",
+      "id": 131
+    },
+    {
+      "name": "realms_natalis",
+      "id": 132
+    },
+    {
+      "name": "realms_philippa",
+      "id": 133
+    },
+    {
+      "name": "realms_stennis",
+      "id": 134
+    },
+    {
+      "name": "realms_poor_infantry",
+      "id": 135
+    },
+    {
+      "name": "realms_redania",
+      "id": 136
+    },
+    {
+      "name": "realms_redania_1",
+      "id": 137
+    },
+    {
+      "name": "realms_sabrina",
+      "id": 138
+    },
+    {
+      "name": "realms_sheala",
+      "id": 139
+    }
+  ],
+  "player2": "opponent",
+  "player2Faction": "RealmsNorthern",
+  "player2Hand": [
+    {
+      "name": "neutral_yennefer",
+      "id": 218
+    },
+    {
+      "name": "realms_banner_nurse",
+      "id": 221
+    },
+    {
+      "name": "realms_kaedwen_siege",
+      "id": 228
+    },
+    {
+      "name": "realms_kaedwen_siege_1",
+      "id": 229
+    },
+    {
+      "name": "realms_kaedwen_siege_2",
+      "id": 230
+    },
+    {
+      "name": "special_horn",
+      "id": 201
+    },
+    {
+      "name": "special_horn_2",
+      "id": 203
+    },
+    {
+      "name": "neutral_chort",
+      "id": 205
+    },
+    {
+      "name": "neutral_cow",
+      "id": 207
+    },
+    {
+      "name": "neutral_emiel",
+      "id": 209
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 211
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 213
+    },
+    {
+      "name": "neutral_triss",
+      "id": 215
+    },
+    {
+      "name": "neutral_villen",
+      "id": 217
+    }
+  ],
+  "player2Deck": [
+    {
+      "name": "special_horn_1",
+      "id": 202
+    },
+    {
+      "name": "special_mardroeme",
+      "id": 204
+    },
+    {
+      "name": "neutral_ciri",
+      "id": 206
+    },
+    {
+      "name": "neutral_dandelion",
+      "id": 208
+    },
+    {
+      "name": "neutral_gaunter_odimm",
+      "id": 210
+    },
+    {
+      "name": "neutral_geralt",
+      "id": 212
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 214
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 216
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 219
+    },
+    {
+      "name": "realms_ballista",
+      "id": 220
+    },
+    {
+      "name": "realms_blue_stripes",
+      "id": 222
+    },
+    {
+      "name": "realms_catapult_1",
+      "id": 223
+    },
+    {
+      "name": "realms_crinfrid",
+      "id": 224
+    },
+    {
+      "name": "realms_dethmold",
+      "id": 225
+    },
+    {
+      "name": "realms_dijkstra",
+      "id": 226
+    },
+    {
+      "name": "realms_esterad",
+      "id": 227
+    },
+    {
+      "name": "realms_keira",
+      "id": 231
+    },
+    {
+      "name": "realms_natalis",
+      "id": 232
+    },
+    {
+      "name": "realms_philippa",
+      "id": 233
+    },
+    {
+      "name": "realms_stennis",
+      "id": 234
+    },
+    {
+      "name": "realms_poor_infantry",
+      "id": 235
+    },
+    {
+      "name": "realms_redania",
+      "id": 236
+    },
+    {
+      "name": "realms_redania_1",
+      "id": 237
+    },
+    {
+      "name": "realms_sabrina",
+      "id": 238
+    },
+    {
+      "name": "realms_sheala",
+      "id": 239
+    }
+  ],
+  "commands": [
+    "card with id: 109 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableList and ability applied",
+    "change turn",
+    "card with id: 215 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableList and ability applied",
+    "change turn",
+    "card with id: 117 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableList and ability applied",
+    "change turn",
+    "change turn",
+    "card with id: 105 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableList and ability applied",
+    "change turn",
+    "card with id: 209 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableList and ability applied",
+    "change turn",
+    "change turn"
+  ]
+}

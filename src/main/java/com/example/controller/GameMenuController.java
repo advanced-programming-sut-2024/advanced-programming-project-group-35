@@ -117,10 +117,9 @@ public class GameMenuController extends AppController {
             } else if (card.getAbilityName() == AbilityName.SCORCH) {
                 AbilityContext abilityContext = new AbilityContext(table, null, null);
                 doNonLeaderCardsAbility(card, abilityContext, AbilityName.SCORCH);
-            }
-            else if (card.getAbilityName() == AbilityName.WEATHER) {
+            } else if (card.getAbilityName() == AbilityName.WEATHER) {
                 AbilityContext abilityContext = new AbilityContext(table, null, null);
-                ((WeatherCard)card).setPlayer(table.getCurrentPlayer());
+                ((WeatherCard) card).setPlayer(table.getCurrentPlayer());
                 doNonLeaderCardsAbility(card, abilityContext, AbilityName.SCORCH);
             }
         }
@@ -128,6 +127,7 @@ public class GameMenuController extends AppController {
         saveLog("card with id: " + cardId + " moved from " + origin + " to " + destination + " and ability applied");
         table.getCurrentPlayer().updateScore();
         table.getOpponent().updateScore();
+        gameMenuControllerView.updateAllLabels();
         if (table.getCurrentPlayer().getBoard().getHand().getCards().isEmpty()) {
             passRound();
         } else if (!table.getOpponent().isPassRound()) {
@@ -211,6 +211,7 @@ public class GameMenuController extends AppController {
             }
         }
         gameMenuControllerView.moveCardToDestinationFlowPane(cardId, origin, destination);
+        gameMenuControllerView.updateAllLabels();
         table.getCurrentPlayer().updateScore();
         table.getOpponent().updateScore();
         saveLog("card with id: " + cardId + " moved from " + origin + " to " + destination + " and ability applied");
@@ -264,6 +265,9 @@ public class GameMenuController extends AppController {
             }
             case "currentPlayerRangedSpecialPlaceObservableList" -> {
                 return table.getCurrentPlayer().getBoard().getRangedCardPlace().getSpecialPlace();
+            }
+            case "opponentPlayerHandObservableList" -> {
+                return table.getOpponent().getBoard().getHand().getCards();
             }
             case "currentPlayerSiegeSpecialPlaceObservableList" -> {
                 return table.getCurrentPlayer().getBoard().getSiegeCardPlace().getSpecialPlace();
@@ -482,18 +486,18 @@ public class GameMenuController extends AppController {
             table.getCurrentRound().setDraw(true);
             table.getCurrentRound().setWon(false);
             table.getCurrentRound().setWinner(null);
-            player1.decreaseNumberOfVetoCards();
-            player2.decreaseNumberOfVetoCards();
+            player1.decreaseCrystals();
+            player2.decreaseCrystals();
         } else if (player1.getScore() > player2.getScore()) {
             table.getCurrentRound().setDraw(false);
             table.getCurrentRound().setWon(true);
             table.getCurrentRound().setWinner(player1);
-            player2.decreaseNumberOfVetoCards();
+            player2.decreaseCrystals();
         } else if (player1.getScore() < player2.getScore()) {
             table.getCurrentRound().setDraw(false);
             table.getCurrentRound().setWon(true);
             table.getCurrentRound().setWinner(player2);
-            player1.decreaseNumberOfVetoCards();
+            player1.decreaseCrystals();
         }
         if (table.getCurrentPlayer().getBoard().getDeck().getFaction() == FactionsType.Monsters) {
             table.getCurrentPlayer().getBoard().getDeck().getFactionAbility().apply(table, table.getCurrentPlayer());
