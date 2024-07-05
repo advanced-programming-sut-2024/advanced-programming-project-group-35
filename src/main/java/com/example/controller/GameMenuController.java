@@ -266,6 +266,9 @@ public class GameMenuController extends AppController {
             case "currentPlayerRangedSpecialPlaceObservableList" -> {
                 return table.getCurrentPlayer().getBoard().getRangedCardPlace().getSpecialPlace();
             }
+            case "opponentPlayerHandObservableList" -> {
+                return table.getOpponent().getBoard().getHand().getCards();
+            }
             case "currentPlayerSiegeSpecialPlaceObservableList" -> {
                 return table.getCurrentPlayer().getBoard().getSiegeCardPlace().getSpecialPlace();
             }

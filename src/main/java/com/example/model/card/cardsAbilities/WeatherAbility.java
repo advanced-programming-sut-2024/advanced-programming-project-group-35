@@ -13,6 +13,7 @@ public class WeatherAbility implements Ability {
     @Override
     public void apply(AbilityContext abilityContext) {
        //TODO اول چک کنیم میتونیم اجرا کنیم توانایی رو یا نه stellFOrged
+        //TODO king Bran
         switch (abilityContext.getCard().getCardName()) {
             case CardData.weather_frost -> {
                 setPowerOne(abilityContext.getTable().getCurrentPlayer().getBoard().getCloseCombatCardPlace());

@@ -22,11 +22,13 @@ public class InvaderOfTheNorthAbility implements LeaderAbility {
 
     private void removeRandomCardFromDiscardPileAndAddToHand(Table table, Board board, Player player) {
         Card randomCard = board.getDiscardPile().getCard(new Random().nextInt(board.getDiscardPile().getSize()));
-        if (player == table.getCurrentPlayer()) {
-            ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDontDoAbility(randomCard.getIdInGame(), RowsInGame.opponentPlayerDiscardPlace.toString(), RowsInGame.opponentPlayerDiscardPlace.toString());
+        if (randomCard != null) {
+            if (player == table.getCurrentPlayer()) {
+                ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDontDoAbility(randomCard.getIdInGame(), RowsInGame.opponentPlayerDiscardPlace.toString(), RowsInGame.opponentPlayerDiscardPlace.toString());
 
-        } else {
-            ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDontDoAbility(randomCard.getIdInGame(), RowsInGame.currentPlayerDiscardPlace.toString(), RowsInGame.currentPlayerHand.toString());
+            } else {
+                ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDontDoAbility(randomCard.getIdInGame(), RowsInGame.currentPlayerDiscardPlace.toString(), RowsInGame.currentPlayerHand.toString());
+            }
         }
     }
 }

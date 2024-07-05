@@ -683,6 +683,9 @@ public class GameMenuControllerView {
             case "opponentPlayerSiegeObservableList" -> {
                 return opponentSiege;
             }
+            case "opponentPlayerHandObservableList" -> {
+                return opponentPlayerHand;
+            }
             case "opponentPlayerCloseCombatObservableList" -> {
                 return opponentCloseCombat;
             }

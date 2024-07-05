@@ -6,6 +6,7 @@ import com.example.model.card.Ability;
 import com.example.model.card.AbilityContext;
 import com.example.model.card.Card;
 import com.example.model.card.enums.AbilityName;
+import com.example.model.game.place.RowsInGame;
 import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class MusterAbility implements Ability {
                 if (parts[1].equals(parts1[1])) {
                     abilityContext.getTable().getCurrentPlayer().getBoard().getHand().removeCard(card);
                     String dest = (String) abilityContext.getParam("dest");
-                    ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDontDoAbility(card1.getIdInGame(), "currentPlayerHandObservableList", dest);
+                    ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDontDoAbility(card1.getIdInGame(), RowsInGame.currentPlayerHand.toString(), dest);
                 }
             }
         }
@@ -40,7 +41,7 @@ public class MusterAbility implements Ability {
                     abilityContext.getTable().getCurrentPlayer().getBoard().getDeck().removeCard(card);
                     abilityContext.getRow().addCard(card1);
                     String dest = (String) abilityContext.getParam("dest");
-                    ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDontDoAbility(card1.getIdInGame(), "currentPlayerHandObservableList", dest);
+                    ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDontDoAbility(card1.getIdInGame(), RowsInGame.currentPlayerHand.toString(), dest);
                 }
             }
         }

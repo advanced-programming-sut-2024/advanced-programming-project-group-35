@@ -1,0 +1,225 @@
+{
+  "player1": "ali",
+  "player1Faction": "Skellige",
+  "player1Hand": [
+    {
+      "name": "skellige_birna",
+      "id": 109
+    },
+    {
+      "name": "skellige_vildkaarl",
+      "id": 123
+    },
+    {
+      "name": "weather_clear",
+      "id": 101
+    },
+    {
+      "name": "weather_storm",
+      "id": 103
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 105
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 107
+    },
+    {
+      "name": "skellige_blueboy",
+      "id": 110
+    },
+    {
+      "name": "skellige_donar",
+      "id": 112
+    },
+    {
+      "name": "skellige_ermion",
+      "id": 114
+    },
+    {
+      "name": "skellige_kambi",
+      "id": 116
+    },
+    {
+      "name": "skellige_shield_maiden_1",
+      "id": 118
+    }
+  ],
+  "player1Deck": [
+    {
+      "name": "weather_clear_1",
+      "id": 102
+    },
+    {
+      "name": "neutral_gaunter_odimm",
+      "id": 104
+    },
+    {
+      "name": "neutral_triss",
+      "id": 106
+    },
+    {
+      "name": "neutral_villen",
+      "id": 108
+    },
+    {
+      "name": "skellige_brokva_archer",
+      "id": 111
+    },
+    {
+      "name": "skellige_draig",
+      "id": 113
+    },
+    {
+      "name": "skellige_holger",
+      "id": 115
+    },
+    {
+      "name": "skellige_light_longship",
+      "id": 117
+    },
+    {
+      "name": "skellige_shield_maiden_2",
+      "id": 119
+    },
+    {
+      "name": "skellige_svanrige",
+      "id": 120
+    },
+    {
+      "name": "skellige_tordarroch",
+      "id": 121
+    },
+    {
+      "name": "skellige_udalryk",
+      "id": 122
+    },
+    {
+      "name": "skellige_war_longship",
+      "id": 124
+    }
+  ],
+  "player2": "opponent",
+  "player2Faction": "Skellige",
+  "player2Hand": [
+    {
+      "name": "skellige_birna",
+      "id": 209
+    },
+    {
+      "name": "skellige_vildkaarl",
+      "id": 223
+    },
+    {
+      "name": "weather_clear",
+      "id": 201
+    },
+    {
+      "name": "weather_storm",
+      "id": 203
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 205
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 207
+    },
+    {
+      "name": "skellige_blueboy",
+      "id": 210
+    },
+    {
+      "name": "skellige_donar",
+      "id": 212
+    },
+    {
+      "name": "skellige_ermion",
+      "id": 214
+    },
+    {
+      "name": "skellige_kambi",
+      "id": 216
+    },
+    {
+      "name": "skellige_shield_maiden_1",
+      "id": 218
+    }
+  ],
+  "player2Deck": [
+    {
+      "name": "weather_clear_1",
+      "id": 202
+    },
+    {
+      "name": "neutral_gaunter_odimm",
+      "id": 204
+    },
+    {
+      "name": "neutral_triss",
+      "id": 206
+    },
+    {
+      "name": "neutral_villen",
+      "id": 208
+    },
+    {
+      "name": "skellige_brokva_archer",
+      "id": 211
+    },
+    {
+      "name": "skellige_draig",
+      "id": 213
+    },
+    {
+      "name": "skellige_holger",
+      "id": 215
+    },
+    {
+      "name": "skellige_light_longship",
+      "id": 217
+    },
+    {
+      "name": "skellige_shield_maiden_2",
+      "id": 219
+    },
+    {
+      "name": "skellige_svanrige",
+      "id": 220
+    },
+    {
+      "name": "skellige_tordarroch",
+      "id": 221
+    },
+    {
+      "name": "skellige_udalryk",
+      "id": 222
+    },
+    {
+      "name": "skellige_war_longship",
+      "id": 224
+    }
+  ],
+  "commands": [
+    "card with id: 123 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableList and ability applied",
+    "change turn",
+    "card with id: 218 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableList and ability applied",
+    "change turn",
+    "card with id: 107 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableList and ability applied",
+    "change turn",
+    "card with id: 205 moved from currentPlayerHandObservableList to currentPlayerCloseCombatObservableList and ability applied",
+    "change turn",
+    "player: ali passed round",
+    "change turn",
+    "player: opponent passed round",
+    "card with id: 123 moved from currentPlayerCloseCombatObservableList to currentPlayerDiscardPlace and ability applied",
+    "card with id: 218 moved from currentPlayerCloseCombatObservableList to currentPlayerDiscardPlace and ability applied",
+    "card with id: 107 moved from currentPlayerCloseCombatObservableList to currentPlayerDiscardPlace and ability applied",
+    "card with id: 205 moved from currentPlayerCloseCombatObservableList to currentPlayerDiscardPlace and ability applied",
+    "player: opponent passed round",
+    "change turn"
+  ]
+}

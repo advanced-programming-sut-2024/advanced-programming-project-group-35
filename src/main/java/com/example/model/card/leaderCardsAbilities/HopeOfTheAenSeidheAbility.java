@@ -1,10 +1,14 @@
 package com.example.model.card.leaderCardsAbilities;
 
+import com.example.controller.Controller;
+import com.example.controller.GameMenuController;
 import com.example.model.card.AbilityContext;
 import com.example.model.card.Card;
 import com.example.model.card.UnitCard;
+import com.example.model.card.enums.AbilityName;
 import com.example.model.game.Table;
 import com.example.model.game.place.Row;
+import com.example.model.game.place.RowsInGame;
 
 import java.util.ArrayList;
 
@@ -21,15 +25,18 @@ public class HopeOfTheAenSeidheAbility implements LeaderAbility {
         ArrayList<Card> closeCopy = new ArrayList<>(close.getCards());
         ArrayList<Card> rangedCopy = new ArrayList<>(ranged.getCards());
         for (Card card : rangedCopy) {
-            if (ranged.getSpecialPlace() == null && close.getSpecialPlace() != null) {
-                ranged.removeCard(card);
-                close.addCard(card);
+            if (ranged.getSpecialCard() == null && close.getSpecialCard() != null && (close.getSpecialCard().getAbilityName() == AbilityName.COMMANDER_HORN)) {
+                ((UnitCard) card).duplicatePower();
+                ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).getGameMenuControllerView().getGameCardViewWithCardId(card.getIdInGame()).updatePowerLabel();
+                ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDontDoAbility(card.getIdInGame(), RowsInGame.currentPlayerRanged.toString(), RowsInGame.currentPlayerCloseCombat.toString());
             }
         }
         for (Card card : closeCopy) {
-            if (close.getSpecialPlace() == null && ranged.getSpecialPlace() != null) {
-                close.removeCard(card);
-                ranged.addCard(card);
+            if (close.getSpecialCard() == null && ranged.getSpecialCard() != null && (ranged.getSpecialCard().getAbilityName() == AbilityName.COMMANDER_HORN)) {
+                ((UnitCard) card).duplicatePower();
+                ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).getGameMenuControllerView().getGameCardViewWithCardId(card.getIdInGame()).updatePowerLabel();
+                ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDontDoAbility(card.getIdInGame(), RowsInGame.currentPlayerCloseCombat.toString(), RowsInGame.currentPlayerRanged.toString());
+
             }
         }
     }
