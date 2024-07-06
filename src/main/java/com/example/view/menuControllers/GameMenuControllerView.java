@@ -4,12 +4,14 @@ import com.example.Main;
 import com.example.controller.Controller;
 import com.example.controller.GameMenuController;
 import com.example.model.App;
+import com.example.model.alerts.AlertType;
 import com.example.model.alerts.NotificationsData;
 import com.example.model.card.*;
 import com.example.model.card.Card;
 import com.example.model.card.enums.CardData;
 import com.example.model.card.enums.FactionsType;
 import com.example.model.card.enums.AbilityName;
+import com.example.model.game.Player;
 import com.example.model.game.Table;
 import com.example.model.game.place.RowsInGame;
 import javafx.animation.KeyFrame;
@@ -952,6 +954,29 @@ public class GameMenuControllerView {
         ObservableList<WeatherCard> weatherCardsCopy = FXCollections.observableArrayList(table.getSpellPlace().getCards());
         for (WeatherCard weatherCard : weatherCardsCopy) {
             backWeatherCardToDiscardPlaces(weatherCard);
+        }
+    }
+
+    public void setClownImageForOpponentLeaderCard() {
+//       opponentPlayerLeaderCard.setImage(new Image(GameMenuControllerView.class.getResource("/images").toExternalForm()));
+    }
+    private int decoyCheat = 0;
+    public void addDecoyCard() {
+        if (decoyCheat == 0) {
+            Card decoy = CardFactory.getCardByName("special_decoy");
+            GameCardView gameCardView = new GameCardView(decoy);
+            currentPlayerHand.getChildren().add(gameCardView);
+            currentPlayerHandObservableList.add(gameCardView);
+            if (table.getCurrentPlayer().getPriorityInGame() == 1) {
+                decoy.setIdInGame(199);
+            } else {
+                decoy.setIdInGame(299);
+            }
+            controller.saveLog("add decoy card cheat code");
+            addMouseEventsForHandCards();
+            decoyCheat++;
+        } else {
+            App.getAppView().showAlert("you can't recieve more than one decoy card", AlertType.WARNING.getType());
         }
     }
 }

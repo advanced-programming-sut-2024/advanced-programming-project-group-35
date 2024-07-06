@@ -16,11 +16,11 @@ import java.util.ArrayList;
 public class ScorchAbility implements Ability {
     @Override
     public void apply(AbilityContext abilityContext) {
-        if (abilityContext.getCard() != null) {
-            applyAbilityForScorchCard(abilityContext);
-        } else {
-            applyAbilityForNonScorchCards(abilityContext);
-        }
+//        if (abilityContext.getCard() != null) {
+//            applyAbilityForScorchCard(abilityContext);
+//        } else {
+//            applyAbilityForNonScorchCards(abilityContext);
+//        }
     }
 
     private void applyAbilityForScorchCard(AbilityContext abilityContext) {

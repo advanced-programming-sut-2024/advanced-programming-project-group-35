@@ -620,4 +620,45 @@ public class GameMenuController extends AppController {
             System.out.println("doCurrentPlayerLeaderAbility in GameMenuController");
         }
     }
+
+    public void addRandomCardToDeck() {
+        Deck deck = table.getCurrentPlayer().getBoard().getDeck();
+        Card randomCard = deck.getCard(new Random().nextInt(deck.getSize()));
+        if (randomCard != null) {
+            moveCardFromOriginToDestinationAndDontDoAbilityWithNoLog(randomCard.getIdInGame(), RowsInGame.currentPlayerDeck.toString(), RowsInGame.currentPlayerHand.toString());
+        }
+        saveLog("add random card to deck cheat code");
+    }
+
+    public void recoverLeaderAbility() {
+        table.getCurrentPlayer().getBoard().getDeck().getLeader().setCanDoAction(true);
+        gameMenuControllerView.updateAllLabels();
+        saveLog("recover leader ability cheat code");
+    }
+
+    public void recoverCrystals() {
+        table.getCurrentPlayer().setNumberOfCrystals(2);
+        gameMenuControllerView.updateAllLabels();
+        saveLog("recover crystals cheat code");
+    }
+
+    public void luckOpponentLeaderAbility() {
+        table.getOpponent().getBoard().getDeck().getLeader().setCanDoAction(false);
+        gameMenuControllerView.updateAllLabels();
+        saveLog("luck opponent leader ability cheat code");
+    }
+
+    public void luckOpponentEmotes() {
+
+    }
+
+    public void setClownForOpponent() {
+        gameMenuControllerView.setClownImageForOpponentLeaderCard();
+        saveLog("set clown picture for opponent leader card cheat code");
+    }
+
+    public void addDecoyCard() {
+        gameMenuControllerView.addDecoyCard();
+        saveLog("add decoy card cheat code");
+    }
 }

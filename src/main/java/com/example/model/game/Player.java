@@ -28,6 +28,10 @@ public class Player {
         this.passRound = false;
     }
 
+    public void setNumberOfCrystals(int numberOfCrystals) {
+        this.numberOfCrystals = numberOfCrystals;
+    }
+
     public int getPriorityInGame() {
         return priorityInGame;
     }
