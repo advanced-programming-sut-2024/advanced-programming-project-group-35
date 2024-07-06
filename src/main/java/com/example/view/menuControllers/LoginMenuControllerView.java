@@ -22,7 +22,7 @@ import java.util.Objects;
 
 public class LoginMenuControllerView {
     private final Stage stage = App.getAppView().getPrimaryStage();
-   // public TextField emailVerificationCode;
+    // public TextField emailVerificationCode;
     private Pane pane = App.getAppView().getPane();
     public TextField usernameFieldLogin;
     public PasswordField passwordFieldLogin;
@@ -51,8 +51,9 @@ public class LoginMenuControllerView {
     private ComboBox securityQuestionRegister;
     @FXML
     private TextField securityAnswerRegister;
+    @FXML
     private TextField emailVerificationCodeField;
-    private int emailVerificationCode;
+    private static int emailVerificationCode;
 
     LoginMenuController controller = (LoginMenuController) Controller.LOGIN_MENU_CONTROLLER.getController();
 
@@ -109,7 +110,9 @@ public class LoginMenuControllerView {
         Thread loadDataThread = new Thread(() -> {
             Platform.runLater(() -> {
                 try {
-                    setEmailVerificationCode();
+//                    setEmailVerificationCode();
+                    int setter = controller.getEmailVerificationCode();
+                    setEmailVerificationCode(setter);
                     if (OutputView.getLastError() == Errors.REGISTER_FIRST_STEP_SUCCESSFUL) {
                         paneChanger("Security Question", "securityQuestion.fxml");
                         OutputView.showOutputAlert(Errors.SENT_CODE);
@@ -124,8 +127,8 @@ public class LoginMenuControllerView {
         loadDataThread.start();
     }
 
-    private void setEmailVerificationCode() throws IOException {
-        emailVerificationCode = controller.getEmailVerificationCode();
+    public void setEmailVerificationCode(int verificationCode) throws IOException {
+        this.emailVerificationCode = verificationCode;
     }
 
     public void finalizeRegisterUser(MouseEvent mouseEvent) {
@@ -133,6 +136,7 @@ public class LoginMenuControllerView {
         String securityAnswer = securityAnswerRegister.getText();
         String securityAnswerConfirmation = securityAnswerConfirmationRegister.getText();
         int emailVerificationCode = Integer.parseInt(emailVerificationCodeField.getText());
+        System.out.println(emailVerificationCode + " ### " + this.emailVerificationCode);
         if (emailVerificationCode != this.emailVerificationCode) {
             App.getAppView().showAlert("Wrong email verification code", AlertType.ERROR.getType());
             return;
@@ -189,7 +193,7 @@ public class LoginMenuControllerView {
 
     public void testApp2(MouseEvent mouseEvent) {
         String username = "ali123";
-        String password = "Bp+\u003d%\u003d1%cI";
+        String password = "Bp+=%=1%cI";
         boolean stayLoggedIn = false;
         controller.loginUser(username, password, stayLoggedIn);
         if (OutputView.getLastError() == Errors.LOGIN_SUCCESSFUL) {

@@ -3,6 +3,7 @@ package com.example.view.menuControllers;
 import com.example.controller.Controller;
 import com.example.controller.MainMenuController;
 import com.example.model.App;
+import com.example.model.FriendRequest;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
@@ -10,6 +11,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class MainMenuControllerView {
@@ -46,4 +48,11 @@ public class MainMenuControllerView {
     public void openTerminal(MouseEvent mouseEvent) {
         App.getAppView().showTerminal();
     }
+
+//    public void random(MouseEvent mouseEvent) {
+//        ArrayList<FriendRequest> friendRequests = new ArrayList<>();
+//        friendRequests.add(new FriendRequest(5, 10));
+//        friendRequests.add(new FriendRequest(-2107179492, 5));
+//        App.getLoggedInUser().setFriendRequests(friendRequests);
+//    }
 }
