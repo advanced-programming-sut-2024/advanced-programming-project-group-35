@@ -178,11 +178,4 @@ public class App {
         appView.updateUserInfo();
     }
 
-    public static void saveUsers(){
-        serverConnector.saveUsers(allUsers);
-    }
-
-    public static void loadUsers(){
-        allUsers = serverConnector.getAllUsers();
-    }
 }

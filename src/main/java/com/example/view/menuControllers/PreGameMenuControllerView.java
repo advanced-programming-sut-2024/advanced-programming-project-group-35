@@ -21,6 +21,8 @@ import com.example.model.card.factions.*;
 import com.example.model.deckmanager.DeckToJson;
 import com.example.view.Menu;
 import com.example.view.OutputView;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -40,11 +42,14 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.util.Duration;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Timer;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class PreGameMenuControllerView {
     private final Stage stage = App.getAppView().getPrimaryStage();
@@ -570,21 +575,30 @@ public class PreGameMenuControllerView {
         Thread loadDataThread = new Thread(() -> {
             Platform.runLater(() -> {
                 try {
-                    Thread.sleep(3000);
+                    //Thread.sleep(3000);
                     CardData leaderCardData = CardData.getCardDataByName(deckToJson.getLeader());
                     System.out.println(CardData.getCardDataByName(deckToJson.getLeader()));
                     leaderCard = new PreGameCard(leaderCardData.getName(), leaderCardData.getPower(), leaderCardData.getAbilityName(), srcPath + leaderCardData.getImageAddress());
                     System.out.println(leaderCard.getName());
                     ArrayList<PreGameCard> copyOfAllCards = new ArrayList<>(allCards);
+
+                    Timeline timeline = new Timeline();
+                    AtomicInteger index = new AtomicInteger(0);
+
                     for (PreGameCard card : copyOfAllCards) {
                         System.out.println(card.getName());
                         if (deckToJson.getCards().contains(card.getName())) {
-                            addCardToDeck(card);
+                            KeyFrame keyFrame = new KeyFrame(Duration.millis(100 * index.get()), event -> {
+                                addCardToDeck(card);
+                                updateDeckCardsPane();
+                                updateAllCardsPane();
+                                updateDeckInfo();
+                            });
+                            timeline.getKeyFrames().add(keyFrame);
+                            index.incrementAndGet();
                         }
                     }
-                    updateDeckCardsPane();
-                    updateAllCardsPane();
-                    updateDeckInfo();
+                    timeline.play();
 //                    App.setCurrentController(Controller.PRE_GAME_MENU_CONTROLLER);
 //                    App.getAppView().showMenu(Menu.PREGAME_MENU);
                 } catch (Exception e) {

@@ -17,8 +17,8 @@ public class Log {
     int player2ID = 2;
 
     public Log(Player player1, Player player2) {
-        this.player1 = player1.getName();
-        this.player2 = player2.getName();
+        this.player1 = player1.getUsername();
+        this.player2 = player2.getUsername();
         deck1 = player1.getBoard().getDeck().toHash(player1ID);
         deck2 = player2.getBoard().getDeck().toHash(player2ID);
     }
