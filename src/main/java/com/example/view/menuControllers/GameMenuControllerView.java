@@ -168,7 +168,7 @@ public class GameMenuControllerView {
         currentPlayerAllScoreCounter.setText(String.valueOf(table.getCurrentPlayer().getScore()));
         currentPlayerSpecialCardCounter.setText(String.valueOf(table.getCurrentPlayer().getSpecialCardCounter()));
         currentPlayerDeckCardCounter.setText(String.valueOf(table.getCurrentPlayer().getBoard().getDeck().getSize()));
-        //currentPlayerLeaderAbilityEnable.setVisible(table.getCurrentPlayer().getBoard().getLeader().isAbilityEnable());
+        currentPlayerLeaderAbilityEnable.setVisible(table.getCurrentPlayer().getBoard().getDeck().getLeader().canDoAction());
         //currentPlayerLeaderCard.getChildren().add(new PreGameCard(table.getCurrentPlayer().getBoard().getLeader().getName(), table.getCurrentPlayer().getBoard().getLeader().getPower(), table.getCurrentPlayer().getBoard().getLeader().getAbility(), table.getCurrentPlayer().getBoard().getLeader().getImageAddress()));
         Image currentFactionIcon = new Image(FactionsType.getFactionDeckShieldImageAddress(table.getCurrentPlayer().getBoard().getDeck().getFaction()));
         currentPlayerFactionIcon.setImage(currentFactionIcon);
@@ -186,7 +186,7 @@ public class GameMenuControllerView {
         opponentPlayerAllScoreCounter.setText(String.valueOf(table.getOpponent().getScore()));
         opponentPlayerSpecialCardCounter.setText(String.valueOf(table.getOpponent().getSpecialCardCounter()));
         opponentPlayerDeckCardCounter.setText(String.valueOf(table.getOpponent().getBoard().getDeck().getSize()));
-        //opponentPlayerLeaderAbilityEnable.setVisible(table.getOpponent().getBoard().getLeader().isAbilityEnable());
+        opponentPlayerLeaderAbilityEnable.setVisible(table.getOpponent().getBoard().getDeck().getLeader().canDoAction());
         //opponentPlayerLeaderCard.getChildren().add(new PreGameCard(table.getOpponent().getBoard().getLeader().getName(), table.getOpponent().getBoard().getLeader().getPower(), table.getOpponent().getBoard().getLeader().getAbility(), table.getOpponent().getBoard().getLeader().getImageAddress()));
         Image opponentFactionIcon = new Image(FactionsType.getFactionDeckShieldImageAddress(table.getOpponent().getBoard().getDeck().getFaction()));
         opponentPlayerFactionIcon.setImage(opponentFactionIcon);
