@@ -7,6 +7,7 @@ import com.example.model.App;
 import com.example.model.alerts.NotificationsData;
 import com.example.model.card.*;
 import com.example.model.card.Card;
+import com.example.model.card.enums.CardData;
 import com.example.model.card.enums.FactionsType;
 import com.example.model.card.enums.AbilityName;
 import com.example.model.game.Table;
@@ -25,11 +26,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class GameMenuControllerView {
     public Rectangle opponentPlayerShadowRectangle;
@@ -78,6 +81,13 @@ public class GameMenuControllerView {
     public ImageView weatherRow6;
     public FlowPane currentPlayerDeck;
     public Button leaderAbility;
+    public FlowPane vetoCardPane = new FlowPane();
+    public ImageView vetoCardBackground;
+    public VBox vetoCardBox;
+    public Button vetoCardButton;
+    private ObservableList<PreGameCard> vetoCardsToShow = FXCollections.observableArrayList();
+    private ObservableList<Card> allCardsToVeto = FXCollections.observableArrayList();
+    private ObservableList<Card> cardsToVeto = FXCollections.observableArrayList();
     @FXML
     private FlowPane currentPlayerHand;
     @FXML
@@ -1010,6 +1020,65 @@ public class GameMenuControllerView {
         App.getAppView().showTerminal();
     }
 
+    public void showVetoCards() {
+        vetoCardBox.setVisible(true);
+        vetoCardButton.setVisible(true);
+        vetoCardBackground.setVisible(true);
+        vetoCardPane.setVisible(true);
+        if (vetoCardPane.getChildren().size() > 0) {
+            vetoCardPane.getChildren().clear();
+        }
+        vetoCardsToShow.clear();
+        allCardsToVeto.clear();
+        cardsToVeto.clear();
+        addToVetoCardPane();
+        addOnMouseClickedEventToVetoCard();
+        vetoCardPane.getChildren().addAll(vetoCardsToShow);
+    }
 
+    private void addToVetoCardPane() {
+        int j = 0;
+        for (Card card : table.getCurrentPlayer().getBoard().getDeck().getCards()) {
+            for (int i = 0; i < table.getCurrentPlayer().getBoard().getDeck().getCards().size(); i++) {
+                if (Objects.equals(card.getId(), table.getCurrentPlayer().getBoard().getHand().getCards().get(i).getId())) {
+                    vetoCardsToShow.add(new PreGameCard(card.getName(), CardData.getCardDataByName(card.getName()).getPower(), CardData.getCardDataByName(card.getName()).getAbility(), Main.class.getResource("/images/cards/") + CardData.getCardDataByName(card.getName()).getImageAddress()));
+                    allCardsToVeto.add(card);
+                    j++;
+                    break;
+                }
+                if (j == 5) {
+                    break;
+                }
+            }
+            if (j == 5) {
+                break;
+            }
+        }
+    }
+
+    private void addOnMouseClickedEventToVetoCard() {
+        for (int i = 0; i < vetoCardsToShow.size(); i++) {
+            int finalI = i;
+            vetoCardsToShow.get(i).setOnMouseClicked(event -> {
+                cardsToVeto.add(allCardsToVeto.get(finalI));
+                vetoCardPane.getChildren().remove(vetoCardsToShow.get(finalI));
+                if (cardsToVeto.size() == 2) {
+                    vetoCardBox.setVisible(false);
+                    vetoCardBackground.setVisible(false);
+                    vetoCardPane.setVisible(false);
+                    vetoCardButton.setVisible(false);
+                    controller.vetoCard(table.getCurrentPlayer(), cardsToVeto);
+                }
+            });
+        }
+    }
+
+    public void vetoCard(MouseEvent mouseEvent) {
+        vetoCardBox.setVisible(false);
+        vetoCardBackground.setVisible(false);
+        vetoCardPane.setVisible(false);
+        vetoCardButton.setVisible(false);
+        controller.vetoCard(table.getCurrentPlayer(), cardsToVeto);
+    }
 }
 

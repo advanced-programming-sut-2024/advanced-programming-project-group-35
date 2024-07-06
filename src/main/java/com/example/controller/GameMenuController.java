@@ -30,6 +30,7 @@ import java.util.stream.Collectors;
 public class GameMenuController extends AppController {
     private Table table;
     private GameMenuControllerView gameMenuControllerView;
+    private int turn = 1;
 
     @Override
     public void run() {
@@ -48,18 +49,18 @@ public class GameMenuController extends AppController {
         return gameMenuControllerView;
     }
 
-    public void vetoCard(Player player, Card selectedCard) {
-        //TODO
+    public void vetoCard(Player player, ObservableList<Card> selectedCards) {
         if (player.canVetoCard()) {
             Deck deck = player.getBoard().getDeck();
             Hand hand = player.getBoard().getHand();
-            Card ranomCard = deck.getCard(new Random().nextInt(deck.getSize()));
-            hand.removeCard(selectedCard);
-            hand.addCard(ranomCard);
-            deck.removeCard(ranomCard);
-            deck.addCard(selectedCard);
-            player.decreaseNumberOfVetoCards();
-            //TODO گرافیک جابه جایی کارت
+            for (int i = 0; i < selectedCards.size(); i++) {
+                Card ranomCard = deck.getCard(new Random().nextInt(deck.getSize()));
+                hand.removeCard(selectedCards.get(i));
+                hand.addCard(ranomCard);
+                deck.removeCard(ranomCard);
+                deck.addCard(selectedCards.get(i));
+                player.decreaseNumberOfVetoCards();
+            }
         }
     }
 
@@ -448,6 +449,10 @@ public class GameMenuController extends AppController {
     }
 
     private void startRound(Table table) {
+        System.out.println(turn);
+        if (turn == 1) {
+            gameMenuControllerView.showVetoCards();
+        }
         if (table.getRoundNumber() == 1) {
             LeaderCard leaderCard1 = table.getCurrentPlayer().getBoard().getDeck().getLeader();
             LeaderCard leaderCard2 = table.getOpponent().getBoard().getDeck().getLeader();
@@ -552,7 +557,14 @@ public class GameMenuController extends AppController {
     }
 
     private void changeTurn() {
+        turn++;
         gameMenuControllerView.changeTurn();
+        if (turn == 2) {
+            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
+                gameMenuControllerView.showVetoCards();
+            }));
+            timeline.play();
+        }
         saveLog("change turn");
     }
 
