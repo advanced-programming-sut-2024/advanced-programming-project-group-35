@@ -74,6 +74,7 @@ public class GameMenuController extends AppController {
     }
 
     public void moveCardFromOriginToDestinationAndDoAbility(int cardId, String origin, String destination) {
+        System.out.println(origin);
         ObservableList<Card> originRow = (ObservableList<Card>) getRowListByName(origin);
         ObservableList<Card> destinationRow = (ObservableList<Card>) getRowListByName(destination);
         Card card = getCardById(cardId, originRow);
@@ -122,6 +123,12 @@ public class GameMenuController extends AppController {
                 abilityContext.addParam("card", card);
                 ((WeatherCard) card).setPlayer(table.getCurrentPlayer());
                 doNonLeaderCardsAbility(card, abilityContext, AbilityName.SCORCH);
+            } else if (card.getAbilityName() == AbilityName.MARDROEME) {
+                System.out.println(destination);
+                AbilityContext abilityContext = new AbilityContext(table, null, getRowByName(getRowNameBySpecialPlaceName(destination)));
+                abilityContext.addParam("dest", destination);
+                abilityContext.addParam("mardroemeCard", card);
+                doNonLeaderCardsAbility(card, abilityContext, AbilityName.MARDROEME);
             }
         }
 
@@ -202,9 +209,11 @@ public class GameMenuController extends AppController {
         moveCardAndDontDoAbilityBase(cardId, origin, destination);
         saveLog("card with id: " + cardId + " moved from " + origin + " to " + destination + " and ability applied");
     }
+
     public void moveCardFromOriginToDestinationAndDontDoAbilityWithNoLog(int cardId, String origin, String destination) {
         moveCardAndDontDoAbilityBase(cardId, origin, destination);
     }
+
     private void moveCardAndDontDoAbilityBase(int cardId, String origin, String destination) {
         System.out.println(destination);
         ObservableList<Card> originRow = (ObservableList<Card>) getRowListByName(origin);
@@ -551,6 +560,14 @@ public class GameMenuController extends AppController {
         } else if (table.getOpponent().getNumberOfCrystals() == 0) {
             endGame(table, table.getCurrentPlayer());
         } else {
+            if (table.getCurrentRound().isWon()) {
+                Player winner = table.getCurrentRound().getWinner();
+                if (table.getCurrentPlayer() != winner) {
+                    table.setOpponent(table.getCurrentPlayer());
+                    table.setCurrentPlayer(winner);
+                }
+            }
+            changeTurnWithNoLog();
             Round round = new Round(table.getRoundNumber() + 1);
             table.getCurrentPlayer().setPassRound(false);
             table.getOpponent().setPassRound(false);
@@ -564,6 +581,10 @@ public class GameMenuController extends AppController {
     private void changeTurn() {
         gameMenuControllerView.changeTurn();
         saveLog("change turn");
+    }
+
+    private void changeTurnWithNoLog() {
+        gameMenuControllerView.changeTurn();
     }
 
     private void endGame(Table table, Player winner) {

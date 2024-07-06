@@ -27,6 +27,14 @@ public class Table {
         this.spellPlace = new SpellPlace();
     }
 
+    public void setCurrentPlayer(Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
+
+    public void setOpponent(Player opponent) {
+        this.opponent = opponent;
+    }
+
     public int getGameId() {
         return gameId;
     }

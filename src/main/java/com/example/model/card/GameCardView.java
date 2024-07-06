@@ -211,10 +211,52 @@ public class GameCardView extends Pane {
 
     public void updatePowerLabelAfterWeather() {
         if (card instanceof UnitCard) {
-            if (((UnitCard) card).isHero()) {
-                power.setText("" + ((UnitCard) card).getCurrentPower());
-                power.setTextFill(Paint.valueOf(Color.rgb(204, 22, 22).toString()));
-            }
+            power.setText("" + ((UnitCard) card).getCurrentPower());
+            power.setTextFill(Paint.valueOf(Color.rgb(204, 22, 22).toString()));
+        }
+    }
+
+    public void applyMardroeme() {
+        if (this.card instanceof UnitCard) {
+            this.card.setCardData(CardData.skellige_young_vildkaarl);
+            this.card.setAbility(null);
+            this.card.setAbilityName(null);
+            this.cardData = this.card.getCardData();
+            ((UnitCard) this.card).setCurrentPower(8);
+            ((UnitCard) this.card).setPower(8);
+            ((UnitCard) this.card).setHero(false);
+            ((UnitCard) this.card).setNoRemove(false);
+
+            Image image = new Image(srcPath + cardData.getImageAddress());
+            ImageView imageView = new ImageView(image);
+            imageView.setFitWidth(width);
+            imageView.setFitHeight(height);
+            imageView.setStyle("-fx-background-radius: 15; -fx-border-radius: 15; -fx-background-color: transparent;");
+
+            this.getChildren().addAll(imageView);
+            setLabelAndAbilitiesLabelForNonSpecialCards();
+        }
+    }
+
+    public void applyTransform() {
+        if (this.card instanceof UnitCard && this.getCard().getAbilityName() == AbilityName.TRANSFORMER) {
+            this.card.setCardData(CardData.scoiatael_schirru);
+            this.card.setAbility(null);
+            this.card.setAbilityName(null);
+            this.cardData = this.card.getCardData();
+            ((UnitCard) this.card).setCurrentPower(8);
+            ((UnitCard) this.card).setPower(8);
+            ((UnitCard) this.card).setHero(false);
+            ((UnitCard) this.card).setNoRemove(false);
+
+            Image image = new Image(srcPath + cardData.getImageAddress());
+            ImageView imageView = new ImageView(image);
+            imageView.setFitWidth(width);
+            imageView.setFitHeight(height);
+            imageView.setStyle("-fx-background-radius: 15; -fx-border-radius: 15; -fx-background-color: transparent;");
+
+            this.getChildren().addAll(imageView);
+            setLabelAndAbilitiesLabelForNonSpecialCards();
         }
     }
 }

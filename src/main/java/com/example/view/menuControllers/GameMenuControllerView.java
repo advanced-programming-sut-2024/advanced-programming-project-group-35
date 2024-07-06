@@ -157,9 +157,6 @@ public class GameMenuControllerView {
         controller.passRound();
     }
 
-    private void setObservableLists() {
-
-    }
 
     @FXML
     public void initialize() {
@@ -364,8 +361,8 @@ public class GameMenuControllerView {
             case RANGED -> {
                 removeStyleClass();
                 if (gameCardView.getCard().getAbilityName() == AbilityName.SPY) {
-                    opponentCloseCombat.getStyleClass().add("highlighted-flow-pane");
-                    opponentCloseCombat.setOnMouseClicked(e -> {
+                    opponentRanged.getStyleClass().add("highlighted-flow-pane");
+                    opponentRanged.setOnMouseClicked(e -> {
                         controller.moveCardFromOriginToDestinationAndDoAbility(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.opponentRanged.toString());
                         removeStyleClass();
                     });
@@ -386,8 +383,8 @@ public class GameMenuControllerView {
                         removeStyleClass();
                     });
                 } else {
-                    currentPlayerRanged.getStyleClass().add("highlighted-flow-pane");
-                    currentPlayerRanged.setOnMouseClicked(e -> {
+                    currentPlayerSiege.getStyleClass().add("highlighted-flow-pane");
+                    currentPlayerSiege.setOnMouseClicked(e -> {
                         controller.moveCardFromOriginToDestinationAndDoAbility(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.currentPlayerSiege.toString());
                         removeStyleClass();
                     });
@@ -395,9 +392,9 @@ public class GameMenuControllerView {
             }
             case AGILE -> {
                 removeStyleClass();
-                currentPlayerCloseCombat.getStyleClass().add("highlighted-flow-pane");
-                currentPlayerRanged.getStyleClass().add("highlighted-flow-pane");
                 if (gameCardView.getCard().getAbilityName() == AbilityName.SPY) {
+                    opponentCloseCombat.getStyleClass().add("highlighted-flow-pane");
+                    opponentRanged.getStyleClass().add("highlighted-flow-pane");
                     opponentCloseCombat.setOnMouseClicked(e -> {
                         controller.moveCardFromOriginToDestinationAndDoAbility(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.opponentCloseCombat.toString());
                         removeStyleClass();
@@ -409,6 +406,8 @@ public class GameMenuControllerView {
                         opponentCloseCombat.setOnMouseClicked(null);
                     });
                 } else {
+                    currentPlayerCloseCombat.getStyleClass().add("highlighted-flow-pane");
+                    currentPlayerRanged.getStyleClass().add("highlighted-flow-pane");
                     currentPlayerCloseCombat.setOnMouseClicked(e -> {
                         controller.moveCardFromOriginToDestinationAndDoAbility(cardId, RowsInGame.currentPlayerHand.toString(), RowsInGame.currentPlayerCloseCombat.toString());
                         removeStyleClass();
@@ -672,11 +671,11 @@ public class GameMenuControllerView {
             swapContents(currentPlayerDeckObservableList, opponentDeckObservableList, currentPlayerDeck, opponentDeck);
             swapContents(currentPlayerHandObservableList, opponentHandObservableList, currentPlayerHand, opponentHand);
             swapContents(currentPlayerDiscardPlaceObservableList, opponentDiscardPlaceObservablePlace, currentPlayerDiscardPlace, opponentDiscardPlace);
-            swapContents(currentPlayerSiegeObservableList, opponentSiegeObservableList, currentPlayerRanged, opponentSiege);
+            swapContents(currentPlayerSiegeObservableList, opponentSiegeObservableList, currentPlayerSiege, opponentSiege);
             swapContents(currentPlayerRangedObservableList, opponentRangedObservableList, currentPlayerRanged, opponentRanged);
             swapContents(currentPlayerCloseCombatObservableList, opponentCloseCombatObservableList, currentPlayerCloseCombat, opponentCloseCombat);
             swapContents(currentPlayerRangedSpecialPlaceObservableList, opponentRangedSpecialPlaceObservableList, currentPlayerRangedSpecialPlace, opponentRangedSpecialPlace);
-            swapContents(currentPlayerCloseCombatObservableList, opponentCloseCombatObservableList, currentPlayerCloseCombatSpecialPlace, opponentCloseCombatSpecialPlace);
+            swapContents(currentPlayerCloseCombatSpecialPlaceObservableList, opponentCloseCombatSpecialPlaceObservableList, currentPlayerCloseCombatSpecialPlace, opponentCloseCombatSpecialPlace);
             swapContents(currentPlayerSiegeSpecialPlaceObservableList, opponentSiegeSpecialPlaceObservableList, currentPlayerSiegeSpecialPlace, opponentSiegeSpecialPlace);
             table.swapPlayers();
             addMouseEventsForHandCards();
@@ -737,6 +736,9 @@ public class GameMenuControllerView {
                     if (!(((UnitCard) gameCardView.getCard()).noRemove())) {
                         controller.moveCardFromOriginToDestinationAndDontDoAbilityWithNoLog(gameCardView.getCard().getIdInGame(), sourceRow.toString(), RowsInGame.currentPlayerDiscardPlace.toString());
                     }
+                    if ((((UnitCard) gameCardView.getCard()).noRemove()) && gameCardView.getCard().getAbilityName() == AbilityName.TRANSFORMER) {
+                        gameCardView.applyTransform();
+                    }
                 } else {
                     controller.moveCardFromOriginToDestinationAndDontDoAbilityWithNoLog(gameCardView.getCard().getIdInGame(), sourceRow.toString(), RowsInGame.currentPlayerDiscardPlace.toString());
                 }
@@ -744,6 +746,9 @@ public class GameMenuControllerView {
                 if (gameCardView.getCard() instanceof UnitCard) {
                     if (!(((UnitCard) gameCardView.getCard()).noRemove())) {
                         controller.moveCardFromOriginToDestinationAndDontDoAbilityWithNoLog(gameCardView.getCard().getIdInGame(), sourceRow.toString(), RowsInGame.opponentDiscardPlace.toString());
+                    }
+                    if ((((UnitCard) gameCardView.getCard()).noRemove()) && gameCardView.getCard().getAbilityName() == AbilityName.TRANSFORMER) {
+                        gameCardView.applyTransform();
                     }
                 } else {
                     controller.moveCardFromOriginToDestinationAndDontDoAbilityWithNoLog(gameCardView.getCard().getIdInGame(), sourceRow.toString(), RowsInGame.opponentDiscardPlace.toString());
@@ -915,7 +920,8 @@ public class GameMenuControllerView {
             case CardData.weather_fog -> {
                 setPowerDefaultForRow(currentPlayerRangedObservableList);
                 setPowerDefaultForRow(opponentRangedObservableList);
-                moveWeatherCardToDiscardPlace(weatherCard);}
+                moveWeatherCardToDiscardPlace(weatherCard);
+            }
             case CardData.weather_rain -> {
                 setPowerDefaultForRow(currentPlayerSiegeObservableList);
                 setPowerDefaultForRow(opponentSiegeObservableList);
@@ -929,10 +935,11 @@ public class GameMenuControllerView {
                 moveWeatherCardToDiscardPlace(weatherCard);
             }
             case CardData.weather_clear -> {
-               moveWeatherCardToDiscardPlace(weatherCard);
+                moveWeatherCardToDiscardPlace(weatherCard);
             }
         }
     }
+
     private void moveWeatherCardToDiscardPlace(WeatherCard weatherCard) {
         if (weatherCard.getCardData() != CardData.weather_clear && weatherCard.getPlayer().getPriorityInGame() == table.getCurrentPlayer().getPriorityInGame()) {
             controller.moveCardFromOriginToDestinationAndDontDoAbilityWithNoLog(weatherCard.getIdInGame(), RowsInGame.weather.toString(), RowsInGame.currentPlayerDiscardPlace.toString());

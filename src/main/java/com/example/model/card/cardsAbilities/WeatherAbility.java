@@ -50,7 +50,7 @@ public class WeatherAbility implements Ability {
 
     private void setPowerOne(Row row, boolean kingBran) {
         for (Card card : row.getCards()) {
-            if (card != null && card instanceof UnitCard) {
+            if (card != null && (card instanceof UnitCard)) {
                 if (kingBran) {
                     ((UnitCard) card).setPowerHalf();
                 } else {

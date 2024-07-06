@@ -664,17 +664,20 @@ public class PreGameMenuControllerView {
         fileChooser.getExtensionFilters().add(
                 new FileChooser.ExtensionFilter("JSON Files", "*.json")
         );
+        try {
+            File selectedFile = fileChooser.showOpenDialog(stage);
+            DeckToJson deck = DeckManager.loadDeck(selectedFile.getAbsolutePath());
+            if (deck == null) {
+                App.getAppView().showAlert("Unable to load Deck", AlertType.ERROR.getType());
+            } else {
+                loadDeckPictures(deck);
+            }
+            loadState = 0;
+            loadDeckNameField.setVisible(false);
+            fileChooserButton.setVisible(false);
+            loadDeckNameField.setVisible(false);
+        } catch (Exception e) {
 
-        File selectedFile = fileChooser.showOpenDialog(stage);
-        DeckToJson deck = DeckManager.loadDeck(selectedFile.getAbsolutePath());
-        if (deck == null) {
-            App.getAppView().showAlert("Unable to load Deck", AlertType.ERROR.getType());
-        } else {
-            loadDeckPictures(deck);
         }
-        loadState = 0;
-        loadDeckNameField.setVisible(false);
-        fileChooserButton.setVisible(false);
-        loadDeckNameField.setVisible(false);
     }
 }

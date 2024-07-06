@@ -8,7 +8,11 @@ public class CardFactory {
         CardData cardData = CardData.getCardDataByName(cardName);
         switch (cardData.getType()) {
             case "soldier" -> {
-                return new UnitCard(cardData.getPower(), AbilityName.getAbilityByName(cardData.getAbilityName()), AbilityName.getAbilityNameByName(cardData.getAbilityName()), cardData.getPlaceToBe(), false, cardData, false);
+                if (!cardData.getAbilityName().equals("transformer")) {
+                    return new UnitCard(cardData.getPower(), AbilityName.getAbilityByName(cardData.getAbilityName()), AbilityName.getAbilityNameByName(cardData.getAbilityName()), cardData.getPlaceToBe(), false, cardData, false);
+                } else {
+                    return new UnitCard(cardData.getPower(), AbilityName.getAbilityByName(cardData.getAbilityName()), AbilityName.getAbilityNameByName(cardData.getAbilityName()), cardData.getPlaceToBe(), false, cardData, true);
+                }
             }
             case "hero" -> {
                 return new UnitCard(cardData.getPower(), AbilityName.getAbilityByName(cardData.getAbilityName()), AbilityName.getAbilityNameByName(cardData.getAbilityName()), cardData.getPlaceToBe(), true, cardData, false);
@@ -22,7 +26,9 @@ public class CardFactory {
                     return new SpecialCard(cardData.getPlaceToBe(), AbilityName.getAbilityByName(cardData.getAbilityName()), AbilityName.getAbilityNameByName(cardData.getAbilityName()), cardData);
                 } else if (cardData.getAbilityName().equals("scorch")) {
                     return new SpecialCard(cardData.getPlaceToBe(), AbilityName.getAbilityByName(cardData.getAbilityName()), AbilityName.getAbilityNameByName(cardData.getAbilityName()), cardData);
-                } else {
+                } else if (cardData.getAbilityName().equals("mardroeme")) {
+                    return new SpecialCard(cardData.getPlaceToBe(), AbilityName.getAbilityByName(cardData.getAbilityName()), AbilityName.getAbilityNameByName(cardData.getAbilityName()), cardData);
+                }else {
                     System.out.println("bia to card factory ke ridi to card data(parsa)");
                     return new SpecialCard(cardData.getPlaceToBe(), null, AbilityName.getAbilityNameByName(cardData.getAbilityName()), cardData);
 
