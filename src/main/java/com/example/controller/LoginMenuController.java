@@ -34,7 +34,6 @@ public class LoginMenuController extends AppController {
         }
         registeringUser.setSecurityQuestion(App.getSecurityQuestions().get(securityQuestionNumber));
         registeringUser.setSecurityQuestionAnswer(securityQuestionAnswer);
-        registeringUser.setNewID();
 //        registeringUser.setId(10);
         App.addNewUser(registeringUser);
         App.setLoggedInUser(registeringUser);
@@ -155,8 +154,7 @@ public class LoginMenuController extends AppController {
     public int getEmailVerificationCode() throws IOException {
         int code = new SecureRandom().nextInt(9000) + 1000;
         System.out.println(code);
-        String emailText = "GWENT\n\nYour verification code is: " + code;
-        EmailSender.sendEmail(registeringUser.getEmail(), emailText);
+        EmailSender.sendEmail(registeringUser.getEmail(), String.valueOf(code));
         System.out.println("Email sent");
         return code;
     }

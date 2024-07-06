@@ -14,10 +14,12 @@ import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -161,6 +163,12 @@ public class AppView extends Application {
     public void showMessage(String part) {
         Platform.runLater(() -> {
             showAlert(part, "info");
+        });
+    }
+
+    public void showRequest(String senderName, int senderID) {
+        Platform.runLater(() -> {
+            showAlert(senderName + " wants to be your friend", "request");
         });
     }
 }

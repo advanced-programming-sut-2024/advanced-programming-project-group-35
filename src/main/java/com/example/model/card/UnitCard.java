@@ -5,7 +5,7 @@ import com.example.model.card.enums.CardData;
 import com.example.model.game.place.Place;
 
 public class UnitCard extends Card {
-    private final int power;
+    private int power;
     private int currentPower;
     private boolean isHero;
     private boolean noRemove;
@@ -16,6 +16,14 @@ public class UnitCard extends Card {
         this.currentPower = power;
         this.isHero = isHero;
         this.noRemove = noRemove;
+    }
+
+    public void setHero(boolean hero) {
+        isHero = hero;
+    }
+
+    public void setPower(int power) {
+        this.power = power;
     }
 
     public boolean noRemove() {
@@ -58,7 +66,11 @@ public class UnitCard extends Card {
         this.currentPower = currentPower;
     }
 
-    public void applyMardroeme() {
-        //TODO
+
+    public void setPowerOne() {
+        currentPower = 1;
+    }
+    public void setPowerHalf() {
+        currentPower = (currentPower / 2);
     }
 }

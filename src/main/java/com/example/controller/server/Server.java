@@ -1,6 +1,4 @@
 package com.example.controller.server;// Server.java
-
-import com.example.model.DatabaseManager;
 import com.example.model.ServerApp;
 import com.example.model.User;
 import com.example.model.game.OnlineTable;
@@ -8,12 +6,11 @@ import com.example.model.game.Player;
 
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Server {
     private static final int PORT = 8080;
-    private ConcurrentHashMap<Integer, PlayerHandler> players = new ConcurrentHashMap<>();
+    public ConcurrentHashMap<Integer, PlayerHandler> players = new ConcurrentHashMap<>();
     private ConcurrentHashMap<Integer, OnlineTable> games = new ConcurrentHashMap<>();
     private ConcurrentHashMap<Integer, PlayerHandler> clientConnectors = new ConcurrentHashMap<>();
 
@@ -23,49 +20,23 @@ public class Server {
 
         ServerApp.setServer(this);
         ServerApp.loadUsers("users.json");
-        System.out.println("###");
-        //System.out.println(DatabaseManager.getAllUsers());
-        System.out.println("###");
-        //ServerApp.setAllUsers(DatabaseManager.getAllUsers());
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            for (User user : ServerApp.allUsers) {
+                System.out.println(user.getDeckName());
+            }
             ServerApp.saveUsers("users.json");
-            System.out.println("Data Base is running...");
-            DatabaseManager.createNewDatabase();
-            DatabaseManager.createUsersTable();
-            DatabaseManager.clearUsersTable();
-            saveUsersToDatabase();
-            System.out.println("Total number of users in database: " + DatabaseManager.getUserCount());
-            try {
-                Thread.sleep(1000); // 1 second delay
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            System.out.println("Data Base completed.");
-            for (int i = 0; i < ServerApp.getAllUsers().size(); i++) {
-                System.out.println(ServerApp.getAllUsers().get(i).getId());
-                System.out.println(ServerApp.getAllUsers().get(i).getUsername());
-                System.out.println("###");
-            }
         }));
         try (ServerSocket serverSocket = new ServerSocket(PORT)) {
             System.out.println("Server started on port " + PORT);
             while (true) {
                 Socket clientSocket = serverSocket.accept();
                 System.out.println("New connection from " + clientSocket.getInetAddress() + ":" + clientSocket.getPort());
+
                 new Thread(new PlayerHandler(clientSocket, this)).start();
                 System.out.println("New player connected");
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
-    }
-
-    public static void saveUsersToDatabase() {
-        ArrayList<User> users = ServerApp.getAllUsers();
-        System.out.println("Number of users to save: " + users.size());
-        for (User user : users) {
-//            System.out.println("Saving user: " + user.getUsername());
-            DatabaseManager.insertOrUpdateUser(user);
         }
     }
 
@@ -82,6 +53,10 @@ public class Server {
         games.put(table.getId(), table);
         players.get(player1.getId()).setCurrentGame(table);
         players.get(player2.getId()).setCurrentGame(table);
+    }
+
+    public void prepareGame(int player1ID, int player2ID) {
+        createGame(new Player(player1ID), new Player(player2ID));
     }
 
 //    public ServerApp getDataManager() {

@@ -12,15 +12,17 @@ import com.example.model.game.place.Row;
 import com.example.model.game.place.RowsInGame;
 
 import java.util.ArrayList;
+
 public class ScorchAbility implements Ability {
     @Override
     public void apply(AbilityContext abilityContext) {
-        if (abilityContext.getCard() != null) {
-            applyAbilityForScorchCard(abilityContext);
-        } else {
-            applyAbilityForNonScorchCards(abilityContext);
-        }
+//        if (abilityContext.getCard() != null) {
+//            applyAbilityForScorchCard(abilityContext);
+//        } else {
+//            applyAbilityForNonScorchCards(abilityContext);
+//        }
     }
+
     private void applyAbilityForScorchCard(AbilityContext abilityContext) {
         ArrayList<UnitCard> maximumPoweredCardsForCurrentPlayer = new ArrayList<>();
         ArrayList<UnitCard> maximumPoweredCardsForOpponentPlayer = new ArrayList<>();
@@ -34,9 +36,8 @@ public class ScorchAbility implements Ability {
         }
         if (maximumPowerForCurrentPlayer == maximumPowerForOpponentPlayer) {
             for (UnitCard card : maximumPoweredCardsForCurrentPlayer) {
-                abilityContext.getTable().getCurrentPlayer().getBoard().getRowByName(card.getPlace()).removeCard(card);
-                abilityContext.getTable().getCurrentPlayer().getBoard().getDiscardPile().addCard(card);
-                //TODO
+
+//                ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDontDoAbility(card.getIdInGame(), abilityContext.getTable().getCurrentPlayer().getBoard().getRowByName(card.getPlace()), RowsInGame.currentPlayerDiscardPlace.toString());
             }
             for (UnitCard card : maximumPoweredCardsForOpponentPlayer) {
                 abilityContext.getTable().getOpponent().getBoard().getRowByName(card.getPlace()).removeCard(card);
@@ -57,16 +58,17 @@ public class ScorchAbility implements Ability {
             }
         }
     }
+
     private int getMaximumPoweredCards(ArrayList<UnitCard> maximumPoweredCardsForCurrentPlayer, Row row) {
         int maximumPowerForCurrentPlayer = 0;
         for (Card card : row.getCards()) {
-            if (card instanceof UnitCard && !((UnitCard)card).isHero()) {
-                if (((UnitCard)card).getCurrentPower() > maximumPowerForCurrentPlayer) {
+            if (card instanceof UnitCard && !((UnitCard) card).isHero()) {
+                if (((UnitCard) card).getCurrentPower() > maximumPowerForCurrentPlayer) {
                     maximumPoweredCardsForCurrentPlayer.clear();
-                    maximumPoweredCardsForCurrentPlayer.add(((UnitCard)card));
-                    maximumPowerForCurrentPlayer = ((UnitCard)card).getCurrentPower();
-                } else if (((UnitCard)card).getCurrentPower() == maximumPowerForCurrentPlayer) {
-                    maximumPoweredCardsForCurrentPlayer.add(((UnitCard)card));
+                    maximumPoweredCardsForCurrentPlayer.add(((UnitCard) card));
+                    maximumPowerForCurrentPlayer = ((UnitCard) card).getCurrentPower();
+                } else if (((UnitCard) card).getCurrentPower() == maximumPowerForCurrentPlayer) {
+                    maximumPoweredCardsForCurrentPlayer.add(((UnitCard) card));
                 }
             }
         }
@@ -80,6 +82,7 @@ public class ScorchAbility implements Ability {
             }
         }
     }
+
     private void removeMaximumPoweredCardsInARow(Row row, AbilityContext abilityContext) {
         ArrayList<UnitCard> maximumPoweredCards = new ArrayList<>();
         int s = getMaximumPoweredCards(maximumPoweredCards, row);

@@ -1,5 +1,8 @@
 package com.example.model;
 
+import com.example.controller.Controller;
+import com.example.controller.GameMenuController;
+import com.example.model.IO.patterns.CheatCodes;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -10,7 +13,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 public class Terminal extends StackPane {
-    private final double WIDTH = 900;
+    private final double WIDTH = 500;
     private final double HEIGHT = 180;
     private TextArea textArea;
     private int editableStartIndex;
@@ -39,8 +42,21 @@ public class Terminal extends StackPane {
                     textArea.clear();
                     textArea.appendText(title.substring(0, title.length() - 1));
                 } else {
-                    //TODO: run command
-                    //App.getCurrentController().runCommand(command);
+                   if (CheatCodes.ADD_CARD_TO_HAND.matched(command)) {
+                       addCardTODeck();
+                   } else if (CheatCodes.RECOVER_CRYSTALS.matched(command)) {
+                       recverCrystals();
+                   } else if (CheatCodes.RECOVER_LEADER_ABILITY.matched(command)) {
+                       recoverLeaderAbility();
+                   } else if (CheatCodes.LUCK_OPPONENT_LEADER_ABILITY.matched(command)) {
+                       luckOpponentLeaderAbility();
+                   } else if (CheatCodes.LUCK_OPPONENT_EMOTES.matched(command)) {
+                       luckOpponentEmotes();
+                   } else if (CheatCodes.SET_CLOWN_PICTURE_FOR_OPPONENT_LEADER_CARD.matched(command)) {
+                       setClownForOpponent();
+                   } else if (CheatCodes.ADD_DECOY_CARD.matched(command)) {
+                       addDecoyCard();
+                   }
                 }
                 editableStartIndex = textArea.getCaretPosition() + 2;
             } else if (event.getCode() == KeyCode.BACK_SPACE || event.getCode() == KeyCode.DELETE) {
@@ -79,23 +95,44 @@ public class Terminal extends StackPane {
         this.setLayoutX(35);
     }
 
-    public void printError(String text) {
-        textArea.appendText("\n   " + text);
-        editableStartIndex = textArea.getCaretPosition() + 2;
+    private void addDecoyCard() {
+        GameMenuController gameMenuController = (GameMenuController) Controller.GAME_MENU_CONTROLLER.getController();
+        gameMenuController.addDecoyCard();
     }
 
-    public void printMessage(String text) {
-        textArea.appendText("\n   " + text);
-        editableStartIndex = textArea.getCaretPosition() + 2;
+    private void setClownForOpponent() {
+        GameMenuController gameMenuController = (GameMenuController) Controller.GAME_MENU_CONTROLLER.getController();
+        gameMenuController.setClownForOpponent();
+    }
+
+    private void luckOpponentEmotes() {
+        GameMenuController gameMenuController = (GameMenuController) Controller.GAME_MENU_CONTROLLER.getController();
+        gameMenuController.luckOpponentEmotes();
+    }
+
+    private void luckOpponentLeaderAbility() {
+        GameMenuController gameMenuController = (GameMenuController) Controller.GAME_MENU_CONTROLLER.getController();
+        gameMenuController.luckOpponentLeaderAbility();
+    }
+
+    private void recverCrystals() {
+        GameMenuController gameMenuController = (GameMenuController) Controller.GAME_MENU_CONTROLLER.getController();
+        gameMenuController.recoverCrystals();
+    }
+
+    private void recoverLeaderAbility() {
+        GameMenuController gameMenuController = (GameMenuController) Controller.GAME_MENU_CONTROLLER.getController();
+        gameMenuController.recoverLeaderAbility();
+    }
+
+    private void addCardTODeck() {
+        GameMenuController gameMenuController = (GameMenuController) Controller.GAME_MENU_CONTROLLER.getController();
+        gameMenuController.addRandomCardToDeck();
     }
 
     public String getCurrentCommand() {
         String text = textArea.getText();
         int lastPromptIndex = text.lastIndexOf("\n");
         return text.substring(lastPromptIndex + 1).trim();
-    }
-
-    public void close() {
-        App.getAppView().removeTerminal();
     }
 }

@@ -131,11 +131,13 @@ public class ProfileMenuControllerView {
         paneChanger("Profile Menu", "ProfileMenu.fxml");
     }
 
-    public void openFriendsListMenu(MouseEvent mouseEvent) {
-        controller.showFriendsList();
-    }
-
     public void openTerminal(MouseEvent mouseEvent) {
         App.getAppView().showTerminal();
     }
+
+    public void openFriendsListMenu(MouseEvent mouseEvent) {
+        App.setCurrentMenu(Menu.FRIENDS_MENU);
+        Controller.FRIENDS_MENU_CONTROLLER.run();
+    }
+
 }

@@ -16,6 +16,7 @@ public class Player {
     private boolean passRound;
     private HashMap<Integer, Integer> scoresOfRounds;
     private int specialCardCounter;
+    private int priorityInGame = 0;
 
     public Player(String name) {
         this.name = name;
@@ -26,6 +27,19 @@ public class Player {
         this.numberOfVetoCards = 2;
         this.passRound = false;
     }
+
+    public void setNumberOfCrystals(int numberOfCrystals) {
+        this.numberOfCrystals = numberOfCrystals;
+    }
+
+    public int getPriorityInGame() {
+        return priorityInGame;
+    }
+
+    public void setPriorityInGame(int priorityInGame) {
+        this.priorityInGame = priorityInGame;
+    }
+
     public void updateScore() {
         int result = 0;
         for (Row row : board.getRows()) {

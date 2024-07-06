@@ -117,25 +117,30 @@ public class GameCardView extends Pane {
     }
 
     public void doAbilityAnimation(AbilityName abilityName) {
-        Image musterImage = new Image(getSrcPathForAnimImagesWithAbilityName(abilityName));
-        ImageView musterImageView = new ImageView(musterImage);
+        try {
+            Image musterImage = new Image(getSrcPathForAnimImagesWithAbilityName(abilityName));
+            ImageView musterImageView = new ImageView(musterImage);
 
-        musterImageView.setFitWidth(40);
-        musterImageView.setFitHeight(40);
-        musterImageView.setTranslateX((width - 40) / 2);
-        musterImageView.setTranslateY((height - 40) / 2);
+            musterImageView.setFitWidth(40);
+            musterImageView.setFitHeight(40);
+            musterImageView.setTranslateX((width - 40) / 2);
+            musterImageView.setTranslateY((height - 40) / 2);
 
 
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.5), event -> {
-            Timeline timeline1 = new Timeline(new KeyFrame(Duration.seconds(0.5), event1 -> {
-                this.getChildren().remove(musterImageView);
+            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.5), event -> {
+                Timeline timeline1 = new Timeline(new KeyFrame(Duration.seconds(0.5), event1 -> {
+                    this.getChildren().remove(musterImageView);
+                }));
+                this.getChildren().add(musterImageView);
+                timeline1.setCycleCount(1);
+                timeline1.play();
             }));
-            this.getChildren().add(musterImageView);
-            timeline1.setCycleCount(1);
-            timeline1.play();
-        }));
-        timeline.setCycleCount(1);
-        timeline.play();
+            timeline.setCycleCount(1);
+            timeline.play();
+        } catch (Exception e) {
+
+        }
+
     }
 
     private String getSrcPathForAnimImagesWithAbilityName(AbilityName abilityName) {
@@ -203,4 +208,57 @@ public class GameCardView extends Pane {
         timeline.play();
         setPowerDefault();
     }
+
+    public void updatePowerLabelAfterWeather() {
+        if (card instanceof UnitCard) {
+            power.setText("" + ((UnitCard) card).getCurrentPower());
+            power.setTextFill(Paint.valueOf(Color.rgb(204, 22, 22).toString()));
+        }
+    }
+
+    public void applyMardroeme() {
+        if (this.card instanceof UnitCard) {
+            this.card.setCardData(CardData.skellige_young_vildkaarl);
+            this.card.setAbility(null);
+            this.card.setAbilityName(null);
+            this.cardData = this.card.getCardData();
+            ((UnitCard) this.card).setCurrentPower(8);
+            ((UnitCard) this.card).setPower(8);
+            ((UnitCard) this.card).setHero(false);
+            ((UnitCard) this.card).setNoRemove(false);
+
+            Image image = new Image(srcPath + cardData.getImageAddress());
+            ImageView imageView = new ImageView(image);
+            imageView.setFitWidth(width);
+            imageView.setFitHeight(height);
+            imageView.setStyle("-fx-background-radius: 15; -fx-border-radius: 15; -fx-background-color: transparent;");
+
+            this.getChildren().addAll(imageView);
+            setLabelAndAbilitiesLabelForNonSpecialCards();
+        }
+    }
+
+    public void applyTransform() {
+//        if (this.card instanceof UnitCard && this.getCard().getAbilityName() == AbilityName.TRANSFORMER) {
+//            this.card.setCardData(CardData.scoiatael_schirru);
+//            this.card.setAbility(null);
+//            this.card.setAbilityName(null);
+//            this.cardData = this.card.getCardData();
+//            ((UnitCard) this.card).setCurrentPower(8);
+//            ((UnitCard) this.card).setPower(8);
+//            ((UnitCard) this.card).setHero(false);
+//            ((UnitCard) this.card).setNoRemove(false);
+//
+//            Image image = new Image(srcPath + cardData.getImageAddress());
+//            ImageView imageView = new ImageView(image);
+//            imageView.setFitWidth(width);
+//            imageView.setFitHeight(height);
+//            imageView.setStyle("-fx-background-radius: 15; -fx-border-radius: 15; -fx-background-color: transparent;");
+//
+//            this.getChildren().addAll(imageView);
+//            setLabelAndAbilitiesLabelForNonSpecialCards();
+//        }
+    }
+
+
 }

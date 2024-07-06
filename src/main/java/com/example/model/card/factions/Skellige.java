@@ -4,15 +4,12 @@ import com.example.controller.Controller;
 import com.example.controller.GameMenuController;
 import com.example.model.card.Card;
 import com.example.model.card.SpecialCard;
-import com.example.model.card.UnitCard;
 import com.example.model.card.WeatherCard;
 import com.example.model.card.enums.FactionsType;
-import com.example.model.game.Deck;
 import com.example.model.game.DiscardPile;
 import com.example.model.game.Player;
 import com.example.model.game.Table;
 import com.example.model.game.place.Place;
-import com.example.model.game.place.Row;
 import com.example.model.game.place.RowsInGame;
 
 import java.util.Random;
@@ -57,26 +54,26 @@ public class Skellige implements Factions {
                 if (table.getCurrentPlayer() == player) {
                     ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.currentPlayerDiscardPlace.toString(), RowsInGame.weather.toString());
                 } else {
-                    ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.opponentPlayerDiscardPlace.toString(), RowsInGame.weather.toString());
+                    ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.opponentDiscardPlace.toString(), RowsInGame.weather.toString());
                 }
             } else {
                 if (selectedCard.getPlace() == Place.CLOSE_COMBAT) {
                     if (table.getCurrentPlayer() == player) {
                         ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.currentPlayerDiscardPlace.toString(), RowsInGame.currentPlayerSiegeSpecialPlace.toString());
                     } else {
-                        ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.opponentPlayerDiscardPlace.toString(), RowsInGame.opponentPlayerCloseCombatSpecialPlace.toString());
+                        ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.opponentDiscardPlace.toString(), RowsInGame.opponentCloseCombatSpecialPlace.toString());
                     }
                 } else if (selectedCard.getPlace() == Place.SIEGE) {
                     if (table.getCurrentPlayer() == player) {
                         ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.currentPlayerDiscardPlace.toString(), RowsInGame.currentPlayerSiegeSpecialPlace.toString());
                     } else {
-                        ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.opponentPlayerDiscardPlace.toString(), RowsInGame.opponentPlayerSiegeSpecialPlace.toString());
+                        ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.opponentDiscardPlace.toString(), RowsInGame.opponentSiegeSpecialPlace.toString());
                     }
                 } else {
                     if (table.getCurrentPlayer() == player) {
                         ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.currentPlayerDiscardPlace.toString(), RowsInGame.currentPlayerRangedSpecialPlace.toString());
                     } else {
-                        ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.opponentPlayerDiscardPlace.toString(), RowsInGame.opponentPlayerRangedSpecialPlace.toString());
+                        ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.opponentDiscardPlace.toString(), RowsInGame.opponentRangedSpecialPlace.toString());
                     }
                 }
             }
@@ -85,19 +82,19 @@ public class Skellige implements Factions {
                 if (table.getCurrentPlayer() == player) {
                     ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.currentPlayerDiscardPlace.toString(), RowsInGame.currentPlayerCloseCombat.toString());
                 } else {
-                    ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.opponentPlayerDiscardPlace.toString(), RowsInGame.opponentPlayerCloseCombat.toString());
+                    ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.opponentDiscardPlace.toString(), RowsInGame.opponentCloseCombat.toString());
                 }
             } else if (selectedCard.getPlace() == Place.SIEGE) {
                 if (table.getCurrentPlayer() == player) {
                     ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.currentPlayerDiscardPlace.toString(), RowsInGame.currentPlayerSiege.toString());
                 } else {
-                    ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.opponentPlayerDiscardPlace.toString(), RowsInGame.opponentPlayerSiege.toString());
+                    ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.opponentDiscardPlace.toString(), RowsInGame.opponentSiege.toString());
                 }
             } else {
                 if (table.getCurrentPlayer() == player) {
                     ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.currentPlayerDiscardPlace.toString(), RowsInGame.currentPlayerRanged.toString());
                 } else {
-                    ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.opponentPlayerDiscardPlace.toString(), RowsInGame.opponentPlayerRanged.toString());
+                    ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.opponentDiscardPlace.toString(), RowsInGame.opponentRanged.toString());
                 }
             }
         }

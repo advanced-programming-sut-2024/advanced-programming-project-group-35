@@ -30,7 +30,6 @@ import java.util.stream.Collectors;
 public class GameMenuController extends AppController {
     private Table table;
     private GameMenuControllerView gameMenuControllerView;
-    private int turn = 1;
 
     @Override
     public void run() {
@@ -49,18 +48,18 @@ public class GameMenuController extends AppController {
         return gameMenuControllerView;
     }
 
-    public void vetoCard(Player player, ObservableList<Card> selectedCards) {
+    public void vetoCard(Player player, Card selectedCard) {
+        //TODO
         if (player.canVetoCard()) {
             Deck deck = player.getBoard().getDeck();
             Hand hand = player.getBoard().getHand();
-            for (int i = 0; i < selectedCards.size(); i++) {
-                Card ranomCard = deck.getCard(new Random().nextInt(deck.getSize()));
-                hand.removeCard(selectedCards.get(i));
-                hand.addCard(ranomCard);
-                deck.removeCard(ranomCard);
-                deck.addCard(selectedCards.get(i));
-                player.decreaseNumberOfVetoCards();
-            }
+            Card ranomCard = deck.getCard(new Random().nextInt(deck.getSize()));
+            hand.removeCard(selectedCard);
+            hand.addCard(ranomCard);
+            deck.removeCard(ranomCard);
+            deck.addCard(selectedCard);
+            player.decreaseNumberOfVetoCards();
+            //TODO گرافیک جابه جایی کارت
         }
     }
 
@@ -75,6 +74,7 @@ public class GameMenuController extends AppController {
     }
 
     public void moveCardFromOriginToDestinationAndDoAbility(int cardId, String origin, String destination) {
+        System.out.println(origin);
         ObservableList<Card> originRow = (ObservableList<Card>) getRowListByName(origin);
         ObservableList<Card> destinationRow = (ObservableList<Card>) getRowListByName(destination);
         Card card = getCardById(cardId, originRow);
@@ -120,8 +120,15 @@ public class GameMenuController extends AppController {
                 doNonLeaderCardsAbility(card, abilityContext, AbilityName.SCORCH);
             } else if (card.getAbilityName() == AbilityName.WEATHER) {
                 AbilityContext abilityContext = new AbilityContext(table, null, null);
+                abilityContext.addParam("card", card);
                 ((WeatherCard) card).setPlayer(table.getCurrentPlayer());
                 doNonLeaderCardsAbility(card, abilityContext, AbilityName.SCORCH);
+            } else if (card.getAbilityName() == AbilityName.MARDROEME) {
+                System.out.println(destination);
+                AbilityContext abilityContext = new AbilityContext(table, null, getRowByName(getRowNameBySpecialPlaceName(destination)));
+                abilityContext.addParam("dest", destination);
+                abilityContext.addParam("mardroemeCard", card);
+                doNonLeaderCardsAbility(card, abilityContext, AbilityName.MARDROEME);
             }
         }
 
@@ -174,23 +181,23 @@ public class GameMenuController extends AppController {
 
     private String getRowNameBySpecialPlaceName(String specialPlaceName) {
         switch (specialPlaceName) {
-            case "currentPlayerCloseCombatSpecialPlaceObservableList" -> {
+            case "currentPlayerCloseCombatSpecialPlace" -> {
                 return RowsInGame.currentPlayerCloseCombat.toString();
             }
-            case "currentPlayerRangedSpecialPlaceObservableList" -> {
+            case "currentPlayerRangedSpecialPlace" -> {
                 return RowsInGame.currentPlayerRanged.toString();
             }
-            case "currentPlayerSiegeSpecialPlaceObservableList" -> {
+            case "currentPlayerSiegeSpecialPlace" -> {
                 return RowsInGame.currentPlayerSiege.toString();
             }
-            case "opponentSiegeSpecialPlaceObservableList" -> {
-                return RowsInGame.opponentPlayerSiege.toString();
+            case "opponentSiegeSpecialPlace" -> {
+                return RowsInGame.opponentSiege.toString();
             }
-            case "opponentCloseCombatSpecialPlaceObservableList" -> {
-                return RowsInGame.opponentPlayerCloseCombat.toString();
+            case "opponentCloseCombatSpecialPlace" -> {
+                return RowsInGame.opponentCloseCombat.toString();
             }
-            case "opponentRangedSpecialPlaceObservableList" -> {
-                return RowsInGame.opponentPlayerRanged.toString();
+            case "opponentRangedSpecialPlace" -> {
+                return RowsInGame.opponentRanged.toString();
             }
             default -> {
                 return null;
@@ -199,6 +206,15 @@ public class GameMenuController extends AppController {
     }
 
     public void moveCardFromOriginToDestinationAndDontDoAbility(int cardId, String origin, String destination) {
+        moveCardAndDontDoAbilityBase(cardId, origin, destination);
+        saveLog("card with id: " + cardId + " moved from " + origin + " to " + destination + " and ability applied");
+    }
+
+    public void moveCardFromOriginToDestinationAndDontDoAbilityWithNoLog(int cardId, String origin, String destination) {
+        moveCardAndDontDoAbilityBase(cardId, origin, destination);
+    }
+
+    private void moveCardAndDontDoAbilityBase(int cardId, String origin, String destination) {
         System.out.println(destination);
         ObservableList<Card> originRow = (ObservableList<Card>) getRowListByName(origin);
         ObservableList<Card> destinationRow = (ObservableList<Card>) getRowListByName(destination);
@@ -215,27 +231,26 @@ public class GameMenuController extends AppController {
         gameMenuControllerView.updateAllLabels();
         table.getCurrentPlayer().updateScore();
         table.getOpponent().updateScore();
-        saveLog("card with id: " + cardId + " moved from " + origin + " to " + destination + " and ability applied");
     }
 
     private Row getRowByName(String rowName) {
         switch (rowName) {
-            case "currentPlayerSiegeObservableList" -> {
+            case "currentPlayerSiege" -> {
                 return table.getCurrentPlayer().getBoard().getSiegeCardPlace();
             }
-            case "currentPlayerRangedObservableList" -> {
+            case "currentPlayerRanged" -> {
                 return table.getCurrentPlayer().getBoard().getRangedCardPlace();
             }
-            case "currentPlayerCloseCombatObservableList" -> {
+            case "currentPlayerCloseCombat" -> {
                 return table.getCurrentPlayer().getBoard().getCloseCombatCardPlace();
             }
-            case "opponentSiegeObservableList" -> {
+            case "opponentSiege" -> {
                 return table.getOpponent().getBoard().getSiegeCardPlace();
             }
-            case "opponentCloseCombatObservableList" -> {
+            case "opponentCloseCombat" -> {
                 return table.getOpponent().getBoard().getCloseCombatCardPlace();
             }
-            case "opponentRangedObservableList" -> {
+            case "opponentRanged" -> {
                 return table.getOpponent().getBoard().getRangedCardPlace();
             }
             default -> {
@@ -246,58 +261,58 @@ public class GameMenuController extends AppController {
 
     private ObservableList<? extends Card> getRowListByName(String rowName) {
         switch (rowName) {
-            case "currentPlayerHandObservableList" -> {
+            case "currentPlayerHand" -> {
                 return table.getCurrentPlayer().getBoard().getHand().getCards();
             }
-            case "currentPlayerDeckObservableList" -> {
+            case "currentPlayerDeck" -> {
                 return table.getCurrentPlayer().getBoard().getDeck().getCards();
             }
-            case "currentPlayerSiegeObservableList" -> {
+            case "currentPlayerSiege" -> {
                 return table.getCurrentPlayer().getBoard().getSiegeCardPlace().getCards();
             }
-            case "currentPlayerRangedObservableList" -> {
+            case "currentPlayerRanged" -> {
                 return table.getCurrentPlayer().getBoard().getRangedCardPlace().getCards();
             }
-            case "currentPlayerCloseCombatObservableList" -> {
+            case "currentPlayerCloseCombat" -> {
                 return table.getCurrentPlayer().getBoard().getCloseCombatCardPlace().getCards();
             }
-            case "currentPlayerCloseCombatSpecialPlaceObservableList" -> {
+            case "currentPlayerCloseCombatSpecialPlace" -> {
                 return table.getCurrentPlayer().getBoard().getCloseCombatCardPlace().getSpecialPlace();
             }
-            case "currentPlayerRangedSpecialPlaceObservableList" -> {
+            case "currentPlayerRangedSpecialPlace" -> {
                 return table.getCurrentPlayer().getBoard().getRangedCardPlace().getSpecialPlace();
             }
-            case "opponentPlayerHandObservableList" -> {
+            case "opponentHand" -> {
                 return table.getOpponent().getBoard().getHand().getCards();
             }
-            case "currentPlayerSiegeSpecialPlaceObservableList" -> {
+            case "currentPlayerSiegeSpecialPlace" -> {
                 return table.getCurrentPlayer().getBoard().getSiegeCardPlace().getSpecialPlace();
             }
-            case "opponentPlayerSiegeObservableList" -> {
+            case "opponentSiege" -> {
                 return table.getOpponent().getBoard().getSiegeCardPlace().getCards();
             }
-            case "opponentPlayerCloseCombatObservableList" -> {
+            case "opponentCloseCombat" -> {
                 return table.getOpponent().getBoard().getCloseCombatCardPlace().getCards();
             }
-            case "opponentPlayerRangedObservableList" -> {
+            case "opponentRanged" -> {
                 return table.getOpponent().getBoard().getRangedCardPlace().getCards();
             }
-            case "opponentPlayerSiegeSpecialPlaceObservableList" -> {
+            case "opponentSiegeSpecialPlace" -> {
                 return table.getOpponent().getBoard().getSiegeCardPlace().getSpecialPlace();
             }
-            case "opponentPlayerCloseCombatSpecialPlaceObservableList" -> {
+            case "opponentCloseCombatSpecialPlace" -> {
                 return table.getOpponent().getBoard().getCloseCombatCardPlace().getSpecialPlace();
             }
-            case "opponentPlayerRangedSpecialPlaceObservableList" -> {
+            case "opponentRangedSpecialPlace" -> {
                 return table.getOpponent().getBoard().getRangedCardPlace().getSpecialPlace();
             }
-            case "opponentPlayerDiscardPlace" -> {
+            case "opponentDiscardPlace" -> {
                 return table.getOpponent().getBoard().getDiscardPile().getCards();
             }
             case "currentPlayerDiscardPlace" -> {
                 return table.getCurrentPlayer().getBoard().getDiscardPile().getCards();
             }
-            case "weatherObservableList" -> {
+            case "weather" -> {
                 return table.getSpellPlace().getCards();
             }
             default -> {
@@ -317,6 +332,8 @@ public class GameMenuController extends AppController {
         player2.getBoard().setHandForStartGame(player2Deck);
         player1.setSpecialCardCounter(player1.getSpecialCardCounter());
         player2.setSpecialCardCounter(player2.getSpecialCardCounter());
+        player1.setPriorityInGame(1);
+        player2.setPriorityInGame(2);
         table = new Table(player1, player2);
         saveLog(generateInitialDeckData());
         Round round1 = new Round(1);
@@ -449,10 +466,6 @@ public class GameMenuController extends AppController {
     }
 
     private void startRound(Table table) {
-        System.out.println(turn);
-        if (turn == 1) {
-            gameMenuControllerView.showVetoCards();
-        }
         if (table.getRoundNumber() == 1) {
             LeaderCard leaderCard1 = table.getCurrentPlayer().getBoard().getDeck().getLeader();
             LeaderCard leaderCard2 = table.getOpponent().getBoard().getDeck().getLeader();
@@ -535,8 +548,9 @@ public class GameMenuController extends AppController {
     }
 
     private void backCardsToDiscardPiles() {
-        gameMenuControllerView.backCardsToDiscardPiles();
+        gameMenuControllerView.backCardsToDiscardPlaces();
         gameMenuControllerView.updateAllLabels();
+        saveLog("cards back to discardPlace");
     }
 
     private void changeRound() {
@@ -546,6 +560,14 @@ public class GameMenuController extends AppController {
         } else if (table.getOpponent().getNumberOfCrystals() == 0) {
             endGame(table, table.getCurrentPlayer());
         } else {
+            if (table.getCurrentRound().isWon()) {
+                Player winner = table.getCurrentRound().getWinner();
+                if (table.getCurrentPlayer() != winner) {
+                    table.setOpponent(table.getCurrentPlayer());
+                    table.setCurrentPlayer(winner);
+                }
+            }
+            changeTurnWithNoLog();
             Round round = new Round(table.getRoundNumber() + 1);
             table.getCurrentPlayer().setPassRound(false);
             table.getOpponent().setPassRound(false);
@@ -557,15 +579,12 @@ public class GameMenuController extends AppController {
     }
 
     private void changeTurn() {
-        turn++;
         gameMenuControllerView.changeTurn();
-        if (turn == 2) {
-            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
-                gameMenuControllerView.showVetoCards();
-            }));
-            timeline.play();
-        }
         saveLog("change turn");
+    }
+
+    private void changeTurnWithNoLog() {
+        gameMenuControllerView.changeTurn();
     }
 
     private void endGame(Table table, Player winner) {
@@ -576,7 +595,7 @@ public class GameMenuController extends AppController {
     }
 
     public void disApplyWeatherCards() {
-        //TODO
+        gameMenuControllerView.disApplyWeatherCards();
     }
 
     public Table getTable() {
@@ -600,5 +619,46 @@ public class GameMenuController extends AppController {
             }
             System.out.println("doCurrentPlayerLeaderAbility in GameMenuController");
         }
+    }
+
+    public void addRandomCardToDeck() {
+        Deck deck = table.getCurrentPlayer().getBoard().getDeck();
+        Card randomCard = deck.getCard(new Random().nextInt(deck.getSize()));
+        if (randomCard != null) {
+            moveCardFromOriginToDestinationAndDontDoAbilityWithNoLog(randomCard.getIdInGame(), RowsInGame.currentPlayerDeck.toString(), RowsInGame.currentPlayerHand.toString());
+        }
+        saveLog("add random card to deck cheat code");
+    }
+
+    public void recoverLeaderAbility() {
+        table.getCurrentPlayer().getBoard().getDeck().getLeader().setCanDoAction(true);
+        gameMenuControllerView.updateAllLabels();
+        saveLog("recover leader ability cheat code");
+    }
+
+    public void recoverCrystals() {
+        table.getCurrentPlayer().setNumberOfCrystals(2);
+        gameMenuControllerView.updateAllLabels();
+        saveLog("recover crystals cheat code");
+    }
+
+    public void luckOpponentLeaderAbility() {
+        table.getOpponent().getBoard().getDeck().getLeader().setCanDoAction(false);
+        gameMenuControllerView.updateAllLabels();
+        saveLog("luck opponent leader ability cheat code");
+    }
+
+    public void luckOpponentEmotes() {
+
+    }
+
+    public void setClownForOpponent() {
+        gameMenuControllerView.setClownImageForOpponentLeaderCard();
+        saveLog("set clown picture for opponent leader card cheat code");
+    }
+
+    public void addDecoyCard() {
+        gameMenuControllerView.addDecoyCard();
+        saveLog("add decoy card cheat code");
     }
 }

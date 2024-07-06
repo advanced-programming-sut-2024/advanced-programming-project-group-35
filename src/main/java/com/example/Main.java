@@ -36,20 +36,20 @@ public class Main extends Application {
         launch(args);
     }
     public static void shutdown() {
-//        System.out.println("Data Base is running...");
-//        DatabaseManager.createNewDatabase();
-//        DatabaseManager.createUsersTable();
-//        DatabaseManager.clearUsersTable();
-//        saveUsersToDatabase();
+        System.out.println("Shutdown hook is running...");
+        DatabaseManager.createNewDatabase();
+        DatabaseManager.createUsersTable();
+        DatabaseManager.clearUsersTable();
+        saveUsersToDatabase();
 //        System.out.println("Detailed user information:");
 //        DatabaseManager.printDetailedUserInfo();
-//        System.out.println("Total number of users in database: " + DatabaseManager.getUserCount());
-//        try {
-//            Thread.sleep(1000); // 1 second delay
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        System.out.println("Shutdown hook completed.");
+        System.out.println("Total number of users in database: " + DatabaseManager.getUserCount());
+        try {
+            Thread.sleep(1000); // 1 second delay
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Shutdown hook completed.");
 //        App.saveUsers("users.json");
     }
 
@@ -68,8 +68,8 @@ public class Main extends Application {
         AppView appView = new AppView();
         App.setAppView(appView);
         connectToServer();
-        App.setServerData(socket, out, in);
         appView.start(stage);
+        App.setServerData(socket, out, in);
     }
 
     private void connectToServer() {

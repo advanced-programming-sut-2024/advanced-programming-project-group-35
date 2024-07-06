@@ -5,9 +5,7 @@ import com.example.controller.GameMenuController;
 import com.example.model.card.AbilityContext;
 import com.example.model.card.Card;
 import com.example.model.card.UnitCard;
-import com.example.model.card.enums.AbilityName;
 import com.example.model.game.Player;
-import com.example.model.game.Table;
 import com.example.model.game.place.Row;
 import com.example.model.game.place.RowsInGame;
 
@@ -29,7 +27,7 @@ public class SonOfMedellAbility implements LeaderAbility {
                     }
                 }
             }
-            ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDontDoAbility(maxPoweredCard.getIdInGame(), RowsInGame.opponentPlayerRangedSpecialPlace.toString(), RowsInGame.opponentPlayerDiscardPlace.toString());
+            ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDontDoAbility(maxPoweredCard.getIdInGame(), RowsInGame.opponentRangedSpecialPlace.toString(), RowsInGame.opponentDiscardPlace.toString());
         }
     }
 }

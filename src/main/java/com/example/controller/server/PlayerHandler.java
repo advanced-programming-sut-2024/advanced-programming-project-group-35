@@ -67,6 +67,25 @@ public class PlayerHandler implements Runnable {
                 } else if ("ClientConnector".equals(parts[0])) {
                     ID = Integer.parseInt(parts[1]);
                     server.addClientConnector(ID, this);
+                    server.addPlayer(ID, this);
+                } else if ("Request".equals(parts[0])) {
+                    System.out.println("Received request to: " + parts[2]);
+                    int receiverID = Integer.parseInt(parts[2]);
+                    int senderID = Integer.parseInt(parts[1]);
+                    ServerApp.sendGameRequest(senderID, receiverID);
+                } else if ("GameRequest".equals(parts[0])) {
+                    System.out.println("Received request from: " + parts[1] + " to: " + parts[2]);
+                    int receiverID = Integer.parseInt(parts[2]);
+                    int senderID = Integer.parseInt(parts[1]);
+                    ServerApp.sendGameRequest(senderID, receiverID);
+                } else if ("RandomGameRequest".equals(parts[0])) {
+                    System.out.println("Received randomGame from: " + parts[1]);
+                    int senderID = Integer.parseInt(parts[1]);
+                    ServerApp.randomGame(senderID);
+                } else if ("TournamentGameRequest".equals(parts[0])) {
+                    System.out.println("Received randomGame from: " + parts[1]);
+                    int senderID = Integer.parseInt(parts[1]);
+                    ServerApp.tournament(senderID);
                 } else if ("Message".equals(parts[0])) {
                     System.out.println("Received message: " + parts[3]);
                     int receiverID = Integer.parseInt(parts[2]);
@@ -118,6 +137,14 @@ public class PlayerHandler implements Runnable {
 
     public void setCurrentGame(OnlineTable game) {
         this.table = game;
+    }
+
+    public BufferedReader getIn() {
+        return in;
+    }
+
+    public PrintWriter getOut() {
+        return out;
     }
 
     // Other methods for player-specific actions

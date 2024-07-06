@@ -1,0 +1,234 @@
+{
+  "player1": "ali123",
+  "player1Faction": "Monsters",
+  "player1Hand": [
+    {
+      "name": "special_mardroeme_2",
+      "id": 99
+    },
+    {
+      "name": "weather_rain",
+      "id": 101
+    },
+    {
+      "name": "weather_clear",
+      "id": 103
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 105
+    },
+    {
+      "name": "monsters_arachas_1",
+      "id": 107
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 109
+    },
+    {
+      "name": "neutral_triss",
+      "id": 111
+    },
+    {
+      "name": "neutral_villen",
+      "id": 113
+    },
+    {
+      "name": "monsters_celaeno_harpy",
+      "id": 115
+    }
+  ],
+  "player1Deck": [
+    {
+      "name": "weather_frost_1",
+      "id": 100
+    },
+    {
+      "name": "weather_rain_1",
+      "id": 102
+    },
+    {
+      "name": "weather_clear_1",
+      "id": 104
+    },
+    {
+      "name": "monsters_arachas",
+      "id": 106
+    },
+    {
+      "name": "monsters_arachas_2",
+      "id": 108
+    },
+    {
+      "name": "monsters_arachas_behemoth",
+      "id": 110
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 112
+    },
+    {
+      "name": "monsters_vampire_bruxa",
+      "id": 114
+    },
+    {
+      "name": "monsters_cockatrice",
+      "id": 116
+    },
+    {
+      "name": "monsters_draug",
+      "id": 117
+    },
+    {
+      "name": "monsters_earth_elemental",
+      "id": 118
+    },
+    {
+      "name": "monsters_vampire_ekkimara",
+      "id": 119
+    },
+    {
+      "name": "monsters_vampire_fleder",
+      "id": 120
+    },
+    {
+      "name": "monsters_forktail",
+      "id": 121
+    }
+  ],
+  "player2": "ali",
+  "player2Faction": "Monsters",
+  "player2Hand": [
+    {
+      "name": "special_mardroeme_1",
+      "id": 199
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 201
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 203
+    },
+    {
+      "name": "neutral_triss",
+      "id": 205
+    },
+    {
+      "name": "neutral_villen",
+      "id": 207
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 209
+    },
+    {
+      "name": "monsters_arachas_1",
+      "id": 211
+    },
+    {
+      "name": "monsters_arachas_behemoth",
+      "id": 213
+    },
+    {
+      "name": "monsters_celaeno_harpy",
+      "id": 215
+    }
+  ],
+  "player2Deck": [
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 200
+    },
+    {
+      "name": "neutral_geralt",
+      "id": 202
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 204
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 206
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 208
+    },
+    {
+      "name": "monsters_arachas",
+      "id": 210
+    },
+    {
+      "name": "monsters_arachas_2",
+      "id": 212
+    },
+    {
+      "name": "monsters_vampire_bruxa",
+      "id": 214
+    },
+    {
+      "name": "monsters_cockatrice",
+      "id": 216
+    },
+    {
+      "name": "monsters_draug",
+      "id": 217
+    },
+    {
+      "name": "monsters_earth_elemental",
+      "id": 218
+    },
+    {
+      "name": "monsters_vampire_ekkimara",
+      "id": 219
+    },
+    {
+      "name": "monsters_endrega",
+      "id": 220
+    }
+  ],
+  "commands": [
+    "card with id: 111 moved from currentPlayerHand to currentPlayerCloseCombat and ability applied",
+    "change turn",
+    "card with id: 203 moved from currentPlayerHand to opponentCloseCombat and ability applied",
+    "change turn",
+    "card with id: 200 moved from currentPlayerDeck to currentPlayerHand and ability applied",
+    "card with id: 202 moved from currentPlayerDeck to currentPlayerHand and ability applied",
+    "card with id: 101 moved from currentPlayerHand to weather and ability applied",
+    "change turn",
+    "card with id: 211 moved from currentPlayerHand to currentPlayerCloseCombat and ability applied",
+    "change turn",
+    "card with id: 210 moved from currentPlayerHand to currentPlayerCloseCombat and ability applied",
+    "card with id: 212 moved from currentPlayerHand to currentPlayerCloseCombat and ability applied",
+    "card with id: 107 moved from currentPlayerHand to currentPlayerCloseCombat and ability applied",
+    "change turn",
+    "card with id: 106 moved from currentPlayerHand to currentPlayerCloseCombat and ability applied",
+    "card with id: 108 moved from currentPlayerHand to currentPlayerCloseCombat and ability applied",
+    "card with id: 200 moved from currentPlayerHand to currentPlayerRanged and ability applied",
+    "change turn",
+    "card with id: 201 moved from currentPlayerHand to currentPlayerRanged and ability applied",
+    "card with id: 109 moved from currentPlayerHand to currentPlayerRanged and ability applied",
+    "change turn",
+    "player: ali passed round",
+    "change turn",
+    "player: ali123 passed round",
+    "cards back to discardPlace",
+    "change turn",
+    "card with id: 105 moved from currentPlayerHand to currentPlayerCloseCombat and ability applied",
+    "change turn",
+    "card with id: 202 moved from currentPlayerHand to currentPlayerCloseCombat and ability applied",
+    "change turn",
+    "player: ali123 passed round",
+    "change turn",
+    "player: ali passed round",
+    "cards back to discardPlace",
+    "player: ali123 passed round",
+    "change turn",
+    "player: ali passed round",
+    "cards back to discardPlace"
+  ]
+}

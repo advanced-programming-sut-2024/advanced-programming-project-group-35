@@ -2,46 +2,62 @@ package com.example.model.card.cardsAbilities;
 
 import com.example.controller.Controller;
 import com.example.controller.GameMenuController;
-import com.example.model.card.Ability;
-import com.example.model.card.AbilityContext;
-import com.example.model.card.Card;
-import com.example.model.card.UnitCard;
+import com.example.model.card.*;
 import com.example.model.card.enums.CardData;
 import com.example.model.game.place.Row;
 
 public class WeatherAbility implements Ability {
     @Override
     public void apply(AbilityContext abilityContext) {
-       //TODO اول چک کنیم میتونیم اجرا کنیم توانایی رو یا نه stellFOrged
-        //TODO king Bran
-        switch (abilityContext.getCard().getCardName()) {
+        LeaderCard leaderCard1 = abilityContext.getTable().getCurrentPlayer().getBoard().getDeck().getLeader();
+        LeaderCard leaderCard2 = abilityContext.getTable().getOpponent().getBoard().getDeck().getLeader();
+        WeatherCard weatherCard = (WeatherCard) abilityContext.getParam("card");
+
+        if (leaderCard1.getLeaderName().equals("realms_foltest_gold") || leaderCard2.getLeaderName().equals("realms_foltest_gold")) {
+            ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).getGameMenuControllerView().backWeatherCardToDiscardPlaces(weatherCard);
+            abilityContext.getTable().getCurrentPlayer().getBoard().getDeck().getLeader().setCanDoAction(false);
+            abilityContext.getTable().getOpponent().getBoard().getDeck().getLeader().setCanDoAction(false);
+        }
+
+        switch (weatherCard.getCardName()) {
             case CardData.weather_frost -> {
-                setPowerOne(abilityContext.getTable().getCurrentPlayer().getBoard().getCloseCombatCardPlace());
-                setPowerOne(abilityContext.getTable().getOpponent().getBoard().getCloseCombatCardPlace());
+                applyWeatherEffect(abilityContext, leaderCard1, leaderCard2, abilityContext.getTable().getCurrentPlayer().getBoard().getCloseCombatCardPlace(), abilityContext.getTable().getOpponent().getBoard().getCloseCombatCardPlace());
             }
             case CardData.weather_fog -> {
-                setPowerOne(abilityContext.getTable().getCurrentPlayer().getBoard().getRangedCardPlace());
-                setPowerOne(abilityContext.getTable().getOpponent().getBoard().getRangedCardPlace());
+                applyWeatherEffect(abilityContext, leaderCard1, leaderCard2, abilityContext.getTable().getCurrentPlayer().getBoard().getRangedCardPlace(), abilityContext.getTable().getOpponent().getBoard().getRangedCardPlace());
             }
             case CardData.weather_rain -> {
-                setPowerOne(abilityContext.getTable().getCurrentPlayer().getBoard().getSiegeCardPlace());
-                setPowerOne(abilityContext.getTable().getOpponent().getBoard().getSiegeCardPlace());
+                applyWeatherEffect(abilityContext, leaderCard1, leaderCard2, abilityContext.getTable().getCurrentPlayer().getBoard().getSiegeCardPlace(), abilityContext.getTable().getOpponent().getBoard().getSiegeCardPlace());
             }
             case CardData.weather_storm -> {
-                setPowerOne(abilityContext.getTable().getCurrentPlayer().getBoard().getRangedCardPlace());
-                setPowerOne(abilityContext.getTable().getOpponent().getBoard().getRangedCardPlace());
-                setPowerOne(abilityContext.getTable().getCurrentPlayer().getBoard().getSiegeCardPlace());
-                setPowerOne(abilityContext.getTable().getOpponent().getBoard().getSiegeCardPlace());
+                applyWeatherEffect(abilityContext, leaderCard1, leaderCard2, abilityContext.getTable().getCurrentPlayer().getBoard().getRangedCardPlace(), abilityContext.getTable().getOpponent().getBoard().getRangedCardPlace());
+                applyWeatherEffect(abilityContext, leaderCard1, leaderCard2, abilityContext.getTable().getCurrentPlayer().getBoard().getCloseCombatCardPlace(), abilityContext.getTable().getOpponent().getBoard().getCloseCombatCardPlace());
             }
             case CardData.weather_clear -> {
-                ((GameMenuController)Controller.GAME_MENU_CONTROLLER.getController()).disApplyWeatherCards();
+                ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).disApplyWeatherCards();
+                ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).getGameMenuControllerView().backWeatherCardToDiscardPlaces(weatherCard);
             }
         }
     }
-    private void setPowerOne(Row row) {
-        row.setApplyWeather(true);
+
+    private void applyWeatherEffect(AbilityContext abilityContext, LeaderCard leaderCard1, LeaderCard leaderCard2, Row currentPlayerRow, Row opponentPlayerRow) {
+        boolean isKingBran1 = leaderCard1.getLeaderName().equals("skellige_king_bran");
+        boolean isKingBran2 = leaderCard2.getLeaderName().equals("skellige_king_bran");
+
+        setPowerOne(currentPlayerRow, isKingBran1);
+        setPowerOne(opponentPlayerRow, isKingBran2);
+    }
+
+    private void setPowerOne(Row row, boolean kingBran) {
         for (Card card : row.getCards()) {
-            ((UnitCard)card).setCurrentPower(1);
+            if (card != null && (card instanceof UnitCard)) {
+                if (kingBran) {
+                    ((UnitCard) card).setPowerHalf();
+                } else {
+                    ((UnitCard) card).setPowerOne();
+                }
+                ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).getGameMenuControllerView().getGameCardViewWithCardId(card.getIdInGame()).updatePowerLabelAfterWeather();
+            }
         }
     }
 }

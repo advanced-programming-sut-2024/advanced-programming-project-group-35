@@ -15,11 +15,13 @@ public class CommandersHornCardAbility implements Ability {
                 if (card != abilityContext.getCard() && (card instanceof UnitCard)) {
                     ((UnitCard)card).duplicatePower();
                     ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).getGameMenuControllerView().getGameCardViewWithCardId(card.getIdInGame()).updatePowerLabel();
-                } else if (abilityContext.getCard() == null) {
+                } else if (abilityContext.getCard() == null && (card instanceof  UnitCard)) {
                     ((UnitCard)card).duplicatePower();
                     ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).getGameMenuControllerView().getGameCardViewWithCardId(card.getIdInGame()).updatePowerLabel();
                 }
             }
         }
+        ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).getGameMenuControllerView().updateAllLabels();
+
     }
 }

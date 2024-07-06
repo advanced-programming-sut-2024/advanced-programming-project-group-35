@@ -232,9 +232,9 @@ public enum CardData {
     special_horn("special_horn", "special_horn.jpg", 0, "special", "commander_horn", "special"),
     special_horn_1("special_horn_1", "special_horn.jpg", 0, "special", "commander_horn", "special"),
     special_horn_2("special_horn_2", "special_horn.jpg", 0, "special", "commander_horn", "special"),
-    special_mardroeme("special_mardroeme", "special_mardroeme.jpg", 0, "special", "", "special"),
-    special_mardroeme_1("special_mardroeme_1", "special_mardroeme.jpg", 0, "special", "", "special"),
-    special_mardroeme_2("special_mardroeme_2", "special_mardroeme.jpg", 0, "special", "", "special"),
+    special_mardroeme("special_mardroeme", "special_mardroeme.jpg", 0, "special", "mardroeme", "special"),
+    special_mardroeme_1("special_mardroeme_1", "special_mardroeme.jpg", 0, "special", "mardroeme", "special"),
+    special_mardroeme_2("special_mardroeme_2", "special_mardroeme.jpg", 0, "special", "mardroeme", "special"),
     special_scorch("special_scorch", "special_scorch.jpg", 0, "special", "scorch", "special"),
     special_scorch_1("special_scorch_1", "special_scorch.jpg", 0, "special", "scorch", "special"),
     special_scorch_2("special_scorch_2", "special_scorch.jpg", 0, "special", "scorch", "special"),
@@ -421,10 +421,9 @@ public enum CardData {
     }
 
     public CardData getByName(String name){
-        for (CardData cardData : CardData.values()){
-            if (cardData.name.equals(name)){
+        for (CardData cardData : CardData.values()) {
+            if (cardData.name.equals(name))
                 return cardData;
-            }
         }
         return null;
     }
