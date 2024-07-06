@@ -968,7 +968,7 @@ public class GameMenuControllerView {
     }
 
     public void setClownImageForOpponentLeaderCard() {
-//       opponentPlayerLeaderCard.setImage(new Image(GameMenuControllerView.class.getResource("/images").toExternalForm()));
+       opponentPlayerLeaderCard.setImage(new Image(GameMenuControllerView.class.getResource("/images/crown.jpg").toExternalForm()));
     }
     private int decoyCheat = 0;
     public void addDecoyCard() {

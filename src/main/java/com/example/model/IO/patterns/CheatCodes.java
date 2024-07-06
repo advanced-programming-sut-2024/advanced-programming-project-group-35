@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum CheatCodes {
-    ADD_CARD_TO_HAND("add a random card to deck"),
+    ADD_CARD_TO_HAND("add a random card to hand"),
     RECOVER_CRYSTALS ("recover crystals"),
     RECOVER_LEADER_ABILITY("recover leader ability"),
     LUCK_OPPONENT_LEADER_ABILITY("luck opponent leader ability"),
