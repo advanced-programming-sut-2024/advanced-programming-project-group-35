@@ -64,6 +64,10 @@ public class GameHandler implements Runnable {
                         handleReaction(inputLine, player1ID);
                         continue;
                     }
+                    if (inputLine.startsWith("EMOTE|")) {
+                        handleEmote(inputLine, player1ID);
+                        continue;
+                    }
                     player2Out.println(inputLine);
                     gameHistory.addCommand(inputLine);
                     if (inputLine.equals("END_GAME|")) {
@@ -79,6 +83,10 @@ public class GameHandler implements Runnable {
                     }
                     if (inputLine.startsWith("REACTION|")) {
                         handleReaction(inputLine, player2ID);
+                        continue;
+                    }
+                    if (inputLine.startsWith("EMOTE|")) {
+                        handleEmote(inputLine, player2ID);
                         continue;
                     }
                     player1Out.println(inputLine);
@@ -99,6 +107,10 @@ public class GameHandler implements Runnable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void handleEmote(String inputLine, int player1ID) {
+        broadcastToAll(inputLine + "|" + player1ID);
     }
 
     private void handleReaction(String input, int senderId) {
