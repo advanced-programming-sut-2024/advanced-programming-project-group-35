@@ -1,18 +1,33 @@
 package com.example.model;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ChatMessage {
     private int senderId;
+    private int hour;
+    private int minute;
     private String content;
     private List<Integer> reactions;
     private ChatMessage replyTo;
+
+    public int getHour() {
+        return hour;
+    }
+
+    public int getMinute() {
+        return minute;
+    }
 
     public ChatMessage(int senderId, String content) {
         this.senderId = senderId;
         this.content = content;
         this.reactions = new ArrayList<>();
+        LocalDateTime date = LocalDateTime.now();
+        this.hour = date.getHour();
+        this.minute = date.getMinute();
     }
 
     // Getters and setters
@@ -41,5 +56,9 @@ public class ChatMessage {
 
     public String getContent() {
         return content;
+    }
+
+    public ChatMessage getReplyTo() {
+        return replyTo;
     }
 }

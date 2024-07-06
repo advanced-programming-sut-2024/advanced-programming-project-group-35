@@ -125,7 +125,7 @@ public class GameHandler implements Runnable {
             message.setReplyTo(chatHistory.get(replyToIndex));
         }
         chatHistory.add(message);
-        broadcastToAll("CHAT|" + message.getSender() + "|" + message.getContent());
+        broadcastToAll("CHAT|" + message.getSender() + "|" + message.getContent() + "|" + message.getHour() + message.getMinute() + (message.getReplyTo() != null ? "|REPLY_TO|" + message.getReplyTo().getSender() + "|" + message.getReplyTo().getContent() : ""));
     }
 
     public void addSpectator(PlayerHandler spectator) throws InterruptedException {
