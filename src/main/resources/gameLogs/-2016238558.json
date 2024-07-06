@@ -1,0 +1,235 @@
+{
+  "player1": "ali123",
+  "player1Faction": "Monsters",
+  "player1Hand": [
+    {
+      "name": "neutral_cow",
+      "id": 100
+    },
+    {
+      "name": "neutral_ciri",
+      "id": 99
+    },
+    {
+      "name": "neutral_emiel",
+      "id": 102
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 104
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 106
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 108
+    },
+    {
+      "name": "neutral_triss",
+      "id": 110
+    },
+    {
+      "name": "neutral_villen",
+      "id": 112
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 114
+    },
+    {
+      "name": "monsters_arachas_1",
+      "id": 116
+    }
+  ],
+  "player1Deck": [
+    {
+      "name": "neutral_dandelion",
+      "id": 101
+    },
+    {
+      "name": "neutral_gaunter_odimm",
+      "id": 103
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 105
+    },
+    {
+      "name": "neutral_geralt",
+      "id": 107
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 109
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 111
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 113
+    },
+    {
+      "name": "monsters_arachas",
+      "id": 115
+    },
+    {
+      "name": "monsters_arachas_2",
+      "id": 117
+    },
+    {
+      "name": "monsters_arachas_behemoth",
+      "id": 118
+    },
+    {
+      "name": "monsters_vampire_bruxa",
+      "id": 119
+    },
+    {
+      "name": "monsters_celaeno_harpy",
+      "id": 120
+    },
+    {
+      "name": "monsters_cockatrice",
+      "id": 121
+    },
+    {
+      "name": "monsters_draug",
+      "id": 122
+    },
+    {
+      "name": "monsters_earth_elemental",
+      "id": 123
+    },
+    {
+      "name": "monsters_vampire_ekkimara",
+      "id": 124
+    }
+  ],
+  "player2": "ali",
+  "player2Faction": "EmpireNilfgaardian",
+  "player2Hand": [
+    {
+      "name": "neutral_zoltan",
+      "id": 199
+    },
+    {
+      "name": "nilfgaard_archer_support",
+      "id": 201
+    },
+    {
+      "name": "nilfgaard_assire",
+      "id": 203
+    },
+    {
+      "name": "nilfgaard_black_archer_1",
+      "id": 205
+    },
+    {
+      "name": "nilfgaard_cynthia",
+      "id": 207
+    },
+    {
+      "name": "nilfgaard_heavy_zerri",
+      "id": 209
+    },
+    {
+      "name": "nilfgaard_letho",
+      "id": 211
+    },
+    {
+      "name": "nilfgaard_moorvran",
+      "id": 213
+    },
+    {
+      "name": "nilfgaard_morteisen",
+      "id": 215
+    }
+  ],
+  "player2Deck": [
+    {
+      "name": "nilfgaard_albrich",
+      "id": 200
+    },
+    {
+      "name": "nilfgaard_archer_support_1",
+      "id": 202
+    },
+    {
+      "name": "nilfgaard_black_archer",
+      "id": 204
+    },
+    {
+      "name": "nilfgaard_cahir",
+      "id": 206
+    },
+    {
+      "name": "nilfgaard_fringilla",
+      "id": 208
+    },
+    {
+      "name": "nilfgaard_imperal_brigade",
+      "id": 210
+    },
+    {
+      "name": "nilfgaard_menno",
+      "id": 212
+    },
+    {
+      "name": "nilfgaard_nauzicaa_2",
+      "id": 214
+    },
+    {
+      "name": "nilfgaard_puttkammer",
+      "id": 216
+    },
+    {
+      "name": "nilfgaard_rainfarn",
+      "id": 217
+    },
+    {
+      "name": "nilfgaard_renuald",
+      "id": 218
+    },
+    {
+      "name": "nilfgaard_rotten",
+      "id": 219
+    },
+    {
+      "name": "nilfgaard_shilard",
+      "id": 220
+    },
+    {
+      "name": "nilfgaard_siege_engineer",
+      "id": 221
+    },
+    {
+      "name": "nilfgaard_siege_support",
+      "id": 222
+    },
+    {
+      "name": "nilfgaard_stefan",
+      "id": 223
+    },
+    {
+      "name": "nilfgaard_sweers",
+      "id": 224
+    },
+    {
+      "name": "nilfgaard_tibor",
+      "id": 225
+    }
+  ],
+  "commands": [
+    "card with id: 104 moved from currentPlayerHand to currentPlayerRanged and ability applied",
+    "change turn",
+    "card with id: 106 moved from currentPlayerHand to currentPlayerRanged and ability applied",
+    "card with id: 105 moved from currentPlayerHand to currentPlayerRanged and ability applied",
+    "card with id: 209 moved from currentPlayerHand to currentPlayerSiege and ability applied",
+    "change turn",
+    "set clown picture for opponent leader card cheat code"
+  ]
+}
