@@ -962,6 +962,16 @@ public class GameMenuControllerView {
             currentPlayerSecondJem.setImage(new Image(Main.class.getResource("/images/icons/icon_gem_on.png").toExternalForm()));
             currentPlayerFirstJem.setImage(new Image(Main.class.getResource("/images/icons/icon_gem_on.png").toExternalForm()));
         }
+        if (table.getOpponent().getNumberOfCrystals() == 0) {
+            opponentPlayerSecondJem.setImage(new Image(Main.class.getResource("/images/icons/icon_gem_off.png").toExternalForm()));
+            opponentPlayerFirstJem.setImage(new Image(Main.class.getResource("/images/icons/icon_gem_off.png").toExternalForm()));
+        } else if (table.getOpponent().getNumberOfCrystals() == 1) {
+            opponentPlayerSecondJem.setImage(new Image(Main.class.getResource("/images/icons/icon_gem_off.png").toExternalForm()));
+            opponentPlayerFirstJem.setImage(new Image(Main.class.getResource("/images/icons/icon_gem_on.png").toExternalForm()));
+        } else {
+            opponentPlayerSecondJem.setImage(new Image(Main.class.getResource("/images/icons/icon_gem_on.png").toExternalForm()));
+            opponentPlayerFirstJem.setImage(new Image(Main.class.getResource("/images/icons/icon_gem_on.png").toExternalForm()));
+        }
         if (table.getCurrentPlayer().getScore() > table.getOpponent().getScore()) {
             currentPlayerExcellenceShower.setVisible(true);
             opponentPlayerExcellenceShower.setVisible(false);
