@@ -8,6 +8,7 @@ import com.example.model.card.Card;
 import com.example.model.card.UnitCard;
 import com.example.model.game.Deck;
 import com.example.model.game.Hand;
+import com.example.model.game.place.RowsInGame;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -25,8 +26,8 @@ public class SpyAbility implements Ability {
             deck.removeCard(selectedCard2);
             hand.addCard(selectedCard1);
             hand.addCard(selectedCard2);
-            ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDontDoAbility(selectedCard1.getIdInGame(), "currentPlayerDeckObservableList", "currentPlayerHandObservableList");
-            ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDontDoAbility(selectedCard2.getIdInGame(), "currentPlayerDeckObservableList", "currentPlayerHandObservableList");
+            ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDontDoAbility(selectedCard1.getIdInGame(), RowsInGame.currentPlayerDeck.toString(), RowsInGame.currentPlayerHand.toString());
+            ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDontDoAbility(selectedCard2.getIdInGame(), RowsInGame.currentPlayerDeck.toString(), RowsInGame.currentPlayerHand.toString());
             ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).getGameMenuControllerView().addMouseEventsForHandCards();
         } else if (deck.getSize() == 1) {
             Card selectedCard = deck.getCard(0);

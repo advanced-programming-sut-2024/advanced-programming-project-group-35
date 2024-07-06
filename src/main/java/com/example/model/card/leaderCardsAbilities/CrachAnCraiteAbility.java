@@ -5,7 +5,6 @@ import com.example.controller.GameMenuController;
 import com.example.model.card.AbilityContext;
 import com.example.model.card.Card;
 import com.example.model.game.*;
-import com.example.model.game.place.Row;
 import com.example.model.game.place.RowsInGame;
 
 import java.util.ArrayList;
@@ -28,7 +27,7 @@ public class CrachAnCraiteAbility implements LeaderAbility {
                 if (player == table.getCurrentPlayer()) {
                     ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDontDoAbility(card.getIdInGame(), RowsInGame.currentPlayerDiscardPlace.toString(), RowsInGame.currentPlayerHand.toString());
                 } else {
-                    ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDontDoAbility(card.getIdInGame(), RowsInGame.opponentPlayerDiscardPlace.toString(), RowsInGame.opponentPlayerHand.toString());
+                    ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDontDoAbility(card.getIdInGame(), RowsInGame.opponentDiscardPlace.toString(), RowsInGame.opponentHand.toString());
                 }
             }
         }

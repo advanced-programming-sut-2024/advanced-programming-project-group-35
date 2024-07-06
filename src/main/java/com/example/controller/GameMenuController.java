@@ -119,6 +119,7 @@ public class GameMenuController extends AppController {
                 doNonLeaderCardsAbility(card, abilityContext, AbilityName.SCORCH);
             } else if (card.getAbilityName() == AbilityName.WEATHER) {
                 AbilityContext abilityContext = new AbilityContext(table, null, null);
+                abilityContext.addParam("card", card);
                 ((WeatherCard) card).setPlayer(table.getCurrentPlayer());
                 doNonLeaderCardsAbility(card, abilityContext, AbilityName.SCORCH);
             }
@@ -173,23 +174,23 @@ public class GameMenuController extends AppController {
 
     private String getRowNameBySpecialPlaceName(String specialPlaceName) {
         switch (specialPlaceName) {
-            case "currentPlayerCloseCombatSpecialPlaceObservableList" -> {
+            case "currentPlayerCloseCombatSpecialPlace" -> {
                 return RowsInGame.currentPlayerCloseCombat.toString();
             }
-            case "currentPlayerRangedSpecialPlaceObservableList" -> {
+            case "currentPlayerRangedSpecialPlace" -> {
                 return RowsInGame.currentPlayerRanged.toString();
             }
-            case "currentPlayerSiegeSpecialPlaceObservableList" -> {
+            case "currentPlayerSiegeSpecialPlace" -> {
                 return RowsInGame.currentPlayerSiege.toString();
             }
-            case "opponentSiegeSpecialPlaceObservableList" -> {
-                return RowsInGame.opponentPlayerSiege.toString();
+            case "opponentSiegeSpecialPlace" -> {
+                return RowsInGame.opponentSiege.toString();
             }
-            case "opponentCloseCombatSpecialPlaceObservableList" -> {
-                return RowsInGame.opponentPlayerCloseCombat.toString();
+            case "opponentCloseCombatSpecialPlace" -> {
+                return RowsInGame.opponentCloseCombat.toString();
             }
-            case "opponentRangedSpecialPlaceObservableList" -> {
-                return RowsInGame.opponentPlayerRanged.toString();
+            case "opponentRangedSpecialPlace" -> {
+                return RowsInGame.opponentRanged.toString();
             }
             default -> {
                 return null;
@@ -198,6 +199,13 @@ public class GameMenuController extends AppController {
     }
 
     public void moveCardFromOriginToDestinationAndDontDoAbility(int cardId, String origin, String destination) {
+        moveCardAndDontDoAbilityBase(cardId, origin, destination);
+        saveLog("card with id: " + cardId + " moved from " + origin + " to " + destination + " and ability applied");
+    }
+    public void moveCardFromOriginToDestinationAndDontDoAbilityWithNoLog(int cardId, String origin, String destination) {
+        moveCardAndDontDoAbilityBase(cardId, origin, destination);
+    }
+    private void moveCardAndDontDoAbilityBase(int cardId, String origin, String destination) {
         System.out.println(destination);
         ObservableList<Card> originRow = (ObservableList<Card>) getRowListByName(origin);
         ObservableList<Card> destinationRow = (ObservableList<Card>) getRowListByName(destination);
@@ -214,27 +222,26 @@ public class GameMenuController extends AppController {
         gameMenuControllerView.updateAllLabels();
         table.getCurrentPlayer().updateScore();
         table.getOpponent().updateScore();
-        saveLog("card with id: " + cardId + " moved from " + origin + " to " + destination + " and ability applied");
     }
 
     private Row getRowByName(String rowName) {
         switch (rowName) {
-            case "currentPlayerSiegeObservableList" -> {
+            case "currentPlayerSiege" -> {
                 return table.getCurrentPlayer().getBoard().getSiegeCardPlace();
             }
-            case "currentPlayerRangedObservableList" -> {
+            case "currentPlayerRanged" -> {
                 return table.getCurrentPlayer().getBoard().getRangedCardPlace();
             }
-            case "currentPlayerCloseCombatObservableList" -> {
+            case "currentPlayerCloseCombat" -> {
                 return table.getCurrentPlayer().getBoard().getCloseCombatCardPlace();
             }
-            case "opponentSiegeObservableList" -> {
+            case "opponentSiege" -> {
                 return table.getOpponent().getBoard().getSiegeCardPlace();
             }
-            case "opponentCloseCombatObservableList" -> {
+            case "opponentCloseCombat" -> {
                 return table.getOpponent().getBoard().getCloseCombatCardPlace();
             }
-            case "opponentRangedObservableList" -> {
+            case "opponentRanged" -> {
                 return table.getOpponent().getBoard().getRangedCardPlace();
             }
             default -> {
@@ -245,58 +252,58 @@ public class GameMenuController extends AppController {
 
     private ObservableList<? extends Card> getRowListByName(String rowName) {
         switch (rowName) {
-            case "currentPlayerHandObservableList" -> {
+            case "currentPlayerHand" -> {
                 return table.getCurrentPlayer().getBoard().getHand().getCards();
             }
-            case "currentPlayerDeckObservableList" -> {
+            case "currentPlayerDeck" -> {
                 return table.getCurrentPlayer().getBoard().getDeck().getCards();
             }
-            case "currentPlayerSiegeObservableList" -> {
+            case "currentPlayerSiege" -> {
                 return table.getCurrentPlayer().getBoard().getSiegeCardPlace().getCards();
             }
-            case "currentPlayerRangedObservableList" -> {
+            case "currentPlayerRanged" -> {
                 return table.getCurrentPlayer().getBoard().getRangedCardPlace().getCards();
             }
-            case "currentPlayerCloseCombatObservableList" -> {
+            case "currentPlayerCloseCombat" -> {
                 return table.getCurrentPlayer().getBoard().getCloseCombatCardPlace().getCards();
             }
-            case "currentPlayerCloseCombatSpecialPlaceObservableList" -> {
+            case "currentPlayerCloseCombatSpecialPlace" -> {
                 return table.getCurrentPlayer().getBoard().getCloseCombatCardPlace().getSpecialPlace();
             }
-            case "currentPlayerRangedSpecialPlaceObservableList" -> {
+            case "currentPlayerRangedSpecialPlace" -> {
                 return table.getCurrentPlayer().getBoard().getRangedCardPlace().getSpecialPlace();
             }
-            case "opponentPlayerHandObservableList" -> {
+            case "opponentHand" -> {
                 return table.getOpponent().getBoard().getHand().getCards();
             }
-            case "currentPlayerSiegeSpecialPlaceObservableList" -> {
+            case "currentPlayerSiegeSpecialPlace" -> {
                 return table.getCurrentPlayer().getBoard().getSiegeCardPlace().getSpecialPlace();
             }
-            case "opponentPlayerSiegeObservableList" -> {
+            case "opponentSiege" -> {
                 return table.getOpponent().getBoard().getSiegeCardPlace().getCards();
             }
-            case "opponentPlayerCloseCombatObservableList" -> {
+            case "opponentCloseCombat" -> {
                 return table.getOpponent().getBoard().getCloseCombatCardPlace().getCards();
             }
-            case "opponentPlayerRangedObservableList" -> {
+            case "opponentRanged" -> {
                 return table.getOpponent().getBoard().getRangedCardPlace().getCards();
             }
-            case "opponentPlayerSiegeSpecialPlaceObservableList" -> {
+            case "opponentSiegeSpecialPlace" -> {
                 return table.getOpponent().getBoard().getSiegeCardPlace().getSpecialPlace();
             }
-            case "opponentPlayerCloseCombatSpecialPlaceObservableList" -> {
+            case "opponentCloseCombatSpecialPlace" -> {
                 return table.getOpponent().getBoard().getCloseCombatCardPlace().getSpecialPlace();
             }
-            case "opponentPlayerRangedSpecialPlaceObservableList" -> {
+            case "opponentRangedSpecialPlace" -> {
                 return table.getOpponent().getBoard().getRangedCardPlace().getSpecialPlace();
             }
-            case "opponentPlayerDiscardPlace" -> {
+            case "opponentDiscardPlace" -> {
                 return table.getOpponent().getBoard().getDiscardPile().getCards();
             }
             case "currentPlayerDiscardPlace" -> {
                 return table.getCurrentPlayer().getBoard().getDiscardPile().getCards();
             }
-            case "weatherObservableList" -> {
+            case "weather" -> {
                 return table.getSpellPlace().getCards();
             }
             default -> {
@@ -316,6 +323,8 @@ public class GameMenuController extends AppController {
         player2.getBoard().setHandForStartGame(player2Deck);
         player1.setSpecialCardCounter(player1.getSpecialCardCounter());
         player2.setSpecialCardCounter(player2.getSpecialCardCounter());
+        player1.setPriorityInGame(1);
+        player2.setPriorityInGame(2);
         table = new Table(player1, player2);
         saveLog(generateInitialDeckData());
         Round round1 = new Round(1);
@@ -530,8 +539,9 @@ public class GameMenuController extends AppController {
     }
 
     private void backCardsToDiscardPiles() {
-        gameMenuControllerView.backCardsToDiscardPiles();
+        gameMenuControllerView.backCardsToDiscardPlaces();
         gameMenuControllerView.updateAllLabels();
+        saveLog("cards back to discardPlace");
     }
 
     private void changeRound() {
@@ -564,7 +574,7 @@ public class GameMenuController extends AppController {
     }
 
     public void disApplyWeatherCards() {
-        //TODO
+        gameMenuControllerView.disApplyWeatherCards();
     }
 
     public Table getTable() {

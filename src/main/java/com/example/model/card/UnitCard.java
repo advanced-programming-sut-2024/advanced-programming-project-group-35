@@ -61,4 +61,11 @@ public class UnitCard extends Card {
     public void applyMardroeme() {
         //TODO
     }
+
+    public void setPowerOne() {
+        currentPower = 1;
+    }
+    public void setPowerHalf() {
+        currentPower = (currentPower / 2);
+    }
 }
