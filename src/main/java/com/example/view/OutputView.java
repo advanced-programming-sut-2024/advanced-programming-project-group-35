@@ -62,6 +62,8 @@ public class OutputView {
                 App.getAppView().showAlert("You can't play with yourself", AlertType.ERROR.getType());
             case SENT_CODE:
                 App.getAppView().showAlert("Code sent to your email", AlertType.SUCCESS.getType());
+            case USER_NOT_FOUND:
+                App.getAppView().showAlert("User not found", AlertType.ERROR.getType());
             default:
                 return null;
         }

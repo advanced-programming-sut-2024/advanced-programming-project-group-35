@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 
 public class Deck {
     private FactionsType faction;
@@ -71,5 +72,15 @@ public class Deck {
 
     public boolean isEmpty() {
         return cards.isEmpty();
+    }
+
+    public LinkedHashMap<String, String> toHash(int index) {
+        LinkedHashMap<String, String> hash = new LinkedHashMap<>();
+        hash.put("faction", faction.toString());
+        hash.put("leader", leader.getName());
+        for (int i = 0; i < cards.size(); i++) {
+            hash.put(String.valueOf(index * 100 + i), cards.get(i).getName());
+        }
+        return hash;
     }
 }

@@ -27,12 +27,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class GameMenuControllerView {
     public Rectangle opponentPlayerShadowRectangle;
@@ -80,6 +82,13 @@ public class GameMenuControllerView {
     public ImageView weatherRow5;
     public ImageView weatherRow6;
     public FlowPane currentPlayerDeck;
+    public FlowPane vetoCardPane = new FlowPane();
+    public ImageView vetoCardBackground;
+    public VBox vetoCardBox;
+    public Button vetoCardButton;
+    private ObservableList<PreGameCard> vetoCardsToShow = FXCollections.observableArrayList();
+    private ObservableList<Card> allCardsToVeto = FXCollections.observableArrayList();
+    private ObservableList<Card> cardsToVeto = FXCollections.observableArrayList();
     public Button leaderAbility;
     @FXML
     private FlowPane currentPlayerHand;
@@ -191,7 +200,7 @@ public class GameMenuControllerView {
         currentPlayerAllScoreCounter.setText(String.valueOf(table.getCurrentPlayer().getScore()));
         currentPlayerSpecialCardCounter.setText(String.valueOf(table.getCurrentPlayer().getSpecialCardCounter()));
         currentPlayerDeckCardCounter.setText(String.valueOf(table.getCurrentPlayer().getBoard().getDeck().getSize()));
-        //currentPlayerLeaderAbilityEnable.setVisible(table.getCurrentPlayer().getBoard().getLeader().isAbilityEnable());
+        currentPlayerLeaderAbilityEnable.setVisible(table.getCurrentPlayer().getBoard().getDeck().getLeader().canDoAction());
         //currentPlayerLeaderCard.getChildren().add(new PreGameCard(table.getCurrentPlayer().getBoard().getLeader().getName(), table.getCurrentPlayer().getBoard().getLeader().getPower(), table.getCurrentPlayer().getBoard().getLeader().getAbility(), table.getCurrentPlayer().getBoard().getLeader().getImageAddress()));
         Image currentFactionIcon = new Image(FactionsType.getFactionDeckShieldImageAddress(table.getCurrentPlayer().getBoard().getDeck().getFaction()));
         currentPlayerFactionIcon.setImage(currentFactionIcon);
@@ -209,14 +218,14 @@ public class GameMenuControllerView {
         opponentPlayerAllScoreCounter.setText(String.valueOf(table.getOpponent().getScore()));
         opponentPlayerSpecialCardCounter.setText(String.valueOf(table.getOpponent().getSpecialCardCounter()));
         opponentPlayerDeckCardCounter.setText(String.valueOf(table.getOpponent().getBoard().getDeck().getSize()));
-        //opponentPlayerLeaderAbilityEnable.setVisible(table.getOpponent().getBoard().getLeader().isAbilityEnable());
+        opponentPlayerLeaderAbilityEnable.setVisible(table.getOpponent().getBoard().getDeck().getLeader().canDoAction());
         //opponentPlayerLeaderCard.getChildren().add(new PreGameCard(table.getOpponent().getBoard().getLeader().getName(), table.getOpponent().getBoard().getLeader().getPower(), table.getOpponent().getBoard().getLeader().getAbility(), table.getOpponent().getBoard().getLeader().getImageAddress()));
         Image opponentFactionIcon = new Image(FactionsType.getFactionDeckShieldImageAddress(table.getOpponent().getBoard().getDeck().getFaction()));
         opponentPlayerFactionIcon.setImage(opponentFactionIcon);
         opponentPlayerFirstJem.setVisible(true);
         opponentPlayerSecondJem.setVisible(true);
         opponentPlayerExcellenceShower.setVisible(false);
-        Image opponentDeckPlace = new Image(FactionsType.getFactionBackDeckImageAddress(table.getCurrentPlayer().getBoard().getDeck().getFaction()));
+        Image opponentDeckPlace = new Image(FactionsType.getFactionBackDeckImageAddress(table.getOpponent().getBoard().getDeck().getFaction()));
         opponentPlayerDeckPlace.setImage(opponentDeckPlace);
 
         if (!currentPlayerHand.getChildren().isEmpty()) {
@@ -855,6 +864,26 @@ public class GameMenuControllerView {
             currentPlayerSecondJem.setImage(new Image(Main.class.getResource("/images/icons/icon_gem_on.png").toExternalForm()));
             currentPlayerFirstJem.setImage(new Image(Main.class.getResource("/images/icons/icon_gem_on.png").toExternalForm()));
         }
+        if (table.getOpponent().getNumberOfCrystals() == 0) {
+            opponentPlayerSecondJem.setImage(new Image(Main.class.getResource("/images/icons/icon_gem_off.png").toExternalForm()));
+            opponentPlayerFirstJem.setImage(new Image(Main.class.getResource("/images/icons/icon_gem_off.png").toExternalForm()));
+        } else if (table.getOpponent().getNumberOfCrystals() == 1) {
+            opponentPlayerSecondJem.setImage(new Image(Main.class.getResource("/images/icons/icon_gem_off.png").toExternalForm()));
+            opponentPlayerFirstJem.setImage(new Image(Main.class.getResource("/images/icons/icon_gem_on.png").toExternalForm()));
+        } else {
+            opponentPlayerSecondJem.setImage(new Image(Main.class.getResource("/images/icons/icon_gem_on.png").toExternalForm()));
+            opponentPlayerFirstJem.setImage(new Image(Main.class.getResource("/images/icons/icon_gem_on.png").toExternalForm()));
+        }
+        if (table.getOpponent().getNumberOfCrystals() == 0) {
+            opponentPlayerSecondJem.setImage(new Image(Main.class.getResource("/images/icons/icon_gem_off.png").toExternalForm()));
+            opponentPlayerFirstJem.setImage(new Image(Main.class.getResource("/images/icons/icon_gem_off.png").toExternalForm()));
+        } else if (table.getOpponent().getNumberOfCrystals() == 1) {
+            opponentPlayerSecondJem.setImage(new Image(Main.class.getResource("/images/icons/icon_gem_off.png").toExternalForm()));
+            opponentPlayerFirstJem.setImage(new Image(Main.class.getResource("/images/icons/icon_gem_on.png").toExternalForm()));
+        } else {
+            opponentPlayerSecondJem.setImage(new Image(Main.class.getResource("/images/icons/icon_gem_on.png").toExternalForm()));
+            opponentPlayerFirstJem.setImage(new Image(Main.class.getResource("/images/icons/icon_gem_on.png").toExternalForm()));
+        }
         if (table.getCurrentPlayer().getScore() > table.getOpponent().getScore()) {
             currentPlayerExcellenceShower.setVisible(true);
             opponentPlayerExcellenceShower.setVisible(false);
@@ -960,7 +989,7 @@ public class GameMenuControllerView {
     }
 
     public void setClownImageForOpponentLeaderCard() {
-//       opponentPlayerLeaderCard.setImage(new Image(GameMenuControllerView.class.getResource("/images").toExternalForm()));
+       opponentPlayerLeaderCard.setImage(new Image(GameMenuControllerView.class.getResource("/images/crown.jpg").toExternalForm()));
     }
     private int decoyCheat = 0;
     public void addDecoyCard() {
@@ -980,6 +1009,66 @@ public class GameMenuControllerView {
         } else {
             App.getAppView().showAlert("you can't recieve more than one decoy card", AlertType.WARNING.getType());
         }
+    }
+    public void showVetoCards() {
+        vetoCardBox.setVisible(true);
+        vetoCardButton.setVisible(true);
+        vetoCardBackground.setVisible(true);
+        vetoCardPane.setVisible(true);
+        if (vetoCardPane.getChildren().size() > 0) {
+            vetoCardPane.getChildren().clear();
+        }
+        vetoCardsToShow.clear();
+        allCardsToVeto.clear();
+        cardsToVeto.clear();
+        addToVetoCardPane();
+        addOnMouseClickedEventToVetoCard();
+        vetoCardPane.getChildren().addAll(vetoCardsToShow);
+    }
+
+    private void addToVetoCardPane() {
+        int j = 0;
+        for (Card card : table.getCurrentPlayer().getBoard().getDeck().getCards()) {
+            for (int i = 0; i < table.getCurrentPlayer().getBoard().getDeck().getCards().size(); i++) {
+                if (Objects.equals(card.getId(), table.getCurrentPlayer().getBoard().getHand().getCards().get(i).getId())) {
+                    vetoCardsToShow.add(new PreGameCard(card.getName(), CardData.getCardDataByName(card.getName()).getPower(), CardData.getCardDataByName(card.getName()).getAbility(), Main.class.getResource("/images/cards/") + CardData.getCardDataByName(card.getName()).getImageAddress()));
+                    allCardsToVeto.add(card);
+                    j++;
+                    break;
+                }
+                if (j == 5) {
+                    break;
+                }
+            }
+            if (j == 5) {
+                break;
+            }
+        }
+    }
+
+    private void addOnMouseClickedEventToVetoCard() {
+        for (int i = 0; i < vetoCardsToShow.size(); i++) {
+            int finalI = i;
+            vetoCardsToShow.get(i).setOnMouseClicked(event -> {
+                cardsToVeto.add(allCardsToVeto.get(finalI));
+                vetoCardPane.getChildren().remove(vetoCardsToShow.get(finalI));
+                if (cardsToVeto.size() == 2) {
+                    vetoCardBox.setVisible(false);
+                    vetoCardBackground.setVisible(false);
+                    vetoCardPane.setVisible(false);
+                    vetoCardButton.setVisible(false);
+                    controller.vetoCard(table.getCurrentPlayer(), cardsToVeto);
+                }
+            });
+        }
+    }
+
+    public void vetoCard(MouseEvent mouseEvent) {
+        vetoCardBox.setVisible(false);
+        vetoCardBackground.setVisible(false);
+        vetoCardPane.setVisible(false);
+        vetoCardButton.setVisible(false);
+        controller.vetoCard(table.getCurrentPlayer(), cardsToVeto);
     }
 }
 

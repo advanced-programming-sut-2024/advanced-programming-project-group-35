@@ -86,6 +86,7 @@ public class App {
     }
 
     private static void connectSereverToApp() {
+        out.println("SET_PLAYER|" + loggedInUser.getID());
         try {
             clientConnector = new ClientConnector(loggedInUser.getID());
             new Thread(clientConnector).start();
@@ -104,6 +105,14 @@ public class App {
     public static void addNewUser(User newUser) {
         App.allUsers().add(newUser);
         serverConnector.saveUsers(allUsers);
+    }
+
+    public static void saveUsers(){
+        serverConnector.saveUsers(allUsers);
+    }
+
+    public static void loadUsers(){
+        allUsers = serverConnector.getAllUsers();
     }
 
     public static void addSecurityQuestion(String question) {
@@ -160,16 +169,13 @@ public class App {
         return temporaryDeck;
     }
 
+    public static ServerConnector getServerConnector() {
+        return serverConnector;
+    }
+
     public void updateUserInfo() {
         updateUsersFromServer();
         appView.updateUserInfo();
     }
 
-    public static void saveUsers(){
-        serverConnector.saveUsers(allUsers);
-    }
-
-    public static void loadUsers(){
-        allUsers = serverConnector.getAllUsers();
-    }
 }

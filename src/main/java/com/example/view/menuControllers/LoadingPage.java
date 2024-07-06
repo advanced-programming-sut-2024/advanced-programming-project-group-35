@@ -19,6 +19,8 @@ public class LoadingPage {
             "/images/loadings/loading10.jpg",
             "/images/loadings/loading11.jpg",
             "/images/loadings/loading12.jpg",
+            "/images/loadings/loading13.jpg",
+            "/images/loadings/loading14.jpg",
     };
     public ImageView backgroundImageView;
 

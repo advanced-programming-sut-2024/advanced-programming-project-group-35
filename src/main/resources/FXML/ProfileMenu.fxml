@@ -27,7 +27,7 @@
         <Button layoutX="100" layoutY="200" minWidth="150" onMouseClicked="#editNickname" styleClass="brown-button"
                 text="Edit Nickname"/>
     </VBox>
-    <VBox translateY="497" translateX="590" alignment="CENTER" prefHeight="150.0" prefWidth="230.0" spacing="10.0">
+    <VBox translateY="497" translateX="592" alignment="CENTER" prefHeight="150.0" prefWidth="230.0" spacing="10.0">
         <HBox alignment="CENTER" spacing="10" prefWidth="250">
             <Button minWidth="120" onMouseClicked="#openUserDataMenu" styleClass="brown-button"
                     text="Your Data"/>
@@ -36,6 +36,7 @@
         </HBox>
         <Button minWidth="250" onMouseClicked="#openGameHistoryMenu" styleClass="brown-button"
                 text="Game History"/>
+
     </VBox>
     <VBox translateY="280" translateX="601" alignment="CENTER" prefHeight="150.0" prefWidth="230.0" spacing="10.0">
         <Label fx:id="usernameShower" layoutX="100" layoutY="100" styleClass="profile-menu-titles" text="Username"/>

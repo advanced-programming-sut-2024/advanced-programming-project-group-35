@@ -297,4 +297,17 @@ public class User {
     public void addDeckNameToDeckAddresses(String deckName) {
         decksAddresses.add(deckName);
     }
+
+    public boolean isFriend(User receiver) {
+        for (User friend : friends) {
+            if (friend.equals(receiver)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public ArrayList<String> getDeckName() {
+        return decksAddresses;
+    }
 }

@@ -10,7 +10,7 @@
             <FlowPane fx:id="allCardsPane" alignment="CENTER" hgap="15" maxWidth="450" prefHeight="700" prefWidth="450" styleClass="transparent-background, flow-pane-pre-game-menu" vgap="20">
             </FlowPane>
         </ScrollPane>
-        <VBox fx:id="infoVBox" alignment="CENTER" maxHeight="300" maxWidth="700" prefHeight="700" prefWidth="300" spacing="20">
+        <VBox fx:id="infoVBox" alignment="CENTER" maxHeight="700" maxWidth="300" prefHeight="700" prefWidth="300" spacing="15">
             <Label fx:id="playerNameLabel" styleClass="pre-game-menu-label" text="Player Name: " />
             <Label fx:id="realmNameLabel" styleClass="pre-game-menu-label" text="Faction: " />
             <Button minWidth="150" onAction="#openChangeFactionMenu" styleClass="brown-button" text="Change Faction" />
@@ -18,29 +18,27 @@
             <Label fx:id="totalCardsLabel" styleClass="pre-game-menu-label" text="Total Cards: " />
             <Label fx:id="soldiersCountLabel" styleClass="pre-game-menu-label" text="Soldiers: " />
             <Label fx:id="specialCardsCountLabel" styleClass="pre-game-menu-label" text="Workers: " />
-         <VBox prefHeight="108.0" prefWidth="100.0">
-            <children>
-               <TextField fx:id="loadDeckNameField" promptText="Enter Your Deck Name" visible="false" />
-               <Button fx:id="loadDeckButton" mnemonicParsing="false" onMouseClicked="#loadDeck" text="load" />
-               <Button fx:id="fileChooserButton" mnemonicParsing="false" onMouseClicked="#chooseDeckFile" visible="false" text="Button" />
-            </children>
-         </VBox>
+
             <Label fx:id="heroCardsCountLabel" styleClass="pre-game-menu-label" text="Special Cards: " />
             <Label fx:id="totalPowerLabel" styleClass="pre-game-menu-label" text="Total Money: " />
-         <VBox prefHeight="80.0" prefWidth="100.0">
-            <children>
-               <TextField fx:id="saveDeckNameField" promptText="Enter Your Deck Name" visible="false" />
-               <Button fx:id="saveDeckButton" mnemonicParsing="false" onMouseClicked="#saveDeck" text="save" />
-               <Button fx:id="chooseDirectoryButton" mnemonicParsing="false" onMouseClicked="#chooseDirectoryToSaveDeckData" text="Button" visible="false" />
-            </children>
-         </VBox>
+
+            <TextField maxWidth="250" styleClass="custom-text-field" fx:id="saveOrLoadDeckNameField" promptText="Enter Your Deck Name"/>
+            <HBox alignment="CENTER" spacing="10" maxWidth="300" prefWidth="300">
+                <Button styleClass="brown-button" fx:id="saveDeckButton" mnemonicParsing="false" onMouseClicked="#saveDeck" text="Save Deck"/>
+                <Button styleClass="brown-button" fx:id="loadDeckButton" mnemonicParsing="false" onMouseClicked="#loadDeck" text="Load Deck" />
+            </HBox>
+            <Button styleClass="brown-button" fx:id="fileChooserButton" mnemonicParsing="false" onMouseClicked="#chooseDeckFile" text="Choose Deck From PC" />
+            <Button styleClass="brown-button" fx:id="chooseDirectoryButton" mnemonicParsing="false"
+                    onMouseClicked="#chooseDirectoryToSaveDeckData" text="Save Deck To Your PC"/>
             <Button fx:id="startGameButton" minWidth="150" onAction="#startGameButtonAction" styleClass="brown-button" text="Start Game" />
-            <Button fx:id="backButton" minWidth="150" onAction="#backToMainMenu" styleClass="brown-button" text="Back" />
+            <!--            <Button fx:id="backButton" minWidth="150" onAction="#backToMainMenu" styleClass="brown-button" text="Back" />-->
         </VBox>
         <ScrollPane fx:id="rightScrollPane" hbarPolicy="NEVER" maxHeight="700" maxWidth="500" prefHeight="700" prefWidth="500" styleClass="scroll-pane-pre-game-menu">
             <FlowPane fx:id="playerDeckPane" alignment="CENTER" hgap="15" maxWidth="450" prefHeight="700" prefWidth="450" styleClass="transparent-background, flow-pane-pre-game-menu" vgap="20" />
         </ScrollPane>
     </HBox>
+    <Button minWidth="50" onMouseClicked="#backToMainMenu" styleClass="brown-button" text="Back" translateX="20"
+            translateY="20"/>
     <AnchorPane fx:id="changeFactionPane" prefHeight="800.0" prefWidth="1400.0" styleClass="change-faction-menu-background" visible="false">
         <ImageView fitHeight="800" fitWidth="1400" pickOnBounds="true" preserveRatio="true">
             <Image url="@../images/change-faction-menu-background.jpg" />
