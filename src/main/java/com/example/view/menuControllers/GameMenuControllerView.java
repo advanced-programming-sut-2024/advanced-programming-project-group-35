@@ -740,6 +740,7 @@ public class GameMenuControllerView {
                     }
                     if ((((UnitCard) gameCardView.getCard()).noRemove()) && gameCardView.getCard().getAbilityName() == AbilityName.TRANSFORMER) {
                         gameCardView.applyTransform();
+                        updateAllLabels();
                     }
                 } else {
                     controller.moveCardFromOriginToDestinationAndDontDoAbilityWithNoLog(gameCardView.getCard().getIdInGame(), sourceRow.toString(), RowsInGame.currentPlayerDiscardPlace.toString());
@@ -751,6 +752,7 @@ public class GameMenuControllerView {
                     }
                     if ((((UnitCard) gameCardView.getCard()).noRemove()) && gameCardView.getCard().getAbilityName() == AbilityName.TRANSFORMER) {
                         gameCardView.applyTransform();
+                        updateAllLabels();
                     }
                 } else {
                     controller.moveCardFromOriginToDestinationAndDontDoAbilityWithNoLog(gameCardView.getCard().getIdInGame(), sourceRow.toString(), RowsInGame.opponentDiscardPlace.toString());
