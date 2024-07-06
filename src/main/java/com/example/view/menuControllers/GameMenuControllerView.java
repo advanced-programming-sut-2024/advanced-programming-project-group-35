@@ -1090,5 +1090,6 @@ public class GameMenuControllerView {
         vetoCardButton.setVisible(false);
         controller.vetoCard(table.getCurrentPlayer(), cardsToVeto);
     }
+
 }
 
