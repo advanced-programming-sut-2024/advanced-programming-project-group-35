@@ -1,6 +1,7 @@
 package com.example.model;
 
 import com.example.controller.server.ClientConnector;
+import com.example.controller.server.GameHandler;
 import com.example.controller.server.PlayerHandler;
 import com.example.controller.server.Server;
 import com.google.gson.Gson;
@@ -12,6 +13,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ServerApp {
     private static Server server;
@@ -27,6 +29,7 @@ public class ServerApp {
     }
 
     public static ArrayList<User> allUsers = new ArrayList<User>();
+    public static HashMap<Integer, GameHandler> games = new HashMap<>();
 
     public static void saveUsers(String filename) {
         for (User user : allUsers) {
@@ -186,5 +189,13 @@ public class ServerApp {
         StartOnlineGame(tournamentPlayers[2], tournamentPlayers[3]);
         StartOnlineGame(tournamentPlayers[4], tournamentPlayers[5]);
         StartOnlineGame(tournamentPlayers[6], tournamentPlayers[7]);
+    }
+
+    public static void addGame(int gameID, GameHandler gameHandler) {
+        games.put(gameID, gameHandler);
+    }
+
+    public static void removeGame(int gameID) {
+        games.remove(gameID);
     }
 }

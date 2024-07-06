@@ -8,10 +8,13 @@ import com.example.model.game.Player;
 
 import java.io.BufferedReader;
 import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameHandler implements Runnable {
+    private int gameID;
     private ArrayList<PlayerHandler> spectators = new ArrayList<>();
     private List<ChatMessage> chatHistory = new ArrayList<>();
     private int winnerID;
@@ -41,33 +44,34 @@ public class GameHandler implements Runnable {
         player1Handler.wait();
         player2Handler.wait();
         gameHistory = new Log(player1, player2);
+        gameID = LocalDateTime.now().hashCode();
+        ServerApp.addGame(gameID, this);
     }
 
     private void endGame() {
         notifyAll();
+        ServerApp.removeGame(gameID);
+    }
+
+    public void Command(String command) {
+        if (command.startsWith("CHAT|")) {
+            handleMessage(command);
+        } else if (command.startsWith("REACTION|")) {
+            handleReaction(command);
+        } else if (command.startsWith("EMOTE|")) {
+            handleEmote(command);
+        }
     }
 
     @Override
     public void run() {
         try {
-            player1Out.println("GAME_STARTED|");
-            player2Out.println("GAME_STARTED|");
+            player1Out.println("GAME_STARTED|" + gameID);
+            player2Out.println("GAME_STARTED|" + gameID);
             String inputLine;
             while (true) {
                 if (isPlayer1Turn) {
                     inputLine = player1In.readLine();
-                    if (inputLine.startsWith("CHAT|")) {
-                        handleMessage(inputLine, player1ID);
-                        continue;
-                    }
-                    if (inputLine.startsWith("REACTION|")) {
-                        handleReaction(inputLine, player1ID);
-                        continue;
-                    }
-                    if (inputLine.startsWith("EMOTE|")) {
-                        handleEmote(inputLine, player1ID);
-                        continue;
-                    }
                     player2Out.println(inputLine);
                     gameHistory.addCommand(inputLine);
                     if (inputLine.equals("END_GAME|")) {
@@ -77,18 +81,6 @@ public class GameHandler implements Runnable {
                     isPlayer1Turn = false;
                 } else {
                     inputLine = player2In.readLine();
-                    if (inputLine.startsWith("CHAT|")) {
-                        handleMessage(inputLine, player2ID);
-                        continue;
-                    }
-                    if (inputLine.startsWith("REACTION|")) {
-                        handleReaction(inputLine, player2ID);
-                        continue;
-                    }
-                    if (inputLine.startsWith("EMOTE|")) {
-                        handleEmote(inputLine, player2ID);
-                        continue;
-                    }
                     player1Out.println(inputLine);
                     gameHistory.addCommand(inputLine);
                     if (inputLine.equals("END_GAME|")) {
@@ -109,13 +101,14 @@ public class GameHandler implements Runnable {
         }
     }
 
-    private void handleEmote(String inputLine, int player1ID) {
-        broadcastToAll(inputLine + "|" + player1ID);
+    private void handleEmote(String inputLine) { // EMOTE|senderID|emoteIndex
+        broadcastToAll(inputLine);
     }
 
-    private void handleReaction(String input, int senderId) {
+    private void handleReaction(String input) { // REACTION|senderID|messageIndex|reactionIndex
         String[] parts = input.split("\\|");
         int messageIndex = Integer.parseInt(parts[2]);
+        int senderId = Integer.parseInt(parts[1]);
         ChatMessage message = chatHistory.get(messageIndex);
         message.addReaction(senderId);
         broadcastToAll("REACTION|" + messageIndex + "|" + senderId);
@@ -129,8 +122,9 @@ public class GameHandler implements Runnable {
         player2Out.println(s);
     }
 
-    private void handleMessage(String inputLine, int senderID) {
+    private void handleMessage(String inputLine) { // CHAT|senderID|content|hour|minute|REPLY_TO|replyToIndex
         String[] parts = inputLine.split("\\|");
+        int senderID = Integer.parseInt(parts[1]);
         ChatMessage message = new ChatMessage(senderID, parts[2]);
         if (parts.length > 3 && parts[3].equals("REPLY_TO")) {
             int replyToIndex = Integer.parseInt(parts[4]);
