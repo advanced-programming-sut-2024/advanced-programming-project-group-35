@@ -1,29 +1,35 @@
 package com.example.model.card.leaderCardsAbilities;
 
+import com.example.controller.Controller;
+import com.example.controller.GameMenuController;
+import com.example.model.card.AbilityContext;
 import com.example.model.card.Card;
-import com.example.model.game.Board;
-import com.example.model.game.Deck;
-import com.example.model.game.DiscardPile;
-import com.example.model.game.Table;
+import com.example.model.game.*;
+import com.example.model.game.place.RowsInGame;
 
 import java.util.ArrayList;
 
 public class CrachAnCraiteAbility implements LeaderAbility {
     @Override
-    public void apply(Table table) {
-        moveCardsFromDiscardPileToDeck(table.getCurrentPlayer().getBoard());
-        moveCardsFromDiscardPileToDeck(table.getOpponent().getBoard());
-        table.getCurrentPlayer().getBoard().getDeck().getLeader().setCanDoAction(false);
+    public void apply(AbilityContext abilityContext) {
+        moveCardsFromDiscardPileToDeck(abilityContext.getTable(), abilityContext.getTable().getCurrentPlayer(), abilityContext.getTable().getCurrentPlayer().getBoard());
+        moveCardsFromDiscardPileToDeck(abilityContext.getTable(), abilityContext.getTable().getOpponent(), abilityContext.getTable().getOpponent().getBoard());
+        abilityContext.getTable().getCurrentPlayer().getBoard().getDeck().getLeader().setCanDoAction(false);
     }
 
-    private void moveCardsFromDiscardPileToDeck(Board board) {
+    private void moveCardsFromDiscardPileToDeck(Table table, Player player,Board board) {
         Deck deck = board.getDeck();
+        deck.shuffle();
         DiscardPile discardPile = board.getDiscardPile();
         ArrayList<Card> cardsToTransfer = new ArrayList<>(discardPile.getCards());
         for (Card card : cardsToTransfer) {
-            deck.addCard(card);
-            discardPile.removeCard(card);
+            if (card != null) {
+                if (player == table.getCurrentPlayer()) {
+                    ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDontDoAbility(card.getIdInGame(), RowsInGame.currentPlayerDiscardPlace.toString(), RowsInGame.currentPlayerHand.toString());
+                } else {
+                    ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDontDoAbility(card.getIdInGame(), RowsInGame.opponentDiscardPlace.toString(), RowsInGame.opponentHand.toString());
+                }
+            }
         }
-        deck.shuffle();
     }
 }

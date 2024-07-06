@@ -3,6 +3,7 @@ module gwent {
     requires javafx.fxml;
     requires javafx.media;
     requires com.google.gson;
+    requires java.sql;
     requires java.mail;
     requires jakarta.mail;
 
@@ -22,4 +23,6 @@ module gwent {
     exports com.example.model.game;
     opens com.example.model.game to com.google.gson, javafx.base;
     exports com.example.controller.server;
+    exports com.example.model.deckmanager;
+    opens com.example.model.deckmanager to com.google.gson, javafx.base;
 }

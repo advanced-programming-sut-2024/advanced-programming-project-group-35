@@ -4,14 +4,18 @@ import com.example.model.card.enums.CardData;
 import com.example.model.card.leaderCardsAbilities.LeaderAbility;
 
 public class LeaderCard {
-    private boolean canDoAction; //TODO باید چک شه وفتی میخوایم توانایی لیدر استفاده کنیم این ترو باشه
+    private boolean canDoAction;
     private LeaderAbility ability;
     private CardData cardData;
 
     public LeaderCard(CardData cardData, LeaderAbility ability) {
         this.ability = ability;
         this.cardData = cardData;
-        this.canDoAction = true;
+        if (cardData.getName().equals("leaders_skellige_king_bran")) {
+            this.canDoAction = false;
+        } else {
+            this.canDoAction = true;
+        }
     }
 
     public LeaderAbility getAbility() {

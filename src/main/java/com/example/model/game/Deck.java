@@ -5,6 +5,8 @@ import com.example.model.card.UnitCard;
 import com.example.model.card.enums.FactionsType;
 import com.example.model.card.Card;
 import com.example.model.card.factions.Factions;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,7 +16,7 @@ public class Deck {
     private FactionsType faction;
     private Factions factionAbility;
     private LeaderCard leader;
-    private ArrayList<Card> cards = new ArrayList<>();
+    private ObservableList<Card> cards = FXCollections.observableArrayList();
 
     public Factions getFactionAbility() {
         return factionAbility;
@@ -24,7 +26,7 @@ public class Deck {
         this.factionAbility = factionAbility;
     }
 
-    public ArrayList<Card> getCards() {
+    public ObservableList<Card> getCards() {
         return cards;
     }
 

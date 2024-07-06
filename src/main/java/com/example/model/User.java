@@ -1,8 +1,7 @@
 package com.example.model;
 
-import com.example.model.App;
 import com.example.model.card.enums.FactionsType;
-import com.example.model.GameData;
+import com.example.model.deckmanager.DeckToJson;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,6 +20,7 @@ public class User {
     private String name;
     private String lastName;
     private String profilePicture;
+    private DeckToJson temporaryDeck;
     private int wins = 0;
     private int losses = 0;
     private int score = 0;
@@ -57,6 +57,7 @@ public class User {
         return friendRequests;
     }
 
+
     public User(String username, String password, String nickname, String email) {
         this.username = username;
         this.password = password;
@@ -75,6 +76,14 @@ public class User {
             }
         }
         return null;
+    }
+
+    public DeckToJson getTemporaryDeck() {
+        return temporaryDeck;
+    }
+
+    public void setTemporaryDeck(DeckToJson temporaryDeck) {
+        this.temporaryDeck = temporaryDeck;
     }
 
     private void setID() {
@@ -100,7 +109,7 @@ public class User {
     }
 
     private FactionsType generateRandomFactionType() {
-        return null;
+        return FactionsType.Monsters;
     }
 
     public FactionsType getCurrentFactionType() {
@@ -220,6 +229,72 @@ public class User {
 
     public void setOnline(boolean b) {
         isOnline = b;
+    }
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getProfilePicture() {
+        return profilePicture;
+    }
+
+    public int getMoney() {
+        return money;
+    }
+
+    public int getNumberOfFlags() {
+        return numberOfFlags;
+    }
+
+    public int getNumberOfKills() {
+        return numberOfKills;
+    }
+
+    public int getNumberOfDeaths() {
+        return numberOfDeaths;
+    }
+
+    public int getNumberOfSpellCards() {
+        return numberOfSpellCards;
+    }
+
+    public int getNumberOfMinionCards() {
+        return numberOfMinionCards;
+    }
+
+    public ArrayList<GameData> getGameData() {
+        return gameData;
+    }
+
+    public ArrayList<String> getDeckNames() {
+        return decksAddresses;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public boolean isADeckExistWithThisName(String deckName) {
+        if (decksAddresses.contains(deckName)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public void addDeckNameToDeckAddresses(String deckName) {
+        decksAddresses.add(deckName);
     }
 
     public boolean isFriend(User receiver) {

@@ -6,8 +6,12 @@ import com.example.controller.ScoreTableController;
 import com.example.model.App;
 import com.example.model.alerts.Alert;
 import com.example.model.Terminal;
+import com.example.model.alerts.AlertType;
+import com.example.model.alerts.Notification;
+import com.example.view.menuControllers.GameMenuControllerView;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -24,18 +28,24 @@ public class AppView extends Application {
     private FXMLLoader fxmlLoader;
     private Stage primaryStage;
     private Pane pane;
-    private Terminal terminal;
+    private Terminal terminal = new Terminal();
     private boolean isAlert = false;
     private Alert alert;
+    private Notification notification;
+    private boolean isNotification = false;
     private boolean terminalVisible = false;
-    public Terminal getTerminal() {
+    private Terminal getTerminal() {
         return terminal;
     }
+    private GameMenuControllerView gameMenuControllerView;
     public void showMenu(Menu menu) throws Exception {
         primaryStage.centerOnScreen();
 
         fxmlLoader = new FXMLLoader(Main.class.getResource(menu.getFxmlFile()));
         pane = fxmlLoader.load();
+        if (menu.getTitle().equals("Game Menu")) {
+            gameMenuControllerView = fxmlLoader.getController();
+        }
 
         Scene scene = new Scene(pane);
         primaryStage.setScene(scene);
@@ -68,6 +78,29 @@ public class AppView extends Application {
         currentPane.getChildren().remove(alert);
         isAlert = false;
     }
+    public void showNotification(String message, String imageAddress, String username) {
+        if (!isNotification) {
+            notification = new Notification(message, imageAddress, username);
+            notification.setLayoutX(0);
+            notification.setLayoutY(0);
+            pane.getChildren().add(notification);
+            isNotification = true;
+            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2)));
+            timeline.play();
+            timeline.setOnFinished(actionEvent ->  {
+                isNotification = false;
+                removeNotification(pane);
+            });
+        }
+    }
+    public void removeNotification(Pane currentPane) {
+        currentPane.getChildren().remove(notification);
+        isNotification = false;
+    }
+
+    public GameMenuControllerView getGameMenuControllerView() {
+        return gameMenuControllerView;
+    }
 
     @Override
     public void start(Stage stage) {
@@ -87,6 +120,28 @@ public class AppView extends Application {
 
     public void setPane(Pane pane) {
         this.pane = pane;
+    }
+
+    public void showTerminal() {
+        pane.getChildren().add(terminal);
+        TranslateTransition transition = new TranslateTransition(Duration.millis(700), terminal);
+        transition.setFromY(900);
+        transition.setToY(550);
+        transition.play();
+    }
+
+    public void removeTerminal() {
+        TranslateTransition transition = new TranslateTransition(Duration.millis(700), terminal);
+        transition.setFromY(550);
+        transition.setToY(900);
+        transition.setOnFinished(e -> {
+            pane.getChildren().remove(terminal);
+            try {
+
+            } catch (NullPointerException e1) {
+            }
+        });
+        transition.play();
     }
 
     public void showLoading() {

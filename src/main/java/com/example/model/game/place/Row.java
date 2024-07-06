@@ -1,12 +1,14 @@
 package com.example.model.game.place;
 
+import com.example.model.card.Card;
 import com.example.model.card.SpecialCard;
 import com.example.model.card.UnitCard;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
-import java.util.ArrayList;
 
 public class Row {
-    private SpecialCard specialPlace;
+    private ObservableList<SpecialCard> specialPlace = FXCollections.observableArrayList();
     private Place place;
     private boolean applyWeather = false;
     private int strength = 0;
@@ -19,17 +21,25 @@ public class Row {
         this.applyWeather = applyWeather;
     }
 
-    public SpecialCard getSpecialPlace() {
+    public ObservableList<SpecialCard> getSpecialPlace() {
         return specialPlace;
     }
 
-    public void setSpecialPlace(SpecialCard specialPlace) {
-        this.specialPlace = specialPlace;
+    public SpecialCard getSpecialCard() {
+        if (specialPlace.isEmpty()) {
+            return null;
+        } else {
+            return specialPlace.get(0);
+        }
     }
 
-    private ArrayList<UnitCard> cards = new ArrayList<>();
+    public void setSpecialCard(SpecialCard specialCard) {
+        this.specialPlace.add(specialCard);
+    }
 
-    public ArrayList<UnitCard> getCards() {
+    private ObservableList<Card> cards = FXCollections.observableArrayList();
+
+    public ObservableList<Card> getCards() {
         return cards;
     }
 
@@ -41,11 +51,11 @@ public class Row {
         this.place = place;
     }
 
-    public void addCard(UnitCard card) {
+    public void addCard(Card card) {
         cards.add(card);
     }
 
-    public void removeCard(UnitCard card) {
+    public void removeCard(Card card) {
         cards.remove(card);
     }
 
@@ -54,14 +64,15 @@ public class Row {
     }
 
     public int getStrength() {
+        updateStrength();
         return strength;
     }
 
     public int getNonHeroStrength() {
         int result = 0;
-        for (UnitCard card : cards) {
-            if (!card.isHero()) {
-                result += card.getCurrentPower();
+        for (Card card : cards) {
+            if (card != null && (card instanceof UnitCard) && !((UnitCard)card).isHero()) {
+                result += ((UnitCard)card).getCurrentPower();
             }
         }
         return result;
@@ -71,10 +82,12 @@ public class Row {
         return cards.isEmpty();
     }
 
-    public void updateStrength() {
+    private void updateStrength() {
         int result = 0;
-        for (UnitCard card : cards) {
-            result += card.getCurrentPower();
+        for (Card card : cards) {
+            if (card != null && (card instanceof UnitCard)) {
+                result += ((UnitCard)card).getCurrentPower();
+            }
         }
         strength = result;
     }

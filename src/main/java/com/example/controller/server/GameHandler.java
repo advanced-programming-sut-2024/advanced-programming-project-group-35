@@ -101,7 +101,7 @@ public class GameHandler implements Runnable {
         }
     }
 
-    private void handleEmote(String inputLine) { // EMOTE|senderID|emoteIndex
+    private void handleEmote(String inputLine) { // EMOTE|senderID|emoteIndex or EMOTE|senderID|Message
         broadcastToAll(inputLine);
     }
 

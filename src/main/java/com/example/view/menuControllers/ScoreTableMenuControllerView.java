@@ -40,4 +40,8 @@ public class ScoreTableMenuControllerView {
             }
         });
     }
+
+    public void openTerminal(MouseEvent mouseEvent) {
+        App.getAppView().showTerminal();
+    }
 }

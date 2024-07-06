@@ -1,0 +1,326 @@
+{
+  "player1": "ali123",
+  "player1Faction": "EmpireNilfgaardian",
+  "player1Hand": [
+    {
+      "name": "nilfgaard_menno",
+      "id": 125
+    },
+    {
+      "name": "nilfgaard_siege_support",
+      "id": 135
+    },
+    {
+      "name": "special_decoy",
+      "id": 99
+    },
+    {
+      "name": "special_horn",
+      "id": 101
+    },
+    {
+      "name": "neutral_ciri",
+      "id": 103
+    },
+    {
+      "name": "neutral_dandelion",
+      "id": 105
+    },
+    {
+      "name": "neutral_gaunter_odimm",
+      "id": 107
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 109
+    },
+    {
+      "name": "neutral_geralt",
+      "id": 111
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 113
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 115
+    }
+  ],
+  "player1Deck": [
+    {
+      "name": "special_decoy_1",
+      "id": 100
+    },
+    {
+      "name": "special_horn_2",
+      "id": 102
+    },
+    {
+      "name": "neutral_cow",
+      "id": 104
+    },
+    {
+      "name": "neutral_emiel",
+      "id": 106
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 108
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 110
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 112
+    },
+    {
+      "name": "neutral_triss",
+      "id": 114
+    },
+    {
+      "name": "neutral_villen",
+      "id": 116
+    },
+    {
+      "name": "nilfgaard_black_archer",
+      "id": 117
+    },
+    {
+      "name": "nilfgaard_black_archer_1",
+      "id": 118
+    },
+    {
+      "name": "nilfgaard_cahir",
+      "id": 119
+    },
+    {
+      "name": "nilfgaard_cynthia",
+      "id": 120
+    },
+    {
+      "name": "nilfgaard_fringilla",
+      "id": 121
+    },
+    {
+      "name": "nilfgaard_heavy_zerri",
+      "id": 122
+    },
+    {
+      "name": "nilfgaard_imperal_brigade",
+      "id": 123
+    },
+    {
+      "name": "nilfgaard_letho",
+      "id": 124
+    },
+    {
+      "name": "nilfgaard_moorvran",
+      "id": 126
+    },
+    {
+      "name": "nilfgaard_nauzicaa_2",
+      "id": 127
+    },
+    {
+      "name": "nilfgaard_morteisen",
+      "id": 128
+    },
+    {
+      "name": "nilfgaard_puttkammer",
+      "id": 129
+    },
+    {
+      "name": "nilfgaard_rainfarn",
+      "id": 130
+    },
+    {
+      "name": "nilfgaard_renuald",
+      "id": 131
+    },
+    {
+      "name": "nilfgaard_rotten",
+      "id": 132
+    },
+    {
+      "name": "nilfgaard_shilard",
+      "id": 133
+    },
+    {
+      "name": "nilfgaard_siege_engineer",
+      "id": 134
+    },
+    {
+      "name": "nilfgaard_stefan",
+      "id": 136
+    },
+    {
+      "name": "nilfgaard_sweers",
+      "id": 137
+    },
+    {
+      "name": "nilfgaard_tibor",
+      "id": 138
+    }
+  ],
+  "player2": "ali",
+  "player2Faction": "Monsters",
+  "player2Hand": [
+    {
+      "name": "neutral_yennefer",
+      "id": 224
+    },
+    {
+      "name": "weather_fog",
+      "id": 199
+    },
+    {
+      "name": "weather_frost",
+      "id": 201
+    },
+    {
+      "name": "weather_rain",
+      "id": 203
+    },
+    {
+      "name": "weather_clear",
+      "id": 205
+    },
+    {
+      "name": "weather_storm",
+      "id": 207
+    },
+    {
+      "name": "neutral_chort",
+      "id": 209
+    },
+    {
+      "name": "neutral_cow",
+      "id": 211
+    },
+    {
+      "name": "neutral_emiel",
+      "id": 213
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 215
+    }
+  ],
+  "player2Deck": [
+    {
+      "name": "weather_fog_1",
+      "id": 200
+    },
+    {
+      "name": "weather_frost_1",
+      "id": 202
+    },
+    {
+      "name": "weather_rain_1",
+      "id": 204
+    },
+    {
+      "name": "weather_clear_1",
+      "id": 206
+    },
+    {
+      "name": "weather_storm_1",
+      "id": 208
+    },
+    {
+      "name": "neutral_ciri",
+      "id": 210
+    },
+    {
+      "name": "neutral_dandelion",
+      "id": 212
+    },
+    {
+      "name": "neutral_gaunter_odimm",
+      "id": 214
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 216
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 217
+    },
+    {
+      "name": "neutral_geralt",
+      "id": 218
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 219
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 220
+    },
+    {
+      "name": "neutral_triss",
+      "id": 221
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 222
+    },
+    {
+      "name": "neutral_villen",
+      "id": 223
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 225
+    },
+    {
+      "name": "monsters_arachas",
+      "id": 226
+    },
+    {
+      "name": "monsters_arachas_1",
+      "id": 227
+    },
+    {
+      "name": "monsters_arachas_2",
+      "id": 228
+    },
+    {
+      "name": "monsters_arachas_behemoth",
+      "id": 229
+    },
+    {
+      "name": "monsters_vampire_bruxa",
+      "id": 230
+    },
+    {
+      "name": "monsters_celaeno_harpy",
+      "id": 231
+    },
+    {
+      "name": "monsters_cockatrice",
+      "id": 232
+    },
+    {
+      "name": "monsters_draug",
+      "id": 233
+    }
+  ],
+  "commands": [
+    "card with id: 109 moved from currentPlayerHand to currentPlayerRanged and ability applied",
+    "change turn",
+    "card with id: 108 moved from currentPlayerHand to currentPlayerRanged and ability applied",
+    "card with id: 110 moved from currentPlayerHand to currentPlayerRanged and ability applied",
+    "card with id: 209 moved from currentPlayerHand to currentPlayerCloseCombat and ability applied",
+    "change turn",
+    "card with id: 111 moved from currentPlayerHand to currentPlayerCloseCombat and ability applied",
+    "change turn",
+    "card with id: 201 moved from currentPlayerHand to weather and ability applied",
+    "change turn"
+  ]
+}

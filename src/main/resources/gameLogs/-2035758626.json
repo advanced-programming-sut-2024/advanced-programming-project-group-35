@@ -1,0 +1,194 @@
+{
+  "player1": "ali123",
+  "player1Faction": "Monsters",
+  "player1Hand": [
+    {
+      "name": "special_mardroeme",
+      "id": 100
+    },
+    {
+      "name": "special_mardroeme_1",
+      "id": 101
+    },
+    {
+      "name": "special_mardroeme_2",
+      "id": 102
+    },
+    {
+      "name": "weather_frost",
+      "id": 99
+    },
+    {
+      "name": "monsters_fiend",
+      "id": 104
+    },
+    {
+      "name": "monsters_vampire_fleder",
+      "id": 106
+    },
+    {
+      "name": "monsters_forktail",
+      "id": 108
+    },
+    {
+      "name": "monsters_frightener",
+      "id": 110
+    },
+    {
+      "name": "monsters_ghoul",
+      "id": 112
+    },
+    {
+      "name": "monsters_ghoul_1",
+      "id": 114
+    },
+    {
+      "name": "monsters_gravehag",
+      "id": 116
+    },
+    {
+      "name": "monsters_harpy",
+      "id": 118
+    }
+  ],
+  "player1Deck": [
+    {
+      "name": "neutral_emiel",
+      "id": 103
+    },
+    {
+      "name": "monsters_fire_elemental",
+      "id": 105
+    },
+    {
+      "name": "monsters_foglet",
+      "id": 107
+    },
+    {
+      "name": "monsters_ice_giant",
+      "id": 109
+    },
+    {
+      "name": "monsters_gargoyle",
+      "id": 111
+    },
+    {
+      "name": "monsters_vampire_garkain",
+      "id": 113
+    },
+    {
+      "name": "monsters_ghoul_2",
+      "id": 115
+    },
+    {
+      "name": "monsters_gryffin",
+      "id": 117
+    },
+    {
+      "name": "monsters_imlerith",
+      "id": 119
+    },
+    {
+      "name": "monsters_vampire_katakan",
+      "id": 120
+    }
+  ],
+  "player2": "ali",
+  "player2Faction": "Monsters",
+  "player2Hand": [
+    {
+      "name": "weather_storm_1",
+      "id": 199
+    },
+    {
+      "name": "neutral_ciri",
+      "id": 201
+    },
+    {
+      "name": "neutral_dandelion",
+      "id": 203
+    },
+    {
+      "name": "neutral_gaunter_odimm",
+      "id": 205
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 207
+    },
+    {
+      "name": "neutral_geralt",
+      "id": 209
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 211
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 213
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 215
+    }
+  ],
+  "player2Deck": [
+    {
+      "name": "neutral_chort",
+      "id": 200
+    },
+    {
+      "name": "neutral_cow",
+      "id": 202
+    },
+    {
+      "name": "neutral_emiel",
+      "id": 204
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 206
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 208
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 210
+    },
+    {
+      "name": "neutral_triss",
+      "id": 212
+    },
+    {
+      "name": "neutral_villen",
+      "id": 214
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 216
+    },
+    {
+      "name": "monsters_arachas",
+      "id": 217
+    },
+    {
+      "name": "monsters_arachas_1",
+      "id": 218
+    },
+    {
+      "name": "monsters_arachas_2",
+      "id": 219
+    },
+    {
+      "name": "monsters_arachas_behemoth",
+      "id": 220
+    }
+  ],
+  "commands": [
+    "card with id: 102 moved from currentPlayerHand to currentPlayerCloseCombatSpecialPlace and ability applied",
+    "change turn"
+  ]
+}

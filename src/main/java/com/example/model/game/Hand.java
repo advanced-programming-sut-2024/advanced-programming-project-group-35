@@ -2,11 +2,13 @@ package com.example.model.game;
 
 import com.example.model.card.Card;
 import com.example.model.card.enums.CardData;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 
 public class Hand {
-    private ArrayList<Card> cards = new ArrayList<>();
+    private ObservableList<Card> cards = FXCollections.observableArrayList();
     public void addCard(Card card) {
         cards.add(card);
     }
@@ -20,7 +22,7 @@ public class Hand {
         return null;
     }
 
-    public ArrayList<Card> getCards() {
+    public ObservableList<Card> getCards() {
         return cards;
     }
 }

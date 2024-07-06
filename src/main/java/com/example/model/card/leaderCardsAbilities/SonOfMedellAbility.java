@@ -1,28 +1,33 @@
 package com.example.model.card.leaderCardsAbilities;
 
+import com.example.controller.Controller;
+import com.example.controller.GameMenuController;
+import com.example.model.card.AbilityContext;
+import com.example.model.card.Card;
 import com.example.model.card.UnitCard;
 import com.example.model.game.Player;
-import com.example.model.game.Table;
 import com.example.model.game.place.Row;
+import com.example.model.game.place.RowsInGame;
 
 public class SonOfMedellAbility implements LeaderAbility {
     @Override
-    public void apply(Table table) {
-        removeMaxPoweredCardInARow(table.getOpponent(), table.getOpponent().getBoard().getRangedCardPlace());
-        table.getCurrentPlayer().getBoard().getDeck().getLeader().setCanDoAction(false);
+    public void apply(AbilityContext abilityContext) {
+        removeMaxPoweredCardInARow(abilityContext.getTable().getOpponent(), abilityContext.getTable().getOpponent().getBoard().getRangedCardPlace());
+        abilityContext.getTable().getCurrentPlayer().getBoard().getDeck().getLeader().setCanDoAction(false);
     }
     private void removeMaxPoweredCardInARow(Player player, Row row) {
         if (!row.isEmpty() && row.getStrength() >= 10) {
             int maximumPowerInRow = 0;
-            UnitCard maxPoweredCard = new UnitCard(0, null, null, false, null, false);
-            for (UnitCard card : player.getBoard().getRangedCardPlace().getCards()) {
-                if (maxPoweredCard.getCurrentPower() >= maximumPowerInRow) {
-                    maxPoweredCard = card;
-                    maximumPowerInRow = maxPoweredCard.getCurrentPower();
+            UnitCard maxPoweredCard = new UnitCard(0, null, null,null, false, null, false);
+            for (Card card : player.getBoard().getRangedCardPlace().getCards()) {
+                if (card instanceof UnitCard) {
+                    if (((UnitCard)card).getCurrentPower() >= maximumPowerInRow) {
+                        maxPoweredCard.setIdInGame(card.getIdInGame());
+                        maximumPowerInRow = ((UnitCard)card).getCurrentPower();
+                    }
                 }
             }
-            player.getBoard().getRangedCardPlace().removeCard(maxPoweredCard);
-            player.getBoard().getDiscardPile().addCard(maxPoweredCard);
+            ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDontDoAbility(maxPoweredCard.getIdInGame(), RowsInGame.opponentRangedSpecialPlace.toString(), RowsInGame.opponentDiscardPlace.toString());
         }
     }
 }

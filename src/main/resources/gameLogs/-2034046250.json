@@ -1,0 +1,279 @@
+{
+  "player1": "ali123",
+  "player1Faction": "Skellige",
+  "player1Hand": [
+    {
+      "name": "special_mardroeme",
+      "id": 99
+    },
+    {
+      "name": "special_mardroeme_2",
+      "id": 101
+    },
+    {
+      "name": "skellige_tordarroch",
+      "id": 103
+    },
+    {
+      "name": "skellige_shield_maiden_1",
+      "id": 105
+    },
+    {
+      "name": "skellige_svanrige",
+      "id": 107
+    },
+    {
+      "name": "skellige_olaf",
+      "id": 109
+    },
+    {
+      "name": "skellige_light_longship",
+      "id": 111
+    },
+    {
+      "name": "skellige_light_longship",
+      "id": 113
+    },
+    {
+      "name": "skellige_holger",
+      "id": 115
+    }
+  ],
+  "player1Deck": [
+    {
+      "name": "special_mardroeme_1",
+      "id": 100
+    },
+    {
+      "name": "skellige_young_berserker",
+      "id": 102
+    },
+    {
+      "name": "skellige_udalryk",
+      "id": 104
+    },
+    {
+      "name": "skellige_shield_maiden_2",
+      "id": 106
+    },
+    {
+      "name": "skellige_madmad_lugos",
+      "id": 108
+    },
+    {
+      "name": "skellige_shield_maiden",
+      "id": 110
+    },
+    {
+      "name": "skellige_light_longship",
+      "id": 112
+    },
+    {
+      "name": "skellige_hjalmar",
+      "id": 114
+    },
+    {
+      "name": "skellige_kambi",
+      "id": 116
+    },
+    {
+      "name": "skellige_ermion",
+      "id": 117
+    },
+    {
+      "name": "skellige_hemdall",
+      "id": 118
+    },
+    {
+      "name": "skellige_heymaey",
+      "id": 119
+    },
+    {
+      "name": "skellige_dimun_pirate",
+      "id": 120
+    },
+    {
+      "name": "skellige_donar",
+      "id": 121
+    }
+  ],
+  "player2": "ali",
+  "player2Faction": "EmpireNilfgaardian",
+  "player2Hand": [
+    {
+      "name": "special_decoy",
+      "id": 199
+    },
+    {
+      "name": "special_horn",
+      "id": 201
+    },
+    {
+      "name": "neutral_ciri",
+      "id": 203
+    },
+    {
+      "name": "neutral_dandelion",
+      "id": 205
+    },
+    {
+      "name": "neutral_gaunter_odimm",
+      "id": 207
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 209
+    },
+    {
+      "name": "neutral_geralt",
+      "id": 211
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 213
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 215
+    }
+  ],
+  "player2Deck": [
+    {
+      "name": "special_decoy_1",
+      "id": 200
+    },
+    {
+      "name": "special_horn_2",
+      "id": 202
+    },
+    {
+      "name": "neutral_cow",
+      "id": 204
+    },
+    {
+      "name": "neutral_emiel",
+      "id": 206
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 208
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 210
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 212
+    },
+    {
+      "name": "neutral_triss",
+      "id": 214
+    },
+    {
+      "name": "neutral_villen",
+      "id": 216
+    },
+    {
+      "name": "nilfgaard_black_archer",
+      "id": 217
+    },
+    {
+      "name": "nilfgaard_black_archer_1",
+      "id": 218
+    },
+    {
+      "name": "nilfgaard_cahir",
+      "id": 219
+    },
+    {
+      "name": "nilfgaard_cynthia",
+      "id": 220
+    },
+    {
+      "name": "nilfgaard_fringilla",
+      "id": 221
+    },
+    {
+      "name": "nilfgaard_heavy_zerri",
+      "id": 222
+    },
+    {
+      "name": "nilfgaard_imperal_brigade",
+      "id": 223
+    },
+    {
+      "name": "nilfgaard_letho",
+      "id": 224
+    },
+    {
+      "name": "nilfgaard_menno",
+      "id": 225
+    },
+    {
+      "name": "nilfgaard_moorvran",
+      "id": 226
+    },
+    {
+      "name": "nilfgaard_nauzicaa_2",
+      "id": 227
+    },
+    {
+      "name": "nilfgaard_morteisen",
+      "id": 228
+    },
+    {
+      "name": "nilfgaard_puttkammer",
+      "id": 229
+    },
+    {
+      "name": "nilfgaard_rainfarn",
+      "id": 230
+    },
+    {
+      "name": "nilfgaard_renuald",
+      "id": 231
+    },
+    {
+      "name": "nilfgaard_rotten",
+      "id": 232
+    },
+    {
+      "name": "nilfgaard_shilard",
+      "id": 233
+    },
+    {
+      "name": "nilfgaard_siege_engineer",
+      "id": 234
+    },
+    {
+      "name": "nilfgaard_siege_support",
+      "id": 235
+    },
+    {
+      "name": "nilfgaard_stefan",
+      "id": 236
+    },
+    {
+      "name": "nilfgaard_sweers",
+      "id": 237
+    },
+    {
+      "name": "nilfgaard_tibor",
+      "id": 238
+    }
+  ],
+  "commands": [
+    "card with id: 107 moved from currentPlayerHand to currentPlayerCloseCombat and ability applied",
+    "change turn",
+    "player: ali passed round",
+    "change turn",
+    "card with id: 111 moved from currentPlayerHand to currentPlayerRanged and ability applied",
+    "card with id: 113 moved from currentPlayerHand to currentPlayerRanged and ability applied",
+    "card with id: 112 moved from currentPlayerHand to currentPlayerRanged and ability applied",
+    "card with id: 115 moved from currentPlayerHand to currentPlayerSiege and ability applied",
+    "card with id: 101 moved from currentPlayerHand to currentPlayerSiegeSpecialPlace and ability applied",
+    "card with id: 101 moved from currentPlayerSiegeSpecialPlace to currentPlayerDiscardPlace and ability applied",
+    "card with id: 99 moved from currentPlayerHand to currentPlayerRangedSpecialPlace and ability applied"
+  ]
+}

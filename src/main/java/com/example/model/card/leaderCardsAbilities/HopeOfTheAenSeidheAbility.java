@@ -1,33 +1,42 @@
 package com.example.model.card.leaderCardsAbilities;
 
+import com.example.controller.Controller;
+import com.example.controller.GameMenuController;
+import com.example.model.card.AbilityContext;
+import com.example.model.card.Card;
 import com.example.model.card.UnitCard;
+import com.example.model.card.enums.AbilityName;
 import com.example.model.game.Table;
 import com.example.model.game.place.Row;
+import com.example.model.game.place.RowsInGame;
 
 import java.util.ArrayList;
 
 public class HopeOfTheAenSeidheAbility implements LeaderAbility {
     @Override
-    public void apply(Table table) {
-        Row close = table.getCurrentPlayer().getBoard().getCloseCombatCardPlace();
-        Row ranged = table.getCurrentPlayer().getBoard().getRangedCardPlace();
+    public void apply(AbilityContext abilityContext) {
+        Row close = abilityContext.getTable().getCurrentPlayer().getBoard().getCloseCombatCardPlace();
+        Row ranged = abilityContext.getTable().getCurrentPlayer().getBoard().getRangedCardPlace();
         transferSiegeCards(close, ranged);
-        table.getCurrentPlayer().getBoard().getDeck().getLeader().setCanDoAction(false);
+        abilityContext.getTable().getCurrentPlayer().getBoard().getDeck().getLeader().setCanDoAction(false);
     }
 
     private void transferSiegeCards(Row close, Row ranged) {
-        ArrayList<UnitCard> closeCopy = new ArrayList<>(close.getCards());
-        ArrayList<UnitCard> rangedCopy = new ArrayList<>(ranged.getCards());
-        for (UnitCard card : rangedCopy) {
-            if (ranged.getSpecialPlace() == null && close.getSpecialPlace() != null) {
-                ranged.removeCard(card);
-                close.addCard(card);
+        ArrayList<Card> closeCopy = new ArrayList<>(close.getCards());
+        ArrayList<Card> rangedCopy = new ArrayList<>(ranged.getCards());
+        for (Card card : rangedCopy) {
+            if (ranged.getSpecialCard() == null && close.getSpecialCard() != null && (close.getSpecialCard().getAbilityName() == AbilityName.COMMANDER_HORN)) {
+                ((UnitCard) card).duplicatePower();
+                ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).getGameMenuControllerView().getGameCardViewWithCardId(card.getIdInGame()).updatePowerLabel();
+                ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDontDoAbility(card.getIdInGame(), RowsInGame.currentPlayerRanged.toString(), RowsInGame.currentPlayerCloseCombat.toString());
             }
         }
-        for (UnitCard card : closeCopy) {
-            if (close.getSpecialPlace() == null && ranged.getSpecialPlace() != null) {
-                close.removeCard(card);
-                ranged.addCard(card);
+        for (Card card : closeCopy) {
+            if (close.getSpecialCard() == null && ranged.getSpecialCard() != null && (ranged.getSpecialCard().getAbilityName() == AbilityName.COMMANDER_HORN)) {
+                ((UnitCard) card).duplicatePower();
+                ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).getGameMenuControllerView().getGameCardViewWithCardId(card.getIdInGame()).updatePowerLabel();
+                ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDontDoAbility(card.getIdInGame(), RowsInGame.currentPlayerCloseCombat.toString(), RowsInGame.currentPlayerRanged.toString());
+
             }
         }
     }

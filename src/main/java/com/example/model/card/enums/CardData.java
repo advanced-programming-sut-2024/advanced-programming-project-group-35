@@ -1,10 +1,14 @@
 package com.example.model.card.enums;
 
 //import com.example.model.card.enums.AbilityName;
-import com.example.model.card.enums.FactionsType;
+
+import com.example.Main;
+import com.example.model.card.Ability;
+import com.example.model.card.cardsAbilities.*;
 //import com.example.model.card.enums.PlaceToBe;
-import com.example.model.card.factions.Factions;
 import com.example.model.game.place.Place;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public enum CardData {
     leaders_monsters_eredin_bronze("leaders_monsters_eredin_bronze", "monsters_eredin_bronze.jpg", 0, "leader", "", "leader"),
@@ -75,7 +79,7 @@ public enum CardData {
     neutral_chort("neutral_chort", "neutral_chort.jpg", 8, "soldier", "", "melee"),
     neutral_ciri("neutral_ciri", "neutral_ciri.jpg", 15, "hero", "", "melee"),
     neutral_cow("neutral_cow", "neutral_cow.jpg", 0, "soldier", "transformer", "ranged"),
-    neutral_dandelion("neutral_dandelion", "neutral_dandelion.jpg", 2, "soldier", "commanders_horn", "melee"),
+    neutral_dandelion("neutral_dandelion", "neutral_dandelion.jpg", 2, "soldier", "commander_horn", "melee"),
     neutral_emiel("neutral_emiel", "neutral_emiel.jpg", 5, "soldier", "", "melee"),
     neutral_gaunter_odimm("neutral_gaunter_odimm", "neutral_gaunter_odimm.jpg", 2, "soldier", "muster", "siege"),
     neutral_gaunter_odimm_darkness("neutral_gaunter_odimm_darkness", "neutral_gaunter_odimm_darkness.jpg", 4, "soldier", "muster", "ranged"),
@@ -222,18 +226,18 @@ public enum CardData {
     skellige_young_berserker("skellige_young_berserker", "skellige_young_berserker.jpg", 2, "soldier", "tight_bound", "ranged"),
     skellige_young_vildkaarl("skellige_young_vildkaarl", "skellige_young_vildkaarl.jpg", 8, "soldier", "berserker", "ranged"),
 
-    special_decoy("special_decoy", "special_decoy.jpg", 0, "special", "decoy", "spell"),
-    special_decoy_1("special_decoy_1", "special_decoy.jpg", 0, "special", "decoy", "spell"),
-    special_decoy_2("special_decoy_2", "special_decoy.jpg", 0, "special", "decoy", "spell"),
-    special_horn("special_horn", "special_horn.jpg", 0, "special", "", "spell"),
-    special_horn_1("special_horn_1", "special_horn.jpg", 0, "special", "", "spell"),
-    special_horn_2("special_horn_2", "special_horn.jpg", 0, "special", "", "spell"),
-    special_mardroeme("special_mardroeme", "special_mardroeme.jpg", 0, "special", "", "special"),
-    special_mardroeme_1("special_mardroeme_1", "special_mardroeme.jpg", 0, "special", "", "special"),
-    special_mardroeme_2("special_mardroeme_2", "special_mardroeme.jpg", 0, "special", "", "special"),
-    special_scorch("special_scorch", "special_scorch.jpg", 0, "special", "", "spell"),
-    special_scorch_1("special_scorch_1", "special_scorch.jpg", 0, "special", "", "spell"),
-    special_scorch_2("special_scorch_2", "special_scorch.jpg", 0, "special", "", "spell"),
+    special_decoy("special_decoy", "special_decoy.jpg", 0, "special", "decoy", "special"),
+    special_decoy_1("special_decoy_1", "special_decoy.jpg", 0, "special", "decoy", "special"),
+    special_decoy_2("special_decoy_2", "special_decoy.jpg", 0, "special", "decoy", "special"),
+    special_horn("special_horn", "special_horn.jpg", 0, "special", "commander_horn", "special"),
+    special_horn_1("special_horn_1", "special_horn.jpg", 0, "special", "commander_horn", "special"),
+    special_horn_2("special_horn_2", "special_horn.jpg", 0, "special", "commander_horn", "special"),
+    special_mardroeme("special_mardroeme", "special_mardroeme.jpg", 0, "special", "mardroeme", "special"),
+    special_mardroeme_1("special_mardroeme_1", "special_mardroeme.jpg", 0, "special", "mardroeme", "special"),
+    special_mardroeme_2("special_mardroeme_2", "special_mardroeme.jpg", 0, "special", "mardroeme", "special"),
+    special_scorch("special_scorch", "special_scorch.jpg", 0, "special", "scorch", "special"),
+    special_scorch_1("special_scorch_1", "special_scorch.jpg", 0, "special", "scorch", "special"),
+    special_scorch_2("special_scorch_2", "special_scorch.jpg", 0, "special", "scorch", "special"),
 
     weather_fog("weather_fog", "weather_fog.jpg", 0, "special", "weather", "weather"),
     weather_fog_1("weather_fog_1", "weather_fog.jpg", 0, "special", "weather", "weather"),
@@ -254,9 +258,9 @@ public enum CardData {
     private final String abilityName;
     private final Place placeToBe;
     public static final CardData nilfgaard_leader = leaders_nilfgaard_emhyr_bronze;
-    public static final CardData monsters_leader = leaders_monsters_eredin_bronze;
+    public static final CardData monsters_leader = leaders_monsters_eredin_the_treacherous;
     public static final CardData realms_leader = leaders_realms_foltest_bronze;
-    public static final CardData scoiatael_leader = leaders_scoiatael_francesca_bronze;
+    public static final CardData scoiatael_leader = leaders_scoiatael_francesca_copper;
     public static final CardData skellige_leader = leaders_skellige_crach_an_craite;
 
 
@@ -267,6 +271,41 @@ public enum CardData {
         this.type = type;
         this.abilityName = abilityName;
         this.placeToBe = Place.getPlaceToBeByName(placeToBe);
+    }
+
+    public static ImageView getPowerBackGroundForHero() {
+        String srcPath = Main.class.getResource("/images/icons/").toExternalForm();
+        return new ImageView(srcPath + "power_hero.png");
+    }
+
+    public static ImageView getPowerBackGroundForUnitCard() {
+        String srcPath = Main.class.getResource("/images/icons/").toExternalForm();
+        return new ImageView(srcPath + "power_normal.png");
+    }
+
+    public static ImageView getImageViewAbilitySpecialCards(CardData specialCardData) {
+        String srcPath = Main.class.getResource("/images/icons/").toExternalForm();
+        if (specialCardData.getName().startsWith("special_decoy")) {
+            return new ImageView(new Image(srcPath + "card_special_decoy.png"));
+        } else if (specialCardData.getName().startsWith("special_horn")) {
+            return new ImageView(new Image(srcPath + "card_special_horn.png"));
+        } else if (specialCardData.getName().startsWith("special_mardroeme")) {
+            return new ImageView(new Image(srcPath + "card_special_mardroeme.png"));
+        } else if (specialCardData.getName().startsWith("special_scorch")) {
+            return new ImageView(new Image(srcPath + "card_special_scorch.png"));
+        } else if (specialCardData.getName().startsWith("weather_fog")) {
+            return new ImageView(new Image(srcPath + "card_weather_fog.png"));
+        } else if (specialCardData.getName().startsWith("weather_frost")) {
+            return new ImageView(new Image(srcPath + "card_weather_frost.png"));
+        } else if (specialCardData.getName().startsWith("weather_rain")) {
+            return new ImageView(new Image(srcPath + "card_weather_rain.png"));
+        } else if (specialCardData.getName().startsWith("weather_clear")) {
+            return new ImageView(new Image(srcPath + "card_weather_clear.png"));
+        } else if (specialCardData.getName().startsWith("weather_storm")) {
+            return new ImageView(new Image(srcPath + "card_weather_storm.png"));
+        } else {
+            return null;
+        }
     }
 
     public String getName() {
@@ -289,19 +328,80 @@ public enum CardData {
         return abilityName;
     }
 
-    public Place getPlaceToBe() {
-        return placeToBe;
+    public static ImageView getImageAbilityForUnitCards(String ability) {
+        String srcPath = Main.class.getResource("/images/icons/").toExternalForm();
+        if (ability == AbilityName.BERSERKER.name()) {
+            System.out.println("CardData 1");
+            return new ImageView(new Image(srcPath + "card_ability_berserker.png"));
+        } else if (ability == AbilityName.TIGHT_BOND.name()) {
+            System.out.println("CardData 2");
+            return new ImageView(new Image(srcPath + "card_ability_bond.png"));
+        } else if (ability == AbilityName.DECOY.name()) {
+            System.out.println("CardData 3");
+            return new ImageView(new Image(srcPath + "card_ability_decoy.png"));
+        } else if (ability == AbilityName.COMMANDER_HORN.name()) {
+            System.out.println("CardData 4");
+            return new ImageView(new Image(srcPath + "card_ability_horn.png"));
+        } else if (ability == AbilityName.MARDROEME.name()) {
+            System.out.println("CardData 5");
+            return new ImageView(new Image(srcPath + "card_ability_mardroeme.png"));
+        } else if (ability == AbilityName.MEDIC.name()) {
+            return new ImageView(new Image(srcPath + "card_ability_medic.png"));
+        } else if (ability == AbilityName.MORALE_BOOST.name()) {
+            System.out.println("CardData 7");
+            return new ImageView(new Image(srcPath + "card_ability_morale.png"));
+        } else if (ability == AbilityName.MUSTER.name()) {
+            System.out.println("CardData 8");
+            return new ImageView(new Image(srcPath + "card_ability_muster.png"));
+        } else if (ability == AbilityName.SCORCH.name()) {
+            System.out.println("CardData 9");
+            return new ImageView(new Image(srcPath + "card_ability_scorch.png"));
+        } else if (ability == AbilityName.SPY.name()) {
+            System.out.println("CardData 10");
+            return new ImageView(new Image(srcPath + "card_ability_spy.png"));
+        } else if (ability == AbilityName.BERSERKER.name()) {
+            System.out.println("CardData 11");
+            return new ImageView(new Image(srcPath + "card_ability_avenger.png"));
+        } else {
+            return null;
+        }
+    }
+
+    public static ImageView getPlaceToBeImageAddress(Place place) {
+        String srcPath = Main.class.getResource("/images/icons/").toExternalForm();
+        switch (place) {
+            case RANGED -> {
+                return new ImageView(new Image(srcPath + "card_row_ranged.png"));
+            }
+            case AGILE -> {
+                return new ImageView(new Image(srcPath + "card_row_agile.png"));
+            }
+            case SIEGE -> {
+                return new ImageView(new Image(srcPath + "card_row_siege.png"));
+            }
+            case CLOSE_COMBAT -> {
+                return new ImageView(new Image(srcPath + "card_row_close.png"));
+            }
+            default -> {
+                return null;
+            }
+        }
     }
 
     public static CardData getCardDataByName(String cardName) {
-        for (CardData cardData : CardData.values()) {
+        for (CardData cardData : com.example.model.card.enums.CardData.values()) {
             if (cardData.name.equals(cardName))
                 return cardData;
         }
         return null;
     }
+
     public String getType() {
         return type;
+    }
+
+    public Place getPlaceToBe() {
+        return placeToBe;
     }
 
     public FactionsType getFaction() {

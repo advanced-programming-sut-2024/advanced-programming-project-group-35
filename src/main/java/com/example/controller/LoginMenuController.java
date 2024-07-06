@@ -34,6 +34,7 @@ public class LoginMenuController extends AppController {
         }
         registeringUser.setSecurityQuestion(App.getSecurityQuestions().get(securityQuestionNumber));
         registeringUser.setSecurityQuestionAnswer(securityQuestionAnswer);
+//        registeringUser.setId(10);
         App.addNewUser(registeringUser);
         App.setLoggedInUser(registeringUser);
         currentStep = LoginMenuStep.NOTHING;
