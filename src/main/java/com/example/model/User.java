@@ -2,6 +2,7 @@ package com.example.model;
 
 import com.example.model.card.enums.FactionsType;
 import com.example.model.deckmanager.DeckToJson;
+import com.example.model.game.Table;
 
 import java.util.ArrayList;
 import java.util.Date;

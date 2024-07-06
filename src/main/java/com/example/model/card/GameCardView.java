@@ -239,24 +239,26 @@ public class GameCardView extends Pane {
     }
 
     public void applyTransform() {
-        if (this.card instanceof UnitCard && this.getCard().getAbilityName() == AbilityName.TRANSFORMER) {
-            this.card.setCardData(CardData.scoiatael_schirru);
-            this.card.setAbility(null);
-            this.card.setAbilityName(null);
-            this.cardData = this.card.getCardData();
-            ((UnitCard) this.card).setCurrentPower(8);
-            ((UnitCard) this.card).setPower(8);
-            ((UnitCard) this.card).setHero(false);
-            ((UnitCard) this.card).setNoRemove(false);
-
-            Image image = new Image(srcPath + cardData.getImageAddress());
-            ImageView imageView = new ImageView(image);
-            imageView.setFitWidth(width);
-            imageView.setFitHeight(height);
-            imageView.setStyle("-fx-background-radius: 15; -fx-border-radius: 15; -fx-background-color: transparent;");
-
-            this.getChildren().addAll(imageView);
-            setLabelAndAbilitiesLabelForNonSpecialCards();
-        }
+//        if (this.card instanceof UnitCard && this.getCard().getAbilityName() == AbilityName.TRANSFORMER) {
+//            this.card.setCardData(CardData.scoiatael_schirru);
+//            this.card.setAbility(null);
+//            this.card.setAbilityName(null);
+//            this.cardData = this.card.getCardData();
+//            ((UnitCard) this.card).setCurrentPower(8);
+//            ((UnitCard) this.card).setPower(8);
+//            ((UnitCard) this.card).setHero(false);
+//            ((UnitCard) this.card).setNoRemove(false);
+//
+//            Image image = new Image(srcPath + cardData.getImageAddress());
+//            ImageView imageView = new ImageView(image);
+//            imageView.setFitWidth(width);
+//            imageView.setFitHeight(height);
+//            imageView.setStyle("-fx-background-radius: 15; -fx-border-radius: 15; -fx-background-color: transparent;");
+//
+//            this.getChildren().addAll(imageView);
+//            setLabelAndAbilitiesLabelForNonSpecialCards();
+//        }
     }
+
+
 }
