@@ -56,7 +56,8 @@ public class PreGameMenuControllerView {
     public ImageView factionCard5;
     public FlowPane leaderCardPane;
     public AnchorPane chooseLeaderAnchorPane;
-    public TextField saveOrLoadDeckNameField;
+    public TextField saveDeckNameField;
+    public TextField loadDeckNameField;
     public Button saveDeckButton;
     public Button loadDeckButton;
     public Button chooseDirectoryButton;
@@ -431,7 +432,7 @@ public class PreGameMenuControllerView {
     }
 
 
-    public void backToMainMenu(MouseEvent actionEvent) {
+    public void backToMainMenu(ActionEvent actionEvent) {
         App.setCurrentMenu(Menu.MAIN_MENU);
         Controller.MAIN_MENU_CONTROLLER.run();
     }
@@ -498,24 +499,32 @@ public class PreGameMenuControllerView {
     }
 
     public void loadDeck(MouseEvent mouseEvent) {
+        saveDeckNameField.setVisible(false);
+        chooseDirectoryButton.setVisible(false);
         saveState = 0;
         if (loadState == 0) {
+            loadDeckNameField.setVisible(true);
+            fileChooserButton.setVisible(true);
             loadState = 1;
         } else if (loadState == 1) {
-            if (saveOrLoadDeckNameField.getText().equals("")) {
+            if (loadDeckNameField.getText().equals("")) {
                 App.getAppView().showAlert("Please enter a name from your saved decks", AlertType.ERROR.getType());
-            } else if (!App.getLoggedInUser().isADeckExistWithThisName(saveOrLoadDeckNameField.getText())) {
+            } else if (!App.getLoggedInUser().isADeckExistWithThisName(loadDeckNameField.getText())) {
                 App.getAppView().showAlert("You don't have a deck with this name", AlertType.ERROR.getType());
-                saveOrLoadDeckNameField.setText("");
+                loadDeckNameField.setVisible(false);
+                fileChooserButton.setVisible(false);
+                loadDeckNameField.setText("");
                 loadState = 0;
             } else {
-                DeckToJson deckToJson = DeckManager.loadDeck(saveOrLoadDeckNameField.getText(), App.getLoggedInUser().getID());
+                DeckToJson deckToJson = DeckManager.loadDeck(loadDeckNameField.getText(), App.getLoggedInUser().getID());
                 if (deckToJson == null) {
                     App.getAppView().showAlert("Unable to load deck", AlertType.ERROR.getType());
                 } else {
                     loadDeckPictures(deckToJson);
                 }
-                saveOrLoadDeckNameField.setText("");
+                loadDeckNameField.setVisible(false);
+                fileChooserButton.setVisible(false);
+                loadDeckNameField.setText("");
                 loadState = 0;
             }
         }
@@ -553,6 +562,8 @@ public class PreGameMenuControllerView {
     }
 
     public void saveDeck(MouseEvent mouseEvent) {
+        loadDeckNameField.setVisible(false);
+        fileChooserButton.setVisible(false);
         loadState = 0;
         if (saveState == 0) {
             if (playerDeck.size() < 22) {
@@ -568,25 +579,30 @@ public class PreGameMenuControllerView {
                         3000
                 );
             } else {
+                saveDeckNameField.setVisible(true);
+                chooseDirectoryButton.setVisible(true);
                 saveState = 1;
             }
         } else if (saveState == 1) {
-            if (saveOrLoadDeckNameField.getText().equals("")) {
+            if (saveDeckNameField.getText().equals("")) {
                 App.getAppView().showAlert("Please enter a name for your deck", AlertType.ERROR.getType());
-            } else if (App.getLoggedInUser().isADeckExistWithThisName(saveOrLoadDeckNameField.getText())) {
+            } else if (App.getLoggedInUser().isADeckExistWithThisName(saveDeckNameField.getText())) {
                 App.getAppView().showAlert("You already have a Deck with this name", AlertType.ERROR.getType());
-                saveOrLoadDeckNameField.setText("");
+                saveDeckNameField.setVisible(false);
+                saveDeckNameField.setText("");
                 saveState = 0;
             } else {
 
                 updateNumbers();
 
-                DeckManager.saveDeck(new DeckToJson(faction.getFaction().name(), leaderCard.getName(), totalCards, heroCardsCount, soldiersCount, specialCardsCount, totalPower, getPreGameCardNames(playerDeck)), App.getLoggedInUser().getID(), saveOrLoadDeckNameField.getText());
-                App.getLoggedInUser().addDeckNameToDeckAddresses(saveOrLoadDeckNameField.getText());
+                DeckManager.saveDeck(new DeckToJson(faction.getFaction().name(), leaderCard.getName(), totalCards, heroCardsCount, soldiersCount, specialCardsCount, totalPower, getPreGameCardNames(playerDeck)), App.getLoggedInUser().getID(), saveDeckNameField.getText());
+                App.getLoggedInUser().addDeckNameToDeckAddresses(saveDeckNameField.getText());
+                saveDeckNameField.setVisible(false);
+                chooseDirectoryButton.setVisible(false);
                 App.loadUsers();
-                App.getLoggedInUser().addDeckNameToDeckAddresses(saveOrLoadDeckNameField.getText());
+                App.getLoggedInUser().addDeckNameToDeckAddresses(saveDeckNameField.getText());
                 App.saveUsers();
-                saveOrLoadDeckNameField.setText("");
+                saveDeckNameField.setText("");
                 saveState = 0;
                 App.getAppView().showAlert("Deck saved successfully", AlertType.SUCCESS.getType());
             }
@@ -601,16 +617,20 @@ public class PreGameMenuControllerView {
 
         File selectedDirectory = directoryChooser.showDialog(primaryStage);
         if (selectedDirectory != null) {
-            if (saveOrLoadDeckNameField.getText().equals("")) {
+            if (saveDeckNameField.getText().equals("")) {
                 App.getAppView().showAlert("Please enter a name for your deck", AlertType.ERROR.getType());
             } else {
-                DeckManager.saveDeck(new DeckToJson(faction.getFaction().name(), leaderCard.getName(), totalCards, heroCardsCount, soldiersCount, specialCardsCount, totalPower, getPreGameCardNames(playerDeck)), selectedDirectory.getAbsolutePath(), saveOrLoadDeckNameField.getText());
+                DeckManager.saveDeck(new DeckToJson(faction.getFaction().name(), leaderCard.getName(), totalCards, heroCardsCount, soldiersCount, specialCardsCount, totalPower, getPreGameCardNames(playerDeck)), selectedDirectory.getAbsolutePath(), saveDeckNameField.getText());
+                saveDeckNameField.setVisible(false);
+                chooseDirectoryButton.setVisible(false);
                 App.getAppView().showAlert("Deck saved successfully", AlertType.SUCCESS.getType());
-                saveOrLoadDeckNameField.setText("");
+                saveDeckNameField.setText("");
             }
         } else {
             App.getAppView().showAlert("Unable to Save Deck", AlertType.ERROR.getType());
-            saveOrLoadDeckNameField.setText("");
+            loadDeckNameField.setText("");
+            loadDeckNameField.setVisible(false);
+            chooseDirectoryButton.setVisible(false);
         }
 
     }
@@ -658,16 +678,6 @@ public class PreGameMenuControllerView {
             loadDeckNameField.setVisible(false);
         } catch (Exception e) {
 
-        File selectedFile = fileChooser.showOpenDialog(stage);
-        if (selectedFile == null) {
-            return;
         }
-        DeckToJson deck = DeckManager.loadDeck(selectedFile.getAbsolutePath());
-        if (deck == null) {
-            App.getAppView().showAlert("Unable to load Deck", AlertType.ERROR.getType());
-        } else {
-            loadDeckPictures(deck);
-        }
-        loadState = 0;
     }
 }

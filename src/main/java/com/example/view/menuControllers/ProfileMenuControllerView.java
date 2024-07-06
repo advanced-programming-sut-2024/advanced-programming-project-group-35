@@ -132,7 +132,6 @@ public class ProfileMenuControllerView {
     }
 
     public void openFriendsListMenu(MouseEvent mouseEvent) {
-        controller.showFriendsList();
     }
 
     public void openTerminal(MouseEvent mouseEvent) {

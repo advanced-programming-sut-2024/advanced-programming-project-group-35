@@ -27,7 +27,7 @@
         </ComboBox>
         <TextField fx:id="securityAnswerRegister" maxWidth="250" promptText="Answer" styleClass="custom-text-field"/>
         <TextField fx:id="securityAnswerConfirmationRegister" maxWidth="250" promptText="Confirm Answer" styleClass="custom-text-field"/>
-        <TextField fx:id="emailVerificationCodeField" maxWidth="250" promptText="Verification Code" styleClass="custom-text-field"/>
+        <TextField fx:id="emailVerificationCode" maxWidth="250" promptText="Verification Code" styleClass="custom-text-field"/>
         <Button minWidth="150" onMouseClicked="#finalizeRegisterUser" styleClass="brown-button"
                 text="Register"/>
     </VBox>

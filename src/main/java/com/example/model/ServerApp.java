@@ -99,12 +99,4 @@ public class ServerApp {
         messageBuilder.append("MESSAGE|").append(senderID).append("|").append(message);
         clientConnector.sendMessage(messageBuilder.toString());
     }
-
-    public static ArrayList<User> getAllUsers() {
-        return allUsers;
-    }
-
-    public static void setAllUsers(ArrayList<User> allUsers) {
-        ServerApp.allUsers = allUsers;
-    }
 }

@@ -74,10 +74,3 @@
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
 }
-
-.friends-menu-background {
-    -fx-background-image: url("/Images/friends-menu-background.jpg");
-    -fx-background-size: cover;
-    -fx-background-repeat: no-repeat;
-    -fx-background-position: center;
-}

@@ -67,8 +67,7 @@ public class User {
         this.currentFactionType = generateRandomFactionType();
         this.gameData = new ArrayList<>();
         this.decksAddresses = new ArrayList<>();
-        this.friends = new ArrayList<>();
-        this.friendRequests = new ArrayList<>();
+        setID();
     }
 
     public static User getUserByUsername(String name) {
@@ -88,7 +87,7 @@ public class User {
         this.temporaryDeck = temporaryDeck;
     }
 
-    public void setNewID() {
+    private void setID() {
         Date date = new Date();
         this.id = date.hashCode();
     }

@@ -62,8 +62,6 @@ public class OutputView {
                 App.getAppView().showAlert("You can't play with yourself", AlertType.ERROR.getType());
             case SENT_CODE:
                 App.getAppView().showAlert("Code sent to your email", AlertType.SUCCESS.getType());
-            case NO_FRIEND_REQUESTS:
-                App.getAppView().showAlert("No friend requests", AlertType.INFO.getType());
             default:
                 return null;
         }
