@@ -78,9 +78,7 @@ public class ClientConnector implements Runnable {
         if (message.startsWith("FRIEND_REQUEST_ACCEPTED:")) {
             App.updateUserInfo();
         } else if (message.startsWith("NEW_FRIEND_REQUEST:")) {
-            System.out.println(App.getLoggedInUser().getFriendRequests());
             App.updateUserInfo();
-            System.out.println(App.getLoggedInUser().getFriendRequests());
         } else if (message.startsWith("FRIEND_REQUEST_REJECTED:")) {
             App.updateUserInfo();
         } else if (message.startsWith("FRIEND_REQUEST_CANCELED:")) {
@@ -94,6 +92,8 @@ public class ClientConnector implements Runnable {
         } else if (message.startsWith("GameStarts")){
             System.out.println("GameStarts -message");
             App.getLoggedInUser().setInGame(true);
+        } else if (message.startsWith("GameRequest")){
+            //
         }
     }
 

@@ -1,6 +1,4 @@
 package com.example.controller.server;// Server.java
-import com.example.model.ServerApp;
-import com.example.model.User;
 import com.example.model.game.OnlineTable;
 import com.example.model.game.Player;
 
