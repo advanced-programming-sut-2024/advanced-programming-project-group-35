@@ -21,9 +21,6 @@ public class Server {
         ServerApp.setServer(this);
         ServerApp.loadUsers("users.json");
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            for (User user : ServerApp.allUsers) {
-                System.out.println(user.getDeckName());
-            }
             ServerApp.saveUsers("users.json");
         }));
         try (ServerSocket serverSocket = new ServerSocket(PORT)) {
@@ -31,7 +28,6 @@ public class Server {
             while (true) {
                 Socket clientSocket = serverSocket.accept();
                 System.out.println("New connection from " + clientSocket.getInetAddress() + ":" + clientSocket.getPort());
-
                 new Thread(new PlayerHandler(clientSocket, this)).start();
                 System.out.println("New player connected");
             }

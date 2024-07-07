@@ -31,42 +31,6 @@
         "receiverID": 2,
         "isAccepted": false,
         "isRejected": false
-      },
-      {
-        "senderID": 3,
-        "receiverID": 2,
-        "isAccepted": false,
-        "isRejected": false
-      },
-      {
-        "senderID": 10,
-        "receiverID": 2,
-        "isAccepted": false,
-        "isRejected": false
-      },
-      {
-        "senderID": 3,
-        "receiverID": 2,
-        "isAccepted": false,
-        "isRejected": false
-      },
-      {
-        "senderID": 3,
-        "receiverID": 2,
-        "isAccepted": false,
-        "isRejected": false
-      },
-      {
-        "senderID": 3,
-        "receiverID": 2,
-        "isAccepted": false,
-        "isRejected": false
-      },
-      {
-        "senderID": 3,
-        "receiverID": 2,
-        "isAccepted": false,
-        "isRejected": false
       }
     ]
   },
@@ -128,45 +92,15 @@
         "receiverID": 2,
         "isAccepted": false,
         "isRejected": false
-      },
-      {
-        "senderID": 3,
-        "receiverID": 2,
-        "isAccepted": false,
-        "isRejected": false
-      },
-      {
-        "senderID": 3,
-        "receiverID": 2,
-        "isAccepted": false,
-        "isRejected": false
-      },
-      {
-        "senderID": 3,
-        "receiverID": 2,
-        "isAccepted": false,
-        "isRejected": false
-      },
-      {
-        "senderID": 3,
-        "receiverID": 2,
-        "isAccepted": false,
-        "isRejected": false
-      },
-      {
-        "senderID": 3,
-        "receiverID": 2,
-        "isAccepted": false,
-        "isRejected": false
       }
     ]
   },
   {
     "isOnline": true,
     "id": 10,
-    "username": "alireza",
-    "password": "Alireza123@",
-    "nickname": "alireza",
+    "username": "ali123",
+    "password": "Bp+\u003d%\u003d1%cI",
+    "nickname": "asmd",
     "email": "sjhagdhj@ahsgdh.com",
     "securityQuestion": 0,
     "securityQuestionAnswer": "What is your favorite color?",
@@ -187,13 +121,6 @@
     "numberOfMinionCards": 0,
     "gameData": [],
     "decksAddresses": [],
-    "friendRequests": [
-      {
-        "senderID": 10,
-        "receiverID": 2,
-        "isAccepted": false,
-        "isRejected": false
-      }
-    ]
+    "friendRequests": []
   }
 ]

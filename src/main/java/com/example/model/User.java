@@ -6,6 +6,7 @@ import com.example.model.game.Table;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class User {
     private boolean isOnline;
@@ -39,8 +40,8 @@ public class User {
     private ArrayList<GameData> gameData; // mitoonim az queue estefade konim (vali ta hala kar nakardam bahash)
     private ArrayList<Log> logs;
     private ArrayList<String> decksAddresses;
-    private ArrayList<User> friends;
-    private ArrayList<FriendRequest> friendRequests;
+    private ArrayList<User> friends = new ArrayList<>();
+    private ArrayList<FriendRequest> friendRequests = new ArrayList<>();
 
     public void setFriends(ArrayList<User> friends) {
         this.friends = friends;
@@ -222,10 +223,13 @@ public class User {
         friendRequests.remove(friendRequest);
     }
 
-    public static void sendFriendRequest(User user, User friend) {
-        FriendRequest friendRequest = new FriendRequest(user, friend);
-        user.friendRequests.add(friendRequest);
-        friend.friendRequests.add(friendRequest);
+
+
+    void addFriendRequest(FriendRequest friendRequest) {
+        if (friendRequests == null) {
+            friendRequests = new ArrayList<>();
+        }
+        friendRequests.add(friendRequest);
     }
 
     public void setOnline(boolean b) {
@@ -309,5 +313,22 @@ public class User {
 
     public ArrayList<String> getDeckName() {
         return decksAddresses;
+    }
+
+    private AtomicBoolean isInGame = new AtomicBoolean(false);
+
+    public boolean isInGame() {
+        if (isInGame == null) {
+            isInGame = new AtomicBoolean(false);
+        }
+        boolean value = isInGame.get();
+        System.out.println("isInGame called, returning: " + value);
+        return value;
+    }
+
+    public void setInGame(boolean inGame) {
+        System.out.println("setInGame called with value: " + inGame);
+        isInGame.set(inGame);
+        System.out.println("isInGame is now: " + isInGame.get());
     }
 }

@@ -2,13 +2,16 @@ package com.example.view.menuControllers;
 
 import com.example.controller.Controller;
 import com.example.model.App;
+import com.example.model.FriendRequest;
 import com.example.view.Menu;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
 public class FriendsMenuControllerView {
     public ScrollPane mainScrollPane;
+    public TextField friendUsername;
 
     @FXML
     public void initialize() {
@@ -57,5 +60,20 @@ public class FriendsMenuControllerView {
     public void backToProfileMenu(MouseEvent mouseEvent) {
         App.setCurrentMenu(Menu.PROFILE_MENU);
         Controller.PROFILE_MENU_CONTROLLER.run();
+    }
+
+    public void sendGameRequest(MouseEvent mouseEvent) {
+        FriendRequest friendRequest = new FriendRequest(App.getLoggedInUser(), App.getUserByUsername(friendUsername.getText()));
+        App.getServerConnector().sendFriendRequest(friendRequest);
+        System.out.println("Friend request sent to " + friendUsername.getText());
+        // new thread to wait for response
+        Thread waitForResponse = new Thread(() -> {
+            try {
+                Thread.sleep(5000);
+                System.out.println(App.getLoggedInUser().getFriendRequests());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
     }
 }

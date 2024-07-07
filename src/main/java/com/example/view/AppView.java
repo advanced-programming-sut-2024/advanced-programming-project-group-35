@@ -157,7 +157,7 @@ public class AppView extends Application {
     }
 
     public void updateUserInfo() {
-        ((ScoreTableController) Controller.SCORE_TABLE_MENU_CONTROLLER.getController()).makeScoreboardTable(App.getAllUsers());
+        //((ScoreTableController) Controller.SCORE_TABLE_MENU_CONTROLLER.getController()).makeScoreboardTable(App.getAllUsers());
     }
 
     public void showMessage(String part) {

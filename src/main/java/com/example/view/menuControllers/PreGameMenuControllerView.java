@@ -402,7 +402,7 @@ public class PreGameMenuControllerView {
             player1OfflineID = App.getLoggedInUser().getID();
             //App.loadUsers();
             App.temporaryUserID = player1OfflineID;
-            player1OfflineDeck = new DeckToJson(faction.getFaction().name(), leaderCard.getName(), totalCards, heroCardsCount, soldiersCount, specialCardsCount, totalPower,getPreGameCardNames(playerDeck));
+            player1OfflineDeck = new DeckToJson(faction.getFaction().name(), leaderCard.getName(), totalCards, heroCardsCount, soldiersCount, specialCardsCount, totalPower, getPreGameCardNames(playerDeck));
             App.setTemporaryDeck(player1OfflineDeck);
             //App.saveUsers();
             App.setCurrentMenu(Menu.LOGIN_MENU);
@@ -414,7 +414,7 @@ public class PreGameMenuControllerView {
         } else {
             player1OfflineID = App.temporaryUserID;
             player2OfflineID = App.getLoggedInUser().getID();
-            player2OfflineDeck = new DeckToJson(faction.getFaction().name(), leaderCard.getName(), totalCards, heroCardsCount, soldiersCount, specialCardsCount, totalPower,getPreGameCardNames(playerDeck));
+            player2OfflineDeck = new DeckToJson(faction.getFaction().name(), leaderCard.getName(), totalCards, heroCardsCount, soldiersCount, specialCardsCount, totalPower, getPreGameCardNames(playerDeck));
             player1OfflineDeck = App.getTemporaryDeck();
             App.getLoggedInUser().setTemporaryDeck(player2OfflineDeck);
             GameMenuController gameMenuController = (GameMenuController) Controller.GAME_MENU_CONTROLLER.getController();
@@ -439,12 +439,48 @@ public class PreGameMenuControllerView {
         App.getServerConnector().sendGameRequest(senderID, receiverID);
     }
 
-    public void sendRandomGameRequest(ActionEvent actionEvent) {
+    public void sendRandomGameRequest(ActionEvent actionEvent) throws Exception {
         App.getServerConnector().sendRandomGameRequest(App.getLoggedInUser().getID());
+        //wait for answer:
+        App.getAppView().showLoading();
+        new Thread(() -> {
+            while (true) {
+                try {
+                    Thread.sleep(2000);
+                    System.out.println("waiting for game to start");
+                    if (App.getLoggedInUser().isInGame()) {
+                        //go to game Controller menu TODO
+                        break;
+                    }
+
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+        ).start();
+        System.out.println("game started");
     }
 
     public void sendTournamentGameRequest(ActionEvent actionEvent) {
-        App.getServerConnector().sendTournamentGameRequest(App.getLoggedInUser().getID());
+        //wait for answer:
+        App.getAppView().showLoading();
+        Thread waitForAnswer = new Thread(() -> {
+            App.getServerConnector().sendTournamentGameRequest(App.getLoggedInUser().getID());
+
+            while (true) {
+                try {
+                    Thread.sleep(1000);
+                    if (App.getLoggedInUser().isInGame()) {
+                        //go to game Controller menu TODO
+                        break;
+                    }
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+        waitForAnswer.start();
     }
 
 
@@ -528,7 +564,7 @@ public class PreGameMenuControllerView {
         saveState = 0;
         if (loadState == 0) {
             loadState = 1;
-        }  else if (loadState == 1) {
+        } else if (loadState == 1) {
             if (saveOrLoadDeckNameField.getText().equals("")) {
                 App.getAppView().showAlert("Please enter a name from your saved decks", AlertType.ERROR.getType());
             } else if (!App.getLoggedInUser().isADeckExistWithThisName(saveOrLoadDeckNameField.getText())) {
@@ -554,21 +590,28 @@ public class PreGameMenuControllerView {
         Thread loadDataThread = new Thread(() -> {
             Platform.runLater(() -> {
                 try {
-                    Thread.sleep(3000);
                     CardData leaderCardData = CardData.getCardDataByName(deckToJson.getLeader());
                     System.out.println(CardData.getCardDataByName(deckToJson.getLeader()));
                     leaderCard = new PreGameCard(leaderCardData.getName(), leaderCardData.getPower(), leaderCardData.getAbilityName(), srcPath + leaderCardData.getImageAddress());
                     System.out.println(leaderCard.getName());
                     ArrayList<PreGameCard> copyOfAllCards = new ArrayList<>(allCards);
+                    Timeline timeline = new Timeline();
+                    AtomicInteger i = new AtomicInteger(0);
                     for (PreGameCard card : copyOfAllCards) {
                         System.out.println(card.getName());
                         if (deckToJson.getCards().contains(card.getName())) {
-                            addCardToDeck(card);
+                            KeyFrame keyFrame = new KeyFrame(Duration.millis(100 * i.get()), event -> {
+                                addCardToDeck(card);
+                                updateDeckCardsPane();
+                                updateAllCardsPane();
+                                updateDeckInfo();
+                            });
+                            timeline.getKeyFrames().add(keyFrame);
+                            i.incrementAndGet();
                         }
                     }
-                    updateDeckCardsPane();
-                    updateAllCardsPane();
-                    updateDeckInfo();
+                    timeline.play();
+
 //                    App.setCurrentController(Controller.PRE_GAME_MENU_CONTROLLER);
 //                    App.getAppView().showMenu(Menu.PREGAME_MENU);
                 } catch (Exception e) {
@@ -683,5 +726,9 @@ public class PreGameMenuControllerView {
             loadDeckPictures(deck);
         }
         loadState = 0;
+    }
+
+    public void RandomGameButtonAction(ActionEvent actionEvent) {
+
     }
 }
