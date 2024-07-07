@@ -55,7 +55,7 @@ public class ServerConnector {
             while (!(line = in.readLine()).equals("END_JSON")) {
                 jsonBuilder.append(line).append("\n");
             }
-
+            //System.out.println(jsonBuilder.toString());
             Type userListType = new TypeToken<ArrayList<User>>() {
             }.getType();
             allUsers = gson.fromJson(jsonBuilder.toString(), userListType);

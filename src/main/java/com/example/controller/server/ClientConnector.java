@@ -82,7 +82,7 @@ public class ClientConnector implements Runnable {
             Thread thread = new Thread(() -> {
                 try {
                     Thread.sleep(4000);
-                    App.updateHandly();
+                    App.updateUserInfo();
                     Thread.sleep(1000);
                     System.out.println(App.getLoggedInUser().getFriendRequests());
                 } catch (InterruptedException e) {

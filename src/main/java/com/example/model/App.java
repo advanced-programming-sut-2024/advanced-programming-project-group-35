@@ -147,6 +147,13 @@ public class App {
 
     private static void updateUsersFromServer() {
         allUsers = serverConnector.getAllUsers();
+        if (loggedInUser == null) return;
+        for (User user : allUsers) {
+            if (user.getID() == loggedInUser.getID()) {
+                loggedInUser = user;
+                break;
+            }
+        }
     }
 
     public static ServerConnector getServerApp() {

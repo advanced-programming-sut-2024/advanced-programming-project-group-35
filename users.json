@@ -55,6 +55,18 @@
         "receiverID": 2,
         "isAccepted": false,
         "isRejected": false
+      },
+      {
+        "senderID": 3,
+        "receiverID": 2,
+        "isAccepted": false,
+        "isRejected": false
+      },
+      {
+        "senderID": 3,
+        "receiverID": 2,
+        "isAccepted": false,
+        "isRejected": false
       }
     ]
   },
@@ -111,6 +123,18 @@
     "gameData": [],
     "decksAddresses": [],
     "friendRequests": [
+      {
+        "senderID": 3,
+        "receiverID": 2,
+        "isAccepted": false,
+        "isRejected": false
+      },
+      {
+        "senderID": 3,
+        "receiverID": 2,
+        "isAccepted": false,
+        "isRejected": false
+      },
       {
         "senderID": 3,
         "receiverID": 2,
