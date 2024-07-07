@@ -92,7 +92,7 @@ public class DatabaseManager {
         try (Connection conn = connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setInt(1, user.getId());
+            pstmt.setInt(1, user.getID());
             pstmt.setString(2, user.getUsername());
             pstmt.setString(3, user.getPassword());
             pstmt.setString(4, user.getNickname());
@@ -130,7 +130,7 @@ public class DatabaseManager {
     }
 
     public static void insertOrUpdateUser(User user) {
-        if (userExists(user.getId())) {
+        if (userExists(user.getID())) {
             updateUser(user);
         } else {
             insertUser(user);
@@ -158,7 +158,7 @@ public class DatabaseManager {
         try (Connection conn = connect()) {
             conn.setAutoCommit(false);
             try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-                pstmt.setInt(1, user.getId());
+                pstmt.setInt(1, user.getID());
                 pstmt.setString(2, user.getUsername());
                 pstmt.setString(3, user.getPassword());
                 pstmt.setString(4, user.getNickname());
@@ -251,24 +251,4 @@ public class DatabaseManager {
         }
         return 0;
     }
-
-//    public static void printDetailedUserInfo() {
-//        String sql = "SELECT * FROM users";
-//        try (Connection conn = connect();
-//             Statement stmt = conn.createStatement();
-//             ResultSet rs = stmt.executeQuery(sql)) {
-//            while (rs.next()) {
-//                System.out.println("User ID: " + rs.getInt("id"));
-//                System.out.println("Username: " + rs.getString("username"));
-//                System.out.println("Email: " + rs.getString("email"));
-//                System.out.println("Nickname: " + rs.getString("nickname"));
-//                System.out.println("Wins: " + rs.getInt("wins"));
-//                System.out.println("Losses: " + rs.getInt("losses"));
-//                System.out.println("Score: " + rs.getInt("score"));
-//                System.out.println("--------------------");
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
 }

@@ -24,6 +24,8 @@
     </VBox>
     <Button layoutX="50" layoutY="740" minWidth="50" onMouseClicked="#openTerminal" styleClass="brown-button"
             text="Terminal"/>
+    <Button layoutX="1150" layoutY="740" minWidth="50" onMouseClicked="#openChatBox" styleClass="brown-button"
+            text="ChatBox"/>
     <TextField layoutX="700" layoutY="300" prefHeight="30" prefWidth="200" fx:id="friendsName" promptText="IP Address"/>
     <Button layoutX="700" layoutY="400" minWidth="50" onMouseClicked="#testNetwork" styleClass="brown-button"
             text="Test Network"/>

@@ -4,10 +4,12 @@ import com.example.Main;
 import com.example.controller.Controller;
 import com.example.controller.ScoreTableController;
 import com.example.model.App;
+import com.example.model.Chat.ChatBox;
+import com.example.model.FriendRequest;
 import com.example.model.User;
 import com.example.model.alerts.Alert;
 import com.example.model.Terminal;
-import com.example.model.alerts.AlertType;
+import com.example.model.alerts.ConfirmationAlert;
 import com.example.model.alerts.Notification;
 import com.example.view.menuControllers.GameMenuControllerView;
 import javafx.animation.KeyFrame;
@@ -15,12 +17,10 @@ import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -30,8 +30,10 @@ public class AppView extends Application {
     private Stage primaryStage;
     private Pane pane;
     private Terminal terminal = new Terminal();
+    private ChatBox chatBox = new ChatBox();
     private boolean isAlert = false;
     private Alert alert;
+    private ConfirmationAlert confirmationAlert;
     private Notification notification;
     private boolean isNotification = false;
     private boolean terminalVisible = false;
@@ -77,6 +79,43 @@ public class AppView extends Application {
     }
     public void removeAlert(Pane currentPane) {
         currentPane.getChildren().remove(alert);
+        isAlert = false;
+    }
+
+    public void showConfirmationAlert(String message, String alertType) {
+        if (!isAlert) {
+            confirmationAlert = new ConfirmationAlert(message, alertType);
+            confirmationAlert.setLayoutX(pane.getWidth() - confirmationAlert.width - 35);
+            confirmationAlert.setLayoutY(50);
+            pane.getChildren().add(confirmationAlert);
+            isAlert = true;
+            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5)));
+            timeline.play();
+            timeline.setOnFinished(actionEvent ->  {
+                isAlert = false;
+                removeAlert(pane);
+            });
+        }
+    }
+
+    public void showConfirmationAlert(String message, String alertType, FriendRequest friendRequest) {
+        if (!isAlert) {
+            confirmationAlert = new ConfirmationAlert(message, alertType, friendRequest);
+            confirmationAlert.setLayoutX(pane.getWidth() - confirmationAlert.width - 35);
+            confirmationAlert.setLayoutY(50);
+            pane.getChildren().add(confirmationAlert);
+            isAlert = true;
+            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5)));
+            timeline.play();
+            timeline.setOnFinished(actionEvent ->  {
+                isAlert = false;
+                removeAlert(pane);
+            });
+        }
+    }
+
+    public void removeConfirmationAlert(Pane currentPane) {
+        currentPane.getChildren().remove(confirmationAlert);
         isAlert = false;
     }
     public void showNotification(String message, String imageAddress, String username) {
@@ -137,6 +176,29 @@ public class AppView extends Application {
         transition.setToY(900);
         transition.setOnFinished(e -> {
             pane.getChildren().remove(terminal);
+            try {
+
+            } catch (NullPointerException e1) {
+            }
+        });
+        transition.play();
+    }
+
+    public void showChatBox() {
+        pane.getChildren().add(chatBox);
+        chatBox.getTextField().requestFocus();
+        TranslateTransition transition = new TranslateTransition(Duration.millis(700), chatBox);
+        transition.setFromY(900);
+        transition.setToY(185);
+        transition.play();
+    }
+
+    public void removeChatBox() {
+        TranslateTransition transition = new TranslateTransition(Duration.millis(700), chatBox);
+        transition.setFromY(185);
+        transition.setToY(900);
+        transition.setOnFinished(e -> {
+            pane.getChildren().remove(chatBox);
             try {
 
             } catch (NullPointerException e1) {

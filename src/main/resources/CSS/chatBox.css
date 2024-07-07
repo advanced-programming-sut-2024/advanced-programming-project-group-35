@@ -1,0 +1,123 @@
+.chat-box{
+    -fx-background-color: #a79377; /* Brown background color */
+    -fx-background-radius: 0; /* Rounded corners */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 15, 0.1, 0, 0); /* Drop shadow */
+}
+.send-button, .close-button{
+    -fx-background-color: #4e342e; /* Brown background color */
+    -fx-text-fill: white; /* White text color */
+    -fx-font-size: 16px; /* Font size */
+    -fx-border-color: #3e2723; /* Darker brown border color */
+    -fx-border-width: 2px; /* Border width */
+    -fx-border-insets: 2; /* Move border inwards */
+    -fx-background-radius: 0; /* Rounded corners */
+    -fx-effect: dropshadow(gaussian, rgba(93, 64, 55, 0.75), 10, 0.1, 0, 0); /* Drop shadow */
+    -fx-cursor: hand; /* Change cursor to hand */
+    -fx-transition: 0.3s; /* Add transition */
+    -fx-padding: 8; /* Padding around the text, adjust as needed */
+    -fx-pref-width: 30px;
+    -fx-pref-height: 30px;
+    -fx-min-width: 30px;
+    -fx-min-height: 30px;
+    -fx-max-height: 30px;
+    -fx-max-width: 30px;
+}
+
+.send-button:hover, .close-button:hover{
+    -fx-background-color: #6d4c41; /* Slightly lighter brown background */
+    -fx-border-color: #5d4037; /* Slightly lighter border color */
+    -fx-effect: dropshadow(gaussian, rgba(93, 64, 55, 0.9), 15, 0.1, 0, 0); /* Stronger shadow effect */
+    -fx-cursor: hand;
+    -fx-transition: 0.3s; /* Add transition */
+}
+.text-field{
+    -fx-background-color: #6b553c;
+    -fx-text-fill: #ffffff;
+    -fx-border-width: 2;
+    -fx-border-insets: 2;
+    -fx-padding: 5;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-border-color: #a79377;
+    -fx-font-size: 16px;
+    -fx-prompt-text-fill: #a79377;
+    -fx-pref-height: 30px;
+    -fx-min-height: 30px;
+    -fx-max-height: 30px;
+}
+.all-messages{
+    -fx-background-color: #6b553c; /* Brown background color */
+    -fx-background-radius: 0; /* Rounded corners */
+}
+.all-messages-vbox {
+    -fx-background-color: #6b553c; /* Brown background color */
+    -fx-background-radius: 0; /* Rounded corners */
+    -fx-padding: 10px 0 0 0;
+}
+.all-messages .viewport{
+    -fx-background-color: #6b553c; /* Brown background color */
+    -fx-background-radius: 0; /* Rounded corners */
+}
+.chat-box-label{
+    -fx-font-size: 18px;
+    -fx-text-fill: #ffffff;
+    -fx-pref-width: 70;
+    -fx-pref-height: 30;
+    -fx-min-width: 70;
+    -fx-min-height: 30;
+    -fx-max-height: 30;
+    -fx-max-width: 80;
+    -fx-padding: 0 !important;
+}
+.message{
+    -fx-background-color: #4e342e; /* Brown background color */
+    -fx-background-radius: 5; /* Rounded corners */
+    -fx-padding: 5;
+    -fx-spacing: 5;
+}
+.reply-label{
+    -fx-background-radius: 5;
+    -fx-background-color: #6b553c;
+    -fx-padding: 5;
+    -fx-text-fill: #ffffff;
+    -fx-max-width: 160;
+}
+.sender-label{
+    -fx-text-fill: #ffffff;
+    -fx-max-width: 160;
+}
+.content-label{
+    -fx-text-fill: #ffffff;
+    -fx-fill: #ffffff;
+    -fx-max-width: 160;
+}
+.time-label{
+    -fx-text-fill: #ffffff;
+    -fx-max-width: 160;
+}
+.reactions-label{
+    -fx-text-fill: #ffffff;
+    -fx-max-width: 160;
+}
+.reactions-box{
+}
+.context-menu{
+    -fx-background-color: #6b553c; /* Brown background color */
+    -fx-background-radius: 0; /* Rounded corners */
+}
+.context-menu-item {
+    -fx-background-color: #6b553c; /* Brown background color */
+    -fx-text-fill: #ffffff; /* White text color */
+    -fx-font-size: 16px; /* Font size */
+    -fx-border-color: #a79377; /* Lighter brown border color */
+    -fx-border-width: 2px; /* Border width */
+    -fx-border-insets: 2; /* Move border inwards */
+    -fx-background-radius: 0; /* Rounded corners */
+}
+.context-menu-item:hover {
+    -fx-background-color: #4e342e; /* Slightly darker brown background */
+    -fx-border-color: #3e2723; /* Slightly darker border color */
+    -fx-effect: dropshadow(gaussian, rgba(93, 64, 55, 0.9), 15, 0.1, 0, 0); /* Stronger shadow effect */
+    -fx-cursor: hand;
+    -fx-transition: 0.3s; /* Add transition */
+}

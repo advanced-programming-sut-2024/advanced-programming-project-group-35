@@ -1,8 +1,7 @@
-package com.example.model;
+package com.example.model.Chat;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class ChatMessage {

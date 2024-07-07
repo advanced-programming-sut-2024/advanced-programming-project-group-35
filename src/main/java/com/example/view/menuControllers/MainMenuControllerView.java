@@ -53,4 +53,8 @@ public class MainMenuControllerView {
         PreGameMenuControllerView gameMenuControllerView = new PreGameMenuControllerView();
         gameMenuControllerView.sendRequestToFriend(friendsName.getText());
     }
+
+    public void openChatBox(MouseEvent mouseEvent) {
+        App.getAppView().showChatBox();
+    }
 }

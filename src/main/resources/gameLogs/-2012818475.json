@@ -1,0 +1,194 @@
+{
+  "player1": "ali123",
+  "player1Faction": "Monsters",
+  "player1Hand": [
+    {
+      "name": "neutral_dandelion",
+      "id": 99
+    },
+    {
+      "name": "neutral_gaunter_odimm",
+      "id": 101
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 103
+    },
+    {
+      "name": "neutral_geralt",
+      "id": 105
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 107
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 109
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 111
+    },
+    {
+      "name": "monsters_arachas",
+      "id": 113
+    },
+    {
+      "name": "monsters_arachas_2",
+      "id": 115
+    }
+  ],
+  "player1Deck": [
+    {
+      "name": "neutral_emiel",
+      "id": 100
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 102
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 104
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 106
+    },
+    {
+      "name": "neutral_triss",
+      "id": 108
+    },
+    {
+      "name": "neutral_villen",
+      "id": 110
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 112
+    },
+    {
+      "name": "monsters_arachas_1",
+      "id": 114
+    },
+    {
+      "name": "monsters_arachas_behemoth",
+      "id": 116
+    },
+    {
+      "name": "monsters_vampire_bruxa",
+      "id": 117
+    },
+    {
+      "name": "monsters_celaeno_harpy",
+      "id": 118
+    },
+    {
+      "name": "monsters_cockatrice",
+      "id": 119
+    },
+    {
+      "name": "monsters_draug",
+      "id": 120
+    }
+  ],
+  "player2": "ali",
+  "player2Faction": "RealmsNorthern",
+  "player2Hand": [
+    {
+      "name": "neutral_vesemir",
+      "id": 199
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 201
+    },
+    {
+      "name": "realms_ballista",
+      "id": 203
+    },
+    {
+      "name": "realms_blue_stripes",
+      "id": 205
+    },
+    {
+      "name": "realms_crinfrid",
+      "id": 207
+    },
+    {
+      "name": "realms_dijkstra",
+      "id": 209
+    },
+    {
+      "name": "realms_kaedwen_siege",
+      "id": 211
+    },
+    {
+      "name": "realms_kaedwen_siege_2",
+      "id": 213
+    },
+    {
+      "name": "realms_natalis",
+      "id": 215
+    }
+  ],
+  "player2Deck": [
+    {
+      "name": "neutral_villen",
+      "id": 200
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 202
+    },
+    {
+      "name": "realms_banner_nurse",
+      "id": 204
+    },
+    {
+      "name": "realms_catapult_1",
+      "id": 206
+    },
+    {
+      "name": "realms_dethmold",
+      "id": 208
+    },
+    {
+      "name": "realms_esterad",
+      "id": 210
+    },
+    {
+      "name": "realms_kaedwen_siege_1",
+      "id": 212
+    },
+    {
+      "name": "realms_keira",
+      "id": 214
+    },
+    {
+      "name": "realms_philippa",
+      "id": 216
+    },
+    {
+      "name": "realms_stennis",
+      "id": 217
+    },
+    {
+      "name": "realms_poor_infantry",
+      "id": 218
+    },
+    {
+      "name": "realms_redania",
+      "id": 219
+    },
+    {
+      "name": "realms_redania_1",
+      "id": 220
+    },
+    {
+      "name": "realms_sabrina",
+      "id": 221
+    }
+  ]
+}

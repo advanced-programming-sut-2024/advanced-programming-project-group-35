@@ -195,4 +195,10 @@ public class App {
         } catch (IOException e) {
         }
     }
+    public static User getUserByID(int id) {
+        for (User user : allUsers) {
+            if (user.getID() == id) return user;
+        }
+        return null;
+    }
 }

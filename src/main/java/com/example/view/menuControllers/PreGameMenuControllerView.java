@@ -9,7 +9,6 @@ import com.example.model.card.enums.FactionsType;
 import com.example.model.deckmanager.DeckManager;
 import com.example.model.IO.errors.Errors;
 import com.example.model.alerts.AlertType;
-import com.example.model.User;
 import com.example.model.card.enums.CardData;
 import com.example.model.App;
 import com.example.model.card.PreGameCard;
@@ -21,8 +20,6 @@ import com.example.model.card.factions.*;
 import com.example.model.deckmanager.DeckToJson;
 import com.example.view.Menu;
 import com.example.view.OutputView;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -42,14 +39,11 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.util.Duration;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.Timer;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class PreGameMenuControllerView {
     private final Stage stage = App.getAppView().getPrimaryStage();
@@ -524,7 +518,7 @@ public class PreGameMenuControllerView {
     }
 
 
-    public void backToMainMenu(ActionEvent actionEvent) {
+    public void backToMainMenu(MouseEvent actionEvent) {
         App.setCurrentMenu(Menu.MAIN_MENU);
         Controller.MAIN_MENU_CONTROLLER.run();
     }

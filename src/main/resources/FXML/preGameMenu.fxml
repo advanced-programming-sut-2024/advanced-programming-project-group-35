@@ -4,88 +4,143 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane fx:id="mainPane" prefHeight="800.0" prefWidth="1400.0" styleClass="pre-game-menu-background" stylesheets="@../CSS/allMenu.css, @../CSS/allFiles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.view.menuControllers.PreGameMenuControllerView">
+<Pane fx:id="mainPane" prefHeight="800.0" prefWidth="1400.0" styleClass="pre-game-menu-background"
+      stylesheets="@../CSS/allMenu.css, @../CSS/allFiles.css" xmlns="http://javafx.com/javafx/17.0.2-ea"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.view.menuControllers.PreGameMenuControllerView">
     <HBox fx:id="mainHBox" alignment="CENTER" prefHeight="800" prefWidth="1400" spacing="25">
-        <ScrollPane fx:id="leftScrollPane" maxHeight="700" maxWidth="500" prefHeight="700" prefWidth="500" styleClass="scroll-pane-pre-game-menu">
-            <FlowPane fx:id="allCardsPane" alignment="CENTER" hgap="15" maxWidth="450" prefHeight="700" prefWidth="450" styleClass="transparent-background, flow-pane-pre-game-menu" vgap="20">
+        <ScrollPane fx:id="leftScrollPane" maxHeight="700" maxWidth="500" prefHeight="700" prefWidth="500"
+                    styleClass="scroll-pane-pre-game-menu">
+            <FlowPane fx:id="allCardsPane" alignment="CENTER" hgap="15" maxWidth="450" prefHeight="700" prefWidth="450"
+                      styleClass="transparent-background, flow-pane-pre-game-menu" vgap="20">
             </FlowPane>
         </ScrollPane>
-        <VBox fx:id="infoVBox" alignment="CENTER" maxHeight="700" maxWidth="300" prefHeight="700" prefWidth="300" spacing="15">
-            <Label fx:id="playerNameLabel" styleClass="pre-game-menu-label" text="Player Name: " />
-            <Label fx:id="realmNameLabel" styleClass="pre-game-menu-label" text="Faction: " />
-            <Button minWidth="150" onAction="#openChangeFactionMenu" styleClass="brown-button" text="Change Faction" />
-            <Button minWidth="150" onAction="#openChooseLeader" styleClass="brown-button" text="Change Leader" />
-            <Label fx:id="totalCardsLabel" styleClass="pre-game-menu-label" text="Total Cards: " />
-            <Label fx:id="soldiersCountLabel" styleClass="pre-game-menu-label" text="Soldiers: " />
-            <Label fx:id="specialCardsCountLabel" styleClass="pre-game-menu-label" text="Workers: " />
-
-            <Label fx:id="heroCardsCountLabel" styleClass="pre-game-menu-label" text="Special Cards: " />
-            <Label fx:id="totalPowerLabel" styleClass="pre-game-menu-label" text="Total Money: " />
-
-            <TextField maxWidth="250" styleClass="custom-text-field" fx:id="saveOrLoadDeckNameField" promptText="Enter Your Deck Name"/>
-            <HBox alignment="CENTER" spacing="10" maxWidth="300" prefWidth="300">
-                <Button styleClass="brown-button" fx:id="saveDeckButton" mnemonicParsing="false" onMouseClicked="#saveDeck" text="Save Deck"/>
-                <Button styleClass="brown-button" fx:id="loadDeckButton" mnemonicParsing="false" onMouseClicked="#loadDeck" text="Load Deck" />
+        <VBox fx:id="infoVBox" alignment="CENTER" maxHeight="700" maxWidth="300" prefHeight="700" prefWidth="300"
+              spacing="15">
+            <Label fx:id="playerNameLabel" styleClass="pre-game-menu-label" text="Player Name: "/>
+            <Label fx:id="realmNameLabel" styleClass="pre-game-menu-label" text="Faction: "/>
+            <HBox spacing="10" alignment="CENTER" maxWidth="300" prefWidth="300">
+                <Button style="-fx-font-size: 14px !important;" maxHeight="30" minWidth="100"
+                        onAction="#openChangeFactionMenu" styleClass="brown-button" text="Change Faction"/>
+                <Button style="-fx-font-size: 14px !important;" maxHeight="30" minWidth="100"
+                        onAction="#openChooseLeader" styleClass="brown-button" text="Change Leader"/>
             </HBox>
-            <Button styleClass="brown-button" fx:id="fileChooserButton" mnemonicParsing="false" onMouseClicked="#chooseDeckFile" text="Choose Deck From PC" />
-            <Button styleClass="brown-button" fx:id="chooseDirectoryButton" mnemonicParsing="false"
-                    onMouseClicked="#chooseDirectoryToSaveDeckData" text="Save Deck To Your PC"/>
-            <Button fx:id="startGameButton" minWidth="150" onAction="#startGameButtonAction" styleClass="brown-button" text="Start Game" />
+            <Label fx:id="totalCardsLabel" styleClass="pre-game-menu-label" text="Total Cards: "/>
+            <Label fx:id="soldiersCountLabel" styleClass="pre-game-menu-label" text="Soldiers: "/>
+            <Label fx:id="specialCardsCountLabel" styleClass="pre-game-menu-label" text="Workers: "/>
+
+            <Label fx:id="heroCardsCountLabel" styleClass="pre-game-menu-label" text="Special Cards: "/>
+            <Label fx:id="totalPowerLabel" styleClass="pre-game-menu-label" text="Total Money: "/>
+            <Label style="-fx-font-size: 18px;" styleClass="pre-game-menu-label" text="- Load or Save Your Deck -"/>
+            <TextField maxWidth="250" styleClass="custom-text-field" fx:id="saveOrLoadDeckNameField"
+                       promptText="Enter Your Deck Name"/>
+            <HBox alignment="CENTER" spacing="10" maxWidth="300" prefWidth="300">
+                <Button style="-fx-font-size: 14px !important;" maxHeight="30" styleClass="brown-button"
+                        fx:id="saveDeckButton" mnemonicParsing="false" onMouseClicked="#saveDeck" text="Save Deck"/>
+                <Button style="-fx-font-size: 14px !important;" maxHeight="30" styleClass="brown-button"
+                        fx:id="loadDeckButton" mnemonicParsing="false" onMouseClicked="#loadDeck" text="Load Deck"/>
+            </HBox>
+            <HBox alignment="CENTER" spacing="10" maxWidth="300" prefWidth="300">
+                <Button style="-fx-font-size: 14px !important;" maxHeight="30" styleClass="brown-button"
+                        fx:id="fileChooserButton" mnemonicParsing="false" onMouseClicked="#chooseDeckFile"
+                        text="Load PC Deck" minWidth="130" maxWidth="130"/>
+                <Button style="-fx-font-size: 14px !important;" maxHeight="30" styleClass="brown-button"
+                        fx:id="chooseDirectoryButton" mnemonicParsing="false"
+                        onMouseClicked="#chooseDirectoryToSaveDeckData" text="Save Deck To PC" minWidth="130"
+                        maxWidth="130"/>
+            </HBox>
+            <Label style="-fx-font-size: 18px;" styleClass="pre-game-menu-label" text="- Stat Game Options -"/>
+            <HBox alignment="CENTER" spacing="10" maxWidth="300" prefWidth="300">
+                <Button minWidth="130" maxWidth="130" style="-fx-font-size: 14px !important;" maxHeight="30"
+                        fx:id="randomOnlineGameButton" onAction="#startGameButtonAction"
+                        styleClass="brown-button"
+                        text="Random Online"/>
+                <Button minWidth="130" maxWidth="130" style="-fx-font-size: 14px !important;" maxHeight="30"
+                        fx:id="withFriendGameButton" onAction="#startGameButtonAction"
+                        styleClass="brown-button"
+                        text="With Friend"/>
+            </HBox>
+            <HBox alignment="CENTER" spacing="10" maxWidth="300" prefWidth="300">
+                <Button minWidth="130" maxWidth="130" style="-fx-font-size: 14px !important;" maxHeight="30"
+                        fx:id="tournamentGameButton" onAction="#startGameButtonAction"
+                        styleClass="brown-button"
+                        text="Tournament"/>
+                <Button minWidth="130" maxWidth="130" style="-fx-font-size: 14px !important;" maxHeight="30"
+                        fx:id="startGameButton" onAction="#startGameButtonAction"
+                        styleClass="brown-button"
+                        text="Start Game"/>
+            </HBox>
             <!--            <Button fx:id="backButton" minWidth="150" onAction="#backToMainMenu" styleClass="brown-button" text="Back" />-->
         </VBox>
-        <ScrollPane fx:id="rightScrollPane" hbarPolicy="NEVER" maxHeight="700" maxWidth="500" prefHeight="700" prefWidth="500" styleClass="scroll-pane-pre-game-menu">
-            <FlowPane fx:id="playerDeckPane" alignment="CENTER" hgap="15" maxWidth="450" prefHeight="700" prefWidth="450" styleClass="transparent-background, flow-pane-pre-game-menu" vgap="20" />
+        <ScrollPane fx:id="rightScrollPane" hbarPolicy="NEVER" maxHeight="700" maxWidth="500" prefHeight="700"
+                    prefWidth="500" styleClass="scroll-pane-pre-game-menu">
+            <FlowPane fx:id="playerDeckPane" alignment="CENTER" hgap="15" maxWidth="450" prefHeight="700"
+                      prefWidth="450" styleClass="transparent-background, flow-pane-pre-game-menu" vgap="20"/>
         </ScrollPane>
     </HBox>
     <Button minWidth="50" onMouseClicked="#backToMainMenu" styleClass="brown-button" text="Back" translateX="20"
             translateY="20"/>
-    <AnchorPane fx:id="changeFactionPane" prefHeight="800.0" prefWidth="1400.0" styleClass="change-faction-menu-background" visible="false">
+    <AnchorPane fx:id="changeFactionPane" prefHeight="800.0" prefWidth="1400.0"
+                styleClass="change-faction-menu-background" visible="false">
         <ImageView fitHeight="800" fitWidth="1400" pickOnBounds="true" preserveRatio="true">
-            <Image url="@../images/change-faction-menu-background.jpg" />
+            <Image url="@../images/change-faction-menu-background.jpg"/>
         </ImageView>
         <VBox alignment="CENTER" prefHeight="800" prefWidth="1400" spacing="0">
             <HBox alignment="CENTER" prefHeight="600" prefWidth="1120" spacing="30">
                 <VBox alignment="CENTER" prefHeight="320" prefWidth="200" spacing="20">
-                    <ImageView fx:id="factionCard1" fitHeight="270" fitWidth="180" onMouseClicked="#changeFactionToMonsters" pickOnBounds="true" preserveRatio="true" styleClass="faction-card, monster-faction-card">
-                        <Image url="@../images/cards/faction_monsters.jpg" />
+                    <ImageView fx:id="factionCard1" fitHeight="270" fitWidth="180"
+                               onMouseClicked="#changeFactionToMonsters" pickOnBounds="true" preserveRatio="true"
+                               styleClass="faction-card, monster-faction-card">
+                        <Image url="@../images/cards/faction_monsters.jpg"/>
                     </ImageView>
-                    <Label styleClass="faction-label" text="Monsters" />
+                    <Label styleClass="faction-label" text="Monsters"/>
                 </VBox>
                 <VBox alignment="CENTER" prefHeight="320" prefWidth="200" spacing="20">
-                    <ImageView fx:id="factionCard2" fitHeight="270" fitWidth="180" onMouseClicked="#changeFactionToNilfgaard" pickOnBounds="true" preserveRatio="true" styleClass="faction-card, nilfgaard-faction-card">
-                        <Image url="@../images/cards/faction_nilfgaard.jpg" />
+                    <ImageView fx:id="factionCard2" fitHeight="270" fitWidth="180"
+                               onMouseClicked="#changeFactionToNilfgaard" pickOnBounds="true" preserveRatio="true"
+                               styleClass="faction-card, nilfgaard-faction-card">
+                        <Image url="@../images/cards/faction_nilfgaard.jpg"/>
                     </ImageView>
-                    <Label styleClass="faction-label" text="Nilfgaard" />
+                    <Label styleClass="faction-label" text="Nilfgaard"/>
                 </VBox>
                 <VBox alignment="CENTER" prefHeight="320" prefWidth="200" spacing="20">
-                    <ImageView fx:id="factionCard3" fitHeight="270" fitWidth="180" onMouseClicked="#changeFactionToRealms" pickOnBounds="true" preserveRatio="true" styleClass="faction-card, realms-faction-card">
-                        <Image url="@../images/cards/faction_realms.jpg" />
+                    <ImageView fx:id="factionCard3" fitHeight="270" fitWidth="180"
+                               onMouseClicked="#changeFactionToRealms" pickOnBounds="true" preserveRatio="true"
+                               styleClass="faction-card, realms-faction-card">
+                        <Image url="@../images/cards/faction_realms.jpg"/>
                     </ImageView>
-                    <Label styleClass="faction-label" text="Realms" />
+                    <Label styleClass="faction-label" text="Realms"/>
                 </VBox>
                 <VBox alignment="CENTER" prefHeight="320" prefWidth="200" spacing="20">
-                    <ImageView fx:id="factionCard4" fitHeight="270" fitWidth="180" onMouseClicked="#changeFactionToScoiatael" pickOnBounds="true" preserveRatio="true" styleClass="faction-card, scoiatael-faction-card">
-                        <Image url="@../images/cards/faction_scoiatael.jpg" />
+                    <ImageView fx:id="factionCard4" fitHeight="270" fitWidth="180"
+                               onMouseClicked="#changeFactionToScoiatael" pickOnBounds="true" preserveRatio="true"
+                               styleClass="faction-card, scoiatael-faction-card">
+                        <Image url="@../images/cards/faction_scoiatael.jpg"/>
                     </ImageView>
-                    <Label styleClass="faction-label" text="Scoiatael" />
+                    <Label styleClass="faction-label" text="Scoiatael"/>
                 </VBox>
                 <VBox alignment="CENTER" prefHeight="320" prefWidth="200" spacing="20">
-                    <ImageView fx:id="factionCard5" fitHeight="270" fitWidth="180" onMouseClicked="#changeFactionToSkellige" pickOnBounds="true" preserveRatio="true" styleClass="faction-card, skellige-faction-card">
-                        <Image url="@../images/cards/faction_skellige.jpg" />
+                    <ImageView fx:id="factionCard5" fitHeight="270" fitWidth="180"
+                               onMouseClicked="#changeFactionToSkellige" pickOnBounds="true" preserveRatio="true"
+                               styleClass="faction-card, skellige-faction-card">
+                        <Image url="@../images/cards/faction_skellige.jpg"/>
                     </ImageView>
-                    <Label styleClass="faction-label" text="Skellige" />
+                    <Label styleClass="faction-label" text="Skellige"/>
                 </VBox>
             </HBox>
         </VBox>
-        <Button minWidth="50" onMouseClicked="#backToPreGameMenu" styleClass="brown-button" text="Back" translateX="20" translateY="30" />
+        <Button minWidth="50" onMouseClicked="#backToPreGameMenu" styleClass="brown-button" text="Back" translateX="20"
+                translateY="30"/>
     </AnchorPane>
-    <AnchorPane fx:id="chooseLeaderAnchorPane" prefHeight="800.0" prefWidth="1400.0" styleClass="change-faction-menu-background" visible="false">
+    <AnchorPane fx:id="chooseLeaderAnchorPane" prefHeight="800.0" prefWidth="1400.0"
+                styleClass="change-faction-menu-background" visible="false">
         <ImageView fitHeight="800" fitWidth="1400" pickOnBounds="true" preserveRatio="true">
-            <Image url="@../images/choose-leader-background.jpg" />
+            <Image url="@../images/choose-leader-background.jpg"/>
         </ImageView>
         <FlowPane fx:id="leadersCardsPane" alignment="CENTER" hgap="30" prefHeight="800" prefWidth="1400">
         </FlowPane>
-        <Button minWidth="50" onMouseClicked="#backToPreGameMenu" styleClass="brown-button" text="Back" translateX="20" translateY="30" />
+        <Button minWidth="50" onMouseClicked="#backToPreGameMenu" styleClass="brown-button" text="Back" translateX="20"
+                translateY="30"/>
     </AnchorPane>
-    <Button layoutX="50" layoutY="740" minWidth="50" onMouseClicked="#openTerminal" styleClass="brown-button" text="Terminal" />
+    <Button layoutX="50" layoutY="740" minWidth="50" onMouseClicked="#openTerminal" styleClass="brown-button"
+            text="Terminal"/>
 </Pane>
