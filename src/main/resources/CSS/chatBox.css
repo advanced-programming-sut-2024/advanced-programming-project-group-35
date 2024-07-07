@@ -101,3 +101,23 @@
 }
 .reactions-box{
 }
+.context-menu{
+    -fx-background-color: #6b553c; /* Brown background color */
+    -fx-background-radius: 0; /* Rounded corners */
+}
+.context-menu-item {
+    -fx-background-color: #6b553c; /* Brown background color */
+    -fx-text-fill: #ffffff; /* White text color */
+    -fx-font-size: 16px; /* Font size */
+    -fx-border-color: #a79377; /* Lighter brown border color */
+    -fx-border-width: 2px; /* Border width */
+    -fx-border-insets: 2; /* Move border inwards */
+    -fx-background-radius: 0; /* Rounded corners */
+}
+.context-menu-item:hover {
+    -fx-background-color: #4e342e; /* Slightly darker brown background */
+    -fx-border-color: #3e2723; /* Slightly darker border color */
+    -fx-effect: dropshadow(gaussian, rgba(93, 64, 55, 0.9), 15, 0.1, 0, 0); /* Stronger shadow effect */
+    -fx-cursor: hand;
+    -fx-transition: 0.3s; /* Add transition */
+}

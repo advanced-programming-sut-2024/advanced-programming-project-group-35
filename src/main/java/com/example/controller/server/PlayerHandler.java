@@ -1,16 +1,9 @@
 package com.example.controller.server;
 
-import com.example.model.ServerApp;
-import com.example.model.User;
 import com.example.model.game.OnlineTable;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 
 import java.io.*;
-import java.lang.reflect.Type;
 import java.net.Socket;
-import java.util.ArrayList;
 
 public class PlayerHandler implements Runnable {
     private static final String USERS_FILE = "users.json";

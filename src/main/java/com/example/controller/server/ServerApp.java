@@ -1,9 +1,7 @@
-package com.example.model;
+package com.example.controller.server;
 
-import com.example.controller.server.ClientConnector;
-import com.example.controller.server.GameHandler;
-import com.example.controller.server.PlayerHandler;
-import com.example.controller.server.Server;
+import com.example.model.FriendRequest;
+import com.example.model.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;

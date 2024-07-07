@@ -111,6 +111,7 @@ public class ChatBox extends StackPane {
             allMessagesVbox.getChildren().add(new ChatMessageView(chatMessage));
             scrollPane.setContent(allMessagesVbox);
         }
+        scrollPane.vvalueProperty().setValue(1.0);
     }
 
     public TextField getTextField() {

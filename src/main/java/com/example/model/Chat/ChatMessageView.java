@@ -1,9 +1,6 @@
 package com.example.model.Chat;
 
-import com.example.controller.server.Server;
-import com.example.controller.server.ServerConnector;
 import com.example.model.App;
-import com.example.model.ServerApp;
 import com.example.model.Terminal;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,7 +11,6 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 public class ChatMessageView extends StackPane {
@@ -90,21 +86,17 @@ public class ChatMessageView extends StackPane {
         });
     }
     public void setupContextMenu() {
-        // گزینه برای ری‌اکشن
+        contextMenu.getItems().clear();
         MenuItem reactionItem = new MenuItem("Reaction");
+        reactionItem.getStyleClass().add("context-menu-item");
+        contextMenu.getStyleClass().add("context-menu");
         reactionItem.setOnAction(event -> {
         });
-        // گزینه برای پاسخ دادن
         MenuItem replyItem = new MenuItem("Replay");
+        replyItem.getStyleClass().add("context-menu-item");
         replyItem.setOnAction(event -> ChatBox.setReplyTo(chatMessage));
 
         contextMenu.getItems().addAll(reactionItem, replyItem);
-
-//        this.setOnMouseClicked(event -> {
-//            if (event.getButton() == MouseButton.SECONDARY) {
-//
-//            }
-//        });
     }
 
     public void setReaction(ChatReaction reaction) {
