@@ -32,6 +32,9 @@ public class FriendsMenuControllerView {
         rows.setSpacing(20);
         rows.setAlignment(Pos.TOP_CENTER);
         rows.setPrefWidth(500);
+        if (App.getLoggedInUser().getFriendRequests() == null) {
+            return;
+        }
         for (int i = 0; i < App.getLoggedInUser().getFriendRequests().size(); i++) {
             HBox row = new HBox();
             row.setPrefWidth(500);
@@ -102,31 +105,6 @@ public class FriendsMenuControllerView {
         }
         mainScrollPane.setContent(rows);
     }
-
-    //    if (App.getLoggedInUser().getFriendRequests().size() == 0) {
-//                    OutputView.showOutputAlert(Errors.NO_FRIEND_REQUESTS);
-//                } else {
-//                    Label status = new Label();
-//                    if (!App.getLoggedInUser().getFriendRequests().get(i).isAccepted() && !App.getLoggedInUser().getFriendRequests().get(i).isAccepted()) {
-//                        status.setText("Pending");
-//                    } else if (App.getLoggedInUser().getFriendRequests().get(i).isAccepted()) {
-//                        status.setText("Accepted");
-//                    } else {
-//                        status.setText("Rejected");
-//                    }
-//                    اینجا یه دونه ایف بذار که اگر فرستنده خودش بود رو چک کنه
-//                    Button accept = new Button("Accept");
-//                    accept.setOnMouseClicked(e -> {
-//                        نمیدونم
-//                   });
-//                    Button reject = new Button("Reject");
-//                    reject.setOnMouseClicked(e -> {
-//                        نمیدونم
-//                    });
-//                    rightSection.getChildren().addAll(status, accept, reject);
-//                    row.getChildren().addAll(label, rightSection);
-//                    mainScrollPane.getChildren().addAll(row);
-//                }
     public void openTerminal(MouseEvent mouseEvent) {
         App.getAppView().showTerminal();
     }
