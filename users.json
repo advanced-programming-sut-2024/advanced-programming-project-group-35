@@ -1,5 +1,6 @@
 [
   {
+    "stayLoggedIn": false,
     "isOnline": true,
     "id": 2,
     "username": "ali",
@@ -31,46 +32,11 @@
         "receiverID": 2,
         "isAccepted": false,
         "isRejected": false
-      },
-      {
-        "senderID": 3,
-        "receiverID": 2,
-        "isAccepted": false,
-        "isRejected": false
-      },
-      {
-        "senderID": 10,
-        "receiverID": 2,
-        "isAccepted": false,
-        "isRejected": false
-      },
-      {
-        "senderID": 3,
-        "receiverID": 2,
-        "isAccepted": false,
-        "isRejected": false
-      },
-      {
-        "senderID": 3,
-        "receiverID": 2,
-        "isAccepted": false,
-        "isRejected": false
-      },
-      {
-        "senderID": 3,
-        "receiverID": 2,
-        "isAccepted": false,
-        "isRejected": false
-      },
-      {
-        "senderID": 3,
-        "receiverID": 2,
-        "isAccepted": false,
-        "isRejected": false
       }
     ]
   },
   {
+    "stayLoggedIn": false,
     "isOnline": false,
     "id": 1,
     "username": "asjkdh",
@@ -98,6 +64,7 @@
     "friendRequests": []
   },
   {
+    "stayLoggedIn": false,
     "isOnline": true,
     "id": 3,
     "username": "parsa",
@@ -128,41 +95,12 @@
         "receiverID": 2,
         "isAccepted": false,
         "isRejected": false
-      },
-      {
-        "senderID": 3,
-        "receiverID": 2,
-        "isAccepted": false,
-        "isRejected": false
-      },
-      {
-        "senderID": 3,
-        "receiverID": 2,
-        "isAccepted": false,
-        "isRejected": false
-      },
-      {
-        "senderID": 3,
-        "receiverID": 2,
-        "isAccepted": false,
-        "isRejected": false
-      },
-      {
-        "senderID": 3,
-        "receiverID": 2,
-        "isAccepted": false,
-        "isRejected": false
-      },
-      {
-        "senderID": 3,
-        "receiverID": 2,
-        "isAccepted": false,
-        "isRejected": false
       }
     ]
   },
   {
-    "isOnline": true,
+    "stayLoggedIn": false,
+    "isOnline": false,
     "id": 10,
     "username": "alireza",
     "password": "Alireza123@",
@@ -187,13 +125,6 @@
     "numberOfMinionCards": 0,
     "gameData": [],
     "decksAddresses": [],
-    "friendRequests": [
-      {
-        "senderID": 10,
-        "receiverID": 2,
-        "isAccepted": false,
-        "isRejected": false
-      }
-    ]
+    "friendRequests": []
   }
 ]

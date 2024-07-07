@@ -79,18 +79,8 @@ public class ClientConnector implements Runnable {
             App.updateUserInfo();
         } else if (message.startsWith("NEW_FRIEND_REQUEST:")) {
             System.out.println(App.getLoggedInUser().getFriendRequests());
-            Thread thread = new Thread(() -> {
-                try {
-                    Thread.sleep(4000);
-                    App.updateUserInfo();
-                    Thread.sleep(1000);
-                    System.out.println(App.getLoggedInUser().getFriendRequests());
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            });
-            thread.start();
-
+            App.updateUserInfo();
+            System.out.println(App.getLoggedInUser().getFriendRequests());
         } else if (message.startsWith("FRIEND_REQUEST_REJECTED:")) {
             App.updateUserInfo();
         } else if (message.startsWith("FRIEND_REQUEST_CANCELED:")) {

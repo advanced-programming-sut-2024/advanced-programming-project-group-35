@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class User {
+    boolean stayLoggedIn = false;
     private boolean isOnline;
     private int id;
     private String username;
@@ -330,5 +331,13 @@ public class User {
         System.out.println("setInGame called with value: " + inGame);
         isInGame.set(inGame);
         System.out.println("isInGame is now: " + isInGame.get());
+    }
+
+    public boolean stayLoggedIn() {
+        return stayLoggedIn;
+    }
+
+    public void setStayLoggedIn(boolean stayLoggedIn) {
+        this.stayLoggedIn = stayLoggedIn;
     }
 }
