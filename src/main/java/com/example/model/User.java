@@ -2,7 +2,6 @@ package com.example.model;
 
 import com.example.model.card.enums.FactionsType;
 import com.example.model.deckmanager.DeckToJson;
-import com.example.model.game.Table;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -67,7 +66,8 @@ public class User {
         this.currentFactionType = generateRandomFactionType();
         this.gameData = new ArrayList<>();
         this.decksAddresses = new ArrayList<>();
-        setID();
+        this.friends = new ArrayList<>();
+        this.friendRequests = new ArrayList<>();
     }
 
     public static User getUserByUsername(String name) {
@@ -77,6 +77,10 @@ public class User {
             }
         }
         return null;
+    }
+    public void setNewID() {
+        Date date = new Date();
+        this.id = date.hashCode();
     }
 
     public DeckToJson getTemporaryDeck() {
@@ -279,9 +283,9 @@ public class User {
         return decksAddresses;
     }
 
-    public int getId() {
-        return id;
-    }
+//    public int getID() {
+//        return id;
+//    }
 
     public void setId(int id) {
         this.id = id;

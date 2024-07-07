@@ -1,0 +1,235 @@
+{
+  "player1": "ali",
+  "player1Faction": "ScoiaTael",
+  "player1Hand": [
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 199
+    },
+    {
+      "name": "neutral_geralt",
+      "id": 201
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 203
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 205
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 207
+    },
+    {
+      "name": "scoiatael_barclay",
+      "id": 209
+    },
+    {
+      "name": "scoiatael_dennis",
+      "id": 211
+    },
+    {
+      "name": "scoiatael_dol_infantry",
+      "id": 213
+    },
+    {
+      "name": "scoiatael_dol_infantry_2",
+      "id": 215
+    }
+  ],
+  "player1Deck": [
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 200
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 202
+    },
+    {
+      "name": "neutral_triss",
+      "id": 204
+    },
+    {
+      "name": "neutral_villen",
+      "id": 206
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 208
+    },
+    {
+      "name": "scoiatael_ciaran",
+      "id": 210
+    },
+    {
+      "name": "scoiatael_dol_archer",
+      "id": 212
+    },
+    {
+      "name": "scoiatael_dol_infantry_1",
+      "id": 214
+    },
+    {
+      "name": "scoiatael_dwarf",
+      "id": 216
+    },
+    {
+      "name": "scoiatael_dwarf_1",
+      "id": 217
+    },
+    {
+      "name": "scoiatael_dwarf_2",
+      "id": 218
+    },
+    {
+      "name": "scoiatael_eithne",
+      "id": 219
+    },
+    {
+      "name": "scoiatael_elf_skirmisher",
+      "id": 220
+    },
+    {
+      "name": "scoiatael_elf_skirmisher_1",
+      "id": 221
+    }
+  ],
+  "player2": "ali123",
+  "player2Faction": "Monsters",
+  "player2Hand": [
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 99
+    },
+    {
+      "name": "neutral_geralt",
+      "id": 101
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 103
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 105
+    },
+    {
+      "name": "neutral_yennefer",
+      "id": 107
+    },
+    {
+      "name": "monsters_arachas",
+      "id": 109
+    },
+    {
+      "name": "monsters_arachas_2",
+      "id": 111
+    },
+    {
+      "name": "monsters_vampire_bruxa",
+      "id": 113
+    },
+    {
+      "name": "monsters_cockatrice",
+      "id": 115
+    }
+  ],
+  "player2Deck": [
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 100
+    },
+    {
+      "name": "neutral_mysterious_elf",
+      "id": 102
+    },
+    {
+      "name": "neutral_triss",
+      "id": 104
+    },
+    {
+      "name": "neutral_villen",
+      "id": 106
+    },
+    {
+      "name": "neutral_zoltan",
+      "id": 108
+    },
+    {
+      "name": "monsters_arachas_1",
+      "id": 110
+    },
+    {
+      "name": "monsters_arachas_behemoth",
+      "id": 112
+    },
+    {
+      "name": "monsters_celaeno_harpy",
+      "id": 114
+    },
+    {
+      "name": "monsters_draug",
+      "id": 116
+    },
+    {
+      "name": "monsters_earth_elemental",
+      "id": 117
+    },
+    {
+      "name": "monsters_vampire_ekkimara",
+      "id": 118
+    },
+    {
+      "name": "monsters_endrega",
+      "id": 119
+    },
+    {
+      "name": "monsters_fiend",
+      "id": 120
+    },
+    {
+      "name": "monsters_fire_elemental",
+      "id": 121
+    },
+    {
+      "name": "monsters_vampire_fleder",
+      "id": 122
+    },
+    {
+      "name": "monsters_foglet",
+      "id": 123
+    }
+  ],
+  "commands": [
+    "card with id: 201 moved from currentPlayerHand to currentPlayerCloseCombat and ability applied",
+    "change turn",
+    "card with id: 109 moved from currentPlayerHand to currentPlayerCloseCombat and ability applied",
+    "change turn",
+    "card with id: 111 moved from currentPlayerHand to currentPlayerCloseCombat and ability applied",
+    "card with id: 110 moved from currentPlayerHand to currentPlayerCloseCombat and ability applied",
+    "player: ali passed round",
+    "change turn",
+    "player: ali123 passed round",
+    "cards back to discardPlace",
+    "card with id: 205 moved from currentPlayerHand to currentPlayerCloseCombat and ability applied",
+    "change turn",
+    "player: ali passed round",
+    "change turn",
+    "card with id: 199 moved from currentPlayerHand to currentPlayerRanged and ability applied",
+    "card with id: 207 moved from currentPlayerHand to currentPlayerRanged and ability applied",
+    "card with id: 209 moved from currentPlayerHand to currentPlayerCloseCombat and ability applied",
+    "card with id: 211 moved from currentPlayerHand to currentPlayerCloseCombat and ability applied",
+    "card with id: 213 moved from currentPlayerHand to currentPlayerRanged and ability applied",
+    "card with id: 203 moved from currentPlayerHand to currentPlayerCloseCombat and ability applied",
+    "card with id: 215 moved from currentPlayerHand to currentPlayerRanged and ability applied",
+    "player: ali123 passed round",
+    "cards back to discardPlace",
+    "player: ali passed round",
+    "change turn",
+    "player: ali123 passed round",
+    "cards back to discardPlace"
+  ]
+}

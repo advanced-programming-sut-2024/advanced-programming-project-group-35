@@ -64,6 +64,8 @@ public class OutputView {
                 App.getAppView().showAlert("Code sent to your email", AlertType.SUCCESS.getType());
             case USER_NOT_FOUND:
                 App.getAppView().showAlert("User not found", AlertType.ERROR.getType());
+            case NO_FRIEND_REQUESTS:
+                App.getAppView().showAlert("No friend requests", AlertType.INFO.getType());
             default:
                 return null;
         }

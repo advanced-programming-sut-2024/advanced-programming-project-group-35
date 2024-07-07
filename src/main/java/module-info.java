@@ -25,4 +25,6 @@ module gwent {
     exports com.example.controller.server;
     exports com.example.model.deckmanager;
     opens com.example.model.deckmanager to com.google.gson, javafx.base;
+    exports com.example.model.Chat;
+    opens com.example.model.Chat to com.google.gson, javafx.base;
 }

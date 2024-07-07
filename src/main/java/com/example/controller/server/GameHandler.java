@@ -1,14 +1,12 @@
 package com.example.controller.server;
 
-import com.example.model.ChatMessage;
+import com.example.model.Chat.ChatMessage;
 import com.example.model.Log;
 import com.example.model.ServerApp;
-import com.example.model.game.OnlineTable;
 import com.example.model.game.Player;
 
 import java.io.BufferedReader;
 import java.io.PrintWriter;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

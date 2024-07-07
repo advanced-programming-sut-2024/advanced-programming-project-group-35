@@ -198,4 +198,12 @@ public class ServerApp {
     public static void removeGame(int gameID) {
         games.remove(gameID);
     }
+
+    public static ArrayList<User> getAllUsers() {
+        return allUsers;
+    }
+
+    public static void setAllUsers(ArrayList<User> allUsers) {
+        ServerApp.allUsers = allUsers;
+    }
 }

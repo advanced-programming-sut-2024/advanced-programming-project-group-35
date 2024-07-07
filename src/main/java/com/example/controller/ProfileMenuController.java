@@ -143,4 +143,9 @@ public class ProfileMenuController extends AppController {
         App.getLoggedInUser().setFriends(updatedUser.getFriends());
         App.getLoggedInUser().setFriendRequests(updatedUser.getFriendRequests());
     }
+
+    public void showFriendsList() {
+        App.setCurrentMenu(Menu.FRIENDS_MENU);
+        Controller.FRIENDS_MENU_CONTROLLER.run();
+    }
 }

@@ -51,8 +51,9 @@ public class LoginMenuControllerView {
     private ComboBox securityQuestionRegister;
     @FXML
     private TextField securityAnswerRegister;
+    @FXML
     private TextField emailVerificationCodeField;
-    private int emailVerificationCode;
+    private static int emailVerificationCode;
 
     LoginMenuController controller = (LoginMenuController) Controller.LOGIN_MENU_CONTROLLER.getController();
 
@@ -105,23 +106,24 @@ public class LoginMenuControllerView {
         String nickname = nicknameFieldRegister.getText();
         boolean stayLoggedIn = stayLoggedInCheckBoxRegister.isSelected();
         controller.registerUser(username, password, confirmPassword, nickname, email, stayLoggedIn);
-        App.getAppView().showLoading();
-        Thread loadDataThread = new Thread(() -> {
-            Platform.runLater(() -> {
-                try {
-                    setEmailVerificationCode();
-                    if (OutputView.getLastError() == Errors.REGISTER_FIRST_STEP_SUCCESSFUL) {
-                        paneChanger("Security Question", "securityQuestion.fxml");
-                        OutputView.showOutputAlert(Errors.SENT_CODE);
+        if (OutputView.getLastError() == Errors.REGISTER_FIRST_STEP_SUCCESSFUL) {
+            App.getAppView().showLoading();
+            Thread loadDataThread = new Thread(() -> {
+                Platform.runLater(() -> {
+                    try {
+                        setEmailVerificationCode();
+                        if (OutputView.getLastError() == Errors.REGISTER_FIRST_STEP_SUCCESSFUL) {
+                            paneChanger("Security Question", "securityQuestion.fxml");
+                            OutputView.showOutputAlert(Errors.SENT_CODE);
+                        }
+                        //Thread.sleep(4000);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
                     }
-                    //Thread.sleep(4000);
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
+                });
             });
-
-        });
-        loadDataThread.start();
+            loadDataThread.start();
+        }
     }
 
     private void setEmailVerificationCode() throws IOException {

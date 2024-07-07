@@ -46,4 +46,8 @@ public class MainMenuControllerView {
     public void openTerminal(MouseEvent mouseEvent) {
         App.getAppView().showTerminal();
     }
+
+    public void openChatBox(MouseEvent mouseEvent) {
+        App.getAppView().showChatBox();
+    }
 }

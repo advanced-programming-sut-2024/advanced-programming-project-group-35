@@ -24,6 +24,8 @@
     </VBox>
     <Button layoutX="50" layoutY="740" minWidth="50" onMouseClicked="#openTerminal" styleClass="brown-button"
             text="Terminal"/>
+    <Button layoutX="1150" layoutY="740" minWidth="50" onMouseClicked="#openChatBox" styleClass="brown-button"
+            text="ChatBox"/>
 
 </AnchorPane>
 
