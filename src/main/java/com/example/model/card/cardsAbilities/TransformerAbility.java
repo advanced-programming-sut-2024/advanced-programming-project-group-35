@@ -6,6 +6,5 @@ import com.example.model.card.AbilityContext;
 public class TransformerAbility implements Ability {
     @Override
     public void apply(AbilityContext abilityContext) {
-        //TODO
     }
 }

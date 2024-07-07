@@ -787,36 +787,7 @@ public class GameMenuControllerView {
     }
 
     public void setPowerOfCardDefault(int cardId) {
-        for (GameCardView gameCardView : currentPlayerRangedObservableList) {
-            if (gameCardView.getCard().getIdInGame() == cardId) {
-                gameCardView.setPowerDefault();
-            }
-        }
-        for (GameCardView gameCardView : currentPlayerCloseCombatObservableList) {
-            if (gameCardView.getCard().getIdInGame() == cardId) {
-                gameCardView.setPowerDefault();
-            }
-        }
-        for (GameCardView gameCardView : currentPlayerSiegeObservableList) {
-            if (gameCardView.getCard().getIdInGame() == cardId) {
-                gameCardView.setPowerDefault();
-            }
-        }
-        for (GameCardView gameCardView : opponentRangedObservableList) {
-            if (gameCardView.getCard().getIdInGame() == cardId) {
-                gameCardView.setPowerDefault();
-            }
-        }
-        for (GameCardView gameCardView : opponentRangedObservableList) {
-            if (gameCardView.getCard().getIdInGame() == cardId) {
-                gameCardView.setPowerDefault();
-            }
-        }
-        for (GameCardView gameCardView : opponentRangedObservableList) {
-            if (gameCardView.getCard().getIdInGame() == cardId) {
-                gameCardView.setPowerDefault();
-            }
-        }
+       getGameCardViewWithCardId(cardId).setPowerDefault();
     }
 
     public void setPowerOfCardsDefault() {

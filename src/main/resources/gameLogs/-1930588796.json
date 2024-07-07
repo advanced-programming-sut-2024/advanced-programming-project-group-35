@@ -166,30 +166,30 @@
     }
   ],
   "player2": "ali",
-  "player2Faction": "Monsters",
+  "player2Faction": "EmpireNilfgaardian",
   "player2Hand": [
     {
       "name": "neutral_cow",
-      "id": 205
+      "id": 204
     },
     {
-      "name": "special_horn",
+      "name": "special_decoy",
       "id": 199
     },
     {
-      "name": "special_horn_2",
+      "name": "special_horn",
       "id": 201
     },
     {
-      "name": "neutral_chort",
+      "name": "neutral_ciri",
       "id": 203
     },
     {
-      "name": "neutral_dandelion",
+      "name": "neutral_emiel",
       "id": 206
     },
     {
-      "name": "neutral_gaunter_odimm",
+      "name": "neutral_gaunter_odimm_darkness",
       "id": 208
     },
     {
@@ -197,33 +197,33 @@
       "id": 210
     },
     {
-      "name": "neutral_geralt",
+      "name": "neutral_mysterious_elf",
       "id": 212
     },
     {
-      "name": "neutral_olgierd",
+      "name": "neutral_triss",
       "id": 214
     },
     {
-      "name": "neutral_vesemir",
+      "name": "neutral_villen",
       "id": 216
     }
   ],
   "player2Deck": [
     {
-      "name": "special_horn_1",
+      "name": "special_decoy_1",
       "id": 200
     },
     {
-      "name": "weather_storm_1",
+      "name": "special_horn_2",
       "id": 202
     },
     {
-      "name": "neutral_ciri",
-      "id": 204
+      "name": "neutral_dandelion",
+      "id": 205
     },
     {
-      "name": "neutral_emiel",
+      "name": "neutral_gaunter_odimm",
       "id": 207
     },
     {
@@ -231,110 +231,147 @@
       "id": 209
     },
     {
-      "name": "neutral_gaunter_odimm_darkness",
+      "name": "neutral_geralt",
       "id": 211
     },
     {
-      "name": "neutral_mysterious_elf",
+      "name": "neutral_olgierd",
       "id": 213
     },
     {
-      "name": "neutral_triss",
+      "name": "neutral_vesemir",
       "id": 215
     },
     {
-      "name": "neutral_villen",
+      "name": "nilfgaard_black_archer",
       "id": 217
     },
     {
-      "name": "neutral_yennefer",
+      "name": "nilfgaard_black_archer_1",
       "id": 218
     },
     {
-      "name": "neutral_zoltan",
+      "name": "nilfgaard_cahir",
       "id": 219
     },
     {
-      "name": "monsters_arachas",
+      "name": "nilfgaard_cynthia",
       "id": 220
     },
     {
-      "name": "monsters_arachas_1",
+      "name": "nilfgaard_fringilla",
       "id": 221
     },
     {
-      "name": "monsters_arachas_2",
+      "name": "nilfgaard_heavy_zerri",
       "id": 222
     },
     {
-      "name": "monsters_arachas_behemoth",
+      "name": "nilfgaard_imperal_brigade",
       "id": 223
     },
     {
-      "name": "monsters_vampire_bruxa",
+      "name": "nilfgaard_letho",
       "id": 224
     },
     {
-      "name": "monsters_celaeno_harpy",
+      "name": "nilfgaard_menno",
       "id": 225
     },
     {
-      "name": "monsters_cockatrice",
+      "name": "nilfgaard_moorvran",
       "id": 226
     },
     {
-      "name": "monsters_draug",
+      "name": "nilfgaard_nauzicaa_2",
       "id": 227
+    },
+    {
+      "name": "nilfgaard_morteisen",
+      "id": 228
+    },
+    {
+      "name": "nilfgaard_puttkammer",
+      "id": 229
+    },
+    {
+      "name": "nilfgaard_rainfarn",
+      "id": 230
+    },
+    {
+      "name": "nilfgaard_renuald",
+      "id": 231
+    },
+    {
+      "name": "nilfgaard_rotten",
+      "id": 232
+    },
+    {
+      "name": "nilfgaard_shilard",
+      "id": 233
+    },
+    {
+      "name": "nilfgaard_siege_engineer",
+      "id": 234
+    },
+    {
+      "name": "nilfgaard_siege_support",
+      "id": 235
+    },
+    {
+      "name": "nilfgaard_stefan",
+      "id": 236
+    },
+    {
+      "name": "nilfgaard_sweers",
+      "id": 237
+    },
+    {
+      "name": "nilfgaard_tibor",
+      "id": 238
     }
   ],
   "commands": [
-    "card with id: 114 moved from currentPlayerHand to currentPlayerSiege and ability applied",
-    "change turn",
-    "card with id: 210 moved from currentPlayerHand to currentPlayerRanged and ability applied",
-    "change turn",
-    "card with id: 209 moved from currentPlayerHand to currentPlayerRanged and ability applied",
-    "card with id: 211 moved from currentPlayerHand to currentPlayerRanged and ability applied",
     "card with id: 112 moved from currentPlayerHand to currentPlayerCloseCombat and ability applied",
     "change turn",
+    "player: ali passed round",
+    "change turn",
+    "card with id: 106 moved from currentPlayerHand to currentPlayerCloseCombat and ability applied",
+    "decoy ability done, decoyCardId: 99 selectedCardId 113",
     "card with id: 113 moved from currentPlayerHand to currentPlayerCloseCombat and ability applied",
-    "card with id: 205 moved from currentPlayerHand to currentPlayerRanged and ability applied",
-    "change turn",
-    "player: ali123 passed round",
-    "change turn",
-    "player: ali passed round",
-    "cards back to discardPlace",
-    "player: ali passed round",
-    "change turn",
-    "card with id: 201 moved from currentPlayerHand to currentPlayerRangedSpecialPlace and ability applied",
-    "card with id: 214 moved from currentPlayerHand to currentPlayerRanged and ability applied",
-    "card with id: 203 moved from currentPlayerHand to currentPlayerCloseCombat and ability applied",
-    "card with id: 199 moved from currentPlayerHand to currentPlayerCloseCombatSpecialPlace and ability applied",
-    "card with id: 216 moved from currentPlayerHand to currentPlayerCloseCombat and ability applied",
-    "card with id: 208 moved from currentPlayerHand to currentPlayerSiege and ability applied",
-    "card with id: 212 moved from currentPlayerHand to currentPlayerCloseCombat and ability applied",
-    "card with id: 206 moved from currentPlayerHand to currentPlayerCloseCombat and ability applied",
-    "player: ali123 passed round",
-    "cards back to discardPlace",
+    "card with id: 101 moved from currentPlayerHand to currentPlayerCloseCombatSpecialPlace and ability applied",
+    "card with id: 116 moved from currentPlayerHand to currentPlayerCloseCombat and ability applied",
     "card with id: 110 moved from currentPlayerHand to currentPlayerRanged and ability applied",
+    "card with id: 103 moved from currentPlayerHand to currentPlayerCloseCombat and ability applied",
+    "card with id: 108 moved from currentPlayerHand to currentPlayerSiege and ability applied",
+    "card with id: 105 moved from currentPlayerHand to currentPlayerRanged and ability applied",
+    "card with id: 114 moved from currentPlayerHand to currentPlayerSiege and ability applied",
+    "player: ali123 passed round",
+    "cards back to discardPlace",
+    "player: ali123 passed round",
     "change turn",
-    "card with id: 109 moved from currentPlayerHand to currentPlayerRanged and ability applied",
-    "card with id: 111 moved from currentPlayerHand to currentPlayerRanged and ability applied",
+    "player: ali123 passed round",
+    "change turn",
+    "card with id: 208 moved from currentPlayerHand to currentPlayerRanged and ability applied",
+    "card with id: 203 moved from currentPlayerHand to currentPlayerCloseCombat and ability applied",
+    "card with id: 201 moved from currentPlayerHand to currentPlayerRangedSpecialPlace and ability applied",
+    "card with id: 206 moved from currentPlayerHand to currentPlayerCloseCombat and ability applied",
+    "card with id: 212 moved from currentPlayerHand to opponentCloseCombat and ability applied",
+    "card with id: 200 moved from currentPlayerDeck to currentPlayerHand and ability not applied",
+    "card with id: 202 moved from currentPlayerDeck to currentPlayerHand and ability not applied",
+    "card with id: 216 moved from currentPlayerHand to currentPlayerCloseCombat and ability applied",
+    "decoy ability done, decoyCardId: 199 selectedCardId 208",
+    "card with id: 202 moved from currentPlayerHand to currentPlayerCloseCombatSpecialPlace and ability applied",
+    "card with id: 214 moved from currentPlayerHand to currentPlayerCloseCombat and ability applied",
+    "card with id: 208 moved from currentPlayerHand to currentPlayerRanged and ability applied",
+    "card with id: 204 moved from currentPlayerHand to currentPlayerRanged and ability applied",
+    "decoy ability done, decoyCardId: 200 selectedCardId 206",
+    "card with id: 206 moved from currentPlayerHand to currentPlayerCloseCombat and ability applied",
+    "player: ali passed round",
+    "cards back to discardPlace",
     "player: ali passed round",
     "change turn",
-    "card with id: 105 moved from currentPlayerHand to currentPlayerRanged and ability applied",
-    "player: ali123 passed round",
-    "cards back to discardPlace",
-    "player: ali123 passed round",
-    "cards back to discardPlace",
-    "player: ali123 passed round",
-    "cards back to discardPlace",
-    "player: ali123 passed round",
-    "cards back to discardPlace",
-    "player: ali123 passed round",
-    "cards back to discardPlace",
-    "player: ali123 passed round",
-    "cards back to discardPlace",
-    "player: ali123 passed round",
-    "cards back to discardPlace"
+    "player: ali passed round",
+    "change turn"
   ]
 }
