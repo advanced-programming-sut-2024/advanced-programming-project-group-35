@@ -104,7 +104,7 @@ public class ServerConnector {
                 Socket socket = new Socket(SERVER_IP, SERVER_PORT);
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true)
         ) {
-            out.print("SYSTEM|SEND_FRIEND_REQUEST");
+            out.print("SYSTEM|SEND_FRIEND_REQUEST|");
             out.print(request.getSender().getID());
             out.print("|");
             out.println(request.getReceiver().getID());

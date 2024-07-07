@@ -37,6 +37,7 @@ public class ClientConnector implements Runnable {
         try {
             while (running) {
                 String message = reader.readLine();
+                System.out.println("Received: " + message);
                 if (message == null) {
                     // Connection closed by server
                     break;
@@ -73,21 +74,36 @@ public class ClientConnector implements Runnable {
     }
 
     private void processMessage(String message) {
-
+        System.out.println("Processing message: " + message);
         if (message.startsWith("FRIEND_REQUEST_ACCEPTED:")) {
-            App.getAppView().updateUserInfo();
+            App.updateUserInfo();
         } else if (message.startsWith("NEW_FRIEND_REQUEST:")) {
-            App.getAppView().updateUserInfo();
+            System.out.println(App.getLoggedInUser().getFriendRequests());
+            Thread thread = new Thread(() -> {
+                try {
+                    Thread.sleep(4000);
+                    App.updateHandly();
+                    Thread.sleep(1000);
+                    System.out.println(App.getLoggedInUser().getFriendRequests());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            });
+            thread.start();
+
         } else if (message.startsWith("FRIEND_REQUEST_REJECTED:")) {
-            App.getAppView().updateUserInfo();
+            App.updateUserInfo();
         } else if (message.startsWith("FRIEND_REQUEST_CANCELED:")) {
-            App.getAppView().updateUserInfo();
+            App.updateUserInfo();
         } else if (message.startsWith("FRIEND_REMOVED:")) {
-            App.getAppView().updateUserInfo();
+            App.updateUserInfo();
         } else if (message.startsWith("MESSAGE")) {
             processMessageAlert(message);
         } else if (message.startsWith("REQUEST")) {
             processRequest(message);
+        } else if (message.startsWith("GameStarts")){
+            System.out.println("GameStarts -message");
+            App.getLoggedInUser().setInGame(true);
         }
     }
 

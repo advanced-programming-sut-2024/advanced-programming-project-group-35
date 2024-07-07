@@ -54,9 +54,7 @@ public class PlayerHandler implements Runnable {
                         int friendUserID = Integer.parseInt(parts[3]);
                         ServerApp.rejectFriendRequest(userID, friendUserID);
                     } else if ("SEND_FRIEND_REQUEST".equals(parts[1])) {
-                        int userID = Integer.parseInt(parts[2]);
-                        int friendUserID = Integer.parseInt(parts[3]);
-                        ServerApp.sendFriendRequest(userID, friendUserID);
+                        sendFriendRequest(parts);
                     } else if ("SET_USER_ONLINE".equals(parts[1])) {
                         int userID = Integer.parseInt(parts[2]);
                         ServerApp.setUserOnline(userID);
@@ -100,6 +98,22 @@ public class PlayerHandler implements Runnable {
             e.printStackTrace();
         } finally {
             server.removePlayer(ID);
+        }
+    }
+
+    private void sendFriendRequest(String[] parts) {
+        int userID = Integer.parseInt(parts[2]);
+        int friendUserID = Integer.parseInt(parts[3]);
+        ServerApp.sendFriendRequest(userID, friendUserID);
+        System.out.println("Friend request sent from: " + userID + " to: " + friendUserID);
+        sendMessageToUser("NEW_FRIEND_REQUEST:", userID);
+        sendMessageToUser("NEW_FRIEND_REQUEST:", friendUserID);
+    }
+
+    private void sendMessageToUser(String s, int userID) {
+        PlayerHandler playerHandler = server.getClientConnector(userID);
+        if (playerHandler != null) {
+            playerHandler.sendMessage(s);
         }
     }
 

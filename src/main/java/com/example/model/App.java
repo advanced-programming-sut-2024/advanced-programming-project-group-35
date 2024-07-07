@@ -173,9 +173,19 @@ public class App {
         return serverConnector;
     }
 
-    public void updateUserInfo() {
+    public static void updateUserInfo() {
         updateUsersFromServer();
         appView.updateUserInfo();
     }
 
+    public static void updateHandly() {
+        Gson gson = new GsonBuilder().create();
+        try (FileReader reader = new FileReader("users.json")) {
+            Type userListType = new TypeToken<ArrayList<User>>() {
+            }.getType();
+            allUsers = gson.fromJson(reader, userListType);
+            System.out.println("Users data loaded successfully.");
+        } catch (IOException e) {
+        }
+    }
 }

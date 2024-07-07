@@ -46,4 +46,9 @@ public class MainMenuControllerView {
     public void openTerminal(MouseEvent mouseEvent) {
         App.getAppView().showTerminal();
     }
+
+    public void testNetwork(MouseEvent mouseEvent) throws Exception {
+        PreGameMenuControllerView gameMenuControllerView = new PreGameMenuControllerView();
+        gameMenuControllerView.sendRandomGameRequest(null);
+    }
 }

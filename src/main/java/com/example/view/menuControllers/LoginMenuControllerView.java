@@ -51,7 +51,7 @@ public class LoginMenuControllerView {
     private ComboBox securityQuestionRegister;
     @FXML
     private TextField securityAnswerRegister;
-    private TextField emailVerificationCodeField;
+    public TextField emailVerificationCodeField;
     private int emailVerificationCode;
 
     LoginMenuController controller = (LoginMenuController) Controller.LOGIN_MENU_CONTROLLER.getController();
@@ -188,8 +188,8 @@ public class LoginMenuControllerView {
     }
 
     public void testApp2(MouseEvent mouseEvent) {
-        String username = "ali123";
-        String password = "Bp+\u003d%\u003d1%cI";
+        String username = "parsa";
+        String password = "endnu003d20u0026Y+";
         boolean stayLoggedIn = false;
         controller.loginUser(username, password, stayLoggedIn);
         if (OutputView.getLastError() == Errors.LOGIN_SUCCESSFUL) {

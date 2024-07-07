@@ -70,9 +70,19 @@ public class ServerApp {
     }
 
     public static void sendFriendRequest(int userID, int friendUserID) {
-        User user = allUsers.get(userID);
-        User friend = allUsers.get(friendUserID);
-        User.sendFriendRequest(user, friend);
+        User user = ServerApp.getUserByID(userID);
+        User friend = ServerApp.getUserByID(friendUserID);
+        System.out.println("Friend request sent from: " + user.getUsername() + " to: " + friend.getUsername());
+        setFriendRequest(user, friend);
+    }
+
+    private static void setFriendRequest(User user, User friend) {
+        FriendRequest friendRequest = new FriendRequest(user, friend);
+        user.addFriendRequest(friendRequest);
+        friend.addFriendRequest(friendRequest);
+        System.out.println("now is saving");
+        ServerApp.saveUsers("users.json");
+        System.out.println("saved");
     }
 
     public static void setUserOnline(int userID) {
@@ -134,8 +144,10 @@ public class ServerApp {
         PlayerHandler clientConnector1 = server.getClientConnector(player1ID);
         PlayerHandler clientConnector2 = server.getClientConnector(player2ID);
         if (clientConnector1 == null || clientConnector2 == null) {
+            System.out.println("client connector not found");
             return;
         }
+        System.out.println("client connectors found");
         //send request
         StringBuilder requestBuilder = new StringBuilder();
         requestBuilder.append("GameStarts|").append(player1ID).append("|").append(player2ID);
@@ -152,9 +164,11 @@ public class ServerApp {
         //find random player
         if (randomPlayers[0] == 0) {
             randomPlayers[0] = senderID;
+            System.out.println("first random player detected");
             return;
         }
         randomPlayers[1] = senderID;
+        System.out.println("second random player detected");
         //send request
         StartOnlineGame(randomPlayers[0], randomPlayers[1]);
         randomPlayers[0] = 0;

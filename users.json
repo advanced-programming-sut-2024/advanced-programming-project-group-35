@@ -24,7 +24,39 @@
     "numberOfSpellCards": 0,
     "numberOfMinionCards": 0,
     "gameData": [],
-    "decksAddresses": []
+    "decksAddresses": [],
+    "friendRequests": [
+      {
+        "senderID": 3,
+        "receiverID": 2,
+        "isAccepted": false,
+        "isRejected": false
+      },
+      {
+        "senderID": 3,
+        "receiverID": 2,
+        "isAccepted": false,
+        "isRejected": false
+      },
+      {
+        "senderID": 10,
+        "receiverID": 2,
+        "isAccepted": false,
+        "isRejected": false
+      },
+      {
+        "senderID": 3,
+        "receiverID": 2,
+        "isAccepted": false,
+        "isRejected": false
+      },
+      {
+        "senderID": 3,
+        "receiverID": 2,
+        "isAccepted": false,
+        "isRejected": false
+      }
+    ]
   },
   {
     "isOnline": false,
@@ -50,13 +82,14 @@
     "numberOfSpellCards": 0,
     "numberOfMinionCards": 0,
     "gameData": [],
-    "decksAddresses": []
+    "decksAddresses": [],
+    "friendRequests": []
   },
   {
-    "isOnline": false,
-    "id": 0,
+    "isOnline": true,
+    "id": 3,
     "username": "parsa",
-    "password": "endn\u003d20\u0026Y+",
+    "password": "endnu003d20u0026Y+",
     "nickname": "parsa123",
     "email": "parsa@gmail.com",
     "securityQuestion": 0,
@@ -76,14 +109,40 @@
     "numberOfSpellCards": 0,
     "numberOfMinionCards": 0,
     "gameData": [],
-    "decksAddresses": []
+    "decksAddresses": [],
+    "friendRequests": [
+      {
+        "senderID": 3,
+        "receiverID": 2,
+        "isAccepted": false,
+        "isRejected": false
+      },
+      {
+        "senderID": 3,
+        "receiverID": 2,
+        "isAccepted": false,
+        "isRejected": false
+      },
+      {
+        "senderID": 3,
+        "receiverID": 2,
+        "isAccepted": false,
+        "isRejected": false
+      },
+      {
+        "senderID": 3,
+        "receiverID": 2,
+        "isAccepted": false,
+        "isRejected": false
+      }
+    ]
   },
   {
     "isOnline": true,
     "id": 10,
-    "username": "ali123",
-    "password": "Bp+\u003d%\u003d1%cI",
-    "nickname": "asmd",
+    "username": "alireza",
+    "password": "Alireza123@",
+    "nickname": "alireza",
     "email": "sjhagdhj@ahsgdh.com",
     "securityQuestion": 0,
     "securityQuestionAnswer": "What is your favorite color?",
@@ -103,6 +162,14 @@
     "numberOfSpellCards": 0,
     "numberOfMinionCards": 0,
     "gameData": [],
-    "decksAddresses": []
+    "decksAddresses": [],
+    "friendRequests": [
+      {
+        "senderID": 10,
+        "receiverID": 2,
+        "isAccepted": false,
+        "isRejected": false
+      }
+    ]
   }
 ]
