@@ -2,12 +2,9 @@ package com.example.view;
 
 import com.example.Main;
 import com.example.controller.Controller;
-import com.example.controller.ProfileMenuController;
-import com.example.controller.ScoreTableController;
 import com.example.model.App;
-import com.example.model.Chat.ChatBox;
+import com.example.model.chat.ChatBox;
 import com.example.model.FriendRequest;
-import com.example.model.User;
 import com.example.model.alerts.Alert;
 import com.example.model.Terminal;
 import com.example.model.alerts.ConfirmationAlert;

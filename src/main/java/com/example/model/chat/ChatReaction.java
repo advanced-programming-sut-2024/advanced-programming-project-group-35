@@ -1,4 +1,4 @@
-package com.example.model.Chat;
+package com.example.model.chat;
 
 import javafx.scene.shape.Rectangle;
 

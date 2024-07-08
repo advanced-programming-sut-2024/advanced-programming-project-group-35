@@ -1,4 +1,4 @@
-package com.example.model.Chat;
+package com.example.model.chat;
 
 public enum ChatReactionType {
     LIKE,
