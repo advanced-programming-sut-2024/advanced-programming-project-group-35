@@ -90,4 +90,9 @@ public class ScoreTableController extends AppController {
     public void setScoreboardTable(TableView<User> scoreboardTable) {
         this.scoreboardTable = scoreboardTable;
     }
+
+    public void updateUserInfo() {//reset the menu to show the new data
+        App.setCurrentMenu(Menu.SCORE_TABLE_MENU);
+        Controller.SCORE_TABLE_MENU_CONTROLLER.run();
+    }
 }

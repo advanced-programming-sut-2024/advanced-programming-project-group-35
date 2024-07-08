@@ -199,4 +199,15 @@ public class LoginMenuControllerView {
             Controller.MAIN_MENU_CONTROLLER.run();
         }
     }
+
+    public void testApp3(MouseEvent mouseEvent) {
+        String username = "alireza";
+        String password = "Alireza123@";
+        boolean stayLoggedIn = false;
+        controller.loginUser(username, password, stayLoggedIn);
+        if (OutputView.getLastError() == Errors.LOGIN_SUCCESSFUL) {
+            App.setCurrentMenu(Menu.MAIN_MENU);
+            Controller.MAIN_MENU_CONTROLLER.run();
+        }
+    }
 }

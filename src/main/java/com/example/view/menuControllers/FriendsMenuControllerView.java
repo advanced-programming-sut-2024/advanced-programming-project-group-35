@@ -29,7 +29,7 @@ public class FriendsMenuControllerView {
         updateFriendRequestList();
     }
 
-    private void updateFriendRequestList() {
+    public void updateFriendRequestList() {
         mainScrollPane.setStyle("-fx-alignment: center;");
         VBox rows = new VBox();
         rows.setSpacing(20);
@@ -38,7 +38,7 @@ public class FriendsMenuControllerView {
         for (int i = 0; i < App.getLoggedInUser().getFriendRequests().size(); i++) {
             HBox row = new HBox();
             row.setPrefWidth(500);
-            Label username = new Label(App.getLoggedInUser().getFriendRequests().get(i).getSender().getUsername());
+            Label username = setUsernameLabel(i);
             username.setTranslateX(20);
             username.setPrefWidth(180);
             username.setStyle("-fx-text-fill: #ffffff; -fx-font-size: 20px; -fx-cursor: hand;");
@@ -54,7 +54,7 @@ public class FriendsMenuControllerView {
             rightSection.setPrefWidth(170);
             if (App.getLoggedInUser().getFriendRequests().get(i).getSender().getID() == App.getLoggedInUser().getID()) {
                 Label status = new Label();
-                if (!App.getLoggedInUser().getFriendRequests().get(i).isAccepted() && !App.getLoggedInUser().getFriendRequests().get(i).isAccepted()) {
+                if (!App.getLoggedInUser().getFriendRequests().get(i).isAccepted() && !App.getLoggedInUser().getFriendRequests().get(i).isRejected()) {
                     status.setText("Pending");
                     status.setStyle("-fx-text-fill: #396b84;");
                 } else if (App.getLoggedInUser().getFriendRequests().get(i).isAccepted()) {
@@ -84,18 +84,18 @@ public class FriendsMenuControllerView {
                 } else {
                     Label accept = new Label("Accept");
                     accept.setStyle("-fx-text-fill: #3c7d52; -fx-padding: 10px; -fx-background-radius: 10px; -fx-background-color: #def0d8; -fx-cursor: hand;");
+                    int finalI1 = i;
                     accept.setOnMouseClicked(e -> {
-                        App.getLoggedInUser().getFriendRequests().get(finalI).accept();
-                        App.getLoggedInUser().addFriend(App.getLoggedInUser().getFriendRequests().get(finalI).getSender());
+                        App.getServerConnector().acceptFriendRequest(App.getLoggedInUser().getFriendRequests().get(finalI1));
                         App.getAppView().showAlert("Friend request accepted", AlertType.INFO.getType());
-                        updateFriendRequestList();
+                        //updateFriendRequestList();
                     });
                     Label reject = new Label("Reject");
                     reject.setStyle("-fx-text-fill: #a93d3a; -fx-padding: 10px; -fx-background-radius: 10px; -fx-background-color: #f2dedf; -fx-cursor: hand;");
                     reject.setOnMouseClicked(e -> {
-                        App.getLoggedInUser().getFriendRequests().get(finalI).reject();
+                        App.getServerConnector().rejectFriendRequest(App.getLoggedInUser().getFriendRequests().get(finalI1));
                         App.getAppView().showAlert("Friend request rejected", AlertType.INFO.getType());
-                        updateFriendRequestList();
+                        //updateFriendRequestList();
                     });
                     rightSection.getChildren().addAll(accept, reject);
                     row.getChildren().addAll(username, rightSection);
@@ -104,6 +104,14 @@ public class FriendsMenuControllerView {
             rows.getChildren().add(row);
         }
         mainScrollPane.setContent(rows);
+    }
+
+    private Label setUsernameLabel(int i) {
+        String usernameText = App.getLoggedInUser().getFriendRequests().get(i).getSender().getUsername();
+        if (usernameText.equals(App.getLoggedInUser().getUsername())) {
+            usernameText = App.getLoggedInUser().getFriendRequests().get(i).getReceiver().getUsername();
+        }
+        return new Label(usernameText);
     }
 
     //    if (App.getLoggedInUser().getFriendRequests().size() == 0) {

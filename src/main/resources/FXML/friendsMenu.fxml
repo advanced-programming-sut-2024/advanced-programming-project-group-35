@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
+<?import javafx.scene.control.TextField?>
 <AnchorPane prefHeight="800.0" prefWidth="1400.0" styleClass="friends-menu-background"
             stylesheets="@../CSS/allMenu.css, @../CSS/allFiles.css" xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.view.menuControllers.FriendsMenuControllerView">
@@ -20,7 +21,7 @@
             text="Terminal"/>
     <ScrollPane fx:id="mainScrollPane" layoutX="400.0" layoutY="150.0" prefHeight="600.0" prefWidth="600.0"
                 styleClass="scroll-pane-pre-game-menu">
+    </ScrollPane>
     <TextField fx:id="friendUsername" layoutX="50" layoutY="200" prefHeight="25" prefWidth="200" promptText="Friend's Username" />
     <Button minWidth="50" onMouseClicked="#sendGameRequest" styleClass="brown-button" text="Send" translateX="20" translateY="100" />
-    </ScrollPane>
 </AnchorPane>

@@ -2,6 +2,7 @@ package com.example.model;
 
 import com.example.controller.Controller;
 import com.example.controller.server.ClientConnector;
+import com.example.controller.server.PlayerHandler;
 import com.example.controller.server.ServerConnector;
 import com.example.model.card.Card;
 import com.example.model.deckmanager.DeckToJson;
@@ -10,6 +11,7 @@ import com.example.view.Menu;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import javafx.application.Platform;
 
 import java.io.*;
 import java.lang.reflect.Type;
@@ -182,7 +184,9 @@ public class App {
 
     public static void updateUserInfo() {
         updateUsersFromServer();
-        appView.updateUserInfo();
+        Platform.runLater(() -> {
+            appView.updateUserInfo();
+        });
     }
 
     public static void updateHandly() {

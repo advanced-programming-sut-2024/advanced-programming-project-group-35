@@ -40,10 +40,10 @@ public class User {
     private ArrayList<GameData> gameData; // mitoonim az queue estefade konim (vali ta hala kar nakardam bahash)
     private ArrayList<Log> logs;
     private ArrayList<String> decksAddresses;
-    private ArrayList<User> friends = new ArrayList<>();
+    private ArrayList<Integer> friends = new ArrayList<>();
     private ArrayList<FriendRequest> friendRequests = new ArrayList<>();
 
-    public void setFriends(ArrayList<User> friends) {
+    public void setFriends(ArrayList<Integer> friends) {
         this.friends = friends;
     }
 
@@ -51,7 +51,7 @@ public class User {
         this.friendRequests = friendRequests;
     }
 
-    public ArrayList<User> getFriends() {
+    public ArrayList<Integer> getFriends() {
         return friends;
     }
 
@@ -212,7 +212,20 @@ public class User {
     }
 
     public void addFriend(User friend) {
-        friends.add(friend);
+        if (friends == null) {
+            friends = new ArrayList<>();
+        }
+        if (friends.contains(friend.getID())){
+            return;
+        }
+        friends.add(friend.getID());
+        for (FriendRequest request : friendRequests){
+            System.out.println(request.getSender().getID() + " " + request.getReceiver().getID() + friend.getID());
+            if (request.getSender().getID() == friend.getID() || request.getReceiver().getID() == friend.getID()){
+                System.out.println("accepted");
+                request.accept();
+            }
+        }
     }
 
     public FriendRequest getFriendRequest(User friend) {
@@ -230,10 +243,17 @@ public class User {
 
 
 
-    void addFriendRequest(FriendRequest friendRequest) {
+    public void addFriendRequest(FriendRequest friendRequest) {
         if (friendRequests == null) {
             friendRequests = new ArrayList<>();
         }
+        if (friends == null){
+            friends = new ArrayList<>();
+        }
+        if (friends.contains(friendRequest.getSender().getID()) || friends.contains(friendRequest.getReceiver().getID())) return;
+        if (friendRequests.contains(friendRequest)) return;
+        FriendRequest duplicate = new FriendRequest(friendRequest.getReceiver().getID(), friendRequest.getSender().getID());
+        if (friendRequests.contains(duplicate)) return;
         friendRequests.add(friendRequest);
     }
 
@@ -308,8 +328,8 @@ public class User {
     }
 
     public boolean isFriend(User receiver) {
-        for (User friend : friends) {
-            if (friend.equals(receiver)) {
+        for (int friend : friends) {
+            if (friend == receiver.id) {
                 return true;
             }
         }
@@ -343,5 +363,13 @@ public class User {
 
     public void setStayLoggedIn(boolean stayLoggedIn) {
         this.stayLoggedIn = stayLoggedIn;
+    }
+
+    public void rejectFriendRequest(User friend) {
+        for (FriendRequest friendRequest : friendRequests) {
+            if (friendRequest.getSender().getID() == friend.getID() || friendRequest.getReceiver().getID() == friend.getID()) {
+                friendRequest.reject();
+            }
+        }
     }
 }

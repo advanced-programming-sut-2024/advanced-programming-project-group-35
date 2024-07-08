@@ -26,11 +26,27 @@
     "numberOfMinionCards": 0,
     "gameData": [],
     "decksAddresses": [],
+    "friends": [
+      3,
+      10
+    ],
     "friendRequests": [
       {
         "senderID": 3,
         "receiverID": 2,
-        "isAccepted": false,
+        "isAccepted": true,
+        "isRejected": false
+      },
+      {
+        "senderID": 3,
+        "receiverID": 2,
+        "isAccepted": true,
+        "isRejected": false
+      },
+      {
+        "senderID": 10,
+        "receiverID": 2,
+        "isAccepted": true,
         "isRejected": false
       }
     ]
@@ -89,10 +105,31 @@
     "numberOfMinionCards": 0,
     "gameData": [],
     "decksAddresses": [],
+    "friends": [
+      2
+    ],
     "friendRequests": [
       {
         "senderID": 3,
         "receiverID": 2,
+        "isAccepted": true,
+        "isRejected": false
+      },
+      {
+        "senderID": 3,
+        "receiverID": 2,
+        "isAccepted": true,
+        "isRejected": false
+      },
+      {
+        "senderID": 3,
+        "receiverID": 10,
+        "isAccepted": false,
+        "isRejected": true
+      },
+      {
+        "senderID": 3,
+        "receiverID": 3,
         "isAccepted": false,
         "isRejected": false
       }
@@ -100,7 +137,7 @@
   },
   {
     "stayLoggedIn": false,
-    "isOnline": false,
+    "isOnline": true,
     "id": 10,
     "username": "alireza",
     "password": "Alireza123@",
@@ -125,6 +162,22 @@
     "numberOfMinionCards": 0,
     "gameData": [],
     "decksAddresses": [],
-    "friendRequests": []
+    "friends": [
+      2
+    ],
+    "friendRequests": [
+      {
+        "senderID": 3,
+        "receiverID": 10,
+        "isAccepted": false,
+        "isRejected": true
+      },
+      {
+        "senderID": 10,
+        "receiverID": 2,
+        "isAccepted": true,
+        "isRejected": false
+      }
+    ]
   }
 ]

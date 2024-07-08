@@ -123,7 +123,7 @@ public class ProfileMenuController extends AppController {
     public void acceptFriendRequest(FriendRequest request) {
         request.accept();
         networkManager.acceptFriendRequest(request);
-        App.getLoggedInUser().getFriends().add(request.getSender());
+        App.getLoggedInUser().getFriends().add(request.getSender().getID());
     }
 
     // رد درخواست دوستی
@@ -133,19 +133,19 @@ public class ProfileMenuController extends AppController {
     }
 
     // دریافت لیست دوستان
-    public List<User> getFriendList() {
+    public List<Integer> getFriendList() {
         return App.getLoggedInUser().getFriends();
     }
 
     // به‌روزرسانی اطلاعات کاربر از سرور
-    public void updateUserInfo() {
-        User updatedUser = User.getUserByID(App.getLoggedInUser().getID());
-        App.getLoggedInUser().setFriends(updatedUser.getFriends());
-        App.getLoggedInUser().setFriendRequests(updatedUser.getFriendRequests());
-    }
 
     public void showFriendsList() {
         App.setCurrentMenu(Menu.FRIENDS_MENU);
         Controller.FRIENDS_MENU_CONTROLLER.run();
+    }
+
+    public void updateUserInfo() {// reset the menu to show the new data
+        App.setCurrentMenu(Menu.PROFILE_MENU);
+        Controller.PROFILE_MENU_CONTROLLER.run();
     }
 }

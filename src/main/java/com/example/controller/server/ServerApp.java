@@ -54,17 +54,19 @@ public class ServerApp {
     }
 
     public static void acceptFriendRequest(int userID, int friendUserID) {
-        User user = allUsers.get(userID);
-        User friend = allUsers.get(friendUserID);
+        User user = getUserByID(userID);
+        User friend = getUserByID(friendUserID);
         user.addFriend(friend);
         friend.addFriend(user);
+        ServerApp.saveUsers("users.json");
     }
 
     public static void rejectFriendRequest(int userID, int friendUserID) {
-        User user = allUsers.get(userID);
-        User friend = allUsers.get(friendUserID);
-        FriendRequest friendRequest = user.getFriendRequest(friend);
-        friendRequest.reject();
+        User user = getUserByID(userID);
+        User friend = getUserByID(friendUserID);
+        user.rejectFriendRequest(friend);
+        friend.rejectFriendRequest(user);
+        ServerApp.saveUsers("users.json");
     }
 
     public static void sendFriendRequest(int userID, int friendUserID) {
