@@ -79,9 +79,9 @@ public class GameHandler implements Runnable {
             handleEmote(command);
         } else {
             if (isPlayer1Turn) {
-                player1Out.println(command);
-            } else {
                 player2Out.println(command);
+            } else {
+                player1Out.println(command);
             }
             gameHistory.addCommand(command);
             broadcastToSpectators(command);

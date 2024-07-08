@@ -4,8 +4,11 @@ import com.example.Main;
 import com.example.model.App;
 import com.example.model.FriendRequest;
 import com.example.model.User;
+import com.example.model.card.Card;
+import com.example.model.card.enums.AbilityName;
 import com.example.model.deckmanager.DeckManager;
 import com.example.model.deckmanager.DeckToJson;
+import com.example.model.game.Deck;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
@@ -181,9 +184,13 @@ public class ServerConnector {
                 Socket socket = new Socket(SERVER_IP, SERVER_PORT);
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true)
         ) {
+            DeckToJson deck = DeckManager.loadDeck("E:\\uni\\AP\\decks\\monsters.json");
+
+            setHand(deck);
+
             out.print("RandomGameRequest|");
             out.print(id);
-            out.println("|" + getDeckString(DeckManager.loadDeck("C:\\Projects\\JavaProjs\\new-repo\\src\\main\\resources\\decksData\\monsters.json")));
+            out.println("|" + DeckManager.getDeckString(deck));
             System.out.println("-random game request sent to server");
         } catch (IOException e) {
             e.printStackTrace();
@@ -191,16 +198,16 @@ public class ServerConnector {
             e.printStackTrace();
         }
     }
-    private String getDeckString(DeckToJson deck) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        String json;
-        try {
-            json = objectMapper.writeValueAsString(deck);
-            return json;
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-            return null;
+
+    private void setHand(DeckToJson deck) {
+        //TODO for test
+        for (int i = 0; i < 10 ; i++) {
+            String cardName = deck.getCards().get(i);
+            deck.getHand().add(cardName);
         }
+        ArrayList<String> restOfCards = new ArrayList<>(deck.getCards());
+        deck.setRestOfCards(restOfCards);
+        deck.getCards().clear();
     }
 
     public void sendTournamentGameRequest(int id) {

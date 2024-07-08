@@ -161,12 +161,14 @@ public class ServerApp {
         //send request
         StringBuilder requestBuilder = new StringBuilder();
         System.out.println("---" + playerDeck2);
-        Deck player2Deck = DeckManager.loadDeck(getDeckToJsonByCardNames(playerDeck2), 2);
+
+        DeckToJson deckPlayer2 = DeckManager.getDeckToJsonByCardNames(playerDeck2);
+
 
         ServerApp.getServer().players.get(player1ID).setInGame(true);
         ServerApp.getServer().players.get(player2ID).setInGame(true);
 
-        if (player2Deck.getFaction().equals(FactionsType.ScoiaTael)) {
+        if (deckPlayer2.getFaction().equals("ScoiaTael")) {
             new GameHandler(player2ID, player1ID);
             requestBuilder.append("GameStarts|").append(player2ID).append("|").append(playerDeck2).append("|").append(player1ID).append("|").append(playerDeck1);
         } else {

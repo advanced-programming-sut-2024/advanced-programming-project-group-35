@@ -362,36 +362,30 @@ public class GameMenuControllerForOnlineGame extends AppController {
     }
 
     public void startNewGame(String player1Name, String player2Name, String player1DeckNames, String player2DeckNames) {
-        Deck player1Deck = DeckManager.loadDeck(getDeckToJsonByCardNames(player1DeckNames), 1);
-        Deck player2Deck = DeckManager.loadDeck(getDeckToJsonByCardNames(player2DeckNames), 2);
         Player player1 = new Player(player1Name, Integer.parseInt(player1Name));
         Player player2 = new Player(player2Name, Integer.parseInt(player2Name));
-        player1.getBoard().setDeck(player1Deck);
-        player2.getBoard().setDeck(player2Deck);
-        player1.getBoard().setHandForStartGame(player1Deck);
-        player2.getBoard().setHandForStartGame(player2Deck);
+
+        DeckToJson deck1 = DeckManager.getDeckToJsonByCardNames(player1DeckNames);
+        DeckToJson deck2 = DeckManager.getDeckToJsonByCardNames(player2DeckNames);
+
+        player1.getBoard().setDeck(DeckManager.loadDeck(deck1, 1));
+        player2.getBoard().setDeck(DeckManager.loadDeck(deck2, 2));
+
+        player1.getBoard().setHand(DeckManager.loadHand(deck1, 1));
+        player2.getBoard().setHand(DeckManager.loadHand(deck2, 2));
+
         player1.setSpecialCardCounter(player1.getSpecialCardCounter());
         player2.setSpecialCardCounter(player2.getSpecialCardCounter());
+
         player1.setPriorityInGame(1);
         player2.setPriorityInGame(2);
-        table = new Table(player1, player2);
 
+        table = new Table(player1, player2);
 
 //        saveLog(generateInitialDeckData());
         Round round1 = new Round(1);
         table.addRound(round1);
         table.setCurrentRound(round1);
-    }
-
-    private DeckToJson getDeckToJsonByCardNames(String deck) {
-        try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            DeckToJson newDeck = objectMapper.readValue(deck, DeckToJson.class);
-            return newDeck;
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 
     public void saveLog(String command) {

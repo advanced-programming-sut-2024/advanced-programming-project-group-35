@@ -686,7 +686,7 @@ public class GameMenuControllerView {
             swapContents(currentPlayerRangedSpecialPlaceObservableList, opponentRangedSpecialPlaceObservableList, currentPlayerRangedSpecialPlace, opponentRangedSpecialPlace);
             swapContents(currentPlayerCloseCombatSpecialPlaceObservableList, opponentCloseCombatSpecialPlaceObservableList, currentPlayerCloseCombatSpecialPlace, opponentCloseCombatSpecialPlace);
             swapContents(currentPlayerSiegeSpecialPlaceObservableList, opponentSiegeSpecialPlaceObservableList, currentPlayerSiegeSpecialPlace, opponentSiegeSpecialPlace);
-            table.swapPlayers();
+//            table.swapPlayers();
             addMouseEventsForHandCards();
             updateAllLabels();
         });

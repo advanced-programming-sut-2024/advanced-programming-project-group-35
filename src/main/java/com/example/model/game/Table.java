@@ -69,10 +69,6 @@ public class Table {
         return spellPlace;
     }
 
-    public void setSpellPlace(SpellPlace spellPlace) {
-        this.spellPlace = spellPlace;
-    }
-
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
@@ -80,11 +76,4 @@ public class Table {
     public Player getOpponent() {
         return opponent;
     }
-
-    public void swapPlayers() {
-        Player tmp = currentPlayer;
-        currentPlayer = opponent;
-        opponent = tmp;
-    }
-
 }
