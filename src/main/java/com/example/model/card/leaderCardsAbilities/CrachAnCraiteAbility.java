@@ -1,7 +1,7 @@
 package com.example.model.card.leaderCardsAbilities;
 
 import com.example.controller.Controller;
-import com.example.controller.GameMenuController;
+import com.example.controller.GameMenuControllerForOnlineGame;
 import com.example.model.card.AbilityContext;
 import com.example.model.card.Card;
 import com.example.model.game.*;
@@ -25,9 +25,9 @@ public class CrachAnCraiteAbility implements LeaderAbility {
         for (Card card : cardsToTransfer) {
             if (card != null) {
                 if (player == table.getCurrentPlayer()) {
-                    ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDontDoAbility(card.getIdInGame(), RowsInGame.currentPlayerDiscardPlace.toString(), RowsInGame.currentPlayerHand.toString());
+                    ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDontDoAbility(card.getIdInGame(), RowsInGame.currentPlayerDiscardPlace.toString(), RowsInGame.currentPlayerHand.toString());
                 } else {
-                    ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDontDoAbility(card.getIdInGame(), RowsInGame.opponentDiscardPlace.toString(), RowsInGame.opponentHand.toString());
+                    ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDontDoAbility(card.getIdInGame(), RowsInGame.opponentDiscardPlace.toString(), RowsInGame.opponentHand.toString());
                 }
             }
         }

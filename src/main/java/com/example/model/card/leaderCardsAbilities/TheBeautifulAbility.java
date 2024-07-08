@@ -1,13 +1,11 @@
 package com.example.model.card.leaderCardsAbilities;
 
 import com.example.controller.Controller;
-import com.example.controller.GameMenuController;
+import com.example.controller.GameMenuControllerForOnlineGame;
 import com.example.model.card.AbilityContext;
 import com.example.model.card.Card;
 import com.example.model.card.UnitCard;
-import com.example.model.card.cardsAbilities.CommandersHornCardAbility;
 import com.example.model.card.enums.AbilityName;
-import com.example.model.game.Table;
 import com.example.model.game.place.Row;
 
 public class TheBeautifulAbility implements LeaderAbility {
@@ -18,14 +16,14 @@ public class TheBeautifulAbility implements LeaderAbility {
             for (Card card : ranged.getCards()) {
                 if (card instanceof UnitCard) {
                     ((UnitCard) card).duplicatePower();
-                    ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).getGameMenuControllerView().getGameCardViewWithCardId(card.getIdInGame()).updatePowerLabel();
+                    ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController()).getGameMenuControllerView().getGameCardViewWithCardId(card.getIdInGame()).updatePowerLabel();
                 }
             }
         } else if (ranged.getSpecialCard() == null) {
             for (Card card : ranged.getCards()) {
                 if (card instanceof UnitCard) {
                     ((UnitCard) card).duplicatePower();
-                    ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).getGameMenuControllerView().getGameCardViewWithCardId(card.getIdInGame()).updatePowerLabel();
+                    ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController()).getGameMenuControllerView().getGameCardViewWithCardId(card.getIdInGame()).updatePowerLabel();
                 }
             }
         }

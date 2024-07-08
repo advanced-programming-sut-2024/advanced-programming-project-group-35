@@ -1,29 +1,22 @@
 package com.example.model.deckmanager;
 
-import com.example.controller.GameMenuController;
+import com.example.controller.GameMenuControllerForOnlineGame;
 import com.example.model.App;
 import com.example.model.alerts.AlertType;
 import com.example.model.card.Card;
 import com.example.model.card.CardFactory;
-import com.example.model.card.LeaderCard;
 import com.example.model.card.LeaderFactory;
-import com.example.model.card.enums.CardData;
 import com.example.model.card.enums.FactionsType;
-import com.example.model.card.factions.Factions;
 import com.example.model.game.Deck;
 import com.google.gson.*;
-import com.google.gson.reflect.TypeToken;
 
 import java.io.*;
-import java.lang.reflect.Type;
 import java.net.URISyntaxException;
-import java.util.*;
-import java.util.stream.Collectors;
 
 public class DeckManager {
     public static void saveDeck(DeckToJson deckData, int playerId, String name) {
         try {
-            String rootPath = new File(GameMenuController.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile().getParentFile().getPath();
+            String rootPath = new File(GameMenuControllerForOnlineGame.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile().getParentFile().getPath();
             String decksDataPath = rootPath + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "decksData";
             File decksDataDir = new File(decksDataPath);
             if (!decksDataDir.exists()) {
@@ -74,10 +67,9 @@ public class DeckManager {
         }
     }
 
-
     public static DeckToJson loadDeck(String fileName, int playerId) {
         try {
-            String rootPath = new File(GameMenuController.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile().getParentFile().getPath();
+            String rootPath = new File(GameMenuControllerForOnlineGame.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile().getParentFile().getPath();
             String filePath = rootPath + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "decksData" + File.separator + playerId + File.separator + fileName + ".json";
 
             Gson gson = new GsonBuilder().create();

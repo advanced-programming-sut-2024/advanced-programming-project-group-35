@@ -1,7 +1,7 @@
 package com.example.model.card.cardsAbilities;
 
 import com.example.controller.Controller;
-import com.example.controller.GameMenuController;
+import com.example.controller.GameMenuControllerForOnlineGame;
 import com.example.model.card.Ability;
 import com.example.model.card.AbilityContext;
 import com.example.model.card.Card;
@@ -24,7 +24,7 @@ public class TightBondAbility implements Ability {
         if (tightBondCards.size() > 1) {
             for (Card card : tightBondCards) {
                 ((UnitCard)card).setCurrentPower(sumOfTightBondCardsPowers);
-                ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).getGameMenuControllerView().getGameCardViewWithCardId(card.getIdInGame()).updatePowerLabel();
+                ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController()).getGameMenuControllerView().getGameCardViewWithCardId(card.getIdInGame()).updatePowerLabel();
             }
         }
     }

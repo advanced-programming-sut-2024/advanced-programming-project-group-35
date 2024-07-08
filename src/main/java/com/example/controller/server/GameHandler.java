@@ -36,17 +36,25 @@ public class GameHandler implements Runnable {
         this.player2In = player2Handler.getIn();
         this.player1Out = player1Handler.getOut();
         this.player2Out = player2Handler.getOut();
-        Player player1 = new Player(player1ID);
-        Player player2 = new Player(player2ID);
-        player1Handler.wait();
-        player2Handler.wait();
-        gameHistory = new Log(player1, player2);
+
+//        player1Handler.wait();
+//        player2Handler.wait();
+//        gameHistory = new Log(player1, player2);
         gameID = LocalDateTime.now().hashCode();
         ServerApp.addGame(gameID, this);
+        run();
+    }
+
+    public boolean isPlayer1Turn() {
+        return isPlayer1Turn;
+    }
+
+    public void setPlayer1Turn(boolean player1Turn) {
+        isPlayer1Turn = player1Turn;
     }
 
     private void endGame() {
-        notifyAll();
+        //notifyAll();
         ServerApp.removeGame(gameID);
     }
 
@@ -62,40 +70,53 @@ public class GameHandler implements Runnable {
 
     @Override
     public void run() {
-        try {
-            player1Out.println("GAME_STARTED|" + gameID);
-            player2Out.println("GAME_STARTED|" + gameID);
-            String inputLine;
-            while (true) {
-                if (isPlayer1Turn) {
-                    inputLine = player1In.readLine();
-                    player2Out.println(inputLine);
-                    gameHistory.addCommand(inputLine);
-                    if (inputLine.equals("END_GAME|")) {
-                        endGame();
-                        break;
-                    }
-                    isPlayer1Turn = false;
-                } else {
-                    inputLine = player2In.readLine();
-                    player1Out.println(inputLine);
-                    gameHistory.addCommand(inputLine);
-                    if (inputLine.equals("END_GAME|")) {
-                        endGame();
-                        break;
-                    }
-                    isPlayer1Turn = true;
-                }
-                for (PlayerHandler spectator : spectators) {
-                    spectator.getOut().println(inputLine);
-                }
+        Thread run = new Thread(() -> {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
-            inputLine = player1In.readLine();
-            winnerID = Integer.parseInt(inputLine.split("\\|")[1]);
-            isGameEnded = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            try {
+//            player1Out.println("GAME_STARTED|" + gameID);
+//            player2Out.println("GAME_STARTED|" + gameID);
+                String inputLine;
+                while (true) {
+                    if (isPlayer1Turn) {
+                        inputLine = player1In.readLine();
+                         System.out.println("test kir khar2");
+                        System.out.println(inputLine + "\n\n\n\n\n");
+                        player2Out.println(inputLine);
+                        gameHistory.addCommand(inputLine);
+                        if (inputLine.equals("END_GAME|")) {
+                            endGame();
+                            break;
+                        }
+                        isPlayer1Turn = false;
+                    } else {
+                        System.out.println("kir shodim2");
+                        inputLine = player2In.readLine();
+                         System.out.println("test kir khar3");
+                        System.out.println(inputLine + "\n\n\n\n\n");
+                        player1Out.println(inputLine);
+                        gameHistory.addCommand(inputLine);
+                        if (inputLine.equals("END_GAME|")) {
+                            endGame();
+                            break;
+                        }
+                        isPlayer1Turn = true;
+                    }
+                    for (PlayerHandler spectator : spectators) {
+                        spectator.getOut().println(inputLine);
+                    }
+                }
+                inputLine = player1In.readLine();
+                winnerID = Integer.parseInt(inputLine.split("\\|")[1]);
+                isGameEnded = true;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        run.start();
     }
 
     private void handleEmote(String inputLine) { // EMOTE|senderID|emoteIndex or EMOTE|senderID|Message

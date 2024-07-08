@@ -23,7 +23,7 @@ public class Alert extends StackPane {
     private void init() {
         this.getStylesheets().add(Alert.class.getResource("/CSS/alertStyle.css").toExternalForm());
         ImageView imageView = new ImageView(new Image(Alert.class.getResource("/images/terminal-exit-button.png").toExternalForm(), 20, 20, true, true));
-        imageView.setOnMouseClicked(e -> App.getAppView().removeAlert(App.getAppView().getPane()));
+        imageView.setOnMouseClicked(e -> App.getAppView().removeAlert());
 
         String containerStyleClassName = alertType + "-vbox-button-container";
 

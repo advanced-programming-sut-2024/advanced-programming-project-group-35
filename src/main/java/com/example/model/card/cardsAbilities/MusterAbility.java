@@ -1,7 +1,7 @@
 package com.example.model.card.cardsAbilities;
 
 import com.example.controller.Controller;
-import com.example.controller.GameMenuController;
+import com.example.controller.GameMenuControllerForOnlineGame;
 import com.example.model.card.Ability;
 import com.example.model.card.AbilityContext;
 import com.example.model.card.Card;
@@ -28,7 +28,7 @@ public class MusterAbility implements Ability {
                 if (parts[1].equals(parts1[1])) {
                     abilityContext.getTable().getCurrentPlayer().getBoard().getHand().removeCard(card);
                     String dest = (String) abilityContext.getParam("dest");
-                    ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDontDoAbilityWithNoLog(card1.getIdInGame(), RowsInGame.currentPlayerHand.toString(), dest);
+                    ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDontDoAbilityWithNoLog(card1.getIdInGame(), RowsInGame.currentPlayerHand.toString(), dest);
                 }
             }
         }
@@ -41,7 +41,7 @@ public class MusterAbility implements Ability {
                     abilityContext.getTable().getCurrentPlayer().getBoard().getDeck().removeCard(card);
                     abilityContext.getRow().addCard(card1);
                     String dest = (String) abilityContext.getParam("dest");
-                    ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDontDoAbilityWithNoLog(card1.getIdInGame(), RowsInGame.currentPlayerHand.toString(), dest);
+                    ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDontDoAbilityWithNoLog(card1.getIdInGame(), RowsInGame.currentPlayerHand.toString(), dest);
                 }
             }
         }
