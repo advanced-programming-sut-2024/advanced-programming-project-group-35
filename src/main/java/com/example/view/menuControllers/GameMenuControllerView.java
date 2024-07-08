@@ -902,8 +902,16 @@ public class GameMenuControllerView {
         } else {
             opponentPlayerLeaderAbilityEnable.setVisible(false);
         }
-        opponentPlayerLeaderCard.setImage(new Image(Main.class.getResource("/images/inGameCards/" + table.getOpponent().getBoard().getDeck().getLeader().getLeaderName().getImageAddress()).toExternalForm()));
-        currentPlayerLeaderCard.setImage(new Image(Main.class.getResource("/images/inGameCards/" + table.getCurrentPlayer().getBoard().getDeck().getLeader().getLeaderName().getImageAddress()).toExternalForm()));
+        if (table.getCurrentPlayer().getBoard().getDeck().getLeader().isPictureClown()) {
+            currentPlayerLeaderCard.setImage(new Image(GameMenuControllerView.class.getResource("/images/crown.jpg").toExternalForm()));
+        } else {
+            currentPlayerLeaderCard.setImage(new Image(Main.class.getResource("/images/inGameCards/" + table.getCurrentPlayer().getBoard().getDeck().getLeader().getLeaderName().getImageAddress()).toExternalForm()));
+        }
+        if (table.getOpponent().getBoard().getDeck().getLeader().isPictureClown()) {
+            opponentPlayerLeaderCard.setImage(new Image(GameMenuControllerView.class.getResource("/images/crown.jpg").toExternalForm()));
+        } else {
+            opponentPlayerLeaderCard.setImage(new Image(Main.class.getResource("/images/inGameCards/" + table.getOpponent().getBoard().getDeck().getLeader().getLeaderName().getImageAddress()).toExternalForm()));
+        }
         if (currentPlayerSiegeObservableList.size() > 9) {
             currentPlayerRanged.setHgap(0);
         } else {
@@ -988,6 +996,7 @@ public class GameMenuControllerView {
 
     public void setClownImageForOpponentLeaderCard() {
        opponentPlayerLeaderCard.setImage(new Image(GameMenuControllerView.class.getResource("/images/crown.jpg").toExternalForm()));
+       table.getOpponent().getBoard().getDeck().getLeader().setPictureClown(true);
     }
     private int decoyCheat = 0;
     public void addDecoyCard() {

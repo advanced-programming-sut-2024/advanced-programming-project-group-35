@@ -207,3 +207,7 @@
     -fx-border-color: #e8af3c;
     -fx-border-width: 2;
 }
+
+.game-history-scroll-pane {
+    -fx-padding: 0 0 0 0;
+}

@@ -7,15 +7,25 @@ public class LeaderCard {
     private boolean canDoAction;
     private LeaderAbility ability;
     private CardData cardData;
+    private boolean isPictureClown;
 
     public LeaderCard(CardData cardData, LeaderAbility ability) {
         this.ability = ability;
         this.cardData = cardData;
+        this.isPictureClown = false;
         if (cardData.getName().equals("leaders_skellige_king_bran")) {
             this.canDoAction = false;
         } else {
             this.canDoAction = true;
         }
+    }
+
+    public boolean isPictureClown() {
+        return isPictureClown;
+    }
+
+    public void setPictureClown(boolean pictureClown) {
+        isPictureClown = pictureClown;
     }
 
     public LeaderAbility getAbility() {
