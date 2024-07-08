@@ -259,6 +259,4 @@ public class GameCardView extends Pane {
 //            setLabelAndAbilitiesLabelForNonSpecialCards();
 //        }
     }
-
-
 }

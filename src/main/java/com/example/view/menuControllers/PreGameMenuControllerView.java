@@ -499,18 +499,6 @@ public class PreGameMenuControllerView {
         waitForAnswer.start();
     }
 
-    private ArrayList<String> opponentDeck() {
-        //TODO
-        return null;
-    }
-
-    private String opponentName() {
-        return "opponent";
-    }
-
-    private String getLeaderName(PreGameCard leaderCard) {
-        return leaderCard.getName();
-    }
 
     private ArrayList<String> getPreGameCardNames(ObservableList<PreGameCard> playerDeck) {
         ArrayList<String> playerDeckNames = new ArrayList<>();

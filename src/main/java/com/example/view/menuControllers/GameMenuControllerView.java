@@ -749,6 +749,7 @@ public class GameMenuControllerView {
                     }
                     if ((((UnitCard) gameCardView.getCard()).noRemove()) && gameCardView.getCard().getAbilityName() == AbilityName.TRANSFORMER) {
                         gameCardView.applyTransform();
+                        updateAllLabels();
                     }
                 } else {
                     controller.moveCardFromOriginToDestinationAndDontDoAbilityWithNoLog(gameCardView.getCard().getIdInGame(), sourceRow.toString(), RowsInGame.currentPlayerDiscardPlace.toString());
@@ -760,6 +761,7 @@ public class GameMenuControllerView {
                     }
                     if ((((UnitCard) gameCardView.getCard()).noRemove()) && gameCardView.getCard().getAbilityName() == AbilityName.TRANSFORMER) {
                         gameCardView.applyTransform();
+                        updateAllLabels();
                     }
                 } else {
                     controller.moveCardFromOriginToDestinationAndDontDoAbilityWithNoLog(gameCardView.getCard().getIdInGame(), sourceRow.toString(), RowsInGame.opponentDiscardPlace.toString());
@@ -785,36 +787,7 @@ public class GameMenuControllerView {
     }
 
     public void setPowerOfCardDefault(int cardId) {
-        for (GameCardView gameCardView : currentPlayerRangedObservableList) {
-            if (gameCardView.getCard().getIdInGame() == cardId) {
-                gameCardView.setPowerDefault();
-            }
-        }
-        for (GameCardView gameCardView : currentPlayerCloseCombatObservableList) {
-            if (gameCardView.getCard().getIdInGame() == cardId) {
-                gameCardView.setPowerDefault();
-            }
-        }
-        for (GameCardView gameCardView : currentPlayerSiegeObservableList) {
-            if (gameCardView.getCard().getIdInGame() == cardId) {
-                gameCardView.setPowerDefault();
-            }
-        }
-        for (GameCardView gameCardView : opponentRangedObservableList) {
-            if (gameCardView.getCard().getIdInGame() == cardId) {
-                gameCardView.setPowerDefault();
-            }
-        }
-        for (GameCardView gameCardView : opponentRangedObservableList) {
-            if (gameCardView.getCard().getIdInGame() == cardId) {
-                gameCardView.setPowerDefault();
-            }
-        }
-        for (GameCardView gameCardView : opponentRangedObservableList) {
-            if (gameCardView.getCard().getIdInGame() == cardId) {
-                gameCardView.setPowerDefault();
-            }
-        }
+       getGameCardViewWithCardId(cardId).setPowerDefault();
     }
 
     public void setPowerOfCardsDefault() {
