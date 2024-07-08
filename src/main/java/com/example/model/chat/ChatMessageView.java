@@ -1,4 +1,4 @@
-package com.example.model.Chat;
+package com.example.model.chat;
 
 import com.example.model.App;
 import com.example.model.Terminal;

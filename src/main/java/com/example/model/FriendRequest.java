@@ -1,31 +1,31 @@
 package com.example.model;
 
 public class FriendRequest {
-    private User sender;
-    private User receiver;
+    private int senderID;
+    private int receiverID;
     private boolean isAccepted;
     private boolean isRejected;
 
     public FriendRequest(User sender, User receiver) {
-        this.sender = sender;
-        this.receiver = receiver;
+        this.senderID = sender.getID();
+        this.receiverID = receiver.getID();
         this.isAccepted = false;
         this.isRejected = false;
     }
 
     public FriendRequest(int id, int receiverId) {
-        this.sender = User.getUserByID(id);
-        this.receiver = User.getUserByID(receiverId);
+        this.senderID = id;
+        this.receiverID = receiverId;
         this.isAccepted = false;
         this.isRejected = false;
     }
 
     public User getSender() {
-        return sender;
+        return User.getUserByID(senderID);
     }
 
     public User getReceiver() {
-        return receiver;
+        return User.getUserByID(receiverID);
     }
 
     public boolean isAccepted() {

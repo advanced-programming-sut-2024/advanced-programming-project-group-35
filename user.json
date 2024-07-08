@@ -1,6 +1,5 @@
 [
   {
-    "stayLoggedIn": false,
     "isOnline": true,
     "id": 2,
     "username": "ali",
@@ -26,33 +25,16 @@
     "numberOfMinionCards": 0,
     "gameData": [],
     "decksAddresses": [],
-    "friends": [
-      3,
-      10
-    ],
     "friendRequests": [
       {
         "senderID": 3,
         "receiverID": 2,
-        "isAccepted": true,
-        "isRejected": false
-      },
-      {
-        "senderID": 3,
-        "receiverID": 2,
-        "isAccepted": true,
-        "isRejected": false
-      },
-      {
-        "senderID": 10,
-        "receiverID": 2,
-        "isAccepted": true,
+        "isAccepted": false,
         "isRejected": false
       }
     ]
   },
   {
-    "stayLoggedIn": false,
     "isOnline": false,
     "id": 1,
     "username": "asjkdh",
@@ -80,7 +62,6 @@
     "friendRequests": []
   },
   {
-    "stayLoggedIn": false,
     "isOnline": true,
     "id": 3,
     "username": "parsa",
@@ -105,43 +86,21 @@
     "numberOfMinionCards": 0,
     "gameData": [],
     "decksAddresses": [],
-    "friends": [
-      2
-    ],
     "friendRequests": [
       {
         "senderID": 3,
         "receiverID": 2,
-        "isAccepted": true,
-        "isRejected": false
-      },
-      {
-        "senderID": 3,
-        "receiverID": 2,
-        "isAccepted": true,
-        "isRejected": false
-      },
-      {
-        "senderID": 3,
-        "receiverID": 10,
-        "isAccepted": false,
-        "isRejected": true
-      },
-      {
-        "senderID": 3,
-        "receiverID": 3,
         "isAccepted": false,
         "isRejected": false
       }
     ]
   },
   {
-    "stayLoggedIn": false,
     "isOnline": true,
     "id": 10,
-    "username": "alireza",
-    "password": "Alireza123@",
-    "nickname": "alireza",
+    "username": "ali123",
+    "password": "Bp+\u003d%\u003d1%cI",
+    "nickname": "asmd",
     "email": "sjhagdhj@ahsgdh.com",
     "securityQuestion": 0,
     "securityQuestionAnswer": "What is your favorite color?",
@@ -162,22 +121,6 @@
     "numberOfMinionCards": 0,
     "gameData": [],
     "decksAddresses": [],
-    "friends": [
-      2
-    ],
-    "friendRequests": [
-      {
-        "senderID": 3,
-        "receiverID": 10,
-        "isAccepted": false,
-        "isRejected": true
-      },
-      {
-        "senderID": 10,
-        "receiverID": 2,
-        "isAccepted": true,
-        "isRejected": false
-      }
-    ]
+    "friendRequests": []
   }
 ]

@@ -2,6 +2,7 @@ package com.example.model;
 
 import com.example.controller.Controller;
 import com.example.controller.server.ClientConnector;
+import com.example.controller.server.PlayerHandler;
 import com.example.controller.server.ServerConnector;
 import com.example.model.card.Card;
 import com.example.model.deckmanager.DeckToJson;
@@ -10,6 +11,7 @@ import com.example.view.Menu;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import javafx.application.Platform;
 
 import java.io.*;
 import java.lang.reflect.Type;
@@ -147,6 +149,13 @@ public class App {
 
     private static void updateUsersFromServer() {
         allUsers = serverConnector.getAllUsers();
+        if (loggedInUser == null) return;
+        for (User user : allUsers) {
+            if (user.getID() == loggedInUser.getID()) {
+                loggedInUser = user;
+                break;
+            }
+        }
     }
 
     public static ServerConnector getServerApp() {
@@ -173,9 +182,22 @@ public class App {
         return serverConnector;
     }
 
-    public void updateUserInfo() {
+    public static void updateUserInfo() {
         updateUsersFromServer();
-        appView.updateUserInfo();
+        Platform.runLater(() -> {
+            appView.updateUserInfo();
+        });
+    }
+
+    public static void updateHandly() {
+        Gson gson = new GsonBuilder().create();
+        try (FileReader reader = new FileReader("users.json")) {
+            Type userListType = new TypeToken<ArrayList<User>>() {
+            }.getType();
+            allUsers = gson.fromJson(reader, userListType);
+            System.out.println("Users data loaded successfully.");
+        } catch (IOException e) {
+        }
     }
     public static User getUserByID(int id) {
         for (User user : allUsers) {

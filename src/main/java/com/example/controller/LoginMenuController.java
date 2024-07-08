@@ -6,6 +6,7 @@ import com.example.model.IO.errors.Errors;
 import com.example.model.User;
 import com.example.view.OutputView;
 import com.example.view.Menu;
+import javafx.application.Platform;
 
 import java.io.IOException;
 import java.security.SecureRandom;
@@ -23,6 +24,25 @@ public class LoginMenuController extends AppController {
         try {
             App.getAppView().showMenu(Menu.LOGIN_MENU);
             App.setCurrentController(Controller.LOGIN_MENU_CONTROLLER);
+            Thread stayLoggedInThread = new Thread(() -> {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                for (User user : App.getAllUsers()) {
+                    if (user.stayLoggedIn()) {
+                        loginUserForce(user.getUsername(), user.getPassword(), true);
+                            Platform.runLater(() -> {
+                                App.setCurrentMenu(Menu.MAIN_MENU);
+                                Controller.MAIN_MENU_CONTROLLER.run();
+                            });
+
+                    }
+                }
+
+            });
+            stayLoggedInThread.start();
         } catch (Exception e) {
             throw new RuntimeException();
         }
@@ -52,9 +72,22 @@ public class LoginMenuController extends AppController {
             OutputView.showOutputAlert(Errors.PASSWORD_DOESNT_MATCH);
             return Errors.PASSWORD_DOESNT_MATCH;
         }
+        user.setStayLoggedIn(stayLoggedIn);
         App.setLoggedInUser(user);
         OutputView.showOutputAlert(Errors.LOGIN_SUCCESSFUL);
         return Errors.LOGIN_SUCCESSFUL;
+    }
+
+    public void loginUserForce(String username, String password, Boolean stayLoggedIn) {
+        User user = App.getUserByUsername(username);
+        if (user == null) {
+            return;
+        }
+        if (!user.getPassword().equals(password)) {
+            return;
+        }
+        user.setStayLoggedIn(stayLoggedIn);
+        App.setLoggedInUser(user);
     }
 
     private Errors handlePassword(String newPassword, String confirmPassword) {

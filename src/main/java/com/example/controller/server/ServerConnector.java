@@ -55,7 +55,7 @@ public class ServerConnector {
             while (!(line = in.readLine()).equals("END_JSON")) {
                 jsonBuilder.append(line).append("\n");
             }
-
+            //System.out.println(jsonBuilder.toString());
             Type userListType = new TypeToken<ArrayList<User>>() {
             }.getType();
             allUsers = gson.fromJson(jsonBuilder.toString(), userListType);
@@ -80,6 +80,7 @@ public class ServerConnector {
             out.print(request.getSender().getID());
             out.print("|");
             out.println(request.getReceiver().getID());
+            System.out.println(request.getSender().getID() + " sending to  " + request.getReceiver().getID());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -90,7 +91,7 @@ public class ServerConnector {
                 Socket socket = new Socket(SERVER_IP, SERVER_PORT);
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true)
         ) {
-            out.print("SYSTEM|REJECT_FRIEND_REQUEST");
+            out.print("SYSTEM|REJECT_FRIEND_REQUEST|");
             out.print(request.getSender().getID());
             out.print("|");
             out.println(request.getReceiver().getID());
@@ -104,7 +105,7 @@ public class ServerConnector {
                 Socket socket = new Socket(SERVER_IP, SERVER_PORT);
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true)
         ) {
-            out.print("SYSTEM|SEND_FRIEND_REQUEST");
+            out.print("SYSTEM|SEND_FRIEND_REQUEST|");
             out.print(request.getSender().getID());
             out.print("|");
             out.println(request.getReceiver().getID());

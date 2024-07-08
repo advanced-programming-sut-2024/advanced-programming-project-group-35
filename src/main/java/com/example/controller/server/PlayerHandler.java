@@ -39,17 +39,11 @@ public class PlayerHandler implements Runnable {
                     } else if ("SAVE_USERS".equals(parts[1])) {
                         handleSaveUsers(in, out);
                     } else if ("ACCEPT_FRIEND_REQUEST".equals(parts[1])) {
-                        int userID = Integer.parseInt(parts[2]);
-                        int friendUserID = Integer.parseInt(parts[3]);
-                        ServerApp.acceptFriendRequest(userID, friendUserID);
+                        acceptFriendRequest(parts);
                     } else if ("REJECT_FRIEND_REQUEST".equals(parts[1])) {
-                        int userID = Integer.parseInt(parts[2]);
-                        int friendUserID = Integer.parseInt(parts[3]);
-                        ServerApp.rejectFriendRequest(userID, friendUserID);
+                        rejectFriendRequest(parts);
                     } else if ("SEND_FRIEND_REQUEST".equals(parts[1])) {
-                        int userID = Integer.parseInt(parts[2]);
-                        int friendUserID = Integer.parseInt(parts[3]);
-                        ServerApp.sendFriendRequest(userID, friendUserID);
+                        sendFriendRequest(parts);
                     } else if ("SET_USER_ONLINE".equals(parts[1])) {
                         int userID = Integer.parseInt(parts[2]);
                         ServerApp.setUserOnline(userID);
@@ -93,6 +87,38 @@ public class PlayerHandler implements Runnable {
             e.printStackTrace();
         } finally {
             server.removePlayer(ID);
+        }
+    }
+
+    private void rejectFriendRequest(String[] parts) {
+        int userID = Integer.parseInt(parts[2]);
+        int friendUserID = Integer.parseInt(parts[3]);
+        ServerApp.rejectFriendRequest(userID, friendUserID);
+        sendMessageToUser("FRIEND_REQUEST_REJECTED:", userID);
+        sendMessageToUser("FRIEND_REQUEST_REJECTED:", friendUserID);
+    }
+
+    private void acceptFriendRequest(String[] parts) {
+        int userID = Integer.parseInt(parts[2]);
+        int friendUserID = Integer.parseInt(parts[3]);
+        ServerApp.acceptFriendRequest(userID, friendUserID);
+        sendMessageToUser("FRIEND_REQUEST_ACCEPTED:", userID);
+        sendMessageToUser("FRIEND_REQUEST_ACCEPTED:", friendUserID);
+    }
+
+    private void sendFriendRequest(String[] parts) {
+        int userID = Integer.parseInt(parts[2]);
+        int friendUserID = Integer.parseInt(parts[3]);
+        ServerApp.sendFriendRequest(userID, friendUserID);
+        System.out.println("Friend request sent from: " + userID + " to: " + friendUserID);
+        sendMessageToUser("NEW_FRIEND_REQUEST:", userID);
+        sendMessageToUser("NEW_FRIEND_REQUEST:", friendUserID);
+    }
+
+    private void sendMessageToUser(String s, int userID) {
+        PlayerHandler playerHandler = server.getClientConnector(userID);
+        if (playerHandler != null) {
+            playerHandler.sendMessage(s);
         }
     }
 

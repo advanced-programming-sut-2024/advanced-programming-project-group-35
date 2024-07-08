@@ -5,6 +5,7 @@ import com.example.controller.MainMenuController;
 import com.example.model.App;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -14,6 +15,7 @@ import java.util.Objects;
 
 public class MainMenuControllerView {
     private final Stage stage = App.getAppView().getPrimaryStage();
+    public TextField friendsName;
     private Pane pane = App.getAppView().getPane();
     MainMenuController controller = (MainMenuController) Controller.MAIN_MENU_CONTROLLER.getController();
     private void paneChanger(String stageTitle, String fxmlFileName) throws IOException {
@@ -45,6 +47,11 @@ public class MainMenuControllerView {
 
     public void openTerminal(MouseEvent mouseEvent) {
         App.getAppView().showTerminal();
+    }
+
+    public void testNetwork(MouseEvent mouseEvent) throws Exception {
+        PreGameMenuControllerView gameMenuControllerView = new PreGameMenuControllerView();
+        gameMenuControllerView.sendRequestToFriend(friendsName.getText());
     }
 
     public void openChatBox(MouseEvent mouseEvent) {

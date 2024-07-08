@@ -2,14 +2,14 @@ package com.example.view;
 
 import com.example.Main;
 import com.example.controller.Controller;
-import com.example.controller.ScoreTableController;
 import com.example.model.App;
-import com.example.model.Chat.ChatBox;
+import com.example.model.chat.ChatBox;
 import com.example.model.FriendRequest;
 import com.example.model.alerts.Alert;
 import com.example.model.Terminal;
 import com.example.model.alerts.ConfirmationAlert;
 import com.example.model.alerts.Notification;
+import com.example.view.menuControllers.FriendsMenuControllerView;
 import com.example.view.menuControllers.GameMenuControllerView;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -40,6 +40,8 @@ public class AppView extends Application {
         return terminal;
     }
     private GameMenuControllerView gameMenuControllerView;
+    private FriendsMenuControllerView friendsMenuControllerView;
+    private Menu currentMenu;
     public void showMenu(Menu menu) throws Exception {
         primaryStage.centerOnScreen();
 
@@ -47,6 +49,9 @@ public class AppView extends Application {
         pane = fxmlLoader.load();
         if (menu.getTitle().equals("Game Menu")) {
             gameMenuControllerView = fxmlLoader.getController();
+        }
+        if (menu.getTitle().equals("Friends Menu")) {
+            friendsMenuControllerView = fxmlLoader.getController();
         }
 
         Scene scene = new Scene(pane);
@@ -59,9 +64,10 @@ public class AppView extends Application {
 
         primaryStage.setTitle(menu.getTitle());
         primaryStage.show();
+        currentMenu = menu;
     }
 
-    public void showAlert(String message, String alertType) {
+    public void showAlert(String message, String alertType){
         if (!isAlert) {
             alert = new Alert(message, alertType);
             alert.setLayoutX(pane.getWidth() - alert.width - 35);
@@ -218,8 +224,12 @@ public class AppView extends Application {
         }
     }
 
-    public void updateUserInfo() {
-        ((ScoreTableController) Controller.SCORE_TABLE_MENU_CONTROLLER.getController()).makeScoreboardTable(App.getAllUsers());
+    public void updateUserInfo() { //check if current menu is profile or score board
+        if (currentMenu.getTitle().equals("Friends Menu")) { //reset the menu to show the new data
+            App.getAppView().getFriendsMenuControllerView().updateFriendRequestList();
+        } else if (currentMenu.getTitle().equals("Score Table")) {
+            Controller.SCORE_TABLE_MENU_CONTROLLER.run();
+        }
     }
 
     public void showMessage(String part) {
@@ -232,5 +242,9 @@ public class AppView extends Application {
         Platform.runLater(() -> {
             showAlert(senderName + " wants to be your friend", "request");
         });
+    }
+
+    public FriendsMenuControllerView getFriendsMenuControllerView() {
+        return friendsMenuControllerView;
     }
 }

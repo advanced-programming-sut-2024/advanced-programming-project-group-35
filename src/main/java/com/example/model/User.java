@@ -5,8 +5,10 @@ import com.example.model.deckmanager.DeckToJson;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class User {
+    boolean stayLoggedIn = false;
     private boolean isOnline;
     private int id;
     private String username;
@@ -38,10 +40,10 @@ public class User {
     private ArrayList<GameData> gameData; // mitoonim az queue estefade konim (vali ta hala kar nakardam bahash)
     private ArrayList<Log> logs;
     private ArrayList<String> decksAddresses;
-    private ArrayList<User> friends;
-    private ArrayList<FriendRequest> friendRequests;
+    private ArrayList<Integer> friends = new ArrayList<>();
+    private ArrayList<FriendRequest> friendRequests = new ArrayList<>();
 
-    public void setFriends(ArrayList<User> friends) {
+    public void setFriends(ArrayList<Integer> friends) {
         this.friends = friends;
     }
 
@@ -49,7 +51,7 @@ public class User {
         this.friendRequests = friendRequests;
     }
 
-    public ArrayList<User> getFriends() {
+    public ArrayList<Integer> getFriends() {
         return friends;
     }
 
@@ -210,7 +212,20 @@ public class User {
     }
 
     public void addFriend(User friend) {
-        friends.add(friend);
+        if (friends == null) {
+            friends = new ArrayList<>();
+        }
+        if (friends.contains(friend.getID())){
+            return;
+        }
+        friends.add(friend.getID());
+        for (FriendRequest request : friendRequests){
+            System.out.println(request.getSender().getID() + " " + request.getReceiver().getID() + friend.getID());
+            if (request.getSender().getID() == friend.getID() || request.getReceiver().getID() == friend.getID()){
+                System.out.println("accepted");
+                request.accept();
+            }
+        }
     }
 
     public FriendRequest getFriendRequest(User friend) {
@@ -226,10 +241,20 @@ public class User {
         friendRequests.remove(friendRequest);
     }
 
-    public static void sendFriendRequest(User user, User friend) {
-        FriendRequest friendRequest = new FriendRequest(user, friend);
-        user.friendRequests.add(friendRequest);
-        friend.friendRequests.add(friendRequest);
+
+
+    public void addFriendRequest(FriendRequest friendRequest) {
+        if (friendRequests == null) {
+            friendRequests = new ArrayList<>();
+        }
+        if (friends == null){
+            friends = new ArrayList<>();
+        }
+        if (friends.contains(friendRequest.getSender().getID()) || friends.contains(friendRequest.getReceiver().getID())) return;
+        if (friendRequests.contains(friendRequest)) return;
+        FriendRequest duplicate = new FriendRequest(friendRequest.getReceiver().getID(), friendRequest.getSender().getID());
+        if (friendRequests.contains(duplicate)) return;
+        friendRequests.add(friendRequest);
     }
 
     public void setOnline(boolean b) {
@@ -303,8 +328,8 @@ public class User {
     }
 
     public boolean isFriend(User receiver) {
-        for (User friend : friends) {
-            if (friend.equals(receiver)) {
+        for (int friend : friends) {
+            if (friend == receiver.id) {
                 return true;
             }
         }
@@ -313,5 +338,38 @@ public class User {
 
     public ArrayList<String> getDeckName() {
         return decksAddresses;
+    }
+
+    private AtomicBoolean isInGame = new AtomicBoolean(false);
+
+    public boolean isInGame() {
+        if (isInGame == null) {
+            isInGame = new AtomicBoolean(false);
+        }
+        boolean value = isInGame.get();
+        System.out.println("isInGame called, returning: " + value);
+        return value;
+    }
+
+    public void setInGame(boolean inGame) {
+        System.out.println("setInGame called with value: " + inGame);
+        isInGame.set(inGame);
+        System.out.println("isInGame is now: " + isInGame.get());
+    }
+
+    public boolean stayLoggedIn() {
+        return stayLoggedIn;
+    }
+
+    public void setStayLoggedIn(boolean stayLoggedIn) {
+        this.stayLoggedIn = stayLoggedIn;
+    }
+
+    public void rejectFriendRequest(User friend) {
+        for (FriendRequest friendRequest : friendRequests) {
+            if (friendRequest.getSender().getID() == friend.getID() || friendRequest.getReceiver().getID() == friend.getID()) {
+                friendRequest.reject();
+            }
+        }
     }
 }
