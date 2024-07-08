@@ -8,21 +8,21 @@ import com.example.model.alerts.AlertType;
 import com.example.model.FriendRequest;
 import com.example.view.Menu;
 import com.example.view.OutputView;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 public class FriendsMenuControllerView {
     public TextField friendUsername;
     public ScrollPane mainScrollPane = new ScrollPane();
+    public ScrollPane newFriendScrollPane;
+    public Pane findNewFriendPane;
 
     @FXML
     public void initialize() {
@@ -117,30 +117,6 @@ public class FriendsMenuControllerView {
         return new Label(usernameText);
     }
 
-    //    if (App.getLoggedInUser().getFriendRequests().size() == 0) {
-//                    OutputView.showOutputAlert(Errors.NO_FRIEND_REQUESTS);
-//                } else {
-//                    Label status = new Label();
-//                    if (!App.getLoggedInUser().getFriendRequests().get(i).isAccepted() && !App.getLoggedInUser().getFriendRequests().get(i).isAccepted()) {
-//                        status.setText("Pending");
-//                    } else if (App.getLoggedInUser().getFriendRequests().get(i).isAccepted()) {
-//                        status.setText("Accepted");
-//                    } else {
-//                        status.setText("Rejected");
-//                    }
-//                    اینجا یه دونه ایف بذار که اگر فرستنده خودش بود رو چک کنه
-//                    Button accept = new Button("Accept");
-//                    accept.setOnMouseClicked(e -> {
-//                        نمیدونم
-//                   });
-//                    Button reject = new Button("Reject");
-//                    reject.setOnMouseClicked(e -> {
-//                        نمیدونم
-//                    });
-//                    rightSection.getChildren().addAll(status, accept, reject);
-//                    row.getChildren().addAll(label, rightSection);
-//                    mainScrollPane.getChildren().addAll(row);
-//                }
     public void openTerminal(MouseEvent mouseEvent) {
         App.getAppView().showTerminal();
     }
@@ -150,10 +126,10 @@ public class FriendsMenuControllerView {
         Controller.PROFILE_MENU_CONTROLLER.run();
     }
 
-    public void sendGameRequest(MouseEvent mouseEvent) {
-        FriendRequest friendRequest = new FriendRequest(App.getLoggedInUser(), App.getUserByUsername(friendUsername.getText()));
+    public void sendFriendRequest(String username) {
+        FriendRequest friendRequest = new FriendRequest(App.getLoggedInUser(), App.getUserByUsername(username));
         App.getServerConnector().sendFriendRequest(friendRequest);
-        System.out.println("Friend request sent to " + friendUsername.getText());
+        App.getAppView().showAlert("Friend request sent to " + username, AlertType.SUCCESS.getType());
         // new thread to wait for response
         Thread waitForResponse = new Thread(() -> {
             try {
@@ -163,5 +139,72 @@ public class FriendsMenuControllerView {
                 e.printStackTrace();
             }
         });
+    }
+
+    public void findUsers(MouseEvent mouseEvent) {
+        if (friendUsername.getText().equals("")) {
+            App.getAppView().showAlert("Please enter a username.", AlertType.ERROR.getType());
+            return;
+        }
+
+        VBox rows = new VBox();
+        rows.setSpacing(20);
+        rows.setAlignment(Pos.TOP_CENTER);
+        rows.setPrefWidth(980);
+        // i need a search system on allUsers and show the results here
+        String searchText = friendUsername.getText().toLowerCase();
+        boolean flag = false;
+        for (int i = 0; i < App.getAllUsers().size(); i++) {
+            String username = App.getAllUsers().get(i).getUsername().toLowerCase();
+            if (username.matches(".*" + searchText + ".*")) {
+                flag = true;
+                Label usernameLabel = new Label(App.getAllUsers().get(i).getUsername());
+                usernameLabel.setTranslateX(20);
+                usernameLabel.setPrefWidth(180);
+                usernameLabel.setStyle("-fx-text-fill: #ffffff; -fx-font-size: 20px; -fx-cursor: hand;");
+
+                HBox row = new HBox();
+                row.setPrefWidth(980);
+                row.setAlignment(Pos.CENTER);
+                row.setSpacing(150);
+                row.setAlignment(Pos.CENTER_LEFT);
+
+                Label score = new Label("Score: " + App.getAllUsers().get(i).getScore());
+                score.setStyle("-fx-text-fill: #ffffff; -fx-font-size: 20px; -fx-cursor: hand;");
+                score.setPrefWidth(180);
+
+                Label nickname = new Label(App.getAllUsers().get(i).getNickname());
+                nickname.setStyle("-fx-text-fill: #ffffff; -fx-font-size: 20px; -fx-cursor: hand;");
+                nickname.setPrefWidth(180);
+
+                HBox rightSection = new HBox();
+                rightSection.setSpacing(15);
+                rightSection.setAlignment(Pos.CENTER_RIGHT);
+                rightSection.setPrefWidth(170);
+
+                Label sendRequest = new Label("Send Request");
+                sendRequest.setStyle("-fx-text-fill: #3c7d52; -fx-padding: 10px; -fx-background-radius: 10px; -fx-background-color: #def0d8; -fx-cursor: hand;");
+                int finalI = i;
+                sendRequest.setOnMouseClicked(e -> {
+                    sendFriendRequest(App.getAllUsers().get(finalI).getUsername());
+                });
+
+                rightSection.getChildren().add(sendRequest);
+                row.getChildren().addAll(usernameLabel, nickname, score, rightSection);
+                rows.getChildren().add(row);
+            }
+        }
+        if (!flag) {
+            App.getAppView().showAlert("No user found with this username.", AlertType.ERROR.getType());
+        }
+        newFriendScrollPane.setContent(rows);
+    }
+
+    public void openFindFriendMenu(MouseEvent mouseEvent) {
+        findNewFriendPane.setVisible(true);
+    }
+
+    public void backToFriendListMenu(MouseEvent mouseEvent) {
+        findNewFriendPane.setVisible(false);
     }
 }

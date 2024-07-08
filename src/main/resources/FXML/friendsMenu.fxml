@@ -8,10 +8,13 @@
 <?import javafx.scene.layout.Pane?>
 
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
 <AnchorPane prefHeight="800.0" prefWidth="1400.0" styleClass="friends-menu-background"
             stylesheets="@../CSS/allMenu.css, @../CSS/allFiles.css" xmlns="http://javafx.com/javafx/21"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.view.menuControllers.FriendsMenuControllerView">
-<?import javafx.scene.control.TextField?>
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.view.menuControllers.FriendsMenuControllerView">
+    <?import javafx.scene.control.TextField?>
     <ImageView fitHeight="800" fitWidth="1400" pickOnBounds="true" preserveRatio="true">
         <Image url="@../images/friends-menu-background.jpg"/>
     </ImageView>
@@ -22,6 +25,22 @@
     <ScrollPane fx:id="mainScrollPane" layoutX="400.0" layoutY="150.0" prefHeight="600.0" prefWidth="600.0"
                 styleClass="scroll-pane-pre-game-menu">
     </ScrollPane>
-    <TextField fx:id="friendUsername" layoutX="50" layoutY="200" prefHeight="25" prefWidth="200" promptText="Friend's Username" />
-    <Button minWidth="50" onMouseClicked="#sendGameRequest" styleClass="brown-button" text="Send" translateX="20" translateY="100" />
+    <Button minWidth="50" onMouseClicked="#openFindFriendMenu" styleClass="brown-button" text="Find New Friend" translateX="150"
+            translateY="740"/>
+    <Pane visible="false" fx:id="findNewFriendPane" prefHeight="800" prefWidth="1400"
+          styleClass="find-new-friend-pane">
+        <ImageView fitHeight="800" fitWidth="1400" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../images/find-new-friend-background.jpg"/>
+        </ImageView>
+        <HBox layoutX="550" layoutY="180" prefWidth="300" alignment="CENTER" spacing="20" minWidth="300" maxWidth="300">
+            <TextField minHeight="50" styleClass="custom-text-field" fx:id="friendUsername" prefHeight="25"
+                       prefWidth="200" promptText="Friend's Username"/>
+            <Button minHeight="50" maxHeight="50" minWidth="50" onMouseClicked="#findUsers"
+                    styleClass="brown-button" text="Find"/>
+        </HBox>
+        <ScrollPane layoutY="260" layoutX="140" fx:id="newFriendScrollPane" prefHeight="440" prefWidth="1120" maxHeight="440" minHeight="440"
+                    styleClass="scroll-pane-pre-game-menu"/>
+        <Button minWidth="50" onMouseClicked="#backToFriendListMenu" styleClass="brown-button" text="Back" translateX="20"
+                translateY="30"/>
+    </Pane>
 </AnchorPane>
