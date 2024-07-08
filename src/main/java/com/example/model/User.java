@@ -384,4 +384,7 @@ public class User {
         return deckJson;
     }
 
+    public int getId() {
+        return id;
+    }
 }

@@ -2,7 +2,7 @@ package com.example.controller.server;
 
 import com.example.model.chat.ChatMessage;
 import com.example.model.Log;
-import com.example.model.game.Player;
+import com.example.model.deckmanager.DeckToJson;
 
 import java.io.BufferedReader;
 import java.io.PrintWriter;
@@ -32,6 +32,8 @@ public class GameHandler implements Runnable {
         this.player2ID = player2ID;
         player1Handler = ServerApp.getServer().players.get(player1ID);
         player2Handler = ServerApp.getServer().players.get(player2ID);
+        player1Handler.setInGame(true);
+        player2Handler.setInGame(true);
         this.player1In = player1Handler.getIn();
         this.player2In = player2Handler.getIn();
         this.player1Out = player1Handler.getOut();
@@ -42,7 +44,14 @@ public class GameHandler implements Runnable {
 //        gameHistory = new Log(player1, player2);
         gameID = LocalDateTime.now().hashCode();
         ServerApp.addGame(gameID, this);
-        run();
+        player1Handler.setGameHandler(this);
+        player2Handler.setGameHandler(this);
+        gameHistory = new Log(player1ID, player2ID, new DeckToJson(), new DeckToJson());
+    }
+
+    public void setDeckToJson(DeckToJson deck1, DeckToJson deck2) {
+        gameHistory.deck1 = deck1;
+        gameHistory.deck2 = deck2;
     }
 
     public boolean isPlayer1Turn() {
@@ -58,13 +67,24 @@ public class GameHandler implements Runnable {
         ServerApp.removeGame(gameID);
     }
 
-    public void Command(String command) {
-        if (command.startsWith("CHAT|")) {
+    public void command(String command) {
+        System.out.println("game handler command: " + command);
+        if (command.startsWith("END_GAME")) {
+            endGame();
+        } else if (command.startsWith("CHAT|")) {
             handleMessage(command);
         } else if (command.startsWith("REACTION|")) {
             handleReaction(command);
         } else if (command.startsWith("EMOTE|")) {
             handleEmote(command);
+        } else {
+            if (isPlayer1Turn) {
+                player1Out.println(command);
+            } else {
+                player2Out.println(command);
+            }
+            gameHistory.addCommand(command);
+            broadcastToSpectators(command);
         }
     }
 
@@ -83,7 +103,7 @@ public class GameHandler implements Runnable {
                 while (true) {
                     if (isPlayer1Turn) {
                         inputLine = player1In.readLine();
-                         System.out.println("test kir khar2");
+                        System.out.println("test kir khar2");
                         System.out.println(inputLine + "\n\n\n\n\n");
                         player2Out.println(inputLine);
                         gameHistory.addCommand(inputLine);
@@ -95,7 +115,7 @@ public class GameHandler implements Runnable {
                     } else {
                         System.out.println("kir shodim2");
                         inputLine = player2In.readLine();
-                         System.out.println("test kir khar3");
+                        System.out.println("test kir khar3");
                         System.out.println(inputLine + "\n\n\n\n\n");
                         player1Out.println(inputLine);
                         gameHistory.addCommand(inputLine);
@@ -169,5 +189,12 @@ public class GameHandler implements Runnable {
     // اضافه کردن getter برای isGameEnded
     public boolean isGameEnded() {
         return isGameEnded;
+    }
+
+
+    private void broadcastToSpectators(String command) {
+        for (PlayerHandler spectator : spectators) {
+            spectator.getOut().println(command);
+        }
     }
 }

@@ -2,7 +2,7 @@
   {
     "stayLoggedIn": false,
     "isOnline": true,
-    "id": 5,
+    "id": 2,
     "username": "ali",
     "password": "@li0083Moi",
     "nickname": "ali0083",
@@ -26,17 +26,15 @@
     "numberOfMinionCards": 0,
     "gameData": [],
     "decksAddresses": [],
-    "friends": [
-      3
-    ],
     "friendRequests": [
       {
         "senderID": 3,
         "receiverID": 2,
-        "isAccepted": true,
+        "isAccepted": false,
         "isRejected": false
       }
-    ]
+    ],
+    "isInGame": false
   },
   {
     "stayLoggedIn": false,
@@ -64,7 +62,8 @@
     "numberOfMinionCards": 0,
     "gameData": [],
     "decksAddresses": [],
-    "friendRequests": []
+    "friendRequests": [],
+    "isInGame": false
   },
   {
     "stayLoggedIn": false,
@@ -92,17 +91,15 @@
     "numberOfMinionCards": 0,
     "gameData": [],
     "decksAddresses": [],
-    "friends": [
-      2
-    ],
     "friendRequests": [
       {
         "senderID": 3,
         "receiverID": 2,
-        "isAccepted": true,
+        "isAccepted": false,
         "isRejected": false
       }
-    ]
+    ],
+    "isInGame": false
   },
   {
     "stayLoggedIn": false,
@@ -131,7 +128,7 @@
     "numberOfMinionCards": 0,
     "gameData": [],
     "decksAddresses": [],
-    "friends": [],
-    "friendRequests": []
+    "friendRequests": [],
+    "isInGame": false
   }
 ]

@@ -148,7 +148,7 @@ public class AppView extends Application {
             timeline.play();
             timeline.setOnFinished(actionEvent ->  {
                 isAlert = false;
-                removeAlert(pane);
+                removeAlert();
             });
         }
     }
@@ -164,7 +164,7 @@ public class AppView extends Application {
             timeline.play();
             timeline.setOnFinished(actionEvent ->  {
                 isAlert = false;
-                removeAlert(pane);
+                removeAlert();
             });
         }
     }

@@ -1,5 +1,6 @@
 package com.example.controller.server;
 
+import com.example.Main;
 import com.example.model.App;
 import com.example.model.FriendRequest;
 import com.example.model.User;
@@ -182,7 +183,7 @@ public class ServerConnector {
         ) {
             out.print("RandomGameRequest|");
             out.print(id);
-            out.println("|" + getDeckString(DeckManager.loadDeck("E:\\uni\\AP\\decks\\monsters.json")));
+            out.println("|" + getDeckString(DeckManager.loadDeck("C:\\Projects\\JavaProjs\\new-repo\\src\\main\\resources\\decksData\\monsters.json")));
             System.out.println("-random game request sent to server");
         } catch (IOException e) {
             e.printStackTrace();
