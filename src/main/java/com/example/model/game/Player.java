@@ -18,9 +18,9 @@ public class Player {
     private int specialCardCounter;
     private int priorityInGame = 0;
 
-    public Player(String name) {
+    public Player(String name, int id) {
         this.name = name;
-        this.id = User.getUserByUsername(name).getID();
+        this.id = id;
         this.board = new Board();
         this.scoresOfRounds = new HashMap<>();
         this.numberOfCrystals = 2;

@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import com.example.model.App;
+import com.example.model.alerts.AlertType;
 import com.example.model.deckmanager.DeckManager;
 import com.example.model.alerts.NotificationsData;
 import com.example.model.card.*;
@@ -13,9 +14,12 @@ import com.example.model.game.place.Row;
 import com.example.model.game.place.RowsInGame;
 import com.example.view.Menu;
 import com.example.view.menuControllers.GameMenuControllerView;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.util.Duration;
 
@@ -27,21 +31,25 @@ import java.net.URISyntaxException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class GameMenuController extends AppController {
+public class GameMenuControllerForOnlineGame extends AppController {
     private Table table;
     private GameMenuControllerView gameMenuControllerView;
     private int turn = 1;
 
     @Override
     public void run() {
-        try {
-            App.getAppView().showMenu(Menu.GAME_MENU);
+        System.out.println("waiting");
+        Platform.runLater(() -> {
+            try {
+                App.getAppView().showMenu(Menu.GAME_MENU);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
             App.setCurrentController(Controller.GAME_MENU_CONTROLLER);
             gameMenuControllerView = App.getAppView().getGameMenuControllerView();
             startRound(table);
-        } catch (Exception e) {
-            throw new RuntimeException();
-        }
+//            App.getAppView().showNotification(NotificationsData.ROUND_START.getMessage(), NotificationsData.ROUND_START.getImageAddress(), null);
+        });
     }
 
     public GameMenuControllerView getGameMenuControllerView() {
@@ -81,6 +89,7 @@ public class GameMenuController extends AppController {
         ObservableList<Card> originRow = (ObservableList<Card>) getRowListByName(origin);
         ObservableList<Card> destinationRow = (ObservableList<Card>) getRowListByName(destination);
         Card card = getCardById(cardId, originRow);
+
         synchronized (originRow) {
             originRow.remove(card);
         }
@@ -90,61 +99,82 @@ public class GameMenuController extends AppController {
             }
         }
         gameMenuControllerView.moveCardToDestinationFlowPane(cardId, origin, destination);
+
+
         if (card instanceof UnitCard) {
-            if (card.getAbilityName() == AbilityName.MUSTER) {
-                AbilityContext abilityContext = new AbilityContext(table, (UnitCard) card, getRowByName(destination));
-                abilityContext.addParam("dest", destination);
-                doNonLeaderCardsAbility(card, abilityContext, AbilityName.MUSTER);
-            } else if (card.getAbilityName() == AbilityName.MORALE_BOOST) {
-                AbilityContext abilityContext = new AbilityContext(table, (UnitCard) card, getRowByName(destination));
-                doNonLeaderCardsAbility(card, abilityContext, AbilityName.MORALE_BOOST);
-            } else if (card.getAbilityName() == AbilityName.SPY) {
-                AbilityContext abilityContext = new AbilityContext(table, null, null);
-                doNonLeaderCardsAbility(card, abilityContext, AbilityName.SPY);
-            } else if (card.getAbilityName() == AbilityName.COMMANDER_HORN) {
-                AbilityContext abilityContext = new AbilityContext(table, (UnitCard) card, getRowByName(destination));
-                doNonLeaderCardsAbility(card, abilityContext, AbilityName.COMMANDER_HORN);
-            } else if (card.getAbilityName() == AbilityName.TIGHT_BOND) {
-                AbilityContext abilityContext = new AbilityContext(table, (UnitCard) card, getRowByName(destination));
-                doNonLeaderCardsAbility(card, abilityContext, AbilityName.TIGHT_BOND);
-            } else if (card.getAbilityName() == AbilityName.SCORCH) {
-                AbilityContext abilityContext = new AbilityContext(table, (UnitCard) card, null);
-                doNonLeaderCardsAbility(card, abilityContext, AbilityName.SCORCH);
-            } else if (card.getAbilityName() == AbilityName.MEDIC) {
-                AbilityContext abilityContext = new AbilityContext(table, (UnitCard) card, null);
-                doNonLeaderCardsAbility(card, abilityContext, AbilityName.MEDIC);
+            AbilityContext abilityContext = new AbilityContext(table, (UnitCard) card, getRowByName(destination));
+            abilityContext.addParam("dest", destination);
+
+            switch (card.getAbilityName()) {
+                case MUSTER:
+                    doNonLeaderCardsAbility(card, abilityContext, AbilityName.MUSTER);
+                    break;
+                case MORALE_BOOST:
+                    doNonLeaderCardsAbility(card, abilityContext, AbilityName.MORALE_BOOST);
+                    break;
+                case SPY:
+                    abilityContext = new AbilityContext(table, null, null);
+                    doNonLeaderCardsAbility(card, abilityContext, AbilityName.SPY);
+                    break;
+                case COMMANDER_HORN:
+                    doNonLeaderCardsAbility(card, abilityContext, AbilityName.COMMANDER_HORN);
+                    break;
+                case TIGHT_BOND:
+                    doNonLeaderCardsAbility(card, abilityContext, AbilityName.TIGHT_BOND);
+                    break;
+                case SCORCH:
+                    abilityContext = new AbilityContext(table, (UnitCard) card, null);
+                    doNonLeaderCardsAbility(card, abilityContext, AbilityName.SCORCH);
+                    break;
+                case MEDIC:
+                    abilityContext = new AbilityContext(table, (UnitCard) card, null);
+                    doNonLeaderCardsAbility(card, abilityContext, AbilityName.MEDIC);
+                    break;
             }
         } else if (card instanceof SpecialCard) {
-            if (card.getAbilityName() == AbilityName.COMMANDER_HORN) {
-                AbilityContext abilityContext = new AbilityContext(table, null, getRowByName(getRowNameBySpecialPlaceName(destination)));
-                doNonLeaderCardsAbility(card, abilityContext, AbilityName.COMMANDER_HORN);
-            } else if (card.getAbilityName() == AbilityName.SCORCH) {
-                AbilityContext abilityContext = new AbilityContext(table, null, null);
-                doNonLeaderCardsAbility(card, abilityContext, AbilityName.SCORCH);
-            } else if (card.getAbilityName() == AbilityName.WEATHER) {
-                AbilityContext abilityContext = new AbilityContext(table, null, null);
-                abilityContext.addParam("card", card);
-                ((WeatherCard) card).setPlayer(table.getCurrentPlayer());
-                doNonLeaderCardsAbility(card, abilityContext, AbilityName.SCORCH);
-            } else if (card.getAbilityName() == AbilityName.MARDROEME) {
-                System.out.println(destination);
-                AbilityContext abilityContext = new AbilityContext(table, null, getRowByName(getRowNameBySpecialPlaceName(destination)));
-                abilityContext.addParam("dest", destination);
-                abilityContext.addParam("mardroemeCard", card);
-                doNonLeaderCardsAbility(card, abilityContext, AbilityName.MARDROEME);
+            AbilityContext abilityContext;
+            switch (card.getAbilityName()) {
+                case COMMANDER_HORN:
+                    abilityContext = new AbilityContext(table, null, getRowByName(getRowNameBySpecialPlaceName(destination)));
+                    doNonLeaderCardsAbility(card, abilityContext, AbilityName.COMMANDER_HORN);
+                    break;
+                case SCORCH:
+                    abilityContext = new AbilityContext(table, null, null);
+                    doNonLeaderCardsAbility(card, abilityContext, AbilityName.SCORCH);
+                    break;
+                case WEATHER:
+                    abilityContext = new AbilityContext(table, null, null);
+                    abilityContext.addParam("card", card);
+                    ((WeatherCard) card).setPlayer(table.getCurrentPlayer());
+                    doNonLeaderCardsAbility(card, abilityContext, AbilityName.SCORCH);
+                    break;
+                case MARDROEME:
+                    abilityContext = new AbilityContext(table, null, getRowByName(getRowNameBySpecialPlaceName(destination)));
+                    abilityContext.addParam("dest", destination);
+                    abilityContext.addParam("mardroemeCard", card);
+                    doNonLeaderCardsAbility(card, abilityContext, AbilityName.MARDROEME);
+                    break;
             }
         }
 
-        saveLog("card with id: " + cardId + " moved from " + origin + " to " + destination + " and ability applied");
+        App.out.println("player|" + table.getPlayerInTurn().getPriorityInGame() + "|movedCard|" + cardId + "|from|" + origin + "|" + destination + "andDoAbility");
         table.getCurrentPlayer().updateScore();
         table.getOpponent().updateScore();
         gameMenuControllerView.updateAllLabels();
-        if (table.getCurrentPlayer().getBoard().getHand().getCards().isEmpty()) {
-            passRound();
-        } else if (!table.getOpponent().isPassRound()) {
-            changeTurn();
-        }
+
+        KeyFrame keyFrame = new KeyFrame(Duration.seconds(0.2), event -> {
+            System.out.println(table.getCurrentPlayer().getBoard().getHand().getCards().size());
+            if (table.getCurrentPlayer().getBoard().getHand().getCards().isEmpty()) {
+                passRound();
+            } else if (!table.getOpponent().isPassRound()) {
+                changeTurn();
+            }
+        });
+        Timeline timeline = new Timeline(keyFrame);
+        timeline.setCycleCount(1);
+        timeline.play();
     }
+
 
     public void doDecoyAbility(int decoyCardId, int selectedCardId, String dest) {
         Card decoyCard = getCardById(decoyCardId, table.getCurrentPlayer().getBoard().getHand().getCards());
@@ -154,14 +184,20 @@ public class GameMenuController extends AppController {
         abilityContext.addParam("cardToSwap", selectedCard);
         abilityContext.addParam("dest", dest);
         doNonLeaderCardsAbility(decoyCard, abilityContext, null);
+        gameMenuControllerView.setPowerOfCardDefault(selectedCardId);
+        gameMenuControllerView.addMouseEventsForHandCards();
         table.getCurrentPlayer().updateScore();
         table.getOpponent().updateScore();
-        if (table.getCurrentPlayer().getBoard().getHand().getCards().isEmpty()) {
-            passRound();
-        } else if (!table.getOpponent().isPassRound()) {
-            changeTurn();
-            System.out.println("12345");
-        }
+        KeyFrame keyFrame = new KeyFrame(Duration.seconds(0.2), event -> {
+            if (table.getCurrentPlayer().getBoard().getHand().getCards().isEmpty()) {
+                passRound();
+            } else if (!table.getOpponent().isPassRound()) {
+                changeTurn();
+            }
+        });
+        Timeline timeline = new Timeline(keyFrame);
+        timeline.setCycleCount(1);
+        timeline.play();
         gameMenuControllerView.removeStyleClass();
         saveLog("decoy ability done, decoyCardId: " + decoyCardId + " selectedCardId " + selectedCardId);
     }
@@ -181,6 +217,7 @@ public class GameMenuController extends AppController {
             }
         }
     }
+
 
     private String getRowNameBySpecialPlaceName(String specialPlaceName) {
         switch (specialPlaceName) {
@@ -210,7 +247,7 @@ public class GameMenuController extends AppController {
 
     public void moveCardFromOriginToDestinationAndDontDoAbility(int cardId, String origin, String destination) {
         moveCardAndDontDoAbilityBase(cardId, origin, destination);
-        saveLog("card with id: " + cardId + " moved from " + origin + " to " + destination + " and ability applied");
+        saveLog("card with id: " + cardId + " moved from " + origin + " to " + destination + " and ability not applied");
     }
 
     public void moveCardFromOriginToDestinationAndDontDoAbilityWithNoLog(int cardId, String origin, String destination) {
@@ -324,11 +361,11 @@ public class GameMenuController extends AppController {
         }
     }
 
-    public void startNewGame(String player1Name, String player2Name, DeckToJson player1DeckNames, DeckToJson player2DeckNames) {
-        Deck player1Deck = DeckManager.loadDeck(player1DeckNames, 1);
-        Deck player2Deck = DeckManager.loadDeck(player2DeckNames, 2);
-        Player player1 = new Player(player1Name);
-        Player player2 = new Player(player2Name);
+    public void startNewGame(String player1Name, String player2Name, String player1DeckNames, String player2DeckNames) {
+        Deck player1Deck = DeckManager.loadDeck(getDeckToJsonByCardNames(player1DeckNames), 1);
+        Deck player2Deck = DeckManager.loadDeck(getDeckToJsonByCardNames(player2DeckNames), 2);
+        Player player1 = new Player(player1Name, Integer.parseInt(player1Name));
+        Player player2 = new Player(player2Name, Integer.parseInt(player2Name));
         player1.getBoard().setDeck(player1Deck);
         player2.getBoard().setDeck(player2Deck);
         player1.getBoard().setHandForStartGame(player1Deck);
@@ -338,75 +375,88 @@ public class GameMenuController extends AppController {
         player1.setPriorityInGame(1);
         player2.setPriorityInGame(2);
         table = new Table(player1, player2);
-        saveLog(generateInitialDeckData());
+
+
+//        saveLog(generateInitialDeckData());
         Round round1 = new Round(1);
         table.addRound(round1);
         table.setCurrentRound(round1);
     }
 
-    public void saveLog(String command) {
+    private DeckToJson getDeckToJsonByCardNames(String deck) {
         try {
-            String filePath = getString(table);
-            JsonObject jsonObject;
-
-            File jsonFile = new File(filePath);
-            if (jsonFile.exists()) {
-                try (FileReader reader = new FileReader(jsonFile)) {
-                    jsonObject = JsonParser.parseReader(reader).getAsJsonObject();
-                }
-            } else {
-                jsonObject = new JsonObject();
-            }
-
-            JsonArray commands;
-            if (jsonObject.has("commands")) {
-                commands = jsonObject.getAsJsonArray("commands");
-            } else {
-                commands = new JsonArray();
-                jsonObject.add("commands", commands);
-            }
-
-            commands.add(command);
-
-            try (FileWriter writer = new FileWriter(filePath)) {
-                Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                gson.toJson(jsonObject, writer);
-                System.out.println("game log Saved Successfully.");
-            }
-        } catch (IOException | URISyntaxException e) {
+            ObjectMapper objectMapper = new ObjectMapper();
+            DeckToJson newDeck = objectMapper.readValue(deck, DeckToJson.class);
+            return newDeck;
+        } catch (JsonProcessingException e) {
             e.printStackTrace();
-            System.err.println("Failed to save game log." + e.getMessage());
+            return null;
         }
     }
 
+    public void saveLog(String command) {
+//        try {
+//            String filePath = getString(table);
+//            JsonObject jsonObject;
+//
+//            File jsonFile = new File(filePath);
+//            if (jsonFile.exists()) {
+//                try (FileReader reader = new FileReader(jsonFile)) {
+//                    jsonObject = JsonParser.parseReader(reader).getAsJsonObject();
+//                }
+//            } else {
+//                jsonObject = new JsonObject();
+//            }
+//
+//            JsonArray commands;
+//            if (jsonObject.has("commands")) {
+//                commands = jsonObject.getAsJsonArray("commands");
+//            } else {
+//                commands = new JsonArray();
+//                jsonObject.add("commands", commands);
+//            }
+//
+//            commands.add(command);
+//
+//            try (FileWriter writer = new FileWriter(filePath)) {
+//                Gson gson = new GsonBuilder().setPrettyPrinting().create();
+//                gson.toJson(jsonObject, writer);
+//                System.out.println("game log Saved Successfully.");
+//            }
+//        } catch (IOException | URISyntaxException e) {
+//            e.printStackTrace();
+//            System.err.println("Failed to save game log." + e.getMessage());
+//        }
+    }
+
     private void saveLog(LinkedHashMap<String, Object> deckData) {
-        try {
-            String filePath = getString(table);
-            JsonObject jsonObject;
-
-            File jsonFile = new File(filePath);
-            if (jsonFile.exists()) {
-                try (FileReader reader = new FileReader(jsonFile)) {
-                    jsonObject = JsonParser.parseReader(reader).getAsJsonObject();
-                }
-            } else {
-                jsonObject = new JsonObject();
-            }
-
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            for (Map.Entry<String, Object> entry : deckData.entrySet()) {
-                JsonElement element = gson.toJsonTree(entry.getValue());
-                jsonObject.add(entry.getKey(), element);
-            }
-
-            try (FileWriter writer = new FileWriter(filePath)) {
-                gson.toJson(jsonObject, writer);
-                System.out.println("game log Saved Successfully.");
-            }
-        } catch (IOException | URISyntaxException e) {
-            e.printStackTrace();
-            System.err.println("Failed to save game log." + e.getMessage());
-        }
+//        try {
+//            String filePath = getString(table);
+//            JsonObject jsonObject;
+//
+//            File jsonFile = new File(filePath);
+//            if (jsonFile.exists()) {
+//                try (FileReader reader = new FileReader(jsonFile)) {
+//                    jsonObject = JsonParser.parseReader(reader).getAsJsonObject();
+//                }
+//            } else {
+//                jsonObject = new JsonObject();
+//            }
+//
+//            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+//            for (Map.Entry<String, Object> entry : deckData.entrySet()) {
+//                JsonElement element = gson.toJsonTree(entry.getValue());
+//                jsonObject.add(entry.getKey(), element);
+//            }
+//
+//            try (FileWriter writer = new FileWriter(filePath)) {
+//                gson.toJson(jsonObject, writer);
+//                System.out.println("game log Saved Successfully.");
+//            }
+//        } catch (IOException | URISyntaxException e) {
+//            e.printStackTrace();
+//            System.err.println("Failed to save game log." + e.getMessage());
+//        }
     }
 
     private LinkedHashMap<String, Object> generateInitialDeckData() {
@@ -447,16 +497,16 @@ public class GameMenuController extends AppController {
         return deckData;
     }
 
-    private static String getString(Table table) throws URISyntaxException {
-        String rootPath = new File(GameMenuController.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile().getParentFile().getPath();
-        String logsDirPath = rootPath + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "gameLogs";
-        File logsDir = new File(logsDirPath);
-        if (!logsDir.exists()) {
-            logsDir.mkdirs();
-        }
-        String filePath = logsDirPath + File.separator + table.getGameId() + ".json";
-        return filePath;
-    }
+//    private static String getString(Table table) throws URISyntaxException {
+//        String rootPath = new File(GameMenuControllerForOnlineGame.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile().getParentFile().getPath();
+//        String logsDirPath = rootPath + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "gameLogs";
+//        File logsDir = new File(logsDirPath);
+//        if (!logsDir.exists()) {
+//            logsDir.mkdirs();
+//        }
+//        String filePath = logsDirPath + File.separator + table.getGameId() + ".json";
+//        return filePath;
+//    }
 
     public void passRound() {
         saveLog("player: " + table.getCurrentPlayer().getUsername() + " passed round");
@@ -500,6 +550,15 @@ public class GameMenuController extends AppController {
                 table.getOpponent().getBoard().getDeck().getFactionAbility().apply(table, table.getOpponent());
             }
         }
+        KeyFrame keyFrame = new KeyFrame(Duration.seconds(3), event -> {
+            if (table.getCurrentPlayer().getBoard().getHand().getCards().isEmpty()) {
+                table.getCurrentPlayer().setPassRound(true);
+                passRound();
+            }
+        });
+        Timeline timeline = new Timeline(keyFrame);
+        timeline.setCycleCount(1);
+        timeline.play();
     }
 
     private void endRound() {
@@ -588,12 +647,6 @@ public class GameMenuController extends AppController {
     private void changeTurn() {
         turn++;
         gameMenuControllerView.changeTurn();
-        if (turn == 2) {
-            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
-                gameMenuControllerView.showVetoCards();
-            }));
-            timeline.play();
-        }
         saveLog("change turn");
     }
 

@@ -20,9 +20,9 @@ public class Server {
         System.setProperty("jdk.tls.client.protocols", "TLSv1.2,TLSv1.3");
 
         ServerApp.setServer(this);
-        ServerApp.loadUsers("users.json");
+        ServerApp.loadUsers("user.json");
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            ServerApp.saveUsers("users.json");
+            ServerApp.saveUsers("user.json");
             System.out.println("Data Base is running...");
             DatabaseManager.createNewDatabase();
             DatabaseManager.createUsersTable();

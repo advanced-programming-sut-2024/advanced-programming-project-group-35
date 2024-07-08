@@ -1,7 +1,7 @@
 package com.example.model.card.cardsAbilities;
 
 import com.example.controller.Controller;
-import com.example.controller.GameMenuController;
+import com.example.controller.GameMenuControllerForOnlineGame;
 import com.example.model.card.Ability;
 import com.example.model.card.AbilityContext;
 import com.example.model.card.Card;
@@ -14,14 +14,14 @@ public class CommandersHornCardAbility implements Ability {
             if (card != null) {
                 if (card != abilityContext.getCard() && (card instanceof UnitCard)) {
                     ((UnitCard)card).duplicatePower();
-                    ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).getGameMenuControllerView().getGameCardViewWithCardId(card.getIdInGame()).updatePowerLabel();
+                    ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController()).getGameMenuControllerView().getGameCardViewWithCardId(card.getIdInGame()).updatePowerLabel();
                 } else if (abilityContext.getCard() == null && (card instanceof  UnitCard)) {
                     ((UnitCard)card).duplicatePower();
-                    ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).getGameMenuControllerView().getGameCardViewWithCardId(card.getIdInGame()).updatePowerLabel();
+                    ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController()).getGameMenuControllerView().getGameCardViewWithCardId(card.getIdInGame()).updatePowerLabel();
                 }
             }
         }
-        ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).getGameMenuControllerView().updateAllLabels();
+        ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController()).getGameMenuControllerView().updateAllLabels();
 
     }
 }

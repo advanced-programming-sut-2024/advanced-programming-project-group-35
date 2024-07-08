@@ -1,5 +1,7 @@
 package com.example.controller.server;
 
+import com.example.controller.Controller;
+import com.example.controller.GameMenuControllerForOnlineGame;
 import com.example.model.App;
 import com.example.model.User;
 import com.example.model.card.enums.CardData;
@@ -75,6 +77,7 @@ public class ClientConnector implements Runnable {
 
     private void processMessage(String message) {
         System.out.println("Processing message: " + message);
+        String parts[] = message.split("\\|");
         if (message.startsWith("FRIEND_REQUEST_ACCEPTED:")) {
             App.updateUserInfo();
         } else if (message.startsWith("NEW_FRIEND_REQUEST:")) {
@@ -92,8 +95,8 @@ public class ClientConnector implements Runnable {
         } else if (message.startsWith("GameStarts")){
             System.out.println("GameStarts -message");
             App.getLoggedInUser().setInGame(true);
-        } else if (message.startsWith("GameRequest")){
-            //
+            ((GameMenuControllerForOnlineGame)Controller.GAME_MENU_CONTROLLER.getController()).startNewGame(parts[1], parts[3], parts[2], parts[4]);
+            Controller.GAME_MENU_CONTROLLER.getController().run();
         }
     }
 

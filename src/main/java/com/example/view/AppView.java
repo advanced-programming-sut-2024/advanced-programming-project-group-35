@@ -3,6 +3,7 @@ package com.example.view;
 import com.example.Main;
 import com.example.controller.Controller;
 import com.example.model.App;
+import com.example.model.alerts.*;
 import com.example.model.chat.ChatBox;
 import com.example.model.FriendRequest;
 import com.example.model.alerts.Alert;
@@ -12,6 +13,7 @@ import com.example.model.alerts.Notification;
 import com.example.view.menuControllers.FriendsMenuControllerView;
 import com.example.view.menuControllers.GameMenuControllerView;
 import javafx.animation.KeyFrame;
+import javafx.animation.ScaleTransition;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
@@ -20,8 +22,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 public class AppView extends Application {
@@ -32,8 +38,10 @@ public class AppView extends Application {
     private ChatBox chatBox = new ChatBox();
     private boolean isAlert = false;
     private Alert alert;
+    private Emote emote;
     private ConfirmationAlert confirmationAlert;
     private Notification notification;
+    private boolean isEmote;
     private boolean isNotification = false;
     private boolean terminalVisible = false;
     private Terminal getTerminal() {
@@ -42,8 +50,9 @@ public class AppView extends Application {
     private GameMenuControllerView gameMenuControllerView;
     private FriendsMenuControllerView friendsMenuControllerView;
     private Menu currentMenu;
+    private Stage lockScreen;
     public void showMenu(Menu menu) throws Exception {
-        primaryStage.centerOnScreen();
+//        primaryStage.centerOnScreen();
 
         fxmlLoader = new FXMLLoader(Main.class.getResource(menu.getFxmlFile()));
         pane = fxmlLoader.load();
@@ -66,8 +75,49 @@ public class AppView extends Application {
         primaryStage.show();
         currentMenu = menu;
     }
+    public void showEmote(Emotes emotes) {
+        if (!isEmote) {
+            emote = new Emote(emotes);
+            emote.setLayoutX((pane.getWidth() - emote.getFitWidth()) / 2);
+            emote.setLayoutY((pane.getHeight() - emote.getFitWidth()) / 2);
+            pane.getChildren().add(emote);
 
-    public void showAlert(String message, String alertType){
+
+            ScaleTransition transition = new ScaleTransition(Duration.millis(300), emote);
+
+            transition.setFromX(0);
+            transition.setToX(1);
+            transition.setFromY(0);
+            transition.setToY(1);
+
+            transition.play();
+
+
+            isEmote = true;
+            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5)));
+            timeline.play();
+            timeline.setOnFinished(actionEvent ->  {
+                isEmote = false;
+                removeEmote();
+            });
+        }
+    }
+    public void removeEmote() {
+        ScaleTransition transition = new ScaleTransition(Duration.millis(300), emote);
+
+        transition.setFromX(1);
+        transition.setToX(0);
+        transition.setFromY(1);
+        transition.setToY(0);
+        transition.play();
+
+        transition.setOnFinished(actionEvent ->  {
+            pane.getChildren().remove(emote);
+            isEmote = false;
+        });
+    }
+
+    public void showAlert(String message, String alertType) {
         if (!isAlert) {
             alert = new Alert(message, alertType);
             alert.setLayoutX(pane.getWidth() - alert.width - 35);
@@ -78,12 +128,12 @@ public class AppView extends Application {
             timeline.play();
             timeline.setOnFinished(actionEvent ->  {
                 isAlert = false;
-                removeAlert(pane);
+                removeAlert();
             });
         }
     }
-    public void removeAlert(Pane currentPane) {
-        currentPane.getChildren().remove(alert);
+    public void removeAlert() {
+        pane.getChildren().remove(alert);
         isAlert = false;
     }
 
@@ -173,6 +223,9 @@ public class AppView extends Application {
         transition.setFromY(900);
         transition.setToY(550);
         transition.play();
+    }
+    public void lockScreen() {
+        pane.addEventFilter(MouseEvent.ANY, MouseEvent::consume);
     }
 
     public void removeTerminal() {

@@ -3,12 +3,8 @@
   "player1Faction": "EmpireNilfgaardian",
   "player1Hand": [
     {
-      "name": "nilfgaard_menno",
-      "id": 125
-    },
-    {
-      "name": "nilfgaard_siege_support",
-      "id": 135
+      "name": "neutral_cow",
+      "id": 104
     },
     {
       "name": "special_decoy",
@@ -21,44 +17,6 @@
     {
       "name": "neutral_ciri",
       "id": 103
-    },
-    {
-      "name": "neutral_dandelion",
-      "id": 105
-    },
-    {
-      "name": "neutral_gaunter_odimm",
-      "id": 107
-    },
-    {
-      "name": "neutral_gaunter_odimm_darkness",
-      "id": 109
-    },
-    {
-      "name": "neutral_geralt",
-      "id": 111
-    },
-    {
-      "name": "neutral_olgierd",
-      "id": 113
-    },
-    {
-      "name": "neutral_vesemir",
-      "id": 115
-    }
-  ],
-  "player1Deck": [
-    {
-      "name": "special_decoy_1",
-      "id": 100
-    },
-    {
-      "name": "special_horn_2",
-      "id": 102
-    },
-    {
-      "name": "neutral_cow",
-      "id": 104
     },
     {
       "name": "neutral_emiel",
@@ -83,6 +41,40 @@
     {
       "name": "neutral_villen",
       "id": 116
+    }
+  ],
+  "player1Deck": [
+    {
+      "name": "special_decoy_1",
+      "id": 100
+    },
+    {
+      "name": "special_horn_2",
+      "id": 102
+    },
+    {
+      "name": "neutral_dandelion",
+      "id": 105
+    },
+    {
+      "name": "neutral_gaunter_odimm",
+      "id": 107
+    },
+    {
+      "name": "neutral_gaunter_odimm_darkness",
+      "id": 109
+    },
+    {
+      "name": "neutral_geralt",
+      "id": 111
+    },
+    {
+      "name": "neutral_olgierd",
+      "id": 113
+    },
+    {
+      "name": "neutral_vesemir",
+      "id": 115
     },
     {
       "name": "nilfgaard_black_archer",
@@ -115,6 +107,10 @@
     {
       "name": "nilfgaard_letho",
       "id": 124
+    },
+    {
+      "name": "nilfgaard_menno",
+      "id": 125
     },
     {
       "name": "nilfgaard_moorvran",
@@ -153,6 +149,10 @@
       "id": 134
     },
     {
+      "name": "nilfgaard_siege_support",
+      "id": 135
+    },
+    {
       "name": "nilfgaard_stefan",
       "id": 136
     },
@@ -166,15 +166,11 @@
     }
   ],
   "player2": "ali",
-  "player2Faction": "EmpireNilfgaardian",
+  "player2Faction": "Monsters",
   "player2Hand": [
     {
-      "name": "nilfgaard_menno",
-      "id": 225
-    },
-    {
-      "name": "nilfgaard_siege_support",
-      "id": 235
+      "name": "neutral_cow",
+      "id": 205
     },
     {
       "name": "special_decoy",
@@ -185,32 +181,32 @@
       "id": 201
     },
     {
-      "name": "neutral_ciri",
+      "name": "neutral_chort",
       "id": 203
     },
     {
       "name": "neutral_dandelion",
-      "id": 205
+      "id": 206
     },
     {
       "name": "neutral_gaunter_odimm",
-      "id": 207
+      "id": 208
     },
     {
       "name": "neutral_gaunter_odimm_darkness",
-      "id": 209
+      "id": 210
     },
     {
-      "name": "neutral_geralt",
-      "id": 211
+      "name": "monsters_arachas_1",
+      "id": 212
     },
     {
-      "name": "neutral_olgierd",
-      "id": 213
+      "name": "monsters_arachas_behemoth",
+      "id": 214
     },
     {
-      "name": "neutral_vesemir",
-      "id": 215
+      "name": "monsters_celaeno_harpy",
+      "id": 216
     }
   ],
   "player2Deck": [
@@ -219,122 +215,139 @@
       "id": 200
     },
     {
-      "name": "special_horn_2",
+      "name": "special_horn_1",
       "id": 202
     },
     {
-      "name": "neutral_cow",
+      "name": "neutral_ciri",
       "id": 204
     },
     {
       "name": "neutral_emiel",
-      "id": 206
+      "id": 207
     },
     {
       "name": "neutral_gaunter_odimm_darkness",
-      "id": 208
+      "id": 209
     },
     {
       "name": "neutral_gaunter_odimm_darkness",
-      "id": 210
+      "id": 211
     },
     {
-      "name": "neutral_mysterious_elf",
-      "id": 212
+      "name": "monsters_arachas_2",
+      "id": 213
     },
     {
-      "name": "neutral_triss",
-      "id": 214
+      "name": "monsters_vampire_bruxa",
+      "id": 215
     },
     {
-      "name": "neutral_villen",
-      "id": 216
-    },
-    {
-      "name": "nilfgaard_black_archer",
+      "name": "monsters_cockatrice",
       "id": 217
     },
     {
-      "name": "nilfgaard_black_archer_1",
+      "name": "monsters_draug",
       "id": 218
     },
     {
-      "name": "nilfgaard_cahir",
+      "name": "monsters_earth_elemental",
       "id": 219
     },
     {
-      "name": "nilfgaard_cynthia",
+      "name": "monsters_vampire_ekkimara",
       "id": 220
     },
     {
-      "name": "nilfgaard_fringilla",
+      "name": "monsters_endrega",
       "id": 221
     },
     {
-      "name": "nilfgaard_heavy_zerri",
+      "name": "monsters_fiend",
       "id": 222
     },
     {
-      "name": "nilfgaard_imperal_brigade",
+      "name": "monsters_fire_elemental",
       "id": 223
     },
     {
-      "name": "nilfgaard_letho",
+      "name": "monsters_vampire_fleder",
       "id": 224
     },
     {
-      "name": "nilfgaard_moorvran",
+      "name": "monsters_foglet",
+      "id": 225
+    },
+    {
+      "name": "monsters_forktail",
       "id": 226
     },
     {
-      "name": "nilfgaard_nauzicaa_2",
+      "name": "monsters_ice_giant",
       "id": 227
     },
     {
-      "name": "nilfgaard_morteisen",
+      "name": "monsters_frightener",
       "id": 228
     },
     {
-      "name": "nilfgaard_puttkammer",
+      "name": "monsters_gargoyle",
       "id": 229
     },
     {
-      "name": "nilfgaard_rainfarn",
+      "name": "monsters_ghoul",
       "id": 230
     },
     {
-      "name": "nilfgaard_renuald",
+      "name": "monsters_vampire_garkain",
       "id": 231
     },
     {
-      "name": "nilfgaard_rotten",
+      "name": "monsters_ghoul_1",
       "id": 232
     },
     {
-      "name": "nilfgaard_shilard",
+      "name": "monsters_ghoul_2",
       "id": 233
     },
     {
-      "name": "nilfgaard_siege_engineer",
+      "name": "monsters_gravehag",
       "id": 234
     },
     {
-      "name": "nilfgaard_stefan",
+      "name": "monsters_gryffin",
+      "id": 235
+    },
+    {
+      "name": "monsters_harpy",
       "id": 236
     },
     {
-      "name": "nilfgaard_sweers",
+      "name": "monsters_imlerith",
       "id": 237
     },
     {
-      "name": "nilfgaard_tibor",
+      "name": "monsters_vampire_katakan",
       "id": 238
     }
   ],
   "commands": [
-    "card with id: 109 moved from currentPlayerHand to currentPlayerRanged and ability applied",
+    "player: ali123 passed round",
     "change turn",
+    "card with id: 205 moved from currentPlayerHand to currentPlayerRanged and ability applied",
+    "card with id: 206 moved from currentPlayerHand to currentPlayerCloseCombat and ability applied",
+    "card with id: 208 moved from currentPlayerHand to currentPlayerSiege and ability applied",
+    "card with id: 210 moved from currentPlayerHand to currentPlayerRanged and ability applied",
+    "card with id: 216 moved from currentPlayerHand to currentPlayerCloseCombat and ability applied",
+    "card with id: 214 moved from currentPlayerHand to currentPlayerSiege and ability applied",
+    "card with id: 212 moved from currentPlayerHand to currentPlayerCloseCombat and ability applied",
+    "decoy ability done, decoyCardId: 199 selectedCardId 205",
+    "card with id: 203 moved from currentPlayerHand to currentPlayerCloseCombat and ability applied",
+    "card with id: 201 moved from currentPlayerHand to currentPlayerCloseCombatSpecialPlace and ability applied",
+    "card with id: 205 moved from currentPlayerHand to currentPlayerRanged and ability applied",
+    "player: ali passed round",
+    "cards back to discardPlace",
     "card with id: 108 moved from currentPlayerHand to currentPlayerRanged and ability applied",
-    "card with id: 110 moved from currentPlayerHand to currentPlayerRanged and ability applied"
+    "change turn"
   ]
 }

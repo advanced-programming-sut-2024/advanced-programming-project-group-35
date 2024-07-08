@@ -1,7 +1,12 @@
 package com.example.controller.server;
 
+import com.example.model.App;
 import com.example.model.FriendRequest;
 import com.example.model.User;
+import com.example.model.deckmanager.DeckManager;
+import com.example.model.deckmanager.DeckToJson;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -176,10 +181,24 @@ public class ServerConnector {
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true)
         ) {
             out.print("RandomGameRequest|");
-            out.println(id);
+            out.print(id);
+            out.println("|" + getDeckString(DeckManager.loadDeck("E:\\uni\\AP\\decks\\monsters.json")));
             System.out.println("-random game request sent to server");
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private String getDeckString(DeckToJson deck) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        String json;
+        try {
+            json = objectMapper.writeValueAsString(deck);
+            return json;
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 

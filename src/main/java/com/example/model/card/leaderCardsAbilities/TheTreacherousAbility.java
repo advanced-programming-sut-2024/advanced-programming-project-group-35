@@ -1,13 +1,11 @@
 package com.example.model.card.leaderCardsAbilities;
 
 import com.example.controller.Controller;
-import com.example.controller.GameMenuController;
+import com.example.controller.GameMenuControllerForOnlineGame;
 import com.example.model.card.AbilityContext;
 import com.example.model.card.Card;
 import com.example.model.card.UnitCard;
-import com.example.model.card.cardsAbilities.SpyAbility;
 import com.example.model.card.enums.AbilityName;
-import com.example.model.game.Table;
 import com.example.model.game.place.Row;
 
 import java.util.ArrayList;
@@ -25,7 +23,7 @@ public class TheTreacherousAbility implements LeaderAbility {
             for (Card card : row.getCards()) {
                 if (card != null && card.getAbilityName() == AbilityName.SPY) {
                     ((UnitCard)card).duplicatePower();
-                    ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).getGameMenuControllerView().getGameCardViewWithCardId(card.getIdInGame()).updatePowerLabel();
+                    ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController()).getGameMenuControllerView().getGameCardViewWithCardId(card.getIdInGame()).updatePowerLabel();
                 }
             }
         }

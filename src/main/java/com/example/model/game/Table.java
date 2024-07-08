@@ -1,30 +1,35 @@
 package com.example.model.game;
 
+import com.example.model.App;
 import com.example.model.card.enums.FactionsType;
 import com.example.model.game.place.SpellPlace;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class Table {
-    private int gameId;
     private Player currentPlayer;
     private Player opponent;
     private SpellPlace spellPlace;
     private int roundNumber;
     private ArrayList<Round> rounds;
     private Round currentRound;
+    private Player playerInTurn;
     public Table(Player player1, Player player2) {
-        if (player2.getBoard().getDeck().getFaction().equals(FactionsType.ScoiaTael)) {
-            this.currentPlayer = player2;
-            this.opponent = player1;
-        } else {
+      this.playerInTurn = player1;
+        if (player1.getId() == App.getLoggedInUser().getId()) {
             this.currentPlayer = player1;
             this.opponent = player2;
+        } else {
+            this.currentPlayer = player2;
+            this.opponent = player1;
         }
         this.rounds = new ArrayList<>();
         this.roundNumber = 1;
-        this.gameId = new Date().hashCode();
         this.spellPlace = new SpellPlace();
+    }
+
+    public Player getPlayerInTurn() {
+        return playerInTurn;
     }
 
     public void setCurrentPlayer(Player currentPlayer) {
@@ -35,9 +40,6 @@ public class Table {
         this.opponent = opponent;
     }
 
-    public int getGameId() {
-        return gameId;
-    }
 
     public void addRound(Round round) {
         rounds.add(round);

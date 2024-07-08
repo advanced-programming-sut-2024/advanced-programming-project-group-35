@@ -5,13 +5,16 @@ import com.example.controller.server.ClientConnector;
 import com.example.controller.server.PlayerHandler;
 import com.example.controller.server.ServerConnector;
 import com.example.model.card.Card;
+import com.example.model.deckmanager.DeckManager;
 import com.example.model.deckmanager.DeckToJson;
 import com.example.view.AppView;
 import com.example.view.Menu;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.application.Platform;
+
 
 import java.io.*;
 import java.lang.reflect.Type;
@@ -40,8 +43,8 @@ public class App {
     private static Menu currentMenu = Menu.LOGIN_MENU;
     private static AppView appView;
     private static Socket socket;
-    private static PrintWriter out;
-    private static BufferedReader in;
+    public static PrintWriter out;
+    public static BufferedReader in;
 
 
     public static AppView getAppView() {
@@ -168,16 +171,6 @@ public class App {
         App.in = in;
     }
 
-    private static DeckToJson temporaryDeck;
-
-    public static void setTemporaryDeck(DeckToJson player1OfflineDeck) {
-        temporaryDeck = player1OfflineDeck;
-    }
-
-    public static DeckToJson getTemporaryDeck() {
-        return temporaryDeck;
-    }
-
     public static ServerConnector getServerConnector() {
         return serverConnector;
     }
@@ -191,7 +184,7 @@ public class App {
 
     public static void updateHandly() {
         Gson gson = new GsonBuilder().create();
-        try (FileReader reader = new FileReader("users.json")) {
+        try (FileReader reader = new FileReader("user.json")) {
             Type userListType = new TypeToken<ArrayList<User>>() {
             }.getType();
             allUsers = gson.fromJson(reader, userListType);

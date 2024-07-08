@@ -1,7 +1,7 @@
 package com.example.model;
 
 import com.example.controller.Controller;
-import com.example.controller.GameMenuController;
+import com.example.controller.GameMenuControllerForOnlineGame;
 import com.example.model.IO.patterns.CheatCodes;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
@@ -96,38 +96,38 @@ public class Terminal extends StackPane {
     }
 
     private void addDecoyCard() {
-        GameMenuController gameMenuController = (GameMenuController) Controller.GAME_MENU_CONTROLLER.getController();
-        gameMenuController.addDecoyCard();
+        GameMenuControllerForOnlineGame gameMenuControllerForOnlineGame = (GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController();
+        gameMenuControllerForOnlineGame.addDecoyCard();
     }
 
     private void setClownForOpponent() {
-        GameMenuController gameMenuController = (GameMenuController) Controller.GAME_MENU_CONTROLLER.getController();
-        gameMenuController.setClownForOpponent();
+        GameMenuControllerForOnlineGame gameMenuControllerForOnlineGame = (GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController();
+        gameMenuControllerForOnlineGame.setClownForOpponent();
     }
 
     private void luckOpponentEmotes() {
-        GameMenuController gameMenuController = (GameMenuController) Controller.GAME_MENU_CONTROLLER.getController();
-        gameMenuController.luckOpponentEmotes();
+        GameMenuControllerForOnlineGame gameMenuControllerForOnlineGame = (GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController();
+        gameMenuControllerForOnlineGame.luckOpponentEmotes();
     }
 
     private void luckOpponentLeaderAbility() {
-        GameMenuController gameMenuController = (GameMenuController) Controller.GAME_MENU_CONTROLLER.getController();
-        gameMenuController.luckOpponentLeaderAbility();
+        GameMenuControllerForOnlineGame gameMenuControllerForOnlineGame = (GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController();
+        gameMenuControllerForOnlineGame.luckOpponentLeaderAbility();
     }
 
     private void recverCrystals() {
-        GameMenuController gameMenuController = (GameMenuController) Controller.GAME_MENU_CONTROLLER.getController();
-        gameMenuController.recoverCrystals();
+        GameMenuControllerForOnlineGame gameMenuControllerForOnlineGame = (GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController();
+        gameMenuControllerForOnlineGame.recoverCrystals();
     }
 
     private void recoverLeaderAbility() {
-        GameMenuController gameMenuController = (GameMenuController) Controller.GAME_MENU_CONTROLLER.getController();
-        gameMenuController.recoverLeaderAbility();
+        GameMenuControllerForOnlineGame gameMenuControllerForOnlineGame = (GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController();
+        gameMenuControllerForOnlineGame.recoverLeaderAbility();
     }
 
     private void addCardTODeck() {
-        GameMenuController gameMenuController = (GameMenuController) Controller.GAME_MENU_CONTROLLER.getController();
-        gameMenuController.addRandomCardToDeck();
+        GameMenuControllerForOnlineGame gameMenuControllerForOnlineGame = (GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController();
+        gameMenuControllerForOnlineGame.addRandomCardToDeck();
     }
 
     public String getCurrentCommand() {
