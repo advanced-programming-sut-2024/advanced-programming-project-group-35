@@ -1,29 +1,31 @@
 package com.example.controller.server;
 
-import com.example.model.ServerApp;
-import com.example.model.User;
 import com.example.model.game.OnlineTable;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 
 import java.io.*;
-import java.lang.reflect.Type;
 import java.net.Socket;
-import java.util.ArrayList;
 
 public class PlayerHandler implements Runnable {
-    private static final String USERS_FILE = "users.json";
+    private static final String USERS_FILE = "user.json";
     private Socket socket;
     private Server server;
     private int ID;
     private OnlineTable table;
     private PrintWriter out;
     private BufferedReader in;
+    private boolean isInGame = false;
 
     public PlayerHandler(Socket socket, Server server) {
         this.socket = socket;
         this.server = server;
+    }
+
+    public boolean isInGame() {
+        return isInGame;
+    }
+
+    public void setInGame(boolean inGame) {
+        isInGame = inGame;
     }
 
     @Override
@@ -37,61 +39,71 @@ public class PlayerHandler implements Runnable {
 //            server.addPlayer(ID, this);
 
             String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                System.out.println("Received: " + inputLine);
-                String[] parts = inputLine.split("\\|");
-                if ("SYSTEM".equals(parts[0])) {
-                    if ("LOAD_USERS".equals(parts[1])) {
-                        handleLoadUsers(out);
-                    } else if ("SAVE_USERS".equals(parts[1])) {
-                        handleSaveUsers(in, out);
-                    } else if ("ACCEPT_FRIEND_REQUEST".equals(parts[1])) {
-                        int userID = Integer.parseInt(parts[2]);
-                        int friendUserID = Integer.parseInt(parts[3]);
-                        ServerApp.acceptFriendRequest(userID, friendUserID);
-                    } else if ("REJECT_FRIEND_REQUEST".equals(parts[1])) {
-                        int userID = Integer.parseInt(parts[2]);
-                        int friendUserID = Integer.parseInt(parts[3]);
-                        ServerApp.rejectFriendRequest(userID, friendUserID);
-                    } else if ("SEND_FRIEND_REQUEST".equals(parts[1])) {
-                        sendFriendRequest(parts);
-                    } else if ("SET_USER_ONLINE".equals(parts[1])) {
-                        int userID = Integer.parseInt(parts[2]);
-                        ServerApp.setUserOnline(userID);
-                    } else if ("SET_USER_OFFLINE".equals(parts[1])) {
-                        int userID = Integer.parseInt(parts[2]);
-                        ServerApp.setUserOffline(userID);
+            while (true){
+                if (isInGame){
+                    continue;
+                }
+                while ((inputLine = in.readLine()) != null) {
+                    System.out.println("Received: " + inputLine);
+                    String[] parts = inputLine.split("\\|");
+                    if ("SYSTEM".equals(parts[0])) {
+                        if ("LOAD_USERS".equals(parts[1])) {
+                            handleLoadUsers(out);
+                        } else if ("SAVE_USERS".equals(parts[1])) {
+                            handleSaveUsers(in, out);
+                        } else if ("ACCEPT_FRIEND_REQUEST".equals(parts[1])) {
+                            int userID = Integer.parseInt(parts[2]);
+                            int friendUserID = Integer.parseInt(parts[3]);
+                            ServerApp.acceptFriendRequest(userID, friendUserID);
+                        } else if ("REJECT_FRIEND_REQUEST".equals(parts[1])) {
+                            int userID = Integer.parseInt(parts[2]);
+                            int friendUserID = Integer.parseInt(parts[3]);
+                            ServerApp.rejectFriendRequest(userID, friendUserID);
+                        } else if ("SEND_FRIEND_REQUEST".equals(parts[1])) {
+                            sendFriendRequest(parts);
+                        } else if ("SET_USER_ONLINE".equals(parts[1])) {
+                            int userID = Integer.parseInt(parts[2]);
+                            ServerApp.setUserOnline(userID);
+                        } else if ("SET_USER_OFFLINE".equals(parts[1])) {
+                            int userID = Integer.parseInt(parts[2]);
+                            ServerApp.setUserOffline(userID);
+                        }
+                    } else if ("SET_PLAYER".equals(parts[0])) {
+                        ID = Integer.parseInt(parts[1]);
+                        server.addPlayer(ID, this);
+                    } else if ("ClientConnector".equals(parts[0])) {
+                        ID = Integer.parseInt(parts[1]);
+                        server.addClientConnector(ID, this);
+                    } else if ("Request".equals(parts[0])) {
+                        System.out.println("Received request to: " + parts[2]);
+                        int receiverID = Integer.parseInt(parts[2]);
+                        int senderID = Integer.parseInt(parts[1]);
+                        ServerApp.sendGameRequest(senderID, receiverID);
+                    } else if ("GameRequest".equals(parts[0])) {
+                        System.out.println("Received request from: " + parts[1] + " to: " + parts[2]);
+                        int receiverID = Integer.parseInt(parts[2]);
+                        int senderID = Integer.parseInt(parts[1]);
+                        ServerApp.sendGameRequest(senderID, receiverID);
+                    } else if ("RandomGameRequest".equals(parts[0])) {
+                        System.out.println("Received randomGame from: " + parts[1]);
+                        int senderID = Integer.parseInt(parts[1]);
+                        String deck = parts[2];
+                        ServerApp.randomGame(senderID, deck);
+                    } else if ("TournamentGameRequest".equals(parts[0])) {
+                        System.out.println("Received randomGame from: " + parts[1]);
+                        int senderID = Integer.parseInt(parts[1]);
+                        ServerApp.tournament(senderID);
+                    } else if ("Message".equals(parts[0])) {
+                        System.out.println("Received message: " + parts[3]);
+                        int receiverID = Integer.parseInt(parts[2]);
+                        int senderID = Integer.parseInt(parts[1]);
+                        String message = parts[3];
+                        ServerApp.sendMessage(senderID, receiverID, message);
+                    } else if ("player".equals(parts[0])) {
+                        System.out.println("ridim");
+                    } else {
+                        handleCommand(inputLine);
                     }
-                } else if ("ClientConnector".equals(parts[0])) {
-                    ID = Integer.parseInt(parts[1]);
-                    server.addClientConnector(ID, this);
-                    server.addPlayer(ID, this);
-                } else if ("Request".equals(parts[0])) {
-                    System.out.println("Received request to: " + parts[2]);
-                    int receiverID = Integer.parseInt(parts[2]);
-                    int senderID = Integer.parseInt(parts[1]);
-                    ServerApp.sendGameRequest(senderID, receiverID);
-                } else if ("GameRequest".equals(parts[0])) {
-                    System.out.println("Received request from: " + parts[1] + " to: " + parts[2]);
-                    int receiverID = Integer.parseInt(parts[2]);
-                    int senderID = Integer.parseInt(parts[1]);
-                    ServerApp.sendGameRequest(senderID, receiverID);
-                } else if ("RandomGameRequest".equals(parts[0])) {
-                    System.out.println("Received randomGame from: " + parts[1]);
-                    int senderID = Integer.parseInt(parts[1]);
-                    ServerApp.randomGame(senderID);
-                } else if ("TournamentGameRequest".equals(parts[0])) {
-                    System.out.println("Received randomGame from: " + parts[1]);
-                    int senderID = Integer.parseInt(parts[1]);
-                    ServerApp.tournament(senderID);
-                } else if ("Message".equals(parts[0])) {
-                    System.out.println("Received message: " + parts[3]);
-                    int receiverID = Integer.parseInt(parts[2]);
-                    int senderID = Integer.parseInt(parts[1]);
-                    String message = parts[3];
-                    ServerApp.sendMessage(senderID, receiverID, message);
-                } else {
-                    handleCommand(inputLine);
                 }
             }
         } catch (Exception e) {

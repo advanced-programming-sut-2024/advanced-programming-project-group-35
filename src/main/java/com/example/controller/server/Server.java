@@ -1,6 +1,4 @@
 package com.example.controller.server;// Server.java
-import com.example.model.ServerApp;
-import com.example.model.User;
 import com.example.model.game.OnlineTable;
 import com.example.model.game.Player;
 
@@ -19,9 +17,9 @@ public class Server {
         System.setProperty("jdk.tls.client.protocols", "TLSv1.2,TLSv1.3");
 
         ServerApp.setServer(this);
-        ServerApp.loadUsers("users.json");
+        ServerApp.loadUsers("user.json");
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            ServerApp.saveUsers("users.json");
+            ServerApp.saveUsers("user.json");
         }));
         try (ServerSocket serverSocket = new ServerSocket(PORT)) {
             System.out.println("Server started on port " + PORT);

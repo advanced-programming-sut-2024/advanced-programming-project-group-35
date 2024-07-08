@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import com.example.model.App;
+import com.example.model.alerts.AlertType;
 import com.example.model.deckmanager.DeckManager;
 import com.example.model.alerts.NotificationsData;
 import com.example.model.card.*;
@@ -13,9 +14,12 @@ import com.example.model.game.place.Row;
 import com.example.model.game.place.RowsInGame;
 import com.example.view.Menu;
 import com.example.view.menuControllers.GameMenuControllerView;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.util.Duration;
 
@@ -25,25 +29,27 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.*;
-import java.util.concurrent.CountDownLatch;
 import java.util.stream.Collectors;
 
-public class GameMenuController extends AppController {
+public class GameMenuControllerForOnlineGame extends AppController {
     private Table table;
     private GameMenuControllerView gameMenuControllerView;
     private int turn = 1;
 
     @Override
     public void run() {
-        try {
-            App.getAppView().showMenu(Menu.GAME_MENU);
+        System.out.println("waiting");
+        Platform.runLater(() -> {
+            try {
+                App.getAppView().showMenu(Menu.GAME_MENU);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
             App.setCurrentController(Controller.GAME_MENU_CONTROLLER);
             gameMenuControllerView = App.getAppView().getGameMenuControllerView();
             startRound(table);
-            App.getAppView().showNotification(NotificationsData.ROUND_START.getMessage(), NotificationsData.ROUND_START.getImageAddress(), null);
-        } catch (Exception e) {
-            throw new RuntimeException();
-        }
+//            App.getAppView().showNotification(NotificationsData.ROUND_START.getMessage(), NotificationsData.ROUND_START.getImageAddress(), null);
+        });
     }
 
     public GameMenuControllerView getGameMenuControllerView() {
@@ -148,7 +154,7 @@ public class GameMenuController extends AppController {
             }
         }
 
-        saveLog("card with id: " + cardId + " moved from " + origin + " to " + destination + " and ability applied");
+        App.out.println("player|" + table.getPlayerInTurn().getPriorityInGame() + "|movedCard|" + cardId + "|from|" + origin + "|" + destination + "andDoAbility");
         table.getCurrentPlayer().updateScore();
         table.getOpponent().updateScore();
         gameMenuControllerView.updateAllLabels();
@@ -208,7 +214,6 @@ public class GameMenuController extends AppController {
             }
         }
     }
-
 
 
     private String getRowNameBySpecialPlaceName(String specialPlaceName) {
@@ -353,11 +358,11 @@ public class GameMenuController extends AppController {
         }
     }
 
-    public void startNewGame(String player1Name, String player2Name, DeckToJson player1DeckNames, DeckToJson player2DeckNames) {
-        Deck player1Deck = DeckManager.loadDeck(player1DeckNames, 1);
-        Deck player2Deck = DeckManager.loadDeck(player2DeckNames, 2);
-        Player player1 = new Player(player1Name);
-        Player player2 = new Player(player2Name);
+    public void startNewGame(String player1Name, String player2Name, String player1DeckNames, String player2DeckNames) {
+        Deck player1Deck = DeckManager.loadDeck(getDeckToJsonByCardNames(player1DeckNames), 1);
+        Deck player2Deck = DeckManager.loadDeck(getDeckToJsonByCardNames(player2DeckNames), 2);
+        Player player1 = new Player(player1Name, Integer.parseInt(player1Name));
+        Player player2 = new Player(player2Name, Integer.parseInt(player2Name));
         player1.getBoard().setDeck(player1Deck);
         player2.getBoard().setDeck(player2Deck);
         player1.getBoard().setHandForStartGame(player1Deck);
@@ -367,75 +372,88 @@ public class GameMenuController extends AppController {
         player1.setPriorityInGame(1);
         player2.setPriorityInGame(2);
         table = new Table(player1, player2);
-        saveLog(generateInitialDeckData());
+
+
+//        saveLog(generateInitialDeckData());
         Round round1 = new Round(1);
         table.addRound(round1);
         table.setCurrentRound(round1);
     }
 
-    public void saveLog(String command) {
+    private DeckToJson getDeckToJsonByCardNames(String deck) {
         try {
-            String filePath = getString(table);
-            JsonObject jsonObject;
-
-            File jsonFile = new File(filePath);
-            if (jsonFile.exists()) {
-                try (FileReader reader = new FileReader(jsonFile)) {
-                    jsonObject = JsonParser.parseReader(reader).getAsJsonObject();
-                }
-            } else {
-                jsonObject = new JsonObject();
-            }
-
-            JsonArray commands;
-            if (jsonObject.has("commands")) {
-                commands = jsonObject.getAsJsonArray("commands");
-            } else {
-                commands = new JsonArray();
-                jsonObject.add("commands", commands);
-            }
-
-            commands.add(command);
-
-            try (FileWriter writer = new FileWriter(filePath)) {
-                Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                gson.toJson(jsonObject, writer);
-                System.out.println("game log Saved Successfully.");
-            }
-        } catch (IOException | URISyntaxException e) {
+            ObjectMapper objectMapper = new ObjectMapper();
+            DeckToJson newDeck = objectMapper.readValue(deck, DeckToJson.class);
+            return newDeck;
+        } catch (JsonProcessingException e) {
             e.printStackTrace();
-            System.err.println("Failed to save game log." + e.getMessage());
+            return null;
         }
     }
 
+    public void saveLog(String command) {
+//        try {
+//            String filePath = getString(table);
+//            JsonObject jsonObject;
+//
+//            File jsonFile = new File(filePath);
+//            if (jsonFile.exists()) {
+//                try (FileReader reader = new FileReader(jsonFile)) {
+//                    jsonObject = JsonParser.parseReader(reader).getAsJsonObject();
+//                }
+//            } else {
+//                jsonObject = new JsonObject();
+//            }
+//
+//            JsonArray commands;
+//            if (jsonObject.has("commands")) {
+//                commands = jsonObject.getAsJsonArray("commands");
+//            } else {
+//                commands = new JsonArray();
+//                jsonObject.add("commands", commands);
+//            }
+//
+//            commands.add(command);
+//
+//            try (FileWriter writer = new FileWriter(filePath)) {
+//                Gson gson = new GsonBuilder().setPrettyPrinting().create();
+//                gson.toJson(jsonObject, writer);
+//                System.out.println("game log Saved Successfully.");
+//            }
+//        } catch (IOException | URISyntaxException e) {
+//            e.printStackTrace();
+//            System.err.println("Failed to save game log." + e.getMessage());
+//        }
+    }
+
     private void saveLog(LinkedHashMap<String, Object> deckData) {
-        try {
-            String filePath = getString(table);
-            JsonObject jsonObject;
-
-            File jsonFile = new File(filePath);
-            if (jsonFile.exists()) {
-                try (FileReader reader = new FileReader(jsonFile)) {
-                    jsonObject = JsonParser.parseReader(reader).getAsJsonObject();
-                }
-            } else {
-                jsonObject = new JsonObject();
-            }
-
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            for (Map.Entry<String, Object> entry : deckData.entrySet()) {
-                JsonElement element = gson.toJsonTree(entry.getValue());
-                jsonObject.add(entry.getKey(), element);
-            }
-
-            try (FileWriter writer = new FileWriter(filePath)) {
-                gson.toJson(jsonObject, writer);
-                System.out.println("game log Saved Successfully.");
-            }
-        } catch (IOException | URISyntaxException e) {
-            e.printStackTrace();
-            System.err.println("Failed to save game log." + e.getMessage());
-        }
+//        try {
+//            String filePath = getString(table);
+//            JsonObject jsonObject;
+//
+//            File jsonFile = new File(filePath);
+//            if (jsonFile.exists()) {
+//                try (FileReader reader = new FileReader(jsonFile)) {
+//                    jsonObject = JsonParser.parseReader(reader).getAsJsonObject();
+//                }
+//            } else {
+//                jsonObject = new JsonObject();
+//            }
+//
+//            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+//            for (Map.Entry<String, Object> entry : deckData.entrySet()) {
+//                JsonElement element = gson.toJsonTree(entry.getValue());
+//                jsonObject.add(entry.getKey(), element);
+//            }
+//
+//            try (FileWriter writer = new FileWriter(filePath)) {
+//                gson.toJson(jsonObject, writer);
+//                System.out.println("game log Saved Successfully.");
+//            }
+//        } catch (IOException | URISyntaxException e) {
+//            e.printStackTrace();
+//            System.err.println("Failed to save game log." + e.getMessage());
+//        }
     }
 
     private LinkedHashMap<String, Object> generateInitialDeckData() {
@@ -476,16 +494,16 @@ public class GameMenuController extends AppController {
         return deckData;
     }
 
-    private static String getString(Table table) throws URISyntaxException {
-        String rootPath = new File(GameMenuController.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile().getParentFile().getPath();
-        String logsDirPath = rootPath + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "gameLogs";
-        File logsDir = new File(logsDirPath);
-        if (!logsDir.exists()) {
-            logsDir.mkdirs();
-        }
-        String filePath = logsDirPath + File.separator + table.getGameId() + ".json";
-        return filePath;
-    }
+//    private static String getString(Table table) throws URISyntaxException {
+//        String rootPath = new File(GameMenuControllerForOnlineGame.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile().getParentFile().getPath();
+//        String logsDirPath = rootPath + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "gameLogs";
+//        File logsDir = new File(logsDirPath);
+//        if (!logsDir.exists()) {
+//            logsDir.mkdirs();
+//        }
+//        String filePath = logsDirPath + File.separator + table.getGameId() + ".json";
+//        return filePath;
+//    }
 
     public void passRound() {
         saveLog("player: " + table.getCurrentPlayer().getUsername() + " passed round");
@@ -626,12 +644,6 @@ public class GameMenuController extends AppController {
     private void changeTurn() {
         turn++;
         gameMenuControllerView.changeTurn();
-        if (turn == 2) {
-            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
-                gameMenuControllerView.showVetoCards();
-            }));
-            timeline.play();
-        }
         saveLog("change turn");
     }
 

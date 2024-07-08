@@ -6,6 +6,7 @@ module gwent {
     requires java.sql;
     requires java.mail;
     requires jakarta.mail;
+    requires com.fasterxml.jackson.databind;
 
     opens com.example.view.menuControllers to javafx.fxml;
     opens com.example.model to com.google.gson, javafx.base;
@@ -25,4 +26,5 @@ module gwent {
     exports com.example.controller.server;
     exports com.example.model.deckmanager;
     opens com.example.model.deckmanager to com.google.gson, javafx.base;
+    opens com.example.controller.server to com.google.gson, javafx.base;
 }

@@ -1,8 +1,10 @@
 package com.example.model;
 
 import com.example.model.card.enums.FactionsType;
+import com.example.model.deckmanager.DeckManager;
 import com.example.model.deckmanager.DeckToJson;
 import com.example.model.game.Table;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,7 +24,7 @@ public class User {
     private String name;
     private String lastName;
     private String profilePicture;
-    private DeckToJson temporaryDeck;
+    private DeckToJson temporaryDeck = DeckManager.loadDeck("E:\\uni\\AP\\decks\\monsters.json");
     private int wins = 0;
     private int losses = 0;
     private int score = 0;
@@ -224,8 +226,7 @@ public class User {
     }
 
 
-
-    void addFriendRequest(FriendRequest friendRequest) {
+    public void addFriendRequest(FriendRequest friendRequest) {
         if (friendRequests == null) {
             friendRequests = new ArrayList<>();
         }
@@ -235,6 +236,7 @@ public class User {
     public void setOnline(boolean b) {
         isOnline = b;
     }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -298,6 +300,7 @@ public class User {
             return false;
         }
     }
+
     public void addDeckNameToDeckAddresses(String deckName) {
         decksAddresses.add(deckName);
     }
@@ -315,20 +318,28 @@ public class User {
         return decksAddresses;
     }
 
-    private AtomicBoolean isInGame = new AtomicBoolean(false);
+    private boolean isInGame = true;
 
     public boolean isInGame() {
-        if (isInGame == null) {
-            isInGame = new AtomicBoolean(false);
-        }
-        boolean value = isInGame.get();
-        System.out.println("isInGame called, returning: " + value);
-        return value;
+//        if (isInGame == null) {
+//            isInGame = new AtomicBoolean(false);
+//        }
+//        boolean value = isInGame.get();
+//        System.out.println("isInGame called, returning: " + value);
+//        return value;
+        return true;
     }
 
     public void setInGame(boolean inGame) {
         System.out.println("setInGame called with value: " + inGame);
-        isInGame.set(inGame);
-        System.out.println("isInGame is now: " + isInGame.get());
+//        isInGame.set(inGame);
+//        System.out.println("isInGame is now: " + isInGame.get());
     }
+
+    public String getDeckString() throws Exception {
+        ObjectMapper objectMapper = new ObjectMapper();
+        String deckJson = objectMapper.writeValueAsString(temporaryDeck);
+        return deckJson;
+    }
+
 }

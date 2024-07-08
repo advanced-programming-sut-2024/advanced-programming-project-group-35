@@ -2,7 +2,7 @@ package com.example.view.menuControllers;
 
 import com.example.Main;
 import com.example.controller.Controller;
-import com.example.controller.GameMenuController;
+import com.example.controller.GameMenuControllerForOnlineGame;
 import com.example.model.App;
 import com.example.model.alerts.AlertType;
 import com.example.model.alerts.NotificationsData;
@@ -11,7 +11,6 @@ import com.example.model.card.Card;
 import com.example.model.card.enums.CardData;
 import com.example.model.card.enums.FactionsType;
 import com.example.model.card.enums.AbilityName;
-import com.example.model.game.Player;
 import com.example.model.game.Table;
 import com.example.model.game.place.RowsInGame;
 import javafx.animation.KeyFrame;
@@ -162,7 +161,7 @@ public class GameMenuControllerView {
 
 
     private Table table;
-    GameMenuController controller = (GameMenuController) Controller.GAME_MENU_CONTROLLER.getController();
+    GameMenuControllerForOnlineGame controller = (GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController();
 
     public void passRound(MouseEvent mouseEvent) {
         controller.passRound();
@@ -236,7 +235,6 @@ public class GameMenuControllerView {
         currentPlayerLeaderCard.setImage(new Image(Main.class.getResource("/images/inGameCards/" + table.getCurrentPlayer().getBoard().getDeck().getLeader().getLeaderName().getImageAddress()).toExternalForm()));
 
         addCurrentPlayerHandCards(table);
-
     }
 
 
@@ -1029,6 +1027,9 @@ public class GameMenuControllerView {
                     vetoCardPane.setVisible(false);
                     vetoCardButton.setVisible(false);
                     controller.vetoCard(table.getCurrentPlayer(), cardsToVeto);
+                    if (table.getCurrentPlayer() != table.getPlayerInTurn()) {
+                        App.getAppView().lockScreen();
+                    }
                 }
             });
         }
@@ -1040,6 +1041,9 @@ public class GameMenuControllerView {
         vetoCardPane.setVisible(false);
         vetoCardButton.setVisible(false);
         controller.vetoCard(table.getCurrentPlayer(), cardsToVeto);
+        if (table.getCurrentPlayer() != table.getPlayerInTurn()) {
+            App.getAppView().lockScreen();
+        }
     }
 }
 

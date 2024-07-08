@@ -1,9 +1,13 @@
-package com.example.model;
+package com.example.controller.server;
 
-import com.example.controller.server.ClientConnector;
-import com.example.controller.server.GameHandler;
-import com.example.controller.server.PlayerHandler;
-import com.example.controller.server.Server;
+import com.example.model.FriendRequest;
+import com.example.model.User;
+import com.example.model.card.enums.FactionsType;
+import com.example.model.deckmanager.DeckManager;
+import com.example.model.deckmanager.DeckToJson;
+import com.example.model.game.Deck;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -13,12 +17,16 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 public class ServerApp {
     private static Server server;
     private static int[] randomPlayers = new int[2];
+
     private static int[] tournamentPlayers = new int[8];
+
+    private static String[] randomPlayersDecks = new String[2];
 
     public static void setServer(Server server) {
         ServerApp.server = server;
@@ -81,7 +89,7 @@ public class ServerApp {
         user.addFriendRequest(friendRequest);
         friend.addFriendRequest(friendRequest);
         System.out.println("now is saving");
-        ServerApp.saveUsers("users.json");
+        ServerApp.saveUsers("user.json");
         System.out.println("saved");
     }
 
@@ -139,7 +147,7 @@ public class ServerApp {
         clientConnector.sendMessage(requestBuilder.toString());
     }
 
-    public static void StartOnlineGame(int player1ID, int player2ID) {
+    public static void StartOnlineGame(int player1ID, int player2ID, String playerDeck1, String playerDeck2) throws InterruptedException {
         //find user connector
         PlayerHandler clientConnector1 = server.getClientConnector(player1ID);
         PlayerHandler clientConnector2 = server.getClientConnector(player2ID);
@@ -150,13 +158,34 @@ public class ServerApp {
         System.out.println("client connectors found");
         //send request
         StringBuilder requestBuilder = new StringBuilder();
-        requestBuilder.append("GameStarts|").append(player1ID).append("|").append(player2ID);
+        Deck player2Deck = DeckManager.loadDeck(getDeckToJsonByCardNames(playerDeck2), 2);
+
+        ServerApp.getServer().players.get(player1ID).setInGame(true);
+        ServerApp.getServer().players.get(player2ID).setInGame(true);
+
+        if (player2Deck.getFaction().equals(FactionsType.ScoiaTael)) {
+            new GameHandler(player2ID, player1ID);
+            requestBuilder.append("GameStarts|").append(player2ID).append("|").append(playerDeck2).append("|").append(player1ID).append("|").append(playerDeck1);
+        } else {
+            new GameHandler(player1ID, player2ID);
+            requestBuilder.append("GameStarts|").append(player1ID).append("|").append(playerDeck1).append("|").append(player2ID).append("|").append(playerDeck2);
+        }
+
         clientConnector1.sendMessage(requestBuilder.toString());
         clientConnector2.sendMessage(requestBuilder.toString());
     }
+    private static DeckToJson getDeckToJsonByCardNames(String deck) {
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            DeckToJson newDeck = objectMapper.readValue(deck, DeckToJson.class);
+            return newDeck;
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
-    public static void randomGame(int senderID) {
-        //find user connector
+    public static void randomGame(int senderID, String deck) throws InterruptedException {
         PlayerHandler clientConnector = server.getClientConnector(senderID);
         if (clientConnector == null) {
             return;
@@ -164,18 +193,20 @@ public class ServerApp {
         //find random player
         if (randomPlayers[0] == 0) {
             randomPlayers[0] = senderID;
+            randomPlayersDecks[0] = deck;
             System.out.println("first random player detected");
             return;
         }
         randomPlayers[1] = senderID;
+        randomPlayersDecks[1] = deck;
         System.out.println("second random player detected");
         //send request
-        StartOnlineGame(randomPlayers[0], randomPlayers[1]);
+        StartOnlineGame(randomPlayers[0], randomPlayers[1], randomPlayersDecks[0], randomPlayersDecks[1]);
         randomPlayers[0] = 0;
         randomPlayers[1] = 0;
     }
 
-    public static void tournament(int senderID) {
+    public static void tournament(int senderID) throws InterruptedException {
         //find user connector
         PlayerHandler clientConnector = server.getClientConnector(senderID);
         if (clientConnector == null) {
@@ -197,12 +228,12 @@ public class ServerApp {
         startTournament();
     }
 
-    private static void startTournament() { //2-step elimination
+    private static void startTournament() throws InterruptedException { //2-step elimination
         //send request
-        StartOnlineGame(tournamentPlayers[0], tournamentPlayers[1]);
-        StartOnlineGame(tournamentPlayers[2], tournamentPlayers[3]);
-        StartOnlineGame(tournamentPlayers[4], tournamentPlayers[5]);
-        StartOnlineGame(tournamentPlayers[6], tournamentPlayers[7]);
+//        StartOnlineGame(tournamentPlayers[0], tournamentPlayers[1]);
+//        StartOnlineGame(tournamentPlayers[2], tournamentPlayers[3]);
+//        StartOnlineGame(tournamentPlayers[4], tournamentPlayers[5]);
+//        StartOnlineGame(tournamentPlayers[6], tournamentPlayers[7]);
     }
 
     public static void addGame(int gameID, GameHandler gameHandler) {

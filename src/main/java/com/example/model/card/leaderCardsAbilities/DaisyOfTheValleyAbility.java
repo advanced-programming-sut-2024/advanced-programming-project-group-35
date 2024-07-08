@@ -1,15 +1,8 @@
 package com.example.model.card.leaderCardsAbilities;
 
-import com.example.controller.Controller;
-import com.example.controller.GameMenuController;
 import com.example.model.card.AbilityContext;
-import com.example.model.card.Card;
 import com.example.model.game.Deck;
 import com.example.model.game.Player;
-import com.example.model.game.Table;
-import com.example.model.game.place.RowsInGame;
-
-import java.util.Random;
 
 public class DaisyOfTheValleyAbility implements LeaderAbility {
     @Override

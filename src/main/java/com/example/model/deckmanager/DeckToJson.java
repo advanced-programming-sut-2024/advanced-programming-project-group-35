@@ -1,26 +1,22 @@
 package com.example.model.deckmanager;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class DeckToJson {
-    private String faction;
-    private String leader;
-    private int totalNumberOfCards;
-    private int totalNumberOfHeros;
-    private int totalNumberOfSoldiers;
-    private int totalNumberOfSpecialCards;
-    private int sumOfPowers;
-    private ArrayList<String> cards;
+public class DeckToJson implements Serializable {
+    public String faction;
+    public String leader;
 
-    public DeckToJson(String faction, String leader, int totalNumberOfCards, int totalNumberOfHeros, int totalNumberOfSoldiers, int totalNumberOfSpecialCards, int sumOfPowers, ArrayList<String> cards) {
+    public ArrayList<String> cards;
+
+    public DeckToJson(String faction, String leader) {
         this.faction = faction;
         this.leader = leader;
-        this.totalNumberOfCards = totalNumberOfCards;
-        this.totalNumberOfHeros = totalNumberOfHeros;
-        this.totalNumberOfSoldiers = totalNumberOfSoldiers;
-        this.totalNumberOfSpecialCards = totalNumberOfSpecialCards;
-        this.sumOfPowers = sumOfPowers;
-        this.cards = cards;
+    }
+
+    public DeckToJson() {
     }
 
     public String getFaction() {
@@ -29,26 +25,6 @@ public class DeckToJson {
 
     public String getLeader() {
         return leader;
-    }
-
-    public int getTotalNumberOfCards() {
-        return totalNumberOfCards;
-    }
-
-    public int getTotalNumberOfHeros() {
-        return totalNumberOfHeros;
-    }
-
-    public int getTotalNumberOfSoldiers() {
-        return totalNumberOfSoldiers;
-    }
-
-    public int getTotalNumberOfSpecialCards() {
-        return totalNumberOfSpecialCards;
-    }
-
-    public int getSumOfPowers() {
-        return sumOfPowers;
     }
 
     public ArrayList<String> getCards() {

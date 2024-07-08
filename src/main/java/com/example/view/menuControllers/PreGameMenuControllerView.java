@@ -2,14 +2,13 @@ package com.example.view.menuControllers;
 
 import com.example.Main;
 import com.example.controller.Controller;
-import com.example.controller.GameMenuController;
+import com.example.controller.GameMenuControllerForOnlineGame;
 import com.example.controller.PreGameMenuController;
 import com.example.model.User;
 import com.example.model.card.enums.FactionsType;
 import com.example.model.deckmanager.DeckManager;
 import com.example.model.IO.errors.Errors;
 import com.example.model.alerts.AlertType;
-import com.example.model.User;
 import com.example.model.card.enums.CardData;
 import com.example.model.App;
 import com.example.model.card.PreGameCard;
@@ -21,6 +20,7 @@ import com.example.model.card.factions.*;
 import com.example.model.deckmanager.DeckToJson;
 import com.example.view.Menu;
 import com.example.view.OutputView;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
@@ -48,7 +48,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.Timer;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class PreGameMenuControllerView {
@@ -381,7 +380,7 @@ public class PreGameMenuControllerView {
         totalPowerLabel.setText("total power: " + totalPower);
     }
 
-    public void startGameButtonAction(ActionEvent actionEvent) {
+    public void startGameButtonAction(ActionEvent actionEvent) throws Exception {
         System.out.println(App.getLoggedInUser().getDeckName());
         if (playerDeck.size() < 22) {
             totalCardsLabel.setTextFill(Color.RED);
@@ -402,8 +401,8 @@ public class PreGameMenuControllerView {
             player1OfflineID = App.getLoggedInUser().getID();
             //App.loadUsers();
             App.temporaryUserID = player1OfflineID;
-            player1OfflineDeck = new DeckToJson(faction.getFaction().name(), leaderCard.getName(), totalCards, heroCardsCount, soldiersCount, specialCardsCount, totalPower, getPreGameCardNames(playerDeck));
-            App.setTemporaryDeck(player1OfflineDeck);
+            player1OfflineDeck = new DeckToJson(faction.getFaction().name(), leaderCard.getName());
+            App.getLoggedInUser().setTemporaryDeck(player1OfflineDeck);
             //App.saveUsers();
             App.setCurrentMenu(Menu.LOGIN_MENU);
             Controller.LOGIN_MENU_CONTROLLER.run();
@@ -414,14 +413,19 @@ public class PreGameMenuControllerView {
         } else {
             player1OfflineID = App.temporaryUserID;
             player2OfflineID = App.getLoggedInUser().getID();
-            player2OfflineDeck = new DeckToJson(faction.getFaction().name(), leaderCard.getName(), totalCards, heroCardsCount, soldiersCount, specialCardsCount, totalPower, getPreGameCardNames(playerDeck));
-            player1OfflineDeck = App.getTemporaryDeck();
+            player2OfflineDeck = new DeckToJson(faction.getFaction().name(), leaderCard.getName());
+            player1OfflineDeck = App.getLoggedInUser().getTemporaryDeck();
             App.getLoggedInUser().setTemporaryDeck(player2OfflineDeck);
-            GameMenuController gameMenuController = (GameMenuController) Controller.GAME_MENU_CONTROLLER.getController();
-            gameMenuController.startNewGame(App.getLoggedInUser().getUsername(), User.getUserByID(App.temporaryUserID).getUsername(), player1OfflineDeck, player2OfflineDeck);
-            gameMenuController.run();
+            GameMenuControllerForOnlineGame gameMenuControllerForOnlineGame = (GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController();
+            gameMenuControllerForOnlineGame.startNewGame(App.getLoggedInUser().getUsername(), User.getUserByID(App.temporaryUserID).getUsername(), getDeckString(player1OfflineDeck), getDeckString(player2OfflineDeck));
+            gameMenuControllerForOnlineGame.run();
             player1OfflineID = player2OfflineID = -1;
         }
+    }
+    public String getDeckString(DeckToJson deckToJson) throws Exception {
+        ObjectMapper objectMapper = new ObjectMapper();
+        String deckJson = objectMapper.writeValueAsString(deckToJson);
+        return deckJson;
     }
 
     private void startGameWithFriend(String friendUsername) {
@@ -442,24 +446,24 @@ public class PreGameMenuControllerView {
     public void sendRandomGameRequest(ActionEvent actionEvent) throws Exception {
         App.getServerConnector().sendRandomGameRequest(App.getLoggedInUser().getID());
         //wait for answer:
-        App.getAppView().showLoading();
-        new Thread(() -> {
-            while (true) {
-                try {
-                    Thread.sleep(2000);
-                    System.out.println("waiting for game to start");
-                    if (App.getLoggedInUser().isInGame()) {
-                        //go to game Controller menu TODO
-                        break;
-                    }
-
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }
-        ).start();
-        System.out.println("game started");
+//        App.getAppView().showLoading();
+//        new Thread(() -> {
+//            while (true) {
+//                try {
+//                    Thread.sleep(2000);
+//                    System.out.println("waiting for game to start");
+//                    if (App.getLoggedInUser().isInGame()) {
+//                        //go to game Controller menu TODO
+//                        break;
+//                    }
+//
+//                } catch (InterruptedException e) {
+//                    throw new RuntimeException(e);
+//                }
+//            }
+//        }
+//        ).start();
+//        System.out.println("game started");
     }
 
     public void sendTournamentGameRequest(ActionEvent actionEvent) {
@@ -651,7 +655,7 @@ public class PreGameMenuControllerView {
 
                 updateNumbers();
 
-                DeckManager.saveDeck(new DeckToJson(faction.getFaction().name(), leaderCard.getName(), totalCards, heroCardsCount, soldiersCount, specialCardsCount, totalPower, getPreGameCardNames(playerDeck)), App.getLoggedInUser().getID(), saveOrLoadDeckNameField.getText());
+                DeckManager.saveDeck(new DeckToJson(faction.getFaction().name(), leaderCard.getName()), App.getLoggedInUser().getID(), saveOrLoadDeckNameField.getText());
                 App.getLoggedInUser().addDeckNameToDeckAddresses(saveOrLoadDeckNameField.getText());
                 App.loadUsers();
                 App.getLoggedInUser().addDeckNameToDeckAddresses(saveOrLoadDeckNameField.getText());
@@ -674,7 +678,7 @@ public class PreGameMenuControllerView {
             if (saveOrLoadDeckNameField.getText().equals("")) {
                 App.getAppView().showAlert("Please enter a name for your deck", AlertType.ERROR.getType());
             } else {
-                DeckManager.saveDeck(new DeckToJson(faction.getFaction().name(), leaderCard.getName(), totalCards, heroCardsCount, soldiersCount, specialCardsCount, totalPower, getPreGameCardNames(playerDeck)), selectedDirectory.getAbsolutePath(), saveOrLoadDeckNameField.getText());
+                DeckManager.saveDeck(new DeckToJson(faction.getFaction().name(), leaderCard.getName()), selectedDirectory.getAbsolutePath(), saveOrLoadDeckNameField.getText());
                 App.getAppView().showAlert("Deck saved successfully", AlertType.SUCCESS.getType());
                 saveOrLoadDeckNameField.setText("");
             }

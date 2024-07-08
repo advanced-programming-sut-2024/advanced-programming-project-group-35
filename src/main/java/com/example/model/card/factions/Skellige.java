@@ -1,7 +1,7 @@
 package com.example.model.card.factions;
 
 import com.example.controller.Controller;
-import com.example.controller.GameMenuController;
+import com.example.controller.GameMenuControllerForOnlineGame;
 import com.example.model.card.Card;
 import com.example.model.card.SpecialCard;
 import com.example.model.card.WeatherCard;
@@ -52,49 +52,49 @@ public class Skellige implements Factions {
         if (selectedCard instanceof SpecialCard) {
             if (selectedCard instanceof WeatherCard) {
                 if (table.getCurrentPlayer() == player) {
-                    ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.currentPlayerDiscardPlace.toString(), RowsInGame.weather.toString());
+                    ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.currentPlayerDiscardPlace.toString(), RowsInGame.weather.toString());
                 } else {
-                    ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.opponentDiscardPlace.toString(), RowsInGame.weather.toString());
+                    ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.opponentDiscardPlace.toString(), RowsInGame.weather.toString());
                 }
             } else {
                 if (selectedCard.getPlace() == Place.CLOSE_COMBAT) {
                     if (table.getCurrentPlayer() == player) {
-                        ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.currentPlayerDiscardPlace.toString(), RowsInGame.currentPlayerSiegeSpecialPlace.toString());
+                        ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.currentPlayerDiscardPlace.toString(), RowsInGame.currentPlayerSiegeSpecialPlace.toString());
                     } else {
-                        ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.opponentDiscardPlace.toString(), RowsInGame.opponentCloseCombatSpecialPlace.toString());
+                        ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.opponentDiscardPlace.toString(), RowsInGame.opponentCloseCombatSpecialPlace.toString());
                     }
                 } else if (selectedCard.getPlace() == Place.SIEGE) {
                     if (table.getCurrentPlayer() == player) {
-                        ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.currentPlayerDiscardPlace.toString(), RowsInGame.currentPlayerSiegeSpecialPlace.toString());
+                        ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.currentPlayerDiscardPlace.toString(), RowsInGame.currentPlayerSiegeSpecialPlace.toString());
                     } else {
-                        ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.opponentDiscardPlace.toString(), RowsInGame.opponentSiegeSpecialPlace.toString());
+                        ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.opponentDiscardPlace.toString(), RowsInGame.opponentSiegeSpecialPlace.toString());
                     }
                 } else {
                     if (table.getCurrentPlayer() == player) {
-                        ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.currentPlayerDiscardPlace.toString(), RowsInGame.currentPlayerRangedSpecialPlace.toString());
+                        ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.currentPlayerDiscardPlace.toString(), RowsInGame.currentPlayerRangedSpecialPlace.toString());
                     } else {
-                        ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.opponentDiscardPlace.toString(), RowsInGame.opponentRangedSpecialPlace.toString());
+                        ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.opponentDiscardPlace.toString(), RowsInGame.opponentRangedSpecialPlace.toString());
                     }
                 }
             }
         } else {
             if (selectedCard.getPlace() == Place.CLOSE_COMBAT) {
                 if (table.getCurrentPlayer() == player) {
-                    ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.currentPlayerDiscardPlace.toString(), RowsInGame.currentPlayerCloseCombat.toString());
+                    ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.currentPlayerDiscardPlace.toString(), RowsInGame.currentPlayerCloseCombat.toString());
                 } else {
-                    ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.opponentDiscardPlace.toString(), RowsInGame.opponentCloseCombat.toString());
+                    ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.opponentDiscardPlace.toString(), RowsInGame.opponentCloseCombat.toString());
                 }
             } else if (selectedCard.getPlace() == Place.SIEGE) {
                 if (table.getCurrentPlayer() == player) {
-                    ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.currentPlayerDiscardPlace.toString(), RowsInGame.currentPlayerSiege.toString());
+                    ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.currentPlayerDiscardPlace.toString(), RowsInGame.currentPlayerSiege.toString());
                 } else {
-                    ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.opponentDiscardPlace.toString(), RowsInGame.opponentSiege.toString());
+                    ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.opponentDiscardPlace.toString(), RowsInGame.opponentSiege.toString());
                 }
             } else {
                 if (table.getCurrentPlayer() == player) {
-                    ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.currentPlayerDiscardPlace.toString(), RowsInGame.currentPlayerRanged.toString());
+                    ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.currentPlayerDiscardPlace.toString(), RowsInGame.currentPlayerRanged.toString());
                 } else {
-                    ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.opponentDiscardPlace.toString(), RowsInGame.opponentRanged.toString());
+                    ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDoAbility(selectedCard.getIdInGame(), RowsInGame.opponentDiscardPlace.toString(), RowsInGame.opponentRanged.toString());
                 }
             }
         }
