@@ -45,13 +45,16 @@ public class LoginMenuController extends AppController {
     public Errors loginUser(String username, String password, Boolean stayLoggedIn) {
         User user = App.getUserByUsername(username);
         if (user == null) {
-            return OutputView.showOutputAlert(Errors.USER_DOESNT_EXIST);
+            OutputView.showOutputAlert(Errors.USER_DOESNT_EXIST);
+            return Errors.USER_DOESNT_EXIST;
         }
         if (!user.getPassword().equals(password)) {
-            return OutputView.showOutputAlert(Errors.PASSWORD_DOESNT_MATCH);
+            OutputView.showOutputAlert(Errors.PASSWORD_DOESNT_MATCH);
+            return Errors.PASSWORD_DOESNT_MATCH;
         }
         App.setLoggedInUser(user);
-        return OutputView.showOutputAlert(Errors.LOGIN_SUCCESSFUL);
+        OutputView.showOutputAlert(Errors.LOGIN_SUCCESSFUL);
+        return Errors.LOGIN_SUCCESSFUL;
     }
 
     private Errors handlePassword(String newPassword, String confirmPassword) {
@@ -69,21 +72,26 @@ public class LoginMenuController extends AppController {
 
     public Errors registerUser(String username, String password, String confirmPassword, String nickname, String email, Boolean stayLoggedIn) {
         if (username == null || !isValidUsername(username)) {
-            return OutputView.showOutputAlert(Errors.INVALID_USERNAME_FORMAT);
+            OutputView.showOutputAlert(Errors.INVALID_USERNAME_FORMAT);
+            return Errors.INVALID_USERNAME_FORMAT;
         }
         if (App.getUserByUsername(username) != null) {
-            return OutputView.showOutputAlert(Errors.USER_ALREADY_EXISTS);
+            OutputView.showOutputAlert(Errors.USER_ALREADY_EXISTS);
+            return Errors.USER_ALREADY_EXISTS;
         }
         Errors error = handlePassword(password, confirmPassword);
         if (error != null) {
-            return OutputView.showOutputAlert(error);
+            OutputView.showOutputAlert(error);
+            return error;
         }
         if (!isValidEmail(email)) {
-            return OutputView.showOutputAlert(Errors.INVALID_EMAIL);
+            OutputView.showOutputAlert(Errors.INVALID_EMAIL);
+            return Errors.INVALID_EMAIL;
         }
         registeringUser = new User(username, password, nickname, email);
         currentStep = LoginMenuStep.REGISTER_FIRST_STEP;
-        return OutputView.showOutputAlert(Errors.REGISTER_FIRST_STEP_SUCCESSFUL);
+        OutputView.showOutputAlert(Errors.REGISTER_FIRST_STEP_SUCCESSFUL);
+        return Errors.REGISTER_FIRST_STEP_SUCCESSFUL;
     }
 
     private boolean isValidEmail(String email) {
@@ -129,17 +137,21 @@ public class LoginMenuController extends AppController {
     public Errors checkSecurityQuestions(String username, String securityQuestion, String securityAnswer) {
         forgotenPasswordUser = App.getUserByUsername(username);
         if (forgotenPasswordUser == null) {
-            return OutputView.showOutputAlert(Errors.USER_DOESNT_EXIST);
+            OutputView.showOutputAlert(Errors.USER_DOESNT_EXIST);
+            return Errors.USER_DOESNT_EXIST;
         }
         if (!forgotenPasswordUser.getSecurityQuestion().equals(securityQuestion)) {
             System.out.println(forgotenPasswordUser.getSecurityQuestion() + " " + securityQuestion);
-            return OutputView.showOutputAlert(Errors.WRONG_SECURITY_QUESTION);
+            OutputView.showOutputAlert(Errors.WRONG_SECURITY_QUESTION);
+            return Errors.WRONG_SECURITY_QUESTION;
         }
         if (!forgotenPasswordUser.getSecurityQuestionAnswer().equals(securityAnswer)) {
-            return OutputView.showOutputAlert(Errors.WRONG_ANSWER_CONFIRMATION);
+            OutputView.showOutputAlert(Errors.WRONG_ANSWER_CONFIRMATION);
+            return Errors.WRONG_ANSWER_CONFIRMATION;
         }
         currentStep = LoginMenuStep.SET_PASSWORD;
-        return OutputView.showOutputAlert(Errors.NO_ERROR);
+        OutputView.showOutputAlert(Errors.NO_ERROR);
+        return Errors.NO_ERROR;
     }
 
     public Errors setNewPassword(String password, String confirmPassword) {
