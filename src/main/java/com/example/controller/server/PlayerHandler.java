@@ -51,10 +51,15 @@ public class PlayerHandler implements Runnable {
                         int userID = Integer.parseInt(parts[2]);
                         ServerApp.setUserOffline(userID);
                     }
+                } else if ("SET_PLAYER".equals(parts[0])) {
+                    System.out.println("Received player ID: " + parts[1]);
+                    ID = Integer.parseInt(parts[1]);
+                    server.addPlayer(ID, this);
+                    this.out.println("test from handler");
                 } else if ("ClientConnector".equals(parts[0])) {
+                    System.out.println("Received client connector ID: " + parts[1]);
                     ID = Integer.parseInt(parts[1]);
                     server.addClientConnector(ID, this);
-                    server.addPlayer(ID, this);
                 } else if ("Request".equals(parts[0])) {
                     System.out.println("Received request to: " + parts[2]);
                     int receiverID = Integer.parseInt(parts[2]);

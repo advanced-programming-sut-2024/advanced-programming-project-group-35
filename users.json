@@ -27,24 +27,11 @@
     "gameData": [],
     "decksAddresses": [],
     "friends": [
-      3,
-      10
+      3
     ],
     "friendRequests": [
       {
         "senderID": 3,
-        "receiverID": 2,
-        "isAccepted": true,
-        "isRejected": false
-      },
-      {
-        "senderID": 3,
-        "receiverID": 2,
-        "isAccepted": true,
-        "isRejected": false
-      },
-      {
-        "senderID": 10,
         "receiverID": 2,
         "isAccepted": true,
         "isRejected": false
@@ -114,24 +101,6 @@
         "receiverID": 2,
         "isAccepted": true,
         "isRejected": false
-      },
-      {
-        "senderID": 3,
-        "receiverID": 2,
-        "isAccepted": true,
-        "isRejected": false
-      },
-      {
-        "senderID": 3,
-        "receiverID": 10,
-        "isAccepted": false,
-        "isRejected": true
-      },
-      {
-        "senderID": 3,
-        "receiverID": 3,
-        "isAccepted": false,
-        "isRejected": false
       }
     ]
   },
@@ -162,22 +131,7 @@
     "numberOfMinionCards": 0,
     "gameData": [],
     "decksAddresses": [],
-    "friends": [
-      2
-    ],
-    "friendRequests": [
-      {
-        "senderID": 3,
-        "receiverID": 10,
-        "isAccepted": false,
-        "isRejected": true
-      },
-      {
-        "senderID": 10,
-        "receiverID": 2,
-        "isAccepted": true,
-        "isRejected": false
-      }
-    ]
+    "friends": [],
+    "friendRequests": []
   }
 ]

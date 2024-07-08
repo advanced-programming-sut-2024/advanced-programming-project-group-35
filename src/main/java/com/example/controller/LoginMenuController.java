@@ -32,8 +32,12 @@ public class LoginMenuController extends AppController {
                 }
                 for (User user : App.getAllUsers()) {
                     if (user.stayLoggedIn()) {
-                        loginUserForce(user.getUsername(), user.getPassword(), true);
-                            Platform.runLater(() -> {
+                        try {
+                            loginUserForce(user.getUsername(), user.getPassword(), true);
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                        Platform.runLater(() -> {
                                 App.setCurrentMenu(Menu.MAIN_MENU);
                                 Controller.MAIN_MENU_CONTROLLER.run();
                             });
@@ -48,7 +52,7 @@ public class LoginMenuController extends AppController {
         }
     }
 
-    public Errors finalizeRegisterUser(String securityQuestionAnswer, String securityQuestionAnswerConfirmation, int securityQuestionNumber) {
+    public Errors finalizeRegisterUser(String securityQuestionAnswer, String securityQuestionAnswerConfirmation, int securityQuestionNumber) throws IOException {
         if (!securityQuestionAnswer.equals(securityQuestionAnswerConfirmation)) {
             return OutputView.showOutputAlert(Errors.WRONG_ANSWER_CONFIRMATION);
         }
@@ -62,7 +66,7 @@ public class LoginMenuController extends AppController {
         return OutputView.showOutputAlert(Errors.REGISTER_SUCCESSFUL);
     }
 
-    public Errors loginUser(String username, String password, Boolean stayLoggedIn) {
+    public Errors loginUser(String username, String password, Boolean stayLoggedIn) throws IOException {
         User user = App.getUserByUsername(username);
         if (user == null) {
             return OutputView.showOutputAlert(Errors.USER_DOESNT_EXIST);
@@ -75,7 +79,7 @@ public class LoginMenuController extends AppController {
         return OutputView.showOutputAlert(Errors.LOGIN_SUCCESSFUL);
     }
 
-    public void loginUserForce(String username, String password, Boolean stayLoggedIn) {
+    public void loginUserForce(String username, String password, Boolean stayLoggedIn) throws IOException {
         User user = App.getUserByUsername(username);
         if (user == null) {
             return;

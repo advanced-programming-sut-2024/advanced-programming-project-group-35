@@ -72,7 +72,7 @@ public class App {
         return loggedInUser;
     }
 
-    public static void setLoggedInUser(User loggedInUser) {
+    public static void setLoggedInUser(User loggedInUser) throws IOException {
         if (loggedInUser == null) {
             serverConnector.setUserOffline(App.loggedInUser);
             clientConnector.close();
@@ -87,7 +87,7 @@ public class App {
         serverConnector.setUserOnline(loggedInUser);
     }
 
-    private static void connectSereverToApp() {
+    private static void connectSereverToApp() throws IOException {
         out.println("SET_PLAYER|" + loggedInUser.getID());
         try {
             clientConnector = new ClientConnector(loggedInUser.getID());
