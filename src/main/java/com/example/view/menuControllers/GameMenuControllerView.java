@@ -4,8 +4,7 @@ import com.example.Main;
 import com.example.controller.Controller;
 import com.example.controller.GameMenuControllerForOnlineGame;
 import com.example.model.App;
-import com.example.model.alerts.AlertType;
-import com.example.model.alerts.NotificationsData;
+import com.example.model.alerts.*;
 import com.example.model.card.*;
 import com.example.model.card.Card;
 import com.example.model.card.enums.CardData;
@@ -21,11 +20,13 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -85,6 +86,20 @@ public class GameMenuControllerView {
     public ImageView vetoCardBackground;
     public VBox vetoCardBox;
     public Button vetoCardButton;
+    public Button emoteButton1;
+    public Button emoteButton2;
+    public Button emoteButton3;
+    public Button emoteButton4;
+    public Button emoteButton5;
+    public Button emoteButton6;
+    public Button emoteButton7;
+    public Button emoteButton8;
+    public Button showEmoteButton;
+    public Button hideEmoteButton;
+    public Button showCustomEmoteHboxButton;
+    public HBox customEmoteHbox;
+    public Button hideCustomEmoteHboxButton;
+    public TextField emoteTextField;
     private ObservableList<PreGameCard> vetoCardsToShow = FXCollections.observableArrayList();
     private ObservableList<Card> allCardsToVeto = FXCollections.observableArrayList();
     private ObservableList<Card> cardsToVeto = FXCollections.observableArrayList();
@@ -785,7 +800,7 @@ public class GameMenuControllerView {
     }
 
     public void setPowerOfCardDefault(int cardId) {
-       getGameCardViewWithCardId(cardId).setPowerDefault();
+        getGameCardViewWithCardId(cardId).setPowerDefault();
     }
 
     public void setPowerOfCardsDefault() {
@@ -966,10 +981,12 @@ public class GameMenuControllerView {
     }
 
     public void setClownImageForOpponentLeaderCard() {
-       opponentPlayerLeaderCard.setImage(new Image(GameMenuControllerView.class.getResource("/images/crown.jpg").toExternalForm()));
-       table.getOpponent().getBoard().getDeck().getLeader().setPictureClown(true);
+        opponentPlayerLeaderCard.setImage(new Image(GameMenuControllerView.class.getResource("/images/crown.jpg").toExternalForm()));
+        table.getOpponent().getBoard().getDeck().getLeader().setPictureClown(true);
     }
+
     private int decoyCheat = 0;
+
     public void addDecoyCard() {
         if (decoyCheat == 0) {
             Card decoy = CardFactory.getCardByName("special_decoy");
@@ -988,6 +1005,7 @@ public class GameMenuControllerView {
             App.getAppView().showAlert("you can't recieve more than one decoy card", AlertType.WARNING.getType());
         }
     }
+
     public void showVetoCards() {
         vetoCardBox.setVisible(true);
         vetoCardButton.setVisible(true);
@@ -1053,6 +1071,116 @@ public class GameMenuControllerView {
         if (table.getCurrentPlayer() != table.getPlayerInTurn()) {
             App.getAppView().lockScreen();
         }
+    }
+
+    public void showEmoteButtons(MouseEvent mouseEvent) {
+        emoteButton1.setVisible(true);
+        emoteButton2.setVisible(true);
+        emoteButton3.setVisible(true);
+        emoteButton4.setVisible(true);
+        emoteButton5.setVisible(true);
+        emoteButton6.setVisible(true);
+        emoteButton7.setVisible(true);
+        emoteButton8.setVisible(true);
+        hideEmoteButton.setVisible(true);
+        showEmoteButton.setVisible(false);
+        customEmoteHbox.setVisible(false);
+        hideCustomEmoteHboxButton.setVisible(false);
+        showCustomEmoteHboxButton.setVisible(false);
+    }
+
+    public void haHaEmote(MouseEvent mouseEvent) {
+        Emote emote = new Emote(Emotes.HA_HA_HA);
+        controller.sendEmote(emote, Emotes.HA_HA_HA);
+    }
+
+    public void thanksEmote(MouseEvent mouseEvent) {
+        Emote emote = new Emote(Emotes.THANKS);
+        controller.sendEmote(emote, Emotes.THANKS);
+    }
+
+    public void oopsEmote(MouseEvent mouseEvent) {
+        Emote emote = new Emote(Emotes.OOPS);
+        controller.sendEmote(emote, Emotes.OOPS);
+    }
+
+    public void dirinLaLaLaEmote(MouseEvent mouseEvent) {
+        Emote emote = new Emote(Emotes.DIRIN_LALALA);
+        controller.sendEmote(emote, Emotes.DIRIN_LALALA);
+    }
+
+    public void boringEmote(MouseEvent mouseEvent) {
+        Emote emote = new Emote(Emotes.BORING);
+        controller.sendEmote(emote, Emotes.BORING);
+    }
+
+    public void shhhhEmote(MouseEvent mouseEvent) {
+        Emote emote = new Emote(Emotes.SHHHHHH);
+        controller.sendEmote(emote, Emotes.SHHHHHH);
+    }
+
+    public void anyWayEmote(MouseEvent mouseEvent) {
+        Emote emote = new Emote(Emotes.ANY_WAY);
+        controller.sendEmote(emote, Emotes.ANY_WAY);
+    }
+
+    public void goodOneEmote(MouseEvent mouseEvent) {
+        Emote emote = new Emote(Emotes.GOOD_ONE);
+        controller.sendEmote(emote, Emotes.GOOD_ONE);
+    }
+
+    public void hideEmoteButtons(MouseEvent mouseEvent) {
+        emoteButton1.setVisible(false);
+        emoteButton2.setVisible(false);
+        emoteButton3.setVisible(false);
+        emoteButton4.setVisible(false);
+        emoteButton5.setVisible(false);
+        emoteButton6.setVisible(false);
+        emoteButton7.setVisible(false);
+        emoteButton8.setVisible(false);
+        hideEmoteButton.setVisible(false);
+        showEmoteButton.setVisible(true);
+        customEmoteHbox.setVisible(false);
+        hideCustomEmoteHboxButton.setVisible(false);
+        showCustomEmoteHboxButton.setVisible(true);
+    }
+
+    public void showCustomEmoteHbox(MouseEvent mouseEvent) {
+        emoteButton1.setVisible(false);
+        emoteButton2.setVisible(false);
+        emoteButton3.setVisible(false);
+        emoteButton4.setVisible(false);
+        emoteButton5.setVisible(false);
+        emoteButton6.setVisible(false);
+        emoteButton7.setVisible(false);
+        emoteButton8.setVisible(false);
+        hideEmoteButton.setVisible(false);
+        showEmoteButton.setVisible(false);
+        customEmoteHbox.setVisible(true);
+        hideCustomEmoteHboxButton.setVisible(true);
+        showCustomEmoteHboxButton.setVisible(false);
+    }
+
+    public void sendCustomEmote(MouseEvent mouseEvent) {
+        String text = emoteTextField.getText();
+        TextEmote textEmote = new TextEmote(text);
+        controller.sendTextEmote(textEmote, text);
+    }
+
+    public void hideCustomEmoteHbox(MouseEvent mouseEvent) {
+        emoteButton1.setVisible(false);
+        emoteButton2.setVisible(false);
+        emoteButton3.setVisible(false);
+        emoteButton4.setVisible(false);
+        emoteButton5.setVisible(false);
+        emoteButton6.setVisible(false);
+        emoteButton7.setVisible(false);
+        emoteButton8.setVisible(false);
+        hideEmoteButton.setVisible(false);
+        showEmoteButton.setVisible(true);
+        customEmoteHbox.setVisible(false);
+        hideCustomEmoteHboxButton.setVisible(false);
+        showCustomEmoteHboxButton.setVisible(true);
     }
 }
 
