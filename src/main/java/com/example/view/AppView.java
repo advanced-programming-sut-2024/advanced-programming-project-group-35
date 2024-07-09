@@ -177,7 +177,7 @@ public class AppView extends Application {
             timeline.play();
             timeline.setOnFinished(actionEvent -> {
                 isAlert = false;
-                removeConfirmationAlert(pane);
+                removeConfirmationAlert();
             });
         }
     }
