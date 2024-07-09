@@ -6,7 +6,7 @@ import java.io.*;
 import java.net.Socket;
 
 public class PlayerHandler implements Runnable {
-    private static final String USERS_FILE = "user.json";
+    private static final String USERS_FILE = "users.json";
     private Socket socket;
     private Server server;
     private int ID;

@@ -91,7 +91,7 @@ public class ServerApp {
         user.addFriendRequest(friendRequest);
         friend.addFriendRequest(friendRequest);
         System.out.println("now is saving");
-        ServerApp.saveUsers("user.json");
+        ServerApp.saveUsers("users.json");
         System.out.println("saved");
     }
 

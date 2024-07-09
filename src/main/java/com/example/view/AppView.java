@@ -44,13 +44,16 @@ public class AppView extends Application {
     private boolean isEmote;
     private boolean isNotification = false;
     private boolean terminalVisible = false;
+
     private Terminal getTerminal() {
         return terminal;
     }
+
     private GameMenuControllerView gameMenuControllerView;
     private FriendsMenuControllerView friendsMenuControllerView;
     private Menu currentMenu;
     private Stage lockScreen;
+
     public void showMenu(Menu menu) throws Exception {
 //        primaryStage.centerOnScreen();
 
@@ -75,6 +78,7 @@ public class AppView extends Application {
         primaryStage.show();
         currentMenu = menu;
     }
+
     public void showEmote(Emotes emotes) {
         if (!isEmote) {
             emote = new Emote(emotes);
@@ -96,12 +100,13 @@ public class AppView extends Application {
             isEmote = true;
             Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5)));
             timeline.play();
-            timeline.setOnFinished(actionEvent ->  {
+            timeline.setOnFinished(actionEvent -> {
                 isEmote = false;
                 removeEmote();
             });
         }
     }
+
     public void removeEmote() {
         ScaleTransition transition = new ScaleTransition(Duration.millis(300), emote);
 
@@ -111,7 +116,7 @@ public class AppView extends Application {
         transition.setToY(0);
         transition.play();
 
-        transition.setOnFinished(actionEvent ->  {
+        transition.setOnFinished(actionEvent -> {
             pane.getChildren().remove(emote);
             isEmote = false;
         });
@@ -126,18 +131,20 @@ public class AppView extends Application {
             isAlert = true;
             Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5)));
             timeline.play();
-            timeline.setOnFinished(actionEvent ->  {
+            timeline.setOnFinished(actionEvent -> {
                 isAlert = false;
                 removeAlert();
             });
         }
     }
+
     public void removeAlert() {
         pane.getChildren().remove(alert);
         isAlert = false;
     }
 
-    public void showConfirmationAlert(String message, String alertType) {
+    public boolean showConfirmationAlert(String message, String alertType) {
+
         if (!isAlert) {
             confirmationAlert = new ConfirmationAlert(message, alertType);
             confirmationAlert.setLayoutX(pane.getWidth() - confirmationAlert.width - 35);
@@ -146,11 +153,16 @@ public class AppView extends Application {
             isAlert = true;
             Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5)));
             timeline.play();
-            timeline.setOnFinished(actionEvent ->  {
+            timeline.setOnFinished(actionEvent -> {
                 isAlert = false;
-                removeAlert();
+                removeConfirmationAlert();
             });
         }
+        System.out.println("confirmation alert : " + confirmationAlert.isResult());
+        while (confirmationAlert.isPending()) {
+            System.out.println("waiting for confirmation");
+        }
+        return confirmationAlert.isResult();
     }
 
     public void showConfirmationAlert(String message, String alertType, FriendRequest friendRequest) {
@@ -162,17 +174,18 @@ public class AppView extends Application {
             isAlert = true;
             Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5)));
             timeline.play();
-            timeline.setOnFinished(actionEvent ->  {
+            timeline.setOnFinished(actionEvent -> {
                 isAlert = false;
                 removeAlert();
             });
         }
     }
 
-    public void removeConfirmationAlert(Pane currentPane) {
-        currentPane.getChildren().remove(confirmationAlert);
+    public void removeConfirmationAlert() {
+        pane.getChildren().remove(confirmationAlert);
         isAlert = false;
     }
+
     public void showNotification(String message, String imageAddress, String username) {
         if (!isNotification) {
             notification = new Notification(message, imageAddress, username);
@@ -182,12 +195,13 @@ public class AppView extends Application {
             isNotification = true;
             Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2)));
             timeline.play();
-            timeline.setOnFinished(actionEvent ->  {
+            timeline.setOnFinished(actionEvent -> {
                 isNotification = false;
                 removeNotification(pane);
             });
         }
     }
+
     public void removeNotification(Pane currentPane) {
         currentPane.getChildren().remove(notification);
         isNotification = false;
@@ -224,6 +238,7 @@ public class AppView extends Application {
         transition.setToY(550);
         transition.play();
     }
+
     public void lockScreen() {
         pane.addEventFilter(MouseEvent.ANY, MouseEvent::consume);
     }

@@ -184,7 +184,7 @@ public class App {
 
     public static void updateHandly() {
         Gson gson = new GsonBuilder().create();
-        try (FileReader reader = new FileReader("user.json")) {
+        try (FileReader reader = new FileReader("users.json")) {
             Type userListType = new TypeToken<ArrayList<User>>() {
             }.getType();
             allUsers = gson.fromJson(reader, userListType);
