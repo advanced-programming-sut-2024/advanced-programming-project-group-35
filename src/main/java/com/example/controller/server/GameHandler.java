@@ -26,9 +26,10 @@ public class GameHandler implements Runnable {
     private PrintWriter player1Out;
     private PrintWriter player2Out;
     private boolean isPlayer1Turn = true;
+    private boolean isPrivate;
     private Log gameHistory;
 
-    public GameHandler(int player1ID, int player2ID) throws InterruptedException {
+    public GameHandler(int player1ID, int player2ID, boolean isPrivate) throws InterruptedException {
         this.player1ID = player1ID;
         this.player2ID = player2ID;
         player1Handler = ServerApp.getServer().players.get(player1ID);
@@ -47,6 +48,7 @@ public class GameHandler implements Runnable {
         ServerApp.addGame(gameID, this);
         player1Handler.setGameHandler(this);
         player2Handler.setGameHandler(this);
+        this.isPrivate = isPrivate;
         gameHistory = new Log(player1ID, player2ID, new DeckToJson(), new DeckToJson());
     }
 

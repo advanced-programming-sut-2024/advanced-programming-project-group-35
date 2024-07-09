@@ -295,8 +295,8 @@ public class AppView extends Application {
     public void updateUserInfo() { //check if current menu is profile or score board
         if (currentMenu.getTitle().equals("Friends Menu")) { //reset the menu to show the new data
             App.getAppView().getFriendsMenuControllerView().updateFriendRequestList();
-        } else if (currentMenu.getTitle().equals("Score Table")) {
-            Controller.SCORE_TABLE_MENU_CONTROLLER.run();
+        } else if (currentMenu.getTitle().equals("Score Table")) {//
+            //TODO Ali score board ro mese friends update kon.
         }
     }
 
