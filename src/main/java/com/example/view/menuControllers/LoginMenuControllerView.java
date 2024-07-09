@@ -87,7 +87,7 @@ public class LoginMenuControllerView {
         App.getAppView().setPane(pane);
     }
 
-    public void loginUser(MouseEvent mouseEvent) {
+    public void loginUser(MouseEvent mouseEvent) throws IOException {
         String username = usernameFieldLogin.getText();
         String password = passwordFieldLogin.getText();
         boolean stayLoggedIn = stayLoggedInCheckBoxLogin.isSelected();
@@ -130,7 +130,7 @@ public class LoginMenuControllerView {
         emailVerificationCode = controller.getEmailVerificationCode();
     }
 
-    public void finalizeRegisterUser(MouseEvent mouseEvent) {
+    public void finalizeRegisterUser(MouseEvent mouseEvent) throws IOException {
         int securityQuestionIndex = securityQuestionRegister.getSelectionModel().getSelectedIndex();
         String securityAnswer = securityAnswerRegister.getText();
         String securityAnswerConfirmation = securityAnswerConfirmationRegister.getText();
@@ -178,7 +178,7 @@ public class LoginMenuControllerView {
         }
     }
 
-    public void testApp1(MouseEvent mouseEvent) {
+    public void testApp1(MouseEvent mouseEvent) throws IOException {
         String username = "ali";
         String password = "@li0083Moi";
         boolean stayLoggedIn = false;
@@ -189,7 +189,7 @@ public class LoginMenuControllerView {
         }
     }
 
-    public void testApp2(MouseEvent mouseEvent) {
+    public void testApp2(MouseEvent mouseEvent) throws IOException {
         String username = "parsa";
         String password = "endnu003d20u0026Y+";
         boolean stayLoggedIn = false;
@@ -200,7 +200,7 @@ public class LoginMenuControllerView {
         }
     }
 
-    public void testApp3(MouseEvent mouseEvent) {
+    public void testApp3(MouseEvent mouseEvent) throws IOException {
         String username = "alireza";
         String password = "Alireza123@";
         boolean stayLoggedIn = false;

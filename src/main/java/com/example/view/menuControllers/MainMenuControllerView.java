@@ -33,7 +33,7 @@ public class MainMenuControllerView {
         controller.openPreGameMenu();
     }
 
-    public void logout(MouseEvent mouseEvent) {
+    public void logout(MouseEvent mouseEvent) throws IOException {
         controller.logout();
     }
 

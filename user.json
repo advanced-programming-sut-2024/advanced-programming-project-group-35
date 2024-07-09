@@ -31,15 +31,9 @@
     ],
     "friendRequests": [
       {
-        "senderID": 3,
-        "receiverID": 2,
-        "isAccepted": true,
-        "isRejected": true
-      },
-      {
         "senderID": 2,
-        "receiverID": 2,
-        "isAccepted": false,
+        "receiverID": 3,
+        "isAccepted": true,
         "isRejected": false
       }
     ],
@@ -105,15 +99,9 @@
     ],
     "friendRequests": [
       {
-        "senderID": 3,
-        "receiverID": 2,
-        "isAccepted": true,
-        "isRejected": true
-      },
-      {
-        "senderID": 3,
+        "senderID": 2,
         "receiverID": 3,
-        "isAccepted": false,
+        "isAccepted": true,
         "isRejected": false
       }
     ],
@@ -123,9 +111,9 @@
     "stayLoggedIn": false,
     "isOnline": true,
     "id": 10,
-    "username": "ali123",
-    "password": "Bp+\u003d%\u003d1%cI",
-    "nickname": "asmd",
+    "username": "alireza",
+    "password": "Alireza123@",
+    "nickname": "alireza",
     "email": "sjhagdhj@ahsgdh.com",
     "securityQuestion": 0,
     "securityQuestionAnswer": "What is your favorite color?",
@@ -146,6 +134,7 @@
     "numberOfMinionCards": 0,
     "gameData": [],
     "decksAddresses": [],
+    "friends": [],
     "friendRequests": [],
     "isInGame": false
   }

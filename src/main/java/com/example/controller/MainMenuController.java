@@ -4,6 +4,8 @@ import com.example.model.App;
 import com.example.model.User;
 import com.example.view.Menu;
 
+import java.io.IOException;
+
 public class MainMenuController extends AppController {
     private final User loggedInUser = App.getLoggedInUser();
     @Override
@@ -18,7 +20,7 @@ public class MainMenuController extends AppController {
     public void createGame(String opponentName) {
 
     }
-    public void logout() {
+    public void logout() throws IOException {
         App.setLoggedInUser(null);
         App.setCurrentMenu(Menu.LOGIN_MENU);
         Controller.LOGIN_MENU_CONTROLLER.run();

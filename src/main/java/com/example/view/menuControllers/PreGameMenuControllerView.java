@@ -441,24 +441,24 @@ public class PreGameMenuControllerView {
         }
         int receiverID = receiver.getID();
         App.getServerConnector().sendGameRequest(senderID, receiverID);
-        App.getAppView().showLoading();
-        new Thread(() -> {
-            while (true) {
-                try {
-                    Thread.sleep(2000);
-                    System.out.println("waiting for game to start");
-                    if (App.getLoggedInUser().isInGame()) {
-                        //go to game Controller menu TODO
-                        break;
-                    }
-
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }
-        ).start();
-        System.out.println("game started");
+//        App.getAppView().showLoading();
+//        new Thread(() -> {
+//            while (true) {
+//                try {
+//                    Thread.sleep(2000);
+//                    System.out.println("waiting for game to start");
+//                    if (App.getLoggedInUser().isInGame()) {
+//                        //go to game Controller menu TODO
+//                        break;
+//                    }
+//
+//                } catch (InterruptedException e) {
+//                    throw new RuntimeException(e);
+//                }
+//            }
+//        }
+//        ).start();
+//        System.out.println("game started");
     }
 
     public void sendRandomGameRequest(ActionEvent actionEvent) throws Exception {

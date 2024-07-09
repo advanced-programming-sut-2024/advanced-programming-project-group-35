@@ -362,13 +362,6 @@ public class User {
 //        System.out.println("isInGame is now: " + isInGame.get());
     }
 
-    public String getDeckString() throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
-        String deckJson = objectMapper.writeValueAsString(temporaryDeck);
-        return deckJson;
-    }
-
-
     public boolean stayLoggedIn() {
         return stayLoggedIn;
     }
@@ -385,7 +378,16 @@ public class User {
         }
     }
 
+    public String getDeckString() throws Exception {
+        ObjectMapper objectMapper = new ObjectMapper();
+        String deckJson = objectMapper.writeValueAsString(temporaryDeck);
+        return deckJson;
+    }
+
     public boolean isOnline() {
         return isOnline;
+    }
+    public int getId() {
+        return id;
     }
 }

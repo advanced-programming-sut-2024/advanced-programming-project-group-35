@@ -93,7 +93,7 @@ public class ServerApp {
         user.addFriendRequest(friendRequest);
         friend.addFriendRequest(friendRequest);
         System.out.println("now is saving");
-        ServerApp.saveUsers("user.json");
+        ServerApp.saveUsers("users.json");
         System.out.println("saved");
     }
 
@@ -162,6 +162,7 @@ public class ServerApp {
         System.out.println("client connectors found");
         //send request
         StringBuilder requestBuilder = new StringBuilder();
+        System.out.println("---" + playerDeck2);
         Deck player2Deck = DeckManager.loadDeck(getDeckToJsonByCardNames(playerDeck2), 2);
 
         ServerApp.getServer().players.get(player1ID).setInGame(true);

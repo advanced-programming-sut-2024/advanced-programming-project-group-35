@@ -75,7 +75,7 @@ public class App {
         return loggedInUser;
     }
 
-    public static void setLoggedInUser(User loggedInUser) {
+    public static void setLoggedInUser(User loggedInUser) throws IOException {
         if (loggedInUser == null) {
             serverConnector.setUserOffline(App.loggedInUser);
             clientConnector.close();
@@ -90,7 +90,7 @@ public class App {
         serverConnector.setUserOnline(loggedInUser);
     }
 
-    private static void connectSereverToApp() {
+    private static void connectSereverToApp() throws IOException {
         out.println("SET_PLAYER|" + loggedInUser.getID());
         try {
             clientConnector = new ClientConnector(loggedInUser.getID());
@@ -184,7 +184,7 @@ public class App {
 
     public static void updateHandly() {
         Gson gson = new GsonBuilder().create();
-        try (FileReader reader = new FileReader("user.json")) {
+        try (FileReader reader = new FileReader("users.json")) {
             Type userListType = new TypeToken<ArrayList<User>>() {
             }.getType();
             allUsers = gson.fromJson(reader, userListType);

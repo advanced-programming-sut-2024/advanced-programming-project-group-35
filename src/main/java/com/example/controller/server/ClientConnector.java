@@ -4,9 +4,7 @@ import com.example.controller.Controller;
 import com.example.controller.GameMenuControllerForOnlineGame;
 import com.example.model.App;
 import com.example.model.User;
-import com.example.model.card.enums.CardData;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.example.model.alerts.AlertType;
 import javafx.application.Platform;
 
 import java.io.BufferedReader;
@@ -15,7 +13,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.SocketException;
-import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ClientConnector implements Runnable {
     private volatile boolean running = true;
@@ -93,10 +91,12 @@ public class ClientConnector implements Runnable {
         } else if (message.startsWith("REQUEST")) {
             processRequest(message);
         } else if (message.startsWith("GameStarts")){
+            //System.out.println(parts[2] + parts[4]);
             System.out.println("GameStarts -message");
             App.getLoggedInUser().setInGame(true);
             ((GameMenuControllerForOnlineGame)Controller.GAME_MENU_CONTROLLER.getController()).startNewGame(parts[1], parts[3], parts[2], parts[4]);
             Controller.GAME_MENU_CONTROLLER.getController().run();
+
         }
     }
 
@@ -105,9 +105,18 @@ public class ClientConnector implements Runnable {
         int senderID = Integer.parseInt(parts[1]);
         String senderName = User.getUserByID(senderID).getUsername();
         //show a message with accept and reject buttons
+        AtomicBoolean result = new AtomicBoolean(false);
         Platform.runLater(() -> {
-            App.getAppView().showRequest(senderName, senderID);
+            result.set(App.getAppView().showConfirmationAlert(senderName + " wants to play a game with you.", AlertType.INFO.getType()));
         });
+        System.out.println("result: " + result.get());
+        if (result.get()) {
+            System.out.println("accepting request");
+            App.getServerConnector().acceptFriendRequest(userID, senderID);
+        } else {
+            System.out.println("rejecting request");
+            App.getServerConnector().rejectFriendRequest(userID, senderID);
+        }
     }
 
     private void processMessageAlert(String message) {
