@@ -3,6 +3,7 @@ package com.example.model.chat;
 import com.example.Main;
 import com.example.model.App;
 import com.example.model.Terminal;
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,6 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
@@ -26,6 +28,8 @@ public class ChatBox extends StackPane {
     private int editableStartIndex;
     private String title;
     private static ChatMessage replyTo;
+    private static Label isReplyLabel = new Label();
+    private static HBox isReplyBox;
 
     public ChatBox() {
         this.getStylesheets().add(Terminal.class.getResource("/CSS/chatBox.css").toExternalForm());
@@ -54,11 +58,11 @@ public class ChatBox extends StackPane {
         textField.getStyleClass().add("text-field");
         textField.setPrefHeight(30);
         textField.setPrefWidth(WIDTH - 10 - 30 - 10);
-        HBox hBox = new HBox(textField, sendButton);
-        hBox.setAlignment(Pos.CENTER);
-        hBox.setPrefWidth(WIDTH - 10);
-        hBox.setPrefHeight(30);
-        hBox.setSpacing(10);
+        HBox sendSection = new HBox(textField, sendButton);
+        sendSection.setAlignment(Pos.CENTER);
+        sendSection.setPrefWidth(WIDTH - 10);
+        sendSection.setPrefHeight(30);
+        sendSection.setSpacing(10);
         allMessagesVbox = new VBox();
         allMessagesVbox.prefWidth(WIDTH - 30);
         allMessagesVbox.prefHeight(HEIGHT - 10 - 60 - 30);
@@ -66,11 +70,11 @@ public class ChatBox extends StackPane {
         allMessagesVbox.setMinWidth(WIDTH - 30);
         allMessagesVbox.setMaxWidth(WIDTH - 30);
         scrollPane.prefWidth(WIDTH - 10);
-        scrollPane.prefHeight(HEIGHT - 10 - 60 - 30);
-        scrollPane.setMinHeight(HEIGHT - 10 - 60 - 30);
+        scrollPane.prefHeight(HEIGHT - 10 - 60 - 30 - 30);
+        scrollPane.setMinHeight(HEIGHT - 10 - 60 - 30 - 30);
         scrollPane.setMinWidth(WIDTH - 10);
         scrollPane.setMaxWidth(WIDTH - 10);
-        scrollPane.setMaxHeight(HEIGHT - 10 - 60 - 30);
+        scrollPane.setMaxHeight(HEIGHT - 10 - 60 - 30 - 30);
         scrollPane.getStyleClass().add("all-messages");
         allMessagesVbox.getStyleClass().add("all-messages-vbox");
         allMessagesVbox.setSpacing(10);
@@ -90,7 +94,25 @@ public class ChatBox extends StackPane {
         Label label = new Label("Chat Box");
         label.getStyleClass().add("chat-box-label");
         closeBox.getChildren().addAll(closeButton, label);
-        chatBox.getChildren().addAll(closeBox, scrollPane, hBox);
+        isReplyBox = new HBox();
+        isReplyBox.getStyleClass().add("is-reply-box");
+        isReplyBox.setPrefWidth(WIDTH - 10);
+        isReplyBox.setPrefHeight(20);
+        isReplyBox.setAlignment(Pos.CENTER);
+        if (replyTo != null) {
+            isReplyLabel.setText("Replying to " + App.getUserByID(replyTo.getSender()).getUsername() + ": " + replyTo.getContent());
+        }
+        isReplyLabel.getStyleClass().add("is-reply-label");
+        isReplyLabel.setStyle("-fx-font-size: 12px;-fx-min-width: 220px;-fx-max-width: 220px;");
+        ImageView closeIconImageView2 = new ImageView(closeIcon);
+        Button cancelReplyButton = new Button("", closeIconImageView2);
+        cancelReplyButton.getStyleClass().add("cancel-reply-button");
+        cancelReplyButton.setOnMouseClicked(e -> {
+            setReplyTo(null);
+        });
+        isReplyBox.getChildren().addAll(isReplyLabel, cancelReplyButton);
+        isReplyBox.setVisible(false);
+        chatBox.getChildren().addAll(closeBox, scrollPane, isReplyBox, sendSection);
         this.getChildren().add(chatBox);
         textField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode() == KeyCode.ENTER) {
@@ -107,11 +129,17 @@ public class ChatBox extends StackPane {
             if (replyTo != null) {
                 chatMessage.setReplyTo(replyTo);
                 replyTo = null;
+                isReplyBox.setVisible(false);
             }
             allMessagesVbox.getChildren().add(new ChatMessageView(chatMessage));
             scrollPane.setContent(allMessagesVbox);
         }
-        scrollPane.vvalueProperty().setValue(1.0);
+        if (scrollPane.getContent() instanceof Region) {
+            Region content = (Region) scrollPane.getContent();
+            content.heightProperty().addListener((observable, oldValue, newValue) -> {
+                Platform.runLater(() -> scrollPane.setVvalue(1.0));
+            });
+        }
     }
 
     public TextField getTextField() {
@@ -124,5 +152,11 @@ public class ChatBox extends StackPane {
 
     public static void setReplyTo(ChatMessage replyTo) {
         ChatBox.replyTo = replyTo;
+        if (replyTo != null) {
+            isReplyLabel.setText("Replying to " + App.getUserByID(replyTo.getSender()).getUsername() + ": " + replyTo.getContent());
+            isReplyBox.setVisible(true);
+        } else {
+            isReplyBox.setVisible(false);
+        }
     }
 }

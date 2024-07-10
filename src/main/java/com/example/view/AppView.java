@@ -3,6 +3,7 @@ package com.example.view;
 import com.example.Main;
 import com.example.controller.Controller;
 import com.example.model.App;
+import com.example.model.alerts.*;
 import com.example.model.chat.ChatBox;
 import com.example.model.FriendRequest;
 import com.example.model.alerts.Alert;
@@ -28,6 +29,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class AppView extends Application {
+    private TextEmote textEmote;
     private FXMLLoader fxmlLoader;
     private Stage primaryStage;
     private Pane pane;
@@ -41,6 +43,7 @@ public class AppView extends Application {
     private boolean isEmote;
     private boolean isNotification = false;
     private boolean terminalVisible = false;
+
     private Terminal getTerminal() {
         return terminal;
     }
@@ -48,6 +51,7 @@ public class AppView extends Application {
     private FriendsMenuControllerView friendsMenuControllerView;
     private Menu currentMenu;
     private Stage lockScreen;
+
     public void showMenu(Menu menu) throws Exception {
 //        primaryStage.centerOnScreen();
 
@@ -72,32 +76,63 @@ public class AppView extends Application {
         primaryStage.show();
         currentMenu = menu;
     }
+
     public void showEmote(Emotes emotes) {
         if (!isEmote) {
             emote = new Emote(emotes);
             emote.setLayoutX((pane.getWidth() - emote.getFitWidth()) / 2);
             emote.setLayoutY((pane.getHeight() - emote.getFitWidth()) / 2);
             pane.getChildren().add(emote);
-
-
             ScaleTransition transition = new ScaleTransition(Duration.millis(300), emote);
-
             transition.setFromX(0);
             transition.setToX(1);
             transition.setFromY(0);
             transition.setToY(1);
-
             transition.play();
-
-
             isEmote = true;
-            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5)));
+            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(7)));
             timeline.play();
-            timeline.setOnFinished(actionEvent ->  {
+            timeline.setOnFinished(actionEvent -> {
                 isEmote = false;
                 removeEmote();
             });
         }
+    }
+
+    public void showTextEmote(String text) {
+        if (!isEmote) {
+            textEmote = new TextEmote(text);
+            textEmote.setLayoutX((pane.getWidth() - textEmote.getWrappingWidth()) / 2);
+            textEmote.setLayoutY((pane.getHeight() - textEmote.getWrappingWidth()) / 2);
+            pane.getChildren().add(textEmote);
+            ScaleTransition transition = new ScaleTransition(Duration.millis(300), textEmote);
+            transition.setFromX(0);
+            transition.setToX(1);
+            transition.setFromY(0);
+            transition.setToY(1);
+            transition.play();
+            isEmote = true;
+            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(7)));
+            timeline.play();
+            timeline.setOnFinished(actionEvent -> {
+                isEmote = false;
+                removeTextEmote();
+            });
+        }
+    }
+    public void removeTextEmote() {
+        ScaleTransition transition = new ScaleTransition(Duration.millis(300), textEmote);
+
+        transition.setFromX(1);
+        transition.setToX(0);
+        transition.setFromY(1);
+        transition.setToY(0);
+        transition.play();
+
+        transition.setOnFinished(actionEvent -> {
+            pane.getChildren().remove(textEmote);
+            isEmote = false;
+        });
     }
     public void removeEmote() {
         ScaleTransition transition = new ScaleTransition(Duration.millis(300), emote);
@@ -108,7 +143,7 @@ public class AppView extends Application {
         transition.setToY(0);
         transition.play();
 
-        transition.setOnFinished(actionEvent ->  {
+        transition.setOnFinished(actionEvent -> {
             pane.getChildren().remove(emote);
             isEmote = false;
         });
@@ -123,18 +158,20 @@ public class AppView extends Application {
             isAlert = true;
             Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5)));
             timeline.play();
-            timeline.setOnFinished(actionEvent ->  {
+            timeline.setOnFinished(actionEvent -> {
                 isAlert = false;
                 removeAlert();
             });
         }
     }
+
     public void removeAlert() {
         pane.getChildren().remove(alert);
         isAlert = false;
     }
 
-    public void showConfirmationAlert(String message, String alertType) {
+    public boolean showConfirmationAlert(String message, String alertType) {
+
         if (!isAlert) {
             confirmationAlert = new ConfirmationAlert(message, alertType);
             confirmationAlert.setLayoutX(pane.getWidth() - confirmationAlert.width - 35);
@@ -143,11 +180,16 @@ public class AppView extends Application {
             isAlert = true;
             Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5)));
             timeline.play();
-            timeline.setOnFinished(actionEvent ->  {
+            timeline.setOnFinished(actionEvent -> {
                 isAlert = false;
-                removeAlert();
+                removeConfirmationAlert();
             });
         }
+        System.out.println("confirmation alert : " + confirmationAlert.isResult());
+        while (confirmationAlert.isPending()) {
+            System.out.println("waiting for confirmation");
+        }
+        return confirmationAlert.isResult();
     }
 
     public void showConfirmationAlert(String message, String alertType, FriendRequest friendRequest) {
@@ -159,17 +201,18 @@ public class AppView extends Application {
             isAlert = true;
             Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5)));
             timeline.play();
-            timeline.setOnFinished(actionEvent ->  {
+            timeline.setOnFinished(actionEvent -> {
                 isAlert = false;
-                removeAlert();
+                removeConfirmationAlert();
             });
         }
     }
 
-    public void removeConfirmationAlert(Pane currentPane) {
-        currentPane.getChildren().remove(confirmationAlert);
+    public void removeConfirmationAlert() {
+        pane.getChildren().remove(confirmationAlert);
         isAlert = false;
     }
+
     public void showNotification(String message, String imageAddress, String username) {
         if (!isNotification) {
             notification = new Notification(message, imageAddress, username);
@@ -179,12 +222,13 @@ public class AppView extends Application {
             isNotification = true;
             Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2)));
             timeline.play();
-            timeline.setOnFinished(actionEvent ->  {
+            timeline.setOnFinished(actionEvent -> {
                 isNotification = false;
                 removeNotification(pane);
             });
         }
     }
+
     public void removeNotification(Pane currentPane) {
         currentPane.getChildren().remove(notification);
         isNotification = false;
@@ -221,6 +265,7 @@ public class AppView extends Application {
         transition.setToY(550);
         transition.play();
     }
+
     public void lockScreen() {
         pane.addEventFilter(MouseEvent.ANY, MouseEvent::consume);
     }

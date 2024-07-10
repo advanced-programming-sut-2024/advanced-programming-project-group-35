@@ -16,6 +16,23 @@
     <ImageView fitHeight="800" fitWidth="1400" pickOnBounds="true" preserveRatio="true">
         <Image url="@../images/game-history-menu-background.jpg"/>
     </ImageView>
+    <ScrollPane styleClass="scroll-pane-pre-game-menu, game-history-scroll-pane" layoutY="225" layoutX="150"
+                fx:id="mainScrollPane" maxHeight="450" minHeight="450" prefHeight="450" prefWidth="1130" maxWidth="1130"
+                minWidth="1130"/>
+    <HBox layoutX="575" layoutY="682" alignment="CENTER" spacing="20" minWidth="250" maxWidth="250" prefWidth="250" minHeight="60" maxHeight="60"
+          prefHeight="60">
+        <TextField prefHeight="50" prefWidth="180" fx:id="searchField" promptText="Game History Count" styleClass="custom-text-field"/>
+        <Button maxHeight="50" maxWidth="50" minWidth="50" onMouseClicked="#updateGameHistory" styleClass="brown-button">
+            <graphic>
+                <ImageView>
+                    <Image url="@../images/icons/search-icon.png" requestedWidth="23" requestedHeight="23"/>
+                </ImageView>
+            </graphic>
+        </Button>
+
+    </HBox>
+    <Button translateX="20" translateY="30" minWidth="50" onMouseClicked="#backToProfileMenu" styleClass="brown-button"
+            text="Back"/>
     <Button layoutX="50" layoutY="740" minWidth="50" onMouseClicked="#openTerminal" styleClass="brown-button"
             text="Terminal"/>
 </AnchorPane>

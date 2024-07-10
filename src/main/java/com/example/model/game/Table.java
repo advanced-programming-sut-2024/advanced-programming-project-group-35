@@ -16,7 +16,7 @@ public class Table {
     private Player playerInTurn;
     public Table(Player player1, Player player2) {
       this.playerInTurn = player1;
-        if (player1.getId() == App.getLoggedInUser().getId()) {
+        if (player1.getId() == App.getLoggedInUser().getID()) {
             this.currentPlayer = player1;
             this.opponent = player2;
         } else {

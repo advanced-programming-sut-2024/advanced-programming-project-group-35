@@ -1,5 +1,6 @@
 package com.example.controller.server;
 
+import com.example.model.chat.ChatBox;
 import com.example.model.chat.ChatMessage;
 import com.example.model.Log;
 import com.example.model.deckmanager.DeckToJson;

@@ -95,6 +95,21 @@ public class ServerConnector {
         }
     }
 
+    public void acceptFriendRequest(int sender, int receiver) {
+        try (
+                Socket socket = new Socket(SERVER_IP, SERVER_PORT);
+                PrintWriter out = new PrintWriter(socket.getOutputStream(), true)
+        ) {
+            out.print("SYSTEM|ACCEPT_FRIEND_REQUEST|");
+            out.print(sender);
+            out.print("|");
+            out.println(receiver);
+            System.out.println(sender + " sending to  " + receiver);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void rejectFriendRequest(FriendRequest request) {
         try (
                 Socket socket = new Socket(SERVER_IP, SERVER_PORT);
@@ -104,6 +119,20 @@ public class ServerConnector {
             out.print(request.getSender().getID());
             out.print("|");
             out.println(request.getReceiver().getID());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void rejectFriendRequest(int sender, int receiver) {
+        try (
+                Socket socket = new Socket(SERVER_IP, SERVER_PORT);
+                PrintWriter out = new PrintWriter(socket.getOutputStream(), true)
+        ) {
+            out.print("SYSTEM|REJECT_FRIEND_REQUEST|");
+            out.print(sender);
+            out.print("|");
+            out.println(receiver);
         } catch (IOException e) {
             e.printStackTrace();
         }

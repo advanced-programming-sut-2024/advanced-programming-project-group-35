@@ -1,5 +1,6 @@
 [
   {
+    "stayLoggedIn": false,
     "isOnline": true,
     "id": 2,
     "username": "ali",
@@ -25,17 +26,21 @@
     "numberOfMinionCards": 0,
     "gameData": [],
     "decksAddresses": [],
+    "friends": [
+      3
+    ],
     "friendRequests": [
       {
-        "senderID": 3,
-        "receiverID": 2,
-        "isAccepted": false,
+        "senderID": 2,
+        "receiverID": 3,
+        "isAccepted": true,
         "isRejected": false
       }
     ],
     "isInGame": false
   },
   {
+    "stayLoggedIn": false,
     "isOnline": false,
     "id": 1,
     "username": "asjkdh",
@@ -64,6 +69,7 @@
     "isInGame": false
   },
   {
+    "stayLoggedIn": false,
     "isOnline": true,
     "id": 3,
     "username": "parsa",
@@ -88,22 +94,26 @@
     "numberOfMinionCards": 0,
     "gameData": [],
     "decksAddresses": [],
+    "friends": [
+      2
+    ],
     "friendRequests": [
       {
-        "senderID": 3,
-        "receiverID": 2,
-        "isAccepted": false,
+        "senderID": 2,
+        "receiverID": 3,
+        "isAccepted": true,
         "isRejected": false
       }
     ],
     "isInGame": false
   },
   {
+    "stayLoggedIn": false,
     "isOnline": true,
     "id": 10,
-    "username": "ali123",
-    "password": "Bp+\u003d%\u003d1%cI",
-    "nickname": "asmd",
+    "username": "alireza",
+    "password": "Alireza123@",
+    "nickname": "alireza",
     "email": "sjhagdhj@ahsgdh.com",
     "securityQuestion": 0,
     "securityQuestionAnswer": "What is your favorite color?",
@@ -124,6 +134,7 @@
     "numberOfMinionCards": 0,
     "gameData": [],
     "decksAddresses": [],
+    "friends": [],
     "friendRequests": [],
     "isInGame": false
   }

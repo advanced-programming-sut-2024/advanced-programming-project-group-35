@@ -384,6 +384,9 @@ public class User {
         return deckJson;
     }
 
+    public boolean isOnline() {
+        return isOnline;
+    }
     public int getId() {
         return id;
     }

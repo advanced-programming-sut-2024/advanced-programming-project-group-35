@@ -19,6 +19,8 @@ public class ConfirmationAlert extends StackPane {
     public final double width = 250;
     public final double height = 80;
     private FriendRequest friendRequest;
+    private boolean result;
+    private boolean pending = true;
 
     public ConfirmationAlert(String message, String alertType, FriendRequest friendRequest) {
         this.alertType = alertType;
@@ -31,6 +33,22 @@ public class ConfirmationAlert extends StackPane {
         this.alertType = alertType;
         this.message = message;
         init();
+    }
+
+    public boolean isResult() {
+        return result;
+    }
+
+    public void setResult(boolean result) {
+        this.result = result;
+    }
+
+    public boolean isPending() {
+        return pending;
+    }
+
+    public void setPending(boolean pending) {
+        this.pending = pending;
     }
 
     private void init() {
@@ -48,18 +66,16 @@ public class ConfirmationAlert extends StackPane {
         Button rejectButton = new Button("Reject");
         rejectButton.setStyle("-fx-background-color: #a93d3a;-fx-text-fill: #f2dedf;-fx-font-size: 16px;-fx-padding: 8;-fx-border-color: #f2dedf;-fx-border-width: 2px;-fx-border-insets: 2;-fx-background-radius: 10px; -fx-border-radius: 10px;-fx-cursor: hand;");
         rejectButton.setOnMouseClicked(e -> {
-            if (friendRequest != null) {
-                App.getServerConnector().rejectFriendRequest(friendRequest);
-            }
-            App.getAppView().removeConfirmationAlert(App.getAppView().getPane());
+            result = false;
+            pending = false;
+            System.out.println("Friend request rejected");
         });
         Button acceptButton = new Button("Accept");
         acceptButton.setStyle("-fx-background-color: #3c7d52;-fx-text-fill: #def0d8;-fx-font-size: 16px;-fx-padding: 8;-fx-border-color: #def0d8;-fx-border-width: 2px;-fx-border-insets: 2;-fx-background-radius: 10px; -fx-border-radius: 10px;-fx-cursor: hand;");
         acceptButton.setOnMouseClicked(e -> {
-            if (friendRequest != null) {
-                App.getServerConnector().acceptFriendRequest(friendRequest);
-            }
-            App.getAppView().removeConfirmationAlert(App.getAppView().getPane());
+            result = true;
+            pending = false;
+            System.out.println("Friend request accepted");
         });
         HBox buttonsHbox = new HBox(rejectButton, acceptButton);
         buttonsHbox.setSpacing(20);

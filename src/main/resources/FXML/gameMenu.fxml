@@ -2,9 +2,11 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
@@ -13,133 +15,82 @@
       stylesheets="@../CSS/allMenu.css, @../CSS/allFiles.css" xmlns="http://javafx.com/javafx/21"
       xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.view.menuControllers.GameMenuControllerViewForOnlineGame">
    <ImageView fitHeight="800.0" fitWidth="1400.0" pickOnBounds="true" preserveRatio="true">
-      <Image url="@../images/game-board.jpg"/>
+      <Image url="@../images/game-board.jpg" />
    </ImageView>
    <!--    <ImageView fitHeight="800.0" fitWidth="1400.0" pickOnBounds="true" preserveRatio="true">-->
    <!--        <Image url="@../images/game-board-template.jpg" />-->
    <!--    </ImageView>-->
-   <Rectangle fx:id="opponentPlayerShadowRectangle" fill="#00000081" height="101.0" layoutY="195.0" width="324.0"/>
-   <Rectangle fx:id="currentPlayerShadowRectangle" fill="#00000081" height="101.0" layoutY="494.0" width="324.0"/>
-   <Label fx:id="opponentPlayerSiegePower" alignment="CENTER" layoutX="371.0" layoutY="40.0" minHeight="30.0"
-          minWidth="30.0" prefHeight="30.0" prefWidth="30.0" style="-fx-font-size: 24px;" styleClass="white-text"
-          text="10" textAlignment="CENTER"/>
-   <Label fx:id="opponentPlayerRangedPower" alignment="CENTER" layoutX="371.0" layoutY="137.0" minHeight="30.0"
-          minWidth="30.0" prefHeight="30.0" prefWidth="30.0" style="-fx-font-size: 24px;" styleClass="white-text"
-          text="10" textAlignment="CENTER"/>
-   <Label fx:id="opponentPlayerCloseCombatPower" alignment="CENTER" layoutX="371.0" layoutY="240.0" minHeight="30.0"
-          minWidth="30.0" prefHeight="30.0" prefWidth="30.0" style="-fx-font-size: 24px;" styleClass="white-text"
-          text="10" textAlignment="CENTER"/>
-   <Label fx:id="currentPlayerCloseCombatPower" alignment="CENTER" layoutX="371.0" layoutY="349.0" minHeight="30.0"
-          minWidth="30.0" prefHeight="30.0" prefWidth="30.0" style="-fx-font-size: 24px;" styleClass="white-text"
-          text="10" textAlignment="CENTER"/>
-   <Label fx:id="currentPlayerRangedPower" alignment="CENTER" layoutX="371.0" layoutY="448.0" minHeight="30.0"
-          minWidth="30.0" prefHeight="30.0" prefWidth="30.0" style="-fx-font-size: 24px;" styleClass="white-text"
-          text="10" textAlignment="CENTER"/>
-   <Label fx:id="currentPlayerSiegePower" alignment="CENTER" layoutX="371.0" layoutY="551.0" minHeight="30.0"
-          minWidth="30.0" prefHeight="30.0" prefWidth="30.0" style="-fx-font-size: 24px;" styleClass="white-text"
-          text="10" textAlignment="CENTER"/>
-   <ImageView fitHeight="45.0" fitWidth="40.0" layoutX="305.0" layoutY="523.0" pickOnBounds="true"
-              preserveRatio="true">
-      <Image url="@../images/icons/score_total_me.png"/>
+   <Rectangle fx:id="opponentPlayerShadowRectangle" fill="#00000081" height="101.0" layoutY="195.0" width="324.0" />
+   <Rectangle fx:id="currentPlayerShadowRectangle" fill="#00000081" height="101.0" layoutY="494.0" width="324.0" />
+   <Label fx:id="opponentPlayerSiegePower" alignment="CENTER" layoutX="371.0" layoutY="40.0" minHeight="30.0" minWidth="30.0" prefHeight="30.0" prefWidth="30.0" style="-fx-font-size: 24px;" styleClass="white-text" text="10" textAlignment="CENTER" />
+   <Label fx:id="opponentPlayerRangedPower" alignment="CENTER" layoutX="371.0" layoutY="137.0" minHeight="30.0" minWidth="30.0" prefHeight="30.0" prefWidth="30.0" style="-fx-font-size: 24px;" styleClass="white-text" text="10" textAlignment="CENTER" />
+   <Label fx:id="opponentPlayerCloseCombatPower" alignment="CENTER" layoutX="371.0" layoutY="240.0" minHeight="30.0" minWidth="30.0" prefHeight="30.0" prefWidth="30.0" style="-fx-font-size: 24px;" styleClass="white-text" text="10" textAlignment="CENTER" />
+   <Label fx:id="currentPlayerCloseCombatPower" alignment="CENTER" layoutX="371.0" layoutY="349.0" minHeight="30.0" minWidth="30.0" prefHeight="30.0" prefWidth="30.0" style="-fx-font-size: 24px;" styleClass="white-text" text="10" textAlignment="CENTER" />
+   <Label fx:id="currentPlayerRangedPower" alignment="CENTER" layoutX="371.0" layoutY="448.0" minHeight="30.0" minWidth="30.0" prefHeight="30.0" prefWidth="30.0" style="-fx-font-size: 24px;" styleClass="white-text" text="10" textAlignment="CENTER" />
+   <Label fx:id="currentPlayerSiegePower" alignment="CENTER" layoutX="371.0" layoutY="551.0" minHeight="30.0" minWidth="30.0" prefHeight="30.0" prefWidth="30.0" style="-fx-font-size: 24px;" styleClass="white-text" text="10" textAlignment="CENTER" />
+   <ImageView fitHeight="45.0" fitWidth="40.0" layoutX="305.0" layoutY="523.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/icons/score_total_me.png" />
    </ImageView>
-   <Label fx:id="currentPlayerAllScoreCounter" alignment="CENTER" layoutX="310.0" layoutY="528.0" minHeight="30.0"
-          minWidth="30.0" prefHeight="30.0" prefWidth="19.0" style="-fx-font-size: 24px;" styleClass="white-text"
-          text="10" textAlignment="CENTER"/>
-   <ImageView fitHeight="45.0" fitWidth="40.0" layoutX="305.0" layoutY="226.0" pickOnBounds="true"
-              preserveRatio="true">
-      <Image url="@../images/icons/score_total_op.png"/>
+   <Label fx:id="currentPlayerAllScoreCounter" alignment="CENTER" layoutX="310.0" layoutY="528.0" minHeight="30.0" minWidth="30.0" prefHeight="30.0" prefWidth="19.0" style="-fx-font-size: 24px;" styleClass="white-text" text="10" textAlignment="CENTER" />
+   <ImageView fitHeight="45.0" fitWidth="40.0" layoutX="305.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/icons/score_total_op.png" />
    </ImageView>
-   <Label fx:id="opponentPlayerAllScoreCounter" alignment="CENTER" layoutX="310.0" layoutY="231.0" minHeight="30.0"
-          minWidth="30.0" prefHeight="30.0" prefWidth="30.0" style="-fx-font-size: 24px;" styleClass="white-text"
-          text="10" textAlignment="CENTER"/>
-   <Label fx:id="currentPlayerUsername" layoutX="168.0" layoutY="553.0" styleClass="yellow-text" text="Username 1"/>
-   <Label fx:id="currentPlayerFactionName" layoutX="168.0" layoutY="572.0" styleClass="yellow-text" text="Faction 1"/>
-   <Label fx:id="currentPlayerSpecialCardCounter" alignment="CENTER" layoutX="188.0" layoutY="511.0" minHeight="30.0"
-          minWidth="19.0" prefHeight="30.0" prefWidth="19.0" style="-fx-font-size: 24px;" styleClass="yellow-text"
-          text="10" textAlignment="CENTER"/>
-   <Label fx:id="opponentPlayerUsername" layoutX="168.0" layoutY="199.0" styleClass="yellow-text" text="Username 2"/>
-   <Label fx:id="opponentPlayerFactionName" layoutX="168.0" layoutY="218.0" styleClass="yellow-text" text="Faction 2"/>
-   <Label fx:id="opponentPlayerSpecialCardCounter" alignment="CENTER" layoutX="188.0" layoutY="252.0" minHeight="30.0"
-          minWidth="19.0" prefHeight="30.0" prefWidth="19.0" style="-fx-font-size: 24px;" styleClass="yellow-text"
-          text="10" textAlignment="CENTER"/>
-   <ImageView fx:id="opponentPlayerDeckPlace" fitHeight="110.0" fitWidth="73.0" layoutX="1270.0" layoutY="50.0"
-              pickOnBounds="true" preserveRatio="true">
-      <Image url="@../images/icons/deck_back_skellige.jpg"/>
+   <Label fx:id="opponentPlayerAllScoreCounter" alignment="CENTER" layoutX="310.0" layoutY="231.0" minHeight="30.0" minWidth="30.0" prefHeight="30.0" prefWidth="30.0" style="-fx-font-size: 24px;" styleClass="white-text" text="10" textAlignment="CENTER" />
+   <Label fx:id="currentPlayerUsername" layoutX="168.0" layoutY="553.0" styleClass="yellow-text" text="Username 1" />
+   <Label fx:id="currentPlayerFactionName" layoutX="168.0" layoutY="572.0" styleClass="yellow-text" text="Faction 1" />
+   <Label fx:id="currentPlayerSpecialCardCounter" alignment="CENTER" layoutX="188.0" layoutY="511.0" minHeight="30.0" minWidth="19.0" prefHeight="30.0" prefWidth="19.0" style="-fx-font-size: 24px;" styleClass="yellow-text" text="10" textAlignment="CENTER" />
+   <Label fx:id="opponentPlayerUsername" layoutX="168.0" layoutY="199.0" styleClass="yellow-text" text="Username 2" />
+   <Label fx:id="opponentPlayerFactionName" layoutX="168.0" layoutY="218.0" styleClass="yellow-text" text="Faction 2" />
+   <Label fx:id="opponentPlayerSpecialCardCounter" alignment="CENTER" layoutX="188.0" layoutY="252.0" minHeight="30.0" minWidth="19.0" prefHeight="30.0" prefWidth="19.0" style="-fx-font-size: 24px;" styleClass="yellow-text" text="10" textAlignment="CENTER" />
+   <ImageView fx:id="opponentPlayerDeckPlace" fitHeight="110.0" fitWidth="73.0" layoutX="1270.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/icons/deck_back_skellige.jpg" />
    </ImageView>
-   <FlowPane alignment="CENTER" hgap="-55" vgap="-80" fx:id="opponentDiscardPlace" layoutX="1136.0"
-             layoutY="50.0" prefHeight="110.0" prefWidth="82.0"/>
-   <ImageView fx:id="currentPlayerDeckPlace" fitHeight="110.0" fitWidth="82.0" layoutX="1270.0" layoutY="613.0"
-              pickOnBounds="true" preserveRatio="true">
-      <Image url="@../images/icons/deck_back_monsters.jpg"/>
+   <FlowPane fx:id="opponentDiscardPlace" alignment="CENTER" hgap="-55" layoutX="1136.0" layoutY="50.0" prefHeight="110.0" prefWidth="82.0" vgap="-80" />
+   <ImageView fx:id="currentPlayerDeckPlace" fitHeight="110.0" fitWidth="82.0" layoutX="1270.0" layoutY="613.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/icons/deck_back_monsters.jpg" />
    </ImageView>
-   <FlowPane alignment="CENTER" hgap="-55" vgap="-80" fx:id="currentPlayerDiscardPlace" layoutX="1136.0"
-             layoutY="613.0" prefHeight="110.0" prefWidth="82.0"/>
-   <FlowPane fx:id="currentPlayerHand" alignment="CENTER" hgap="5" layoutX="417.0" layoutY="624.0" prefHeight="96.0"
-             prefWidth="696.0"/>
-   <FlowPane fx:id="currentPlayerSiege" alignment="CENTER" hgap="5" layoutX="516.0" layoutY="525.0" prefHeight="85.0"
-             prefWidth="599.0"/>
-   <FlowPane fx:id="currentPlayerRanged" alignment="CENTER" hgap="5" layoutX="516.0" layoutY="424.0" prefHeight="85.0"
-             prefWidth="599.0"/>
-   <FlowPane fx:id="currentPlayerCloseCombat" alignment="CENTER" hgap="5" layoutX="516.0" layoutY="325.0"
-             prefHeight="85.0" prefWidth="599.0"/>
-   <FlowPane fx:id="opponentCloseCombat" alignment="CENTER" hgap="5" layoutX="516.0" layoutY="214.0" prefHeight="85.0"
-             prefWidth="599.0"/>
-   <FlowPane fx:id="opponentRanged" alignment="CENTER" hgap="5" layoutX="516.0" layoutY="112.0" prefHeight="85.0"
-             prefWidth="599.0"/>
-   <FlowPane fx:id="opponentSiege" alignment="CENTER" hgap="5" layoutX="516.0" layoutY="15.0" prefHeight="85.0"
-             prefWidth="599.0"/>
-   <ImageView fx:id="opponentPlayerLeaderCard" layoutX="91.0" layoutY="60.0" fitHeight="100.0" fitWidth="76.0"/>
-   <ImageView fx:id="currentPlayerLeaderCard" layoutX="91.0" layoutY="617.0" fitHeight="100.0" fitWidth="76.0"/>
-   <FlowPane fx:id="currentPlayerSiegeSpecialPlace" alignment="CENTER" hgap="5" layoutX="412.0" layoutY="525.0"
-             prefHeight="85.0" prefWidth="96.0"/>
-   <FlowPane fx:id="currentPlayerRangedSpecialPlace" alignment="CENTER" hgap="5" layoutX="412.0" layoutY="424.0"
-             prefHeight="85.0" prefWidth="96.0"/>
-   <FlowPane fx:id="currentPlayerCloseCombatSpecialPlace" alignment="CENTER" hgap="5" layoutX="412.0" layoutY="325.0"
-             prefHeight="85.0" prefWidth="96.0"/>
-   <FlowPane fx:id="opponentCloseCombatSpecialPlace" alignment="CENTER" hgap="5" layoutX="412.0" layoutY="214.0"
-             prefHeight="85.0" prefWidth="96.0"/>
-   <FlowPane fx:id="opponentRangedSpecialPlace" alignment="CENTER" hgap="5" layoutX="412.0" layoutY="112.0"
-             prefHeight="85.0" prefWidth="96.0"/>
-   <FlowPane fx:id="opponentSiegeSpecialPlace" alignment="CENTER" hgap="5" layoutX="412.0" layoutY="15.0"
-             prefHeight="85.0" prefWidth="96.0"/>
-   <FlowPane fx:id="currentPlayerDeck" layoutX="1266.0" layoutY="611.0" prefHeight="110.0" prefWidth="76.0"/>
-   <Label fx:id="opponentPlayerDeckCardCounter" alignment="CENTER" contentDisplay="CENTER" layoutX="1300.0"
-          layoutY="165.0" minHeight="20.0" minWidth="16.0" prefHeight="20.0" prefWidth="16.0" styleClass="white-text"
-          text="23" textAlignment="CENTER"/>
-   <Label fx:id="currentPlayerDeckCardCounter" alignment="CENTER" contentDisplay="CENTER" layoutX="1300.0"
-          layoutY="728.0" minHeight="20.0" minWidth="16.0" prefHeight="20.0" prefWidth="16.0" styleClass="white-text"
-          text="23" textAlignment="CENTER"/>
-   <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="163.0" layoutY="256.0" pickOnBounds="true"
-              preserveRatio="true">
-      <Image url="@../images/icons/icon_card_count.png"/>
+   <FlowPane fx:id="currentPlayerDiscardPlace" alignment="CENTER" hgap="-55" layoutX="1136.0" layoutY="613.0" prefHeight="110.0" prefWidth="82.0" vgap="-80" />
+   <FlowPane fx:id="currentPlayerHand" alignment="CENTER" hgap="5" layoutX="417.0" layoutY="624.0" prefHeight="96.0" prefWidth="696.0" />
+   <FlowPane fx:id="currentPlayerSiege" alignment="CENTER" hgap="5" layoutX="516.0" layoutY="525.0" prefHeight="85.0" prefWidth="599.0" />
+   <FlowPane fx:id="currentPlayerRanged" alignment="CENTER" hgap="5" layoutX="516.0" layoutY="424.0" prefHeight="85.0" prefWidth="599.0" />
+   <FlowPane fx:id="currentPlayerCloseCombat" alignment="CENTER" hgap="5" layoutX="516.0" layoutY="325.0" prefHeight="85.0" prefWidth="599.0" />
+   <FlowPane fx:id="opponentCloseCombat" alignment="CENTER" hgap="5" layoutX="516.0" layoutY="214.0" prefHeight="85.0" prefWidth="599.0" />
+   <FlowPane fx:id="opponentRanged" alignment="CENTER" hgap="5" layoutX="516.0" layoutY="112.0" prefHeight="85.0" prefWidth="599.0" />
+   <FlowPane fx:id="opponentSiege" alignment="CENTER" hgap="5" layoutX="516.0" layoutY="15.0" prefHeight="85.0" prefWidth="599.0" />
+   <ImageView fx:id="opponentPlayerLeaderCard" fitHeight="100.0" fitWidth="76.0" layoutX="91.0" layoutY="60.0" />
+   <ImageView fx:id="currentPlayerLeaderCard" fitHeight="100.0" fitWidth="76.0" layoutX="91.0" layoutY="617.0" />
+   <FlowPane fx:id="currentPlayerSiegeSpecialPlace" alignment="CENTER" hgap="5" layoutX="412.0" layoutY="525.0" prefHeight="85.0" prefWidth="96.0" />
+   <FlowPane fx:id="currentPlayerRangedSpecialPlace" alignment="CENTER" hgap="5" layoutX="412.0" layoutY="424.0" prefHeight="85.0" prefWidth="96.0" />
+   <FlowPane fx:id="currentPlayerCloseCombatSpecialPlace" alignment="CENTER" hgap="5" layoutX="412.0" layoutY="325.0" prefHeight="85.0" prefWidth="96.0" />
+   <FlowPane fx:id="opponentCloseCombatSpecialPlace" alignment="CENTER" hgap="5" layoutX="412.0" layoutY="214.0" prefHeight="85.0" prefWidth="96.0" />
+   <FlowPane fx:id="opponentRangedSpecialPlace" alignment="CENTER" hgap="5" layoutX="412.0" layoutY="112.0" prefHeight="85.0" prefWidth="96.0" />
+   <FlowPane fx:id="opponentSiegeSpecialPlace" alignment="CENTER" hgap="5" layoutX="412.0" layoutY="15.0" prefHeight="85.0" prefWidth="96.0" />
+   <FlowPane fx:id="currentPlayerDeck" layoutX="1266.0" layoutY="611.0" prefHeight="110.0" prefWidth="76.0" />
+   <Label fx:id="opponentPlayerDeckCardCounter" alignment="CENTER" contentDisplay="CENTER" layoutX="1300.0" layoutY="165.0" minHeight="20.0" minWidth="16.0" prefHeight="20.0" prefWidth="16.0" styleClass="white-text" text="23" textAlignment="CENTER" />
+   <Label fx:id="currentPlayerDeckCardCounter" alignment="CENTER" contentDisplay="CENTER" layoutX="1300.0" layoutY="728.0" minHeight="20.0" minWidth="16.0" prefHeight="20.0" prefWidth="16.0" styleClass="white-text" text="23" textAlignment="CENTER" />
+   <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="163.0" layoutY="256.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/icons/icon_card_count.png" />
    </ImageView>
-   <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="163.0" layoutY="514.0" pickOnBounds="true"
-              preserveRatio="true">
-      <Image url="@../images/icons/icon_card_count.png"/>
+   <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="163.0" layoutY="514.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/icons/icon_card_count.png" />
    </ImageView>
-   <ImageView fx:id="currentPlayerFirstJem" fitHeight="30.0" fitWidth="30.0" layoutX="218.0" layoutY="508.0"
-              pickOnBounds="true" preserveRatio="true">
-      <Image url="@../images/icons/icon_gem_on.png"/>
+   <ImageView fx:id="currentPlayerFirstJem" fitHeight="30.0" fitWidth="30.0" layoutX="218.0" layoutY="508.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/icons/icon_gem_on.png" />
    </ImageView>
-   <ImageView fx:id="currentPlayerSecondJem" fitHeight="30.0" fitWidth="30.0" layoutX="253.0" layoutY="508.0"
-              pickOnBounds="true" preserveRatio="true">
-      <Image url="@../images/icons/icon_gem_on.png"/>
+   <ImageView fx:id="currentPlayerSecondJem" fitHeight="30.0" fitWidth="30.0" layoutX="253.0" layoutY="508.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/icons/icon_gem_on.png" />
    </ImageView>
-   <ImageView fx:id="opponentPlayerFirstJem" fitHeight="30.0" fitWidth="30.0" layoutX="218.0" layoutY="250.0"
-              pickOnBounds="true" preserveRatio="true">
-      <Image url="@../images/icons/icon_gem_on.png"/>
+   <ImageView fx:id="opponentPlayerFirstJem" fitHeight="30.0" fitWidth="30.0" layoutX="218.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/icons/icon_gem_on.png" />
    </ImageView>
-   <ImageView fx:id="opponentPlayerSecondJem" fitHeight="30.0" fitWidth="30.0" layoutX="253.0" layoutY="250.0"
-              pickOnBounds="true" preserveRatio="true">
-      <Image url="@../images/icons/icon_gem_on.png"/>
+   <ImageView fx:id="opponentPlayerSecondJem" fitHeight="30.0" fitWidth="30.0" layoutX="253.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/icons/icon_gem_on.png" />
    </ImageView>
-   <ImageView fx:id="opponentPlayerExcellenceShower" fitHeight="75.0" fitWidth="75.0" layoutX="288.0" layoutY="223.0"
-              pickOnBounds="true" preserveRatio="true">
-      <Image url="@../images/icons/icon_high_score.png"/>
+   <ImageView fx:id="opponentPlayerExcellenceShower" fitHeight="75.0" fitWidth="75.0" layoutX="288.0" layoutY="223.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/icons/icon_high_score.png" />
    </ImageView>
-   <ImageView fx:id="currentPlayerExcellenceShower" fitHeight="75.0" fitWidth="75.0" layoutX="288.0" layoutY="521.0"
-              pickOnBounds="true" preserveRatio="true">
-      <Image url="@../images/icons/icon_high_score.png"/>
+   <ImageView fx:id="currentPlayerExcellenceShower" fitHeight="75.0" fitWidth="75.0" layoutX="288.0" layoutY="521.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/icons/icon_high_score.png" />
    </ImageView>
    <Button fx:id="passRoundButton" layoutX="229.0" layoutY="650.0" mnemonicParsing="false" onMouseClicked="#passRound" prefHeight="43.0"
            prefWidth="73.0" styleClass="brown-button" text="Pass"/>
@@ -147,41 +98,31 @@
               onMouseClicked="#toggleMusic" pickOnBounds="true" preserveRatio="true">
       <!--           <Image url="@../images/icons/mus" />-->
    </ImageView>
-   <ImageView fx:id="opponentPlayerLeaderAbilityEnable" fitHeight="30.0" fitWidth="30.0" layoutX="179.0" layoutY="95.0"
-              pickOnBounds="true" preserveRatio="true">
-      <Image url="@../images/icons/icon_leader_active.png"/>
+   <ImageView fx:id="opponentPlayerLeaderAbilityEnable" fitHeight="30.0" fitWidth="30.0" layoutX="179.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/icons/icon_leader_active.png" />
    </ImageView>
-   <ImageView fx:id="currentPlayerLeaderAbilityEnable" fitHeight="30.0" fitWidth="30.0" layoutX="179.0" layoutY="653.0"
-              pickOnBounds="true" preserveRatio="true">
-      <Image url="@../images/icons/icon_leader_active.png"/>
+   <ImageView fx:id="currentPlayerLeaderAbilityEnable" fitHeight="30.0" fitWidth="30.0" layoutX="179.0" layoutY="653.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/icons/icon_leader_active.png" />
    </ImageView>
-   <ImageView fx:id="currentPlayerProfilePic" fitHeight="84.0" fitWidth="73.0" layoutX="75.0" layoutY="509.0"
-              pickOnBounds="true" preserveRatio="true">
-      <Image url="@../images/icons/profile.png"/>
+   <ImageView fx:id="currentPlayerProfilePic" fitHeight="84.0" fitWidth="73.0" layoutX="75.0" layoutY="509.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/icons/profile.png" />
    </ImageView>
-   <ImageView fx:id="currentPlayerProfilePicBorder" fitHeight="95.0" fitWidth="95.0" layoutX="65.0" layoutY="497.0"
-              pickOnBounds="true" preserveRatio="true">
-      <Image url="@../images/icons/icon_player_border.png"/>
+   <ImageView fx:id="currentPlayerProfilePicBorder" fitHeight="95.0" fitWidth="95.0" layoutX="65.0" layoutY="497.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/icons/icon_player_border.png" />
    </ImageView>
-   <ImageView fx:id="opponentPlayerProfilePic" fitHeight="84.0" fitWidth="73.0" layoutX="75.0" layoutY="210.0"
-              pickOnBounds="true" preserveRatio="true">
-      <Image url="@../images/icons/profile.png"/>
+   <ImageView fx:id="opponentPlayerProfilePic" fitHeight="84.0" fitWidth="73.0" layoutX="75.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/icons/profile.png" />
    </ImageView>
-   <ImageView fx:id="opponentPlayerProfilePicBorder" fitHeight="95.0" fitWidth="95.0" layoutX="65.0" layoutY="198.0"
-              pickOnBounds="true" preserveRatio="true">
-      <Image url="@../images/icons/icon_player_border.png"/>
+   <ImageView fx:id="opponentPlayerProfilePicBorder" fitHeight="95.0" fitWidth="95.0" layoutX="65.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/icons/icon_player_border.png" />
    </ImageView>
-   <FlowPane fx:id="weather" alignment="CENTER" hgap="5" layoutX="93.0" layoutY="331.0" prefHeight="107.0"
-             prefWidth="208.0"/>
-   <ImageView fx:id="cardDetailShower" fitWidth="180.0" layoutX="1141.0" layoutY="230.0" pickOnBounds="true"
-              preserveRatio="true"/>
-   <ImageView fx:id="currentPlayerFactionIcon" fitHeight="40.0" fitWidth="29.0" layoutX="64.0" layoutY="554.0"
-              pickOnBounds="true" preserveRatio="true">
-      <Image url="@../images/icons/deck_shield_monsters.png"/>
+   <FlowPane fx:id="weather" alignment="CENTER" hgap="5" layoutX="93.0" layoutY="331.0" prefHeight="107.0" prefWidth="208.0" />
+   <ImageView fx:id="cardDetailShower" fitWidth="180.0" layoutX="1141.0" layoutY="230.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="currentPlayerFactionIcon" fitHeight="40.0" fitWidth="29.0" layoutX="64.0" layoutY="554.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/icons/deck_shield_monsters.png" />
    </ImageView>
-   <ImageView fx:id="opponentPlayerFactionIcon" fitHeight="40.0" fitWidth="29.0" layoutX="64.0" layoutY="204.0"
-              pickOnBounds="true" preserveRatio="true">
-      <Image url="@../images/icons/deck_shield_monsters.png"/>
+   <ImageView fx:id="opponentPlayerFactionIcon" fitHeight="40.0" fitWidth="29.0" layoutX="64.0" layoutY="204.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/icons/deck_shield_monsters.png" />
    </ImageView>
    <ImageView fx:id="weatherRow1" fitHeight="85.0" fitWidth="599.0" layoutX="516.0" layoutY="525.0" pickOnBounds="true"
               preserveRatio="true" visible="false"/>
@@ -203,10 +144,26 @@
               preserveRatio="true">
       <Image url="@../images/veto-card-background.jpg"/>
    </ImageView>
-   <VBox alignment="CENTER" fx:id="vetoCardBox" spacing="10" visible="false" prefWidth="1400" prefHeight="800">
-      <FlowPane hgap="15" visible="false" fx:id="vetoCardPane" prefHeight="400" prefWidth="1400" alignment="CENTER"/>
-      <Button visible="false" fx:id="vetoCardButton" styleClass="brown-button" text="Done Veto" onMouseClicked="#vetoCard"/>
+   <VBox fx:id="vetoCardBox" alignment="CENTER" prefHeight="800" prefWidth="1400" spacing="10" visible="false">
+      <FlowPane fx:id="vetoCardPane" alignment="CENTER" hgap="15" prefHeight="400" prefWidth="1400" visible="false" />
+      <Button fx:id="vetoCardButton" onMouseClicked="#vetoCard" styleClass="brown-button" text="Done Veto" visible="false" />
    </VBox>
-
+   <Button fx:id="showEmoteButton" layoutX="370.0" layoutY="740.0" mnemonicParsing="false" onMouseClicked="#showEmoteButtons" prefHeight="43.0" prefWidth="85.0" styleClass="brown-button" text="Emotes" />
+   <Button fx:id="emoteButton1" layoutX="475.0" layoutY="740.0" mnemonicParsing="false" onMouseClicked="#haHaEmote" prefHeight="43.0" prefWidth="70.0" styleClass="brown-button" text="HA HA" visible="false" />
+   <Button fx:id="emoteButton2" layoutX="560.0" layoutY="740.0" mnemonicParsing="false" onMouseClicked="#thanksEmote" prefHeight="43.0" prefWidth="85.0" styleClass="brown-button" text="THANKS" visible="false" />
+   <Button fx:id="emoteButton3" layoutX="660.0" layoutY="740.0" mnemonicParsing="false" onMouseClicked="#oopsEmote" prefHeight="43.0" prefWidth="60.0" styleClass="brown-button" text="OOPS" visible="false" />
+   <Button fx:id="emoteButton4" layoutX="740.0" layoutY="740.0" mnemonicParsing="false" onMouseClicked="#goodOneEmote" prefHeight="43.0" prefWidth="95.0" styleClass="brown-button" text="GOOD ONE" visible="false" />
+   <Button fx:id="emoteButton5" layoutX="855.0" layoutY="740.0" mnemonicParsing="false" onMouseClicked="#dirinLaLaLaEmote" prefHeight="43.0" prefWidth="120.0" styleClass="brown-button" text="DIRIN LALALA" visible="false" />
+   <Button fx:id="emoteButton6" layoutX="995.0" layoutY="740.0" mnemonicParsing="false" onMouseClicked="#boringEmote" prefHeight="43.0" prefWidth="75.0" styleClass="brown-button" text="BORING" visible="false" />
+   <Button fx:id="emoteButton7" layoutX="1090.0" layoutY="740.0" mnemonicParsing="false" onMouseClicked="#shhhhEmote" prefHeight="43.0" prefWidth="85.0" styleClass="brown-button" text="SHHHH" visible="false" />
+   <Button fx:id="emoteButton8" layoutX="1195.0" layoutY="740.0" mnemonicParsing="false" onMouseClicked="#anyWayEmote" prefHeight="43.0" prefWidth="90.0" styleClass="brown-button" text="ANY WAY" visible="false" />
+   <Button fx:id="hideEmoteButton" layoutX="370.0" layoutY="740.0" mnemonicParsing="false" onMouseClicked="#hideEmoteButtons" prefHeight="43.0" prefWidth="85.0" styleClass="brown-button" text="Hide" visible="false" />
+   <Button fx:id="showCustomEmoteHboxButton" layoutX="475.0" layoutY="740.0" mnemonicParsing="false" onMouseClicked="#showCustomEmoteHbox" prefHeight="43.0" prefWidth="130.0" styleClass="brown-button" text="Custom Emote" />
+   <Button visible="false" fx:id="hideCustomEmoteHboxButton" layoutX="475.0" layoutY="740.0" mnemonicParsing="false" onMouseClicked="#hideCustomEmoteHbox" prefHeight="43.0" prefWidth="130.0" styleClass="brown-button" text="Hide" />
+   <HBox visible="false" fx:id="customEmoteHbox" layoutX="625.0" layoutY="740.0" prefHeight="43.0" prefWidth="250.0" spacing="15.0">
+      <TextField fx:id="emoteTextField" styleClass="custom-text-field" maxHeight="43.0" minHeight="43.0" prefHeight="43.0" promptText="Write Your Message"/>
+      <Button mnemonicParsing="false" onMouseClicked="#sendCustomEmote" prefHeight="43.0" prefWidth="73.0"
+              styleClass="brown-button" text="Send"/>
+   </HBox>
 
 </Pane>

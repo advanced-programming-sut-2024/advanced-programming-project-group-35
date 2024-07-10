@@ -74,4 +74,8 @@ public class OutputView {
     public static Errors getLastError() {
         return lastError;
     }
+
+    public static void setLastError(Errors lastError) {
+        OutputView.lastError = lastError;
+    }
 }
