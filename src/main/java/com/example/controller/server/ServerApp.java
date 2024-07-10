@@ -110,7 +110,7 @@ public class ServerApp {
     }
 
     public static void setUserOffline(int userID) {
-        User user = allUsers.get(userID);
+        User user = getUserByID(userID);
         user.setOnline(false);
     }
 

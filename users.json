@@ -1,7 +1,7 @@
 [
   {
     "stayLoggedIn": false,
-    "isOnline": true,
+    "isOnline": false,
     "isInGame": false,
     "privateGame": false,
     "id": 2,
@@ -50,6 +50,15 @@
         "second": 16,
         "minute": 16,
         "hour": 22
+      },
+      {
+        "senderID": 10,
+        "receiverID": 2,
+        "isAccepted": false,
+        "isPending": true,
+        "second": 48,
+        "minute": 16,
+        "hour": 0
       }
     ],
     "friendRequests": [
@@ -94,7 +103,7 @@
   },
   {
     "stayLoggedIn": false,
-    "isOnline": true,
+    "isOnline": false,
     "isInGame": false,
     "privateGame": false,
     "id": 3,
@@ -121,7 +130,8 @@
     "gameData": [],
     "decksAddresses": [],
     "friends": [
-      2
+      2,
+      10
     ],
     "gameRequests": [
       {
@@ -147,6 +157,12 @@
       {
         "senderID": 2,
         "receiverID": 3,
+        "isAccepted": true,
+        "isRejected": false
+      },
+      {
+        "senderID": 3,
+        "receiverID": 10,
         "isAccepted": true,
         "isRejected": false
       }
@@ -182,12 +198,30 @@
     "gameData": [],
     "decksAddresses": [],
     "friends": [
-      2
+      2,
+      3
+    ],
+    "gameRequests": [
+      {
+        "senderID": 10,
+        "receiverID": 2,
+        "isAccepted": false,
+        "isPending": true,
+        "second": 48,
+        "minute": 16,
+        "hour": 0
+      }
     ],
     "friendRequests": [
       {
         "senderID": 10,
         "receiverID": 2,
+        "isAccepted": true,
+        "isRejected": false
+      },
+      {
+        "senderID": 3,
+        "receiverID": 10,
         "isAccepted": true,
         "isRejected": false
       }
