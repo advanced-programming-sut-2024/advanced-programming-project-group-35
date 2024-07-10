@@ -146,7 +146,7 @@
    <Button fx:id="emoteButton8" layoutX="1195.0" layoutY="740.0" mnemonicParsing="false" onMouseClicked="#anyWayEmote" prefHeight="43.0" prefWidth="90.0" styleClass="brown-button" text="ANY WAY" visible="false" />
    <Button fx:id="hideEmoteButton" layoutX="370.0" layoutY="740.0" mnemonicParsing="false" onMouseClicked="#hideEmoteButtons" prefHeight="43.0" prefWidth="85.0" styleClass="brown-button" text="Hide" visible="false" />
    <Button fx:id="showCustomEmoteHboxButton" layoutX="475.0" layoutY="740.0" mnemonicParsing="false" onMouseClicked="#showCustomEmoteHbox" prefHeight="43.0" prefWidth="130.0" styleClass="brown-button" text="Custom Emote" />
-   <Button fx:id="hideCustomEmoteHboxButton" layoutX="475.0" layoutY="740.0" mnemonicParsing="false" onMouseClicked="#hideCustomEmoteHbox" prefHeight="43.0" prefWidth="130.0" styleClass="brown-button" text="Hide" />
+   <Button visible="false" fx:id="hideCustomEmoteHboxButton" layoutX="475.0" layoutY="740.0" mnemonicParsing="false" onMouseClicked="#hideCustomEmoteHbox" prefHeight="43.0" prefWidth="130.0" styleClass="brown-button" text="Hide" />
    <HBox visible="false" fx:id="customEmoteHbox" layoutX="625.0" layoutY="740.0" prefHeight="43.0" prefWidth="250.0" spacing="15.0">
       <TextField fx:id="emoteTextField" styleClass="custom-text-field" maxHeight="43.0" minHeight="43.0" prefHeight="43.0" promptText="Write Your Message"/>
       <Button mnemonicParsing="false" onMouseClicked="#sendCustomEmote" prefHeight="43.0" prefWidth="73.0"
