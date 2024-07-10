@@ -82,3 +82,9 @@
     -fx-background-position: center;
 }
 
+.game-request-menu-background {
+    -fx-background-image: url("/Images/game-request-history-menu-background.jpg");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}

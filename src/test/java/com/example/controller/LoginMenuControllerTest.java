@@ -67,7 +67,7 @@ class LoginMenuControllerTest {
     }
 
     @Test
-    void testLoginUser() {
+    void testLoginUser() throws IOException {
         App.addNewUser(new User("existinguser", "Le@23#Re", "nickname", "email@example.com"));
 
         Errors result = controller.loginUser("nonexistentuser", "Le@23#Re", false);

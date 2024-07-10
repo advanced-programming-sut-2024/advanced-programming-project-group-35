@@ -13,6 +13,7 @@ import com.example.model.alerts.ConfirmationAlert;
 import com.example.model.alerts.Notification;
 import com.example.view.menuControllers.FriendsMenuControllerView;
 import com.example.view.menuControllers.GameMenuControllerView;
+import com.example.view.menuControllers.GameRequestHistoryMenuControllerView;
 import javafx.animation.KeyFrame;
 import javafx.animation.ScaleTransition;
 import javafx.animation.Timeline;
@@ -52,6 +53,7 @@ public class AppView extends Application {
     }
 
     private GameMenuControllerView gameMenuControllerView;
+    private GameRequestHistoryMenuControllerView gameRequestHistoryMenuControllerView;
     private FriendsMenuControllerView friendsMenuControllerView;
     private Menu currentMenu;
     private Stage lockScreen;
@@ -66,6 +68,9 @@ public class AppView extends Application {
         }
         if (menu.getTitle().equals("Friends Menu")) {
             friendsMenuControllerView = fxmlLoader.getController();
+        }
+        if (menu.getTitle().equals("Game Request History Menu")) {
+            gameRequestHistoryMenuControllerView = fxmlLoader.getController();
         }
 
         Scene scene = new Scene(pane);
@@ -240,6 +245,9 @@ public class AppView extends Application {
 
     public GameMenuControllerView getGameMenuControllerView() {
         return gameMenuControllerView;
+    }
+    public GameRequestHistoryMenuControllerView getGameRequestHistoryMenuControllerView() {
+        return gameRequestHistoryMenuControllerView;
     }
 
     @Override
