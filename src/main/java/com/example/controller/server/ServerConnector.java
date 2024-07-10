@@ -201,7 +201,7 @@ public class ServerConnector {
 
     private void setHand(DeckToJson deck) {
         //TODO for test
-        for (int i = 0; i < 10 ; i++) {
+        for (int i = 4; i < 14 ; i++) {
             String cardName = deck.getCards().get(i);
             deck.getHand().add(cardName);
         }

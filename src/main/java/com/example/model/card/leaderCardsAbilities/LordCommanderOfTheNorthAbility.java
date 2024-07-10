@@ -27,7 +27,7 @@ public class LordCommanderOfTheNorthAbility implements LeaderAbility {
                     }
                 }
             }
-            ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDontDoAbility(maxPoweredCard.getIdInGame(), RowsInGame.opponentSiegeSpecialPlace.toString(), RowsInGame.opponentDiscardPlace.toString());
+            ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbility(maxPoweredCard.getIdInGame(), RowsInGame.opponentSiegeSpecialPlace.toString(), RowsInGame.opponentDiscardPlace.toString());
         }
     }
 }

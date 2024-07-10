@@ -26,9 +26,8 @@ public class MusterAbility implements Ability {
             if (card1 != null && card1.getAbilityName() == AbilityName.MUSTER && abilityContext.getCard() != card1 && card.getPlace() == card1.getPlace() && (count++ < 4)) {
                 String[] parts1 = card1.getName().split("_");
                 if (parts[1].equals(parts1[1])) {
-                    abilityContext.getTable().getCurrentPlayer().getBoard().getHand().removeCard(card);
                     String dest = (String) abilityContext.getParam("dest");
-                    ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDontDoAbilityWithNoLog(card1.getIdInGame(), RowsInGame.currentPlayerHand.toString(), dest);
+                    ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbility(card1.getIdInGame(), RowsInGame.currentPlayerHand.toString(), dest);
                 }
             }
         }
@@ -38,10 +37,8 @@ public class MusterAbility implements Ability {
             if (card1 != null && card1.getAbilityName() == AbilityName.MUSTER && card.getPlace() == card1.getPlace() && (count++ < 4)) {
                 String[] parts1 = card1.getName().split("_");
                 if (parts[1].equals(parts1[1])) {
-                    abilityContext.getTable().getCurrentPlayer().getBoard().getDeck().removeCard(card);
-                    abilityContext.getRow().addCard(card1);
                     String dest = (String) abilityContext.getParam("dest");
-                    ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDontDoAbilityWithNoLog(card1.getIdInGame(), RowsInGame.currentPlayerHand.toString(), dest);
+                    ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbility(card1.getIdInGame(), RowsInGame.currentPlayerHand.toString(), dest);
                 }
             }
         }

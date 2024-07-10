@@ -27,7 +27,7 @@ public class SonOfMedellAbility implements LeaderAbility {
                     }
                 }
             }
-            ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDontDoAbility(maxPoweredCard.getIdInGame(), RowsInGame.opponentRangedSpecialPlace.toString(), RowsInGame.opponentDiscardPlace.toString());
+            ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbility(maxPoweredCard.getIdInGame(), RowsInGame.opponentRangedSpecialPlace.toString(), RowsInGame.opponentDiscardPlace.toString());
         }
     }
 }

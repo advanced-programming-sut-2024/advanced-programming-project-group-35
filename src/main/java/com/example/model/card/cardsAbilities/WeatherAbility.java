@@ -14,7 +14,7 @@ public class WeatherAbility implements Ability {
         WeatherCard weatherCard = (WeatherCard) abilityContext.getParam("card");
 
         if (leaderCard1.getLeaderName().equals("realms_foltest_gold") || leaderCard2.getLeaderName().equals("realms_foltest_gold")) {
-            ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController()).getGameMenuControllerView().backWeatherCardToDiscardPlaces(weatherCard);
+            ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).getGameMenuControllerView().backWeatherCardToDiscardPlaces(weatherCard);
             abilityContext.getTable().getCurrentPlayer().getBoard().getDeck().getLeader().setCanDoAction(false);
             abilityContext.getTable().getOpponent().getBoard().getDeck().getLeader().setCanDoAction(false);
         }
@@ -34,8 +34,8 @@ public class WeatherAbility implements Ability {
                 applyWeatherEffect(abilityContext, leaderCard1, leaderCard2, abilityContext.getTable().getCurrentPlayer().getBoard().getCloseCombatCardPlace(), abilityContext.getTable().getOpponent().getBoard().getCloseCombatCardPlace());
             }
             case CardData.weather_clear -> {
-                ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController()).disApplyWeatherCards();
-                ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController()).getGameMenuControllerView().backWeatherCardToDiscardPlaces(weatherCard);
+                ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).disApplyWeatherCards();
+                ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).getGameMenuControllerView().backWeatherCardToDiscardPlaces(weatherCard);
             }
         }
     }
@@ -56,7 +56,7 @@ public class WeatherAbility implements Ability {
                 } else {
                     ((UnitCard) card).setPowerOne();
                 }
-                ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController()).getGameMenuControllerView().getGameCardViewWithCardId(card.getIdInGame()).updatePowerLabelAfterWeather();
+                ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).getGameMenuControllerView().getGameCardViewWithCardId(card.getIdInGame()).updatePowerLabelAfterWeather();
             }
         }
     }

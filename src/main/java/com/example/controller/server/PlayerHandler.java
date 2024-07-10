@@ -53,7 +53,6 @@ public class PlayerHandler implements Runnable {
                     gameHandler.command(inputLine);
                     continue;
                 }
-                System.out.println("Received: " + inputLine);
                 String[] parts = inputLine.split("\\|");
                 if ("SYSTEM".equals(parts[0])) {
                     if ("LOAD_USERS".equals(parts[1])) {

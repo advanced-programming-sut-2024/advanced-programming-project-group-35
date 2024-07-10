@@ -11,7 +11,7 @@ import com.example.model.Terminal;
 import com.example.model.alerts.ConfirmationAlert;
 import com.example.model.alerts.Notification;
 import com.example.view.menuControllers.FriendsMenuControllerView;
-import com.example.view.menuControllers.GameMenuControllerView;
+import com.example.view.menuControllers.GameMenuControllerViewForOnlineGame;
 import javafx.animation.KeyFrame;
 import javafx.animation.ScaleTransition;
 import javafx.animation.Timeline;
@@ -22,12 +22,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 public class AppView extends Application {
@@ -47,7 +44,7 @@ public class AppView extends Application {
     private Terminal getTerminal() {
         return terminal;
     }
-    private GameMenuControllerView gameMenuControllerView;
+    private GameMenuControllerViewForOnlineGame gameMenuControllerViewForOnlineGame;
     private FriendsMenuControllerView friendsMenuControllerView;
     private Menu currentMenu;
     private Stage lockScreen;
@@ -57,7 +54,7 @@ public class AppView extends Application {
         fxmlLoader = new FXMLLoader(Main.class.getResource(menu.getFxmlFile()));
         pane = fxmlLoader.load();
         if (menu.getTitle().equals("Game Menu")) {
-            gameMenuControllerView = fxmlLoader.getController();
+            gameMenuControllerViewForOnlineGame = fxmlLoader.getController();
         }
         if (menu.getTitle().equals("Friends Menu")) {
             friendsMenuControllerView = fxmlLoader.getController();
@@ -193,8 +190,8 @@ public class AppView extends Application {
         isNotification = false;
     }
 
-    public GameMenuControllerView getGameMenuControllerView() {
-        return gameMenuControllerView;
+    public GameMenuControllerViewForOnlineGame getGameMenuControllerView() {
+        return gameMenuControllerViewForOnlineGame;
     }
 
     @Override

@@ -16,14 +16,14 @@ public class TheBeautifulAbility implements LeaderAbility {
             for (Card card : ranged.getCards()) {
                 if (card instanceof UnitCard) {
                     ((UnitCard) card).duplicatePower();
-                    ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController()).getGameMenuControllerView().getGameCardViewWithCardId(card.getIdInGame()).updatePowerLabel();
+                    ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).getGameMenuControllerView().getGameCardViewWithCardId(card.getIdInGame()).updatePowerLabel();
                 }
             }
         } else if (ranged.getSpecialCard() == null) {
             for (Card card : ranged.getCards()) {
                 if (card instanceof UnitCard) {
                     ((UnitCard) card).duplicatePower();
-                    ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController()).getGameMenuControllerView().getGameCardViewWithCardId(card.getIdInGame()).updatePowerLabel();
+                    ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).getGameMenuControllerView().getGameCardViewWithCardId(card.getIdInGame()).updatePowerLabel();
                 }
             }
         }

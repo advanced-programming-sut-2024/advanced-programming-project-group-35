@@ -106,7 +106,7 @@ public class DeckManager {
 
     public static Hand loadHand(DeckToJson deckToJson, int first) {
         Hand hand = new Hand();
-        for (int i = 0; i < deckToJson.getCards().size(); i++) {
+        for (int i = 0; i < deckToJson.getHand().size(); i++) {
             Card card = CardFactory.getCardByName(deckToJson.getHand().get(i));
             card.setIdInGame(first * 100 + i);
             hand.addCard(card);

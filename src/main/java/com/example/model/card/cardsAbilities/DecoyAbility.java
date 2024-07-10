@@ -11,7 +11,7 @@ public class DecoyAbility implements Ability {
         Card cardToSwap = (Card) abilityContext.getParam("cardToSwap");
         Card decoyCard = (Card) abilityContext.getParam("decoyCard");
         String dest = (String) abilityContext.getParam("dest");
-        ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDontDoAbilityWithNoLog(cardToSwap.getIdInGame(), dest, RowsInGame.currentPlayerHand.toString());
-        ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDontDoAbilityWithNoLog(decoyCard.getIdInGame(), RowsInGame.currentPlayerHand.toString(), dest);
+        ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbility(cardToSwap.getIdInGame(), dest, RowsInGame.currentPlayerHand.toString());
+        ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbility(decoyCard.getIdInGame(), RowsInGame.currentPlayerHand.toString(), dest);
     }
 }

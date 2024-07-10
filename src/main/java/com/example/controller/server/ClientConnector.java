@@ -4,9 +4,6 @@ import com.example.controller.Controller;
 import com.example.controller.GameMenuControllerForOnlineGame;
 import com.example.model.App;
 import com.example.model.User;
-import com.example.model.card.enums.CardData;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import javafx.application.Platform;
 
 import java.io.BufferedReader;
@@ -15,7 +12,6 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.SocketException;
-import java.util.ArrayList;
 
 public class ClientConnector implements Runnable {
     private volatile boolean running = true;
@@ -93,12 +89,10 @@ public class ClientConnector implements Runnable {
         } else if (message.startsWith("REQUEST")) {
             processRequest(message);
         } else if (message.startsWith("GameStarts")){
-            //System.out.println(parts[2] + parts[4]);
             System.out.println("GameStarts -message");
             App.getLoggedInUser().setInGame(true);
-            ((GameMenuControllerForOnlineGame)Controller.GAME_MENU_CONTROLLER.getController()).startNewGame(parts[1], parts[3], parts[2], parts[4]);
-            Controller.GAME_MENU_CONTROLLER.getController().run();
-
+            ((GameMenuControllerForOnlineGame)Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).startNewGame(parts[1], parts[3], parts[2], parts[4]);
+            Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController().run();
         }
     }
 

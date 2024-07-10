@@ -160,7 +160,6 @@ public class ServerApp {
         System.out.println("client connectors found");
         //send request
         StringBuilder requestBuilder = new StringBuilder();
-        System.out.println("---" + playerDeck2);
 
         DeckToJson deckPlayer2 = DeckManager.getDeckToJsonByCardNames(playerDeck2);
 

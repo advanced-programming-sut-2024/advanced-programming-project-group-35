@@ -25,9 +25,9 @@ public class CrachAnCraiteAbility implements LeaderAbility {
         for (Card card : cardsToTransfer) {
             if (card != null) {
                 if (player == table.getCurrentPlayer()) {
-                    ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDontDoAbility(card.getIdInGame(), RowsInGame.currentPlayerDiscardPlace.toString(), RowsInGame.currentPlayerHand.toString());
+                    ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbility(card.getIdInGame(), RowsInGame.currentPlayerDiscardPlace.toString(), RowsInGame.currentPlayerHand.toString());
                 } else {
-                    ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDontDoAbility(card.getIdInGame(), RowsInGame.opponentDiscardPlace.toString(), RowsInGame.opponentHand.toString());
+                    ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbility(card.getIdInGame(), RowsInGame.opponentDiscardPlace.toString(), RowsInGame.opponentHand.toString());
                 }
             }
         }

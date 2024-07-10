@@ -11,7 +11,7 @@
 
 <Pane fx:id="mainPane" prefHeight="800.0" prefWidth="1400.0" styleClass="pre-game-menu-background"
       stylesheets="@../CSS/allMenu.css, @../CSS/allFiles.css" xmlns="http://javafx.com/javafx/21"
-      xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.view.menuControllers.GameMenuControllerView">
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.view.menuControllers.GameMenuControllerViewForOnlineGame">
    <ImageView fitHeight="800.0" fitWidth="1400.0" pickOnBounds="true" preserveRatio="true">
       <Image url="@../images/game-board.jpg"/>
    </ImageView>
@@ -141,7 +141,7 @@
               pickOnBounds="true" preserveRatio="true">
       <Image url="@../images/icons/icon_high_score.png"/>
    </ImageView>
-   <Button layoutX="229.0" layoutY="650.0" mnemonicParsing="false" onMouseClicked="#passRound" prefHeight="43.0"
+   <Button fx:id="passRoundButton" layoutX="229.0" layoutY="650.0" mnemonicParsing="false" onMouseClicked="#passRound" prefHeight="43.0"
            prefWidth="73.0" styleClass="brown-button" text="Pass"/>
    <ImageView fx:id="musicToggleIcon" fitHeight="35.0" fitWidth="35.0" layoutX="358.0" layoutY="655.0"
               onMouseClicked="#toggleMusic" pickOnBounds="true" preserveRatio="true">
@@ -195,7 +195,7 @@
               preserveRatio="true" visible="false"/>
    <ImageView fx:id="weatherRow6" fitHeight="85.0" fitWidth="599.0" layoutX="516.0" layoutY="15.0" pickOnBounds="true"
               preserveRatio="true" visible="false"/>
-   <Button layoutX="50" layoutY="740" minWidth="50" onMouseClicked="#openTerminal" styleClass="brown-button"
+   <Button fx:id="terminalButton" layoutX="50" layoutY="740" minWidth="50" onMouseClicked="#openTerminal" styleClass="brown-button"
            text="Terminal"/>
    <Button styleClass="brown-button" fx:id="leaderAbility" layoutX="370.0" layoutY="740.0" mnemonicParsing="false"
            onMouseClicked="#leaderAbilityApply" prefHeight="36.0" prefWidth="184.0" text="leader ability"/>
