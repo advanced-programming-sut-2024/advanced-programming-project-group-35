@@ -68,6 +68,7 @@ public class ConfirmationAlert extends StackPane {
         rejectButton.setOnMouseClicked(e -> {
             result = false;
             pending = false;
+            App.getServerConnector().rejectGameRequest();
             System.out.println("Friend request rejected");
         });
         Button acceptButton = new Button("Accept");
@@ -75,6 +76,7 @@ public class ConfirmationAlert extends StackPane {
         acceptButton.setOnMouseClicked(e -> {
             result = true;
             pending = false;
+            App.getServerConnector().acceptGameRequest();
             System.out.println("Friend request accepted");
         });
         HBox buttonsHbox = new HBox(rejectButton, acceptButton);

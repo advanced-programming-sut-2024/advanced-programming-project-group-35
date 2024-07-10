@@ -159,9 +159,6 @@ public class AppView extends Application {
             });
         }
         System.out.println("confirmation alert : " + confirmationAlert.isResult());
-        while (confirmationAlert.isPending()) {
-            System.out.println("waiting for confirmation");
-        }
         return confirmationAlert.isResult();
     }
 
@@ -176,7 +173,7 @@ public class AppView extends Application {
             timeline.play();
             timeline.setOnFinished(actionEvent -> {
                 isAlert = false;
-                removeAlert();
+                removeConfirmationAlert();
             });
         }
     }

@@ -244,4 +244,26 @@ public class ServerConnector {
             e.printStackTrace();
         }
     }
+
+    public void acceptGameRequest() {
+        try (
+                Socket socket = new Socket(SERVER_IP, SERVER_PORT);
+                PrintWriter out = new PrintWriter(socket.getOutputStream(), true)
+        ) {
+            out.print("AcceptGameRequest");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void rejectGameRequest() {
+        try (
+                Socket socket = new Socket(SERVER_IP, SERVER_PORT);
+                PrintWriter out = new PrintWriter(socket.getOutputStream(), true)
+        ) {
+            out.print("RejectGameRequest");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -79,7 +79,7 @@
   },
   {
     "stayLoggedIn": false,
-    "isOnline": false,
+    "isOnline": true,
     "isInGame": false,
     "privateGame": false,
     "id": 3,
@@ -119,7 +119,7 @@
   },
   {
     "stayLoggedIn": false,
-    "isOnline": true,
+    "isOnline": false,
     "isInGame": false,
     "privateGame": false,
     "id": 10,

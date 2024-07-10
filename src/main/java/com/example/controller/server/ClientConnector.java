@@ -110,14 +110,14 @@ public class ClientConnector implements Runnable {
         Platform.runLater(() -> {
             result.set(App.getAppView().showConfirmationAlert(senderName + " wants to play a game with you.", AlertType.INFO.getType()));
         });
-        System.out.println("result: " + result.get());
-        if (result.get()) {
-            System.out.println("accepting request");
-            App.getServerConnector().acceptFriendRequest(userID, senderID);
-        } else {
-            System.out.println("rejecting request");
-            App.getServerConnector().rejectFriendRequest(userID, senderID);
-        }
+//        System.out.println("result: " + result.get());
+//        if (result.get()) {
+//            System.out.println("accepting request");
+//            App.getServerConnector().acceptFriendRequest(userID, senderID);
+//        } else {
+//            System.out.println("rejecting request");
+//            App.getServerConnector().rejectFriendRequest(userID, senderID);
+//        }
     }
 
     private void processMessageAlert(String message) {
