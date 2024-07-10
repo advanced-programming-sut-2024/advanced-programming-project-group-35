@@ -232,27 +232,31 @@ public class ServerApp {
             return;
         }
         //find random player
+        int counter = 0, flag = 0;
         for (int i = 0; i < tournamentPlayers.length; i++) {
             if (tournamentPlayers[i] == 0) {
-                tournamentPlayers[i] = senderID;
-                return;
+                if (flag == 0){
+                    tournamentPlayers[i] = senderID;
+                }
+                flag = 1;
+            } else {
+                counter++;
             }
         }
+        if (counter < 8) return;
         //send request
+        HashMap<Integer, PlayerHandler> players = new HashMap<>();
         for (int i = 0; i < tournamentPlayers.length; i++) {
-            if (tournamentPlayers[i] == 0) {
-                return;
-            }
+            server.players.get(tournamentPlayers[i]).sendMessage("Tournament_Started");
+            players.put(tournamentPlayers[i], server.players.get(tournamentPlayers[i]));
         }
-        startTournament();
+
+        startTournament(players);
     }
 
-    private static void startTournament() throws InterruptedException { //2-step elimination
-        //send request
-//        StartOnlineGame(tournamentPlayers[0], tournamentPlayers[1]);
-//        StartOnlineGame(tournamentPlayers[2], tournamentPlayers[3]);
-//        StartOnlineGame(tournamentPlayers[4], tournamentPlayers[5]);
-//        StartOnlineGame(tournamentPlayers[6], tournamentPlayers[7]);
+    private static void startTournament(HashMap<Integer, PlayerHandler> players) throws InterruptedException { //2-step elimination
+        TournamentHandler tournamentHandler = new TournamentHandler(players);
+        tournamentHandler.startTournament();
     }
 
     public static void addGame(int gameID, GameHandler gameHandler) {

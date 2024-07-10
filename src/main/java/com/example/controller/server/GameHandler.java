@@ -16,6 +16,7 @@ public class GameHandler implements Runnable {
     private ArrayList<PlayerHandler> spectators = new ArrayList<>();
     private List<ChatMessage> chatHistory = new ArrayList<>();
     private int winnerID;
+    private int loserID;
     private boolean isGameEnded = false;
     private int player1ID;
     private int player2ID;
@@ -199,5 +200,9 @@ public class GameHandler implements Runnable {
         for (PlayerHandler spectator : spectators) {
             spectator.getOut().println(command);
         }
+    }
+
+    public int getLoserID() {
+        return loserID;
     }
 }
