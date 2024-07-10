@@ -389,6 +389,16 @@ public class User {
 
     public void addGameRequest(int senderID) {
         GameRequest gameRequest = new GameRequest(senderID, id);
+        if (gameRequests == null) {
+            gameRequests = new ArrayList<>();
+        }
+        gameRequests.add(gameRequest);
+    }
+
+    public void addGameRequest(GameRequest gameRequest) {
+        if (gameRequests == null) {
+            gameRequests = new ArrayList<>();
+        }
         gameRequests.add(gameRequest);
     }
 

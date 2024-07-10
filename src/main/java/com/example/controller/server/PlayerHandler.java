@@ -105,14 +105,14 @@ public class PlayerHandler implements Runnable {
                     String message = parts[3];
                     ServerApp.sendMessage(senderID, receiverID, message);
                 } else if ("AcceptGameRequest".equals(parts[0])) {
-                    int userID = Integer.parseInt(parts[2]);
-                    int friendUserID = Integer.parseInt(parts[3]);
+                    int userID = Integer.parseInt(parts[1]);
+                    int friendUserID = Integer.parseInt(parts[2]);
                     ServerApp.acceptGameRequest(userID, friendUserID);
                     sendMessageToUser("GAME_REQUEST_ACCEPTED:", userID);
                     sendMessageToUser("GAME_REQUEST_ACCEPTED:", friendUserID);
                 } else if ("RejectGameRequest".equals(parts[0])) {
-                    int userID = Integer.parseInt(parts[2]);
-                    int friendUserID = Integer.parseInt(parts[3]);
+                    int userID = Integer.parseInt(parts[1]);
+                    int friendUserID = Integer.parseInt(parts[2]);
                     ServerApp.rejectGameRequest(userID, friendUserID);
                     sendMessageToUser("GAME_REQUEST_REJECTED:", userID);
                     sendMessageToUser("GAME_REQUEST_REJECTED:", friendUserID);

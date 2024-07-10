@@ -153,8 +153,10 @@ public class ServerApp {
         }
         //send request
         StringBuilder requestBuilder = new StringBuilder();
+        GameRequest gameRequest = new GameRequest(senderID, receiverID);
+        receiver.addGameRequest(gameRequest);
+        sender.addGameRequest(gameRequest);
         requestBuilder.append("REQUEST|").append(senderID).append("|").append(receiverID);
-        receiver.addGameRequest(senderID);
         clientConnector.sendMessage(requestBuilder.toString());
     }
 
