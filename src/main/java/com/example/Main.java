@@ -42,6 +42,7 @@ public class Main extends Application {
 
 
     public static void shutdown() {
+        App.logout();
 //        System.out.println("Shutdown hook is running...");
 //        DatabaseManager.createNewDatabase();
 //        DatabaseManager.createUsersTable();

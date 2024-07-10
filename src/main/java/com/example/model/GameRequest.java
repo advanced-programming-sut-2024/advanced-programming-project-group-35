@@ -1,16 +1,37 @@
 package com.example.model;
 
+import java.time.LocalDateTime;
+
 public class GameRequest {
     private int senderID;
     private int receiverID;
     private boolean isAccepted;
     private boolean isPending;
+    private int second;
+    private int minute;
+    private int hour;
 
     public GameRequest(int senderID, int receiverID) {
         this.senderID = senderID;
         this.receiverID = receiverID;
         this.isAccepted = false;
         this.isPending = true;
+        LocalDateTime now = LocalDateTime.now();
+        this.second = now.getSecond();
+        this.minute = now.getMinute();
+        this.hour = now.getHour();
+    }
+
+    public int getSecond() {
+        return second;
+    }
+
+    public int getMinute() {
+        return minute;
+    }
+
+    public int getHour() {
+        return hour;
     }
 
     public int getSenderID() {
@@ -32,6 +53,9 @@ public class GameRequest {
     public boolean isAccepted() {
         return isAccepted;
     }
+    public boolean isRejected() {
+        return !isAccepted;
+    }
 
     public void setAccepted(boolean accepted) {
         isAccepted = accepted;
@@ -43,6 +67,16 @@ public class GameRequest {
 
     public void setPending(boolean pending) {
         isPending = pending;
+    }
+
+    public void accept() {
+        isAccepted = true;
+        isPending = false;
+    }
+
+    public void reject() {
+        isAccepted = false;
+        isPending = false;
     }
 }
 

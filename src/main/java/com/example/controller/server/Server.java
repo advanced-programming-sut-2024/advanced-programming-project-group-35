@@ -157,6 +157,12 @@ public class Server {
         // کد ثبت‌نام نهایی کاربر
         System.out.println("Registering user successfully!");
     }
+
+    public void broadcast(String s) {
+        for (PlayerHandler player : players.values()) {
+            player.sendMessage(s);
+        }
+    }
 }
 
 // PlayerHandler.java

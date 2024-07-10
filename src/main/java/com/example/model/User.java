@@ -396,15 +396,38 @@ public class User {
         return gameRequests;
     }
 
-    public boolean isOnline() {
-        return isOnline;
-    }
-
     public boolean isPrivate() {
         return privateGame;
     }
 
     public void setPrivacy(boolean isPrivate) {
         this.privateGame = isPrivate;
+    }
+
+    public void acceptGameRequest(int friendUserID) {
+        for (GameRequest gameRequest : gameRequests) {
+            if (gameRequest.getSenderID() == friendUserID) {
+                gameRequest.accept();
+                return;
+            }
+        }
+    }
+
+    public void rejectGameRequest(int friendUserID) {
+        for (GameRequest gameRequest : gameRequests) {
+            if (gameRequest.getSenderID() == friendUserID) {
+                gameRequest.reject();
+                return;
+            }
+        }
+    }
+
+    public boolean hasFriendRequest(User friend) {
+        for (FriendRequest friendRequest : friendRequests) {
+            if (friendRequest.getSender().getID() == friend.getID() || friendRequest.getReceiver().getID() == friend.getID()) {
+                return true;
+            }
+        }
+        return false;
     }
 }

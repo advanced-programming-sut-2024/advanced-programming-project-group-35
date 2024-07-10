@@ -3,6 +3,7 @@ package com.example.view;
 import com.example.Main;
 import com.example.controller.Controller;
 import com.example.model.App;
+import com.example.model.GameRequest;
 import com.example.model.alerts.*;
 import com.example.model.chat.ChatBox;
 import com.example.model.FriendRequest;
@@ -179,10 +180,10 @@ public class AppView extends Application {
         isAlert = false;
     }
 
-    public boolean showConfirmationAlert(String message, String alertType) {
+    public void showConfirmationAlert(String message, String alertType, GameRequest gameRequest) {
 
         if (!isAlert) {
-            confirmationAlert = new ConfirmationAlert(message, alertType);
+            confirmationAlert = new ConfirmationAlert(message, alertType, gameRequest);
             confirmationAlert.setLayoutX(pane.getWidth() - confirmationAlert.width - 35);
             confirmationAlert.setLayoutY(50);
             pane.getChildren().add(confirmationAlert);
@@ -194,8 +195,6 @@ public class AppView extends Application {
                 removeConfirmationAlert();
             });
         }
-        System.out.println("confirmation alert : " + confirmationAlert.isResult());
-        return confirmationAlert.isResult();
     }
 
     public void showConfirmationAlert(String message, String alertType, FriendRequest friendRequest) {
@@ -350,5 +349,11 @@ public class AppView extends Application {
 
     public FriendsMenuControllerView getFriendsMenuControllerView() {
         return friendsMenuControllerView;
+    }
+
+    public void showError(String s) {
+        Platform.runLater(() -> {
+            showAlert(s, "error");
+        });
     }
 }

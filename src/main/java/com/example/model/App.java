@@ -198,4 +198,8 @@ public class App {
         }
         return null;
     }
+
+    public static void logout() {
+        serverConnector.setUserOffline(loggedInUser);
+    }
 }

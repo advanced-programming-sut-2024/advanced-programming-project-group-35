@@ -3,6 +3,7 @@ package com.example.controller.server;
 import com.example.controller.Controller;
 import com.example.controller.GameMenuControllerForOnlineGame;
 import com.example.model.App;
+import com.example.model.GameRequest;
 import com.example.model.User;
 import com.example.model.alerts.AlertType;
 import javafx.application.Platform;
@@ -78,6 +79,10 @@ public class ClientConnector implements Runnable {
         String parts[] = message.split("\\|");
         if (message.startsWith("FRIEND_REQUEST_ACCEPTED:")) {
             App.updateUserInfo();
+        } else if (message.startsWith("GAME_REQUEST_ACCEPTED:")) {
+            App.updateUserInfo();
+        } else if (message.startsWith("GAME_REQUEST_REJECTED:")) {
+            App.updateUserInfo();
         } else if (message.startsWith("NEW_FRIEND_REQUEST:")) {
             App.updateUserInfo();
         } else if (message.startsWith("FRIEND_REQUEST_REJECTED:")) {
@@ -88,6 +93,8 @@ public class ClientConnector implements Runnable {
             App.updateUserInfo();
         } else if (message.startsWith("MESSAGE")) {
             processMessageAlert(message);
+        } else if (message.startsWith("ERROR")) {
+            processErrorAlert(message);
         } else if (message.startsWith("REQUEST")) {
             App.updateUserInfo();
             processRequest(message);
@@ -101,14 +108,27 @@ public class ClientConnector implements Runnable {
         }
     }
 
+    private void processErrorAlert(String message) {
+        String[] parts = message.split("\\|");
+        int senderID = Integer.parseInt(parts[1]);
+        String senderName;
+        if (senderID != 0){
+            senderName = User.getUserByID(senderID).getUsername();
+        }else {
+            senderName = "Server";
+        }
+        System.out.println(parts[2]);
+        App.getAppView().showError(senderName + ": " + parts[2]);
+    }
+
     private void processRequest(String message) {
         String[] parts = message.split("\\|");
         int senderID = Integer.parseInt(parts[1]);
         String senderName = User.getUserByID(senderID).getUsername();
+        GameRequest gameRequest = new GameRequest(senderID, userID);
         //show a message with accept and reject buttons
-        AtomicBoolean result = new AtomicBoolean(false);
         Platform.runLater(() -> {
-            result.set(App.getAppView().showConfirmationAlert(senderName + " wants to play a game with you.", AlertType.INFO.getType()));
+            App.getAppView().showConfirmationAlert(senderName + " wants to play a game with you.", AlertType.INFO.getType(), gameRequest);
         });
 //        System.out.println("result: " + result.get());
 //        if (result.get()) {
@@ -123,7 +143,12 @@ public class ClientConnector implements Runnable {
     private void processMessageAlert(String message) {
         String[] parts = message.split("\\|");
         int senderID = Integer.parseInt(parts[1]);
-        String senderName = User.getUserByID(senderID).getUsername();
+        String senderName;
+        if (senderID != 0){
+            senderName = User.getUserByID(senderID).getUsername();
+        }else {
+            senderName = "Server";
+        }
         System.out.println(parts[2]);
         App.getAppView().showMessage(senderName + ": " + parts[2]);
     }

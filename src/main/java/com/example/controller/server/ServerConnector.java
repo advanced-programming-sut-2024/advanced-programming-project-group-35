@@ -3,6 +3,7 @@ package com.example.controller.server;
 import com.example.Main;
 import com.example.model.App;
 import com.example.model.FriendRequest;
+import com.example.model.GameRequest;
 import com.example.model.User;
 import com.example.model.deckmanager.DeckManager;
 import com.example.model.deckmanager.DeckToJson;
@@ -250,7 +251,21 @@ public class ServerConnector {
                 Socket socket = new Socket(SERVER_IP, SERVER_PORT);
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true)
         ) {
-            out.print("AcceptGameRequest");
+            out.println("AcceptGameRequest");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void acceptGameRequest(GameRequest request) {
+        try (
+                Socket socket = new Socket(SERVER_IP, SERVER_PORT);
+                PrintWriter out = new PrintWriter(socket.getOutputStream(), true)
+        ) {
+            out.print("AcceptGameRequest|");
+            out.print(request.getSenderID());
+            out.print("|");
+            out.println(request.getReceiverID());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -262,6 +277,20 @@ public class ServerConnector {
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true)
         ) {
             out.print("RejectGameRequest");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void rejectGameRequest(GameRequest request) {
+        try (
+                Socket socket = new Socket(SERVER_IP, SERVER_PORT);
+                PrintWriter out = new PrintWriter(socket.getOutputStream(), true)
+        ) {
+            out.print("RejectGameRequest|");
+            out.print(request.getSenderID());
+            out.print("|");
+            out.println(request.getReceiverID());
         } catch (IOException e) {
             e.printStackTrace();
         }
