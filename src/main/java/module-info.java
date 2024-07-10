@@ -7,6 +7,7 @@ module gwent {
     requires java.mail;
     requires jakarta.mail;
     requires com.fasterxml.jackson.databind;
+    requires jdk.httpserver;
 
     opens com.example.view.menuControllers to javafx.fxml;
     opens com.example.model to com.google.gson, javafx.base;

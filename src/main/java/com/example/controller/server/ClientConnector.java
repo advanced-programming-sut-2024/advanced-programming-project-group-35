@@ -89,6 +89,7 @@ public class ClientConnector implements Runnable {
         } else if (message.startsWith("MESSAGE")) {
             processMessageAlert(message);
         } else if (message.startsWith("REQUEST")) {
+            App.updateUserInfo();
             processRequest(message);
         } else if (message.startsWith("GameStarts")){
             //System.out.println(parts[2] + parts[4]);

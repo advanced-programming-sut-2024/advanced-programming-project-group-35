@@ -140,6 +140,14 @@ public class ServerApp {
             sendMessage(senderID, senderID, "You are not friends.");
             return;
         }
+        if (receiver.isInGame()) {
+            sendMessage(senderID, senderID, "User is in game.");
+            return;
+        }
+        if (!receiver.isOnline()) {
+            sendMessage(senderID, senderID, "User is offline.");
+            return;
+        }
         //find user connector
         PlayerHandler clientConnector = server.getClientConnector(receiverID);
         if (clientConnector == null) {
@@ -148,6 +156,7 @@ public class ServerApp {
         //send request
         StringBuilder requestBuilder = new StringBuilder();
         requestBuilder.append("REQUEST|").append(senderID).append("|").append(receiverID);
+        receiver.addGameRequest(senderID);
         clientConnector.sendMessage(requestBuilder.toString());
     }
 
@@ -167,18 +176,25 @@ public class ServerApp {
 
         ServerApp.getServer().players.get(player1ID).setInGame(true);
         ServerApp.getServer().players.get(player2ID).setInGame(true);
-
+        boolean isPrivate = checkPrivacy(player1ID, player2ID);
         if (player2Deck.getFaction().equals(FactionsType.ScoiaTael)) {
-            new GameHandler(player2ID, player1ID);
+            new GameHandler(player2ID, player1ID, isPrivate);
             requestBuilder.append("GameStarts|").append(player2ID).append("|").append(playerDeck2).append("|").append(player1ID).append("|").append(playerDeck1);
         } else {
-            new GameHandler(player1ID, player2ID);
+            new GameHandler(player1ID, player2ID, isPrivate);
             requestBuilder.append("GameStarts|").append(player1ID).append("|").append(playerDeck1).append("|").append(player2ID).append("|").append(playerDeck2);
         }
 
         clientConnector1.sendMessage(requestBuilder.toString());
         clientConnector2.sendMessage(requestBuilder.toString());
     }
+
+    private static boolean checkPrivacy(int player1ID, int player2ID) {
+        User player1 = getUserByID(player1ID);
+        User player2 = getUserByID(player2ID);
+        return player1.isPrivate() || player2.isPrivate();
+    }
+
     private static DeckToJson getDeckToJsonByCardNames(String deck) {
         try {
             ObjectMapper objectMapper = new ObjectMapper();

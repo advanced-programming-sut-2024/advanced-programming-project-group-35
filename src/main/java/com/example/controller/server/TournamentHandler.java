@@ -39,7 +39,7 @@ public class TournamentHandler {
             PlayerHandler player1 = participants.get(id1);
             PlayerHandler player2 = participants.get(id2);
 
-            GameHandler game = new GameHandler(id1, id2);
+            GameHandler game = new GameHandler(id1, id2, false);
             currentGames.add(game);
             new Thread(game).start();
         }
