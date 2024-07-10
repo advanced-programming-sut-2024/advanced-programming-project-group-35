@@ -19,12 +19,14 @@
     </ImageView>
     <VBox prefWidth="1400" prefHeight="800" spacing="20" alignment="CENTER">
         <Text styleClass="white-text, score-board-title" text="Scoreboard"/>
-        <TableView styleClass="scoreboard-table" fx:id="scoreboardTable" maxWidth="806.0" minHeight="400.0">
+        <TableView styleClass="scoreboard-table" fx:id="scoreboardTable" maxWidth="1106.0" minHeight="400.0">
             <columns>
                 <TableColumn minWidth="200" styleClass="column-header" fx:id="usernameColumn" prefWidth="200.0" text="Username"/>
                 <TableColumn minWidth="100" styleClass="column-header" fx:id="rankColumn" prefWidth="200.0" text="Best Score"/>
                 <TableColumn minWidth="100" styleClass="column-header" fx:id="scoreColumn" prefWidth="200.0" text="Score"/>
                 <TableColumn minWidth="100" styleClass="column-header" fx:id="gamesWonColumn" prefWidth="200.0" text="Games Won"/>
+                <TableColumn minWidth="100" styleClass="column-header" fx:id="isOnlineColumn" prefWidth="150.0" text="Status"/>
+                <TableColumn minWidth="100" styleClass="column-header" fx:id="watchGameColumn" prefWidth="150.0" text="Watch Game"/>
             </columns>
         </TableView>
     </VBox>

@@ -3,6 +3,7 @@ package com.example.view;
 import com.example.Main;
 import com.example.controller.Controller;
 import com.example.model.App;
+import com.example.model.alerts.*;
 import com.example.model.chat.ChatBox;
 import com.example.model.FriendRequest;
 import com.example.model.alerts.Alert;
@@ -12,6 +13,7 @@ import com.example.model.alerts.ConfirmationAlert;
 import com.example.model.alerts.Notification;
 import com.example.view.menuControllers.FriendsMenuControllerView;
 import com.example.view.menuControllers.GameMenuControllerView;
+import com.example.view.menuControllers.GameRequestHistoryMenuControllerView;
 import javafx.animation.KeyFrame;
 import javafx.animation.ScaleTransition;
 import javafx.animation.Timeline;
@@ -31,6 +33,7 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 public class AppView extends Application {
+    private TextEmote textEmote;
     private FXMLLoader fxmlLoader;
     private Stage primaryStage;
     private Pane pane;
@@ -50,6 +53,7 @@ public class AppView extends Application {
     }
 
     private GameMenuControllerView gameMenuControllerView;
+    private GameRequestHistoryMenuControllerView gameRequestHistoryMenuControllerView;
     private FriendsMenuControllerView friendsMenuControllerView;
     private Menu currentMenu;
     private Stage lockScreen;
@@ -64,6 +68,9 @@ public class AppView extends Application {
         }
         if (menu.getTitle().equals("Friends Menu")) {
             friendsMenuControllerView = fxmlLoader.getController();
+        }
+        if (menu.getTitle().equals("Game Request History Menu")) {
+            gameRequestHistoryMenuControllerView = fxmlLoader.getController();
         }
 
         Scene scene = new Scene(pane);
@@ -85,20 +92,14 @@ public class AppView extends Application {
             emote.setLayoutX((pane.getWidth() - emote.getFitWidth()) / 2);
             emote.setLayoutY((pane.getHeight() - emote.getFitWidth()) / 2);
             pane.getChildren().add(emote);
-
-
             ScaleTransition transition = new ScaleTransition(Duration.millis(300), emote);
-
             transition.setFromX(0);
             transition.setToX(1);
             transition.setFromY(0);
             transition.setToY(1);
-
             transition.play();
-
-
             isEmote = true;
-            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5)));
+            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(7)));
             timeline.play();
             timeline.setOnFinished(actionEvent -> {
                 isEmote = false;
@@ -107,6 +108,41 @@ public class AppView extends Application {
         }
     }
 
+    public void showTextEmote(String text) {
+        if (!isEmote) {
+            textEmote = new TextEmote(text);
+            textEmote.setLayoutX((pane.getWidth() - textEmote.getWrappingWidth()) / 2);
+            textEmote.setLayoutY((pane.getHeight() - textEmote.getWrappingWidth()) / 2);
+            pane.getChildren().add(textEmote);
+            ScaleTransition transition = new ScaleTransition(Duration.millis(300), textEmote);
+            transition.setFromX(0);
+            transition.setToX(1);
+            transition.setFromY(0);
+            transition.setToY(1);
+            transition.play();
+            isEmote = true;
+            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(7)));
+            timeline.play();
+            timeline.setOnFinished(actionEvent -> {
+                isEmote = false;
+                removeTextEmote();
+            });
+        }
+    }
+    public void removeTextEmote() {
+        ScaleTransition transition = new ScaleTransition(Duration.millis(300), textEmote);
+
+        transition.setFromX(1);
+        transition.setToX(0);
+        transition.setFromY(1);
+        transition.setToY(0);
+        transition.play();
+
+        transition.setOnFinished(actionEvent -> {
+            pane.getChildren().remove(textEmote);
+            isEmote = false;
+        });
+    }
     public void removeEmote() {
         ScaleTransition transition = new ScaleTransition(Duration.millis(300), emote);
 
@@ -206,6 +242,9 @@ public class AppView extends Application {
 
     public GameMenuControllerView getGameMenuControllerView() {
         return gameMenuControllerView;
+    }
+    public GameRequestHistoryMenuControllerView getGameRequestHistoryMenuControllerView() {
+        return gameRequestHistoryMenuControllerView;
     }
 
     @Override

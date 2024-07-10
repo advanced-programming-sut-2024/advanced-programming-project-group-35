@@ -139,4 +139,11 @@ public class ProfileMenuControllerView {
         controller.showFriendsList();
     }
 
+    public void openGameRequestHistoryMenu(MouseEvent mouseEvent) {
+        controller.showGameRequestsHistory();
+    }
+
+    public void openTVMenu(MouseEvent mouseEvent) {
+        controller.showTVMenu();
+    }
 }

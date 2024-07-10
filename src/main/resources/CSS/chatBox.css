@@ -3,7 +3,7 @@
     -fx-background-radius: 0; /* Rounded corners */
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 15, 0.1, 0, 0); /* Drop shadow */
 }
-.send-button, .close-button{
+.send-button, .close-button, .cancel-reply-button{
     -fx-background-color: #4e342e; /* Brown background color */
     -fx-text-fill: white; /* White text color */
     -fx-font-size: 16px; /* Font size */
@@ -23,7 +23,7 @@
     -fx-max-width: 30px;
 }
 
-.send-button:hover, .close-button:hover{
+.send-button:hover, .close-button:hover, .cancel-reply-button:hover{
     -fx-background-color: #6d4c41; /* Slightly lighter brown background */
     -fx-border-color: #5d4037; /* Slightly lighter border color */
     -fx-effect: dropshadow(gaussian, rgba(93, 64, 55, 0.9), 15, 0.1, 0, 0); /* Stronger shadow effect */
@@ -52,7 +52,7 @@
 .all-messages-vbox {
     -fx-background-color: #6b553c; /* Brown background color */
     -fx-background-radius: 0; /* Rounded corners */
-    -fx-padding: 10px 0 0 0;
+    -fx-padding: 10px 0 10px 0;
 }
 .all-messages .viewport{
     -fx-background-color: #6b553c; /* Brown background color */
@@ -120,4 +120,8 @@
     -fx-effect: dropshadow(gaussian, rgba(93, 64, 55, 0.9), 15, 0.1, 0, 0); /* Stronger shadow effect */
     -fx-cursor: hand;
     -fx-transition: 0.3s; /* Add transition */
+}
+.is-reply-label{
+    -fx-fill: #ffffff;
+    -fx-text-fill: #ffffff;
 }

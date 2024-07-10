@@ -1,0 +1,213 @@
+{
+  "player1": "ali123",
+  "player1Faction": "EmpireNilfgaardian",
+  "player1Hand": [
+    {
+      "name": "nilfgaard_black_archer",
+      "id": 99
+    },
+    {
+      "name": "nilfgaard_cahir",
+      "id": 101
+    },
+    {
+      "name": "nilfgaard_fringilla",
+      "id": 103
+    },
+    {
+      "name": "nilfgaard_imperal_brigade",
+      "id": 105
+    },
+    {
+      "name": "nilfgaard_menno",
+      "id": 107
+    },
+    {
+      "name": "nilfgaard_nauzicaa_2",
+      "id": 109
+    },
+    {
+      "name": "nilfgaard_puttkammer",
+      "id": 111
+    },
+    {
+      "name": "nilfgaard_renuald",
+      "id": 113
+    },
+    {
+      "name": "nilfgaard_shilard",
+      "id": 115
+    }
+  ],
+  "player1Deck": [
+    {
+      "name": "nilfgaard_black_archer_1",
+      "id": 100
+    },
+    {
+      "name": "nilfgaard_cynthia",
+      "id": 102
+    },
+    {
+      "name": "nilfgaard_heavy_zerri",
+      "id": 104
+    },
+    {
+      "name": "nilfgaard_letho",
+      "id": 106
+    },
+    {
+      "name": "nilfgaard_moorvran",
+      "id": 108
+    },
+    {
+      "name": "nilfgaard_morteisen",
+      "id": 110
+    },
+    {
+      "name": "nilfgaard_rainfarn",
+      "id": 112
+    },
+    {
+      "name": "nilfgaard_rotten",
+      "id": 114
+    },
+    {
+      "name": "nilfgaard_siege_engineer",
+      "id": 116
+    },
+    {
+      "name": "nilfgaard_siege_support",
+      "id": 117
+    },
+    {
+      "name": "nilfgaard_stefan",
+      "id": 118
+    },
+    {
+      "name": "nilfgaard_sweers",
+      "id": 119
+    },
+    {
+      "name": "nilfgaard_tibor",
+      "id": 120
+    },
+    {
+      "name": "nilfgaard_vanhemar",
+      "id": 121
+    }
+  ],
+  "player2": "ali",
+  "player2Faction": "Skellige",
+  "player2Hand": [
+    {
+      "name": "skellige_cerys",
+      "id": 199
+    },
+    {
+      "name": "skellige_dimun_pirate",
+      "id": 201
+    },
+    {
+      "name": "skellige_hjalmar",
+      "id": 203
+    },
+    {
+      "name": "skellige_kambi",
+      "id": 205
+    },
+    {
+      "name": "skellige_light_longship",
+      "id": 207
+    },
+    {
+      "name": "skellige_madmad_lugos",
+      "id": 209
+    },
+    {
+      "name": "skellige_shield_maiden",
+      "id": 211
+    },
+    {
+      "name": "skellige_shield_maiden_2",
+      "id": 213
+    },
+    {
+      "name": "skellige_tordarroch",
+      "id": 215
+    }
+  ],
+  "player2Deck": [
+    {
+      "name": "skellige_craite_warrior",
+      "id": 200
+    },
+    {
+      "name": "skellige_donar",
+      "id": 202
+    },
+    {
+      "name": "skellige_holger",
+      "id": 204
+    },
+    {
+      "name": "skellige_light_longship",
+      "id": 206
+    },
+    {
+      "name": "skellige_light_longship",
+      "id": 208
+    },
+    {
+      "name": "skellige_olaf",
+      "id": 210
+    },
+    {
+      "name": "skellige_shield_maiden_1",
+      "id": 212
+    },
+    {
+      "name": "skellige_svanrige",
+      "id": 214
+    },
+    {
+      "name": "skellige_udalryk",
+      "id": 216
+    },
+    {
+      "name": "skellige_vildkaarl",
+      "id": 217
+    },
+    {
+      "name": "skellige_war_longship",
+      "id": 218
+    },
+    {
+      "name": "skellige_young_berserker",
+      "id": 219
+    },
+    {
+      "name": "skellige_ermion",
+      "id": 220
+    },
+    {
+      "name": "skellige_hemdall",
+      "id": 221
+    }
+  ],
+  "commands": [
+    "card with id: 103 moved from currentPlayerHand to currentPlayerRanged and ability applied",
+    "change turn",
+    "card with id: 199 moved from currentPlayerHand to currentPlayerCloseCombat and ability applied",
+    "change turn",
+    "card with id: 111 moved from currentPlayerHand to currentPlayerRanged and ability applied",
+    "change turn",
+    "card with id: 207 moved from currentPlayerHand to currentPlayerRanged and ability applied",
+    "change turn",
+    "card with id: 206 moved from currentPlayerHand to currentPlayerRanged and ability applied",
+    "card with id: 208 moved from currentPlayerHand to currentPlayerRanged and ability applied",
+    "card with id: 206 moved from currentPlayerHand to currentPlayerRanged and ability applied",
+    "card with id: 107 moved from currentPlayerHand to currentPlayerCloseCombat and ability applied",
+    "change turn"
+  ]
+}

@@ -5,9 +5,7 @@ import com.example.model.User;
 import com.example.view.Menu;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.ArrayList;
@@ -26,8 +24,16 @@ public class ScoreTableController extends AppController {
             throw new RuntimeException();
         }
     }
-
+    private final Label btn = new Label("Watch");
+    {
+        btn.setOnMouseClicked(event -> {
+            User user = scoreboardTable.getItems().get(scoreboardTable.getSelectionModel().getSelectedIndex());
+            // اینجا کد مربوط به تماشای بازی را قرار دهید
+            System.out.println("Watching game of user: " + user.getUsername());
+        });
+    }
     public void makeScoreboardTable(ArrayList<User> allUsers) {
+
         allUsers.sort(Comparator.comparing(User::getScore).reversed());
 
         // Limit the list to the top 10 users
@@ -41,20 +47,54 @@ public class ScoreTableController extends AppController {
         TableColumn<User, Integer> bestScoreColumn = new TableColumn<>("Best Score");
         TableColumn<User, Integer> scoreColumn = new TableColumn<>("Score");
         TableColumn<User, Integer> gamesWonColumn = new TableColumn<>("Games Won");
+        TableColumn<User, String> isOnlineColumn = new TableColumn<>("Status");
+        TableColumn<User, Void> watchGameColumn = new TableColumn<>("Watch Game");
 
         // Set the cell value factory for each column to display the appropriate property of the User object
         usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
         bestScoreColumn.setCellValueFactory(new PropertyValueFactory<>("bestScore"));
         scoreColumn.setCellValueFactory(new PropertyValueFactory<>("score"));
         gamesWonColumn.setCellValueFactory(new PropertyValueFactory<>("numberOfWonGames"));
+        isOnlineColumn.setCellValueFactory(cellData -> {
+            boolean isOnline = cellData.getValue().isOnline();
+            return javafx.beans.binding.Bindings.createStringBinding(
+                    () -> isOnline ? "Online" : "Offline"
+            );
+        });
+        watchGameColumn.setCellFactory(col -> {
+            TableCell<User, Void> cell = new TableCell<User, Void>() {
+                private final Label btn = new Label("Watch");
+                {
+                    btn.setStyle("-fx-text-fill: #ffffff; -fx-underline: true; -fx-cursor: hand;");
+                    btn.setOnMouseClicked(event -> {
+                        User user = getTableView().getItems().get(getIndex());
+                        // اینجا کد مربوط به تماشای بازی را قرار دهید
+                        System.out.println("Watching game of user: " + user.getUsername());
+                    });
+                }
+
+                @Override
+                protected void updateItem(Void item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setGraphic(null);
+                    } else {
+                        setGraphic(btn);
+                    }
+                }
+            };
+            return cell;
+        });
 
         usernameColumn.setMinWidth(200);
         bestScoreColumn.setMinWidth(200);
         scoreColumn.setMinWidth(200);
         gamesWonColumn.setMinWidth(200);
+        isOnlineColumn.setMinWidth(150);
+        watchGameColumn.setMinWidth(150);
 
         // Add the TableColumn objects to the TableView
-        scoreboardTable.getColumns().setAll(usernameColumn, bestScoreColumn, scoreColumn, gamesWonColumn);
+        scoreboardTable.getColumns().setAll(usernameColumn, bestScoreColumn, scoreColumn, gamesWonColumn, isOnlineColumn, watchGameColumn);
 
         // Set the items of the TableView to the ObservableList of users
         scoreboardTable.setItems(users);

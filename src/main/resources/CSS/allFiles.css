@@ -207,3 +207,40 @@
     -fx-border-color: #e8af3c;
     -fx-border-width: 2;
 }
+
+.game-history-scroll-pane {
+    -fx-padding: 0 0 0 0;
+}
+
+.combo-box {
+    -fx-background-color: #4e342e; /* Background color */
+    -fx-border-color: #3e2723; /* Border color */
+    -fx-border-width: 0px; /* Border width */
+    -fx-border-radius: 0px; /* Border radius */
+    -fx-border-insets: 2;
+}
+.combo-box .arrow-button {
+    -fx-background-color: #4e342e; /* Background color */
+    -fx-shape: ""; /* Remove default arrow shape */
+}
+
+/* Style the list view popup */
+.combo-box .list-view {
+    -fx-background-color: #4e342e; /* Background color */
+    -fx-font-size: 14px; /* Font size */
+}
+
+/* Style list view items */
+.combo-box .list-cell {
+    -fx-background-color: #4e342e;
+    -fx-text-fill: #ffffff; /* Text color */
+}
+.combo-box .list-cell:hover {
+    -fx-background-color: #4e342e;
+    -fx-text-fill: #ffffff; /* Text color */
+}
+
+/* Style list view item on hover */
+.combo-box .list-cell:hover {
+    -fx-background-color: #4e342e; /* Background color */
+}

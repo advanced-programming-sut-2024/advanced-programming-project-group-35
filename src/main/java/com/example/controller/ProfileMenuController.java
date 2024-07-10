@@ -3,6 +3,7 @@ package com.example.controller;
 import com.example.controller.server.ServerConnector;
 import com.example.model.App;
 import com.example.model.FriendRequest;
+import com.example.model.GameData;
 import com.example.model.IO.errors.Errors;
 import com.example.model.User;
 import com.example.view.Menu;
@@ -23,7 +24,17 @@ public class ProfileMenuController extends AppController {
         }
     }
     public void showGameHistory() {
-        if (App.getLoggedInUser().getNumberOfPlayedGames() == 0) {
+        GameData gameData1 = new GameData("Ali", "2021-06-01", 10, 5, new int[]{1, 2, 3, 4, 5}, new int[]{5, 4, 3, 2, 1}, "Ali");
+        GameData gameData2 = new GameData("Reza", "2021-06-02", 10, 5, new int[]{1, 2, 3, 4, 5}, new int[]{5, 4, 3, 2, 1}, "Reza");
+        GameData gameData3 = new GameData("Mehdi", "2021-06-03", 10, 5, new int[]{1, 2, 3, 4, 5}, new int[]{5, 4, 3, 2, 1}, "Mehdi");
+        GameData gameData4 = new GameData("Hossein", "2021-06-04", 10, 5, new int[]{1, 2, 3, 4, 5}, new int[]{5, 4, 3, 2, 1}, "Hossein");
+        GameData gameData5 = new GameData("Mohammad", "2021-06-05", 10, 5, new int[]{1, 2, 3, 4, 5}, new int[]{5, 4, 3, 2, 1}, "Mohammad");
+        loggedInUser.getGameData().add(gameData1);
+        loggedInUser.getGameData().add(gameData2);
+        loggedInUser.getGameData().add(gameData3);
+        loggedInUser.getGameData().add(gameData4);
+        loggedInUser.getGameData().add(gameData5);
+        if (App.getLoggedInUser().getGameData().isEmpty()) {
             OutputView.showOutputAlert(Errors.DONT_HAVE_PLAYED_GAME);
         }
         else {
@@ -147,5 +158,15 @@ public class ProfileMenuController extends AppController {
     public void updateUserInfo() {// reset the menu to show the new data
         App.setCurrentMenu(Menu.PROFILE_MENU);
         Controller.PROFILE_MENU_CONTROLLER.run();
+    }
+
+    public void showGameRequestsHistory() {
+        App.setCurrentMenu(Menu.GAME_REQUEST_HISTORY_MENU);
+        Controller.GAME_REQUEST_HISTORY_MENU_CONTROLLER.run();
+    }
+
+    public void showTVMenu() {
+        App.setCurrentMenu(Menu.TV_MENU);
+        Controller.TV_MENU_CONTROLLER.run();
     }
 }

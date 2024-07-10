@@ -8,6 +8,8 @@ import com.example.model.deckmanager.DeckToJson;
 import com.example.model.game.Deck;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.example.model.FriendRequest;
+import com.example.model.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;

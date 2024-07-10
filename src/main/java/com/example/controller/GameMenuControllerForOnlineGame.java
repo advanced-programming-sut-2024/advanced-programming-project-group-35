@@ -1,9 +1,8 @@
 package com.example.controller;
 
 import com.example.model.App;
-import com.example.model.alerts.AlertType;
+import com.example.model.alerts.*;
 import com.example.model.deckmanager.DeckManager;
-import com.example.model.alerts.NotificationsData;
 import com.example.model.card.*;
 import com.example.model.card.enums.AbilityName;
 import com.example.model.card.enums.CardData;
@@ -727,5 +726,15 @@ public class GameMenuControllerForOnlineGame extends AppController {
     public void addDecoyCard() {
         gameMenuControllerView.addDecoyCard();
         saveLog("add decoy card cheat code");
+    }
+
+    public void sendEmote(Emote emote, Emotes emoteType) {
+        App.getAppView().showEmote(emoteType);
+        //TODO: App.getServerConnector().sendEmote(emote);
+    }
+
+    public void sendTextEmote(TextEmote textEmote, String text) {
+        App.getAppView().showTextEmote(text);
+        //TODO
     }
 }

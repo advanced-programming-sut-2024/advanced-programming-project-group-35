@@ -4,6 +4,7 @@ import com.example.model.App;
 import com.example.model.Terminal;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
@@ -23,6 +24,7 @@ public class ChatMessageView extends StackPane {
     boolean isReply = false;
     private ObservableList<ChatReaction> reactions = FXCollections.observableArrayList();
     private ChatMessage chatMessage;
+    private HBox reactionsBox;
     ContextMenu contextMenu = new ContextMenu();
 
     public ChatMessageView(ChatMessage chatMessage) {
@@ -35,6 +37,8 @@ public class ChatMessageView extends StackPane {
         if (replyTo != null) {
             isReply = true;
         }
+        this.reactionsBox = new HBox(5);
+        this.reactionsBox.setAlignment(Pos.CENTER_LEFT);
         init();
     }
 
@@ -62,7 +66,7 @@ public class ChatMessageView extends StackPane {
         Label timeLabel = new Label(hour + ":" + minute);
         timeLabel.getStyleClass().add("time-label");
         timeLabel.setStyle("-fx-font-size: 10px;");
-        HBox reactionsBox = new HBox();
+        reactionsBox = new HBox();
         if (reactions.size() > 0) {
             Label reactionsLabel = new Label("Reactions: ");
             reactionsLabel.getStyleClass().add("reactions-label");
@@ -87,16 +91,27 @@ public class ChatMessageView extends StackPane {
     }
     public void setupContextMenu() {
         contextMenu.getItems().clear();
-        MenuItem reactionItem = new MenuItem("Reaction");
-        reactionItem.getStyleClass().add("context-menu-item");
         contextMenu.getStyleClass().add("context-menu");
-        reactionItem.setOnAction(event -> {
-        });
+        MenuItem likeItem = new MenuItem(ChatReactionType.LIKE.getName());
+        likeItem.getStyleClass().add("context-menu-item");
+        likeItem.setOnAction(event -> addReaction(ChatReactionType.LIKE));
+        MenuItem dislikeItem = new MenuItem(ChatReactionType.DISLIKE.getName());
+        dislikeItem.getStyleClass().add("context-menu-item");
+        dislikeItem.setOnAction(event -> addReaction(ChatReactionType.DISLIKE));
+        MenuItem laughItem = new MenuItem(ChatReactionType.LAUGH.getName());
+        laughItem.getStyleClass().add("context-menu-item");
+        laughItem.setOnAction(event -> addReaction(ChatReactionType.LAUGH));
+        MenuItem sadItem = new MenuItem(ChatReactionType.SAD.getName());
+        sadItem.getStyleClass().add("context-menu-item");
+        sadItem.setOnAction(event -> addReaction(ChatReactionType.SAD));
+        MenuItem angryItem = new MenuItem(ChatReactionType.ANGRY.getName());
+        angryItem.getStyleClass().add("context-menu-item");
+        angryItem.setOnAction(event -> addReaction(ChatReactionType.ANGRY));
         MenuItem replyItem = new MenuItem("Replay");
         replyItem.getStyleClass().add("context-menu-item");
         replyItem.setOnAction(event -> ChatBox.setReplyTo(chatMessage));
 
-        contextMenu.getItems().addAll(reactionItem, replyItem);
+        contextMenu.getItems().addAll(likeItem, dislikeItem, laughItem, sadItem, angryItem, replyItem);
     }
 
     public void setReaction(ChatReaction reaction) {
@@ -106,7 +121,18 @@ public class ChatMessageView extends StackPane {
     public ChatReaction getReaction() {
         return reaction;
     }
+    private void addReaction(ChatReactionType type) {
+        int reactorId = App.getLoggedInUser().getID();
+        ChatReaction reaction = new ChatReaction(reactorId, type);
+
+        if (!reactions.stream().anyMatch(r -> r.getType() == type && r.getReactorId() == reactorId)) {
+            reactions.add(reaction);
+            reactionsBox.getChildren().add(reaction);
+            chatMessage.addReaction(reactorId);
+        }
+    }
     public void addReaction(ChatReaction reaction) {
         reactions.add(reaction);
+        reactionsBox.getChildren().add(reaction);
     }
 }
