@@ -8,29 +8,32 @@ import com.example.model.card.Card;
 import com.example.model.game.Deck;
 import com.example.model.game.Hand;
 import com.example.model.game.place.RowsInGame;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
+
+import java.util.Collections;
 
 public class SpyAbility implements Ability {
     @Override
     public void apply(AbilityContext abilityContext) {
         Deck deck = abilityContext.getTable().getCurrentPlayer().getBoard().getDeck();
-        Hand hand = abilityContext.getTable().getCurrentPlayer().getBoard().getHand();
-
         if (deck.getSize() > 1) {
+            Collections.shuffle(deck.getCards());
             Card selectedCard1 = deck.getCard(0);
             Card selectedCard2 = deck.getCard(1);
-            deck.removeCard(selectedCard1);
-            deck.removeCard(selectedCard2);
-            hand.addCard(selectedCard1);
-            hand.addCard(selectedCard2);
-            ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbility(selectedCard1.getIdInGame(), RowsInGame.currentPlayerDeck.toString(), RowsInGame.currentPlayerHand.toString());
-            ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbility(selectedCard2.getIdInGame(), RowsInGame.currentPlayerDeck.toString(), RowsInGame.currentPlayerHand.toString());
-            ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).getGameMenuControllerView().addMouseEventsForHandCards();
+            ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbilityForCurrentPlayer(selectedCard1.getIdInGame(), RowsInGame.currentPlayerDeck.toString(), RowsInGame.currentPlayerHand.toString());
+            ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbilityForCurrentPlayer(selectedCard2.getIdInGame(), RowsInGame.currentPlayerDeck.toString(), RowsInGame.currentPlayerHand.toString());
         } else if (deck.getSize() == 1) {
+            Collections.shuffle(deck.getCards());
             Card selectedCard = deck.getCard(0);
-            deck.removeCard(selectedCard);
-            hand.addCard(selectedCard);
-            ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbility(selectedCard.getIdInGame(), "currentPlayerHandObservableList", "currentPlayerDeckObservableList");
-            ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).getGameMenuControllerView().addMouseEventsForHandCards();
+            ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbilityForCurrentPlayer(selectedCard.getIdInGame(),RowsInGame.currentPlayerDeck.toString(), RowsInGame.currentPlayerHand.toString());
         }
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.5)));
+        timeline.setOnFinished(e -> {
+            ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).getGameMenuControllerView().addMouseEventsForHandCards();
+        });
+        timeline.setCycleCount(1);
+        timeline.play();
     }
 }

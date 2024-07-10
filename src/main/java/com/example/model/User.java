@@ -387,7 +387,4 @@ public class User {
     public boolean isOnline() {
         return isOnline;
     }
-    public int getId() {
-        return id;
-    }
 }

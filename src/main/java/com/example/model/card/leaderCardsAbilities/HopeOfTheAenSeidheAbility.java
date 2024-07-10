@@ -27,14 +27,14 @@ public class HopeOfTheAenSeidheAbility implements LeaderAbility {
             if (ranged.getSpecialCard() == null && close.getSpecialCard() != null && (close.getSpecialCard().getAbilityName() == AbilityName.COMMANDER_HORN)) {
                 ((UnitCard) card).duplicatePower();
                 ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).getGameMenuControllerView().getGameCardViewWithCardId(card.getIdInGame()).updatePowerLabel();
-                ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbility(card.getIdInGame(), RowsInGame.currentPlayerRanged.toString(), RowsInGame.currentPlayerCloseCombat.toString());
+                ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbilityForCurrentPlayer(card.getIdInGame(), RowsInGame.currentPlayerRanged.toString(), RowsInGame.currentPlayerCloseCombat.toString());
             }
         }
         for (Card card : closeCopy) {
             if (close.getSpecialCard() == null && ranged.getSpecialCard() != null && (ranged.getSpecialCard().getAbilityName() == AbilityName.COMMANDER_HORN)) {
                 ((UnitCard) card).duplicatePower();
                 ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).getGameMenuControllerView().getGameCardViewWithCardId(card.getIdInGame()).updatePowerLabel();
-                ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbility(card.getIdInGame(), RowsInGame.currentPlayerCloseCombat.toString(), RowsInGame.currentPlayerRanged.toString());
+                ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbilityForCurrentPlayer(card.getIdInGame(), RowsInGame.currentPlayerCloseCombat.toString(), RowsInGame.currentPlayerRanged.toString());
 
             }
         }

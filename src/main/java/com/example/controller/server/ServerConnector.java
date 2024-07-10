@@ -6,6 +6,7 @@ import com.example.model.FriendRequest;
 import com.example.model.User;
 import com.example.model.card.Card;
 import com.example.model.card.enums.AbilityName;
+import com.example.model.card.enums.CardData;
 import com.example.model.deckmanager.DeckManager;
 import com.example.model.deckmanager.DeckToJson;
 import com.example.model.game.Deck;
@@ -230,7 +231,14 @@ public class ServerConnector {
 
     private void setHand(DeckToJson deck) {
         //TODO for test
-        for (int i = 4; i < 14 ; i++) {
+        ArrayList<String> names = new ArrayList<>(deck.getCards());
+        for (String name: names) {
+            if (CardData.getCardDataByName(name).getAbilityName().equals("tight_bound")){
+                deck.getHand().add(name);
+                deck.getCards().remove(name);
+            }
+        }
+        for (int i = 0 ; i < 15 ; i++) {
             String cardName = deck.getCards().get(i);
             deck.getHand().add(cardName);
             deck.getCards().remove(cardName);

@@ -26,7 +26,7 @@ public class MusterAbility implements Ability {
                 String[] parts1 = card1.getName().split("_");
                 if (parts[1].equals(parts1[1])) {
                     String dest = (String) abilityContext.getParam("dest");
-                    ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbility(card1.getIdInGame(), RowsInGame.currentPlayerHand.toString(), dest);
+                    ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbilityForCurrentPlayer(card1.getIdInGame(), RowsInGame.currentPlayerHand.toString(), dest);
                 }
             }
         }
@@ -37,7 +37,7 @@ public class MusterAbility implements Ability {
                 String[] parts1 = card1.getName().split("_");
                 if (parts[1].equals(parts1[1])) {
                     String dest = (String) abilityContext.getParam("dest");
-                    ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbility(card1.getIdInGame(), RowsInGame.currentPlayerHand.toString(), dest);
+                    ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbilityForCurrentPlayer(card1.getIdInGame(), RowsInGame.currentPlayerDeck.toString(), dest);
                 }
             }
         }

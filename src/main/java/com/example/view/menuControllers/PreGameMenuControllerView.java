@@ -417,7 +417,7 @@ public class PreGameMenuControllerView {
             player1OfflineDeck = App.getLoggedInUser().getTemporaryDeck();
             App.getLoggedInUser().setTemporaryDeck(player2OfflineDeck);
             GameMenuControllerForOnlineGame gameMenuControllerForOnlineGame = (GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController();
-            gameMenuControllerForOnlineGame.startNewGame(App.getLoggedInUser().getUsername(), User.getUserByID(App.temporaryUserID).getUsername(), getDeckString(player1OfflineDeck), getDeckString(player2OfflineDeck));
+            gameMenuControllerForOnlineGame.startNewGame(App.getLoggedInUser().getID(), User.getUserByID(App.temporaryUserID).getID(), getDeckString(player1OfflineDeck), getDeckString(player2OfflineDeck), 0);
             gameMenuControllerForOnlineGame.run();
             player1OfflineID = player2OfflineID = -1;
         }

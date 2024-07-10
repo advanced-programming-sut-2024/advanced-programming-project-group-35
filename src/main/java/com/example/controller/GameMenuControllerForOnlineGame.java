@@ -1,5 +1,7 @@
 package com.example.controller;
 
+import com.example.controller.server.GameHandler;
+import com.example.controller.server.ServerApp;
 import com.example.model.App;
 import com.example.model.alerts.*;
 import com.example.model.deckmanager.DeckManager;
@@ -45,15 +47,22 @@ public class GameMenuControllerForOnlineGame extends AppController {
         });
     }
 
+    private Matcher matcher;
+
     private void handleCommand() {
         Thread thread = new Thread(() -> {
             try {
-                String message = App.in.readLine();
-                Matcher matcher;
-                if ((matcher = OnlineGameCommands.MOVE_CARD_AND_DO_ABILITY.getMatcher(message)) != null) {
-                    moveCardAndDoAbility(matcher);
-                } else if ((matcher = OnlineGameCommands.MOVE_CARD_AND_DONT_DO_ABILITY.getMatcher(message)) != null) {
-
+                String message;
+                while ((message = App.in.readLine()) != null) {
+                    if (OnlineGameCommands.CHANGE_TURN.getMatcher(message) != null) {
+                        changeTurnWithNoLog();
+                    } else if ((matcher = OnlineGameCommands.MOVE_CARD_AND_DO_ABILITY.getMatcher(message)) != null) {
+                        moveCardAndDoAbility(matcher);
+                    } else if ((matcher = OnlineGameCommands.MOVE_CARD_AND_DONT_DO_ABILITY.getMatcher(message)) != null) {
+                        moveCardAndDontDoAbility(matcher);
+                    } else if (OnlineGameCommands.CHANGE_TURN != null) {
+                        changeTurnWithNoLog();
+                    }
                 }
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -71,6 +80,18 @@ public class GameMenuControllerForOnlineGame extends AppController {
             moveCardAndDoAbilityForCurrentPlayer(cardId, origin, dest);
         } else {
             moveCardAndDoAbilityForOpponent(cardId, reverseRow(origin), reverseRow(dest));
+        }
+    }
+
+    private void moveCardAndDontDoAbility(Matcher matcher) {
+        int playerPriority = Integer.parseInt(matcher.group("playerPriority"));
+        int cardId = Integer.parseInt(matcher.group("cardId"));
+        String origin = matcher.group("origin");
+        String dest = matcher.group("dest");
+        if (isYou(playerPriority)) {
+            moveCardAndDontDoAbilityForCurrentPlayer(cardId, origin, dest);
+        } else {
+            moveCardAndDontDoAbilityForOpponent(cardId, reverseRow(origin), reverseRow(dest));
         }
     }
 
@@ -104,6 +125,7 @@ public class GameMenuControllerForOnlineGame extends AppController {
 
 
     private Card getCardById(int cardId, ObservableList<Card> originRow) {
+        ;
         for (Card card : originRow) {
             if (card != null && card.getIdInGame() == cardId) {
                 return card;
@@ -149,10 +171,10 @@ public class GameMenuControllerForOnlineGame extends AppController {
                     break;
             }
         } else if (card instanceof SpecialCard) {
-            AbilityContext abilityContext;
+            AbilityContext abilityContext = new AbilityContext(table, null, getRowByName(getRowNameBySpecialPlaceName(destination)));
+            abilityContext.addParam("dest", destination);
             switch (card.getAbilityName()) {
                 case COMMANDER_HORN:
-                    abilityContext = new AbilityContext(table, null, getRowByName(getRowNameBySpecialPlaceName(destination)));
                     doNonLeaderCardsAbilityForCurrentPlayer(card, abilityContext, AbilityName.COMMANDER_HORN);
                     break;
                 case SCORCH:
@@ -178,7 +200,16 @@ public class GameMenuControllerForOnlineGame extends AppController {
         table.getCurrentPlayer().updateScore();
         table.getOpponent().updateScore();
         gameMenuControllerViewForOnlineGame.updateAllLabels();
-        checkHandEmpty();
+        Timeline timeline = new Timeline();
+        timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(2), e -> {
+            if (table.getCurrentPlayer().getBoard().getHand().getCards().isEmpty() && !table.getCurrentPlayer().getBoard().getDeck().getLeader().canDoAction()) {
+                passRound();
+            } else if (!table.getOpponent().isPassRound()) {
+                changeTurn();
+            }
+        }));
+        timeline.setCycleCount(1);
+        timeline.play();
     }
 
     public void moveCardAndDoAbilityForOpponent(int cardId, String origin, String destination) {
@@ -195,16 +226,16 @@ public class GameMenuControllerForOnlineGame extends AppController {
                     doNonLeaderCardsAbilityForOpponent(card, AbilityName.MUSTER);
                     break;
                 case MORALE_BOOST:
-                    doNonLeaderCardsAbilityForOpponent(card, AbilityName.MORALE_BOOST);
+                    doNonLeaderCardsAbilityForCurrentPlayer(card, abilityContext, AbilityName.MORALE_BOOST);
                     break;
                 case SPY:
                     doNonLeaderCardsAbilityForOpponent(card, AbilityName.SPY);
                     break;
                 case COMMANDER_HORN:
-                    doNonLeaderCardsAbilityForOpponent(card, AbilityName.COMMANDER_HORN);
+                    doNonLeaderCardsAbilityForCurrentPlayer(card, abilityContext, AbilityName.COMMANDER_HORN);
                     break;
                 case TIGHT_BOND:
-                    doNonLeaderCardsAbilityForOpponent(card, AbilityName.TIGHT_BOND);
+                    doNonLeaderCardsAbilityForCurrentPlayer(card, abilityContext, AbilityName.TIGHT_BOND);
                     break;
                 case SCORCH:
                     doNonLeaderCardsAbilityForOpponent(card, AbilityName.SCORCH);
@@ -214,10 +245,11 @@ public class GameMenuControllerForOnlineGame extends AppController {
                     break;
             }
         } else if (card instanceof SpecialCard) {
-            AbilityContext abilityContext;
+            AbilityContext abilityContext = new AbilityContext(table, null, getRowByName(getRowNameBySpecialPlaceName(destination)));
+            abilityContext.addParam("dest", destination);
             switch (card.getAbilityName()) {
                 case COMMANDER_HORN:
-                    doNonLeaderCardsAbilityForOpponent(card, AbilityName.COMMANDER_HORN);
+                    doNonLeaderCardsAbilityForCurrentPlayer(card, abilityContext, AbilityName.COMMANDER_HORN);
                     break;
                 case SCORCH:
                     doNonLeaderCardsAbilityForOpponent(card, AbilityName.SCORCH);
@@ -232,19 +264,9 @@ public class GameMenuControllerForOnlineGame extends AppController {
             }
         }
 
-//        App.out.println("player|" + table.getPlayerInTurn().getPriorityInGame() + "|movedCard|" + cardId + "|from|" + origin + "|to|" + destination + "|andDoAbility");
         table.getCurrentPlayer().updateScore();
         table.getOpponent().updateScore();
         gameMenuControllerViewForOnlineGame.updateAllLabels();
-        checkHandEmpty();
-    }
-
-    private void checkHandEmpty() {
-        if (table.getCurrentPlayer().getBoard().getHand().getCards().isEmpty()) {
-            passRound();
-        } else if (!table.getOpponent().isPassRound()) {
-            changeTurn();
-        }
     }
 
 
@@ -297,9 +319,13 @@ public class GameMenuControllerForOnlineGame extends AppController {
         }
     }
 
-    public void moveCardAndDontDoAbility(int cardId, String origin, String destination) {
+    public void moveCardAndDontDoAbilityForCurrentPlayer(int cardId, String origin, String destination) {
         moveCard(cardId, origin, destination);
         App.out.println("player|" + table.getPlayerInTurn().getPriorityInGame() + "|movedCard|" + cardId + "|from|" + origin + "|to|" + destination + "|andDontDoAbility");
+    }
+
+    public void moveCardAndDontDoAbilityForOpponent(int cardId, String origin, String destination) {
+        moveCard(cardId, origin, destination);
     }
 
     private void moveCard(int cardId, String origin, String destination) {
@@ -321,9 +347,9 @@ public class GameMenuControllerForOnlineGame extends AppController {
     }
 
 
-    public void startNewGame(String player1Name, String player2Name, String player1DeckNames, String player2DeckNames) {
-        Player player1 = new Player(player1Name, Integer.parseInt(player1Name));
-        Player player2 = new Player(player2Name, Integer.parseInt(player2Name));
+    public void startNewGame(int player1Id, int player2Id, String player1DeckNames, String player2DeckNames, int gameId) {
+        Player player1 = new Player(App.getUserByID(player1Id).getUsername(), player1Id);
+        Player player2 = new Player(App.getUserByID(player2Id).getUsername(), player2Id);
 
         DeckToJson deck1 = DeckManager.getDeckToJsonByCardNames(player1DeckNames);
         DeckToJson deck2 = DeckManager.getDeckToJsonByCardNames(player2DeckNames);
@@ -340,7 +366,7 @@ public class GameMenuControllerForOnlineGame extends AppController {
         player1.setPriorityInGame(1);
         player2.setPriorityInGame(2);
 
-        table = new Table(player1, player2);
+        table = new Table(player1, player2, gameId);
 
 //        saveLog(generateInitialDeckData());
         Round round1 = new Round(1);
@@ -397,7 +423,6 @@ public class GameMenuControllerForOnlineGame extends AppController {
     }
 
     private void startRound(Table table) {
-        System.out.println(turn);
         if (turn == 1) {
             gameMenuControllerViewForOnlineGame.showVetoCards();
         }
@@ -510,7 +535,6 @@ public class GameMenuControllerForOnlineGame extends AppController {
                     table.setCurrentPlayer(winner);
                 }
             }
-            changeTurnWithNoLog();
             Round round = new Round(table.getRoundNumber() + 1);
             table.getCurrentPlayer().setPassRound(false);
             table.getOpponent().setPassRound(false);
@@ -523,12 +547,17 @@ public class GameMenuControllerForOnlineGame extends AppController {
 
     private void changeTurn() {
         turn++;
+        table.swapPlayers();
         gameMenuControllerViewForOnlineGame.changeTurn();
+        App.out.println("change turn");
     }
 
     private void changeTurnWithNoLog() {
+        turn++;
+        table.swapPlayers();
         gameMenuControllerViewForOnlineGame.changeTurn();
     }
+
 
     private void endGame(Table table, Player winner) {
         System.out.println("end game");
@@ -613,6 +642,9 @@ public class GameMenuControllerForOnlineGame extends AppController {
             }
             case "opponentDiscardPlace" -> {
                 return table.getOpponent().getBoard().getDiscardPile().getCards();
+            }
+            case "opponentDeck" -> {
+                return table.getOpponent().getBoard().getDeck().getCards();
             }
             case "currentPlayerDiscardPlace" -> {
                 return table.getCurrentPlayer().getBoard().getDiscardPile().getCards();
@@ -746,7 +778,7 @@ public class GameMenuControllerForOnlineGame extends AppController {
         Deck deck = table.getCurrentPlayer().getBoard().getDeck();
         Card randomCard = deck.getCard(new Random().nextInt(deck.getSize()));
         if (randomCard != null) {
-            moveCardAndDontDoAbility(randomCard.getIdInGame(), RowsInGame.currentPlayerDeck.toString(), RowsInGame.currentPlayerHand.toString());
+            moveCardAndDontDoAbilityForCurrentPlayer(randomCard.getIdInGame(), RowsInGame.currentPlayerDeck.toString(), RowsInGame.currentPlayerHand.toString());
         }
     }
 

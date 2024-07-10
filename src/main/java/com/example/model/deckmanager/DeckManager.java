@@ -98,7 +98,7 @@ public class DeckManager {
         deck.setFactionAbility(FactionsType.getAbilityByName(deckToJson.getFaction()));
         for (int i = 0; i < deckToJson.getRestOfCards().size(); i++) {
             Card card = CardFactory.getCardByName(deckToJson.getRestOfCards().get(i));
-            card.setIdInGame(first * 100 + i + 11);
+            card.setIdInGame(first * 100 + i + 20);
             deck.addCard(card);
         }
         return deck;

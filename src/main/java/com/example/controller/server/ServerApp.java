@@ -39,8 +39,6 @@ public class ServerApp {
     }
 
     public static ArrayList<User> allUsers = new ArrayList<User>();
-    public static HashMap<Integer, GameHandler> games = new HashMap<>();
-
     public static void saveUsers(String filename) {
         for (User user : allUsers) {
             System.out.println(user.getUsername());
@@ -53,6 +51,7 @@ public class ServerApp {
             System.out.println("Error saving users data.");
         }
     }
+
 
     public static void loadUsers(String filename) {
         Gson gson = new GsonBuilder().create();
@@ -170,16 +169,16 @@ public class ServerApp {
         ServerApp.getServer().players.get(player2ID).setInGame(true);
 
         if (deckPlayer2.getFaction().equals("ScoiaTael")) {
-            new GameHandler(player2ID, player1ID);
-            requestBuilder.append("GameStarts|").append(player2ID).append("|").append(playerDeck2).append("|").append(player1ID).append("|").append(playerDeck1);
+            GameHandler gameHandler = new GameHandler(player2ID, player1ID);
+            requestBuilder.append("GameStarts|").append(player2ID).append("|").append(playerDeck2).append("|").append(player1ID).append("|").append(playerDeck1).append("|").append(gameHandler.getGameId());
         } else {
-            new GameHandler(player1ID, player2ID);
-            requestBuilder.append("GameStarts|").append(player1ID).append("|").append(playerDeck1).append("|").append(player2ID).append("|").append(playerDeck2);
+            GameHandler gameHandler = new GameHandler(player1ID, player2ID);
+            requestBuilder.append("GameStarts|").append(player1ID).append("|").append(playerDeck1).append("|").append(player2ID).append("|").append(playerDeck2).append("|").append(gameHandler.getGameId());
         }
-
         clientConnector1.sendMessage(requestBuilder.toString());
         clientConnector2.sendMessage(requestBuilder.toString());
     }
+
     private static DeckToJson getDeckToJsonByCardNames(String deck) {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
@@ -242,13 +241,6 @@ public class ServerApp {
 //        StartOnlineGame(tournamentPlayers[6], tournamentPlayers[7]);
     }
 
-    public static void addGame(int gameID, GameHandler gameHandler) {
-        games.put(gameID, gameHandler);
-    }
-
-    public static void removeGame(int gameID) {
-        games.remove(gameID);
-    }
 
     public static ArrayList<User> getAllUsers() {
         return allUsers;

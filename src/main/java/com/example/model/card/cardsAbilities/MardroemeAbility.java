@@ -16,7 +16,7 @@ public class MardroemeAbility implements Ability {
                 if (card != null && card.getAbilityName() ==  AbilityName.BERSERKER)
                     ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).getGameMenuControllerView().getGameCardViewWithCardId(card.getIdInGame()).applyMardroeme();
             }
-            ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbility(((Card)abilityContext.getParam("mardroemeCard")).getIdInGame(), (String) abilityContext.getParam("dest"), RowsInGame.currentPlayerDiscardPlace.toString());
+            ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbilityForCurrentPlayer(((Card)abilityContext.getParam("mardroemeCard")).getIdInGame(), (String) abilityContext.getParam("dest"), RowsInGame.currentPlayerDiscardPlace.toString());
         }
     }
 }

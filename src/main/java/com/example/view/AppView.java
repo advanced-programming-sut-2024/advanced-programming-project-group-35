@@ -214,19 +214,21 @@ public class AppView extends Application {
     }
 
     public void showNotification(String message, String imageAddress, String username) {
-        if (!isNotification) {
-            notification = new Notification(message, imageAddress, username);
-            notification.setLayoutX(0);
-            notification.setLayoutY(0);
-            pane.getChildren().add(notification);
-            isNotification = true;
-            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2)));
-            timeline.play();
-            timeline.setOnFinished(actionEvent -> {
-                isNotification = false;
-                removeNotification(pane);
-            });
-        }
+        Platform.runLater(() -> {
+            if (!isNotification) {
+                notification = new Notification(message, imageAddress, username);
+                notification.setLayoutX(0);
+                notification.setLayoutY(0);
+                pane.getChildren().add(notification);
+                isNotification = true;
+                Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2)));
+                timeline.play();
+                timeline.setOnFinished(actionEvent -> {
+                    isNotification = false;
+                    removeNotification(pane);
+                });
+            }
+        });
     }
 
     public void removeNotification(Pane currentPane) {

@@ -24,10 +24,10 @@ public class InvaderOfTheNorthAbility implements LeaderAbility {
         Card randomCard = board.getDiscardPile().getCard(new Random().nextInt(board.getDiscardPile().getSize()));
         if (randomCard != null) {
             if (player == table.getCurrentPlayer()) {
-                ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbility(randomCard.getIdInGame(), RowsInGame.opponentDiscardPlace.toString(), RowsInGame.opponentDiscardPlace.toString());
+                ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbilityForCurrentPlayer(randomCard.getIdInGame(), RowsInGame.opponentDiscardPlace.toString(), RowsInGame.opponentDiscardPlace.toString());
 
             } else {
-                ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbility(randomCard.getIdInGame(), RowsInGame.currentPlayerDiscardPlace.toString(), RowsInGame.currentPlayerHand.toString());
+                ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbilityForCurrentPlayer(randomCard.getIdInGame(), RowsInGame.currentPlayerDiscardPlace.toString(), RowsInGame.currentPlayerHand.toString());
             }
         }
     }
