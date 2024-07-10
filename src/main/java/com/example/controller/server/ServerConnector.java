@@ -233,6 +233,7 @@ public class ServerConnector {
         for (int i = 4; i < 14 ; i++) {
             String cardName = deck.getCards().get(i);
             deck.getHand().add(cardName);
+            deck.getCards().remove(cardName);
         }
         ArrayList<String> restOfCards = new ArrayList<>(deck.getCards());
         deck.setRestOfCards(restOfCards);

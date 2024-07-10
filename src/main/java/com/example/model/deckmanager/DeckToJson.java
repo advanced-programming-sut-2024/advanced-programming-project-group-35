@@ -13,9 +13,10 @@ public class DeckToJson implements Serializable {
     public ArrayList<String> hand;
     public ArrayList<String> restOfCards;
 
-    public DeckToJson(String faction, String leader) {
+    public DeckToJson(String faction, String leader, ArrayList<String> cards) {
         this.faction = faction;
         this.leader = leader;
+        this.cards = cards;
     }
 
     public ArrayList<String> getRestOfCards() {

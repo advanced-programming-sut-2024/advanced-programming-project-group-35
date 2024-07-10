@@ -49,7 +49,6 @@ public class GameMenuControllerForOnlineGame extends AppController {
         Thread thread = new Thread(() -> {
             try {
                 String message = App.in.readLine();
-                System.out.println(message + "\n\n\n\n");
                 Matcher matcher;
                 if ((matcher = OnlineGameCommands.MOVE_CARD_AND_DO_ABILITY.getMatcher(message)) != null) {
                     moveCardAndDoAbility(matcher);
@@ -68,7 +67,6 @@ public class GameMenuControllerForOnlineGame extends AppController {
         int cardId = Integer.parseInt(matcher.group("cardId"));
         String origin = matcher.group("origin");
         String dest = matcher.group("dest");
-        System.out.println(playerPriority + " "  + table.getCurrentPlayer().getPriorityInGame());
         if (isYou(playerPriority)) {
             moveCardAndDoAbilityForCurrentPlayer(cardId, origin, dest);
         } else {

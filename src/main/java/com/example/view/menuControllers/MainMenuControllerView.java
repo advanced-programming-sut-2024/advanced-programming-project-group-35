@@ -51,7 +51,7 @@ public class MainMenuControllerView {
 
     public void testNetwork(MouseEvent mouseEvent) throws Exception {
         PreGameMenuControllerView gameMenuControllerView = new PreGameMenuControllerView();
-        gameMenuControllerView.sendRequestToFriend(friendsName.getText());
+        gameMenuControllerView.sendRandomGameRequest(null);
     }
 
     public void openChatBox(MouseEvent mouseEvent) {

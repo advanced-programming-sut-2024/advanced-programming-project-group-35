@@ -401,7 +401,7 @@ public class PreGameMenuControllerView {
             player1OfflineID = App.getLoggedInUser().getID();
             //App.loadUsers();
             App.temporaryUserID = player1OfflineID;
-            player1OfflineDeck = new DeckToJson(faction.getFaction().name(), leaderCard.getName());
+            player1OfflineDeck = new DeckToJson(faction.getFaction().name(), leaderCard.getName(), getPreGameCardNames(playerDeck));
             App.getLoggedInUser().setTemporaryDeck(player1OfflineDeck);
             //App.saveUsers();
             App.setCurrentMenu(Menu.LOGIN_MENU);
@@ -413,7 +413,7 @@ public class PreGameMenuControllerView {
         } else {
             player1OfflineID = App.temporaryUserID;
             player2OfflineID = App.getLoggedInUser().getID();
-            player2OfflineDeck = new DeckToJson(faction.getFaction().name(), leaderCard.getName());
+            player2OfflineDeck = new DeckToJson(faction.getFaction().name(), leaderCard.getName(), getPreGameCardNames(playerDeck));
             player1OfflineDeck = App.getLoggedInUser().getTemporaryDeck();
             App.getLoggedInUser().setTemporaryDeck(player2OfflineDeck);
             GameMenuControllerForOnlineGame gameMenuControllerForOnlineGame = (GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController();
@@ -673,7 +673,7 @@ public class PreGameMenuControllerView {
 
                 updateNumbers();
 
-                DeckManager.saveDeck(new DeckToJson(faction.getFaction().name(), leaderCard.getName()), App.getLoggedInUser().getID(), saveOrLoadDeckNameField.getText());
+                DeckManager.saveDeck(new DeckToJson(faction.getFaction().name(), leaderCard.getName(), getPreGameCardNames(playerDeck)), App.getLoggedInUser().getID(), saveOrLoadDeckNameField.getText());
                 App.getLoggedInUser().addDeckNameToDeckAddresses(saveOrLoadDeckNameField.getText());
                 App.loadUsers();
                 App.getLoggedInUser().addDeckNameToDeckAddresses(saveOrLoadDeckNameField.getText());
@@ -696,7 +696,7 @@ public class PreGameMenuControllerView {
             if (saveOrLoadDeckNameField.getText().equals("")) {
                 App.getAppView().showAlert("Please enter a name for your deck", AlertType.ERROR.getType());
             } else {
-                DeckManager.saveDeck(new DeckToJson(faction.getFaction().name(), leaderCard.getName()), selectedDirectory.getAbsolutePath(), saveOrLoadDeckNameField.getText());
+                DeckManager.saveDeck(new DeckToJson(faction.getFaction().name(), leaderCard.getName(), getPreGameCardNames(playerDeck)), selectedDirectory.getAbsolutePath(), saveOrLoadDeckNameField.getText());
                 App.getAppView().showAlert("Deck saved successfully", AlertType.SUCCESS.getType());
                 saveOrLoadDeckNameField.setText("");
             }
