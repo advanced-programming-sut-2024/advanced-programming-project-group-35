@@ -99,7 +99,7 @@ public class ServerApp {
         User user = getUserByID(userID);
         user.setOnline(true);
         if (user.isInGame()) {
-            GameHandler gameHandler = games.get(user.getGameID());
+            GameHandler gameHandler = server.getGameHandlers().get(user.getGameID());
             if (gameHandler != null) {
                 gameHandler.playerReconnected(userID);
             }
@@ -119,7 +119,7 @@ public class ServerApp {
         User user = getUserByID(userID);
         user.setOnline(false);
         if (user.isInGame()) {
-            GameHandler gameHandler = games.get(user.getGameID());
+            GameHandler gameHandler = server.getGameHandlers().get(user.getGameID());
             if (gameHandler != null) {
                 gameHandler.playerDisconnected(userID);
             }

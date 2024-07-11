@@ -2,13 +2,13 @@ package com.example.view;
 
 import com.example.Main;
 import com.example.controller.Controller;
+import com.example.controller.GameMenuControllerForOnlineGame;
 import com.example.model.App;
 import com.example.model.GameRequest;
 import com.example.model.alerts.*;
 import com.example.model.chat.ChatBox;
 import com.example.model.FriendRequest;
 import com.example.model.alerts.Alert;
-import com.example.model.alerts.*;
 import com.example.model.Terminal;
 import com.example.model.alerts.ConfirmationAlert;
 import com.example.model.alerts.Notification;
@@ -49,7 +49,8 @@ public class AppView extends Application {
     private Terminal getTerminal() {
         return terminal;
     }
-    private GameMenuControllerViewForOnlineGame gameMenuControllerViewForOnlineGame;
+
+    private GameMenuControllerViewForOnlineGame gameMenuControllerForOnlineGame;
     private GameRequestHistoryMenuControllerView gameRequestHistoryMenuControllerView;
     private FriendsMenuControllerView friendsMenuControllerView;
     private Menu currentMenu;
@@ -61,7 +62,7 @@ public class AppView extends Application {
         fxmlLoader = new FXMLLoader(Main.class.getResource(menu.getFxmlFile()));
         pane = fxmlLoader.load();
         if (menu.getTitle().equals("Game Menu")) {
-            gameMenuControllerViewForOnlineGame = fxmlLoader.getController();
+            gameMenuControllerForOnlineGame = fxmlLoader.getController();
         }
         if (menu.getTitle().equals("Friends Menu")) {
             friendsMenuControllerView = fxmlLoader.getController();
@@ -283,8 +284,8 @@ public class AppView extends Application {
         isNotification = false;
     }
 
-    public GameMenuControllerViewForOnlineGame getGameMenuControllerView() {
-        return gameMenuControllerViewForOnlineGame;
+    public GameMenuControllerViewForOnlineGame getGameMenuControllerForOnlineGame() {
+        return gameMenuControllerForOnlineGame;
     }
     public GameRequestHistoryMenuControllerView getGameRequestHistoryMenuControllerView() {
         return gameRequestHistoryMenuControllerView;

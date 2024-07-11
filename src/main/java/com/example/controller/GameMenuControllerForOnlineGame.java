@@ -1,7 +1,5 @@
 package com.example.controller;
 
-import com.example.controller.server.GameHandler;
-import com.example.controller.server.ServerApp;
 import com.example.model.App;
 import com.example.model.GameData;
 import com.example.model.alerts.*;
@@ -12,7 +10,6 @@ import com.example.model.card.enums.CardData;
 import com.example.model.card.enums.FactionsType;
 import com.example.model.deckmanager.DeckToJson;
 import com.example.model.game.*;
-import com.example.model.game.place.Place;
 import com.example.model.game.place.Row;
 import com.example.model.game.place.RowsInGame;
 import com.example.view.Menu;
@@ -42,7 +39,7 @@ public class GameMenuControllerForOnlineGame extends AppController {
                 App.getAppView().showMenu(Menu.GAME_MENU);
                 App.setCurrentMenu(Menu.GAME_MENU);
                 App.setCurrentController(Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME);
-                gameMenuControllerViewForOnlineGame = App.getAppView().getGameMenuControllerView();
+                gameMenuControllerViewForOnlineGame = App.getAppView().getGameMenuControllerForOnlineGame();
                 startRound(table);
                 handleCommand();
             } catch (Exception e) {
@@ -66,8 +63,6 @@ public class GameMenuControllerForOnlineGame extends AppController {
                         moveCardAndDoAbility(matcher);
                     } else if ((matcher = OnlineGameCommands.MOVE_CARD_AND_DONT_DO_ABILITY.getMatcher(message)) != null) {
                         moveCardAndDontDoAbility(matcher);
-                    } else if (OnlineGameCommands.CHANGE_TURN != null) {
-                        changeTurnWithNoLog();
                     }
                 }
             } catch (IOException e) {
@@ -374,6 +369,12 @@ public class GameMenuControllerForOnlineGame extends AppController {
                 destinationRow.add(card);
             }
         }
+        if (destination == RowsInGame.opponentDeck.toString() || destination == RowsInGame.currentPlayerDeck.toString()) {
+            gameMenuControllerViewForOnlineGame.getGameCardViewWithCardId(cardId).setVisible(false);
+        }
+        if (destination == RowsInGame.opponentHand.toString() || destination == RowsInGame.currentPlayerHand.toString()) {
+            gameMenuControllerViewForOnlineGame.getGameCardViewWithCardId(cardId).setVisible(true);
+        }
         Row destRow = getRowByName(destination);
         if (destRow != null && destRow.isApplyWeather() && (card instanceof UnitCard) && !((UnitCard) card).isHero()) {
             if (table.getCurrentPlayer().getBoard().getDeck().getLeader().getLeaderName().getName().equals("leaders_skellige_king_bran")) {
@@ -545,7 +546,7 @@ public class GameMenuControllerForOnlineGame extends AppController {
             }
         }
         KeyFrame keyFrame = new KeyFrame(Duration.seconds(3), event -> {
-            if (table.getCurrentPlayer().getBoard().getHand().getCards().isEmpty()) {
+            if (table.getCurrentPlayer().getBoard().getHand().getCards().isEmpty() && !table.getCurrentPlayer().getBoard().getDeck().getLeader().canDoAction()) {
                 table.getCurrentPlayer().setPassRound(true);
                 passRound();
             }
