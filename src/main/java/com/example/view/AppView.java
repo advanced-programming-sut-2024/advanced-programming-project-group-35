@@ -223,6 +223,7 @@ public class AppView extends Application {
                 isNotification = true;
                 Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2)));
                 timeline.play();
+                timeline.setCycleCount(1);
                 timeline.setOnFinished(actionEvent -> {
                     isNotification = false;
                     removeNotification(pane);

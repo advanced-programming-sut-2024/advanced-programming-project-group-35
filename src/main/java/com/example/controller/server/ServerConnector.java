@@ -233,12 +233,12 @@ public class ServerConnector {
         //TODO for test
         ArrayList<String> names = new ArrayList<>(deck.getCards());
         for (String name: names) {
-            if (CardData.getCardDataByName(name).getAbilityName().equals("weather") || CardData.getCardDataByName(name).getAbilityName().equals("commander_horn")){
+            if (CardData.getCardDataByName(name).getAbilityName().equals("mardroeme") || CardData.getCardDataByName(name).getAbilityName().equals("commander_horn")){
                 deck.getHand().add(name);
                 deck.getCards().remove(name);
             }
         }
-        for (int i = 0 ; i < 15 ; i++) {
+        for (int i = 0 ; i < 9 ; i++) {
             String cardName = deck.getCards().get(i);
             deck.getHand().add(cardName);
             deck.getCards().remove(cardName);

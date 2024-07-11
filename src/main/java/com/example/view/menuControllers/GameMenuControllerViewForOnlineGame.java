@@ -640,20 +640,6 @@ public class GameMenuControllerViewForOnlineGame {
     }
 
 
-    private void swapObservableLists(ObservableList<GameCardView> list1, ObservableList<GameCardView> list2) {
-        ObservableList<GameCardView> temp1 = FXCollections.observableArrayList(list1);
-        ObservableList<GameCardView> temp2 = FXCollections.observableArrayList(list2);
-        list1.setAll(temp2);
-        list2.setAll(temp1);
-    }
-
-    private void swapFlowPanes(FlowPane pane1, FlowPane pane2) {
-        ArrayList<Node> temp1 = new ArrayList<>(pane1.getChildren());
-        ArrayList<Node> temp2 = new ArrayList<>(pane2.getChildren());
-        pane1.getChildren().setAll(temp2);
-        pane2.getChildren().setAll(temp1);
-    }
-
 
     public void leaderAbilityApply(MouseEvent mouseEvent) {
         controller.doCurrentPlayerLeaderAbility();
@@ -683,26 +669,26 @@ public class GameMenuControllerViewForOnlineGame {
             if (dest == 1) {
                 if (gameCardView.getCard() instanceof UnitCard) {
                     if (!(((UnitCard) gameCardView.getCard()).noRemove())) {
-                        controller.moveCardAndDontDoAbilityForCurrentPlayer(gameCardView.getCard().getIdInGame(), sourceRow.toString(), RowsInGame.currentPlayerDiscardPlace.toString());
+                        controller.moveCard(gameCardView.getCard().getIdInGame(), sourceRow.toString(), RowsInGame.currentPlayerDiscardPlace.toString());
                     }
                     if ((((UnitCard) gameCardView.getCard()).noRemove()) && gameCardView.getCard().getAbilityName() == AbilityName.TRANSFORMER) {
                         gameCardView.applyTransform();
                         updateAllLabels();
                     }
                 } else {
-                    controller.moveCardAndDontDoAbilityForCurrentPlayer(gameCardView.getCard().getIdInGame(), sourceRow.toString(), RowsInGame.currentPlayerDiscardPlace.toString());
+                    controller.moveCard(gameCardView.getCard().getIdInGame(), sourceRow.toString(), RowsInGame.currentPlayerDiscardPlace.toString());
                 }
             } else {
                 if (gameCardView.getCard() instanceof UnitCard) {
                     if (!(((UnitCard) gameCardView.getCard()).noRemove())) {
-                        controller.moveCardAndDontDoAbilityForCurrentPlayer(gameCardView.getCard().getIdInGame(), sourceRow.toString(), RowsInGame.opponentDiscardPlace.toString());
+                        controller.moveCard(gameCardView.getCard().getIdInGame(), sourceRow.toString(), RowsInGame.opponentDiscardPlace.toString());
                     }
                     if ((((UnitCard) gameCardView.getCard()).noRemove()) && gameCardView.getCard().getAbilityName() == AbilityName.TRANSFORMER) {
                         gameCardView.applyTransform();
                         updateAllLabels();
                     }
                 } else {
-                    controller.moveCardAndDontDoAbilityForCurrentPlayer(gameCardView.getCard().getIdInGame(), sourceRow.toString(), RowsInGame.opponentDiscardPlace.toString());
+                    controller.moveCard(gameCardView.getCard().getIdInGame(), sourceRow.toString(), RowsInGame.opponentDiscardPlace.toString());
                 }
             }
         }
@@ -974,9 +960,6 @@ public class GameMenuControllerViewForOnlineGame {
                     vetoCardPane.setVisible(false);
                     vetoCardButton.setVisible(false);
                     controller.vetoCard(table.getCurrentPlayer(), cardsToVeto);
-                    if (table.getCurrentPlayer() != table.getPlayerInTurn()) {
-                        lockScreen();
-                    }
                 }
             });
         }

@@ -3,6 +3,7 @@ package com.example.controller;
 import com.example.controller.server.GameHandler;
 import com.example.controller.server.ServerApp;
 import com.example.model.App;
+import com.example.model.GameData;
 import com.example.model.alerts.*;
 import com.example.model.deckmanager.DeckManager;
 import com.example.model.card.*;
@@ -11,6 +12,7 @@ import com.example.model.card.enums.CardData;
 import com.example.model.card.enums.FactionsType;
 import com.example.model.deckmanager.DeckToJson;
 import com.example.model.game.*;
+import com.example.model.game.place.Place;
 import com.example.model.game.place.Row;
 import com.example.model.game.place.RowsInGame;
 import com.example.view.Menu;
@@ -22,6 +24,7 @@ import javafx.collections.ObservableList;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.stream.Collectors;
@@ -72,6 +75,7 @@ public class GameMenuControllerForOnlineGame extends AppController {
         });
         thread.start();
     }
+
     private void passRound(Matcher matcher) {
         int playerPriority = Integer.parseInt(matcher.group("playerId"));
         if (playerPriority != table.getCurrentPlayer().getPriorityInGame()) {
@@ -120,19 +124,22 @@ public class GameMenuControllerForOnlineGame extends AppController {
     public void vetoCard(Player player, ObservableList<Card> selectedCards) {
         if (player.canVetoCard()) {
             Deck deck = player.getBoard().getDeck();
-            Hand hand = player.getBoard().getHand();
             for (int i = 0; i < selectedCards.size(); i++) {
                 Card ranomCard = deck.getCard(new Random().nextInt(deck.getSize()));
-                hand.removeCard(selectedCards.get(i));
-                hand.addCard(ranomCard);
-                deck.removeCard(ranomCard);
-                deck.addCard(selectedCards.get(i));
+                moveCardAndDontDoAbilityForCurrentPlayer(selectedCards.get(i).getIdInGame(), RowsInGame.currentPlayerHand.toString(), RowsInGame.currentPlayerDeck.toString());
+                moveCardAndDontDoAbilityForCurrentPlayer(ranomCard.getIdInGame(), RowsInGame.currentPlayerDeck.toString(), RowsInGame.currentPlayerHand.toString());
                 player.decreaseNumberOfVetoCards();
             }
         }
         if (turn == 1) {
             App.getAppView().showNotification(NotificationsData.ROUND_START.getMessage(), NotificationsData.ROUND_START.getImageAddress(), null);
         }
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.5)));
+        timeline.setOnFinished(e -> {
+            getGameMenuControllerView().addMouseEventsForHandCards();
+        });
+        timeline.setCycleCount(1);
+        timeline.play();
     }
 
 
@@ -345,7 +352,7 @@ public class GameMenuControllerForOnlineGame extends AppController {
         moveCard(cardId, origin, destination);
     }
 
-    private void moveCard(int cardId, String origin, String destination) {
+    public void moveCard(int cardId, String origin, String destination) {
         ObservableList<Card> originRow = (ObservableList<Card>) getRowListByName(origin);
         ObservableList<Card> destinationRow = (ObservableList<Card>) getRowListByName(destination);
         Card card = getCardById(cardId, originRow);
@@ -467,21 +474,34 @@ public class GameMenuControllerForOnlineGame extends AppController {
                 }).collect(Collectors.toList()));
         return deckData;
     }
+
     private void passRoundWithNoLog() {
-        if (table.getCurrentPlayer().isPassRound()) {
-            changeRound();
-        }
+        App.getAppView().showNotification(NotificationsData.YOUR_OPPONENT_HAS_PASSED.getMessage(), NotificationsData.YOUR_OPPONENT_HAS_PASSED.getImageAddress(), "");
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2.1)));
+        timeline.play();
+        timeline.setCycleCount(1);
+        timeline.setOnFinished(actionEvent -> {
+            if (table.getCurrentPlayer().isPassRound()) {
+                changeRound();
+            }
+        });
     }
 
 
     public void passRound() {
         App.out.println("player|" + table.getCurrentPlayer().getPriorityInGame() + "|passedRound");
-        table.getCurrentPlayer().setPassRound(true);
-        if (table.getOpponent().isPassRound()) {
-            changeRound();
-        } else {
-            changeTurn();
-        }
+        App.getAppView().showNotification(NotificationsData.TURN_PASSED.getMessage(), NotificationsData.TURN_PASSED.getImageAddress(), "");
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2.1)));
+        timeline.play();
+        timeline.setCycleCount(1);
+        timeline.setOnFinished(actionEvent -> {
+            table.getCurrentPlayer().setPassRound(true);
+            if (table.getOpponent().isPassRound()) {
+                changeRound();
+            } else {
+                changeTurn();
+            }
+        });
     }
 
     private void startRound(Table table) {
@@ -532,6 +552,7 @@ public class GameMenuControllerForOnlineGame extends AppController {
         table.getCurrentRound().addScore(player1, player1.getScore());
         table.getCurrentRound().addScore(player2, player2.getScore());
         if (player1.getScore() == player2.getScore()) {
+            App.getAppView().showNotification(NotificationsData.DRAW_ROUND.getMessage(), NotificationsData.DRAW_ROUND.getImageAddress(), "");
             table.getCurrentRound().setDraw(true);
             table.getCurrentRound().setWon(false);
             table.getCurrentRound().setWinner(null);
@@ -539,12 +560,22 @@ public class GameMenuControllerForOnlineGame extends AppController {
             player2.decreaseCrystals();
             gameMenuControllerViewForOnlineGame.updateAllLabels();
         } else if (player1.getScore() > player2.getScore()) {
+            if (player1 == table.getCurrentPlayer()) {
+                App.getAppView().showNotification(NotificationsData.YOU_WON_THIS_ROUND.getMessage(), NotificationsData.YOU_WON_THIS_ROUND.getImageAddress(), "");
+            } else {
+                App.getAppView().showNotification(NotificationsData.OPPONENT_WON_THIS_ROUND.getMessage(), NotificationsData.OPPONENT_WON_THIS_ROUND.getImageAddress(), "");
+            }
             table.getCurrentRound().setDraw(false);
             table.getCurrentRound().setWon(true);
             table.getCurrentRound().setWinner(player1);
             player2.decreaseCrystals();
             gameMenuControllerViewForOnlineGame.updateAllLabels();
         } else if (player1.getScore() < player2.getScore()) {
+            if (player2 == table.getCurrentPlayer()) {
+                App.getAppView().showNotification(NotificationsData.YOU_WON_THIS_ROUND.getMessage(), NotificationsData.YOU_WON_THIS_ROUND.getImageAddress(), "");
+            } else {
+                App.getAppView().showNotification(NotificationsData.OPPONENT_WON_THIS_ROUND.getMessage(), NotificationsData.OPPONENT_WON_THIS_ROUND.getImageAddress(), "");
+            }
             table.getCurrentRound().setDraw(false);
             table.getCurrentRound().setWon(true);
             table.getCurrentRound().setWinner(player2);
@@ -592,9 +623,8 @@ public class GameMenuControllerForOnlineGame extends AppController {
         } else {
             if (table.getCurrentRound().isWon()) {
                 Player winner = table.getCurrentRound().getWinner();
-                if (table.getCurrentPlayer() != winner) {
-                    table.setOpponent(table.getCurrentPlayer());
-                    table.setCurrentPlayer(winner);
+                if (winner != table.getCurrentPlayer()) {
+                    changeTurn();
                 }
             }
             Round round = new Round(table.getRoundNumber() + 1);
@@ -635,7 +665,28 @@ public class GameMenuControllerForOnlineGame extends AppController {
         System.out.println("end game");
         //TODO نمایش برنده
         //TODO نمایش مجموع امتیاز های هر فرد در تمام راند ها
-        //TODO اضافه کردن گیم دیتا
+        LocalDateTime localDateTime = LocalDateTime.now();
+        String date = localDateTime.getYear() + "/" + localDateTime.getMonthValue() + "/" + localDateTime.getDayOfMonth() + "-" + localDateTime.getHour() + ":" + localDateTime.getMinute();
+        GameData gameData = new GameData(table.getOpponent().getUsername(), date, finalScore(table.getCurrentPlayer()), finalScore(table.getOpponent()), roundScores(table.getCurrentPlayer()), roundScores(table.getOpponent()), winner.getUsername());
+        App.getLoggedInUser().addGameData(gameData);
+    }
+
+    private int[] roundScores(Player player) {
+        int[] scores = new int[20];
+        for (int i = 0; i < table.getRounds().size(); i++) {
+            Round round = table.getRounds().get(i);
+            scores[i] = round.getScores().get(player);
+        }
+        return scores;
+    }
+
+    private int finalScore(Player player) {
+        int finalScore = 0;
+        for (int i = 0; i < table.getRounds().size(); i++) {
+            Round round = table.getRounds().get(i);
+            finalScore += round.getScores().get(player);
+        }
+        return finalScore;
     }
 
     public void disApplyWeatherCards() {
