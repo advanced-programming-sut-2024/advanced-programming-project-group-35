@@ -16,6 +16,7 @@ public class User {
     private boolean isOnline;
     private boolean isInGame = true;
     private boolean privateGame = false;
+    private int gameID;
     private int id;
     private String username;
     private String password;
@@ -439,5 +440,9 @@ public class User {
             }
         }
         return false;
+    }
+
+    public int getGameID() {
+        return gameID;
     }
 }

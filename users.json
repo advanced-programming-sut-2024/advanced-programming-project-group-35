@@ -1,9 +1,10 @@
 [
   {
     "stayLoggedIn": false,
-    "isOnline": false,
+    "isOnline": true,
     "isInGame": false,
     "privateGame": false,
+    "gameID": 0,
     "id": 2,
     "username": "ali",
     "password": "@li0083Moi",
@@ -40,7 +41,8 @@
         "isPending": false,
         "second": 39,
         "minute": 13,
-        "hour": 22
+        "hour": 22,
+        "gameHandlerID": 0
       },
       {
         "senderID": 3,
@@ -49,7 +51,8 @@
         "isPending": false,
         "second": 16,
         "minute": 16,
-        "hour": 22
+        "hour": 22,
+        "gameHandlerID": 0
       },
       {
         "senderID": 10,
@@ -58,7 +61,8 @@
         "isPending": true,
         "second": 48,
         "minute": 16,
-        "hour": 0
+        "hour": 0,
+        "gameHandlerID": 0
       }
     ],
     "friendRequests": [
@@ -75,6 +79,7 @@
     "isOnline": false,
     "isInGame": false,
     "privateGame": false,
+    "gameID": 0,
     "id": 1,
     "username": "asjkdh",
     "password": "%Mm1YgtDNU",
@@ -106,6 +111,7 @@
     "isOnline": false,
     "isInGame": false,
     "privateGame": false,
+    "gameID": 0,
     "id": 3,
     "username": "parsa",
     "password": "endnu003d20u0026Y+",
@@ -131,7 +137,8 @@
     "decksAddresses": [],
     "friends": [
       2,
-      10
+      10,
+      -1746134436
     ],
     "gameRequests": [
       {
@@ -141,7 +148,8 @@
         "isPending": false,
         "second": 39,
         "minute": 13,
-        "hour": 22
+        "hour": 22,
+        "gameHandlerID": 0
       },
       {
         "senderID": 3,
@@ -150,7 +158,28 @@
         "isPending": false,
         "second": 16,
         "minute": 16,
-        "hour": 22
+        "hour": 22,
+        "gameHandlerID": 0
+      },
+      {
+        "senderID": 10,
+        "receiverID": 3,
+        "isAccepted": true,
+        "isPending": false,
+        "second": 48,
+        "minute": 56,
+        "hour": 11,
+        "gameHandlerID": 0
+      },
+      {
+        "senderID": -1746134436,
+        "receiverID": 3,
+        "isAccepted": true,
+        "isPending": false,
+        "second": 34,
+        "minute": 57,
+        "hour": 14,
+        "gameHandlerID": 0
       }
     ],
     "friendRequests": [
@@ -165,14 +194,21 @@
         "receiverID": 10,
         "isAccepted": true,
         "isRejected": false
+      },
+      {
+        "senderID": -1746134436,
+        "receiverID": 3,
+        "isAccepted": true,
+        "isRejected": false
       }
     ]
   },
   {
     "stayLoggedIn": false,
-    "isOnline": true,
+    "isOnline": false,
     "isInGame": false,
     "privateGame": false,
+    "gameID": 0,
     "id": 10,
     "username": "alireza",
     "password": "Alireza123@",
@@ -209,7 +245,18 @@
         "isPending": true,
         "second": 48,
         "minute": 16,
-        "hour": 0
+        "hour": 0,
+        "gameHandlerID": 0
+      },
+      {
+        "senderID": 10,
+        "receiverID": 3,
+        "isAccepted": true,
+        "isPending": false,
+        "second": 48,
+        "minute": 56,
+        "hour": 11,
+        "gameHandlerID": 0
       }
     ],
     "friendRequests": [
@@ -232,6 +279,7 @@
     "isOnline": false,
     "isInGame": false,
     "privateGame": false,
+    "gameID": 0,
     "id": -1746134436,
     "username": "Kian",
     "password": "Aqakian1383@",
@@ -256,8 +304,28 @@
     "numberOfMinionCards": 0,
     "gameData": [],
     "decksAddresses": [],
-    "friends": [],
-    "gameRequests": [],
-    "friendRequests": []
+    "friends": [
+      3
+    ],
+    "gameRequests": [
+      {
+        "senderID": -1746134436,
+        "receiverID": 3,
+        "isAccepted": true,
+        "isPending": false,
+        "second": 34,
+        "minute": 57,
+        "hour": 14,
+        "gameHandlerID": 0
+      }
+    ],
+    "friendRequests": [
+      {
+        "senderID": -1746134436,
+        "receiverID": 3,
+        "isAccepted": true,
+        "isRejected": false
+      }
+    ]
   }
 ]

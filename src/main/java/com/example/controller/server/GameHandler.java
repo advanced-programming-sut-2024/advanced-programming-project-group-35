@@ -10,6 +10,8 @@ import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class GameHandler implements Runnable {
     private int gameID;
@@ -29,6 +31,9 @@ public class GameHandler implements Runnable {
     private boolean isPlayer1Turn = true;
     private boolean isPrivate;
     private Log gameHistory;
+    private boolean isPlayer1Connected = true;
+    private boolean isPlayer2Connected = true;
+    private Timer reconnectionTimer;
 
     public GameHandler(int player1ID, int player2ID, boolean isPrivate) throws InterruptedException {
         this.player1ID = player1ID;
@@ -51,6 +56,62 @@ public class GameHandler implements Runnable {
         player2Handler.setGameHandler(this);
         this.isPrivate = isPrivate;
         gameHistory = new Log(player1ID, player2ID, new DeckToJson(), new DeckToJson());
+    }
+
+    private void checkConnection() {
+        if (!isPlayer1Connected) {
+            handleDisconnection(player1ID);
+            player2Handler.getOut().println("ALERT|DISCONNECTED|" + player1ID);
+        }
+        if (!isPlayer2Connected) {
+            handleDisconnection(player2ID);
+            player1Handler.getOut().println("ALERT|DISCONNECTED|" + player2ID);
+        }
+    }
+
+    private void handleDisconnection(int playerID) {
+        System.out.println("Player " + playerID + " disconnected. Starting 2-minute timer.");
+        reconnectionTimer = new Timer();
+        reconnectionTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if (playerID == player1ID && !isPlayer1Connected) {
+                    endGameDueToDisconnection(player2ID);
+                } else if (playerID == player2ID && !isPlayer2Connected) {
+                    endGameDueToDisconnection(player1ID);
+                }
+            }
+        }, 2 * 60 * 1000); // 2 دقیقه
+    }
+
+    private void endGameDueToDisconnection(int winnerID) {
+        System.out.println("Player didn't reconnect in time. Game ended.");
+        this.winnerID = winnerID;
+        this.loserID = (winnerID == player1ID) ? player2ID : player1ID;
+        isGameEnded = true;
+        endGame();
+    }
+
+    public void playerReconnected(int playerID) {
+        if (playerID == player1ID) {
+            isPlayer1Connected = true;
+        } else if (playerID == player2ID) {
+            isPlayer2Connected = true;
+        }
+
+        if (reconnectionTimer != null) {
+            reconnectionTimer.cancel();
+            System.out.println("Player " + playerID + " reconnected. Continuing the game.");
+        }
+    }
+
+    public void playerDisconnected(int playerID) {
+        if (playerID == player1ID) {
+            isPlayer1Connected = false;
+        } else if (playerID == player2ID) {
+            isPlayer2Connected = false;
+        }
+        handleDisconnection(playerID);
     }
 
     public void setDeckToJson(DeckToJson deck1, DeckToJson deck2) {
@@ -105,6 +166,7 @@ public class GameHandler implements Runnable {
 //            player2Out.println("GAME_STARTED|" + gameID);
                 String inputLine;
                 while (true) {
+                    checkConnection();
                     if (isPlayer1Turn) {
                         inputLine = player1In.readLine();
                         System.out.println("test kir khar2");

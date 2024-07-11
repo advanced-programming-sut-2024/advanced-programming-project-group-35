@@ -98,6 +98,12 @@ public class ServerApp {
     public static void setUserOnline(int userID) {
         User user = getUserByID(userID);
         user.setOnline(true);
+        if (user.isInGame()) {
+            GameHandler gameHandler = games.get(user.getGameID());
+            if (gameHandler != null) {
+                gameHandler.playerReconnected(userID);
+            }
+        }
     }
 
     public static User getUserByID(int userID) {
@@ -112,6 +118,12 @@ public class ServerApp {
     public static void setUserOffline(int userID) {
         User user = getUserByID(userID);
         user.setOnline(false);
+        if (user.isInGame()) {
+            GameHandler gameHandler = games.get(user.getGameID());
+            if (gameHandler != null) {
+                gameHandler.playerDisconnected(userID);
+            }
+        }
     }
 
     public static void sendMessage(int senderID, int receiverID, String message) {

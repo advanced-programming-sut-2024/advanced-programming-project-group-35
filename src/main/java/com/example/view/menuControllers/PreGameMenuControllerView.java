@@ -112,15 +112,15 @@ public class PreGameMenuControllerView {
 
     @FXML
     public void initialize() {
-        privacyComboBox.getSelectionModel().select("private");
+        privacyComboBox.getSelectionModel().select("public");
         privacyComboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             String mute = (String) newValue;
             switch (mute) {
                 case "private":
-                    //TODO
+                    App.getLoggedInUser().setPrivacy(true);
                     break;
                 case "public":
-                    //TODO
+                    App.getLoggedInUser().setPrivacy(false);
                     break;
                 default:
                     break;
