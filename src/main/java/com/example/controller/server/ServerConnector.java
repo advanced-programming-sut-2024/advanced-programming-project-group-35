@@ -228,7 +228,7 @@ public class ServerConnector {
         }
     }
 
-    public void sendGameRequest(int senderID, int receiverID) {
+    public void sendGameRequest(int senderID, int receiverID, DeckToJson deck) {
         try (
                 Socket socket = new Socket(SERVER_IP, SERVER_PORT);
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true)
@@ -236,7 +236,9 @@ public class ServerConnector {
             out.print("GameRequest|");
             out.print(senderID);
             out.print("|");
-            out.println(receiverID);
+            out.print(receiverID);
+            out.print("|");
+            out.println(DeckManager.getDeckString(deck));
             System.out.println("-game request sent to server");
         } catch (IOException e) {
             e.printStackTrace();
@@ -248,7 +250,7 @@ public class ServerConnector {
                 Socket socket = new Socket(SERVER_IP, SERVER_PORT);
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true)
         ) {
-            //DeckToJson deck = DeckManager.loadDeck("E:\\uni\\AP\\decks\\monsters.json");
+            //DeckToJson deck = DeckManager.loadDeck("C:\\Projects\\JavaProjs\\new-repo\\src\\main\\resources\\decksData\\monsters.json");
 
             setHand(deck);
 

@@ -465,7 +465,8 @@ public class PreGameMenuControllerView {
             return;
         }
         int receiverID = receiver.getID();
-        App.getServerConnector().sendGameRequest(senderID, receiverID);
+        DeckToJson deck = new DeckToJson(faction.getFaction().name(), leaderCard.getName(), getPreGameCardNames(playerDeck));
+        App.getServerConnector().sendGameRequest(senderID, receiverID, deck);
 //        App.getAppView().showLoading();
 //        new Thread(() -> {
 //            while (true) {
