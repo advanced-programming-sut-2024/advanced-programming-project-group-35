@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<?import javafx.scene.control.Button?>
 <AnchorPane prefHeight="800.0" prefWidth="1400.0" styleClass="game-request-menu-background" stylesheets="@../CSS/allMenu.css, @../CSS/allFiles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.view.menuControllers.TournamentMenuControllerView">
     <ImageView fitHeight="800" fitWidth="1400">
         <Image url="@../images/tournament-menu-background.jpg" />
@@ -34,9 +34,7 @@
    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="1045.0" layoutY="360.0" maxHeight="20.0" maxWidth="80.0" minHeight="20.0" minWidth="80.0" prefHeight="20.0" prefWidth="80.0" text="username" textAlignment="CENTER" />
    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="776.0" layoutY="233.0" maxHeight="20.0" maxWidth="80.0" minHeight="20.0" minWidth="80.0" prefHeight="20.0" prefWidth="80.0" text="username" textAlignment="CENTER" />
 
-   <Button translateX="20" translateY="30" minWidth="50" onMouseClicked="#backToPreGameMenu" styleClass="brown-button"
-           text="Back"/>
-   <Button layoutX="50" layoutY="740" minWidth="50" onMouseClicked="#openTerminal" styleClass="brown-button"
-           text="Terminal"/>
+   <Button minWidth="50" onMouseClicked="#backToPreGameMenu" styleClass="brown-button" text="Back" translateX="20" translateY="30" />
+   <Button layoutX="1250.0" layoutY="740" minWidth="50" onMouseClicked="#openTerminal" styleClass="brown-button" text="Terminal" />
 
 </AnchorPane>
