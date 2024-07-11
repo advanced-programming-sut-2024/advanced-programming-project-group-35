@@ -158,5 +158,7 @@
       <TextField fx:id="emoteTextField" maxHeight="43.0" minHeight="43.0" prefHeight="43.0" promptText="Write Your Message" styleClass="custom-text-field" />
       <Button mnemonicParsing="false" onMouseClicked="#sendCustomEmote" prefHeight="43.0" prefWidth="73.0" styleClass="brown-button" text="Send" />
    </HBox>
+   <Button layoutX="1150" layoutY="740" minWidth="50" onMouseClicked="#openChatBox" styleClass="brown-button"
+           text="ChatBox"/>
 
 </Pane>

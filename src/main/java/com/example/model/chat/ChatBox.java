@@ -23,8 +23,8 @@ public class ChatBox extends StackPane {
     private final double HEIGHT = 600;
     private TextField textField;
     private Button sendButton;
-    private VBox allMessagesVbox;
-    private ScrollPane scrollPane = new ScrollPane();
+    private static VBox allMessagesVbox;
+    private static ScrollPane scrollPane = new ScrollPane();
     private int editableStartIndex;
     private String title;
     private static ChatMessage replyTo;
@@ -131,15 +131,21 @@ public class ChatBox extends StackPane {
                 replyTo = null;
                 isReplyBox.setVisible(false);
             }
+            App.getServerConnector().sendChat("CHAT|" + chatMessage.getSender() + "|" + chatMessage.getContent() + "|" + chatMessage.getHour() + "|" + chatMessage.getMinute() + (chatMessage.getReplyTo() != null ? "|REPLY_TO|" + chatMessage.getReplyTo().getSender() + "|" + chatMessage.getReplyTo().getContent() : ""));
+        }
+    }
+
+    public static void addMessage(ChatMessage chatMessage) {
+        Platform.runLater(() -> {
             allMessagesVbox.getChildren().add(new ChatMessageView(chatMessage));
             scrollPane.setContent(allMessagesVbox);
-        }
-        if (scrollPane.getContent() instanceof Region) {
-            Region content = (Region) scrollPane.getContent();
-            content.heightProperty().addListener((observable, oldValue, newValue) -> {
-                Platform.runLater(() -> scrollPane.setVvalue(1.0));
-            });
-        }
+            if (scrollPane.getContent() instanceof Region) {
+                Region content = (Region) scrollPane.getContent();
+                content.heightProperty().addListener((observable, oldValue, newValue) -> {
+                    Platform.runLater(() -> scrollPane.setVvalue(1.0));
+                });
+            }
+        });
     }
 
     public TextField getTextField() {

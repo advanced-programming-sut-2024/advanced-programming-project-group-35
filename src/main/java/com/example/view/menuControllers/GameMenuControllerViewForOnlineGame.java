@@ -1125,5 +1125,9 @@ public class GameMenuControllerViewForOnlineGame {
         passRoundButton.setDisable(false);
         terminalButton.setDisable(false);
     }
+
+    public void openChatBox(MouseEvent mouseEvent) {
+        App.getAppView().showChatBox();
+    }
 }
 

@@ -8,13 +8,10 @@ import com.example.model.card.Card;
 import com.example.model.card.UnitCard;
 import com.example.model.game.place.Row;
 import com.example.model.game.place.RowsInGame;
-<<<<<<< HEAD
-=======
 import com.sun.mail.imap.protocol.INTERNALDATE;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
->>>>>>> 139076ed4e7c020cc78d59eb7cf935f77fe2cfd2
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,7 +27,6 @@ public class ScorchAbility implements Ability {
     }
 
     private void applyAbilityForScorchCard(AbilityContext abilityContext) {
-<<<<<<< HEAD
         ArrayList<UnitCard> maximumPoweredCardsForCurrentPlayer = new ArrayList<>();
         ArrayList<UnitCard> maximumPoweredCardsForOpponentPlayer = new ArrayList<>();
         int maximumPowerForCurrentPlayer = 0;
@@ -57,11 +53,9 @@ public class ScorchAbility implements Ability {
              //   ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbilityForCurrentPlayer(card.getIdInGame(), abilityContext.getTable().getCurrentPlayer().getBoard().getRowByName(card.getPlace()), RowsInGame.currentPlayerDiscardPlace.toString());
             }
         }
-=======
         removeMaximumPoweredCardsInClose(abilityContext.getTable().getOpponent().getBoard().getCloseCombatCardPlace());
         removeMaximumPoweredCardsInSiege(abilityContext.getTable().getOpponent().getBoard().getSiegeCardPlace());
         removeMaximumPoweredCardsInRanged(abilityContext.getTable().getOpponent().getBoard().getRangedCardPlace());
->>>>>>> 139076ed4e7c020cc78d59eb7cf935f77fe2cfd2
     }
 
     private int getMaximumPoweredCards(ArrayList<UnitCard> maximumPoweredCardsForCurrentPlayer, Row row) {
