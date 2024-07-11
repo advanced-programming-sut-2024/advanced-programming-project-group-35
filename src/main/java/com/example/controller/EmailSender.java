@@ -56,4 +56,19 @@ public class EmailSender{
             e.printStackTrace();
         }
     }
+
+    public static void sendLinkEmail(String email, String link) {
+        try {
+            Message message = new MimeMessage(getEmailSession());
+            message.setFrom(new InternetAddress(EMAIL_FROM));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
+            message.setSubject("Gwent Email Verification Link:");
+            message.setText("Click on the link below to verify your email:\n" + link);
+            System.out.println("Sending email...");
+            Transport.send(message);
+            System.out.println("Email sent successfully");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

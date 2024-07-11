@@ -1,6 +1,7 @@
 package com.example;
 
 
+import com.example.controller.EmailVerification;
 import com.example.controller.server.ClientConnector;
 import com.example.model.App;
 import com.example.model.DatabaseManager;
@@ -10,10 +11,12 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
+import java.net.InetSocketAddress;
 import java.net.Socket;
+import com.sun.net.httpserver.HttpServer;
+import com.sun.net.httpserver.HttpHandler;
+import com.sun.net.httpserver.HttpExchange;
 
 import static com.example.model.App.clientConnector;
 
@@ -23,7 +26,7 @@ public class Main extends Application {
     private Socket socket;
     private PrintWriter out;
     private BufferedReader in;
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 //        App.setAllUsers(DatabaseManager.getAllUsers());
 //        App.loadUsers("users.json");
 //        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
@@ -35,7 +38,15 @@ public class Main extends Application {
         Runtime.getRuntime().addShutdownHook(new Thread(Main::shutdown));
         launch(args);
     }
+
+
+
     public static void shutdown() {
+        if (App.getLoggedInUser() != null){
+            playerShutedDown();
+        }
+        System.out.println("shut down");
+        //TODO
 //        System.out.println("Shutdown hook is running...");
 //        DatabaseManager.createNewDatabase();
 //        DatabaseManager.createUsersTable();
@@ -51,6 +62,15 @@ public class Main extends Application {
 //        }
 //        System.out.println("Shutdown hook completed.");
 //        App.saveUsers("users.json");
+    }
+
+    private static void playerShutedDown() {
+//        User loggedInUser = App.getLoggedInUser();
+//        if (loggedInUser.isInGame()) {
+//            App.getServerConnector().setUserOffline(loggedInUser);
+//        }
+        App.logout();
+
     }
 
     public static void saveUsersToDatabase() {

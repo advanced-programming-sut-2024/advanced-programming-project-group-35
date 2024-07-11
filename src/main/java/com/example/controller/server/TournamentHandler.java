@@ -6,12 +6,23 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 public class TournamentHandler {
     private HashMap<Integer, PlayerHandler> participants;
     private List<Integer> players;
+    private List<Integer> winners;
+    private List<Integer> lossers;
+    private int winnersState = 0;
+    private List<Integer> losers;
+    private int losersState = 0;
     private List<GameHandler> currentGames;
     private int round;
+
+    private int stPlayer;
+    private int ndPlayer;
+    private int rdPlayer;
 
     public TournamentHandler(HashMap<Integer, PlayerHandler> participants) {
         this.participants = participants;
@@ -21,47 +32,75 @@ public class TournamentHandler {
     }
 
     public void startTournament() throws InterruptedException {
-        while (participants.size() > 1) {
-            playRound();
+        while (players.size() > 1) {
+            playRound(players);
             round++;
         }
+        while (winners.size() > 1){
+            playRound(winners);
+            winnersState++;
+        }
+        while (losers.size() > 1){
+            playRound(losers);
+            losersState++;
+        }
+        playRound(List.of(winners.get(0), losers.get(0)));
         // اعلام برنده نهایی
-        announceWinner(participants.keySet().iterator().next());
+        announceWinner(stPlayer, ndPlayer, rdPlayer);
     }
 
-    private void playRound() throws InterruptedException {
+    private void playRound(List<Integer> players) throws InterruptedException {
         Collections.shuffle(players);
         currentGames.clear();
+        CountDownLatch latch = new CountDownLatch(players.size()/2);
 
-        for (int i = 0; i < participants.size(); i += 2) {
+        for (int i = 0; i < players.size() - 1; i += 2) {
             int id1 = players.get(i);
             int id2 = players.get(i + 1);
-            PlayerHandler player1 = participants.get(id1);
-            PlayerHandler player2 = participants.get(id2);
 
-            GameHandler game = new GameHandler(id1, id2);
+            GameHandler game = new GameHandler(id1, id2, false);
             currentGames.add(game);
-            new Thread(game).start();
+            new Thread(() ->{
+               game.run();
+               latch.countDown();
+            });
         }
 
         // انتظار برای پایان همه بازی‌های این دور
-        for (GameHandler game : currentGames) {
-            while (!game.isGameEnded()) {
-                Thread.sleep(100);
-            }
+        if (!latch.await(30, TimeUnit.MINUTES)){
+            System.out.println("Round " + round + " timed out!");
         }
 
-        // حذف بازنده‌ها از لیست شرکت‌کنندگان
-        HashMap<Integer, PlayerHandler> winners = new HashMap<>();
-        for (GameHandler game : currentGames) {
-            winners.put(game.getWinnerID(), ServerApp.getServer().players.get(game.getWinnerID()));
-        }
-        participants = winners;
+        updateParticipants(players);
     }
 
-    private void announceWinner(int id) {
+    private void updateParticipants(List<Integer> players) {
+        //HashMap<Integer, PlayerHandler> winners = new HashMap<>();
+        if (losersState == 0 && winnersState == 0){
+            for (GameHandler game : currentGames) {
+                int winnerId = game.getWinnerID();
+                winners.add(winnerId);
+                int loserID = game.getLoserID();
+                losers.add(loserID);
+            }
+        } else if(winnersState == 2 && losersState == 2) {
+            stPlayer = currentGames.get(0).getWinnerID();
+            ndPlayer = currentGames.get(0).getLoserID();
+        } else {
+            players.clear();
+            for (GameHandler game : currentGames) {
+                int winnerId = game.getWinnerID();
+                players.add(winnerId);
+            }
+            if (winnersState == 1 && players.size() == 1){
+                rdPlayer = players.get(0);
+            }
+        }
+    }
+
+    private void announceWinner(int id1, int id2, int id3) {
         for (PlayerHandler player : ServerApp.getServer().players.values()) {
-            player.getOut().println("TOURNAMENT_WINNER|" + User.getUserByID(id).getUsername());
+            player.getOut().println("TOURNAMENT_WINNER|" + id1 + "|" + id2 + "|" + id3);
         }
     }
 }

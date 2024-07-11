@@ -206,7 +206,10 @@ public class LoginMenuController extends AppController {
         System.out.println(code);
         String emailText = "GWENT\n\nYour verification code is: " + code;
         EmailSender.sendEmail(registeringUser.getEmail(), emailText);
-        System.out.println("Email sent");
+        System.out.println("Code sent");
+        System.out.println("registeringUser.username = " + registeringUser.getUsername());
+        EmailSender.sendLinkEmail(registeringUser.getEmail(), EmailVerification.createVerificationLink(registeringUser.getUsername()));
+        System.out.println("Link sent");
         return code;
     }
 }

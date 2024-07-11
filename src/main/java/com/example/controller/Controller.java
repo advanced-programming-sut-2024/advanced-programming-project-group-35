@@ -9,6 +9,9 @@ public enum Controller {
     GAME_HISTORY_MENU_CONTROLLER(new GameHistoryController()),
     SCORE_TABLE_MENU_CONTROLLER(new ScoreTableController()),
     FRIENDS_MENU_CONTROLLER(new FriendsMenuController()),
+    GAME_REQUEST_HISTORY_MENU_CONTROLLER(new GameRequestHistoryMenuController()),
+    TV_MENU_CONTROLLER(new TVMenuController()),
+    TOURNAMENT_MENU_CONTROLLER(new TournamentMenuController()),
 
     ;
     private final AppController controller;

@@ -3,6 +3,7 @@ package com.example.view;
 import com.example.Main;
 import com.example.controller.Controller;
 import com.example.model.App;
+import com.example.model.GameRequest;
 import com.example.model.alerts.*;
 import com.example.model.chat.ChatBox;
 import com.example.model.FriendRequest;
@@ -12,6 +13,8 @@ import com.example.model.Terminal;
 import com.example.model.alerts.ConfirmationAlert;
 import com.example.model.alerts.Notification;
 import com.example.view.menuControllers.FriendsMenuControllerView;
+import com.example.view.menuControllers.GameMenuControllerView;
+import com.example.view.menuControllers.GameRequestHistoryMenuControllerView;
 import com.example.view.menuControllers.GameMenuControllerViewForOnlineGame;
 import javafx.animation.KeyFrame;
 import javafx.animation.ScaleTransition;
@@ -47,7 +50,9 @@ public class AppView extends Application {
     private Terminal getTerminal() {
         return terminal;
     }
-    private GameMenuControllerViewForOnlineGame gameMenuControllerViewForOnlineGame;
+
+    private GameMenuControllerView gameMenuControllerView;
+    private GameRequestHistoryMenuControllerView gameRequestHistoryMenuControllerView;
     private FriendsMenuControllerView friendsMenuControllerView;
     private Menu currentMenu;
     private Stage lockScreen;
@@ -62,6 +67,9 @@ public class AppView extends Application {
         }
         if (menu.getTitle().equals("Friends Menu")) {
             friendsMenuControllerView = fxmlLoader.getController();
+        }
+        if (menu.getTitle().equals("Game Request History Menu")) {
+            gameRequestHistoryMenuControllerView = fxmlLoader.getController();
         }
 
         Scene scene = new Scene(pane);
@@ -170,10 +178,10 @@ public class AppView extends Application {
         isAlert = false;
     }
 
-    public boolean showConfirmationAlert(String message, String alertType) {
+    public void showConfirmationAlert(String message, String alertType, GameRequest gameRequest) {
 
         if (!isAlert) {
-            confirmationAlert = new ConfirmationAlert(message, alertType);
+            confirmationAlert = new ConfirmationAlert(message, alertType, gameRequest);
             confirmationAlert.setLayoutX(pane.getWidth() - confirmationAlert.width - 35);
             confirmationAlert.setLayoutY(50);
             pane.getChildren().add(confirmationAlert);
@@ -185,11 +193,6 @@ public class AppView extends Application {
                 removeConfirmationAlert();
             });
         }
-        System.out.println("confirmation alert : " + confirmationAlert.isResult());
-        while (confirmationAlert.isPending()) {
-            System.out.println("waiting for confirmation");
-        }
-        return confirmationAlert.isResult();
     }
 
     public void showConfirmationAlert(String message, String alertType, FriendRequest friendRequest) {
@@ -239,6 +242,9 @@ public class AppView extends Application {
 
     public GameMenuControllerViewForOnlineGame getGameMenuControllerView() {
         return gameMenuControllerViewForOnlineGame;
+    }
+    public GameRequestHistoryMenuControllerView getGameRequestHistoryMenuControllerView() {
+        return gameRequestHistoryMenuControllerView;
     }
 
     @Override
@@ -325,8 +331,8 @@ public class AppView extends Application {
     public void updateUserInfo() { //check if current menu is profile or score board
         if (currentMenu.getTitle().equals("Friends Menu")) { //reset the menu to show the new data
             App.getAppView().getFriendsMenuControllerView().updateFriendRequestList();
-        } else if (currentMenu.getTitle().equals("Score Table")) {
-            Controller.SCORE_TABLE_MENU_CONTROLLER.run();
+        } else if (currentMenu.getTitle().equals("Score Table")) {//
+            //TODO Ali score board ro mese friends update kon.
         }
     }
 
@@ -344,5 +350,11 @@ public class AppView extends Application {
 
     public FriendsMenuControllerView getFriendsMenuControllerView() {
         return friendsMenuControllerView;
+    }
+
+    public void showError(String s) {
+        Platform.runLater(() -> {
+            showAlert(s, "error");
+        });
     }
 }

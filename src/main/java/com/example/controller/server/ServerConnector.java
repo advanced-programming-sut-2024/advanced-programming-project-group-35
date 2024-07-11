@@ -3,6 +3,7 @@ package com.example.controller.server;
 import com.example.Main;
 import com.example.model.App;
 import com.example.model.FriendRequest;
+import com.example.model.GameRequest;
 import com.example.model.User;
 import com.example.model.card.Card;
 import com.example.model.card.enums.AbilityName;
@@ -77,9 +78,42 @@ public class ServerConnector {
         return allUsers;
     }
 
+    private ArrayList<GameRequest> loadGames() {
+        ArrayList<GameRequest> allGames = new ArrayList<>();
+        Gson gson = new GsonBuilder().create();
+
+        try (
+                Socket socket = new Socket(SERVER_IP, SERVER_PORT);
+                PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+                BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))
+        ) {
+            out.println("SYSTEM|LOAD_GAMES");
+
+            StringBuilder jsonBuilder = new StringBuilder();
+            String line;
+            while (!(line = in.readLine()).equals("END_JSON")) {
+                jsonBuilder.append(line).append("\n");
+            }
+            //System.out.println(jsonBuilder.toString());
+            Type userListType = new TypeToken<ArrayList<GameRequest>>() {
+            }.getType();
+            allGames = gson.fromJson(jsonBuilder.toString(), userListType);
+            System.out.println("Users data loaded successfully.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return allGames;
+    }
+
     public ArrayList<User> getAllUsers() {
         return loadUsers();
     }
+
+    public ArrayList<GameRequest> getAllGames() {
+        return loadGames();
+    }
+
 
     public void acceptFriendRequest(FriendRequest request) {
         try (
@@ -260,4 +294,55 @@ public class ServerConnector {
             e.printStackTrace();
         }
     }
+
+    public void acceptGameRequest() {
+        try (
+                Socket socket = new Socket(SERVER_IP, SERVER_PORT);
+                PrintWriter out = new PrintWriter(socket.getOutputStream(), true)
+        ) {
+            out.println("AcceptGameRequest");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void acceptGameRequest(GameRequest request) {
+        try (
+                Socket socket = new Socket(SERVER_IP, SERVER_PORT);
+                PrintWriter out = new PrintWriter(socket.getOutputStream(), true)
+        ) {
+            out.print("AcceptGameRequest|");
+            out.print(request.getSenderID());
+            out.print("|");
+            out.println(request.getReceiverID());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void rejectGameRequest() {
+        try (
+                Socket socket = new Socket(SERVER_IP, SERVER_PORT);
+                PrintWriter out = new PrintWriter(socket.getOutputStream(), true)
+        ) {
+            out.print("RejectGameRequest");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void rejectGameRequest(GameRequest request) {
+        try (
+                Socket socket = new Socket(SERVER_IP, SERVER_PORT);
+                PrintWriter out = new PrintWriter(socket.getOutputStream(), true)
+        ) {
+            out.print("RejectGameRequest|");
+            out.print(request.getSenderID());
+            out.print("|");
+            out.println(request.getReceiverID());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

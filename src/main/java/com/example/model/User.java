@@ -6,6 +6,7 @@ import com.example.model.deckmanager.DeckToJson;
 import com.example.model.game.Table;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -13,6 +14,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class User {
     boolean stayLoggedIn = false;
     private boolean isOnline;
+    private boolean isInGame = true;
+    private boolean privateGame = false;
+    private int gameID;
     private int id;
     private String username;
     private String password;
@@ -44,6 +48,7 @@ public class User {
     private ArrayList<Log> logs;
     private ArrayList<String> decksAddresses;
     private ArrayList<Integer> friends = new ArrayList<>();
+    private ArrayList<GameRequest> gameRequests = new ArrayList<>();
     private ArrayList<FriendRequest> friendRequests = new ArrayList<>();
 
     public void setFriends(ArrayList<Integer> friends) {
@@ -84,8 +89,8 @@ public class User {
         return null;
     }
     public void setNewID() {
-        Date date = new Date();
-        this.id = date.hashCode();
+        LocalDateTime now = LocalDateTime.now();
+        id = now.hashCode();
     }
 
     public DeckToJson getTemporaryDeck() {
@@ -344,16 +349,8 @@ public class User {
         return decksAddresses;
     }
 
-    private boolean isInGame = true;
-
     public boolean isInGame() {
-//        if (isInGame == null) {
-//            isInGame = new AtomicBoolean(false);
-//        }
-//        boolean value = isInGame.get();
-//        System.out.println("isInGame called, returning: " + value);
-//        return value;
-        return true;
+        return isInGame;
     }
 
     public void setInGame(boolean inGame) {
@@ -386,5 +383,66 @@ public class User {
 
     public boolean isOnline() {
         return isOnline;
+    }
+    public int getId() {
+        return id;
+    }
+
+    public void addGameRequest(int senderID) {
+        GameRequest gameRequest = new GameRequest(senderID, id);
+        if (gameRequests == null) {
+            gameRequests = new ArrayList<>();
+        }
+        gameRequests.add(gameRequest);
+    }
+
+    public void addGameRequest(GameRequest gameRequest) {
+        if (gameRequests == null) {
+            gameRequests = new ArrayList<>();
+        }
+        gameRequests.add(gameRequest);
+    }
+
+    public ArrayList<GameRequest> getGameRequests() {
+        return gameRequests;
+    }
+
+    public boolean isPrivate() {
+        return privateGame;
+    }
+
+    public void setPrivacy(boolean isPrivate) {
+        this.privateGame = isPrivate;
+    }
+
+    public void acceptGameRequest(int friendUserID) {
+        for (GameRequest gameRequest : gameRequests) {
+            if (gameRequest.getSenderID() == friendUserID) {
+                gameRequest.accept();
+                return;
+            }
+        }
+    }
+
+    public void rejectGameRequest(int friendUserID) {
+        for (GameRequest gameRequest : gameRequests) {
+            if (gameRequest.getSenderID() == friendUserID) {
+                gameRequest.reject();
+                return;
+            }
+        }
+    }
+
+    public boolean hasFriendRequest(User friend) {
+        for (FriendRequest friendRequest : friendRequests) {
+            if (friendRequest.getSender().getID() == friend.getID() || friendRequest.getReceiver().getID() == friend.getID()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int getGameID() {
+        return gameID;
     }
 }

@@ -1,7 +1,6 @@
 package com.example.controller.server;
 
-import com.example.model.FriendRequest;
-import com.example.model.User;
+import com.example.model.*;
 import com.example.model.card.enums.FactionsType;
 import com.example.model.deckmanager.DeckManager;
 import com.example.model.deckmanager.DeckToJson;
@@ -83,7 +82,6 @@ public class ServerApp {
     public static void sendFriendRequest(int userID, int friendUserID) {
         User user = ServerApp.getUserByID(userID);
         User friend = ServerApp.getUserByID(friendUserID);
-        System.out.println("Friend request sent from: " + user.getUsername() + " to: " + friend.getUsername());
         setFriendRequest(user, friend);
     }
 
@@ -99,6 +97,12 @@ public class ServerApp {
     public static void setUserOnline(int userID) {
         User user = getUserByID(userID);
         user.setOnline(true);
+        if (user.isInGame()) {
+            GameHandler gameHandler = games.get(user.getGameID());
+            if (gameHandler != null) {
+                gameHandler.playerReconnected(userID);
+            }
+        }
     }
 
     public static User getUserByID(int userID) {
@@ -111,8 +115,14 @@ public class ServerApp {
     }
 
     public static void setUserOffline(int userID) {
-        User user = allUsers.get(userID);
+        User user = getUserByID(userID);
         user.setOnline(false);
+        if (user.isInGame()) {
+            GameHandler gameHandler = games.get(user.getGameID());
+            if (gameHandler != null) {
+                gameHandler.playerDisconnected(userID);
+            }
+        }
     }
 
     public static void sendMessage(int senderID, int receiverID, String message) {
@@ -132,11 +142,19 @@ public class ServerApp {
         User sender = getUserByID(senderID);
         User receiver = getUserByID(receiverID);
         if (sender == null || receiver == null) {
-            sendMessage(senderID, senderID, "User not found.");
+            sendError(0, senderID, "User not found.");
             return;
         }
         if (!sender.isFriend(receiver)) {
-            sendMessage(senderID, senderID, "You are not friends.");
+            sendError(0, senderID, "You are not friends.");
+            return;
+        }
+        if (receiver.isInGame()) {
+            sendError(0, senderID, "User is in game.");
+            return;
+        }
+        if (!receiver.isOnline()) {
+            sendError(0, senderID, "User is offline.");
             return;
         }
         //find user connector
@@ -146,6 +164,9 @@ public class ServerApp {
         }
         //send request
         StringBuilder requestBuilder = new StringBuilder();
+        GameRequest gameRequest = new GameRequest(senderID, receiverID);
+        receiver.addGameRequest(gameRequest);
+        sender.addGameRequest(gameRequest);
         requestBuilder.append("REQUEST|").append(senderID).append("|").append(receiverID);
         clientConnector.sendMessage(requestBuilder.toString());
     }
@@ -167,6 +188,7 @@ public class ServerApp {
 
         ServerApp.getServer().players.get(player1ID).setInGame(true);
         ServerApp.getServer().players.get(player2ID).setInGame(true);
+        boolean isPrivate = checkPrivacy(player1ID, player2ID);
 
         if (deckPlayer2.getFaction().equals("ScoiaTael")) {
             GameHandler gameHandler = new GameHandler(player2ID, player1ID);
@@ -177,6 +199,12 @@ public class ServerApp {
         }
         clientConnector1.sendMessage(requestBuilder.toString());
         clientConnector2.sendMessage(requestBuilder.toString());
+    }
+
+    private static boolean checkPrivacy(int player1ID, int player2ID) {
+        User player1 = getUserByID(player1ID);
+        User player2 = getUserByID(player2ID);
+        return player1.isPrivate() || player2.isPrivate();
     }
 
     private static DeckToJson getDeckToJsonByCardNames(String deck) {
@@ -218,27 +246,31 @@ public class ServerApp {
             return;
         }
         //find random player
+        int counter = 0, flag = 0;
         for (int i = 0; i < tournamentPlayers.length; i++) {
             if (tournamentPlayers[i] == 0) {
-                tournamentPlayers[i] = senderID;
-                return;
+                if (flag == 0){
+                    tournamentPlayers[i] = senderID;
+                }
+                flag = 1;
+            } else {
+                counter++;
             }
         }
+        if (counter < 8) return;
         //send request
+        HashMap<Integer, PlayerHandler> players = new HashMap<>();
         for (int i = 0; i < tournamentPlayers.length; i++) {
-            if (tournamentPlayers[i] == 0) {
-                return;
-            }
+            server.players.get(tournamentPlayers[i]).sendMessage("Tournament_Started");
+            players.put(tournamentPlayers[i], server.players.get(tournamentPlayers[i]));
         }
-        startTournament();
+
+        startTournament(players);
     }
 
-    private static void startTournament() throws InterruptedException { //2-step elimination
-        //send request
-//        StartOnlineGame(tournamentPlayers[0], tournamentPlayers[1]);
-//        StartOnlineGame(tournamentPlayers[2], tournamentPlayers[3]);
-//        StartOnlineGame(tournamentPlayers[4], tournamentPlayers[5]);
-//        StartOnlineGame(tournamentPlayers[6], tournamentPlayers[7]);
+    private static void startTournament(HashMap<Integer, PlayerHandler> players) throws InterruptedException { //2-step elimination
+        TournamentHandler tournamentHandler = new TournamentHandler(players);
+        tournamentHandler.startTournament();
     }
 
 
@@ -248,5 +280,45 @@ public class ServerApp {
 
     public static void setAllUsers(ArrayList<User> allUsers) {
         ServerApp.allUsers = allUsers;
+    }
+
+    public static void acceptGameRequest(int userID, int friendUserID) {
+        User user = getUserByID(userID);
+        User friend = getUserByID(friendUserID);
+        user.acceptGameRequest(friendUserID);
+        friend.acceptGameRequest(userID);
+        ServerApp.saveUsers("users.json");
+    }
+
+    public static void rejectGameRequest(int userID, int friendUserID) {
+        User user = getUserByID(userID);
+        User friend = getUserByID(friendUserID);
+        user.rejectGameRequest(friendUserID);
+        friend.rejectGameRequest(userID);
+        ServerApp.saveUsers("users.json");
+    }
+
+    public static boolean areFriends(int userID, int friendUserID) {
+        User user = getUserByID(userID);
+        User friend = getUserByID(friendUserID);
+        return user.isFriend(friend);
+    }
+
+    public static boolean hasFriendRequest(int userID, int friendUserID) {
+        User user = getUserByID(userID);
+        User friend = getUserByID(friendUserID);
+        return user.hasFriendRequest(friend);
+    }
+
+    public static void sendError(int senderID, int receiverID, String message) {
+        //find user connector
+        PlayerHandler clientConnector = server.getClientConnector(receiverID);
+        if (clientConnector == null) {
+            return;
+        }
+        //send message
+        StringBuilder messageBuilder = new StringBuilder();
+        messageBuilder.append("ERROR|").append(senderID).append("|").append(message);
+        clientConnector.sendMessage(messageBuilder.toString());
     }
 }

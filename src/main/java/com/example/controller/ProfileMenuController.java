@@ -159,4 +159,14 @@ public class ProfileMenuController extends AppController {
         App.setCurrentMenu(Menu.PROFILE_MENU);
         Controller.PROFILE_MENU_CONTROLLER.run();
     }
+
+    public void showGameRequestsHistory() {
+        App.setCurrentMenu(Menu.GAME_REQUEST_HISTORY_MENU);
+        Controller.GAME_REQUEST_HISTORY_MENU_CONTROLLER.run();
+    }
+
+    public void showTVMenu() {
+        App.setCurrentMenu(Menu.TV_MENU);
+        Controller.TV_MENU_CONTROLLER.run();
+    }
 }

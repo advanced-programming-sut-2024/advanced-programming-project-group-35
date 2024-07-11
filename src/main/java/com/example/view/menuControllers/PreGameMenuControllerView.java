@@ -29,10 +29,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -93,6 +90,7 @@ public class PreGameMenuControllerView {
     public static int player2OfflineID = -1;
     private DeckToJson player1OfflineDeck;
     private DeckToJson player2OfflineDeck;
+    public ComboBox privacyComboBox;
 
     @FXML
     private Label playerNameLabel = new Label("player name: ");
@@ -114,8 +112,28 @@ public class PreGameMenuControllerView {
 
     @FXML
     public void initialize() {
-        faction = new Monsters();
-        leaderCard = defaultLeaderCard();
+        privacyComboBox.getSelectionModel().select("public");
+        privacyComboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            String mute = (String) newValue;
+            switch (mute) {
+                case "private":
+                    App.getLoggedInUser().setPrivacy(true);
+                    break;
+                case "public":
+                    App.getLoggedInUser().setPrivacy(false);
+                    break;
+                default:
+                    break;
+            }
+        });
+
+        faction = new
+
+                Monsters();
+
+        leaderCard =
+
+                defaultLeaderCard();
 
         leftScrollPane.setBackground(Background.EMPTY);
         rightScrollPane.setBackground(Background.EMPTY);
@@ -135,7 +153,9 @@ public class PreGameMenuControllerView {
         HBox.setHgrow(leftScrollPane, Priority.ALWAYS);
         HBox.setHgrow(rightScrollPane, Priority.ALWAYS);
 
-        playerNameLabel.setText("player name: " + App.getLoggedInUser().getUsername());
+        playerNameLabel.setText("player name: " + App.getLoggedInUser().
+
+                getUsername());
 
         updateDeckInfo();
 
@@ -422,6 +442,7 @@ public class PreGameMenuControllerView {
             player1OfflineID = player2OfflineID = -1;
         }
     }
+
     public String getDeckString(DeckToJson deckToJson) throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
         String deckJson = objectMapper.writeValueAsString(deckToJson);
@@ -752,5 +773,8 @@ public class PreGameMenuControllerView {
 
     public void RandomGameButtonAction(ActionEvent actionEvent) {
 
+    }
+
+    public void joinRandomGameButtonAction(ActionEvent actionEvent) {
     }
 }

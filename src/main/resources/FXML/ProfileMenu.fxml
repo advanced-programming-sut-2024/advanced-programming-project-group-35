@@ -13,6 +13,9 @@
 <Pane prefHeight="800.0" prefWidth="1400.0" styleClass="profile-menu-background"
       stylesheets="@../CSS/allMenu.css, @../CSS/allFiles.css" xmlns="http://javafx.com/javafx/21"
       xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.view.menuControllers.ProfileMenuControllerView">
+    <ImageView fitWidth="1400" fitHeight="800">
+        <Image url="@../images/profile-menu-background.jpg"/>
+    </ImageView>
     <VBox translateY="200" translateX="197" alignment="CENTER" prefHeight="150.0" prefWidth="230.0" spacing="15.0">
         <Label layoutX="100" layoutY="100" styleClass="profile-menu-titles" text="Change Username"/>
         <TextField fx:id="newUsernameField" layoutX="100" layoutY="150" prefHeight="25" prefWidth="200"
@@ -34,10 +37,16 @@
             <Button minWidth="120" onMouseClicked="#openFriendsListMenu" styleClass="brown-button"
                     text="Friends List"/>
         </HBox>
-        <Button minWidth="250" onMouseClicked="#openGameHistoryMenu" styleClass="brown-button"
-                text="Game History"/>
-
+        <HBox alignment="CENTER" spacing="10" prefWidth="250">
+            <Button minWidth="120" onMouseClicked="#openGameHistoryMenu" styleClass="brown-button"
+                    text="Game History"/>
+            <Button minWidth="120" onMouseClicked="#openGameRequestHistoryMenu" styleClass="brown-button"
+                    text="Request List"/>
+        </HBox>
     </VBox>
+    <ImageView onMouseClicked="#openTVMenu" style="-fx-cursor: hand;" layoutX="687" layoutY="647" fitWidth="50" fitHeight="50">
+        <Image url="@../images/tv-icon.png"/>
+    </ImageView>
     <VBox translateY="280" translateX="601" alignment="CENTER" prefHeight="150.0" prefWidth="230.0" spacing="10.0">
         <Label fx:id="usernameShower" layoutX="100" layoutY="100" styleClass="profile-menu-titles" text="Username"/>
         <Label fx:id="nicknameShower" layoutX="100" layoutY="100" styleClass="profile-menu-titles" text="Nickname"/>

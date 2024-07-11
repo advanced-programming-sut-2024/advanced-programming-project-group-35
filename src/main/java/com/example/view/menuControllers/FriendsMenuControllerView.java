@@ -129,16 +129,7 @@ public class FriendsMenuControllerView {
     public void sendFriendRequest(String username) {
         FriendRequest friendRequest = new FriendRequest(App.getLoggedInUser(), App.getUserByUsername(username));
         App.getServerConnector().sendFriendRequest(friendRequest);
-        App.getAppView().showAlert("Friend request sent to " + username, AlertType.SUCCESS.getType());
-        // new thread to wait for response
-        Thread waitForResponse = new Thread(() -> {
-            try {
-                Thread.sleep(5000);
-                System.out.println(App.getLoggedInUser().getFriendRequests());
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        });
+        //App.getAppView().showAlert("Friend request sent to " + username, AlertType.SUCCESS.getType());
     }
 
     public void findUsers(MouseEvent mouseEvent) {
