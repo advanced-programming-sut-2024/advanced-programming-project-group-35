@@ -133,13 +133,14 @@ public class ChatBox extends StackPane {
             }
             allMessagesVbox.getChildren().add(new ChatMessageView(chatMessage));
             scrollPane.setContent(allMessagesVbox);
+            if (scrollPane.getContent() instanceof Region) {
+                Region content = (Region) scrollPane.getContent();
+                content.heightProperty().addListener((observable, oldValue, newValue) -> {
+                    Platform.runLater(() -> scrollPane.setVvalue(1.0));
+                });
+            }
         }
-        if (scrollPane.getContent() instanceof Region) {
-            Region content = (Region) scrollPane.getContent();
-            content.heightProperty().addListener((observable, oldValue, newValue) -> {
-                Platform.runLater(() -> scrollPane.setVvalue(1.0));
-            });
-        }
+
     }
 
     public TextField getTextField() {

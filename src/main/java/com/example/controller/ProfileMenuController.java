@@ -166,6 +166,16 @@ public class ProfileMenuController extends AppController {
     }
 
     public void showTVMenu() {
+        GameData gameData1 = new GameData("Ali", "2021-06-01", 10, 5, new int[]{1, 2, 3, 4, 5}, new int[]{5, 4, 3, 2, 1}, "Ali");
+        GameData gameData2 = new GameData("Reza", "2021-06-02", 10, 5, new int[]{1, 2, 3, 4, 5}, new int[]{5, 4, 3, 2, 1}, "Reza");
+        GameData gameData3 = new GameData("Mehdi", "2021-06-03", 10, 5, new int[]{1, 2, 3, 4, 5}, new int[]{5, 4, 3, 2, 1}, "Mehdi");
+        GameData gameData4 = new GameData("Hossein", "2021-06-04", 10, 5, new int[]{1, 2, 3, 4, 5}, new int[]{5, 4, 3, 2, 1}, "Hossein");
+        GameData gameData5 = new GameData("Mohammad", "2021-06-05", 10, 5, new int[]{1, 2, 3, 4, 5}, new int[]{5, 4, 3, 2, 1}, "Mohammad");
+        loggedInUser.getGameData().add(gameData1);
+        loggedInUser.getGameData().add(gameData2);
+        loggedInUser.getGameData().add(gameData3);
+        loggedInUser.getGameData().add(gameData4);
+        loggedInUser.getGameData().add(gameData5);
         App.setCurrentMenu(Menu.TV_MENU);
         Controller.TV_MENU_CONTROLLER.run();
     }

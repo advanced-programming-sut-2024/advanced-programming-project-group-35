@@ -6,14 +6,20 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1400.0" styleClass="game-request-menu-background" stylesheets="@../CSS/allMenu.css, @../CSS/allFiles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.view.menuControllers.TVMenuControllerView">
+<AnchorPane prefHeight="800.0" prefWidth="1400.0" styleClass="game-request-menu-background"
+            stylesheets="@../CSS/allMenu.css, @../CSS/allFiles.css" xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.view.menuControllers.TVMenuControllerView">
     <ImageView fitHeight="800.0" fitWidth="1400.0" pickOnBounds="true" preserveRatio="true">
-        <Image url="@../images/tv-menu-background.jpg" />
+        <Image url="@../images/tv-menu-background.jpg"/>
     </ImageView>
 
 
-    <Button minWidth="50" onMouseClicked="#backToProfileMenu" styleClass="brown-button" text="Back" translateX="20" translateY="30" />
-    <Button layoutX="50" layoutY="740" minWidth="50" onMouseClicked="#openTerminal" styleClass="brown-button" text="Terminal" />
-   <ScrollPane hbarPolicy="NEVER" layoutX="749.0" layoutY="283.0" maxHeight="330.0" maxWidth="385.0" minHeight="330.0" minWidth="385.0" prefHeight="330.0" prefWidth="385.0" />
-   <ScrollPane hbarPolicy="NEVER" layoutX="256.0" layoutY="283.0" maxHeight="330.0" maxWidth="385.0" minHeight="330.0" minWidth="385.0" prefHeight="330.0" prefWidth="385.0" />
+    <Button minWidth="50" onMouseClicked="#backToProfileMenu" styleClass="brown-button" text="Back" translateX="20"
+            translateY="30"/>
+    <Button layoutX="50" layoutY="740" minWidth="50" onMouseClicked="#openTerminal" styleClass="brown-button"
+            text="Terminal"/>
+    <ScrollPane fx:id="pastGamesScrollPane" styleClass="scroll-pane-pre-game-menu" hbarPolicy="NEVER" layoutX="749.0" layoutY="283.0" maxHeight="330.0" maxWidth="385.0" minHeight="330.0"
+                minWidth="385.0" prefHeight="330.0" prefWidth="385.0"/>
+    <ScrollPane fx:id="onlineGamesScrollPane" styleClass="scroll-pane-pre-game-menu" hbarPolicy="NEVER" layoutX="256.0" layoutY="283.0" maxHeight="330.0" maxWidth="385.0" minHeight="330.0"
+                minWidth="385.0" prefHeight="330.0" prefWidth="385.0"/>
 </AnchorPane>
