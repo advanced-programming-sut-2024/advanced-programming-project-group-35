@@ -14,7 +14,6 @@ import com.example.model.alerts.ConfirmationAlert;
 import com.example.model.alerts.Notification;
 import com.example.view.menuControllers.FriendsMenuControllerView;
 import com.example.view.menuControllers.GameMenuControllerViewForOnlineGame;
-import com.example.view.menuControllers.GameMenuControllerView;
 import com.example.view.menuControllers.GameRequestHistoryMenuControllerView;
 import javafx.animation.KeyFrame;
 import javafx.animation.ScaleTransition;
@@ -51,8 +50,6 @@ public class AppView extends Application {
         return terminal;
     }
     private GameMenuControllerViewForOnlineGame gameMenuControllerViewForOnlineGame;
-
-    private GameMenuControllerView gameMenuControllerView;
     private GameRequestHistoryMenuControllerView gameRequestHistoryMenuControllerView;
     private FriendsMenuControllerView friendsMenuControllerView;
     private Menu currentMenu;

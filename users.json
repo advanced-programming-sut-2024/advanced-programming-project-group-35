@@ -108,7 +108,7 @@
   },
   {
     "stayLoggedIn": false,
-    "isOnline": false,
+    "isOnline": true,
     "isInGame": false,
     "privateGame": false,
     "gameID": 0,
