@@ -18,7 +18,7 @@ public class TightBondAbility implements Ability {
         for (Card card : abilityContext.getRow().getCards()) {
             if (card.getAbilityName() == AbilityName.TIGHT_BOND) {
                 tightBondCards.add(card);
-                sumOfTightBondCardsPowers += ((UnitCard)card).getPower();
+                sumOfTightBondCardsPowers += ((UnitCard)card).getCurrentPower();
             }
         }
         if (tightBondCards.size() > 1) {

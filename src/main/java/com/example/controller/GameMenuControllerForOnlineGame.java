@@ -56,6 +56,8 @@ public class GameMenuControllerForOnlineGame extends AppController {
                 while ((message = App.in.readLine()) != null) {
                     if (OnlineGameCommands.CHANGE_TURN.getMatcher(message) != null) {
                         changeTurnWithNoLog();
+                    } else if ((matcher = OnlineGameCommands.PASSED_ROUND.getMatcher(message)) != null) {
+                        passRound(matcher);
                     } else if ((matcher = OnlineGameCommands.MOVE_CARD_AND_DO_ABILITY.getMatcher(message)) != null) {
                         moveCardAndDoAbility(matcher);
                     } else if ((matcher = OnlineGameCommands.MOVE_CARD_AND_DONT_DO_ABILITY.getMatcher(message)) != null) {
@@ -69,6 +71,15 @@ public class GameMenuControllerForOnlineGame extends AppController {
             }
         });
         thread.start();
+    }
+    private void passRound(Matcher matcher) {
+        int playerPriority = Integer.parseInt(matcher.group("playerId"));
+        if (playerPriority != table.getCurrentPlayer().getPriorityInGame()) {
+            table.getOpponent().setPassRound(true);
+            passRoundWithNoLog();
+        } else {
+            passRound();
+        }
     }
 
     private void moveCardAndDoAbility(Matcher matcher) {
@@ -104,6 +115,7 @@ public class GameMenuControllerForOnlineGame extends AppController {
     public GameMenuControllerViewForOnlineGame getGameMenuControllerView() {
         return gameMenuControllerViewForOnlineGame;
     }
+
 
     public void vetoCard(Player player, ObservableList<Card> selectedCards) {
         if (player.canVetoCard()) {
@@ -171,10 +183,10 @@ public class GameMenuControllerForOnlineGame extends AppController {
                     break;
             }
         } else if (card instanceof SpecialCard) {
-            AbilityContext abilityContext = new AbilityContext(table, null, getRowByName(getRowNameBySpecialPlaceName(destination)));
-            abilityContext.addParam("dest", destination);
+            AbilityContext abilityContext;
             switch (card.getAbilityName()) {
                 case COMMANDER_HORN:
+                    abilityContext = new AbilityContext(table, null, getRowByName(getRowNameBySpecialPlaceName(destination)));
                     doNonLeaderCardsAbilityForCurrentPlayer(card, abilityContext, AbilityName.COMMANDER_HORN);
                     break;
                 case SCORCH:
@@ -185,7 +197,7 @@ public class GameMenuControllerForOnlineGame extends AppController {
                     abilityContext = new AbilityContext(table, null, null);
                     abilityContext.addParam("card", card);
                     ((WeatherCard) card).setPlayer(table.getCurrentPlayer());
-                    doNonLeaderCardsAbilityForCurrentPlayer(card, abilityContext, AbilityName.SCORCH);
+                    doNonLeaderCardsAbilityForCurrentPlayer(card, abilityContext, AbilityName.WEATHER);
                     break;
                 case MARDROEME:
                     abilityContext = new AbilityContext(table, null, getRowByName(getRowNameBySpecialPlaceName(destination)));
@@ -245,18 +257,23 @@ public class GameMenuControllerForOnlineGame extends AppController {
                     break;
             }
         } else if (card instanceof SpecialCard) {
-            AbilityContext abilityContext = new AbilityContext(table, null, getRowByName(getRowNameBySpecialPlaceName(destination)));
-            abilityContext.addParam("dest", destination);
+            AbilityContext abilityContext;
             switch (card.getAbilityName()) {
                 case COMMANDER_HORN:
+                    abilityContext = new AbilityContext(table, null, getRowByName(getRowNameBySpecialPlaceName(destination)));
+                    abilityContext.addParam("dest", destination);
                     doNonLeaderCardsAbilityForCurrentPlayer(card, abilityContext, AbilityName.COMMANDER_HORN);
                     break;
                 case SCORCH:
+                    abilityContext = new AbilityContext(table, null, getRowByName(getRowNameBySpecialPlaceName(destination)));
+                    abilityContext.addParam("dest", destination);
                     doNonLeaderCardsAbilityForOpponent(card, AbilityName.SCORCH);
                     break;
                 case WEATHER:
-                    ((WeatherCard) card).setPlayer(table.getOpponent());
-                    doNonLeaderCardsAbilityForOpponent(card, AbilityName.SCORCH);
+                    abilityContext = new AbilityContext(table, null, null);
+                    abilityContext.addParam("card", card);
+                    ((WeatherCard) card).setPlayer(table.getCurrentPlayer());
+                    doNonLeaderCardsAbilityForCurrentPlayer(card, abilityContext, AbilityName.WEATHER);
                     break;
                 case MARDROEME:
                     doNonLeaderCardsAbilityForOpponent(card, AbilityName.MARDROEME);
@@ -340,10 +357,49 @@ public class GameMenuControllerForOnlineGame extends AppController {
                 destinationRow.add(card);
             }
         }
+        Row destRow = getRowByName(destination);
+        if (destRow != null && destRow.isApplyWeather() && (card instanceof UnitCard) && !((UnitCard) card).isHero()) {
+            if (table.getCurrentPlayer().getBoard().getDeck().getLeader().getLeaderName().getName().equals("leaders_skellige_king_bran")) {
+                ((UnitCard) card).setPowerHalf();
+                gameMenuControllerViewForOnlineGame.getGameCardViewWithCardId(cardId).updatePowerLabelAfterWeather();
+            } else {
+                ((UnitCard) card).setPowerOne();
+                gameMenuControllerViewForOnlineGame.getGameCardViewWithCardId(cardId).updatePowerLabelAfterWeather();
+            }
+        } else if (destRow != null && destRow.getSpecialCard() != null && destRow.getSpecialCard().getAbilityName() == AbilityName.COMMANDER_HORN && (card instanceof UnitCard)) {
+            ((UnitCard) card).duplicatePower();
+            gameMenuControllerViewForOnlineGame.getGameCardViewWithCardId(cardId).updatePowerLabel();
+        } else if (destRow != null && rowHasCommanderHorn(destinationRow) && (card instanceof UnitCard)) {
+            if (card.getAbilityName() != AbilityName.COMMANDER_HORN) {
+                ((UnitCard) card).duplicatePower();
+                gameMenuControllerViewForOnlineGame.getGameCardViewWithCardId(cardId).updatePowerLabel();
+            }
+        } else if (destRow != null && rowHasMoralBoost(destinationRow) && (card instanceof UnitCard) && !((UnitCard) card).isHero()) {
+            if (card.getAbilityName() != AbilityName.MORALE_BOOST) {
+                ((UnitCard) card).applyMoralBoost();
+                gameMenuControllerViewForOnlineGame.getGameCardViewWithCardId(cardId).updatePowerLabel();
+            }
+        }
         gameMenuControllerViewForOnlineGame.moveCardToDestinationFlowPane(cardId, origin, destination);
         gameMenuControllerViewForOnlineGame.updateAllLabels();
         table.getCurrentPlayer().updateScore();
         table.getOpponent().updateScore();
+    }
+
+    private boolean rowHasCommanderHorn(ObservableList<Card> cards) {
+        for (Card card : cards) {
+            if (card != null && card instanceof UnitCard && (card.getAbilityName() == AbilityName.COMMANDER_HORN))
+                return true;
+        }
+        return false;
+    }
+
+    private boolean rowHasMoralBoost(ObservableList<Card> cards) {
+        for (Card card : cards) {
+            if (card != null && card instanceof UnitCard && (card.getAbilityName() == AbilityName.MORALE_BOOST))
+                return true;
+        }
+        return false;
     }
 
 
@@ -411,9 +467,15 @@ public class GameMenuControllerForOnlineGame extends AppController {
                 }).collect(Collectors.toList()));
         return deckData;
     }
+    private void passRoundWithNoLog() {
+        if (table.getCurrentPlayer().isPassRound()) {
+            changeRound();
+        }
+    }
 
 
     public void passRound() {
+        App.out.println("player|" + table.getCurrentPlayer().getPriorityInGame() + "|passedRound");
         table.getCurrentPlayer().setPassRound(true);
         if (table.getOpponent().isPassRound()) {
             changeRound();
@@ -545,6 +607,16 @@ public class GameMenuControllerForOnlineGame extends AppController {
         }
     }
 
+
+    private void disApplyWeatherForRows() {
+        for (Row row : table.getOpponent().getBoard().getRows()) {
+            row.setApplyWeather(false);
+        }
+        for (Row row : table.getCurrentPlayer().getBoard().getRows()) {
+            row.setApplyWeather(false);
+        }
+    }
+
     private void changeTurn() {
         turn++;
         table.swapPlayers();
@@ -567,7 +639,9 @@ public class GameMenuControllerForOnlineGame extends AppController {
     }
 
     public void disApplyWeatherCards() {
+        disApplyWeatherForRows();
         gameMenuControllerViewForOnlineGame.disApplyWeatherCards();
+        gameMenuControllerViewForOnlineGame.removeWeatherPictures();
     }
 
     public Table getTable() {

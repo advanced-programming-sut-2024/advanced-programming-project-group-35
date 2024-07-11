@@ -124,18 +124,31 @@
    <ImageView fx:id="opponentPlayerFactionIcon" fitHeight="40.0" fitWidth="29.0" layoutX="64.0" layoutY="204.0" pickOnBounds="true" preserveRatio="true">
       <Image url="@../images/icons/deck_shield_monsters.png" />
    </ImageView>
+
    <ImageView fx:id="weatherRow1" fitHeight="85.0" fitWidth="599.0" layoutX="516.0" layoutY="525.0" pickOnBounds="true"
-              preserveRatio="true" visible="false"/>
+              preserveRatio="true" visible="false">
+      <Image url="@../images/icons/overlay_rain.png"/>
+   </ImageView>
    <ImageView fx:id="weatherRow2" fitHeight="85.0" fitWidth="599.0" layoutX="516.0" layoutY="424.0" pickOnBounds="true"
-              preserveRatio="true" visible="false"/>
+              preserveRatio="true" visible="false">
+      <Image url="@../images/icons/overlay_fog.png"/>
+   </ImageView>
    <ImageView fx:id="weatherRow3" fitHeight="85.0" fitWidth="599.0" layoutX="516.0" layoutY="325.0" pickOnBounds="true"
-              preserveRatio="true" visible="false"/>
+              preserveRatio="true" visible="false">
+      <Image url="@../images/icons/overlay_frost.png"/>
+   </ImageView>
    <ImageView fx:id="weatherRow4" fitHeight="85.0" fitWidth="599.0" layoutX="516.0" layoutY="214.0" pickOnBounds="true"
-              preserveRatio="true" visible="false"/>
+              preserveRatio="true" visible="false">
+      <Image url="@../images/icons/overlay_frost.png"/>
+   </ImageView>
    <ImageView fx:id="weatherRow5" fitHeight="85.0" fitWidth="599.0" layoutX="516.0" layoutY="112.0" pickOnBounds="true"
-              preserveRatio="true" visible="false"/>
+              preserveRatio="true" visible="false">
+      <Image url="@../images/icons/overlay_fog.png"/>
+   </ImageView>
    <ImageView fx:id="weatherRow6" fitHeight="85.0" fitWidth="599.0" layoutX="516.0" layoutY="15.0" pickOnBounds="true"
-              preserveRatio="true" visible="false"/>
+              preserveRatio="true" visible="false">
+      <Image url="@../images/icons/overlay_rain.png"/>
+   </ImageView>
    <Button fx:id="terminalButton" layoutX="50" layoutY="740" minWidth="50" onMouseClicked="#openTerminal" styleClass="brown-button"
            text="Terminal"/>
    <Button styleClass="brown-button" fx:id="leaderAbility" layoutX="370.0" layoutY="740.0" mnemonicParsing="false"

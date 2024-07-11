@@ -5,8 +5,10 @@ import com.example.model.App;
 import com.example.model.card.enums.Abilities;
 import com.example.model.card.enums.AbilityName;
 import com.example.model.card.enums.CardData;
+import com.example.model.game.place.Place;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -182,15 +184,17 @@ public class GameCardView extends Pane {
     }
 
     public void setPowerDefault() {
-        if (card instanceof UnitCard) {
-            if (((UnitCard) card).isHero()) {
-                power.setText("" + ((UnitCard) card).getPower());
-                power.setTextFill(Paint.valueOf("white"));
-            } else if (!((UnitCard) card).isHero()) {
-                power.setText("" + ((UnitCard) card).getPower());
-                power.setTextFill(Paint.valueOf("black"));
+        Platform.runLater(() -> {
+            if (card instanceof UnitCard) {
+                if (((UnitCard) card).isHero()) {
+                    power.setText("" + ((UnitCard) card).getPower());
+                    power.setTextFill(Paint.valueOf("white"));
+                } else if (!((UnitCard) card).isHero()) {
+                    power.setText("" + ((UnitCard) card).getPower());
+                    power.setTextFill(Paint.valueOf("black"));
+                }
             }
-        }
+        });
     }
 
     public void setScorchPicture() {

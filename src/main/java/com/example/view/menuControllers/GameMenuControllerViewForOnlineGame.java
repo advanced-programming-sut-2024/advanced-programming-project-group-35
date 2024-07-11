@@ -13,6 +13,7 @@ import com.example.model.card.enums.FactionsType;
 import com.example.model.card.enums.AbilityName;
 import com.example.model.game.Table;
 import com.example.model.game.place.Place;
+import com.example.model.game.place.Row;
 import com.example.model.game.place.RowsInGame;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -621,35 +622,23 @@ public class GameMenuControllerViewForOnlineGame {
 
     public void changeTurn() {
         if (table.getPlayerInTurn() == table.getCurrentPlayer()) {
-            App.getAppView().showNotification(NotificationsData.USERNAME_TURN.getMessage(), NotificationsData.USERNAME_TURN.getImageAddress(), "your");
+            App.getAppView().showNotification(NotificationsData.YOUR_TURN.getMessage(), NotificationsData.YOUR_TURN.getImageAddress(), "");
             disableLockScreen();
         } else {
             App.getAppView().showNotification(NotificationsData.USERNAME_TURN.getMessage(), NotificationsData.USERNAME_TURN.getImageAddress(), table.getOpponent().getUsername());
             lockScreen();
         }
-//        KeyFrame keyFrame = new KeyFrame(Duration.seconds(3), event -> {
-//            swapContents(currentPlayerDeckObservableList, opponentDeckObservableList, currentPlayerDeck, opponentDeck);
-//            swapContents(currentPlayerHandObservableList, opponentHandObservableList, currentPlayerHand, opponentHand);
-//            swapContents(currentPlayerDiscardPlaceObservableList, opponentDiscardPlaceObservablePlace, currentPlayerDiscardPlace, opponentDiscardPlace);
-//            swapContents(currentPlayerSiegeObservableList, opponentSiegeObservableList, currentPlayerSiege, opponentSiege);
-//            swapContents(currentPlayerRangedObservableList, opponentRangedObservableList, currentPlayerRanged, opponentRanged);
-//            swapContents(currentPlayerCloseCombatObservableList, opponentCloseCombatObservableList, currentPlayerCloseCombat, opponentCloseCombat);
-//            swapContents(currentPlayerRangedSpecialPlaceObservableList, opponentRangedSpecialPlaceObservableList, currentPlayerRangedSpecialPlace, opponentRangedSpecialPlace);
-//            swapContents(currentPlayerCloseCombatSpecialPlaceObservableList, opponentCloseCombatSpecialPlaceObservableList, currentPlayerCloseCombatSpecialPlace, opponentCloseCombatSpecialPlace);
-//            swapContents(currentPlayerSiegeSpecialPlaceObservableList, opponentSiegeSpecialPlaceObservableList, currentPlayerSiegeSpecialPlace, opponentSiegeSpecialPlace);
-////            table.swapPlayers();
-//            addMouseEventsForHandCards();
-//            updateAllLabels();
-//        });
-//        Timeline timeline = new Timeline(keyFrame);
-//        timeline.setCycleCount(1);
-//        timeline.play();
     }
 
-    private void swapContents(ObservableList<GameCardView> list1, ObservableList<GameCardView> list2, FlowPane pane1, FlowPane pane2) {
-        swapObservableLists(list1, list2);
-        swapFlowPanes(pane1, pane2);
+    public void removeWeatherPictures() {
+        weatherRow1.setVisible(false);
+        weatherRow2.setVisible(false);
+        weatherRow3.setVisible(false);
+        weatherRow4.setVisible(false);
+        weatherRow5.setVisible(false);
+        weatherRow6.setVisible(false);
     }
+
 
     private void swapObservableLists(ObservableList<GameCardView> list1, ObservableList<GameCardView> list2) {
         ObservableList<GameCardView> temp1 = FXCollections.observableArrayList(list1);
@@ -730,20 +719,25 @@ public class GameMenuControllerViewForOnlineGame {
     }
 
     public void setPowerOfCardsDefault() {
-        setPowerDefaultForRow(currentPlayerRangedObservableList);
-        setPowerDefaultForRow(currentPlayerCloseCombatObservableList);
-        setPowerDefaultForRow(currentPlayerSiegeObservableList);
-        setPowerDefaultForRow(opponentRangedObservableList);
-        setPowerDefaultForRow(opponentCloseCombatObservableList);
-        setPowerDefaultForRow(opponentSiegeObservableList);
+        Platform.runLater(() -> {
+            setPowerDefaultForRow(currentPlayerRangedObservableList);
+            setPowerDefaultForRow(currentPlayerCloseCombatObservableList);
+            setPowerDefaultForRow(currentPlayerSiegeObservableList);
+            setPowerDefaultForRow(opponentRangedObservableList);
+            setPowerDefaultForRow(opponentCloseCombatObservableList);
+            setPowerDefaultForRow(opponentSiegeObservableList);
+        });
     }
 
     private void setPowerDefaultForRow(ObservableList<GameCardView> rowObservableList) {
-        synchronized (rowObservableList) {
-            for (GameCardView gameCardView : rowObservableList) {
-                gameCardView.setPowerDefault();
+        Platform.runLater(() -> {
+            synchronized (rowObservableList) {
+                for (GameCardView gameCardView : rowObservableList) {
+                    gameCardView.setPowerDefault();
+                }
             }
-        }
+            updateAllLabels();
+        });
     }
 
 
@@ -870,40 +864,34 @@ public class GameMenuControllerViewForOnlineGame {
 
 
     public void backWeatherCardToDiscardPlaces(WeatherCard weatherCard) {
-        switch (weatherCard.getCardName()) {
-            case CardData.weather_frost -> {
-                setPowerDefaultForRow(currentPlayerCloseCombatObservableList);
-                setPowerDefaultForRow(opponentCloseCombatObservableList);
-                moveWeatherCardToDiscardPlace(weatherCard);
-            }
-            case CardData.weather_fog -> {
-                setPowerDefaultForRow(currentPlayerRangedObservableList);
-                setPowerDefaultForRow(opponentRangedObservableList);
-                moveWeatherCardToDiscardPlace(weatherCard);
-            }
-            case CardData.weather_rain -> {
-                setPowerDefaultForRow(currentPlayerSiegeObservableList);
-                setPowerDefaultForRow(opponentSiegeObservableList);
-                moveWeatherCardToDiscardPlace(weatherCard);
-            }
-            case CardData.weather_storm -> {
-                setPowerDefaultForRow(currentPlayerCloseCombatObservableList);
-                setPowerDefaultForRow(opponentCloseCombatObservableList);
-                setPowerDefaultForRow(currentPlayerRangedObservableList);
-                setPowerDefaultForRow(opponentRangedObservableList);
-                moveWeatherCardToDiscardPlace(weatherCard);
-            }
-            case CardData.weather_clear -> {
-                moveWeatherCardToDiscardPlace(weatherCard);
-            }
+        if (weatherCard.getName().startsWith("weather_frost")) {
+            setPowerDefaultForRow(currentPlayerCloseCombatObservableList);
+            setPowerDefaultForRow(opponentCloseCombatObservableList);
+            moveWeatherCardToDiscardPlace(weatherCard);
+        } else if (weatherCard.getName().startsWith("weather_fog")) {
+            setPowerDefaultForRow(currentPlayerRangedObservableList);
+            setPowerDefaultForRow(opponentRangedObservableList);
+            moveWeatherCardToDiscardPlace(weatherCard);
+        } else if (weatherCard.getName().startsWith("weather_rain")) {
+            setPowerDefaultForRow(currentPlayerSiegeObservableList);
+            setPowerDefaultForRow(opponentSiegeObservableList);
+            moveWeatherCardToDiscardPlace(weatherCard);
+        } else if (weatherCard.getName().startsWith("weather_storm")) {
+            setPowerDefaultForRow(currentPlayerCloseCombatObservableList);
+            setPowerDefaultForRow(opponentCloseCombatObservableList);
+            setPowerDefaultForRow(currentPlayerRangedObservableList);
+            setPowerDefaultForRow(opponentRangedObservableList);
+            moveWeatherCardToDiscardPlace(weatherCard);
+        } else if (weatherCard.getName().startsWith("weather_clear")) {
+            moveWeatherCardToDiscardPlace(weatherCard);
         }
     }
 
     private void moveWeatherCardToDiscardPlace(WeatherCard weatherCard) {
         if (weatherCard.getCardData() != CardData.weather_clear && weatherCard.getPlayer().getPriorityInGame() == table.getCurrentPlayer().getPriorityInGame()) {
-            controller.moveCardAndDoAbilityForCurrentPlayer(weatherCard.getIdInGame(), RowsInGame.weather.toString(), RowsInGame.currentPlayerDiscardPlace.toString());
+            controller.moveCardAndDontDoAbilityForCurrentPlayer(weatherCard.getIdInGame(), RowsInGame.weather.toString(), RowsInGame.currentPlayerDiscardPlace.toString());
         } else {
-            controller.moveCardAndDoAbilityForCurrentPlayer(weatherCard.getIdInGame(), RowsInGame.weather.toString(), RowsInGame.opponentDiscardPlace.toString());
+            controller.moveCardAndDontDoAbilityForCurrentPlayer(weatherCard.getIdInGame(), RowsInGame.weather.toString(), RowsInGame.opponentDiscardPlace.toString());
         }
     }
 
@@ -1122,20 +1110,35 @@ public class GameMenuControllerViewForOnlineGame {
         terminalButton.setDisable(true);
     }
 
+    public void applyWeatherPicture(RowsInGame rowsInGame) {
+        System.out.println(rowsInGame.toString());
+        switch (rowsInGame) {
+            case RowsInGame.currentPlayerCloseCombat -> {
+                weatherRow3.setVisible(true);
+            }
+            case RowsInGame.opponentCloseCombat -> {
+                weatherRow4.setVisible(true);
+            }
+            case RowsInGame.currentPlayerRanged -> {
+                weatherRow2.setVisible(true);
+            }
+            case RowsInGame.opponentRanged -> {
+                weatherRow5.setVisible(true);
+            }
+            case RowsInGame.currentPlayerSiege -> {
+                weatherRow1.setVisible(true);
+            }
+            case RowsInGame.opponentSiege -> {
+                weatherRow6.setVisible(true);
+            }
+        }
+    }
+
     private void disableLockScreen() {
         addMouseEventsForHandCards();
         leaderAbility.setDisable(false);
-//        leaderAbility.setOnMouseClicked(e -> {
-//            leaderAbilityApply(null);
-//        });
         passRoundButton.setDisable(false);
-//        passRoundButton.setOnMouseClicked(e -> {
-//            passRound(null);
-//        });
         terminalButton.setDisable(false);
-//        terminalButton.setOnMouseClicked(e -> {
-//            openTerminal(null);
-//        });
     }
 }
 

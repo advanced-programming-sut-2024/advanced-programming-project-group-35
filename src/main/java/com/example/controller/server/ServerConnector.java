@@ -233,7 +233,7 @@ public class ServerConnector {
         //TODO for test
         ArrayList<String> names = new ArrayList<>(deck.getCards());
         for (String name: names) {
-            if (CardData.getCardDataByName(name).getAbilityName().equals("tight_bound")){
+            if (CardData.getCardDataByName(name).getAbilityName().equals("weather") || CardData.getCardDataByName(name).getAbilityName().equals("commander_horn")){
                 deck.getHand().add(name);
                 deck.getCards().remove(name);
             }
