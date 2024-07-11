@@ -133,8 +133,8 @@
    <ImageView fx:id="weatherRow6" fitHeight="85.0" fitWidth="599.0" layoutX="516.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" visible="false">
       <Image url="@../images/icons/overlay_rain.png" />
    </ImageView>
-   <Button fx:id="terminalButton" layoutX="21.0" layoutY="740.0" minWidth="50" onMouseClicked="#openTerminal" styleClass="brown-button" text="Terminal" />
-   <Button fx:id="leaderAbility" layoutX="126.0" layoutY="740.0" mnemonicParsing="false" onMouseClicked="#leaderAbilityApply" prefHeight="36.0" prefWidth="184.0" styleClass="brown-button" text="leader ability" />
+   <Button fx:id="terminalButton" layoutX="50" layoutY="740" minWidth="50" onMouseClicked="#openTerminal" styleClass="brown-button" text="Terminal" />
+   <Button fx:id="leaderAbility" layoutX="180.0" layoutY="740.0" mnemonicParsing="false" onMouseClicked="#leaderAbilityApply" prefHeight="36.0" prefWidth="130.0" styleClass="brown-button" text="leader ability" />
    <ImageView fx:id="vetoCardBackground" fitHeight="800" fitWidth="1400" pickOnBounds="true" preserveRatio="true" visible="false">
       <Image url="@../images/veto-card-background.jpg" />
    </ImageView>

@@ -248,7 +248,7 @@ public class ServerConnector {
                 Socket socket = new Socket(SERVER_IP, SERVER_PORT);
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true)
         ) {
-            DeckToJson deck = DeckManager.loadDeck("E:\\uni\\AP\\decks\\monsters.json");
+            DeckToJson deck = DeckManager.loadDeck("/Users/ali/Downloads/random.json");
 
             setHand(deck);
 
