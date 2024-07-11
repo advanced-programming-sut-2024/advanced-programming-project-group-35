@@ -7,15 +7,19 @@ import com.example.model.card.AbilityContext;
 import com.example.model.card.Card;
 import com.example.model.card.UnitCard;
 import com.example.model.game.place.Row;
+import com.example.model.game.place.RowsInGame;
+import com.sun.mail.imap.protocol.INTERNALDATE;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ScorchAbility implements Ability {
-    
     @Override
     public void apply(AbilityContext abilityContext) {
-        if (abilityContext.getCard() != null) {
+        if (abilityContext.getCard() == null) {
             applyAbilityForScorchCard(abilityContext);
         } else {
             applyAbilityForNonScorchCards(abilityContext);
@@ -23,32 +27,9 @@ public class ScorchAbility implements Ability {
     }
 
     private void applyAbilityForScorchCard(AbilityContext abilityContext) {
-        ArrayList<UnitCard> maximumPoweredCardsForCurrentPlayer = new ArrayList<>();
-        ArrayList<UnitCard> maximumPoweredCardsForOpponentPlayer = new ArrayList<>();
-        int maximumPowerForCurrentPlayer = 0;
-        int maximumPowerForOpponentPlayer = 0;
-        for (Row row : abilityContext.getTable().getCurrentPlayer().getBoard().getRows()) {
-            maximumPowerForCurrentPlayer = getMaximumPoweredCards(maximumPoweredCardsForCurrentPlayer, row);
-        }
-        for (Row row : abilityContext.getTable().getOpponent().getBoard().getRows()) {
-            maximumPowerForOpponentPlayer = getMaximumPoweredCards(maximumPoweredCardsForOpponentPlayer, row);
-        }
-        if (maximumPowerForCurrentPlayer == maximumPowerForOpponentPlayer) {
-            for (UnitCard card : maximumPoweredCardsForCurrentPlayer) {
-                ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbilityForCurrentPlayer(card.getIdInGame(), abilityContext.getTable().getCurrentPlayer().getBoard().getRowByName(card.getPlace()), RowsInGame.currentPlayerDiscardPlace.toString());
-            }
-            for (UnitCard card : maximumPoweredCardsForOpponentPlayer) {
-                ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbilityForCurrentPlayer(card.getIdInGame(), abilityContext.getTable().getCurrentPlayer().getBoard().getRowByName(card.getPlace()), RowsInGame.currentPlayerDiscardPlace.toString());
-            }
-        } else if (maximumPowerForCurrentPlayer > maximumPowerForOpponentPlayer) {
-            for (UnitCard card : maximumPoweredCardsForCurrentPlayer) {
-                ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbilityForCurrentPlayer(card.getIdInGame(), abilityContext.getTable().getCurrentPlayer().getBoard().getRowByName(card.getPlace()), RowsInGame.currentPlayerDiscardPlace.toString());
-            }
-        } else {
-            for (UnitCard card : maximumPoweredCardsForOpponentPlayer) {
-                ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbilityForCurrentPlayer(card.getIdInGame(), abilityContext.getTable().getCurrentPlayer().getBoard().getRowByName(card.getPlace()), RowsInGame.currentPlayerDiscardPlace.toString());
-            }
-        }
+        removeMaximumPoweredCardsInClose(abilityContext.getTable().getOpponent().getBoard().getCloseCombatCardPlace());
+        removeMaximumPoweredCardsInSiege(abilityContext.getTable().getOpponent().getBoard().getSiegeCardPlace());
+        removeMaximumPoweredCardsInRanged(abilityContext.getTable().getOpponent().getBoard().getRangedCardPlace());
     }
 
     private int getMaximumPoweredCards(ArrayList<UnitCard> maximumPoweredCardsForCurrentPlayer, Row row) {
@@ -68,20 +49,94 @@ public class ScorchAbility implements Ability {
     }
 
     private void applyAbilityForNonScorchCards(AbilityContext abilityContext) {
-        for (Row row : abilityContext.getTable().getOpponent().getBoard().getRows()) {
-            if (row.getNonHeroStrength() >= 10) {
-                removeMaximumPoweredCardsInARow(row, abilityContext);
-            }
-        }
+        removeMaximumPoweredCardsInClose(abilityContext.getTable().getOpponent().getBoard().getCloseCombatCardPlace());
+        removeMaximumPoweredCardsInSiege(abilityContext.getTable().getOpponent().getBoard().getSiegeCardPlace());
+        removeMaximumPoweredCardsInRanged(abilityContext.getTable().getOpponent().getBoard().getRangedCardPlace());
+        removeMaximumPoweredCardsInCloseForCurrent(abilityContext.getTable().getCurrentPlayer().getBoard().getCloseCombatCardPlace());
+        removeMaximumPoweredCardsInSiegeForCurrent(abilityContext.getTable().getCurrentPlayer().getBoard().getSiegeCardPlace());
+        removeMaximumPoweredCardsInRangedForCurrent(abilityContext.getTable().getCurrentPlayer().getBoard().getRangedCardPlace());
     }
 
-    private void removeMaximumPoweredCardsInARow(Row row, AbilityContext abilityContext) {
+    private void removeMaximumPoweredCardsInClose(Row row) {
         ArrayList<UnitCard> maximumPoweredCards = new ArrayList<>();
         int s = getMaximumPoweredCards(maximumPoweredCards, row);
         for (UnitCard card : maximumPoweredCards) {
-            row.removeCard(card);
-            abilityContext.getTable().getOpponent().getBoard().getDiscardPile().addCard(card);
-            //TODO گرافیک انتقال کارت
+            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1.5)));
+            timeline.setOnFinished(e -> {
+                ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).getGameMenuControllerView().setPowerOfCardDefault(card.getIdInGame());
+                ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbilityForCurrentPlayer(card.getIdInGame(), RowsInGame.opponentCloseCombat.toString(), RowsInGame.opponentDiscardPlace.toString());
+            });
+            timeline.setCycleCount(1);
+            timeline.play();
+        }
+    }
+
+    private void removeMaximumPoweredCardsInRanged(Row row) {
+        ArrayList<UnitCard> maximumPoweredCards = new ArrayList<>();
+        int s = getMaximumPoweredCards(maximumPoweredCards, row);
+        for (UnitCard card : maximumPoweredCards) {
+            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1.5)));
+            timeline.setOnFinished(e -> {
+                ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).getGameMenuControllerView().setPowerOfCardDefault(card.getIdInGame());
+                ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbilityForCurrentPlayer(card.getIdInGame(), RowsInGame.opponentRanged.toString(), RowsInGame.opponentDiscardPlace.toString());
+            });
+            timeline.setCycleCount(1);
+            timeline.play();
+        }
+    }
+
+    private void removeMaximumPoweredCardsInSiege(Row row) {
+        ArrayList<UnitCard> maximumPoweredCards = new ArrayList<>();
+        int s = getMaximumPoweredCards(maximumPoweredCards, row);
+        for (UnitCard card : maximumPoweredCards) {
+            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1.5)));
+            timeline.setOnFinished(e -> {
+                ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).getGameMenuControllerView().setPowerOfCardDefault(card.getIdInGame());
+                ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbilityForCurrentPlayer(card.getIdInGame(), RowsInGame.opponentSiege.toString(), RowsInGame.opponentDiscardPlace.toString());
+            });
+            timeline.setCycleCount(1);
+            timeline.play();
+        }
+    }
+    private void removeMaximumPoweredCardsInCloseForCurrent(Row row) {
+        ArrayList<UnitCard> maximumPoweredCards = new ArrayList<>();
+        int s = getMaximumPoweredCards(maximumPoweredCards, row);
+        for (UnitCard card : maximumPoweredCards) {
+            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1.5)));
+            timeline.setOnFinished(e -> {
+                ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).getGameMenuControllerView().setPowerOfCardDefault(card.getIdInGame());
+                ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbilityForCurrentPlayer(card.getIdInGame(), RowsInGame.currentPlayerCloseCombat.toString(), RowsInGame.currentPlayerDiscardPlace.toString());
+            });
+            timeline.setCycleCount(1);
+            timeline.play();
+        }
+    }
+
+    private void removeMaximumPoweredCardsInRangedForCurrent(Row row) {
+        ArrayList<UnitCard> maximumPoweredCards = new ArrayList<>();
+        int s = getMaximumPoweredCards(maximumPoweredCards, row);
+        for (UnitCard card : maximumPoweredCards) {
+            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1.5)));
+            timeline.setOnFinished(e -> {
+                ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).getGameMenuControllerView().setPowerOfCardDefault(card.getIdInGame());
+                ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbilityForCurrentPlayer(card.getIdInGame(), RowsInGame.currentPlayerRanged.toString(), RowsInGame.currentPlayerDiscardPlace.toString());
+            });
+            timeline.setCycleCount(1);
+            timeline.play();
+        }
+    }
+
+    private void removeMaximumPoweredCardsInSiegeForCurrent(Row row) {
+        ArrayList<UnitCard> maximumPoweredCards = new ArrayList<>();
+        int s = getMaximumPoweredCards(maximumPoweredCards, row);
+        for (UnitCard card : maximumPoweredCards) {
+            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1.5)));
+            timeline.setOnFinished(e -> {
+                ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).getGameMenuControllerView().setPowerOfCardDefault(card.getIdInGame());
+                ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbilityForCurrentPlayer(card.getIdInGame(), RowsInGame.currentPlayerSiege.toString(), RowsInGame.currentPlayerDiscardPlace.toString());
+            });
+            timeline.setCycleCount(1);
+            timeline.play();
         }
     }
 }

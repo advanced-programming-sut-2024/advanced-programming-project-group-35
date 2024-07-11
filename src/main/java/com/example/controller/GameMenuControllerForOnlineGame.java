@@ -441,7 +441,6 @@ public class GameMenuControllerForOnlineGame extends AppController {
 
         table = new Table(player1, player2, gameId);
 
-//        saveLog(generateInitialDeckData());
         Round round1 = new Round(1);
         table.addRound(round1);
         table.setCurrentRound(round1);
