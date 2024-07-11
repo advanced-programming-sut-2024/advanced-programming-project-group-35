@@ -23,8 +23,8 @@ public class ChatBox extends StackPane {
     private final double HEIGHT = 600;
     private TextField textField;
     private Button sendButton;
-    private static VBox allMessagesVbox;
-    private static ScrollPane scrollPane = new ScrollPane();
+    private VBox allMessagesVbox;
+    private ScrollPane scrollPane = new ScrollPane();
     private int editableStartIndex;
     private String title;
     private static ChatMessage replyTo;
@@ -131,11 +131,11 @@ public class ChatBox extends StackPane {
                 replyTo = null;
                 isReplyBox.setVisible(false);
             }
-            App.getServerConnector().sendChat("CHAT|" + chatMessage.getSender() + "|" + chatMessage.getContent() + "|" + chatMessage.getHour() + "|" + chatMessage.getMinute() + (chatMessage.getReplyTo() != null ? "|REPLY_TO|" + chatMessage.getReplyTo().getSender() + "|" + chatMessage.getReplyTo().getContent() : ""));
+            App.out.println("CHAT|" + chatMessage.getSender() + "|" + chatMessage.getContent() + "|" + chatMessage.getHour() + "|" + chatMessage.getMinute() + (chatMessage.getReplyTo() != null ? "|REPLY_TO|" + chatMessage.getReplyTo().getReplyTo().getSender() + "|" + chatMessage.getReplyTo().getContent() : ""));
         }
     }
 
-    public static void addMessage(ChatMessage chatMessage) {
+    public void addMessage(ChatMessage chatMessage) {
         Platform.runLater(() -> {
             allMessagesVbox.getChildren().add(new ChatMessageView(chatMessage));
             scrollPane.setContent(allMessagesVbox);
@@ -152,7 +152,7 @@ public class ChatBox extends StackPane {
         return textField;
     }
 
-    public static ChatMessage getReplyTo() {
+    public ChatMessage getReplyTo() {
         return replyTo;
     }
 

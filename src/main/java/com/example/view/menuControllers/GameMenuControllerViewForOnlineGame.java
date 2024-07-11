@@ -1129,5 +1129,13 @@ public class GameMenuControllerViewForOnlineGame {
     public void openChatBox(MouseEvent mouseEvent) {
         App.getAppView().showChatBox();
     }
+
+    public void addMessage(int senderID, String message) {
+        App.getAppView().addMessageToChatBox(senderID, message);
+    }
+
+    public void addMessage(int senderID, String message, int replayUser, String replayMessage) {
+        App.getAppView().addMessageToChatBox(senderID, message, replayUser, replayMessage);
+    }
 }
 

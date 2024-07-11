@@ -789,6 +789,6 @@ public class PreGameMenuControllerView {
     }
 
     public void startGameWithFriendButtonAction(ActionEvent actionEvent) {
-        sendRequestToFriend(friendsName);
+        sendRequestToFriend(saveOrLoadDeckNameField.getText());
     }
 }

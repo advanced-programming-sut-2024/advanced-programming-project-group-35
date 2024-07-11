@@ -12,6 +12,7 @@ import com.example.model.alerts.Alert;
 import com.example.model.Terminal;
 import com.example.model.alerts.ConfirmationAlert;
 import com.example.model.alerts.Notification;
+import com.example.model.chat.ChatMessage;
 import com.example.view.menuControllers.FriendsMenuControllerView;
 import com.example.view.menuControllers.GameMenuControllerViewForOnlineGame;
 import com.example.view.menuControllers.GameRequestHistoryMenuControllerView;
@@ -401,4 +402,17 @@ public class AppView extends Application {
             showAlert(s, "error");
         });
     }
+
+    public void addMessageToChatBox(int senderID, String message) {
+        ChatMessage chatMessage = new ChatMessage(senderID, message);
+        chatBox.addMessage(chatMessage);
+    }
+
+    public void addMessageToChatBox(int senderID, String message, int replayUser, String replayMessage) {
+        ChatMessage chatMessage = new ChatMessage(senderID, message);
+        chatMessage.setReplyTo(new ChatMessage(replayUser, replayMessage));
+        chatBox.addMessage(chatMessage);
+    }
+
+
 }
