@@ -74,7 +74,7 @@ public class GameMenuControllerForOnlineGame extends AppController {
     }
 
 
-    private Card getCardById(int cardId, ObservableList<Card> originRow) {
+    Card getCardById(int cardId, ObservableList<Card> originRow) {
         for (Card card : originRow) {
             if (card != null && card.getIdInGame() == cardId) {
                 return card;
@@ -298,7 +298,7 @@ public class GameMenuControllerForOnlineGame extends AppController {
         }
     }
 
-    private ObservableList<? extends Card> getRowListByName(String rowName) {
+    ObservableList<? extends Card> getRowListByName(String rowName) {
         switch (rowName) {
             case "currentPlayerHand" -> {
                 return table.getCurrentPlayer().getBoard().getHand().getCards();
@@ -736,5 +736,9 @@ public class GameMenuControllerForOnlineGame extends AppController {
     public void sendTextEmote(TextEmote textEmote, String text) {
         App.getAppView().showTextEmote(text);
         //TODO
+    }
+
+    public void setTable(Table table) {
+        this.table = table;
     }
 }

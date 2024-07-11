@@ -379,10 +379,6 @@ public class User {
         String deckJson = objectMapper.writeValueAsString(temporaryDeck);
         return deckJson;
     }
-
-    public boolean isOnline() {
-        return isOnline;
-    }
     public int getId() {
         return id;
     }
