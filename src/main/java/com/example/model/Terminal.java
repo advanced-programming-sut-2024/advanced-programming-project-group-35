@@ -96,37 +96,37 @@ public class Terminal extends StackPane {
     }
 
     private void addDecoyCard() {
-        GameMenuControllerForOnlineGame gameMenuControllerForOnlineGame = (GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController();
+        GameMenuControllerForOnlineGame gameMenuControllerForOnlineGame = (GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController();
         gameMenuControllerForOnlineGame.addDecoyCard();
     }
 
     private void setClownForOpponent() {
-        GameMenuControllerForOnlineGame gameMenuControllerForOnlineGame = (GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController();
+        GameMenuControllerForOnlineGame gameMenuControllerForOnlineGame = (GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController();
         gameMenuControllerForOnlineGame.setClownForOpponent();
     }
 
     private void luckOpponentEmotes() {
-        GameMenuControllerForOnlineGame gameMenuControllerForOnlineGame = (GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController();
+        GameMenuControllerForOnlineGame gameMenuControllerForOnlineGame = (GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController();
         gameMenuControllerForOnlineGame.luckOpponentEmotes();
     }
 
     private void luckOpponentLeaderAbility() {
-        GameMenuControllerForOnlineGame gameMenuControllerForOnlineGame = (GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController();
+        GameMenuControllerForOnlineGame gameMenuControllerForOnlineGame = (GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController();
         gameMenuControllerForOnlineGame.luckOpponentLeaderAbility();
     }
 
     private void recverCrystals() {
-        GameMenuControllerForOnlineGame gameMenuControllerForOnlineGame = (GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController();
+        GameMenuControllerForOnlineGame gameMenuControllerForOnlineGame = (GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController();
         gameMenuControllerForOnlineGame.recoverCrystals();
     }
 
     private void recoverLeaderAbility() {
-        GameMenuControllerForOnlineGame gameMenuControllerForOnlineGame = (GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController();
+        GameMenuControllerForOnlineGame gameMenuControllerForOnlineGame = (GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController();
         gameMenuControllerForOnlineGame.recoverLeaderAbility();
     }
 
     private void addCardTODeck() {
-        GameMenuControllerForOnlineGame gameMenuControllerForOnlineGame = (GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController();
+        GameMenuControllerForOnlineGame gameMenuControllerForOnlineGame = (GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController();
         gameMenuControllerForOnlineGame.addRandomCardToDeck();
     }
 

@@ -8,6 +8,9 @@ import com.example.model.card.CardFactory;
 import com.example.model.card.LeaderFactory;
 import com.example.model.card.enums.FactionsType;
 import com.example.model.game.Deck;
+import com.example.model.game.Hand;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.*;
 
 import java.io.*;
@@ -93,11 +96,44 @@ public class DeckManager {
         deck.setLeader(LeaderFactory.getLeaderCardByName(deckToJson.getLeader()));
         deck.setFaction(FactionsType.getFactionByName(deckToJson.getFaction()));
         deck.setFactionAbility(FactionsType.getAbilityByName(deckToJson.getFaction()));
-        for (int i = 0; i < deckToJson.getCards().size(); i++) {
-            Card card = CardFactory.getCardByName(deckToJson.getCards().get(i));
-            card.setIdInGame(first * 100 + i - 1);
+        for (int i = 0; i < deckToJson.getRestOfCards().size(); i++) {
+            Card card = CardFactory.getCardByName(deckToJson.getRestOfCards().get(i));
+            card.setIdInGame(first * 100 + i + 20);
             deck.addCard(card);
         }
         return deck;
+    }
+
+    public static Hand loadHand(DeckToJson deckToJson, int first) {
+        Hand hand = new Hand();
+        for (int i = 0; i < deckToJson.getHand().size(); i++) {
+            Card card = CardFactory.getCardByName(deckToJson.getHand().get(i));
+            card.setIdInGame(first * 100 + i);
+            hand.addCard(card);
+        }
+        return hand;
+    }
+
+    public static DeckToJson getDeckToJsonByCardNames(String deck) {
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            DeckToJson newDeck = objectMapper.readValue(deck, DeckToJson.class);
+            return newDeck;
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static String getDeckString(DeckToJson deck) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        String json;
+        try {
+            json = objectMapper.writeValueAsString(deck);
+            return json;
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

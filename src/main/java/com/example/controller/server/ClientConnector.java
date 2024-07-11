@@ -99,12 +99,10 @@ public class ClientConnector implements Runnable {
             App.updateUserInfo();
             processRequest(message);
         } else if (message.startsWith("GameStarts")){
-            //System.out.println(parts[2] + parts[4]);
             System.out.println("GameStarts -message");
             App.getLoggedInUser().setInGame(true);
-            ((GameMenuControllerForOnlineGame)Controller.GAME_MENU_CONTROLLER.getController()).startNewGame(parts[1], parts[3], parts[2], parts[4]);
-            Controller.GAME_MENU_CONTROLLER.getController().run();
-
+            ((GameMenuControllerForOnlineGame)Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).startNewGame(Integer.parseInt(parts[1]), Integer.parseInt(parts[3]), parts[2], parts[4], Integer.parseInt(parts[5]));
+            Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController().run();
         }
     }
 

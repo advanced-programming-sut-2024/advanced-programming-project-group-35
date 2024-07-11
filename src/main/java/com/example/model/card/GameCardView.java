@@ -5,8 +5,10 @@ import com.example.model.App;
 import com.example.model.card.enums.Abilities;
 import com.example.model.card.enums.AbilityName;
 import com.example.model.card.enums.CardData;
+import com.example.model.game.place.Place;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -182,15 +184,17 @@ public class GameCardView extends Pane {
     }
 
     public void setPowerDefault() {
-        if (card instanceof UnitCard) {
-            if (((UnitCard) card).isHero()) {
-                power.setText("" + ((UnitCard) card).getPower());
-                power.setTextFill(Paint.valueOf("white"));
-            } else if (!((UnitCard) card).isHero()) {
-                power.setText("" + ((UnitCard) card).getPower());
-                power.setTextFill(Paint.valueOf("black"));
+        Platform.runLater(() -> {
+            if (card instanceof UnitCard) {
+                if (((UnitCard) card).isHero()) {
+                    power.setText("" + ((UnitCard) card).getPower());
+                    power.setTextFill(Paint.valueOf("white"));
+                } else if (!((UnitCard) card).isHero()) {
+                    power.setText("" + ((UnitCard) card).getPower());
+                    power.setTextFill(Paint.valueOf("black"));
+                }
             }
-        }
+        });
     }
 
     public void setScorchPicture() {
@@ -239,24 +243,24 @@ public class GameCardView extends Pane {
     }
 
     public void applyTransform() {
-//        if (this.card instanceof UnitCard && this.getCard().getAbilityName() == AbilityName.TRANSFORMER) {
-//            this.card.setCardData(CardData.scoiatael_schirru);
-//            this.card.setAbility(null);
-//            this.card.setAbilityName(null);
-//            this.cardData = this.card.getCardData();
-//            ((UnitCard) this.card).setCurrentPower(8);
-//            ((UnitCard) this.card).setPower(8);
-//            ((UnitCard) this.card).setHero(false);
-//            ((UnitCard) this.card).setNoRemove(false);
-//
-//            Image image = new Image(srcPath + cardData.getImageAddress());
-//            ImageView imageView = new ImageView(image);
-//            imageView.setFitWidth(width);
-//            imageView.setFitHeight(height);
-//            imageView.setStyle("-fx-background-radius: 15; -fx-border-radius: 15; -fx-background-color: transparent;");
-//
-//            this.getChildren().addAll(imageView);
-//            setLabelAndAbilitiesLabelForNonSpecialCards();
-//        }
+        if (this.card instanceof UnitCard && this.getCard().getAbilityName() == AbilityName.TRANSFORMER) {
+            this.card.setCardData(CardData.scoiatael_toruviel);
+            this.card.setAbility(null);
+            this.card.setAbilityName(null);
+            this.cardData = this.card.getCardData();
+            ((UnitCard) this.card).setCurrentPower(8);
+            ((UnitCard) this.card).setPower(8);
+            ((UnitCard) this.card).setHero(false);
+            ((UnitCard) this.card).setNoRemove(false);
+
+            Image image = new Image(srcPath + cardData.getImageAddress());
+            ImageView imageView = new ImageView(image);
+            imageView.setFitWidth(width);
+            imageView.setFitHeight(height);
+            imageView.setStyle("-fx-background-radius: 15; -fx-border-radius: 15; -fx-background-color: transparent;");
+
+            this.getChildren().addAll(imageView);
+            setLabelAndAbilitiesLabelForNonSpecialCards();
+        }
     }
 }

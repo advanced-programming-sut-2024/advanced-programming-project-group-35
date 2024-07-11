@@ -14,7 +14,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class GameHandler implements Runnable {
-    private int gameID;
     private ArrayList<PlayerHandler> spectators = new ArrayList<>();
     private List<ChatMessage> chatHistory = new ArrayList<>();
     private int winnerID;
@@ -34,6 +33,7 @@ public class GameHandler implements Runnable {
     private boolean isPlayer1Connected = true;
     private boolean isPlayer2Connected = true;
     private Timer reconnectionTimer;
+    private int gameId;
 
     public GameHandler(int player1ID, int player2ID, boolean isPrivate) throws InterruptedException {
         this.player1ID = player1ID;
@@ -46,16 +46,18 @@ public class GameHandler implements Runnable {
         this.player2In = player2Handler.getIn();
         this.player1Out = player1Handler.getOut();
         this.player2Out = player2Handler.getOut();
+        gameId = LocalDateTime.now().hashCode();
 
-//        player1Handler.wait();
-//        player2Handler.wait();
-//        gameHistory = new Log(player1, player2);
-        gameID = LocalDateTime.now().hashCode();
-        ServerApp.addGame(gameID, this);
+        ServerApp.getServer().getGameHandlers().put(gameId, this);
+
         player1Handler.setGameHandler(this);
         player2Handler.setGameHandler(this);
         this.isPrivate = isPrivate;
         gameHistory = new Log(player1ID, player2ID, new DeckToJson(), new DeckToJson());
+    }
+
+    public int getGameId() {
+        return gameId;
     }
 
     private void checkConnection() {
@@ -129,7 +131,7 @@ public class GameHandler implements Runnable {
 
     private void endGame() {
         //notifyAll();
-        ServerApp.removeGame(gameID);
+        //TODO
     }
 
     public void command(String command) {
@@ -144,9 +146,12 @@ public class GameHandler implements Runnable {
             handleEmote(command);
         } else {
             if (isPlayer1Turn) {
-                player1Out.println(command);
-            } else {
                 player2Out.println(command);
+            } else {
+                player1Out.println(command);
+            }
+            if (command.equals("change turn")) {
+                swapPlayers();
             }
             gameHistory.addCommand(command);
             broadcastToSpectators(command);
@@ -262,6 +267,11 @@ public class GameHandler implements Runnable {
         for (PlayerHandler spectator : spectators) {
             spectator.getOut().println(command);
         }
+    }
+
+    public void swapPlayers() {
+        if (isPlayer1Turn) isPlayer1Turn = false;
+        else isPlayer1Turn = true;
     }
 
     public int getLoserID() {
