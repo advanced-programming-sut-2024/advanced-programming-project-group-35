@@ -176,13 +176,12 @@ public class ServerApp {
 
         ServerApp.getServer().players.get(player1ID).setInGame(true);
         ServerApp.getServer().players.get(player2ID).setInGame(true);
-
-        if (deckPlayer2.getFaction().equals("ScoiaTael")) {
-            GameHandler gameHandler = new GameHandler(player2ID, player1ID);
-            requestBuilder.append("GameStarts|").append(player2ID).append("|").append(playerDeck2).append("|").append(player1ID).append("|").append(playerDeck1).append("|").append(gameHandler.getGameId());
         boolean isPrivate = checkPrivacy(player1ID, player2ID);
+        if (deckPlayer2.getFaction().equals("ScoiaTael")) {
+            GameHandler gameHandler = new GameHandler(player2ID, player1ID, isPrivate);
+            requestBuilder.append("GameStarts|").append(player2ID).append("|").append(playerDeck2).append("|").append(player1ID).append("|").append(playerDeck1).append("|").append(gameHandler.getGameId());
         } else {
-            GameHandler gameHandler = new GameHandler(player1ID, player2ID);
+            GameHandler gameHandler = new GameHandler(player1ID, player2ID,isPrivate);
             requestBuilder.append("GameStarts|").append(player1ID).append("|").append(playerDeck1).append("|").append(player2ID).append("|").append(playerDeck2).append("|").append(gameHandler.getGameId());
         }
         clientConnector1.sendMessage(requestBuilder.toString());
