@@ -1,5 +1,7 @@
 package com.example.model.card.cardsAbilities;
 
+import com.example.controller.Controller;
+import com.example.controller.GameMenuControllerForOnlineGame;
 import com.example.model.card.Ability;
 import com.example.model.card.AbilityContext;
 import com.example.model.card.Card;
@@ -7,8 +9,10 @@ import com.example.model.card.UnitCard;
 import com.example.model.game.place.Row;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ScorchAbility implements Ability {
+    
     @Override
     public void apply(AbilityContext abilityContext) {
         if (abilityContext.getCard() != null) {
@@ -31,25 +35,18 @@ public class ScorchAbility implements Ability {
         }
         if (maximumPowerForCurrentPlayer == maximumPowerForOpponentPlayer) {
             for (UnitCard card : maximumPoweredCardsForCurrentPlayer) {
-
-//                ((GameMenuController) Controller.GAME_MENU_CONTROLLER.getController()).moveCardFromOriginToDestinationAndDontDoAbility(card.getIdInGame(), abilityContext.getTable().getCurrentPlayer().getBoard().getRowByName(card.getPlace()), RowsInGame.currentPlayerDiscardPlace.toString());
+                ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbilityForCurrentPlayer(card.getIdInGame(), abilityContext.getTable().getCurrentPlayer().getBoard().getRowByName(card.getPlace()), RowsInGame.currentPlayerDiscardPlace.toString());
             }
             for (UnitCard card : maximumPoweredCardsForOpponentPlayer) {
-                abilityContext.getTable().getOpponent().getBoard().getRowByName(card.getPlace()).removeCard(card);
-                abilityContext.getTable().getOpponent().getBoard().getDiscardPile().addCard(card);
-                //TODO گرافیک انتقال کارت
+                ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbilityForCurrentPlayer(card.getIdInGame(), abilityContext.getTable().getCurrentPlayer().getBoard().getRowByName(card.getPlace()), RowsInGame.currentPlayerDiscardPlace.toString());
             }
         } else if (maximumPowerForCurrentPlayer > maximumPowerForOpponentPlayer) {
             for (UnitCard card : maximumPoweredCardsForCurrentPlayer) {
-                abilityContext.getTable().getCurrentPlayer().getBoard().getRowByName(card.getPlace()).removeCard(card);
-                abilityContext.getTable().getCurrentPlayer().getBoard().getDiscardPile().addCard(card);
-                //TODO گرافیک انتقال کارت
+                ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbilityForCurrentPlayer(card.getIdInGame(), abilityContext.getTable().getCurrentPlayer().getBoard().getRowByName(card.getPlace()), RowsInGame.currentPlayerDiscardPlace.toString());
             }
         } else {
             for (UnitCard card : maximumPoweredCardsForOpponentPlayer) {
-                abilityContext.getTable().getOpponent().getBoard().getRowByName(card.getPlace()).removeCard(card);
-                abilityContext.getTable().getOpponent().getBoard().getDiscardPile().addCard(card);
-                //TODO گرافیک انتقال کارت
+                ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbilityForCurrentPlayer(card.getIdInGame(), abilityContext.getTable().getCurrentPlayer().getBoard().getRowByName(card.getPlace()), RowsInGame.currentPlayerDiscardPlace.toString());
             }
         }
     }

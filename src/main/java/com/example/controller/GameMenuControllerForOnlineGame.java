@@ -40,6 +40,7 @@ public class GameMenuControllerForOnlineGame extends AppController {
         Platform.runLater(() -> {
             try {
                 App.getAppView().showMenu(Menu.GAME_MENU);
+                App.setCurrentMenu(Menu.GAME_MENU);
                 App.setCurrentController(Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME);
                 gameMenuControllerViewForOnlineGame = App.getAppView().getGameMenuControllerView();
                 startRound(table);
@@ -197,8 +198,19 @@ public class GameMenuControllerForOnlineGame extends AppController {
                     doNonLeaderCardsAbilityForCurrentPlayer(card, abilityContext, AbilityName.COMMANDER_HORN);
                     break;
                 case SCORCH:
-                    abilityContext = new AbilityContext(table, null, null);
+                    if (destination.contains("SpecialPlace")) {
+                        abilityContext = new AbilityContext(table, null, getRowByName(getRowNameBySpecialPlaceName(destination)));
+                    } else {
+                        abilityContext = new AbilityContext(table, null, getRowByName(destination));
+                    }
+                    abilityContext.addParam("dest", destination);
                     doNonLeaderCardsAbilityForCurrentPlayer(card, abilityContext, AbilityName.SCORCH);
+                    Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1.5)));
+                    timeline.setOnFinished(e -> {
+                        moveCardAndDontDoAbilityForCurrentPlayer(cardId, destination, RowsInGame.currentPlayerDiscardPlace.toString());
+                    });
+                    timeline.setCycleCount(1);
+                    timeline.play();
                     break;
                 case WEATHER:
                     abilityContext = new AbilityContext(table, null, null);
@@ -272,8 +284,6 @@ public class GameMenuControllerForOnlineGame extends AppController {
                     doNonLeaderCardsAbilityForCurrentPlayer(card, abilityContext, AbilityName.COMMANDER_HORN);
                     break;
                 case SCORCH:
-                    abilityContext = new AbilityContext(table, null, getRowByName(getRowNameBySpecialPlaceName(destination)));
-                    abilityContext.addParam("dest", destination);
                     doNonLeaderCardsAbilityForOpponent(card, AbilityName.SCORCH);
                     break;
                 case WEATHER:
@@ -621,12 +631,6 @@ public class GameMenuControllerForOnlineGame extends AppController {
         } else if (table.getOpponent().getNumberOfCrystals() == 0) {
             endGame(table, table.getCurrentPlayer());
         } else {
-            if (table.getCurrentRound().isWon()) {
-                Player winner = table.getCurrentRound().getWinner();
-                if (winner != table.getCurrentPlayer()) {
-                    changeTurn();
-                }
-            }
             Round round = new Round(table.getRoundNumber() + 1);
             table.getCurrentPlayer().setPassRound(false);
             table.getOpponent().setPassRound(false);
