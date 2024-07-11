@@ -958,13 +958,13 @@ public class GameMenuControllerForOnlineGame extends AppController {
     }
 
     public void sendEmote(Emote emote, Emotes emoteType) {
-        App.getAppView().showEmote(emoteType);
-        //TODO: App.getServerConnector().sendEmote(emote);
+        //App.getAppView().showEmote(emoteType);
+        App.getServerConnector().sendEmote(emote, App.getLoggedInUser().getId());
     }
 
     public void sendTextEmote(TextEmote textEmote, String text) {
-        App.getAppView().showTextEmote(text);
-        //TODO
+        //App.getAppView().showTextEmote(text);
+        App.getServerConnector().sendTextEmote(textEmote, text, App.getLoggedInUser().getId());
     }
 
     public void setTable(Table table) {

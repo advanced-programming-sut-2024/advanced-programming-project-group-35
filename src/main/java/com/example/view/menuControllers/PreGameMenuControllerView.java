@@ -63,6 +63,8 @@ public class PreGameMenuControllerView {
     public Button loadDeckButton;
     public Button chooseDirectoryButton;
     public Button fileChooserButton;
+    public Button randomOnlineGameButton;
+    public Button withFriendGameButton;
     private Pane pane = App.getAppView().getPane();
     private final String srcPath = Main.class.getResource("/images/cards/").toExternalForm();
     public Pane mainPane;
@@ -91,6 +93,8 @@ public class PreGameMenuControllerView {
     private DeckToJson player1OfflineDeck;
     private DeckToJson player2OfflineDeck;
     public ComboBox privacyComboBox;
+
+    private final String friendsName = "friendsName";
 
     @FXML
     private Label playerNameLabel = new Label("player name: ");
@@ -461,7 +465,8 @@ public class PreGameMenuControllerView {
             return;
         }
         int receiverID = receiver.getID();
-        App.getServerConnector().sendGameRequest(senderID, receiverID);
+        DeckToJson deck = new DeckToJson(faction.getFaction().name(), leaderCard.getName(), getPreGameCardNames(playerDeck));
+        App.getServerConnector().sendGameRequest(senderID, receiverID, deck);
 //        App.getAppView().showLoading();
 //        new Thread(() -> {
 //            while (true) {
@@ -483,7 +488,8 @@ public class PreGameMenuControllerView {
     }
 
     public void sendRandomGameRequest(ActionEvent actionEvent) throws Exception {
-        App.getServerConnector().sendRandomGameRequest(App.getLoggedInUser().getID());
+        DeckToJson deck = new DeckToJson(faction.getFaction().name(), leaderCard.getName(), getPreGameCardNames(playerDeck));
+        App.getServerConnector().sendRandomGameRequest(App.getLoggedInUser().getID(), deck);
         //wait for answer:
 //        App.getAppView().showLoading();
 //        new Thread(() -> {
@@ -776,5 +782,13 @@ public class PreGameMenuControllerView {
     }
 
     public void joinRandomGameButtonAction(ActionEvent actionEvent) {
+    }
+
+    public void startRandomGameButtonAction(ActionEvent actionEvent) throws Exception {
+        sendRandomGameRequest(null);
+    }
+
+    public void startGameWithFriendButtonAction(ActionEvent actionEvent) {
+        sendRequestToFriend(friendsName);
     }
 }

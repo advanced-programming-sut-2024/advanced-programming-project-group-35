@@ -106,6 +106,28 @@ public class AppView extends Application {
         }
     }
 
+    public void showEmote(String sender, int index) {
+        if (!isEmote) {
+            emote = new Emote(index);
+            emote.setLayoutX((pane.getWidth() - emote.getFitWidth()) / 2);
+            emote.setLayoutY((pane.getHeight() - emote.getFitWidth()) / 2);
+            pane.getChildren().add(emote);
+            ScaleTransition transition = new ScaleTransition(Duration.millis(300), emote);
+            transition.setFromX(0);
+            transition.setToX(1);
+            transition.setFromY(0);
+            transition.setToY(1);
+            transition.play();
+            isEmote = true;
+            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(7)));
+            timeline.play();
+            timeline.setOnFinished(actionEvent -> {
+                isEmote = false;
+                removeEmote();
+            });
+        }
+    }
+
     public void showTextEmote(String text) {
         if (!isEmote) {
             textEmote = new TextEmote(text);
@@ -127,6 +149,29 @@ public class AppView extends Application {
             });
         }
     }
+
+    public void showTextEmote(String sender, String text) {
+        if (!isEmote) {
+            textEmote = new TextEmote(text);
+            textEmote.setLayoutX((pane.getWidth() - textEmote.getWrappingWidth()) / 2);
+            textEmote.setLayoutY((pane.getHeight() - textEmote.getWrappingWidth()) / 2);
+            pane.getChildren().add(textEmote);
+            ScaleTransition transition = new ScaleTransition(Duration.millis(300), textEmote);
+            transition.setFromX(0);
+            transition.setToX(1);
+            transition.setFromY(0);
+            transition.setToY(1);
+            transition.play();
+            isEmote = true;
+            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(7)));
+            timeline.play();
+            timeline.setOnFinished(actionEvent -> {
+                isEmote = false;
+                removeTextEmote();
+            });
+        }
+    }
+
     public void removeTextEmote() {
         ScaleTransition transition = new ScaleTransition(Duration.millis(300), textEmote);
 

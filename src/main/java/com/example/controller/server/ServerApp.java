@@ -38,6 +38,7 @@ public class ServerApp {
     }
 
     public static ArrayList<User> allUsers = new ArrayList<User>();
+    private static HashMap<Integer, GameHandler> games = new HashMap<>();
     public static void saveUsers(String filename) {
         for (User user : allUsers) {
             System.out.println(user.getUsername());

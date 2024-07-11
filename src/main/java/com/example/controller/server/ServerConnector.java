@@ -5,6 +5,8 @@ import com.example.model.App;
 import com.example.model.FriendRequest;
 import com.example.model.GameRequest;
 import com.example.model.User;
+import com.example.model.alerts.Emote;
+import com.example.model.alerts.TextEmote;
 import com.example.model.card.Card;
 import com.example.model.card.enums.AbilityName;
 import com.example.model.card.enums.CardData;
@@ -229,7 +231,7 @@ public class ServerConnector {
         }
     }
 
-    public void sendGameRequest(int senderID, int receiverID) {
+    public void sendGameRequest(int senderID, int receiverID, DeckToJson deck) {
         try (
                 Socket socket = new Socket(SERVER_IP, SERVER_PORT);
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true)
@@ -237,19 +239,21 @@ public class ServerConnector {
             out.print("GameRequest|");
             out.print(senderID);
             out.print("|");
-            out.println(receiverID);
+            out.print(receiverID);
+            out.print("|");
+            out.println(DeckManager.getDeckString(deck));
             System.out.println("-game request sent to server");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void sendRandomGameRequest(int id) {
+    public void sendRandomGameRequest(int id, DeckToJson deck){
         try (
                 Socket socket = new Socket(SERVER_IP, SERVER_PORT);
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true)
         ) {
-            DeckToJson deck = DeckManager.loadDeck("E:\\uni\\AP\\decks\\monsters.json");
+            //DeckToJson deck = DeckManager.loadDeck("C:\\Projects\\JavaProjs\\new-repo\\src\\main\\resources\\decksData\\monsters.json");
 
             setHand(deck);
 
@@ -339,4 +343,67 @@ public class ServerConnector {
         }
     }
 
+    public void sendChat(String s) {
+        try (
+                Socket socket = new Socket(SERVER_IP, SERVER_PORT);
+                PrintWriter out = new PrintWriter(socket.getOutputStream(), true)
+        ) {
+            out.println(s);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendEmote(Emote emote, int sender) {
+        try (
+                Socket socket = new Socket(SERVER_IP, SERVER_PORT);
+                PrintWriter out = new PrintWriter(socket.getOutputStream(), true)
+        ) {
+            out.print("EMOTE|");
+            out.print(sender);
+            out.print("|");
+            switch (emote.emotes) {
+                case HA_HA_HA:
+                    out.println("1");
+                    break;
+                case THANKS:
+                    out.println("2");
+                    break;
+                case OOPS:
+                    out.println("3");
+                    break;
+                case GOOD_ONE:
+                    out.println("4");
+                    break;
+                case DIRIN_LALALA:
+                    out.println("5");
+                    break;
+                case BORING:
+                    out.println("6");
+                    break;
+                case SHHHHHH:
+                    out.println("7");
+                    break;
+                case ANY_WAY:
+                    out.println("8");
+                    break;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendTextEmote(TextEmote textEmote, String text, int id) {
+        try (
+                Socket socket = new Socket(SERVER_IP, SERVER_PORT);
+                PrintWriter out = new PrintWriter(socket.getOutputStream(), true)
+        ) {
+            out.print("EMOTE|");
+            out.print(id);
+            out.print("|");
+            out.println(text);
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
