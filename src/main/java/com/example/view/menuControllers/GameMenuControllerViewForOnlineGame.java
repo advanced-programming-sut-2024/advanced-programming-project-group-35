@@ -669,6 +669,7 @@ public class GameMenuControllerViewForOnlineGame {
             if (dest == 1) {
                 if (gameCardView.getCard() instanceof UnitCard) {
                     if (!(((UnitCard) gameCardView.getCard()).noRemove())) {
+                        ((UnitCard)gameCardView.getCard()).setNoRemove(true);
                         controller.moveCard(gameCardView.getCard().getIdInGame(), sourceRow.toString(), RowsInGame.currentPlayerDiscardPlace.toString());
                     }
                     if ((((UnitCard) gameCardView.getCard()).noRemove()) && gameCardView.getCard().getAbilityName() == AbilityName.TRANSFORMER) {
@@ -681,6 +682,7 @@ public class GameMenuControllerViewForOnlineGame {
             } else {
                 if (gameCardView.getCard() instanceof UnitCard) {
                     if (!(((UnitCard) gameCardView.getCard()).noRemove())) {
+                        ((UnitCard)gameCardView.getCard()).setNoRemove(true);
                         controller.moveCard(gameCardView.getCard().getIdInGame(), sourceRow.toString(), RowsInGame.opponentDiscardPlace.toString());
                     }
                     if ((((UnitCard) gameCardView.getCard()).noRemove()) && gameCardView.getCard().getAbilityName() == AbilityName.TRANSFORMER) {
