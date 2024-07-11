@@ -14,6 +14,6 @@ public class Emote extends ImageView {
     }
 
     public Emote(int index) {
-        this(Emotes.values()[index]);
+        this(Emotes.values()[index - 1]);
     }
 }

@@ -92,10 +92,6 @@ public class ClientConnector implements Runnable {
             App.updateUserInfo();
         } else if (message.startsWith("FRIEND_REMOVED:")) {
             App.updateUserInfo();
-        } else if (message.startsWith("CHAT")) {
-            processChat(message);
-        } else if (message.startsWith("EMOTE")) {
-            processEmote(message);
         } else if (message.startsWith("MESSAGE")) {
             processMessageAlert(message);
         } else if (message.startsWith("ERROR")) {
@@ -132,16 +128,7 @@ public class ClientConnector implements Runnable {
         });
     }
 
-    private void processChat(String message) {
-        String[] parts = message.split("\\|");
-        int senderID = Integer.parseInt(parts[1]);
-        String senderName;
-        senderName = User.getUserByID(senderID).getUsername();
-        String content = parts[2];
-        Platform.runLater(() -> {
-            ChatBox.addMessage(new ChatMessage(senderID, content));
-        });
-    }
+
 
     private void processErrorAlert(String message) {
         String[] parts = message.split("\\|");

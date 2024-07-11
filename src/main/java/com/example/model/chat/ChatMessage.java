@@ -10,7 +10,7 @@ public class ChatMessage {
     private int minute;
     private String content;
     private List<Integer> reactions;
-    private ChatMessage replyTo;
+    private static ChatMessage replyTo;
 
     public int getHour() {
         return hour;
@@ -36,7 +36,7 @@ public class ChatMessage {
     }
 
     public void setReplyTo(ChatMessage replyTo) {
-        this.replyTo = replyTo;
+        ChatMessage.replyTo = replyTo;
     }
 
     @Override

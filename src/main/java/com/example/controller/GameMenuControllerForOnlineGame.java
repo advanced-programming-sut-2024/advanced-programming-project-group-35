@@ -2,7 +2,9 @@ package com.example.controller;
 
 import com.example.model.App;
 import com.example.model.GameData;
+import com.example.model.User;
 import com.example.model.alerts.*;
+import com.example.model.chat.ChatMessage;
 import com.example.model.deckmanager.DeckManager;
 import com.example.model.card.*;
 import com.example.model.card.enums.AbilityName;
@@ -21,6 +23,8 @@ import javafx.collections.ObservableList;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.Socket;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.regex.Matcher;
@@ -63,6 +67,12 @@ public class GameMenuControllerForOnlineGame extends AppController {
                         moveCardAndDoAbility(matcher);
                     } else if ((matcher = OnlineGameCommands.MOVE_CARD_AND_DONT_DO_ABILITY.getMatcher(message)) != null) {
                         moveCardAndDontDoAbility(matcher);
+                    } else if (message.startsWith("CHAT")) {// chat
+                        proccessChat(message);
+                    } else if (message.startsWith("REACTION")) {// reaction
+                        proccessReaction(message);
+                    } else if (message.startsWith("EMOTE")) {// emote
+                        proccessEmote(message);
                     }
                 }
             } catch (IOException e) {
@@ -70,6 +80,50 @@ public class GameMenuControllerForOnlineGame extends AppController {
             }
         });
         thread.start();
+    }
+
+    private void proccessChat(String message) {
+        int senderID = Integer.parseInt(message.split("\\|")[1]);
+        String content = message.split("\\|")[2];
+        //reply to:
+        if (message.contains("REPLY_TO")) {
+            int replyToSenderID = Integer.parseInt(message.split("\\|")[4]);
+            String replyToContent = message.split("\\|")[5];
+            System.out.println("reply to");
+            gameMenuControllerViewForOnlineGame.addMessage(senderID, content, replyToSenderID, replyToContent);
+        } else {
+            gameMenuControllerViewForOnlineGame.addMessage(senderID, content);
+        }
+    }
+
+    private void proccessReaction(String message) {
+//        String[] parts = message.split("\\|");
+//        String sender = parts[1];
+//        String content = parts[2];
+//        int reactionIndex = Integer.parseInt(parts[3]);
+//        App.getAppView().showReaction(sender, content, reactionIndex);
+    }
+
+    private void proccessEmote(String message) {
+        String[] parts = message.split("\\|");
+        String sender = parts[1];
+        try {
+            int emoteIndex = Integer.parseInt(parts[2]);
+            Platform.runLater(() -> {
+                App.getAppView().showEmote(sender, emoteIndex);
+            });
+        } catch (NumberFormatException e) {
+            proccessTextEmote(message);
+        }
+    }
+
+    private void proccessTextEmote(String message) {
+        String[] parts = message.split("\\|");
+        String sender = parts[1];
+        String content = parts[2];
+        Platform.runLater(() -> {
+            App.getAppView().showTextEmote(sender, content);
+        });
     }
 
     private void passRound(Matcher matcher) {
@@ -940,11 +994,53 @@ public class GameMenuControllerForOnlineGame extends AppController {
 
     public void sendEmote(Emote emote, Emotes emoteType) {
         //App.getAppView().showEmote(emoteType);
-        App.getServerConnector().sendEmote(emote, App.getLoggedInUser().getId());
+        sendEmote(emote, App.getLoggedInUser().getId());
+    }
+
+    public void sendEmote(Emote emote, int sender) {
+
+        App.out.print("EMOTE|");
+        App.out.print(sender);
+        App.out.print("|");
+        switch (emote.emotes) {
+            case HA_HA_HA:
+                App.out.println("1");
+                break;
+            case THANKS:
+                App.out.println("2");
+                break;
+            case OOPS:
+                App.out.println("3");
+                break;
+            case GOOD_ONE:
+                App.out.println("4");
+                break;
+            case DIRIN_LALALA:
+                App.out.println("5");
+                break;
+            case BORING:
+                App.out.println("6");
+                break;
+            case SHHHHHH:
+                App.out.println("7");
+                break;
+            case ANY_WAY:
+                App.out.println("8");
+                break;
+        }
     }
 
     public void sendTextEmote(TextEmote textEmote, String text) {
         //App.getAppView().showTextEmote(text);
-        App.getServerConnector().sendTextEmote(textEmote, text, App.getLoggedInUser().getId());
+        sendTextEmote(textEmote, text, App.getLoggedInUser().getId());
+    }
+
+    public void sendTextEmote(TextEmote textEmote, String text, int id) {
+
+        App.out.print("EMOTE|");
+        App.out.print(id);
+        App.out.print("|");
+        App.out.println(text);
+
     }
 }
