@@ -63,8 +63,6 @@ public class GameMenuControllerForOnlineGame extends AppController {
                         moveCardAndDoAbility(matcher);
                     } else if ((matcher = OnlineGameCommands.MOVE_CARD_AND_DONT_DO_ABILITY.getMatcher(message)) != null) {
                         moveCardAndDontDoAbility(matcher);
-                    } else if (OnlineGameCommands.CHANGE_TURN != null) {
-                        changeTurnWithNoLog();
                     }
                 }
             } catch (IOException e) {
@@ -371,6 +369,12 @@ public class GameMenuControllerForOnlineGame extends AppController {
                 destinationRow.add(card);
             }
         }
+        if (destination == RowsInGame.opponentDeck.toString() || destination == RowsInGame.currentPlayerDeck.toString()) {
+            gameMenuControllerViewForOnlineGame.getGameCardViewWithCardId(cardId).setVisible(false);
+        }
+        if (destination == RowsInGame.opponentHand.toString() || destination == RowsInGame.currentPlayerHand.toString()) {
+            gameMenuControllerViewForOnlineGame.getGameCardViewWithCardId(cardId).setVisible(true);
+        }
         Row destRow = getRowByName(destination);
         if (destRow != null && destRow.isApplyWeather() && (card instanceof UnitCard) && !((UnitCard) card).isHero()) {
             if (table.getCurrentPlayer().getBoard().getDeck().getLeader().getLeaderName().getName().equals("leaders_skellige_king_bran")) {
@@ -542,7 +546,7 @@ public class GameMenuControllerForOnlineGame extends AppController {
             }
         }
         KeyFrame keyFrame = new KeyFrame(Duration.seconds(3), event -> {
-            if (table.getCurrentPlayer().getBoard().getHand().getCards().isEmpty()) {
+            if (table.getCurrentPlayer().getBoard().getHand().getCards().isEmpty() && !table.getCurrentPlayer().getBoard().getDeck().getLeader().canDoAction()) {
                 table.getCurrentPlayer().setPassRound(true);
                 passRound();
             }
