@@ -119,7 +119,7 @@ public class PlayerHandler implements Runnable {
                     sendMessageToUser("GAME_REQUEST_REJECTED:", userID);
                     sendMessageToUser("GAME_REQUEST_REJECTED:", friendUserID);
                 } else if ("player".equals(parts[0])) {
-                    System.out.println("ridim");
+                    System.out.println("...");
                 } else {
                     handleCommand(inputLine);
                 }

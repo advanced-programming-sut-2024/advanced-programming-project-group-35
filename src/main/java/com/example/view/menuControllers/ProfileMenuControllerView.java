@@ -62,8 +62,6 @@ public class ProfileMenuControllerView {
     public void backToMainMenu(MouseEvent mouseEvent) {
         App.setCurrentMenu(Menu.MAIN_MENU);
         Controller.MAIN_MENU_CONTROLLER.run();
-
-        sendTestMessage("ali|Ha ha ha ridi");
     }
 
     private void sendTestMessage(String message) {
