@@ -1,7 +1,7 @@
 [
   {
     "stayLoggedIn": false,
-    "isOnline": true,
+    "isOnline": false,
     "isInGame": false,
     "privateGame": false,
     "gameID": 0,
@@ -108,7 +108,7 @@
   },
   {
     "stayLoggedIn": false,
-    "isOnline": true,
+    "isOnline": false,
     "isInGame": false,
     "privateGame": false,
     "gameID": 0,
@@ -210,9 +210,9 @@
     "privateGame": false,
     "gameID": 0,
     "id": 10,
-    "username": "ali123",
-    "password": "Bp+\u003d%\u003d1%cI",
-    "nickname": "asmd",
+    "username": "alireza",
+    "password": "Alireza123@",
+    "nickname": "alireza",
     "email": "sjhagdhj@ahsgdh.com",
     "securityQuestion": 0,
     "securityQuestionAnswer": "What is your favorite color?",

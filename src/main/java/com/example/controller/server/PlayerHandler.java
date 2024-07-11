@@ -87,6 +87,7 @@ public class PlayerHandler implements Runnable {
                     System.out.println("Received request from: " + parts[1] + " to: " + parts[2]);
                     int receiverID = Integer.parseInt(parts[2]);
                     int senderID = Integer.parseInt(parts[1]);
+                    String deck = parts[3];
                     ServerApp.sendGameRequest(senderID, receiverID);
                     sendMessageToUser("NEW_GAME_REQUEST:" + senderID, receiverID);
                     sendMessageToUser("NEW_GAME_REQUEST:" + receiverID, senderID);
