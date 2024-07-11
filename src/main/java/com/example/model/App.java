@@ -94,6 +94,7 @@ public class App {
         App.loggedInUser = loggedInUser;
         connectSereverToApp();
         serverConnector.setUserOnline(loggedInUser);
+        saveUsers();
     }
 
     private static void connectSereverToApp() throws IOException {
