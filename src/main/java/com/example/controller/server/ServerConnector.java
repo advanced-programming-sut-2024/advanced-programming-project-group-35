@@ -24,6 +24,7 @@ import java.io.PrintWriter;
 import java.lang.reflect.Type;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ServerConnector {
@@ -248,7 +249,7 @@ public class ServerConnector {
                 Socket socket = new Socket(SERVER_IP, SERVER_PORT);
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true)
         ) {
-            DeckToJson deck = DeckManager.loadDeck("/Users/ali/Downloads/random.json");
+            DeckToJson deck = DeckManager.loadDeck("E:\\uni\\AP\\decks\\monsters.json");
 
             setHand(deck);
 
@@ -264,15 +265,8 @@ public class ServerConnector {
     }
 
     private void setHand(DeckToJson deck) {
-        //TODO for test
-        ArrayList<String> names = new ArrayList<>(deck.getCards());
-        for (String name: names) {
-            if (CardData.getCardDataByName(name).getAbilityName().equals("weather") || CardData.getCardDataByName(name).getAbilityName().equals("commander_horn")){
-                deck.getHand().add(name);
-                deck.getCards().remove(name);
-            }
-        }
-        for (int i = 0 ; i < 9 ; i++) {
+        Collections.shuffle(deck.getCards());
+        for (int i = 0 ; i < 10 ; i++) {
             String cardName = deck.getCards().get(i);
             deck.getHand().add(cardName);
             deck.getCards().remove(cardName);

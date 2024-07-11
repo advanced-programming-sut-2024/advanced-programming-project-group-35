@@ -2,6 +2,7 @@ package com.example.controller;
 
 import com.example.model.App;
 import com.example.model.GameData;
+import com.example.model.IO.patterns.CheatCodes;
 import com.example.model.alerts.*;
 import com.example.model.deckmanager.DeckManager;
 import com.example.model.card.*;
@@ -14,6 +15,7 @@ import com.example.model.game.place.Row;
 import com.example.model.game.place.RowsInGame;
 import com.example.view.Menu;
 import com.example.view.menuControllers.GameMenuControllerViewForOnlineGame;
+import com.example.view.menuControllers.ResultMenuControllerView;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
@@ -63,6 +65,12 @@ public class GameMenuControllerForOnlineGame extends AppController {
                         moveCardAndDoAbility(matcher);
                     } else if ((matcher = OnlineGameCommands.MOVE_CARD_AND_DONT_DO_ABILITY.getMatcher(message)) != null) {
                         moveCardAndDontDoAbility(matcher);
+                    } else if (CheatCodes.RECOVER_LEADER_ABILITY.matched(message)) {
+                        table.getOpponent().getBoard().getDeck().getLeader().setCanDoAction(true);
+                        gameMenuControllerViewForOnlineGame.updateAllLabels();
+                    } else if (OnlineGameCommands.LEADER_ABILITY.getMatcher(message) != null) {
+                        table.getOpponent().getBoard().getDeck().getLeader().setCanDoAction(false);
+                        gameMenuControllerViewForOnlineGame.updateAllLabels();
                     }
                 }
             } catch (IOException e) {
@@ -666,12 +674,20 @@ public class GameMenuControllerForOnlineGame extends AppController {
 
     private void endGame(Table table, Player winner) {
         System.out.println("end game");
-        LocalDateTime localDateTime = LocalDateTime.now();
-        String date = localDateTime.getYear() + "/" + localDateTime.getMonthValue() + "/" + localDateTime.getDayOfMonth() + "-" + localDateTime.getHour() + ":" + localDateTime.getMinute();
-        GameData gameData = new GameData(table.getOpponent().getUsername(), date, finalScore(table.getCurrentPlayer()), finalScore(table.getOpponent()), roundScores(table.getCurrentPlayer()), roundScores(table.getOpponent()), winner.getUsername());
-        App.getLoggedInUser().addGameData(gameData);
-        App.setCurrentMenu(Menu.RESULT_MENU);
-        Controller.RESULT_MENU_CONTROLLER.run();
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2)));
+        timeline.setOnFinished(e -> {
+            table.setFinalWinner(winner);
+            LocalDateTime localDateTime = LocalDateTime.now();
+            String date = localDateTime.getYear() + "/" + localDateTime.getMonthValue() + "/" + localDateTime.getDayOfMonth() + "-" + localDateTime.getHour() + ":" + localDateTime.getMinute();
+            GameData gameData = new GameData(table.getOpponent().getUsername(), date, finalScore(table.getCurrentPlayer()), finalScore(table.getOpponent()), roundScores(table.getCurrentPlayer()), roundScores(table.getOpponent()), winner.getUsername());
+            App.getLoggedInUser().addGameData(gameData);
+            ResultMenuControllerView.setTable(table);
+            App.setCurrentMenu(Menu.RESULT_MENU);
+            Controller.RESULT_MENU_CONTROLLER.run();
+        });
+        timeline.setCycleCount(1);
+        timeline.play();
+
     }
 
     private int[] roundScores(Player player) {
@@ -719,6 +735,9 @@ public class GameMenuControllerForOnlineGame extends AppController {
             }
             System.out.println("doCurrentPlayerLeaderAbility in GameMenuController");
         }
+        App.out.println("leader ability done");
+        table.getCurrentPlayer().getBoard().getDeck().getLeader().setCanDoAction(false);
+        gameMenuControllerViewForOnlineGame.updateAllLabels();
     }
 
     private ObservableList<? extends Card> getRowListByName(String rowName) {
@@ -912,6 +931,7 @@ public class GameMenuControllerForOnlineGame extends AppController {
 
     public void recoverLeaderAbility() {
         table.getCurrentPlayer().getBoard().getDeck().getLeader().setCanDoAction(true);
+        App.out.println(CheatCodes.RECOVER_LEADER_ABILITY.getPattern());
         gameMenuControllerViewForOnlineGame.updateAllLabels();
     }
 

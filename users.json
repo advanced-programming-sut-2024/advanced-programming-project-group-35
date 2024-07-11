@@ -137,49 +137,6 @@
     "numberOfMinionCards": 0,
     "gameData": [],
     "decksAddresses": [],
-    "friends": [
-      2
-    ],
-    "friendRequests": [
-      {
-        "senderID": 2,
-        "receiverID": 10,
-        "isAccepted": true,
-        "isRejected": true
-      }
-    ]
-  },
-  {
-    "stayLoggedIn": false,
-    "isOnline": true,
-    "isInGame": true,
-    "privateGame": false,
-    "id": -1746134436,
-    "username": "Kian",
-    "password": "Aqakian1383@",
-    "nickname": "",
-    "email": "parsaivim@gmail.com",
-    "securityQuestion": 0,
-    "securityQuestionAnswer": "ali",
-    "currentFactionType": "Monsters",
-    "wins": 0,
-    "losses": 0,
-    "score": 0,
-    "bestScore": 0,
-    "money": 0,
-    "numberOfFlags": 0,
-    "numberOfKills": 0,
-    "numberOfDeaths": 0,
-    "numberOfDraws": 0,
-    "numberOfPlayedGames": 0,
-    "numberOfWonGames": 0,
-    "numberOfLostGames": 0,
-    "numberOfSpellCards": 0,
-    "numberOfMinionCards": 0,
-    "gameData": [],
-    "decksAddresses": [],
-    "friends": [],
-    "gameRequests": [],
     "friendRequests": []
   }
 ]
