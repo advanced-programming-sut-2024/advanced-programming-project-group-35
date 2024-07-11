@@ -28,7 +28,7 @@ public class User {
     private String name;
     private String lastName;
     private String profilePicture;
-    private DeckToJson temporaryDeck = DeckManager.loadDeck("E:\\uni\\AP\\decks\\monsters.json");
+    private DeckToJson temporaryDeck = DeckManager.loadDeck("/Users/ali/Downloads/random.json");
     private int wins = 0;
     private int losses = 0;
     private int score = 0;

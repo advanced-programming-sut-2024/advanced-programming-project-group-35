@@ -665,12 +665,12 @@ public class GameMenuControllerForOnlineGame extends AppController {
 
     private void endGame(Table table, Player winner) {
         System.out.println("end game");
-        //TODO نمایش برنده
-        //TODO نمایش مجموع امتیاز های هر فرد در تمام راند ها
         LocalDateTime localDateTime = LocalDateTime.now();
         String date = localDateTime.getYear() + "/" + localDateTime.getMonthValue() + "/" + localDateTime.getDayOfMonth() + "-" + localDateTime.getHour() + ":" + localDateTime.getMinute();
         GameData gameData = new GameData(table.getOpponent().getUsername(), date, finalScore(table.getCurrentPlayer()), finalScore(table.getOpponent()), roundScores(table.getCurrentPlayer()), roundScores(table.getOpponent()), winner.getUsername());
         App.getLoggedInUser().addGameData(gameData);
+        App.setCurrentMenu(Menu.RESULT_MENU);
+        Controller.RESULT_MENU_CONTROLLER.run();
     }
 
     private int[] roundScores(Player player) {
@@ -949,4 +949,6 @@ public class GameMenuControllerForOnlineGame extends AppController {
     public void setTable(Table table) {
         this.table = table;
     }
+
+
 }

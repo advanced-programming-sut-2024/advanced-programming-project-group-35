@@ -12,6 +12,7 @@ public enum Controller {
     GAME_REQUEST_HISTORY_MENU_CONTROLLER(new GameRequestHistoryMenuController()),
     TV_MENU_CONTROLLER(new TVMenuController()),
     TOURNAMENT_MENU_CONTROLLER(new TournamentMenuController()),
+    RESULT_MENU_CONTROLLER(new ResultMenuController()),
 
     ;
     private final AppController controller;

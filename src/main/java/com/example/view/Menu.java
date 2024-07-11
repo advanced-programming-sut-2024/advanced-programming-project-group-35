@@ -11,7 +11,8 @@ public enum Menu {
     FRIENDS_MENU("Friends Menu", "/FXML/friendsMenu.fxml"),
     GAME_REQUEST_HISTORY_MENU("Game Request History Menu", "/FXML/gameRequestHistory.fxml"),
     TV_MENU("TV Menu", "/FXML/tvMenu.fxml"),
-    TOURNAMENT_MENU("Tournament Menu", "/FXML/tournamentMenu.fxml")
+    TOURNAMENT_MENU("Tournament Menu", "/FXML/tournamentMenu.fxml"),
+    RESULT_MENU("Result Menu", "/FXML/resultMenu.fxml"),
 
     ;
     private final String title;
