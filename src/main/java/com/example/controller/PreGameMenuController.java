@@ -96,4 +96,9 @@ public class PreGameMenuController extends AppController {
     public void addRandomCardsToHand() {
 
     }
+
+    public void showTournament() throws Exception {
+        App.getAppView().showMenu(Menu.TOURNAMENT_MENU);
+        App.setCurrentController(Controller.TOURNAMENT_MENU_CONTROLLER);
+    }
 }

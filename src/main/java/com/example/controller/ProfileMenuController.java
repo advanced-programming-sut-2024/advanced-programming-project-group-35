@@ -34,13 +34,13 @@ public class ProfileMenuController extends AppController {
         loggedInUser.getGameData().add(gameData3);
         loggedInUser.getGameData().add(gameData4);
         loggedInUser.getGameData().add(gameData5);
-        if (App.getLoggedInUser().getGameData().isEmpty()) {
-            OutputView.showOutputAlert(Errors.DONT_HAVE_PLAYED_GAME);
-        }
-        else {
+//        if (App.getLoggedInUser().getGameData().isEmpty()) {
+//            OutputView.showOutputAlert(Errors.DONT_HAVE_PLAYED_GAME);
+//        }
+//        else {
             App.setCurrentMenu(Menu.GAME_HISTORY_MENU);
             Controller.GAME_HISTORY_MENU_CONTROLLER.run();
-        }
+//        }
     }
 
     public Errors editUsername(String username) {

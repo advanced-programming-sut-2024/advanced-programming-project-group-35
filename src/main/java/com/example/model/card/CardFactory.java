@@ -29,7 +29,6 @@ public class CardFactory {
                 } else if (cardData.getAbilityName().equals("mardroeme")) {
                     return new SpecialCard(cardData.getPlaceToBe(), AbilityName.getAbilityByName(cardData.getAbilityName()), AbilityName.getAbilityNameByName(cardData.getAbilityName()), cardData);
                 }else {
-                    System.out.println("bia to card factory ke ridi to card data(parsa)");
                     return new SpecialCard(cardData.getPlaceToBe(), null, AbilityName.getAbilityNameByName(cardData.getAbilityName()), cardData);
 
                 }

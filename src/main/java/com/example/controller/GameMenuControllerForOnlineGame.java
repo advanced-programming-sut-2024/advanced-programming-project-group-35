@@ -734,13 +734,21 @@ public class GameMenuControllerForOnlineGame extends AppController {
             LocalDateTime localDateTime = LocalDateTime.now();
             String date = localDateTime.getYear() + "/" + localDateTime.getMonthValue() + "/" + localDateTime.getDayOfMonth() + "-" + localDateTime.getHour() + ":" + localDateTime.getMinute();
             GameData gameData = new GameData(table.getOpponent().getUsername(), date, finalScore(table.getCurrentPlayer()), finalScore(table.getOpponent()), roundScores(table.getCurrentPlayer()), roundScores(table.getOpponent()), winner.getUsername());
-            App.getLoggedInUser().addGameData(gameData);
+            User user = App.getLoggedInUser();
+            user.setScore(user.getScore() + finalScore(table.getCurrentPlayer()));
+            user.setBestScore(finalScore(table.getCurrentPlayer()));
+            if (table.getCurrentPlayer() == winner) {
+                user.setNumberOfWonGames(user.getNumberOfWonGames() + 1);
+            }
+            user.addGameData(gameData);
+            App.saveUsers();
             ResultMenuControllerView.setTable(table);
             App.setCurrentMenu(Menu.RESULT_MENU);
             Controller.RESULT_MENU_CONTROLLER.run();
         });
         timeline.setCycleCount(1);
         timeline.play();
+        App.saveUsers();
 
     }
 

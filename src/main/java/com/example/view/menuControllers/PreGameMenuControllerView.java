@@ -791,4 +791,8 @@ public class PreGameMenuControllerView {
     public void startGameWithFriendButtonAction(ActionEvent actionEvent) {
         sendRequestToFriend(saveOrLoadDeckNameField.getText());
     }
+
+    public void showTournament(ActionEvent actionEvent) throws Exception {
+        controller.showTournament();
+    }
 }

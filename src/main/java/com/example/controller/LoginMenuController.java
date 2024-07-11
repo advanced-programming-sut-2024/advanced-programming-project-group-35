@@ -78,7 +78,6 @@ public class LoginMenuController extends AppController {
         }
         user.setStayLoggedIn(stayLoggedIn);
         App.setLoggedInUser(user);
-        App.saveUsers();
         OutputView.showOutputAlert(Errors.LOGIN_SUCCESSFUL);
         return Errors.LOGIN_SUCCESSFUL;
     }

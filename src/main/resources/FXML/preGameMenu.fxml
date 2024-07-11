@@ -77,7 +77,7 @@
             </HBox>
             <HBox alignment="CENTER" spacing="10" maxWidth="300" prefWidth="300">
                 <Button minWidth="130" maxWidth="130" style="-fx-font-size: 14px !important;" maxHeight="30"
-                        fx:id="tournamentGameButton" onAction="#startGameButtonAction"
+                        fx:id="tournamentGameButton" onAction="#showTournament"
                         styleClass="brown-button"
                         text="Tournament"/>
                 <Button minWidth="130" maxWidth="130" style="-fx-font-size: 14px !important;" maxHeight="30"
