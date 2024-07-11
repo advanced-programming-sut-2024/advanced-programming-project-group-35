@@ -11,6 +11,16 @@ public class GameRequest {
     private int minute;
     private int hour;
 
+    private int gameHandlerID = 0;
+
+    public int getGameHandlerID() {
+        return gameHandlerID;
+    }
+
+    public void setGameHandlerID(int gameHandlerID) {
+        this.gameHandlerID = gameHandlerID;
+    }
+
     public GameRequest(int senderID, int receiverID) {
         this.senderID = senderID;
         this.receiverID = receiverID;

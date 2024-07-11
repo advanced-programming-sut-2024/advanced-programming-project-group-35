@@ -74,9 +74,42 @@ public class ServerConnector {
         return allUsers;
     }
 
+    private ArrayList<GameRequest> loadGames() {
+        ArrayList<GameRequest> allGames = new ArrayList<>();
+        Gson gson = new GsonBuilder().create();
+
+        try (
+                Socket socket = new Socket(SERVER_IP, SERVER_PORT);
+                PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+                BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))
+        ) {
+            out.println("SYSTEM|LOAD_GAMES");
+
+            StringBuilder jsonBuilder = new StringBuilder();
+            String line;
+            while (!(line = in.readLine()).equals("END_JSON")) {
+                jsonBuilder.append(line).append("\n");
+            }
+            //System.out.println(jsonBuilder.toString());
+            Type userListType = new TypeToken<ArrayList<GameRequest>>() {
+            }.getType();
+            allGames = gson.fromJson(jsonBuilder.toString(), userListType);
+            System.out.println("Users data loaded successfully.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return allGames;
+    }
+
     public ArrayList<User> getAllUsers() {
         return loadUsers();
     }
+
+    public ArrayList<GameRequest> getAllGames() {
+        return loadGames();
+    }
+
 
     public void acceptFriendRequest(FriendRequest request) {
         try (
@@ -295,4 +328,5 @@ public class ServerConnector {
             e.printStackTrace();
         }
     }
+
 }

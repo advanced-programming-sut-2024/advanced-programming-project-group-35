@@ -60,6 +60,8 @@ public class PlayerHandler implements Runnable {
                         handleLoadUsers(out);
                     } else if ("SAVE_USERS".equals(parts[1])) {
                         handleSaveUsers(in, out);
+                    } else if ("LOAD_USERS".equals(parts[1])) {
+                        handleLoadGames(in, out);
                     } else if ("ACCEPT_FRIEND_REQUEST".equals(parts[1])) {
                         acceptFriendRequest(parts);
                     } else if ("REJECT_FRIEND_REQUEST".equals(parts[1])) {
@@ -127,6 +129,10 @@ public class PlayerHandler implements Runnable {
         } finally {
             server.removePlayer(ID);
         }
+    }
+
+    private void handleLoadGames(BufferedReader in, PrintWriter out) {
+        //TODO
     }
 
     private void broadcast(String s) {
