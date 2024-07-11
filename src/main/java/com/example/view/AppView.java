@@ -2,20 +2,19 @@ package com.example.view;
 
 import com.example.Main;
 import com.example.controller.Controller;
+import com.example.controller.GameMenuControllerForOnlineGame;
 import com.example.model.App;
 import com.example.model.GameRequest;
 import com.example.model.alerts.*;
 import com.example.model.chat.ChatBox;
 import com.example.model.FriendRequest;
 import com.example.model.alerts.Alert;
-import com.example.model.alerts.*;
 import com.example.model.Terminal;
 import com.example.model.alerts.ConfirmationAlert;
 import com.example.model.alerts.Notification;
 import com.example.view.menuControllers.FriendsMenuControllerView;
-import com.example.view.menuControllers.GameMenuControllerView;
-import com.example.view.menuControllers.GameRequestHistoryMenuControllerView;
 import com.example.view.menuControllers.GameMenuControllerViewForOnlineGame;
+import com.example.view.menuControllers.GameRequestHistoryMenuControllerView;
 import javafx.animation.KeyFrame;
 import javafx.animation.ScaleTransition;
 import javafx.animation.Timeline;
@@ -51,7 +50,7 @@ public class AppView extends Application {
         return terminal;
     }
 
-    private GameMenuControllerView gameMenuControllerView;
+    private GameMenuControllerViewForOnlineGame gameMenuControllerForOnlineGame;
     private GameRequestHistoryMenuControllerView gameRequestHistoryMenuControllerView;
     private FriendsMenuControllerView friendsMenuControllerView;
     private Menu currentMenu;
@@ -63,7 +62,7 @@ public class AppView extends Application {
         fxmlLoader = new FXMLLoader(Main.class.getResource(menu.getFxmlFile()));
         pane = fxmlLoader.load();
         if (menu.getTitle().equals("Game Menu")) {
-            gameMenuControllerViewForOnlineGame = fxmlLoader.getController();
+            gameMenuControllerForOnlineGame = fxmlLoader.getController();
         }
         if (menu.getTitle().equals("Friends Menu")) {
             friendsMenuControllerView = fxmlLoader.getController();
@@ -240,8 +239,8 @@ public class AppView extends Application {
         isNotification = false;
     }
 
-    public GameMenuControllerViewForOnlineGame getGameMenuControllerView() {
-        return gameMenuControllerViewForOnlineGame;
+    public GameMenuControllerViewForOnlineGame getGameMenuControllerForOnlineGame() {
+        return gameMenuControllerForOnlineGame;
     }
     public GameRequestHistoryMenuControllerView getGameRequestHistoryMenuControllerView() {
         return gameRequestHistoryMenuControllerView;
