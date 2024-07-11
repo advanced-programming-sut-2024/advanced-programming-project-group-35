@@ -13,7 +13,7 @@ public class MoralBoostAbility implements Ability {
         for (Card card : abilityContext.getRow().getCards()) {
             if (card != abilityContext.getCard() && ((card instanceof UnitCard) && !((UnitCard)card).isHero())) {
                 ((UnitCard)card).applyMoralBoost();
-                ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController()).getGameMenuControllerView().getGameCardViewWithCardId(card.getIdInGame()).updatePowerLabel();
+                ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).getGameMenuControllerView().getGameCardViewWithCardId(card.getIdInGame()).updatePowerLabel();
             }
         }
     }

@@ -22,6 +22,7 @@ public class Server {
     public ConcurrentHashMap<Integer, PlayerHandler> players = new ConcurrentHashMap<>();
     private ConcurrentHashMap<Integer, OnlineTable> games = new ConcurrentHashMap<>();
     private ConcurrentHashMap<Integer, PlayerHandler> clientConnectors = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<Integer, GameHandler> gameHandlers = new ConcurrentHashMap<>();
 
     public void start() throws IOException {
         System.setProperty("https.protocols", "TLSv1.2,TLSv1.3");
@@ -62,6 +63,10 @@ public class Server {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public ConcurrentHashMap<Integer, GameHandler> getGameHandlers() {
+        return gameHandlers;
     }
 
     public static void saveUsersToDatabase() {

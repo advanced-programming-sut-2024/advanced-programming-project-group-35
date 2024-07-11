@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Table {
+    private int gameID;
     private Player currentPlayer;
     private Player opponent;
     private SpellPlace spellPlace;
@@ -14,7 +15,8 @@ public class Table {
     private ArrayList<Round> rounds;
     private Round currentRound;
     private Player playerInTurn;
-    public Table(Player player1, Player player2) {
+    public Table(Player player1, Player player2, int gameID) {
+        this.gameID = gameID;
       this.playerInTurn = player1;
         if (player1.getId() == App.getLoggedInUser().getID()) {
             this.currentPlayer = player1;
@@ -27,6 +29,11 @@ public class Table {
         this.roundNumber = 1;
         this.spellPlace = new SpellPlace();
     }
+
+    public int getGameID() {
+        return gameID;
+    }
+
 
     public Player getPlayerInTurn() {
         return playerInTurn;
@@ -69,10 +76,6 @@ public class Table {
         return spellPlace;
     }
 
-    public void setSpellPlace(SpellPlace spellPlace) {
-        this.spellPlace = spellPlace;
-    }
-
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
@@ -82,9 +85,10 @@ public class Table {
     }
 
     public void swapPlayers() {
-        Player tmp = currentPlayer;
-        currentPlayer = opponent;
-        opponent = tmp;
+        if (playerInTurn == currentPlayer) {
+            playerInTurn = opponent;
+        } else {
+            playerInTurn = currentPlayer;
+        }
     }
-
 }

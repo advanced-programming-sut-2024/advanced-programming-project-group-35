@@ -17,7 +17,7 @@ public class KingOfTermeriaAbility implements LeaderAbility {
             for (Card card : siege.getCards()) {
                 if (card instanceof UnitCard) {
                     ((UnitCard) card).duplicatePower();
-                    ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController()).getGameMenuControllerView().getGameCardViewWithCardId(card.getIdInGame()).updatePowerLabel();
+                    ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).getGameMenuControllerView().getGameCardViewWithCardId(card.getIdInGame()).updatePowerLabel();
                 }
             }
         } else if (siege.getSpecialCard() == null) {
@@ -34,7 +34,7 @@ public class KingOfTermeriaAbility implements LeaderAbility {
                 for (Card card : siege.getCards()) {
                     if (card instanceof UnitCard) {
                         ((UnitCard) card).duplicatePower();
-                        ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController()).getGameMenuControllerView().getGameCardViewWithCardId(card.getIdInGame()).updatePowerLabel();
+                        ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).getGameMenuControllerView().getGameCardViewWithCardId(card.getIdInGame()).updatePowerLabel();
                     }
                 }
             }

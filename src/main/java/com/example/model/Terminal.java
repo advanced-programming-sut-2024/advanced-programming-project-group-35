@@ -3,6 +3,7 @@ package com.example.model;
 import com.example.controller.Controller;
 import com.example.controller.GameMenuControllerForOnlineGame;
 import com.example.model.IO.patterns.CheatCodes;
+import com.example.view.Menu;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -42,21 +43,25 @@ public class Terminal extends StackPane {
                     textArea.clear();
                     textArea.appendText(title.substring(0, title.length() - 1));
                 } else {
-                   if (CheatCodes.ADD_CARD_TO_HAND.matched(command)) {
-                       addCardTODeck();
-                   } else if (CheatCodes.RECOVER_CRYSTALS.matched(command)) {
-                       recverCrystals();
-                   } else if (CheatCodes.RECOVER_LEADER_ABILITY.matched(command)) {
-                       recoverLeaderAbility();
-                   } else if (CheatCodes.LUCK_OPPONENT_LEADER_ABILITY.matched(command)) {
-                       luckOpponentLeaderAbility();
-                   } else if (CheatCodes.LUCK_OPPONENT_EMOTES.matched(command)) {
-                       luckOpponentEmotes();
-                   } else if (CheatCodes.SET_CLOWN_PICTURE_FOR_OPPONENT_LEADER_CARD.matched(command)) {
-                       setClownForOpponent();
-                   } else if (CheatCodes.ADD_DECOY_CARD.matched(command)) {
-                       addDecoyCard();
-                   }
+                    if (App.getCurrentMenu() == Menu.GAME_MENU) {
+                        if (CheatCodes.ADD_CARD_TO_HAND.matched(command)) {
+                            addCardTODeck();
+                        } else if (CheatCodes.RECOVER_CRYSTALS.matched(command)) {
+                            recverCrystals();
+                        } else if (CheatCodes.RECOVER_LEADER_ABILITY.matched(command)) {
+                            recoverLeaderAbility();
+                        } else if (CheatCodes.LUCK_OPPONENT_LEADER_ABILITY.matched(command)) {
+                            luckOpponentLeaderAbility();
+                        } else if (CheatCodes.LUCK_OPPONENT_EMOTES.matched(command)) {
+                            luckOpponentEmotes();
+                        } else if (CheatCodes.SET_CLOWN_PICTURE_FOR_OPPONENT_LEADER_CARD.matched(command)) {
+                            setClownForOpponent();
+                        } else if (CheatCodes.ADD_DECOY_CARD.matched(command)) {
+                            addDecoyCard();
+                        }
+                    } else {
+                        textArea.appendText("\ninvalid command!");
+                    }
                 }
                 editableStartIndex = textArea.getCaretPosition() + 2;
             } else if (event.getCode() == KeyCode.BACK_SPACE || event.getCode() == KeyCode.DELETE) {
@@ -96,37 +101,37 @@ public class Terminal extends StackPane {
     }
 
     private void addDecoyCard() {
-        GameMenuControllerForOnlineGame gameMenuControllerForOnlineGame = (GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController();
+        GameMenuControllerForOnlineGame gameMenuControllerForOnlineGame = (GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController();
         gameMenuControllerForOnlineGame.addDecoyCard();
     }
 
     private void setClownForOpponent() {
-        GameMenuControllerForOnlineGame gameMenuControllerForOnlineGame = (GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController();
+        GameMenuControllerForOnlineGame gameMenuControllerForOnlineGame = (GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController();
         gameMenuControllerForOnlineGame.setClownForOpponent();
     }
 
     private void luckOpponentEmotes() {
-        GameMenuControllerForOnlineGame gameMenuControllerForOnlineGame = (GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController();
+        GameMenuControllerForOnlineGame gameMenuControllerForOnlineGame = (GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController();
         gameMenuControllerForOnlineGame.luckOpponentEmotes();
     }
 
     private void luckOpponentLeaderAbility() {
-        GameMenuControllerForOnlineGame gameMenuControllerForOnlineGame = (GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController();
+        GameMenuControllerForOnlineGame gameMenuControllerForOnlineGame = (GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController();
         gameMenuControllerForOnlineGame.luckOpponentLeaderAbility();
     }
 
     private void recverCrystals() {
-        GameMenuControllerForOnlineGame gameMenuControllerForOnlineGame = (GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController();
+        GameMenuControllerForOnlineGame gameMenuControllerForOnlineGame = (GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController();
         gameMenuControllerForOnlineGame.recoverCrystals();
     }
 
     private void recoverLeaderAbility() {
-        GameMenuControllerForOnlineGame gameMenuControllerForOnlineGame = (GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController();
+        GameMenuControllerForOnlineGame gameMenuControllerForOnlineGame = (GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController();
         gameMenuControllerForOnlineGame.recoverLeaderAbility();
     }
 
     private void addCardTODeck() {
-        GameMenuControllerForOnlineGame gameMenuControllerForOnlineGame = (GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController();
+        GameMenuControllerForOnlineGame gameMenuControllerForOnlineGame = (GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController();
         gameMenuControllerForOnlineGame.addRandomCardToDeck();
     }
 

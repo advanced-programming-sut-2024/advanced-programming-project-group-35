@@ -12,7 +12,7 @@ import com.example.model.Terminal;
 import com.example.model.alerts.ConfirmationAlert;
 import com.example.model.alerts.Notification;
 import com.example.view.menuControllers.FriendsMenuControllerView;
-import com.example.view.menuControllers.GameMenuControllerView;
+import com.example.view.menuControllers.GameMenuControllerViewForOnlineGame;
 import com.example.view.menuControllers.GameRequestHistoryMenuControllerView;
 import javafx.animation.KeyFrame;
 import javafx.animation.ScaleTransition;
@@ -24,12 +24,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 public class AppView extends Application {
@@ -51,9 +48,8 @@ public class AppView extends Application {
     private Terminal getTerminal() {
         return terminal;
     }
-
-    private GameMenuControllerView gameMenuControllerView;
     private GameRequestHistoryMenuControllerView gameRequestHistoryMenuControllerView;
+    private GameMenuControllerViewForOnlineGame gameMenuControllerViewForOnlineGame;
     private FriendsMenuControllerView friendsMenuControllerView;
     private Menu currentMenu;
     private Stage lockScreen;
@@ -64,7 +60,7 @@ public class AppView extends Application {
         fxmlLoader = new FXMLLoader(Main.class.getResource(menu.getFxmlFile()));
         pane = fxmlLoader.load();
         if (menu.getTitle().equals("Game Menu")) {
-            gameMenuControllerView = fxmlLoader.getController();
+            gameMenuControllerViewForOnlineGame = fxmlLoader.getController();
         }
         if (menu.getTitle().equals("Friends Menu")) {
             friendsMenuControllerView = fxmlLoader.getController();
@@ -223,19 +219,22 @@ public class AppView extends Application {
     }
 
     public void showNotification(String message, String imageAddress, String username) {
-        if (!isNotification) {
-            notification = new Notification(message, imageAddress, username);
-            notification.setLayoutX(0);
-            notification.setLayoutY(0);
-            pane.getChildren().add(notification);
-            isNotification = true;
-            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2)));
-            timeline.play();
-            timeline.setOnFinished(actionEvent -> {
-                isNotification = false;
-                removeNotification(pane);
-            });
-        }
+        Platform.runLater(() -> {
+            if (!isNotification) {
+                notification = new Notification(message, imageAddress, username);
+                notification.setLayoutX(0);
+                notification.setLayoutY(0);
+                pane.getChildren().add(notification);
+                isNotification = true;
+                Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2)));
+                timeline.play();
+                timeline.setCycleCount(1);
+                timeline.setOnFinished(actionEvent -> {
+                    isNotification = false;
+                    removeNotification(pane);
+                });
+            }
+        });
     }
 
     public void removeNotification(Pane currentPane) {
@@ -243,8 +242,8 @@ public class AppView extends Application {
         isNotification = false;
     }
 
-    public GameMenuControllerView getGameMenuControllerView() {
-        return gameMenuControllerView;
+    public GameMenuControllerViewForOnlineGame getGameMenuControllerView() {
+        return gameMenuControllerViewForOnlineGame;
     }
     public GameRequestHistoryMenuControllerView getGameRequestHistoryMenuControllerView() {
         return gameRequestHistoryMenuControllerView;

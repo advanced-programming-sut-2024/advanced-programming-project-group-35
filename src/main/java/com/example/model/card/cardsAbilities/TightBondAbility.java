@@ -18,14 +18,15 @@ public class TightBondAbility implements Ability {
         for (Card card : abilityContext.getRow().getCards()) {
             if (card.getAbilityName() == AbilityName.TIGHT_BOND) {
                 tightBondCards.add(card);
-                sumOfTightBondCardsPowers += ((UnitCard)card).getPower();
+                sumOfTightBondCardsPowers += ((UnitCard)card).getCurrentPower();
             }
         }
         if (tightBondCards.size() > 1) {
             for (Card card : tightBondCards) {
                 ((UnitCard)card).setCurrentPower(sumOfTightBondCardsPowers);
-                ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController()).getGameMenuControllerView().getGameCardViewWithCardId(card.getIdInGame()).updatePowerLabel();
+                ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).getGameMenuControllerView().getGameCardViewWithCardId(card.getIdInGame()).updatePowerLabel();
             }
         }
+        ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).getGameMenuControllerView().updateAllLabels();
     }
 }

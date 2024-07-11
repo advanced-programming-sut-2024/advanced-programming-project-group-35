@@ -23,7 +23,7 @@ public class TheTreacherousAbility implements LeaderAbility {
             for (Card card : row.getCards()) {
                 if (card != null && card.getAbilityName() == AbilityName.SPY) {
                     ((UnitCard)card).duplicatePower();
-                    ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER.getController()).getGameMenuControllerView().getGameCardViewWithCardId(card.getIdInGame()).updatePowerLabel();
+                    ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).getGameMenuControllerView().getGameCardViewWithCardId(card.getIdInGame()).updatePowerLabel();
                 }
             }
         }

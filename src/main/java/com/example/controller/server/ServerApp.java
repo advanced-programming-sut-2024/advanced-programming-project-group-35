@@ -39,8 +39,6 @@ public class ServerApp {
     }
 
     public static ArrayList<User> allUsers = new ArrayList<User>();
-    public static HashMap<Integer, GameHandler> games = new HashMap<>();
-
     public static void saveUsers(String filename) {
         for (User user : allUsers) {
             System.out.println(user.getUsername());
@@ -53,6 +51,7 @@ public class ServerApp {
             System.out.println("Error saving users data.");
         }
     }
+
 
     public static void loadUsers(String filename) {
         Gson gson = new GsonBuilder().create();
@@ -171,20 +170,21 @@ public class ServerApp {
         System.out.println("client connectors found");
         //send request
         StringBuilder requestBuilder = new StringBuilder();
-        System.out.println("---" + playerDeck2);
-        Deck player2Deck = DeckManager.loadDeck(getDeckToJsonByCardNames(playerDeck2), 2);
+
+        DeckToJson deckPlayer2 = DeckManager.getDeckToJsonByCardNames(playerDeck2);
+
 
         ServerApp.getServer().players.get(player1ID).setInGame(true);
         ServerApp.getServer().players.get(player2ID).setInGame(true);
-        boolean isPrivate = checkPrivacy(player1ID, player2ID);
-        if (player2Deck.getFaction().equals(FactionsType.ScoiaTael)) {
-            new GameHandler(player2ID, player1ID, isPrivate);
-            requestBuilder.append("GameStarts|").append(player2ID).append("|").append(playerDeck2).append("|").append(player1ID).append("|").append(playerDeck1);
-        } else {
-            new GameHandler(player1ID, player2ID, isPrivate);
-            requestBuilder.append("GameStarts|").append(player1ID).append("|").append(playerDeck1).append("|").append(player2ID).append("|").append(playerDeck2);
-        }
 
+        if (deckPlayer2.getFaction().equals("ScoiaTael")) {
+            GameHandler gameHandler = new GameHandler(player2ID, player1ID);
+            requestBuilder.append("GameStarts|").append(player2ID).append("|").append(playerDeck2).append("|").append(player1ID).append("|").append(playerDeck1).append("|").append(gameHandler.getGameId());
+        boolean isPrivate = checkPrivacy(player1ID, player2ID);
+        } else {
+            GameHandler gameHandler = new GameHandler(player1ID, player2ID);
+            requestBuilder.append("GameStarts|").append(player1ID).append("|").append(playerDeck1).append("|").append(player2ID).append("|").append(playerDeck2).append("|").append(gameHandler.getGameId());
+        }
         clientConnector1.sendMessage(requestBuilder.toString());
         clientConnector2.sendMessage(requestBuilder.toString());
     }
@@ -257,13 +257,6 @@ public class ServerApp {
 //        StartOnlineGame(tournamentPlayers[6], tournamentPlayers[7]);
     }
 
-    public static void addGame(int gameID, GameHandler gameHandler) {
-        games.put(gameID, gameHandler);
-    }
-
-    public static void removeGame(int gameID) {
-        games.remove(gameID);
-    }
 
     public static ArrayList<User> getAllUsers() {
         return allUsers;

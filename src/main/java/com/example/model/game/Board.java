@@ -11,7 +11,12 @@ import java.util.List;
 
 public class Board {
     private DiscardPile discardPile = new DiscardPile();
-    private Hand hand = new Hand();
+    private Hand hand;
+
+    public void setHand(Hand hand) {
+        this.hand = hand;
+    }
+
     private Deck deck;
     private CloseCombatRow closeCombatCardPlace = new CloseCombatRow();
     private RangedRow rangedCardPlace = new RangedRow();
@@ -64,42 +69,6 @@ public class Board {
             default -> {
                 return null;
             }
-        }
-    }
-
-    public void setHandForStartGame(Deck deck) {
-//        int specialCards = 0, heroCards = 0;
-//        Collections.shuffle(deck.getCards());
-//        for (Card card : deck.getCards()) {
-//            if (card instanceof SpecialCard) {
-//                hand.addCard(card);
-//                deck.removeCard(card);
-//                if ((++specialCards) == 4) break;
-//            }
-//        }
-//        Collections.shuffle(deck.getCards());
-//        for (Card card : deck.getCards()) {
-//            if (card instanceof UnitCard && ((UnitCard) card).isHero()) {
-//                hand.addCard(card);
-//                deck.removeCard(card);
-//                if ((++heroCards) == 2) break;
-//            }
-//        }
-//        for (int i = 0; i < 10 - specialCards - heroCards; i++) {
-//            hand.addCard(deck.getCard(i));
-//            deck.removeCard(deck.getCard(i));
-//        }
-        //TODO تابع زیر برای تست کارو راحت میکنه
-        List<Card> deckCopy = new ArrayList<>(deck.getCards());
-        for (Card card : deckCopy) {
-            if (card.getAbilityName() == AbilityName.TRANSFORMER) {
-                hand.addCard(card);
-                deck.removeCard(card);
-            }
-        }
-        for (int i = 0; i < 9; i++) {
-            hand.addCard(deck.getCard(i));
-            deck.removeCard(deck.getCard(i));
         }
     }
 }
