@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.io.File;
 
 public class DatabaseManager {
-    private static final String DB_PATH = Main.class.getResource("/DB/users.db").toExternalForm();
+    //private static final String DB_PATH = Main.class.getResource("/DB/users.db").toExternalForm();
 
-    //private static final String DB_PATH = System.getProperty("user.home") + "/Desktop/users.db";
+    private static final String DB_PATH = System.getProperty("user.home") + "/Desktop/users.db";
     private static final String URL = "jdbc:sqlite:" + DB_PATH;
 
     public static Connection connect() {
