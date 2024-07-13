@@ -2,6 +2,7 @@ package com.example.model.alerts;
 
 import com.example.model.App;
 import com.example.model.FriendRequest;
+import com.example.model.GameRequest;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -19,6 +20,7 @@ public class ConfirmationAlert extends StackPane {
     public final double width = 250;
     public final double height = 80;
     private FriendRequest friendRequest;
+    private GameRequest gameRequest;
     private boolean result;
     private boolean pending = true;
 
@@ -29,9 +31,10 @@ public class ConfirmationAlert extends StackPane {
         init();
     }
 
-    public ConfirmationAlert(String message, String alertType) {
+    public ConfirmationAlert(String message, String alertType, GameRequest gameRequest) {
         this.alertType = alertType;
         this.message = message;
+        this.gameRequest = gameRequest;
         init();
     }
 
@@ -68,6 +71,7 @@ public class ConfirmationAlert extends StackPane {
         rejectButton.setOnMouseClicked(e -> {
             result = false;
             pending = false;
+            App.getServerConnector().rejectGameRequest(gameRequest);
             System.out.println("Friend request rejected");
         });
         Button acceptButton = new Button("Accept");
@@ -75,6 +79,7 @@ public class ConfirmationAlert extends StackPane {
         acceptButton.setOnMouseClicked(e -> {
             result = true;
             pending = false;
+            App.getServerConnector().acceptGameRequest(gameRequest);
             System.out.println("Friend request accepted");
         });
         HBox buttonsHbox = new HBox(rejectButton, acceptButton);

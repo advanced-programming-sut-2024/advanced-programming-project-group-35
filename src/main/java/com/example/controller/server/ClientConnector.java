@@ -3,8 +3,11 @@ package com.example.controller.server;
 import com.example.controller.Controller;
 import com.example.controller.GameMenuControllerForOnlineGame;
 import com.example.model.App;
+import com.example.model.GameRequest;
 import com.example.model.User;
 import com.example.model.alerts.AlertType;
+import com.example.model.chat.ChatBox;
+import com.example.model.chat.ChatMessage;
 import javafx.application.Platform;
 
 import java.io.BufferedReader;
@@ -13,7 +16,6 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.SocketException;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ClientConnector implements Runnable {
     private volatile boolean running = true;
@@ -78,6 +80,10 @@ public class ClientConnector implements Runnable {
         String parts[] = message.split("\\|");
         if (message.startsWith("FRIEND_REQUEST_ACCEPTED:")) {
             App.updateUserInfo();
+        } else if (message.startsWith("GAME_REQUEST_ACCEPTED:")) {
+            App.updateUserInfo();
+        } else if (message.startsWith("GAME_REQUEST_REJECTED:")) {
+            App.updateUserInfo();
         } else if (message.startsWith("NEW_FRIEND_REQUEST:")) {
             App.updateUserInfo();
         } else if (message.startsWith("FRIEND_REQUEST_REJECTED:")) {
@@ -88,40 +94,83 @@ public class ClientConnector implements Runnable {
             App.updateUserInfo();
         } else if (message.startsWith("MESSAGE")) {
             processMessageAlert(message);
+        } else if (message.startsWith("ERROR")) {
+            processErrorAlert(message);
         } else if (message.startsWith("REQUEST")) {
             App.updateUserInfo();
             processRequest(message);
-        } else if (message.startsWith("GameStarts")){
+        } else if (message.startsWith("GameStarts")) {
             System.out.println("GameStarts -message");
             App.getLoggedInUser().setInGame(true);
-            ((GameMenuControllerForOnlineGame)Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).startNewGame(Integer.parseInt(parts[1]), Integer.parseInt(parts[3]), parts[2], parts[4], Integer.parseInt(parts[5]));
+            ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).startNewGame(Integer.parseInt(parts[1]), Integer.parseInt(parts[3]), parts[2], parts[4], Integer.parseInt(parts[5]));
             Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController().run();
         }
+    }
+
+    private void processEmote(String message) {
+        String[] parts = message.split("\\|");
+        int senderID = Integer.parseInt(parts[1]);
+        String senderName;
+        senderName = User.getUserByID(senderID).getUsername();
+        boolean isIndex = false;
+        try {
+            int emoteIndex = Integer.parseInt(parts[2]);
+            isIndex = true;
+        } catch (NumberFormatException ignored) {
+        }
+        boolean finalIsIndex = isIndex;
+        Platform.runLater(() -> {
+            if (finalIsIndex) {
+                App.getAppView().showEmote(senderName, Integer.parseInt(parts[2]));
+            } else {
+                App.getAppView().showTextEmote(senderName, parts[2]);
+            }
+        });
+    }
+
+
+
+    private void processErrorAlert(String message) {
+        String[] parts = message.split("\\|");
+        int senderID = Integer.parseInt(parts[1]);
+        String senderName;
+        if (senderID != 0) {
+            senderName = User.getUserByID(senderID).getUsername();
+        } else {
+            senderName = "Server";
+        }
+        System.out.println(parts[2]);
+        App.getAppView().showError(senderName + ": " + parts[2]);
     }
 
     private void processRequest(String message) {
         String[] parts = message.split("\\|");
         int senderID = Integer.parseInt(parts[1]);
         String senderName = User.getUserByID(senderID).getUsername();
+        GameRequest gameRequest = new GameRequest(senderID, userID);
         //show a message with accept and reject buttons
-        AtomicBoolean result = new AtomicBoolean(false);
         Platform.runLater(() -> {
-            result.set(App.getAppView().showConfirmationAlert(senderName + " wants to play a game with you.", AlertType.INFO.getType()));
+            App.getAppView().showConfirmationAlert(senderName + " wants to play a game with you.", AlertType.INFO.getType(), gameRequest);
         });
-        System.out.println("result: " + result.get());
-        if (result.get()) {
-            System.out.println("accepting request");
-            App.getServerConnector().acceptFriendRequest(userID, senderID);
-        } else {
-            System.out.println("rejecting request");
-            App.getServerConnector().rejectFriendRequest(userID, senderID);
-        }
+//        System.out.println("result: " + result.get());
+//        if (result.get()) {
+//            System.out.println("accepting request");
+//            App.getServerConnector().acceptFriendRequest(userID, senderID);
+//        } else {
+//            System.out.println("rejecting request");
+//            App.getServerConnector().rejectFriendRequest(userID, senderID);
+//        }
     }
 
     private void processMessageAlert(String message) {
         String[] parts = message.split("\\|");
         int senderID = Integer.parseInt(parts[1]);
-        String senderName = User.getUserByID(senderID).getUsername();
+        String senderName;
+        if (senderID != 0) {
+            senderName = User.getUserByID(senderID).getUsername();
+        } else {
+            senderName = "Server";
+        }
         System.out.println(parts[2]);
         App.getAppView().showMessage(senderName + ": " + parts[2]);
     }

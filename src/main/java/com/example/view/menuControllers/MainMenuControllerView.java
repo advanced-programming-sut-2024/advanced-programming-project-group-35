@@ -54,7 +54,4 @@ public class MainMenuControllerView {
         gameMenuControllerView.sendRandomGameRequest(null);
     }
 
-    public void openChatBox(MouseEvent mouseEvent) {
-        App.getAppView().showChatBox();
-    }
 }

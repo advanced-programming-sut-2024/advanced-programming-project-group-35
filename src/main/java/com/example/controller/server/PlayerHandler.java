@@ -59,22 +59,18 @@ public class PlayerHandler implements Runnable {
                         handleLoadUsers(out);
                     } else if ("SAVE_USERS".equals(parts[1])) {
                         handleSaveUsers(in, out);
+                    } else if ("LOAD_USERS".equals(parts[1])) {
+                        handleLoadGames(in, out);
                     } else if ("ACCEPT_FRIEND_REQUEST".equals(parts[1])) {
-                        int userID = Integer.parseInt(parts[2]);
-                        int friendUserID = Integer.parseInt(parts[3]);
-                        ServerApp.acceptFriendRequest(userID, friendUserID);
+                        acceptFriendRequest(parts);
                     } else if ("REJECT_FRIEND_REQUEST".equals(parts[1])) {
-                        int userID = Integer.parseInt(parts[2]);
-                        int friendUserID = Integer.parseInt(parts[3]);
-                        ServerApp.rejectFriendRequest(userID, friendUserID);
+                        rejectFriendRequest(parts);
                     } else if ("SEND_FRIEND_REQUEST".equals(parts[1])) {
                         sendFriendRequest(parts);
                     } else if ("SET_USER_ONLINE".equals(parts[1])) {
-                        int userID = Integer.parseInt(parts[2]);
-                        ServerApp.setUserOnline(userID);
+                        setUserOnline(parts);
                     } else if ("SET_USER_OFFLINE".equals(parts[1])) {
-                        int userID = Integer.parseInt(parts[2]);
-                        ServerApp.setUserOffline(userID);
+                        setUserOffline(parts);
                     }
                 } else if ("SET_PLAYER".equals(parts[0])) {
                     ID = Integer.parseInt(parts[1]);
@@ -91,7 +87,10 @@ public class PlayerHandler implements Runnable {
                     System.out.println("Received request from: " + parts[1] + " to: " + parts[2]);
                     int receiverID = Integer.parseInt(parts[2]);
                     int senderID = Integer.parseInt(parts[1]);
+                    String deck = parts[3];
                     ServerApp.sendGameRequest(senderID, receiverID);
+                    sendMessageToUser("NEW_GAME_REQUEST:" + senderID, receiverID);
+                    sendMessageToUser("NEW_GAME_REQUEST:" + receiverID, senderID);
                 } else if ("RandomGameRequest".equals(parts[0])) {
                     System.out.println("Received randomGame from: " + parts[1]);
                     int senderID = Integer.parseInt(parts[1]);
@@ -107,8 +106,20 @@ public class PlayerHandler implements Runnable {
                     int senderID = Integer.parseInt(parts[1]);
                     String message = parts[3];
                     ServerApp.sendMessage(senderID, receiverID, message);
+                } else if ("AcceptGameRequest".equals(parts[0])) {
+                    int userID = Integer.parseInt(parts[1]);
+                    int friendUserID = Integer.parseInt(parts[2]);
+                    ServerApp.acceptGameRequest(userID, friendUserID);
+                    sendMessageToUser("GAME_REQUEST_ACCEPTED:", userID);
+                    sendMessageToUser("GAME_REQUEST_ACCEPTED:", friendUserID);
+                } else if ("RejectGameRequest".equals(parts[0])) {
+                    int userID = Integer.parseInt(parts[1]);
+                    int friendUserID = Integer.parseInt(parts[2]);
+                    ServerApp.rejectGameRequest(userID, friendUserID);
+                    sendMessageToUser("GAME_REQUEST_REJECTED:", userID);
+                    sendMessageToUser("GAME_REQUEST_REJECTED:", friendUserID);
                 } else if ("player".equals(parts[0])) {
-                    System.out.println("ridim");
+                    System.out.println("...");
                 } else {
                     handleCommand(inputLine);
                 }
@@ -118,6 +129,26 @@ public class PlayerHandler implements Runnable {
         } finally {
             server.removePlayer(ID);
         }
+    }
+
+    private void handleLoadGames(BufferedReader in, PrintWriter out) {
+        //TODO
+    }
+
+    private void broadcast(String s) {
+        server.broadcast(s);
+    }
+
+    private void setUserOnline(String[] parts) {
+        int userID = Integer.parseInt(parts[2]);
+        ServerApp.setUserOnline(userID);
+        broadcast("USER_ONLINE:" + userID);
+    }
+
+    private void setUserOffline(String[] parts) {
+        int userID = Integer.parseInt(parts[2]);
+        ServerApp.setUserOffline(userID);
+        broadcast("USER_OFFLINE:" + userID);
     }
 
     private void rejectFriendRequest(String[] parts) {
@@ -139,6 +170,19 @@ public class PlayerHandler implements Runnable {
     private void sendFriendRequest(String[] parts) {
         int userID = Integer.parseInt(parts[2]);
         int friendUserID = Integer.parseInt(parts[3]);
+        if (userID == friendUserID) {
+            ServerApp.sendError(0, userID, "You can't send friend request to yourself");
+            return;
+        }
+        if (ServerApp.areFriends(userID, friendUserID)) {
+            ServerApp.sendMessage(0, userID, "You are already friends");
+            return;
+        }
+        if (ServerApp.hasFriendRequest(userID, friendUserID)) {
+            ServerApp.sendMessage(0, userID, "You have already sent friend request");
+            return;
+        }
+        ServerApp.sendMessage(0, userID, "Friend request sent");
         ServerApp.sendFriendRequest(userID, friendUserID);
         System.out.println("Friend request sent from: " + userID + " to: " + friendUserID);
         sendMessageToUser("NEW_FRIEND_REQUEST:", userID);

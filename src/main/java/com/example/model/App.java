@@ -25,6 +25,7 @@ public class App {
     private static ServerConnector serverConnector = new ServerConnector();
     public static ClientConnector clientConnector ;
     private static ArrayList<String> securityQuestions = new ArrayList<String>();
+    private static ArrayList<GameRequest> allGames = new ArrayList<GameRequest>();
 
     static {
         securityQuestions.add("What is your favorite color?");
@@ -45,6 +46,11 @@ public class App {
     private static Socket socket;
     public static PrintWriter out;
     public static BufferedReader in;
+
+    public static ArrayList<GameRequest> getAllGames(){
+        updateAllGames();
+        return allGames;
+    }
 
 
     public static AppView getAppView() {
@@ -161,6 +167,10 @@ public class App {
         }
     }
 
+    private static void updateAllGames() {
+        allGames = serverConnector.getAllGames();
+    }
+
     public static ServerConnector getServerApp() {
         return serverConnector;
     }
@@ -197,5 +207,9 @@ public class App {
             if (user.getID() == id) return user;
         }
         return null;
+    }
+
+    public static void logout() {
+        serverConnector.setUserOffline(loggedInUser);
     }
 }

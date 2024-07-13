@@ -22,7 +22,6 @@ public class CommnderOfTheRedRidersAbility implements LeaderAbility {
                 weatherCards.add((WeatherCard) card);
             }
         }
-        //TODO باید اینکارت ها نمایش داده بشه یدونش انتخاب شه و بازی شه
         abilityContext.getTable().getCurrentPlayer().getBoard().getDeck().getLeader().setCanDoAction(false);
     }
 }

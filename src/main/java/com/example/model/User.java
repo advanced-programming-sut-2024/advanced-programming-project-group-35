@@ -16,6 +16,7 @@ public class User {
     private boolean isOnline;
     private boolean isInGame = true;
     private boolean privateGame = false;
+    private int gameID;
     private int id;
     private String username;
     private String password;
@@ -87,6 +88,7 @@ public class User {
         }
         return null;
     }
+
     public void setNewID() {
         LocalDateTime now = LocalDateTime.now();
         id = now.hashCode();
@@ -222,13 +224,13 @@ public class User {
         if (friends == null) {
             friends = new ArrayList<>();
         }
-        if (friends.contains(friend.getID())){
+        if (friends.contains(friend.getID())) {
             return;
         }
         friends.add(friend.getID());
-        for (FriendRequest request : friendRequests){
+        for (FriendRequest request : friendRequests) {
             System.out.println(request.getSender().getID() + " " + request.getReceiver().getID() + friend.getID());
-            if (request.getSender().getID() == friend.getID() || request.getReceiver().getID() == friend.getID()){
+            if (request.getSender().getID() == friend.getID() || request.getReceiver().getID() == friend.getID()) {
                 System.out.println("accepted");
                 request.accept();
             }
@@ -253,10 +255,11 @@ public class User {
         if (friendRequests == null) {
             friendRequests = new ArrayList<>();
         }
-        if (friends == null){
+        if (friends == null) {
             friends = new ArrayList<>();
         }
-        if (friends.contains(friendRequest.getSender().getID()) || friends.contains(friendRequest.getReceiver().getID())) return;
+        if (friends.contains(friendRequest.getSender().getID()) || friends.contains(friendRequest.getReceiver().getID()))
+            return;
         if (friendRequests.contains(friendRequest)) return;
         FriendRequest duplicate = new FriendRequest(friendRequest.getReceiver().getID(), friendRequest.getSender().getID());
         if (friendRequests.contains(duplicate)) return;
@@ -379,21 +382,32 @@ public class User {
         String deckJson = objectMapper.writeValueAsString(temporaryDeck);
         return deckJson;
     }
+
+    public boolean isOnline() {
+        return isOnline;
+    }
+
     public int getId() {
         return id;
     }
 
     public void addGameRequest(int senderID) {
         GameRequest gameRequest = new GameRequest(senderID, id);
+        if (gameRequests == null) {
+            gameRequests = new ArrayList<>();
+        }
+        gameRequests.add(gameRequest);
+    }
+
+    public void addGameRequest(GameRequest gameRequest) {
+        if (gameRequests == null) {
+            gameRequests = new ArrayList<>();
+        }
         gameRequests.add(gameRequest);
     }
 
     public ArrayList<GameRequest> getGameRequests() {
         return gameRequests;
-    }
-
-    public boolean isOnline() {
-        return isOnline;
     }
 
     public boolean isPrivate() {
@@ -402,5 +416,57 @@ public class User {
 
     public void setPrivacy(boolean isPrivate) {
         this.privateGame = isPrivate;
+    }
+
+    public void acceptGameRequest(int friendUserID) {
+        for (GameRequest gameRequest : gameRequests) {
+            if (gameRequest.getSenderID() == friendUserID) {
+                gameRequest.accept();
+                return;
+            }
+        }
+    }
+
+    public void rejectGameRequest(int friendUserID) {
+        for (GameRequest gameRequest : gameRequests) {
+            if (gameRequest.getSenderID() == friendUserID) {
+                gameRequest.reject();
+                return;
+            }
+        }
+    }
+
+    public boolean hasFriendRequest(User friend) {
+        for (FriendRequest friendRequest : friendRequests) {
+            if (friendRequest.getSender().getID() == friend.getID() || friendRequest.getReceiver().getID() == friend.getID()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int getGameID() {
+        return gameID;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public void setBestScore(int bestScore) {
+        if (this.bestScore < bestScore)
+            this.bestScore = bestScore;
+    }
+
+    public void setNumberOfPlayedGames(int numberOfPlayedGames) {
+        this.numberOfPlayedGames = numberOfPlayedGames;
+    }
+
+    public void setNumberOfWonGames(int numberOfWonGames) {
+        this.numberOfWonGames = numberOfWonGames;
+    }
+
+    public void setNumberOfLostGames(int numberOfLostGames) {
+        this.numberOfLostGames = numberOfLostGames;
     }
 }

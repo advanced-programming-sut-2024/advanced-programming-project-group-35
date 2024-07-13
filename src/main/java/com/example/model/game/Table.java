@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Table {
+    private Player finalWinner;
     private int gameID;
     private Player currentPlayer;
     private Player opponent;
@@ -15,6 +16,15 @@ public class Table {
     private ArrayList<Round> rounds;
     private Round currentRound;
     private Player playerInTurn;
+
+    public Player getFinalWinner() {
+        return finalWinner;
+    }
+
+    public void setFinalWinner(Player finalWinner) {
+        this.finalWinner = finalWinner;
+    }
+
     public Table(Player player1, Player player2, int gameID) {
         this.gameID = gameID;
       this.playerInTurn = player1;

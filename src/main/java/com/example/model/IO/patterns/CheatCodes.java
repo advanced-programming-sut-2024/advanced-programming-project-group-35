@@ -21,4 +21,8 @@ public enum CheatCodes {
         if (matcher.matches()) return true;
         else return false;
     }
+
+    public String getPattern() {
+        return pattern;
+    }
 }

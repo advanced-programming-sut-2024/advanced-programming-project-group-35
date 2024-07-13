@@ -27,6 +27,32 @@ public class ScorchAbility implements Ability {
     }
 
     private void applyAbilityForScorchCard(AbilityContext abilityContext) {
+        ArrayList<UnitCard> maximumPoweredCardsForCurrentPlayer = new ArrayList<>();
+        ArrayList<UnitCard> maximumPoweredCardsForOpponentPlayer = new ArrayList<>();
+        int maximumPowerForCurrentPlayer = 0;
+        int maximumPowerForOpponentPlayer = 0;
+        for (Row row : abilityContext.getTable().getCurrentPlayer().getBoard().getRows()) {
+            maximumPowerForCurrentPlayer = getMaximumPoweredCards(maximumPoweredCardsForCurrentPlayer, row);
+        }
+        for (Row row : abilityContext.getTable().getOpponent().getBoard().getRows()) {
+            maximumPowerForOpponentPlayer = getMaximumPoweredCards(maximumPoweredCardsForOpponentPlayer, row);
+        }
+        if (maximumPowerForCurrentPlayer == maximumPowerForOpponentPlayer) {
+            for (UnitCard card : maximumPoweredCardsForCurrentPlayer) {
+                //((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbilityForCurrentPlayer(card.getIdInGame(), abilityContext.getTable().getCurrentPlayer().getBoard().getRowByName(card.getPlace()), RowsInGame.currentPlayerDiscardPlace.toString());
+            }
+            for (UnitCard card : maximumPoweredCardsForOpponentPlayer) {
+                //((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbilityForCurrentPlayer(card.getIdInGame(), abilityContext.getTable().getCurrentPlayer().getBoard().getRowByName(card.getPlace()), RowsInGame.currentPlayerDiscardPlace.toString());
+            }
+        } else if (maximumPowerForCurrentPlayer > maximumPowerForOpponentPlayer) {
+            for (UnitCard card : maximumPoweredCardsForCurrentPlayer) {
+              //  ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbilityForCurrentPlayer(card.getIdInGame(), abilityContext.getTable().getCurrentPlayer().getBoard().getRowByName(card.getPlace()), RowsInGame.currentPlayerDiscardPlace.toString());
+            }
+        } else {
+            for (UnitCard card : maximumPoweredCardsForOpponentPlayer) {
+             //   ((GameMenuControllerForOnlineGame) Controller.GAME_MENU_CONTROLLER_FOR_ONLINE_GAME.getController()).moveCardAndDontDoAbilityForCurrentPlayer(card.getIdInGame(), abilityContext.getTable().getCurrentPlayer().getBoard().getRowByName(card.getPlace()), RowsInGame.currentPlayerDiscardPlace.toString());
+            }
+        }
         removeMaximumPoweredCardsInClose(abilityContext.getTable().getOpponent().getBoard().getCloseCombatCardPlace());
         removeMaximumPoweredCardsInSiege(abilityContext.getTable().getOpponent().getBoard().getSiegeCardPlace());
         removeMaximumPoweredCardsInRanged(abilityContext.getTable().getOpponent().getBoard().getRangedCardPlace());

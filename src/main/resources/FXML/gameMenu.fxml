@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.FlowPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 
-<Pane fx:id="mainPane" prefHeight="800.0" prefWidth="1400.0" styleClass="pre-game-menu-background" stylesheets="@../CSS/allMenu.css, @../CSS/allFiles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.view.menuControllers.GameMenuControllerViewForOnlineGame">
+<Pane fx:id="mainPane" prefHeight="800.0" prefWidth="1400.0" styleClass="pre-game-menu-background" stylesheets="@../CSS/allMenu.css, @../CSS/allFiles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.view.menuControllers.GameMenuControllerViewForOnlineGame">
    <ImageView fitHeight="800.0" fitWidth="1400.0" pickOnBounds="true" preserveRatio="true">
       <Image url="@../images/game-board.jpg" />
    </ImageView>
@@ -164,5 +158,7 @@
       <TextField fx:id="emoteTextField" maxHeight="43.0" minHeight="43.0" prefHeight="43.0" promptText="Write Your Message" styleClass="custom-text-field" />
       <Button mnemonicParsing="false" onMouseClicked="#sendCustomEmote" prefHeight="43.0" prefWidth="73.0" styleClass="brown-button" text="Send" />
    </HBox>
+   <Button layoutX="1150" layoutY="740" minWidth="50" onMouseClicked="#openChatBox" styleClass="brown-button"
+           text="ChatBox"/>
 
 </Pane>

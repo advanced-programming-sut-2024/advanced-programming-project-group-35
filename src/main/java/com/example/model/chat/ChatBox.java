@@ -131,6 +131,12 @@ public class ChatBox extends StackPane {
                 replyTo = null;
                 isReplyBox.setVisible(false);
             }
+            App.out.println("CHAT|" + chatMessage.getSender() + "|" + chatMessage.getContent() + "|" + chatMessage.getHour() + "|" + chatMessage.getMinute() + (chatMessage.getReplyTo() != null ? "|REPLY_TO|" + chatMessage.getReplyTo().getReplyTo().getSender() + "|" + chatMessage.getReplyTo().getContent() : ""));
+        }
+    }
+
+    public void addMessage(ChatMessage chatMessage) {
+        Platform.runLater(() -> {
             allMessagesVbox.getChildren().add(new ChatMessageView(chatMessage));
             scrollPane.setContent(allMessagesVbox);
             if (scrollPane.getContent() instanceof Region) {
@@ -139,15 +145,14 @@ public class ChatBox extends StackPane {
                     Platform.runLater(() -> scrollPane.setVvalue(1.0));
                 });
             }
-        }
-
+        });
     }
 
     public TextField getTextField() {
         return textField;
     }
 
-    public static ChatMessage getReplyTo() {
+    public ChatMessage getReplyTo() {
         return replyTo;
     }
 

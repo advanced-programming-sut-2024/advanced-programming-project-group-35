@@ -2,15 +2,17 @@ package com.example.view;
 
 import com.example.Main;
 import com.example.controller.Controller;
+import com.example.controller.GameMenuControllerForOnlineGame;
 import com.example.model.App;
+import com.example.model.GameRequest;
 import com.example.model.alerts.*;
 import com.example.model.chat.ChatBox;
 import com.example.model.FriendRequest;
 import com.example.model.alerts.Alert;
-import com.example.model.alerts.*;
 import com.example.model.Terminal;
 import com.example.model.alerts.ConfirmationAlert;
 import com.example.model.alerts.Notification;
+import com.example.model.chat.ChatMessage;
 import com.example.view.menuControllers.FriendsMenuControllerView;
 import com.example.view.menuControllers.GameMenuControllerViewForOnlineGame;
 import com.example.view.menuControllers.GameRequestHistoryMenuControllerView;
@@ -48,8 +50,9 @@ public class AppView extends Application {
     private Terminal getTerminal() {
         return terminal;
     }
+
+    private GameMenuControllerViewForOnlineGame gameMenuControllerForOnlineGame;
     private GameRequestHistoryMenuControllerView gameRequestHistoryMenuControllerView;
-    private GameMenuControllerViewForOnlineGame gameMenuControllerViewForOnlineGame;
     private FriendsMenuControllerView friendsMenuControllerView;
     private Menu currentMenu;
     private Stage lockScreen;
@@ -60,7 +63,7 @@ public class AppView extends Application {
         fxmlLoader = new FXMLLoader(Main.class.getResource(menu.getFxmlFile()));
         pane = fxmlLoader.load();
         if (menu.getTitle().equals("Game Menu")) {
-            gameMenuControllerViewForOnlineGame = fxmlLoader.getController();
+            gameMenuControllerForOnlineGame = fxmlLoader.getController();
         }
         if (menu.getTitle().equals("Friends Menu")) {
             friendsMenuControllerView = fxmlLoader.getController();
@@ -104,6 +107,28 @@ public class AppView extends Application {
         }
     }
 
+    public void showEmote(String sender, int index) {
+        if (!isEmote) {
+            emote = new Emote(index);
+            emote.setLayoutX((pane.getWidth() - emote.getFitWidth()) / 2);
+            emote.setLayoutY((pane.getHeight() - emote.getFitWidth()) / 2);
+            pane.getChildren().add(emote);
+            ScaleTransition transition = new ScaleTransition(Duration.millis(300), emote);
+            transition.setFromX(0);
+            transition.setToX(1);
+            transition.setFromY(0);
+            transition.setToY(1);
+            transition.play();
+            isEmote = true;
+            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(7)));
+            timeline.play();
+            timeline.setOnFinished(actionEvent -> {
+                isEmote = false;
+                removeEmote();
+            });
+        }
+    }
+
     public void showTextEmote(String text) {
         if (!isEmote) {
             textEmote = new TextEmote(text);
@@ -125,6 +150,29 @@ public class AppView extends Application {
             });
         }
     }
+
+    public void showTextEmote(String sender, String text) {
+        if (!isEmote) {
+            textEmote = new TextEmote(text);
+            textEmote.setLayoutX((pane.getWidth() - textEmote.getWrappingWidth()) / 2);
+            textEmote.setLayoutY((pane.getHeight() - textEmote.getWrappingWidth()) / 2);
+            pane.getChildren().add(textEmote);
+            ScaleTransition transition = new ScaleTransition(Duration.millis(300), textEmote);
+            transition.setFromX(0);
+            transition.setToX(1);
+            transition.setFromY(0);
+            transition.setToY(1);
+            transition.play();
+            isEmote = true;
+            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(7)));
+            timeline.play();
+            timeline.setOnFinished(actionEvent -> {
+                isEmote = false;
+                removeTextEmote();
+            });
+        }
+    }
+
     public void removeTextEmote() {
         ScaleTransition transition = new ScaleTransition(Duration.millis(300), textEmote);
 
@@ -175,10 +223,10 @@ public class AppView extends Application {
         isAlert = false;
     }
 
-    public boolean showConfirmationAlert(String message, String alertType) {
+    public void showConfirmationAlert(String message, String alertType, GameRequest gameRequest) {
 
         if (!isAlert) {
-            confirmationAlert = new ConfirmationAlert(message, alertType);
+            confirmationAlert = new ConfirmationAlert(message, alertType, gameRequest);
             confirmationAlert.setLayoutX(pane.getWidth() - confirmationAlert.width - 35);
             confirmationAlert.setLayoutY(50);
             pane.getChildren().add(confirmationAlert);
@@ -190,11 +238,6 @@ public class AppView extends Application {
                 removeConfirmationAlert();
             });
         }
-        System.out.println("confirmation alert : " + confirmationAlert.isResult());
-        while (confirmationAlert.isPending()) {
-            System.out.println("waiting for confirmation");
-        }
-        return confirmationAlert.isResult();
     }
 
     public void showConfirmationAlert(String message, String alertType, FriendRequest friendRequest) {
@@ -242,8 +285,8 @@ public class AppView extends Application {
         isNotification = false;
     }
 
-    public GameMenuControllerViewForOnlineGame getGameMenuControllerView() {
-        return gameMenuControllerViewForOnlineGame;
+    public GameMenuControllerViewForOnlineGame getGameMenuControllerForOnlineGame() {
+        return gameMenuControllerForOnlineGame;
     }
     public GameRequestHistoryMenuControllerView getGameRequestHistoryMenuControllerView() {
         return gameRequestHistoryMenuControllerView;
@@ -353,4 +396,23 @@ public class AppView extends Application {
     public FriendsMenuControllerView getFriendsMenuControllerView() {
         return friendsMenuControllerView;
     }
+
+    public void showError(String s) {
+        Platform.runLater(() -> {
+            showAlert(s, "error");
+        });
+    }
+
+    public void addMessageToChatBox(int senderID, String message) {
+        ChatMessage chatMessage = new ChatMessage(senderID, message);
+        chatBox.addMessage(chatMessage);
+    }
+
+    public void addMessageToChatBox(int senderID, String message, int replayUser, String replayMessage) {
+        ChatMessage chatMessage = new ChatMessage(senderID, message);
+        chatMessage.setReplyTo(new ChatMessage(replayUser, replayMessage));
+        chatBox.addMessage(chatMessage);
+    }
+
+
 }

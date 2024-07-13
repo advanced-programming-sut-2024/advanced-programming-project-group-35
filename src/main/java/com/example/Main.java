@@ -42,6 +42,11 @@ public class Main extends Application {
 
 
     public static void shutdown() {
+        if (App.getLoggedInUser() != null){
+            playerShutedDown();
+        }
+        System.out.println("shut down");
+        //TODO
 //        System.out.println("Shutdown hook is running...");
 //        DatabaseManager.createNewDatabase();
 //        DatabaseManager.createUsersTable();
@@ -57,6 +62,15 @@ public class Main extends Application {
 //        }
 //        System.out.println("Shutdown hook completed.");
 //        App.saveUsers("users.json");
+    }
+
+    private static void playerShutedDown() {
+//        User loggedInUser = App.getLoggedInUser();
+//        if (loggedInUser.isInGame()) {
+//            App.getServerConnector().setUserOffline(loggedInUser);
+//        }
+        App.logout();
+
     }
 
     public static void saveUsersToDatabase() {
